@@ -6,7 +6,8 @@
 ## Documentation
 
 ## Rapport
-[First Review]:(https://www.overleaf.com/1492324357bbbzgzpcwmmv)
+
+- [First Review](https://www.overleaf.com/1492324357bbbzgzpcwmmv)
 
 ## Point a discuter 
 1. Choissir une template qui devra être conservée durant le projet
