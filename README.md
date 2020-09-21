@@ -12,3 +12,9 @@
 
 ## Point a discuter 
 1. Choissir une template qui devra être conservée durant le projet
+
+# Authors 
+1. Pierre Dumoulin
+1. Andreas Duquenne
+1. François Lievens
+1. [Hubar Julien](https://github.com/julien1941)
