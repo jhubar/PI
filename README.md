@@ -16,5 +16,6 @@
 # Authors 
 1. Pierre Dumoulin
 1. Andreas Duquenne
-1. François Lievens
+1. [François Lievens](https://github.com/francoislievens)
 1. [Hubar Julien](https://github.com/julien1941)
+
