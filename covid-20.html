@@ -746,10 +746,10 @@
         var data = ''
         // DAY
         $.get(url,function(data){
-          console.log(data)
+
           var lines=data.split("\n");
           var result = [];
-          var size = result.length-1;
+
           var headers=lines[0].split(",");
           for(var i=1;i<lines.length;i++){
             var obj = {};
@@ -759,16 +759,17 @@
             }
             result.push(obj);
           }
-
+          var size = result.length-1;
           //return result; //JavaScript object
+
             result = `
-            <td>${ result[result.length()].Day }</td>`
+            <td>${ result[size-1].Day }</td>`
             $("#result").html(result)
 
         })
         // Posive cases
         $.get(url,function(data){
-          console.log(data)
+
           var lines=data.split("\n");
           var result = [];
           var headers=lines[0].split(",");
@@ -780,15 +781,16 @@
             }
             result.push(obj);
           }
+          var size = result.length-1;
           //return result; //JavaScript object
             result = `
-            <td>${ result[0].num_positive }</td>`
+            <td>${ result[size-1].num_positive }</td>`
             $("#num_positive").html(result)
 
         })
         // Number of Hospitalised
         $.get(url,function(data){
-          console.log(data)
+
           var lines=data.split("\n");
           var result = [];
           var headers=lines[0].split(",");
@@ -801,14 +803,15 @@
             result.push(obj);
           }
           //return result; //JavaScript object
+          var size = result.length-1;
             result = `
-            <td>${ result[0].num_hospitalised }</td>`
+            <td>${ result[size-1].num_hospitalised }</td>`
             $("#num_hospitalised").html(result)
 
         })
         // num_cumulative_hospitalizations
         $.get(url,function(data){
-          console.log(data)
+
           var lines=data.split("\n");
           var result = [];
           var headers=lines[0].split(",");
@@ -820,15 +823,16 @@
             }
             result.push(obj);
           }
+          var size = result.length-1;
           //return result; //JavaScript object
             result = `
-            <td>${ result[0].num_cumulative_hospitalizations }</td>`
+            <td>${ result[size-1].num_cumulative_hospitalizations }</td>`
             $("#num_cumulative_hospitalizations").html(result)
 
         })
         // num_critical
         $.get(url,function(data){
-          console.log(data)
+
           var lines=data.split("\n");
           var result = [];
           var headers=lines[0].split(",");
@@ -840,15 +844,16 @@
             }
             result.push(obj);
           }
+          var size = result.length-1;
           //return result; //JavaScript object
             result = `
-            <td>${ result[0].num_critical }</td>`
+            <td>${ result[size-1].num_critical }</td>`
             $("#num_critical").html(result)
 
         })
         // num_fatalities
         $.get(url,function(data){
-          console.log(data)
+
           var lines=data.split("\n");
           var result = [];
           var headers=lines[0].split(",");
@@ -860,9 +865,10 @@
             }
             result.push(obj);
           }
+          var size = result.length-1;
           //return result; //JavaScript object
             result = `
-            <td>${ result[0].num_fatalities }</td>`
+            <td>${ result[size-1].num_fatalities }</td>`
             $("#num_fatalities").html(result)
 
         })
