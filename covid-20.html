@@ -749,6 +749,7 @@
           console.log(data)
           var lines=data.split("\n");
           var result = [];
+          var size = result.length-1;
           var headers=lines[0].split(",");
           for(var i=1;i<lines.length;i++){
             var obj = {};
@@ -758,9 +759,10 @@
             }
             result.push(obj);
           }
+
           //return result; //JavaScript object
             result = `
-            <td>${ result[0].Day }</td>`
+            <td>${ result[result.length()].Day }</td>`
             $("#result").html(result)
 
         })
