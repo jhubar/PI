@@ -4,12 +4,26 @@ Chart.defaults.global.defaultFontColor = '#858796';
 
 // Pie Chart Example
 var ctx = document.getElementById("myPieChart");
+// var percentTOTALRECOVERED = 19679/13023;
+function retrivedata(){
+  var url = "https://api.covid19api.com/summary "
+  var data = ''
+  $.get(url,function(data){
+      return data.Countries[16].TotalConfirmed
+
+  })
+}
+
+
+var percentTOTALRECOVERED = 19679/130235;
+var percentTOTALDeaths = 10064/130235;
+var percentTotalConfirmed = (130235-percentTOTALRECOVERED-percentTOTALDeaths)/130235;
 var myPieChart = new Chart(ctx, {
   type: 'doughnut',
   data: {
-    labels: ["Direct", "Referral", "Social"],
+    labels: ["TotalRecovered", "TotalDeaths", "TotalConfirmed"],
     datasets: [{
-      data: [55, 30, 15],
+      data: [percentTOTALRECOVERED, percentTOTALDeaths, percentTotalConfirmed],
       backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
       hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
       hoverBorderColor: "rgba(234, 236, 244, 1)",
