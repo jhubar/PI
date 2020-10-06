@@ -1,7 +1,7 @@
 // Set new default font family and font color to mimic Bootstrap's default styling
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
-
+loadData();
 function number_format(number, decimals, dec_point, thousands_sep) {
   // *     example: number_format(1234.56, 2, ',', ' ');
   // *     return: '1 234,56'
@@ -26,13 +26,140 @@ function number_format(number, decimals, dec_point, thousands_sep) {
   }
   return s.join(dec);
 }
+function loadData(){
+  var url = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/data.csv"
+  var data = ''
+  // DAp
+  var tmp ;
+  $.get(url,function(data){
+    var result = [];
+    var lines=data.split("\n");
+    var headers=lines[0].split(",");
+    for(var i=1;i<lines.length;i++){
+      var obj = {};
+      var currentline=lines[i].split(",");
+      for(var j=0;j<headers.length;j++){
+        obj[headers[j]] = currentline[j];
+      }
+      result.push(obj);
+    }
 
+
+    label = [];
+    dataL = [];
+    for(var i=0;i<result.length;i++){
+      label.push(result[i].Day);
+      dataL.push(result[i].num_positive);
+    }
+  
+
+
+
+
+  var ctx = document.getElementById("myAreaChart");
+  var myLineChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: label,
+      datasets: [{
+        label: "Earnings",
+        lineTension: 0.3,
+        backgroundColor: "rgba(78, 115, 223, 0.05)",
+        borderColor: "rgba(78, 115, 223, 1)",
+        pointRadius: 3,
+        pointBackgroundColor: "rgba(78, 115, 223, 1)",
+        pointBorderColor: "rgba(78, 115, 223, 1)",
+        pointHoverRadius: 3,
+        pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+        pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+        pointHitRadius: 10,
+        pointBorderWidth: 2,
+        data: dataL,
+      }],
+    },
+    options: {
+      maintainAspectRatio: false,
+      layout: {
+        padding: {
+          left: 10,
+          right: 25,
+          top: 25,
+          bottom: 0
+        }
+      },
+      scales: {
+        xAxes: [{
+          time: {
+            unit: 'date'
+          },
+          gridLines: {
+            display: false,
+            drawBorder: false
+          },
+          ticks: {
+            maxTicksLimit: 7,
+            // callback: function(value, index, values) {
+            //   return number_format(value)+ ' Days';
+            // }
+          }
+        }],
+        yAxes: [{
+          ticks: {
+            maxTicksLimit: 5,
+            padding: 10,
+
+            callback: function(value, index, values) {
+              return number_format(value)+ ' Cases';
+            }
+          },
+          gridLines: {
+            color: "rgb(234, 236, 244)",
+            zeroLineColor: "rgb(234, 236, 244)",
+            drawBorder: false,
+            borderDash: [2],
+            zeroLineBorderDash: [2]
+          }
+        }],
+      },
+      legend: {
+        display: false
+      },
+      tooltips: {
+        backgroundColor: "rgb(255,255,255)",
+        bodyFontColor: "#858796",
+        titleMarginBottom: 10,
+        titleFontColor: '#6e707e',
+        titleFontSize: 14,
+        borderColor: '#dddfeb',
+        borderWidth: 1,
+        xPadding: 15,
+        yPadding: 15,
+        displayColors: false,
+        intersect: false,
+        mode: 'index',
+        caretPadding: 10,
+        callbacks: {
+          label: function(tooltipItem, chart) {
+            var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+            return datasetLabel + number_format(tooltipItem.yLabel)+ ': Cases';
+          }
+        }
+      }
+    }
+  });
+},
+);
+
+}
+console.log("tmp: ",result);
+label = ["2"];
+dataL = ["7"];
 // Area Chart Example
 var ctx = document.getElementById("myAreaChart");
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    labels: label,
     datasets: [{
       label: "Earnings",
       lineTension: 0.3,
@@ -46,7 +173,7 @@ var myLineChart = new Chart(ctx, {
       pointHoverBorderColor: "rgba(78, 115, 223, 1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: [0, 10000, 5000, 15000, 10000, 20000, 15000, 25000, 20000, 30000, 25000, 40000],
+      data: dataL,
     }],
   },
   options: {
@@ -69,16 +196,19 @@ var myLineChart = new Chart(ctx, {
           drawBorder: false
         },
         ticks: {
-          maxTicksLimit: 7
+          maxTicksLimit: 7,
+          // callback: function(value, index, values) {
+          //   return number_format(value)+ ' Days';
+          // }
         }
       }],
       yAxes: [{
         ticks: {
           maxTicksLimit: 5,
           padding: 10,
-          // Include a dollar sign in the ticks
+
           callback: function(value, index, values) {
-            return '$' + number_format(value);
+            return number_format(value)+ ' Cases';
           }
         },
         gridLines: {
@@ -110,9 +240,10 @@ var myLineChart = new Chart(ctx, {
       callbacks: {
         label: function(tooltipItem, chart) {
           var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-          return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
+          return datasetLabel + number_format(tooltipItem.yLabel)+ ': Cases';
         }
       }
     }
   }
 });
+loadData();
