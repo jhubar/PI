@@ -412,14 +412,14 @@
                 </div>
               </div>
             </div>
-            <!-- NewRecovered-->
+            <!-- Nnum_critical-->
             <div class="col-xl-3 col-md-6 mb-4">
               <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Critical</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="NewRecovered"></a></div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_critical"></a></div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -428,14 +428,14 @@
                 </div>
               </div>
             </div>
-            <!-- TotalRecovered-->
+            <!-- num_fatalities-->
             <div class="col-xl-3 col-md-6 mb-4">
               <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Fatalties</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="TotalRecovered"></a></div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_fatalities"></a></div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -444,22 +444,7 @@
                 </div>
               </div>
             </div>
-            <!-- Date-->
-            <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Date</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="Date"></a></div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+
 
 
             <!-- Global Deaths -->
@@ -855,8 +840,8 @@
           }
           //return result; //JavaScript object
             result = `
-            <td>${ result[0].num_hospitalised }</td>`
-            $("#num_hospitalised").html(result)
+            <td>${ result[0].num_critical }</td>`
+            $("#num_critical").html(result)
 
         })
         // num_fatalities
@@ -875,8 +860,8 @@
           }
           //return result; //JavaScript object
             result = `
-            <td>${ result[0].num_hospitalised }</td>`
-            $("#num_hospitalised").html(result)
+            <td>${ result[0].num_fatalities }</td>`
+            $("#num_fatalities").html(result)
 
         })
       }
