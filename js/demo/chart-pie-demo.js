@@ -51,7 +51,7 @@ function loadData(){
         labels: ["normal Cases", "number Of Hospitalied", "critical","fatalities"],
         datasets: [{
           data: [normalCases,numberOfHospitalied, critical, fatalities],
-          backgroundColor: ['#1cc88a','#4e73df', '#ffc107','#DF2C2C'],
+          backgroundColor: ['#4e73df','#1cc88a', '#ffc107','#DF2C2C'],
           hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf','#DF2C2C'],
           hoverBorderColor: "rgba(234, 236, 244, 1)",
         }],
