@@ -144,7 +144,7 @@ function loadData(){
         {
           label: "Earnings",
           lineTension: 0.1,
-          backgroundColor: "rgba(255, 193, 7,0.1)",
+          backgroundColor: "rgba(255, 193, 7,0.3)",
           borderColor: "rgba(255, 193, 7,0.1)",
           pointRadius: 3,
           pointBackgroundColor: "rgba(255, 193, 7,1)",
