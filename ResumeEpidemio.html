@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Big data project</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+      <!-- Sidebar - Brand -->
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <!-- <div class="sidebar-brand-icon rotate-n-15">
+          <i class="fas fa-laugh-wink"></i>
+        </div> -->
+        <div class="sidebar-brand-text mx-3">Big data project</div>
+      </a>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0">
+
+      <!-- Nav Item - Dashboard -->
+      <li class="nav-item active">
+        <a class="nav-link" href="index.html">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Dashboard</span></a>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Interface
+      </div>
+
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fas fa-fw fa-cog"></i>
+          <span>Covid-Version</span>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Covid data:</h6>
+            <a class="collapse-item" href="index.html">Covid-19</a>
+            <a class="collapse-item" href="covid-20.html">Covid-20</a>
+          </div>
+        </div>
+      </li>
+
+      <!-- Nav Item - Utilities Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+          <i class="fas fa-fw fa-wrench"></i>
+          <span>Tools</span>
+        </a>
+        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Custom Utilities:</h6>
+            <a class="collapse-item" href="ResumeEpidemio.html">Resume Epidemio</a>
+          </div>
+        </div>
+      </li>
+
+      <!-- Divider -->
+      <!-- <hr class="sidebar-divider"> -->
+
+      <!-- Heading -->
+      <!-- <div class="sidebar-heading">
+        Addons
+      </div> -->
+
+      <!-- Nav Item - Pages Collapse Menu -->
+      <!-- <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>Pages</span>
+        </a>
+        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Login Screens:</h6>
+            <a class="collapse-item" href="login.html">Login</a>
+            <a class="collapse-item" href="register.html">Register</a>
+            <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
+            <div class="collapse-divider"></div>
+            <h6 class="collapse-header">Other Pages:</h6>
+            <a class="collapse-item" href="404.html">404 Page</a>
+            <a class="collapse-item" href="blank.html">Blank Page</a>
+          </div>
+        </div>
+      </li> -->
+
+      <!-- Nav Item - Charts -->
+      <!-- <li class="nav-item">
+        <a class="nav-link" href="charts.html">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Charts</span></a>
+      </li> -->
+
+      <!-- Nav Item - Tables -->
+      <!-- <li class="nav-item">
+        <a class="nav-link" href="tables.html">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Tables</span></a>
+      </li> -->
+
+      <!-- Divider -->
+      <!-- <hr class="sidebar-divider d-none d-md-block"> -->
+
+      <!-- Sidebar Toggler (Sidebar) -->
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Topbar -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+          <!-- Sidebar Toggle (Topbar) -->
+          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+          </button>
+
+          <!-- Topbar Search -->
+          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+            <div class="input-group">
+              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <button class="btn btn-primary" type="button">
+                  <i class="fas fa-search fa-sm"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+
+          <!-- Topbar Navbar -->
+          <ul class="navbar-nav ml-auto">
+
+            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+            <li class="nav-item dropdown no-arrow d-sm-none">
+              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-search fa-fw"></i>
+              </a>
+              <!-- Dropdown - Messages -->
+
+            </li>
+
+
+
+
+            <div class="topbar-divider d-none d-sm-block"></div>
+
+
+
+          </ul>
+
+        </nav>
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <h1 class="h3 mb-4 text-gray-800">Epidemio Resume</h1>
+          <h1 class="h4 mb-4 text-gray-800">La propagation d’un agent infectieux au sein d’une population est influencée par de très nombreux paramètres : </h1>
+          <p>
+            <ul>
+              <li>Concerant l'agent lui-même.</li>
+              <ul>
+                <li>Les taux de mortalité et de morbidité qu’il engendre</li>
+                <li>S’il touche d’autres espèces que l’homme</li>
+                <li>La durée de la phase d’excrétion par les individus infectieux,
+                  et si ces derniers sont symptomatiques ou non</li>
+                <li>Si les individus cible arrivent à développer de l’immunité
+                   ou non contre l’agent, et si oui, est-elle durable ? </li>
+                <li>Si une partie de la population est naturellement résistante à l’agent</li>
+                <li>La résistance de l’agent dans l’environnement</li>
+                <li>Par quelles voies les individus se font ils infecter</li>
+
+              </ul>
+              <li>Concernant la population cible.</li>
+              <ul>
+                <li>Quels contacts entretiennent entre eux les membres de la population étudiée ?</li>
+                <li>Sont-ils plus ou moins rapprochés</li>
+                <li>Certains individus sont-ils plus à risque que d’autres</li>
+              </ul>
+          </ul>
+        </p>
+        <h1 class="h4 mb-4 text-gray-800">
+          Pour modéliser la propagation d’une maladie, nous devons séparer la population en compartiments.
+          </h1>
+          <p>Une première façon de faire est le modèle SI. Nous séparons donc
+            la population en deux compartiments : les individus S (sains), et
+            donc <br> dont les tests sont négatifs, et les individus I (infectés) dont
+             les tests sont positifs. L’évolution de l’épidémie avec le temps peut
+              donc être<br> représentée par deux courbes, S(t) et I(t) dont la somme
+              donne toujours la taille totale de la population étudiée.
+            <br>
+          <br>
+          Pour obtenir ces valeurs, nous pouvons opérer de plusieurs façons différentes :
+          <ul>
+            <li>Soit recenser les cas cliniques. Cela présente divers problèmes
+              tel que la non-détection des individus asymptomatiques ou de comptabiliser
+               des infections dont les signes cliniques sont comparables.</li>
+
+            <li>Soit l’utilisation de tests recherchant la présence de l’agent
+              infectieux de façon directe, tel que des PCR (amplification du génome
+              de l’agent), des test ELISA orientés sur les antigènes du pathogène,
+               etc. Dans tous les cas, ces tests ont une certaine sensibilité et
+               une certaine spécificité. Ils permettent parfois de détecter des
+               individus asymptomatiques, mais cela dépend de leur disponibilité
+               et de l’échelle de la campagne de testage. De plus, la sensibilité
+               des tests peut parfois dépendre d’une fenêtre d’excrétion virale
+               très courte et il peut dès lors être aisé de passer à côté de certaines
+                contaminations asymptomatiques, même avec un testage régulier. </li>
+
+          </ul>
+          Nous pouvons dès lors représenter l’évolution de ces valeurs sur un
+          graphique étalant les courbes épidémiques en fonction du temps.
+          <br>
+          <br>
+            Plusieurs cas de figure peuvent alors se présenter 
+          <ul>
+            <li>Soit les individus ne guérissent pas, et restent donc infectieux.
+               La proportion des individus I de la population augmente alors de
+               façon à tendre vers une population totalement infectieuse (si rien
+               n’est mis en place).</li>
+            <li>Soit les individus de la population s’infectent, puis guérissent,
+              mais ne développent pas d’immunité contre l’agent infectieux après
+              guérison. Les individus vont alors s’infecter et guérir de façon
+              cyclique. Cela va donner une courbe épidémique qui tend à former
+              un plateau après un certain temps avec une proportion stable
+              d’individus infectieux dans la population</li>
+            <li>Soit les individus restent immunisés après infection.
+              Dans ce cas la courbe épidémique forme une vague qui finit par
+              décroître suivant l’augmentation de la proportion d’individus
+              immunisés dans la population. </li>
+          </ul>
+          Dans notre cas (corona), il semblerait que le taux de réinfection soit
+          très faible, ce qui laisse suggérer que les individus atteints créent
+          une immunité durable contre l’agent infectieux. Il devient dès-lors
+          judicieux d’identifier dans notre population les individus « R » pour
+          résistant, et qui ne peuvent donc plus contracter la maladie. Cette
+          information peut être directement déduite des résultats déjà obtenus
+          dans le modèle précédent, mais également par d’autres types de tests
+          tel que les tests sérologiques. Ces tests permettent de mettre en
+          évidence l’apparition d’immunité adaptative chez l’individu testé par
+          la présence d’anticorps dirigés contre l’agent pathogène. <br>
+          L’utilisation de tests sérologiques permet dans un premier temps de
+          vérifier l’hypothèse du déploiement d’une immunité durable chez les
+          individus en contact avec le virus. Cependant, il faut garder à l’esprit
+          que la sensibilité peut être faible suivant le pannel d’anticorps dosés.
+          Ainsi, un individu négatif aux tests sérologique n’est pas forcément
+          à nouveau sensible à l’agent pathogène. Par contre, l’utilisation de
+          ces tests permettent de réaliser des screenings afin de de se renseigner
+          sur la proportion de la population immunisée à un temps t. Cette
+          information est très importante afin de réaliser des simulations
+          sur l’évolution de l’épidémie en mesurant le taux d’immunité collective.
+          Elle permet également d’interpréter plus efficacement les données
+          issues des tests permettant de détecter les individus infectieux,
+          et d’évaluer l’efficacité de la campagne de testing. En effet, cela
+          peut mettre en évidence une sous-estimation de la proportion d’individus
+          infectieux, dans le cas ou ces individus ne se font pas tester, que
+          ce soit volontaire ou non. <br>
+
+          Nous pouvons donc introduire R(t). A tout moment, si l’on fait la
+          somme de S(t), I(t) et R(t), nous devons retrouver la taille de la
+          population étudiée. <br><br>
+
+          Des données issues du testing, nous pouvons déduire deux paramètres important :
+          <ul>
+            <li>Beta : Le paramètre Beta peut se décomposer en un produit de
+              deux éléments distinct : </li>
+              <ul>
+              <li>Le premier spécifique aux propriétés de la population et
+                déterminant la probabilité que deux individus de cette même
+                population soient en contact. </li>
+              <li>Le deuxième spécifique à l’agent infectieux qui détermine
+                la probabilité que l’un des contacts précédemment décrit soit
+                contaminant.</li>
+              </ul>
+              Vu que pour qu’il y ait contamination, ces contacts doivent avoir
+              lieux entre un individu S et un I, nous pouvons dès lors déterminer
+              le nombre d’individus qui passent du compartiment S au compartiment
+              I à une unité de temps discrète t donnée par la formule : Beta * I(t) * S(t).
+              <li>Gamma : C’est le temps moyen au bout duquel les individus
+                contaminés guérissent, et donc passent du compartiment I vers
+                le compartiment R. Le nombre d’individus guérissant à un temps t
+                 est donc proportionnel au nombre d’individus dans le
+                 compartiment I et se calcul par le rapport I(t)/gamma.</li>
+          </ul>
+          Ces paramètres apportent des informations statistiques très précieuses
+          pour caractériser l’épidémiologie de l’agent infectieux. Ils peuvent
+          être déterminé par l’utilisation des dérivées partielles suivantes :
+          <ul>
+            <li>dI(t)/dt = Beta*I(t)*S(t) – 1/gamma</li>
+            <li>dR(t)/dt = 1/gamma</li>
+            <li>dS(t)/dt = -Beta*I(t)*S(t)</li>
+          </ul>
+          Ce modèle SIR représente un modèle général simplifié que l’on peut
+          appliquer dans de nombreux cas d’épidémies. A ce modèle de base, nous
+          pouvons envisager l’ajout de beaucoup de détails qui peuvent avoir de
+          l’importance suivant la situation :
+          <ul>
+            <li>A la place d’utiliser un simple statut « I », nous pourrions
+               faire la distinction entre les individus asymptomatiques, les
+               symptomatiques légers, les individus hospitalisés, individus en
+               soins intensifs, … Il est en effet important d’adopter une gestion
+               de l’épidémie ne saturant pas le système de soins. De plus, dans
+               beaucoup de cas, des paramètres comme la durée et le niveau d’excrétion
+               sont fort différents suivant le degré des symptômes.</li>
+            <li>Le modèle de base considère les individus décédés comme étant
+              « R ». Or, alors qu’une large proportion de la population ayant
+              un statut d’immunisé semble à première vue souhaitable,  les pertes
+               en vies humaines ne le sont évidemment pas. </li>
+          </ul>
+
+         Il paraît également nécessaire lors de campagnes de test de récupérer
+         un maximum d’informations personnelles sur les individus eux-mêmes tel
+         que les tranches d’âges, des données géographiques, des informations
+         sur la situation sociale, … En effet, la réalisation de tels datasets
+         permet une étude approfondie de la situation, et donc de réaliser des
+         modèles prédictifs performants. En effet, cela nous permet d’estimer le
+         mieux possible les valeurs des paramètres beta et gamma spécifiques des
+        différents profils d’individus présents dans la population, ainsi que de
+        modéliser le graphe représentant au mieux les contacts entre les individus.
+        <br><br>
+         Ces simulations nous permettent alors de prendre au mieux les décisions
+        des mesures sanitaires à prendre, de façon à minimiser de façon parallèle
+        l’impact sur la santé de la population et l’impact des mesures sur le
+        système économique.
+         </p>
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Your Website 2020</span>
+          </div>
+        </div>
+      </footer>
+      <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="login.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin-2.min.js"></script>
+
+</body>
+
+</html>
