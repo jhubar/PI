@@ -238,8 +238,8 @@ function loadData(){
 
 }
 
-label = ["2"];
-dataL = ["7"];
+label = [];
+dataL = [];
 // Area Chart Example
 var ctx = document.getElementById("myAreaChartFatalities");
 var myLineChart = new Chart(ctx, {

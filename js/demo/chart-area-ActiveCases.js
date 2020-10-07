@@ -237,8 +237,8 @@ function loadData(){
 
 }
 
-label = ["2"];
-dataL = ["7"];
+label = [];
+dataL = [];
 // Area Chart Example
 var ctx = document.getElementById("myAreaChart");
 var myLineChart = new Chart(ctx, {
