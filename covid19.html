@@ -1,4 +1,4 @@
-user<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -349,10 +349,10 @@ user<!DOCTYPE html>
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Day</div>
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Cumulative cases</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800">
                         <tr>
-                              <a id="result"></a>
+                              <a id="data"></a>
                         </tr>
                       </div>
                     </div>
@@ -364,87 +364,102 @@ user<!DOCTYPE html>
               </div>
             </div>
 
-            <!-- num_positive-->
+            <!-- NewConfirmed-->
             <div class="col-xl-3 col-md-6 mb-4">
               <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Positive cases</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_positive"></a></div>
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">New Confirmed</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="dataTotConf"></a></div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-user fa-2x text-gray-300"></i>
+                      <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <!-- num_hospitalised-->
+            <!-- TotalDeaths-->
             <div class="col-xl-3 col-md-6 mb-4">
               <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Number of Hospitalised</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_hospitalised"></a></div>
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total Deaths</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="TotalDeaths"></a></div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-user fa-2x text-gray-300"></i>
+                      <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <!-- num_cumulative_hospitalizations-->
+            <!-- NewDeaths-->
             <div class="col-xl-3 col-md-6 mb-4">
               <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Cumulative hospitalizations</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_cumulative_hospitalizations"></a></div>
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">New Deaths</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="NewDeaths"></a></div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-user fa-2x text-gray-300"></i>
+                      <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <!-- Nnum_critical-->
+            <!-- NewRecovered-->
             <div class="col-xl-3 col-md-6 mb-4">
               <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Critical</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_critical"></a></div>
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">New Recovered</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="NewRecovered"></a></div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-user fa-2x text-gray-300"></i>
+                      <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <!-- num_fatalities-->
+            <!-- TotalRecovered-->
             <div class="col-xl-3 col-md-6 mb-4">
               <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Fatalties</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_fatalities"></a></div>
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total Recovered</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="TotalRecovered"></a></div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-user fa-2x text-gray-300"></i>
+                      <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-
+            <!-- Date-->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Date</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="Date"></a></div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
 
             <!-- Global Deaths -->
@@ -474,7 +489,7 @@ user<!DOCTYPE html>
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Cases</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Cumulative cases</h6>
                   <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -546,10 +561,10 @@ user<!DOCTYPE html>
               <!-- Project Card Example -->
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Stat</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
                 </div>
                 <div class="card-body">
-                  <h4 class="small font-weight-bold">Percent of hospitalizations <span class="float-right">2%</span></h4>
+                  <h4 class="small font-weight-bold">Server Migration <span class="float-right">20%</span></h4>
                   <div class="progress mb-4">
                     <div class="progress-bar bg-danger" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
@@ -574,15 +589,15 @@ user<!DOCTYPE html>
 
               <!-- Color System -->
               <div class="row">
-                <!-- <div class="col-lg-6 mb-4">
+                <div class="col-lg-6 mb-4">
                   <div class="card bg-primary text-white shadow">
                     <div class="card-body">
                       Primary
                       <div class="text-white-50 small">#4e73df</div>
                     </div>
                   </div>
-                </div> -->
-                <!-- <div class="col-lg-6 mb-4">
+                </div>
+                <div class="col-lg-6 mb-4">
                   <div class="card bg-success text-white shadow">
                     <div class="card-body">
                       Success
@@ -637,7 +652,7 @@ user<!DOCTYPE html>
                       <div class="text-white-50 small">#5a5c69</div>
                   </div>
                 </div>
-              </div> -->
+              </div>
             </div>
 
             </div>
@@ -645,7 +660,7 @@ user<!DOCTYPE html>
             <div class="col-lg-6 mb-4">
 
               <!-- Illustrations -->
-              <!-- <div class="card shadow mb-4">
+              <div class="card shadow mb-4">
                 <div class="card-header py-3">
                   <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
                 </div>
@@ -656,10 +671,10 @@ user<!DOCTYPE html>
                   <p>Add some quality, svg illustrations to your project courtesy of <a target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a constantly updated collection of beautiful svg images that you can use completely free and without attribution!</p>
                   <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on unDraw &rarr;</a>
                 </div>
-              </div> -->
+              </div>
 
               <!-- Approach -->
-              <!-- <div class="card shadow mb-4">
+              <div class="card shadow mb-4">
                 <div class="card-header py-3">
                   <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
                 </div>
@@ -667,7 +682,7 @@ user<!DOCTYPE html>
                   <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce CSS bloat and poor page performance. Custom CSS classes are used to create custom components and custom utility classes.</p>
                   <p class="mb-0">Before working with this theme, you should become familiar with the Bootstrap framework, especially the utility classes.</p>
                 </div>
-              </div> -->
+              </div>
 
             </div>
           </div>
@@ -738,142 +753,85 @@ user<!DOCTYPE html>
   <!-- Api connection -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script>
-    $(document).ready(function(){
+  $(document).ready(function(){
+    init()
+
+    function init(){
+      var url = "https://api.covid19api.com/summary "
+      var dara = ''
+      $.get(url,function(data){
+        console.log(data.Global)
+          data = `
+
+          <td>${ data.Countries[16].TotalConfirmed }</td>`
+          $("#data").html(data)
+
+      })
+      $.get(url,function(data){
+        console.log(data.Global)
+          data = `
+
+          <td>${ data.Countries[16].NewConfirmed }</td>`
+          $("#dataTotConf").html(data)
+
+      })
+      $.get(url,function(data){
+        console.log(data.Global)
+          data = `
+
+          <td>${ data.Countries[16].TotalDeaths }</td>`
+          $("#TotalDeaths").html(data)
+
+      })
+      $.get(url,function(data){
+        console.log(data.Global)
+          data = `
+
+          <td>${ data.Countries[16].NewDeaths }</td>`
+          $("#NewDeaths").html(data)
+
+      })
+      $.get(url,function(data){
+        console.log(data.Global)
+          data = `
+
+          <td>${ data.Countries[16].NewRecovered }</td>`
+          $("#NewRecovered").html(data)
+
+      })
+      $.get(url,function(data){
+        console.log(data.Global)
+          data = `
+
+          <td>${ data.Countries[16].TotalRecovered }</td>`
+          $("#TotalRecovered").html(data)
+
+      })
+      $.get(url,function(data){
+        console.log(data.Global)
+          data = `
+
+          <td>${ data.Countries[16].Date }</td>`
+          $("#Date").html(data)
+
+      })
+
+    }
+  })
+    function refreshdata(){
+      clearData()
       init()
+    }
+    function cleardata(){
+     $("#data").empty()
+     $("#dataTotConf").empty()
+     $("#TotalDeaths").empty()
+     $("#NewDeaths").empty()
+     $("#NewRecovered").empty()
+     $("#TotalRecovered").empty()
+     $("#Date").empty()
+   }
 
-      function init(){
-        var url = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/data.csv"
-        var data = ''
-        // DAY
-        $.get(url,function(data){
-
-          var lines=data.split("\n");
-          var result = [];
-
-          var headers=lines[0].split(",");
-          for(var i=1;i<lines.length;i++){
-            var obj = {};
-            var currentline=lines[i].split(",");
-            for(var j=0;j<headers.length;j++){
-              obj[headers[j]] = currentline[j];
-            }
-            result.push(obj);
-          }
-          var size = result.length-1;
-          //return result; //JavaScript object
-
-            result = `
-            <td>${ result[size-1].Day }</td>`
-            $("#result").html(result)
-
-        })
-        // Posive cases
-        $.get(url,function(data){
-
-          var lines=data.split("\n");
-          var result = [];
-          var headers=lines[0].split(",");
-          for(var i=1;i<lines.length;i++){
-            var obj = {};
-            var currentline=lines[i].split(",");
-            for(var j=0;j<headers.length;j++){
-              obj[headers[j]] = currentline[j];
-            }
-            result.push(obj);
-          }
-          var size = result.length-1;
-          //return result; //JavaScript object
-            result = `
-            <td>${ result[size-1].num_positive }</td>`
-            $("#num_positive").html(result)
-
-        })
-        // Number of Hospitalised
-        $.get(url,function(data){
-
-          var lines=data.split("\n");
-          var result = [];
-          var headers=lines[0].split(",");
-          for(var i=1;i<lines.length;i++){
-            var obj = {};
-            var currentline=lines[i].split(",");
-            for(var j=0;j<headers.length;j++){
-              obj[headers[j]] = currentline[j];
-            }
-            result.push(obj);
-          }
-          //return result; //JavaScript object
-          var size = result.length-1;
-            result = `
-            <td>${ result[size-1].num_hospitalised }</td>`
-            $("#num_hospitalised").html(result)
-
-        })
-        // num_cumulative_hospitalizations
-        $.get(url,function(data){
-
-          var lines=data.split("\n");
-          var result = [];
-          var headers=lines[0].split(",");
-          for(var i=1;i<lines.length;i++){
-            var obj = {};
-            var currentline=lines[i].split(",");
-            for(var j=0;j<headers.length;j++){
-              obj[headers[j]] = currentline[j];
-            }
-            result.push(obj);
-          }
-          var size = result.length-1;
-          //return result; //JavaScript object
-            result = `
-            <td>${ result[size-1].num_cumulative_hospitalizations }</td>`
-            $("#num_cumulative_hospitalizations").html(result)
-
-        })
-        // num_critical
-        $.get(url,function(data){
-
-          var lines=data.split("\n");
-          var result = [];
-          var headers=lines[0].split(",");
-          for(var i=1;i<lines.length;i++){
-            var obj = {};
-            var currentline=lines[i].split(",");
-            for(var j=0;j<headers.length;j++){
-              obj[headers[j]] = currentline[j];
-            }
-            result.push(obj);
-          }
-          var size = result.length-1;
-          //return result; //JavaScript object
-            result = `
-            <td>${ result[size-1].num_critical }</td>`
-            $("#num_critical").html(result)
-
-        })
-        // num_fatalities
-        $.get(url,function(data){
-
-          var lines=data.split("\n");
-          var result = [];
-          var headers=lines[0].split(",");
-          for(var i=1;i<lines.length;i++){
-            var obj = {};
-            var currentline=lines[i].split(",");
-            for(var j=0;j<headers.length;j++){
-              obj[headers[j]] = currentline[j];
-            }
-            result.push(obj);
-          }
-          var size = result.length-1;
-          //return result; //JavaScript object
-            result = `
-            <td>${ result[size-1].num_fatalities }</td>`
-            $("#num_fatalities").html(result)
-
-        })
-      }
-    })
   </script>
 </body>
 
