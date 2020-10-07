@@ -366,9 +366,16 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Positive cases</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_positive"></a></div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">
+                        <a id="num_positive"></a>
+
+                      </div>
+
+
                     </div>
                     <div class="col-auto">
+                      <i class="text-primary"><a id="casesKpi"></a></i>
+
                       <i class="fas fa-user fa-2x text-gray-300"></i>
                       <i class="fas fa-viruses fa-2x text-gray-300"></i>
                     </div>
@@ -804,6 +811,36 @@
             result = `
             <td>${ result[size-1].num_positive }</td>`
             $("#num_positive").html(result)
+
+        })
+        // Positives cases minus one
+        $.get(url,function(data){
+
+          var lines=data.split("\n");
+          var result = [];
+          var headers=lines[0].split(",");
+          for(var i=1;i<lines.length;i++){
+            var obj = {};
+            var currentline=lines[i].split(",");
+            for(var j=0;j<headers.length;j++){
+              obj[headers[j]] = currentline[j];
+            }
+            result.push(obj);
+          }
+          var size = result.length-1;
+          //return result; //JavaScript object
+
+          var percentChange = (result[size-1].num_positive /result[size-2].num_positive)*100;
+          if(percentChange >= 0){
+            result = `
+            <td>${ percentChange }</td>`
+            $("#casesKpi").html(result)
+          }
+          else{
+            result = `
+            <td>${ percentChange }</td>`
+            $("#casesKpi").html(result)
+          }
 
         })
         // Number of Hospitalised
