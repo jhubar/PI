@@ -47,12 +47,43 @@ function loadData(){
 
     label = [];
     dataL = [];
-    for(var i=0;i<result.length;i++){
+    dataOverfit = [];
+    dataUnderfit = [];
+    dataLinearfit = [];
+    for(var i=0;i<result.length-1;i++){
       label.push(result[i].Day);
       dataL.push(result[i].num_positive);
+      dataOverfit.push(result[i].num_positive);
+      dataUnderfit.push(result[i].num_positive);
+      dataLinearfit.push(result[i].num_positive);
     }
-  
 
+    for(var i=0;i<7;i++){
+      label.push((result.length+i).toString());
+    }
+
+
+
+    tmpOverfit = dataL[result.length-2];
+    tmpUnderfit = dataL[result.length-2];
+    tmpLinearfit = dataL[result.length-2];
+
+    for(var i=result.length-1;i<label.length;i++){
+      tmpLinearfit = 5 * parseInt(label[i-1]);
+      if(i%2 == 0){
+        tmpOverfit = 4 + parseInt(tmpLinearfit);
+        tmpUnderfit = parseInt(tmpLinearfit) - 4;
+      }
+      else{
+        tmpOverfit = 3 + parseInt(tmpLinearfit);
+        tmpUnderfit = parseInt(tmpLinearfit)-3;
+      }
+
+
+      dataLinearfit[i]= tmpLinearfit.toString();
+      dataOverfit[i]= tmpOverfit.toString()*1.1;
+      dataUnderfit[i]= tmpUnderfit.toString()/1.1;
+    }
 
 
 
@@ -61,21 +92,74 @@ function loadData(){
     type: 'line',
     data: {
       labels: label,
-      datasets: [{
-        label: "Earnings",
-        lineTension: 0.3,
-        backgroundColor: "rgba(78, 115, 223, 0.05)",
-        borderColor: "rgba(78, 115, 223, 1)",
-        pointRadius: 3,
-        pointBackgroundColor: "rgba(78, 115, 223, 1)",
-        pointBorderColor: "rgba(78, 115, 223, 1)",
-        pointHoverRadius: 3,
-        pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-        pointHoverBorderColor: "rgba(78, 115, 223, 1)",
-        pointHitRadius: 10,
-        pointBorderWidth: 2,
-        data: dataL,
-      }],
+      datasets: [
+        {
+          label: "Earnings",
+          lineTension: 0.6,
+          backgroundColor: "rgba(78, 115, 223, 0.15)",
+          borderColor: "rgba(78, 115, 223, 1)",
+          pointRadius: 4,
+          pointBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointBorderColor: "rgba(78, 115, 223, 1)",
+          pointHoverRadius: 4,
+          pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 4,
+          data: dataL,
+        },
+        // linear line
+        {
+          label: "Earnings",
+          lineTension: 0.3,
+          backgroundColor: "rgba(237, 0, 59,0.05)",
+          borderColor: "rgba(237, 0, 59, 1)",
+          pointRadius: 3,
+          pointBackgroundColor: "rgba(237, 0, 59, 1)",
+          pointBorderColor: "rgba(237, 0, 59, 1)",
+          pointHoverRadius: 3,
+          pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 2,
+          data: dataLinearfit,
+        },
+        //Overfitt line
+        {
+          label: "Earnings",
+          lineTension: 0.1,
+          backgroundColor: "rgba(237, 0, 59,0.05)",
+          borderColor: "rgba(237, 0, 59, 1)",
+          pointRadius: 3,
+          pointBackgroundColor: "rgba(237, 0, 59, 1)",
+          pointBorderColor: "rgba(237, 0, 59, 1)",
+          pointHoverRadius: 3,
+          pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 2,
+          data: dataOverfit,
+        },
+          //Underfit line
+        {
+          label: "Earnings",
+          lineTension: 0.1,
+          backgroundColor: "rgba(237, 0, 59,0.05)",
+          borderColor: "rgba(237, 0, 59, 0.9)",
+          pointRadius: 3,
+          pointBackgroundColor: "rgba(237, 0, 59, 0.9)",
+          pointBorderColor: "rgba(237, 0, 59, 0.9)",
+          pointHoverRadius: 3,
+          pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 2,
+          data: dataUnderfit,
+        }
+
+
+
+    ],
     },
     options: {
       maintainAspectRatio: false,
@@ -146,12 +230,12 @@ function loadData(){
         }
       }
     }
-  });
+  },);
 },
 );
 
 }
-console.log("tmp: ",result);
+
 label = ["2"];
 dataL = ["7"];
 // Area Chart Example
