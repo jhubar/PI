@@ -374,11 +374,11 @@
 
                     </div>
                     <div class="col-auto">
-                      <i class="text-primary"><a id="casesKpi"></a></i>
-
-                      <i class="fas fa-user fa-2x text-gray-300"></i>
+                      <!-- <i class="fas fa-caret-up fa-2x text-success"></i> -->
+                      <i class="text-success"><a id="casesKpi"></a></i>
                       <i class="fas fa-viruses fa-2x text-gray-300"></i>
                     </div>
+                    
                   </div>
                 </div>
               </div>
@@ -833,12 +833,16 @@
           var percentChange = (result[size-1].num_positive /result[size-2].num_positive)*100;
           if(percentChange >= 0){
             result = `
-            <td>${ percentChange }</td>`
+
+
+            <td class="fas fa-caret-up fa-1x text-success">${ percentChange }</td>
+            <td>${ "%" }</td>`
             $("#casesKpi").html(result)
           }
           else{
             result = `
-            <td>${ percentChange }</td>`
+            <td class="fas fa-caret-down fa-1x text-danger">${ percentChange }</td>
+            <td>${ "%" }</td>`
             $("#casesKpi").html(result)
           }
 
