@@ -374,11 +374,10 @@
 
                     </div>
                     <div class="col-auto">
-                      <!-- <i class="fas fa-caret-up fa-2x text-success"></i> -->
                       <i class="text-success"><a id="casesKpi"></a></i>
                       <i class="fas fa-viruses fa-2x text-gray-300"></i>
                     </div>
-                    
+
                   </div>
                 </div>
               </div>
@@ -393,6 +392,7 @@
                       <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_hospitalised"></a></div>
                     </div>
                     <div class="col-auto">
+                      <i class="text-success"><a id="num_hospitalisedKpi"></a></i>
                       <i class="fas fa-head-side-mask fa-2x text-gray-300"></i>
                     </div>
                   </div>
@@ -426,6 +426,7 @@
                       <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_critical"></a></div>
                     </div>
                     <div class="col-auto">
+                      <i class="text-success"><a id="num_criticalKpi"></a></i>
                       <i class="fas fa-head-side-cough fa-2x text-gray-300"></i>
                     </div>
                   </div>
@@ -442,6 +443,7 @@
                       <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_fatalities"></a></div>
                     </div>
                     <div class="col-auto">
+                      <i class="text-success"><a id="num_fatalitiesKpi"></a></i>
                       <i class="fas fa-bible fa-2x text-gray-300"></i>
                       <i class="fas fa-dizzy fa-2x text-gray-300"></i>
                     </div>
@@ -813,7 +815,7 @@
             $("#num_positive").html(result)
 
         })
-        // Positives cases minus one
+        // Positives casesKPI
         $.get(url,function(data){
 
           var lines=data.split("\n");
@@ -830,7 +832,7 @@
           var size = result.length-1;
           //return result; //JavaScript object
 
-          var percentChange = (result[size-1].num_positive /result[size-2].num_positive)*100;
+          var percentChange = (((result[size-1].num_positive -result[size-2].num_positive)/result[size-2].num_positive)).toFixed(2);
           if(percentChange >= 0){
             result = `
 
@@ -866,6 +868,40 @@
             result = `
             <td>${ result[size-1].num_hospitalised }</td>`
             $("#num_hospitalised").html(result)
+
+        })
+        // NumberOfHospitaliedKPI
+        $.get(url,function(data){
+
+          var lines=data.split("\n");
+          var result = [];
+          var headers=lines[0].split(",");
+          for(var i=1;i<lines.length;i++){
+            var obj = {};
+            var currentline=lines[i].split(",");
+            for(var j=0;j<headers.length;j++){
+              obj[headers[j]] = currentline[j];
+            }
+            result.push(obj);
+          }
+          var size = result.length-1;
+          //return result; //JavaScript object
+
+          var percentChange = (((result[size-1].num_hospitalised - result[size-2].num_hospitalised) /result[size-2].num_hospitalised)).toFixed(2);
+          if(percentChange >= 0){
+            result = `
+
+
+            <td class="fas fa-caret-up fa-1x text-success">${ percentChange }</td>
+            <td>${ "%" }</td>`
+            $("#num_hospitalisedKpi").html(result)
+          }
+          else{
+            result = `
+            <td class="fas fa-caret-down fa-1x text-danger">${ percentChange }</td>
+            <td>${ "%" }</td>`
+            $("#num_hospitalisedKpi").html(result)
+          }
 
         })
         // num_cumulative_hospitalizations
@@ -910,6 +946,40 @@
             $("#num_critical").html(result)
 
         })
+        // num_criticalKPI
+        $.get(url,function(data){
+
+          var lines=data.split("\n");
+          var result = [];
+          var headers=lines[0].split(",");
+          for(var i=1;i<lines.length;i++){
+            var obj = {};
+            var currentline=lines[i].split(",");
+            for(var j=0;j<headers.length;j++){
+              obj[headers[j]] = currentline[j];
+            }
+            result.push(obj);
+          }
+          var size = result.length-1;
+          //return result; //JavaScript object
+
+          var percentChange = (((result[size-1].num_critical -result[size-2].num_critical)/result[size-2].num_positive)).toFixed(2);
+          if(percentChange >= 0){
+            result = `
+
+
+            <td class="fas fa-caret-up fa-1x text-success">${ percentChange }</td>
+            <td>${ "%" }</td>`
+            $("#num_criticalKpi").html(result)
+          }
+          else{
+            result = `
+            <td class="fas fa-caret-down fa-1x text-danger">${ percentChange }</td>
+            <td>${ "%" }</td>`
+            $("#num_criticalKpi").html(result)
+          }
+
+        })
         // num_fatalities
         $.get(url,function(data){
 
@@ -929,6 +999,40 @@
             result = `
             <td>${ result[size-1].num_fatalities }</td>`
             $("#num_fatalities").html(result)
+
+        })
+        // num_fatalitiesKPI
+        $.get(url,function(data){
+
+          var lines=data.split("\n");
+          var result = [];
+          var headers=lines[0].split(",");
+          for(var i=1;i<lines.length;i++){
+            var obj = {};
+            var currentline=lines[i].split(",");
+            for(var j=0;j<headers.length;j++){
+              obj[headers[j]] = currentline[j];
+            }
+            result.push(obj);
+          }
+          var size = result.length-1;
+          //return result; //JavaScript object
+
+          var percentChange = (((result[size-1].num_fatalities -result[size-2].num_fatalities)/result[size-2].num_positive)).toFixed(2);
+          if(percentChange >= 0){
+            result = `
+
+
+            <td class="fas fa-caret-up fa-1x text-success">${ percentChange }</td>
+            <td>${ "%" }</td>`
+            $("#num_fatalitiesKpi").html(result)
+          }
+          else{
+            result = `
+            <td class="fas fa-caret-down fa-1x text-danger">${ percentChange }</td>
+            <td>${ "%" }</td>`
+            $("#num_fatalitiesKpi").html(result)
+          }
 
         })
       }
