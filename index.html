@@ -427,7 +427,8 @@
                     </div>
                     <div class="col-auto">
                       <i class="text-success"><a id="num_criticalKpi"></a></i>
-                      <i class="fas fa-head-side-cough fa-2x text-gray-300"></i>
+                      <i class="fas fa-exclamation-triangle fa-2x text-gray-300"></i>
+                      <!-- <i class="fas fa-head-side-cough "></i> -->
                     </div>
                   </div>
                 </div>
@@ -455,8 +456,7 @@
 
 
 
-          <!-- Content Row -->
-
+          <!-- Content Row Actives Cases -->
           <div class="row">
 
             <!-- Area Chart Active Cases -->
@@ -502,59 +502,49 @@
               </div>
             </div>
 
-            <!-- Pie Chart  Active Cases-->
-            <div class="col-xl-4 col-lg-5">
-              <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Cases</h6>
-                  <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                      <div class="dropdown-header">Dropdown Header:</div>
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Something else here</a>
+
+
+            <!-- Prediction in one week -->
+            <div class="col-xl-4 col-lg-3 mb-4">
+              <div class="card border-left-primary shadow h-10 py-2">
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Next week's forecast for the number of cases </div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_fatalitiesForcast"></a></div>
+                    </div>
+                    <div class="col-auto">
+                      <i></a><a id = "num_hospitalisedKpiPredicated"></a></i>
+                      <i class="fas fas fa-head-side-cough fa-2x text-gray-300"></i>
                     </div>
                   </div>
                 </div>
-                <!-- Card Body -->
+              </div>
+              <br>
+              <div class="card border-left-primary shadow h-10 py-2">
                 <div class="card-body">
-                  <div class="chart-pie pt-4 pb-2">
-                    <canvas id="myPieChart"></canvas>
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Next week's forecast for the number of cases (mask) </div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_fatalitiesForcast"></a></div>
                   </div>
-                  <div class="mt-4 text-center small">
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-primary"></i> Normal Cases
-                    </span>
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-success"></i> Number Of Hospitalied
-                    </span>
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-warning"></i> Critical
-                    </span>
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-danger"></i> fatalities
-                    </span>
-
+                  <div class="col-auto">
+                    <i></a><a id = "num_hospitalisedKpiPredicated"></a></i>
+                    <i class="fas fa-head-side-mask fa-2x text-gray-300"></i>
                   </div>
                 </div>
               </div>
             </div>
+            </div>
           </div>
-
-          <!-- Content Row -->
+          <!-- Content Row numberOfHospitalied-->
           <div class="row">
-
-            <!-- Area Chart Hospitalised -->
-            <div class="col-xl-8 col-lg-7">
+              <!-- Area Chart Hospitalised -->
+              <div class="col-xl-8 col-lg-7">
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Number of Hospitalised</h6>
+                  <h6 class="m-0 font-weight-bold text-success">Number of Hospitalised</h6>
                   <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -590,12 +580,43 @@
                   </div>
                 </div>
               </div>
+
+            </div>
+              <!-- Prediction in one week -->
+              <div class="col-xl-4 col-lg-3 mb-4">
+                <div class="card border-left-success shadow h-10 py-2">
+                    <div class="card-body">
+                      <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Next week's forecast for the number of hospitalized cases </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_fatalitiesForcast"></a></div>
+                      </div>
+                      <div class="col-auto">
+                        <i></a><a id = "num_OfcasesKPIPredicated"></a></i>
+                        <i class="fas fas fa-head-side-cough fa-2x text-gray-300"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <br>
+                <div class="card border-left-success shadow h-10 py-2">
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Next week's forecast for the number of hospitalized cases (mask) </div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_fatalitiesForcast"></a></div>
+                    </div>
+                    <div class="col-auto">
+                      <i></a><a id = "num_hospitalisedKpiPredicated"></a></i>
+                      <i class="fas fa-head-side-mask fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <!-- Pie Chart -->
-
           </div>
-          <!-- Content Row -->
+          <!-- Content Row number of Critical-->
           <div class="row">
 
             <!-- Area Chart Fatalities -->
@@ -603,7 +624,7 @@
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Number of Criticals</h6>
+                  <h6 class="m-0 font-weight-bold text-warning">Number of Criticals</h6>
                   <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -641,11 +662,41 @@
               </div>
             </div>
 
-            <!-- Pie Chart -->
 
+            <!-- Prediction in one week -->
+            <div class="col-xl-4 col-lg-3 mb-4">
+              <div class="card border-left-warning shadow h-10 py-2">
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Next week's forecast for the number of critical cases </div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_fatalitiesForcast"></a></div>
+                    </div>
+                    <div class="col-auto">
+                      <i></a><a id = "num_hospitalisedKpiPredicated"></a></i>
+                      <i class="fas fas fa-head-side-cough fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br>
+              <div class="card border-left-warning shadow h-10 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Next week's forecast for the number of hospitalized cases (mask) </div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_fatalitiesForcast"></a></div>
+                  </div>
+                  <div class="col-auto">
+                    <i></a><a id = "num_hospitalisedKpiPredicated"></a></i>
+                    <i class="fas fa-head-side-mask fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
           </div>
-
-          <!-- Content Row -->
+          <!-- Content Row number of fatalities -->
           <div class="row">
 
             <!-- Area Chart Fatalities -->
@@ -653,7 +704,7 @@
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Number of Fatalities</h6>
+                  <h6 class="m-0 font-weight-bold text-danger">Number of Fatalities</h6>
                   <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -691,7 +742,38 @@
               </div>
             </div>
 
-            <!-- Pie Chart -->
+
+            <!-- Prediction in one week -->
+            <div class="col-xl-4 col-lg-3 mb-4">
+              <div class="card border-left-danger shadow h-10 py-2">
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Next week's forecast for the number of Fataliets cases </div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_OfcasesKPIPredicated"></a></div>
+                    </div>
+                    <div class="col-auto">
+                      <i></a><a id = "num_hospitalisedKpiPredicated"></a></i>
+                      <i class="fas fas fa-head-side-cough fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br>
+              <div class="card border-left-danger shadow h-10 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Next week's forecast for the number of Fatalies cases (mask) </div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_fatalitiesForcast"></a></div>
+                  </div>
+                  <div class="col-auto">
+                    <i></a><a id = "num_hospitalisedKpiPredicated"></a></i>
+                    <i class="fas fa-head-side-mask fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
 
           </div>
 
@@ -843,7 +925,7 @@
           if(percentChange == 0){
             result = `
             <td class="fas fa-caret-right text-success">${ percentChange }</td>
-            <td text-success>${ "%" }</td>`
+            <td class="text-success">${ "%" }</td>`
             $("#casesKpi").html(result)
           }
           else{
@@ -852,6 +934,97 @@
             <td class="text-danger">${ "%" }</td>`
             $("#casesKpi").html(result)
           }
+
+        })
+        //predicated numberOfcasesKPIPredicated
+        $.get(url,function(data){
+
+          var lines=data.split("\n");
+          var result = [];
+          var headers=lines[0].split(",");
+          for(var i=1;i<lines.length;i++){
+            var obj = {};
+            var currentline=lines[i].split(",");
+            for(var j=0;j<headers.length;j++){
+              obj[headers[j]] = currentline[j];
+            }
+            result.push(obj);
+          }
+          var size = result.length-1;
+          //return result; //JavaScript object
+          label = [];
+          dataL = [];
+          dataOverfit = [];
+          dataUnderfit = [];
+          dataLinearfit = [];
+          for(var i=0;i<result.length-1;i++){
+            label.push(result[i].Day);
+            dataL.push(result[i].num_positive);
+            dataOverfit.push(result[i].num_positive);
+            dataUnderfit.push(result[i].num_positive);
+            dataLinearfit.push(result[i].num_positive);
+          }
+
+          for(var i=0;i<7;i++){
+            label.push((result.length+i).toString());
+          }
+
+
+
+          tmpOverfit = dataL[result.length-2];
+          tmpUnderfit = dataL[result.length-2];
+          tmpLinearfit = dataL[result.length-2];
+
+          var m = 0;
+          for(var i=1;i<result.length-1;i++){
+              m +=(dataL[i] - dataL[i-1])/((label[i] - label[i-1]));
+          }
+          m/=result.length-1;
+          for(var i=result.length-1;i<label.length;i++){
+            tmpLinearfit = m * parseInt(label[i]);
+            if(i%2 == 0){
+              tmpOverfit = 4 + parseInt(tmpLinearfit);
+              tmpUnderfit = parseInt(tmpLinearfit) - 4;
+            }
+            else{
+              tmpOverfit = 3 + parseInt(tmpLinearfit);
+              tmpUnderfit = parseInt(tmpLinearfit)-3;
+            }
+
+
+            dataLinearfit[i]= tmpLinearfit.toString();
+            dataOverfit[i]= tmpOverfit.toString()*1.1;
+            dataUnderfit[i]= tmpUnderfit.toString()/1.1;
+          }
+
+          var percentChange = (((dataLinearfit[label.length-1] - dataLinearfit[label.length-8]) /dataLinearfit[label.length-8])).toFixed(2);
+          if(percentChange <= 0){
+            result = `
+
+
+            <td class="fas fa-caret-down fa-1x text-success">${ percentChange }</td>
+            <td class="text-success">${ "%" }</td>`
+            $("#num_OfcasesKPIPredicated").html(result)
+          }
+          if(percentChange == 0){
+            result = `
+
+
+            <td class="fas fa-caret-right text-success">${ percentChange }</td>
+            <td class="text-success">${ "%" }</td>`
+            $("#num_OfcasesKPIPredicated").html(result)
+          }
+          else{
+            result = `
+            <td class="fas fa-caret-up fa-1x text-danger">${ percentChange }</td>
+            <td class="text-danger">${ "%" }</td>`
+            $("#num_OfcasesKPIPredicated").html(result)
+          }
+
+          forcastResult = `
+          <td class="text-success">${ dataLinearfit[label.length-1] }</td>`
+          $("#num_OfcasesKPIForcast").html(forcastResult)
+
 
         })
         // Number of Hospitalised
@@ -915,6 +1088,97 @@
             <td text-danger>${ "%" }</td>`
             $("#num_hospitalisedKpi").html(result)
           }
+
+        })
+        //predicated numberOfHospitalied
+        $.get(url,function(data){
+
+          var lines=data.split("\n");
+          var result = [];
+          var headers=lines[0].split(",");
+          for(var i=1;i<lines.length;i++){
+            var obj = {};
+            var currentline=lines[i].split(",");
+            for(var j=0;j<headers.length;j++){
+              obj[headers[j]] = currentline[j];
+            }
+            result.push(obj);
+          }
+          var size = result.length-1;
+          //return result; //JavaScript object
+          label = [];
+          dataL = [];
+          dataOverfit = [];
+          dataUnderfit = [];
+          dataLinearfit = [];
+          for(var i=0;i<result.length-1;i++){
+            label.push(result[i].Day);
+            dataL.push(result[i].num_hospitalised);
+            dataOverfit.push(result[i].num_hospitalised);
+            dataUnderfit.push(result[i].num_hospitalised);
+            dataLinearfit.push(result[i].num_hospitalised);
+          }
+
+          for(var i=0;i<7;i++){
+            label.push((result.length+i).toString());
+          }
+
+
+
+          tmpOverfit = dataL[result.length-2];
+          tmpUnderfit = dataL[result.length-2];
+          tmpLinearfit = dataL[result.length-2];
+
+          var m = 0;
+          for(var i=1;i<result.length-1;i++){
+              m +=(dataL[i] - dataL[i-1])/((label[i] - label[i-1]));
+          }
+          m/=result.length-1;
+          for(var i=result.length-1;i<label.length;i++){
+            tmpLinearfit = m * parseInt(label[i]);
+            if(i%2 == 0){
+              tmpOverfit = 4 + parseInt(tmpLinearfit);
+              tmpUnderfit = parseInt(tmpLinearfit) - 4;
+            }
+            else{
+              tmpOverfit = 3 + parseInt(tmpLinearfit);
+              tmpUnderfit = parseInt(tmpLinearfit)-3;
+            }
+
+
+            dataLinearfit[i]= tmpLinearfit.toString();
+            dataOverfit[i]= tmpOverfit.toString()*1.1;
+            dataUnderfit[i]= tmpUnderfit.toString()/1.1;
+          }
+
+          var percentChange = (((dataLinearfit[label.length-1] - dataLinearfit[label.length-8]) /dataLinearfit[label.length-8])).toFixed(2);
+          if(percentChange <= 0){
+            result = `
+
+
+            <td class="fas fa-caret-down fa-1x text-success">${ percentChange }</td>
+            <td class="text-success">${ "%" }</td>`
+            $("#num_hospitalisedKpiPredicated").html(result)
+          }
+          if(percentChange == 0){
+            result = `
+
+
+            <td class="fas fa-caret-right text-success">${ percentChange }</td>
+            <td class="text-success">${ "%" }</td>`
+            $("#num_hospitalisedKpiPredicated").html(result)
+          }
+          else{
+            result = `
+            <td class="fas fa-caret-up fa-1x text-danger">${ percentChange }</td>
+            <td class="text-danger">${ "%" }</td>`
+            $("#num_hospitalisedKpiPredicated").html(result)
+          }
+
+          forcastResult = `
+          <td class="text-success">${ dataLinearfit[label.length-1] }</td>`
+          $("#num_fatalitiesForcast").html(forcastResult)
+
 
         })
         // num_cumulative_hospitalizations

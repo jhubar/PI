@@ -67,7 +67,7 @@ function loadData(){
     tmpOverfit = dataL[result.length-2];
     tmpUnderfit = dataL[result.length-2];
     tmpLinearfit = dataL[result.length-2];
-    
+
     var m = 0;
     for(var i=1;i<result.length-1;i++){
         m +=(dataL[i] - dataL[i-1])/((label[i] - label[i-1]));
@@ -76,7 +76,6 @@ function loadData(){
 
     for(var i=result.length-1;i<label.length;i++){
       tmpLinearfit = m * parseInt(label[i]);
-      console.log(tmpLinearfit);
       if(i%2 == 0){
         tmpOverfit = 4 + parseInt(tmpLinearfit);
         tmpUnderfit = parseInt(tmpLinearfit) - 4;
