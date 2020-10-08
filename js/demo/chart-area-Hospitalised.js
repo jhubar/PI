@@ -94,7 +94,7 @@ function loadData(){
       labels: label,
       datasets: [
         {
-          label: "Nb",
+          label: "Current ",
           lineTension: 0.6,
           backgroundColor: "rgba(78, 115, 223, 0.2)",
           borderColor: "rgba(78, 115, 223, 1)",
@@ -110,7 +110,7 @@ function loadData(){
         },
         //Underfit line
         {
-          label: "Nb",
+          label: "Underfit ",
           lineTension: 0.1,
           backgroundColor: "rgba(255,255,255,1)",
           borderColor: "rgba(255, 193, 7,0.1)",
@@ -126,7 +126,7 @@ function loadData(){
         },
         // linear line
         {
-          label: "Nb",
+          label: "Linear ",
           lineTension: 0.3,
           backgroundColor: "rgba(255, 193, 7,0.1)",
           borderColor: "rgba(237, 0, 59, 1)",
@@ -142,7 +142,7 @@ function loadData(){
         },
         //Overfitt line
         {
-          label: "Nb",
+          label: "Overfit",
           lineTension: 0.1,
           backgroundColor: "rgba(255, 193, 7,0.3)",
           borderColor: "rgba(255, 193, 7,0.1)",
