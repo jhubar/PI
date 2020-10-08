@@ -392,8 +392,8 @@
                       <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_hospitalised"></a></div>
                     </div>
                     <div class="col-auto">
-                      <i class="text-success"><a id="num_hospitalisedKpi"></a></i>
-                      <i class="fas fa-head-side-mask fa-2x text-gray-300"></i>
+                      <i class="text-success"><a id="num_hospitalisedKpi">" "</a></i>
+                      <i class="fas fa-hospital-symbol fa-2x text-gray-300"></i>
                     </div>
                   </div>
                 </div>
@@ -511,10 +511,10 @@
                     <div class="row no-gutters align-items-center">
                       <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Next week's forecast for the number of cases </div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_fatalitiesForcast"></a></div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_OfcasesKPIForcast"></a></div>
                     </div>
                     <div class="col-auto">
-                      <i></a><a id = "num_hospitalisedKpiPredicated"></a></i>
+                      <i></a><a id = "num_OfcasesKPIPredicated"></a></i>
                       <i class="fas fas fa-head-side-cough fa-2x text-gray-300"></i>
                     </div>
                   </div>
@@ -526,10 +526,10 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Next week's forecast for the number of cases (mask) </div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_fatalitiesForcast"></a></div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800"></a></div>
                   </div>
                   <div class="col-auto">
-                    <i></a><a id = "num_hospitalisedKpiPredicated"></a></i>
+                    <i></a></i>
                     <i class="fas fa-head-side-mask fa-2x text-gray-300"></i>
                   </div>
                 </div>
@@ -589,16 +589,18 @@
                       <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Next week's forecast for the number of hospitalized cases </div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_fatalitiesForcast"></a></div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_hospitalisedForcast"></a></div>
                       </div>
                       <div class="col-auto">
-                        <i></a><a id = "num_OfcasesKPIPredicated"></a></i>
+                        <i></a><a id = "num_hospitalisedKpiPredicated"></a></i>
                         <i class="fas fas fa-head-side-cough fa-2x text-gray-300"></i>
                       </div>
                     </div>
                   </div>
                 </div>
                 <br>
+
+                <!-- With mask -->
                 <div class="card border-left-success shadow h-10 py-2">
                   <div class="card-body">
                     <div class="row no-gutters align-items-center">
@@ -607,19 +609,38 @@
                       <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_fatalitiesForcast"></a></div>
                     </div>
                     <div class="col-auto">
-                      <i></a><a id = "num_hospitalisedKpiPredicated"></a></i>
+                      <i></a></a></i>
                       <i class="fas fa-head-side-mask fa-2x text-gray-300"></i>
                     </div>
                   </div>
                 </div>
-              </div>
+                </div>
+                <br>
+
+                
+                <br>
+                <!-- With lockdown -->
+                <div class="card border-left-success shadow h-10 py-2">
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Next week's forecast for the number of hospitalized cases (lockdown) </div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_fatalitiesForcast"></a></div>
+                    </div>
+                    <div class="col-auto">
+                      <i></a></a></i>
+                      <i class="fas fa-head-side-mask fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+                </div>
             </div>
 
           </div>
           <!-- Content Row number of Critical-->
           <div class="row">
 
-            <!-- Area Chart Fatalities -->
+            <!-- Area Chart criticals -->
             <div class="col-xl-8 col-lg-7">
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
@@ -661,8 +682,6 @@
                 </div>
               </div>
             </div>
-
-
             <!-- Prediction in one week -->
             <div class="col-xl-4 col-lg-3 mb-4">
               <div class="card border-left-warning shadow h-10 py-2">
@@ -670,10 +689,10 @@
                     <div class="row no-gutters align-items-center">
                       <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Next week's forecast for the number of critical cases </div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_fatalitiesForcast"></a></div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_criticalOfcasesKPIForcast"></a></div>
                     </div>
                     <div class="col-auto">
-                      <i></a><a id = "num_hospitalisedKpiPredicated"></a></i>
+                      <i></a><a id = "num_criticalKPIPredicated"></a></i>
                       <i class="fas fas fa-head-side-cough fa-2x text-gray-300"></i>
                     </div>
                   </div>
@@ -750,10 +769,10 @@
                     <div class="row no-gutters align-items-center">
                       <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Next week's forecast for the number of Fataliets cases </div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_OfcasesKPIPredicated"></a></div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_fatalitiesOfcasesKPIForcast"></a></div>
                     </div>
                     <div class="col-auto">
-                      <i></a><a id = "num_hospitalisedKpiPredicated"></a></i>
+                      <i></a><a id = "num_fatalitiesKPIPredicated"></a></i>
                       <i class="fas fas fa-head-side-cough fa-2x text-gray-300"></i>
                     </div>
                   </div>
@@ -841,7 +860,7 @@
   <script src="js/demo/chart-area-Hospitalised.js"></script>
   <script src="js/demo/chart-area-Critical.js"></script>
   <script src="js/demo/chart-area-Fatalities.js"></script>
-  <script src="js/demo/chart-pie-demo.js"></script>
+  <!-- <script src="js/demo/chart-pie-demo.js"></script> -->
 
   <!-- Api connection -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -941,6 +960,7 @@
 
           var lines=data.split("\n");
           var result = [];
+
           var headers=lines[0].split(",");
           for(var i=1;i<lines.length;i++){
             var obj = {};
@@ -957,12 +977,46 @@
           dataOverfit = [];
           dataUnderfit = [];
           dataLinearfit = [];
+          // num_hospitalised
+          dataL_num_hospitalised = [];
+          dataOverfit_num_hospitalised = [];
+          dataUnderfit_num_hospitalised = [];
+          dataLinearfit_num_hospitalised = [];
+          // num_critical
+          dataL_num_critical = [];
+          dataOverfit_num_critical = [];
+          dataUnderfit_num_critical = [];
+          dataLinearfit_num_critical = [];
+          // num_fatalities
+          dataL_num_fatalities = [];
+          dataOverfit_num_fatalities = [];
+          dataUnderfit_num_fatalities = [];
+          dataLinearfit_num_fatalities = [];
+
           for(var i=0;i<result.length-1;i++){
             label.push(result[i].Day);
+
             dataL.push(result[i].num_positive);
             dataOverfit.push(result[i].num_positive);
             dataUnderfit.push(result[i].num_positive);
             dataLinearfit.push(result[i].num_positive);
+
+
+            dataL_num_hospitalised .push(result[i].num_hospitalised);
+            dataOverfit_num_hospitalised.push(result[i].num_hospitalised);
+            dataUnderfit_num_hospitalised.push(result[i].num_hospitalised);
+            dataLinearfit_num_hospitalised.push(result[i].num_hospitalised);
+
+            dataL_num_critical.push(result[i].num_critical);
+            dataOverfit_num_critical.push(result[i].num_critical);
+            dataUnderfit_num_critical.push(result[i].num_critical);
+            dataLinearfit_num_critical.push(result[i].num_critical);
+
+            dataL_num_fatalities.push(result[i].num_fatalities);
+            dataOverfit_num_fatalities.push(result[i].num_fatalities);
+            dataUnderfit_num_fatalities.push(result[i].num_fatalities);
+            dataLinearfit_num_fatalities.push(result[i].num_fatalities);
+
           }
 
           for(var i=0;i<7;i++){
@@ -974,34 +1028,90 @@
           tmpOverfit = dataL[result.length-2];
           tmpUnderfit = dataL[result.length-2];
           tmpLinearfit = dataL[result.length-2];
+          // num_hospitalised
+          tmpOverfit_num_hospitalised = dataL_num_hospitalised[result.length-2];
+          tmpUnderfit_num_hospitalised = dataL_num_hospitalised[result.length-2];
+          tmpLinearfit_num_hospitalised = dataL_num_hospitalised[result.length-2];
+          // num_critical
+          tmpOverfit_num_critical = dataL_num_critical[result.length-2];
+          tmpUnderfit_num_critical = dataL_num_critical[result.length-2];
+          tmpLinearfit_num_critical = dataL_num_critical[result.length-2];
+          //num_fatalities
+          tmpOverfit_num_fatalities = dataL_num_fatalities[result.length-2];
+          tmpUnderfit_num_fatalities = dataL_num_fatalities[result.length-2];
+          tmpLinearfit_num_fatalities = dataL_num_fatalities[result.length-2];
 
           var m = 0;
+          var m_num_hospitalised = 0;
+          var m_num_critical = 0;
+          var m_num_fatalities = 0;
+
           for(var i=1;i<result.length-1;i++){
               m +=(dataL[i] - dataL[i-1])/((label[i] - label[i-1]));
+              m_num_hospitalised +=(dataL_num_hospitalised[i] - dataL_num_hospitalised[i-1])/((label[i] - label[i-1]));
+              m_num_critical +=(dataL_num_critical[i] - dataL_num_critical[i-1])/((label[i] - label[i-1]));
+              m_num_fatalities +=(dataL_num_fatalities[i] - dataL_num_fatalities[i-1])/((label[i] - label[i-1]));
           }
+
           m/=result.length-1;
+          m_num_hospitalised/=result.length-1;
+          m_num_critical/=result.length-1;
+          m_num_fatalities/=result.length-1;
+
           for(var i=result.length-1;i<label.length;i++){
             tmpLinearfit = m * parseInt(label[i]);
+            tmpLinearfit_num_hospitalised = m_num_hospitalised * parseInt(label[i]);
+            tmpLinearfit_num_critical = m_num_critical * parseInt(label[i]);
+            tmpLinearfit_num_fatalities = m_num_fatalities * parseInt(label[i]);
             if(i%2 == 0){
               tmpOverfit = 4 + parseInt(tmpLinearfit);
               tmpUnderfit = parseInt(tmpLinearfit) - 4;
+
+              tmpOverfit_num_hospitalised = 4 + parseInt(tmpLinearfit_num_hospitalised);
+              tmpUnderfit_num_hospitalised = parseInt(tmpLinearfit_num_hospitalised) - 4;
+
+              tmpOverfit_num_critical = 0.05 + parseInt(tmpLinearfit_num_critical);
+              tmpUnderfit_num_critical = parseInt(tmpLinearfit_num_critical) - 0.05;
+
+              tmpOverfit_num_fatalities = 0.04 + parseInt(tmpLinearfit_num_fatalities);
+              tmpUnderfit_num_fatalities = parseInt(tmpLinearfit_num_fatalities) - 0.004;
             }
             else{
               tmpOverfit = 3 + parseInt(tmpLinearfit);
               tmpUnderfit = parseInt(tmpLinearfit)-3;
+
+              tmpOverfit_num_hospitalised = 3 + parseInt(tmpLinearfit_num_hospitalised);
+              tmpUnderfit_num_hospitalised = parseInt(tmpLinearfit_num_hospitalised)-3;
+
+              tmpOverfit_num_critical = 0.01 + parseInt(tmpLinearfit_num_critical);
+              tmpUnderfit_num_critical = parseInt(tmpLinearfit_num_critical) - 0.05;
+
+              tmpOverfit_num_fatalities = 0.03 + parseInt(tmpLinearfit_num_fatalities);
+              tmpUnderfit_num_fatalities = parseInt(tmpLinearfit_num_fatalities) - 0.003;
             }
 
 
             dataLinearfit[i]= tmpLinearfit.toString();
             dataOverfit[i]= tmpOverfit.toString()*1.1;
             dataUnderfit[i]= tmpUnderfit.toString()/1.1;
+
+            dataLinearfit_num_hospitalised[i]= tmpLinearfit_num_hospitalised.toString();
+            dataOverfit_num_hospitalised[i]= tmpOverfit_num_hospitalised.toString()*1.1;
+            dataUnderfit_num_hospitalised[i]= tmpUnderfit_num_hospitalised.toString()/1.1;
+
+            dataLinearfit_num_critical[i]= tmpLinearfit_num_critical.toString();
+            dataOverfit_num_critical[i]= tmpOverfit_num_critical.toString()*1.1;
+            dataUnderfit_num_critical[i]= tmpUnderfit_num_critical.toString()/1.1;
+
+            dataLinearfit_num_fatalities[i]= tmpLinearfit_num_fatalities.toString();
+            dataOverfit_num_fatalities[i]= tmpOverfit_num_fatalities.toString()*1.1;
+            dataUnderfit_num_fatalities[i]= tmpUnderfit_num_fatalities.toString()/1.1;
           }
 
           var percentChange = (((dataLinearfit[label.length-1] - dataLinearfit[label.length-8]) /dataLinearfit[label.length-8])).toFixed(2);
+
           if(percentChange <= 0){
             result = `
-
-
             <td class="fas fa-caret-down fa-1x text-success">${ percentChange }</td>
             <td class="text-success">${ "%" }</td>`
             $("#num_OfcasesKPIPredicated").html(result)
@@ -1022,8 +1132,106 @@
           }
 
           forcastResult = `
-          <td class="text-success">${ dataLinearfit[label.length-1] }</td>`
+          <td class="text-secondary">${ dataLinearfit[label.length-1] }</td>`
           $("#num_OfcasesKPIForcast").html(forcastResult)
+
+          // hospitalized
+
+          var percentChange_num_hospitalised = (((dataLinearfit_num_hospitalised[label.length-1] - dataLinearfit_num_hospitalised[label.length-8]) /dataLinearfit_num_hospitalised[label.length-8])).toFixed(2);
+          console.log(dataLinearfit_num_hospitalised);
+          if(percentChange_num_hospitalised <= 0){
+            result_num_hospitalised = `
+
+
+            <td class="fas fa-caret-down fa-1x text-success">${ percentChange_num_hospitalised }</td>
+            <td class="text-success">${ "%" }</td>`
+            $("#num_hospitalisedKpiPredicated").html(result_num_hospitalised)
+          }
+          if(percentChange == 0){
+            result_num_hospitalised = `
+
+
+            <td class="fas fa-caret-right text-success">${ percentChange_num_hospitalised }</td>
+            <td class="text-success">${ "%" }</td>`
+            $("#num_hospitalisedKpiPredicated").html(result_num_hospitalised)
+          }
+          else{
+            result_num_hospitalised = `
+            <td class="fas fa-caret-up fa-1x text-danger">${ percentChange_num_hospitalised }</td>
+            <td class="text-danger">${ "%" }</td>`
+            $("#num_hospitalisedKpiPredicated").html(result_num_hospitalised)
+          }
+
+          forcastResult_num_hospitalised = `
+          <td class="text-secondary">${ dataLinearfit_num_hospitalised[label.length-1] }</td>`
+          $("#num_hospitalisedForcast").html(forcastResult_num_hospitalised)
+
+          // critical
+          var percentChange_num_critical = (((dataLinearfit_num_critical[label.length-1] - dataLinearfit_num_critical[label.length-8]) /dataLinearfit_num_critical[label.length-8])).toFixed(2);
+
+          if(percentChange_num_critical <= 0){
+            result_num_critical = `
+            <td class="fas fa-caret-down fa-1x text-success">${ percentChange_num_critical }</td>
+            <td class="text-success">${ "%" }</td>`
+            $("#num_criticalKPIPredicated").html(result_num_critical)
+          }
+          if(percentChange_num_critical == 0){
+            result_num_critical = `
+
+            <td class="fas fa-caret-right text-success">${ percentChange_num_critical }</td>
+            <td class="text-success">${ "%" }</td>`
+            $("#num_criticalKPIPredicated").html(result_num_critical)
+          }
+          if(dataLinearfit_num_critical[label.length-8] == 0){
+            result_num_critical = `
+            <td class="fas fa-caret-right text-success">${ "0" }</td>
+            <td class="text-success">${ "%" }</td>`
+            $("#num_criticalKPIPredicated").html(result_num_critical)
+          }
+          else{
+            result_num_critical = `
+            <td class="fas fa-caret-up fa-1x text-danger">${ percentChange_num_critical }</td>
+            <td class="text-danger">${ "%" }</td>`
+            $("#num_criticalKPIPredicated").html(result_num_critical)
+          }
+
+          forcastResult_num_critical = `
+          <td class="text-secondary">${ dataLinearfit_num_critical[label.length-1] }</td>`
+          $("#num_criticalOfcasesKPIForcast").html(forcastResult_num_critical)
+          // fatalities
+
+          var percentChange_num_fatalities = (((dataLinearfit_num_fatalities[label.length-1] - dataLinearfit_num_fatalities[label.length-8]) /dataLinearfit_num_fatalities[label.length-8])).toFixed(2);
+
+          if(percentChange_num_fatalities <= 0){
+
+            result_num_fatalities = `
+            <td class="fas fa-caret-down fa-1x text-success">${ percentChange_num_fatalities }</td>
+            <td class="text-success">${ "%" }</td>`
+            $("#num_fatalitiesKPIPredicated").html(result_num_fatalities)
+          }
+          if(percentChange_num_fatalities == 0){
+            result_num_fatalities = `
+
+            <td class="fas fa-caret-right text-success">${ percentChange_num_fatalities }</td>
+            <td class="text-success">${ "%" }</td>`
+            $("#num_fatalitiesKPIPredicated").html(result_num_fatalities)
+          }
+          if(dataLinearfit_num_fatalities[label.length-8] == 0){
+            result_num_fatalities = `
+            <td class="fas fa-caret-right text-success">${ "0" }</td>
+            <td class="text-success">${ "%" }</td>`
+            $("#num_fatalitiesKPIPredicated").html(result_num_fatalities)
+          }
+          else{
+            result_num_fatalities = `
+            <td class="fas fa-caret-up fa-1x text-danger">${ percentChange_num_fatalities }</td>
+            <td class="text-danger">${ "%" }</td>`
+            $("#num_fatalitiesKPIPredicated").html(result_num_fatalities)
+          }
+
+          forcastResult_num_fatalities = `
+          <td class="text-secondary">${ dataLinearfit_num_fatalities[label.length-1] }</td>`
+          $("#num_fatalitiesOfcasesKPIForcast").html(forcastResult_num_fatalities)
 
 
         })
@@ -1088,97 +1296,6 @@
             <td text-danger>${ "%" }</td>`
             $("#num_hospitalisedKpi").html(result)
           }
-
-        })
-        //predicated numberOfHospitalied
-        $.get(url,function(data){
-
-          var lines=data.split("\n");
-          var result = [];
-          var headers=lines[0].split(",");
-          for(var i=1;i<lines.length;i++){
-            var obj = {};
-            var currentline=lines[i].split(",");
-            for(var j=0;j<headers.length;j++){
-              obj[headers[j]] = currentline[j];
-            }
-            result.push(obj);
-          }
-          var size = result.length-1;
-          //return result; //JavaScript object
-          label = [];
-          dataL = [];
-          dataOverfit = [];
-          dataUnderfit = [];
-          dataLinearfit = [];
-          for(var i=0;i<result.length-1;i++){
-            label.push(result[i].Day);
-            dataL.push(result[i].num_hospitalised);
-            dataOverfit.push(result[i].num_hospitalised);
-            dataUnderfit.push(result[i].num_hospitalised);
-            dataLinearfit.push(result[i].num_hospitalised);
-          }
-
-          for(var i=0;i<7;i++){
-            label.push((result.length+i).toString());
-          }
-
-
-
-          tmpOverfit = dataL[result.length-2];
-          tmpUnderfit = dataL[result.length-2];
-          tmpLinearfit = dataL[result.length-2];
-
-          var m = 0;
-          for(var i=1;i<result.length-1;i++){
-              m +=(dataL[i] - dataL[i-1])/((label[i] - label[i-1]));
-          }
-          m/=result.length-1;
-          for(var i=result.length-1;i<label.length;i++){
-            tmpLinearfit = m * parseInt(label[i]);
-            if(i%2 == 0){
-              tmpOverfit = 4 + parseInt(tmpLinearfit);
-              tmpUnderfit = parseInt(tmpLinearfit) - 4;
-            }
-            else{
-              tmpOverfit = 3 + parseInt(tmpLinearfit);
-              tmpUnderfit = parseInt(tmpLinearfit)-3;
-            }
-
-
-            dataLinearfit[i]= tmpLinearfit.toString();
-            dataOverfit[i]= tmpOverfit.toString()*1.1;
-            dataUnderfit[i]= tmpUnderfit.toString()/1.1;
-          }
-
-          var percentChange = (((dataLinearfit[label.length-1] - dataLinearfit[label.length-8]) /dataLinearfit[label.length-8])).toFixed(2);
-          if(percentChange <= 0){
-            result = `
-
-
-            <td class="fas fa-caret-down fa-1x text-success">${ percentChange }</td>
-            <td class="text-success">${ "%" }</td>`
-            $("#num_hospitalisedKpiPredicated").html(result)
-          }
-          if(percentChange == 0){
-            result = `
-
-
-            <td class="fas fa-caret-right text-success">${ percentChange }</td>
-            <td class="text-success">${ "%" }</td>`
-            $("#num_hospitalisedKpiPredicated").html(result)
-          }
-          else{
-            result = `
-            <td class="fas fa-caret-up fa-1x text-danger">${ percentChange }</td>
-            <td class="text-danger">${ "%" }</td>`
-            $("#num_hospitalisedKpiPredicated").html(result)
-          }
-
-          forcastResult = `
-          <td class="text-success">${ dataLinearfit[label.length-1] }</td>`
-          $("#num_fatalitiesForcast").html(forcastResult)
-
 
         })
         // num_cumulative_hospitalizations
