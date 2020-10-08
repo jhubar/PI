@@ -67,10 +67,10 @@ function loadData(){
     tmpOverfit = dataL[result.length-2];
     tmpUnderfit = dataL[result.length-2];
     tmpLinearfit = dataL[result.length-2];
-
+    var m = (dataL[result.length-2] - dataL[0])/((label[result.length-2] - label[0]))
     for(var i=result.length-1;i<label.length;i++){
 
-      tmpLinearfit = (0.05) * parseInt(label[i-1]);
+      tmpLinearfit = m * parseInt(label[i-1]);
       if(i%2 == 0){
         tmpOverfit = 0.05 + parseInt(tmpLinearfit);
         tmpUnderfit = parseInt(tmpLinearfit) - 0.05 ;
@@ -95,7 +95,7 @@ function loadData(){
       labels: label,
       datasets: [
         {
-          label: "Earnings",
+          label: "Nb",
           lineTension: 0.6,
           backgroundColor: "rgba(78, 115, 223, 0.2)",
           borderColor: "rgba(78, 115, 223, 1)",
@@ -111,7 +111,7 @@ function loadData(){
         },
         //Underfit line
         {
-          label: "Earnings",
+          label: "Nb",
           lineTension: 0.1,
           backgroundColor: "rgba(255,255,255,1)",
           borderColor: "rgba(255, 193, 7,0.1)",
@@ -127,7 +127,7 @@ function loadData(){
         },
         // linear line
         {
-          label: "Earnings",
+          label: "Nb",
           lineTension: 0.3,
           backgroundColor: "rgba(255, 193, 7,0.1)",
           borderColor: "rgba(237, 0, 59, 1)",
@@ -143,7 +143,7 @@ function loadData(){
         },
         //Overfitt line
         {
-          label: "Earnings",
+          label: "Nb",
           lineTension: 0.1,
           backgroundColor: "rgba(255, 193, 7,0.3)",
           borderColor: "rgba(255, 193, 7,0.1)",
@@ -247,7 +247,7 @@ var myLineChart = new Chart(ctx, {
   data: {
     labels: label,
     datasets: [{
-      label: "Earnings",
+      label: "Nb",
       lineTension: 0.3,
       backgroundColor: "rgba(78, 115, 223, 0.05)",
       borderColor: "rgba(78, 115, 223, 1)",

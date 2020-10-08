@@ -77,10 +77,7 @@ function loadData(){
   });
 }
 
-// var numberOfHospitalied = 0/5;
-// var fatalities = 0/5;
-// var critical = 0/5;
-// var normalCases = (5-numberOfHospitalied-fatalities)/5;
+
 var dataPie = [];
 var myPieChart = new Chart(ctx, {
   type: 'doughnut',
