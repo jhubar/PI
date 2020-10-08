@@ -444,7 +444,6 @@
                     </div>
                     <div class="col-auto">
                       <i class="text-success"><a id="num_fatalitiesKpi"></a></i>
-                      <i class="fas fa-bible fa-2x text-gray-300"></i>
                       <i class="fas fa-dizzy fa-2x text-gray-300"></i>
                     </div>
                   </div>
@@ -833,18 +832,24 @@
           //return result; //JavaScript object
 
           var percentChange = (((result[size-1].num_positive -result[size-2].num_positive)/result[size-2].num_positive)).toFixed(2);
-          if(percentChange >= 0){
+          if(percentChange <= 0){
             result = `
 
 
-            <td class="fas fa-caret-up fa-1x text-success">${ percentChange }</td>
-            <td>${ "%" }</td>`
+            <td class="fas fa-caret-down fa-1x text-success">${ percentChange }</td>
+            <td class="text-success">${ "%" }</td>`
+            $("#casesKpi").html(result)
+          }
+          if(percentChange == 0){
+            result = `
+            <td class="fas fa-caret-right text-success">${ percentChange }</td>
+            <td text-success>${ "%" }</td>`
             $("#casesKpi").html(result)
           }
           else{
             result = `
-            <td class="fas fa-caret-down fa-1x text-danger">${ percentChange }</td>
-            <td>${ "%" }</td>`
+            <td class="fas fa-caret-up fa-1x text-danger">${ percentChange }</td>
+            <td class="text-danger">${ "%" }</td>`
             $("#casesKpi").html(result)
           }
 
@@ -888,18 +893,26 @@
           //return result; //JavaScript object
 
           var percentChange = (((result[size-1].num_hospitalised - result[size-2].num_hospitalised) /result[size-2].num_hospitalised)).toFixed(2);
-          if(percentChange >= 0){
+          if(percentChange <= 0){
             result = `
 
 
-            <td class="fas fa-caret-up fa-1x text-success">${ percentChange }</td>
-            <td>${ "%" }</td>`
+            <td class="fas fa-caret-down fa-1x text-success">${ percentChange }</td>
+            <td text-success>${ "%" }</td>`
+            $("#num_hospitalisedKpi").html(result)
+          }
+          if(percentChange == 0){
+            result = `
+
+
+            <td class="fas fa-caret-right text-success">${ percentChange }</td>
+            <td text-success>${ "%" }</td>`
             $("#num_hospitalisedKpi").html(result)
           }
           else{
             result = `
-            <td class="fas fa-caret-down fa-1x text-danger">${ percentChange }</td>
-            <td>${ "%" }</td>`
+            <td class="fas fa-caret-up fa-1x text-danger">${ percentChange }</td>
+            <td text-danger>${ "%" }</td>`
             $("#num_hospitalisedKpi").html(result)
           }
 
@@ -964,18 +977,25 @@
           //return result; //JavaScript object
 
           var percentChange = (((result[size-1].num_critical -result[size-2].num_critical)/result[size-2].num_positive)).toFixed(2);
-          if(percentChange >= 0){
+          if(percentChange <= 0){
             result = `
 
 
-            <td class="fas fa-caret-up fa-1x text-success">${ percentChange }</td>
-            <td>${ "%" }</td>`
+            <td class="fas fa-caret-down fa-1x text-success">${ percentChange }</td>
+            <td class="fa-1x text-success">${ "%" }</td>`
+            $("#num_criticalKpi").html(result)
+          }
+          if(percentChange == 0){
+            result = `
+            <td class="fas fa-caret-right fa-1x text-success">${ percentChange }</td>
+            <td class="fa-1x text-success">${ "%" }</td>`
+
             $("#num_criticalKpi").html(result)
           }
           else{
             result = `
-            <td class="fas fa-caret-down fa-1x text-danger">${ percentChange }</td>
-            <td>${ "%" }</td>`
+            <td class="fas fa-caret-up fa-1x text-danger">${ percentChange }</td>
+            <td class="fa-1x text-danger">${ "%" }</td>`
             $("#num_criticalKpi").html(result)
           }
 
@@ -1019,18 +1039,22 @@
           //return result; //JavaScript object
 
           var percentChange = (((result[size-1].num_fatalities -result[size-2].num_fatalities)/result[size-2].num_positive)).toFixed(2);
-          if(percentChange >= 0){
+          if(percentChange <= 0){
             result = `
-
-
-            <td class="fas fa-caret-up fa-1x text-success">${ percentChange }</td>
-            <td>${ "%" }</td>`
+            <td class="fas fa-caret-down fa-1x text-success">${ percentChange }</td>
+            <td class="text-success">${ "%" }</td>`
+            $("#num_fatalitiesKpi").html(result)
+          }
+          if(percentChange == 0){
+            result = `
+            <td class="fas fa-caret-right fa-1x text-success">${ percentChange }</td>
+            <td class="text-success">${ "%" }</td>`
             $("#num_fatalitiesKpi").html(result)
           }
           else{
             result = `
-            <td class="fas fa-caret-down fa-1x text-danger">${ percentChange }</td>
-            <td>${ "%" }</td>`
+            <td class="fas fa-caret-up fa-1x text-danger">${ percentChange }</td>
+            <td class="text-success">${ "%" }</td>`
             $("#num_fatalitiesKpi").html(result)
           }
 

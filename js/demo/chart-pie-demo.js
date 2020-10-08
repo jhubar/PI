@@ -77,16 +77,17 @@ function loadData(){
   });
 }
 
-var numberOfHospitalied = 0/5;
-var fatalities = 0/5;
-var critical = 0/5;
-var normalCases = (5-numberOfHospitalied-fatalities)/5;
+// var numberOfHospitalied = 0/5;
+// var fatalities = 0/5;
+// var critical = 0/5;
+// var normalCases = (5-numberOfHospitalied-fatalities)/5;
+var dataPie = [];
 var myPieChart = new Chart(ctx, {
   type: 'doughnut',
   data: {
     labels: ["normal Cases", "number Of Hospitalied", "critical","fatalities"],
     datasets: [{
-      data: [normalCases,numberOfHospitalied, critical, fatalities],
+      data: dataPie,
       backgroundColor: ['#1cc88a','#4e73df', '#ffc107','#DF2C2C'],
       hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf','#DF2C2C'],
       hoverBorderColor: "rgba(234, 236, 244, 1)",
