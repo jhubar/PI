@@ -67,10 +67,14 @@ function loadData(){
     tmpOverfit = dataL[result.length-2];
     tmpUnderfit = dataL[result.length-2];
     tmpLinearfit = dataL[result.length-2];
-    var m = (dataL[result.length-2] - dataL[0])/((label[result.length-2] - label[0]))
+    var m = 0;
+    for(var i=1;i<result.length-1;i++){
+        m +=(dataL[i] - dataL[i-1])/((label[i] - label[i-1]));
+    }
+    m/=result.length-1;
     for(var i=result.length-1;i<label.length;i++){
 
-      tmpLinearfit = m * parseInt(label[i-1]);
+      tmpLinearfit = m * parseInt(label[i]);
       if(i%2 == 0){
         tmpOverfit = 0.05 + parseInt(tmpLinearfit);
         tmpUnderfit = parseInt(tmpLinearfit) - 0.05 ;
