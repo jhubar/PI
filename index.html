@@ -79,7 +79,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <!-- <h6 class="collapse-header">Custom Utilities:</h6> -->
             <a class="collapse-item" href="ResumeEpidemio.html">Resume Epidemio</a>
-            <a class="collapse-item" href="#" onclick="window.open('Documents/Dernière mise à jour de la situation épidémiologique.pdf', '_blank', 'fullscreen=yes'); return false;">Belgium Epidemio</a>            
+            <a class="collapse-item" href="#" onclick="window.open('Documents/Dernière mise à jour de la situation épidémiologique.pdf', '_blank', 'fullscreen=yes'); return false;">Belgium Epidemio</a>
           </div>
         </div>
       </li>
@@ -369,10 +369,7 @@
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Positive cases</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800">
                         <a id="num_positive"></a>
-
                       </div>
-
-
                     </div>
                     <div class="col-auto">
                       <i class="text-success"><a id="casesKpi"></a></i>
@@ -988,21 +985,23 @@
           if(percentChange <= 0){
             result = `
 
-
-            <td class="fas fa-caret-down fa-1x text-success">${ percentChange }</td>
-            <td class="text-success">${ "%" }</td>`
+            
+            <td class="fas fa-caret-down fa-1x text-danger">${ percentChange }</td>
+            <td class="text-danger">${ "%" }</td>`
             $("#casesKpi").html(result)
           }
           if(percentChange == 0){
             result = `
-            <td class="fas fa-caret-right text-success">${ percentChange }</td>
-            <td class="text-success">${ "%" }</td>`
+
+            <td class="fas fa-caret-right text-danger">${ percentChange }</td>
+            <td class="text-danger">${ "%" }</td>`
             $("#casesKpi").html(result)
           }
           else{
             result = `
-            <td class="fas fa-caret-up fa-1x text-danger">${ percentChange }</td>
-            <td class="text-danger">${ "%" }</td>`
+
+            <td class="fas fa-caret-up fa-1x text-success">${ percentChange }</td>
+            <td class="text-success">${ "%" }</td>`
             $("#casesKpi").html(result)
           }
 
