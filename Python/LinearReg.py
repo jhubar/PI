@@ -128,10 +128,10 @@ if __name__ == '__main__':
           % r2_score(current_casses_y_test, current_casses_y_pred))
 
     # Plot outputs
-    # plt.scatter(current_casses_X_test, current_casses_y_test,  color='black')
-    # plt.plot(current_casses_X_test, current_casses_y_pred, color='blue', linewidth=3)
-    #
-    # plt.xticks(())
-    # plt.yticks(())
-    #
-    # plt.show()
+    plt.scatter(current_casses_X_test, current_casses_y_test,  color='black')
+    plt.plot(current_casses_X_test, current_casses_y_pred, color='blue', linewidth=3)
+
+    plt.xticks(())
+    plt.yticks(())
+
+    plt.show()
