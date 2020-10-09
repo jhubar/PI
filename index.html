@@ -985,7 +985,7 @@
           if(percentChange <= 0){
             result = `
 
-            
+
             <td class="fas fa-caret-down fa-1x text-danger">${ percentChange }</td>
             <td class="text-danger">${ "%" }</td>`
             $("#casesKpi").html(result)
@@ -1189,7 +1189,7 @@
           // hospitalized
 
           var percentChange_num_hospitalised = (((dataLinearfit_num_hospitalised[label.length-1] - dataLinearfit_num_hospitalised[label.length-8]) /dataLinearfit_num_hospitalised[label.length-8])).toFixed(2);
-          console.log(dataLinearfit_num_hospitalised);
+          
           if(percentChange_num_hospitalised <= 0){
             result_num_hospitalised = `
 
@@ -1212,9 +1212,9 @@
             <td class="text-danger">${ "%" }</td>`
             $("#num_hospitalisedKpiPredicated").html(result_num_hospitalised)
           }
-
+          var varforcastResult_num_hospitalised = (parseInt(dataLinearfit_num_hospitalised[label.length-1]).toFixed(2)).toString();
           forcastResult_num_hospitalised = `
-          <td class="text-secondary">${ dataLinearfit_num_hospitalised[label.length-1] }</td>`
+          <td class="text-secondary">${ varforcastResult_num_hospitalised }</td>`
           $("#num_hospitalisedForcast").html(forcastResult_num_hospitalised)
 
           // critical
