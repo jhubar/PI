@@ -78,8 +78,7 @@ def test_accuracy(model, X_LS, y_LS, X_TS, y_TS):
     print(roc_auc_score(y_pred, y_TS))
 
 def load_current_casses(X_data):
-    # X = [([i[0] for i in X_data])]
-    # y = [([i[1] for i in X_data])]
+
     X = (np.array(([i[0] for i in X_data]))).reshape(-1,1)
     y = np.array(([i[1] for i in X_data])).reshape(-1,1)
 
@@ -93,29 +92,23 @@ if __name__ == '__main__':
     data = load_from_url(url)
     data_array = np.array(data)
     X = np.delete(data_array, [2,3,4,5], axis=1)
-    # y = np.dot(X, np.array([1, 2])) + 3
-    # reg = LinearRegression().fit(X, y)
-    # print(reg.score(X, y))
-    # print(reg.coef_)
-    # print(reg.predict(np.array([[6, 5]])))
 
     # Load the current casses dataset
 
     current_casses_X, current_casses_y = load_current_casses(X)
 
+    porportion_ls_ts = current_casses_X.size-int(2*(current_casses_X.size/3))
     # Use only one feature
     # current_casses_X = current_casses_X[:, np.newaxis, 2]
 
     # Split the data into training/testing sets
-    current_casses_X_train = current_casses_X[:-2]
-    current_casses_X_test = current_casses_X[-2:]
-    # print(current_casses_X_train)
-    # print(current_casses_X_test)
+    current_casses_X_train = current_casses_X[:-porportion_ls_ts]
+    current_casses_X_test = current_casses_X[-porportion_ls_ts:]
+
     # Split the targets into training/testing sets
-    current_casses_y_train = current_casses_y[:-2]
-    current_casses_y_test = current_casses_y[-2:]
-    print(current_casses_y_train)
-    print(current_casses_y_test)
+    current_casses_y_train = current_casses_y[:-porportion_ls_ts]
+    current_casses_y_test = current_casses_y[-porportion_ls_ts:]
+
     # Create linear regression object
     regr = linear_model.LinearRegression()
 
@@ -135,10 +128,10 @@ if __name__ == '__main__':
           % r2_score(current_casses_y_test, current_casses_y_pred))
 
     # Plot outputs
-    plt.scatter(current_casses_X_test, current_casses_y_test,  color='black')
-    plt.plot(current_casses_X_test, current_casses_y_pred, color='blue', linewidth=3)
-
-    plt.xticks(())
-    plt.yticks(())
-
-    plt.show()
+    # plt.scatter(current_casses_X_test, current_casses_y_test,  color='black')
+    # plt.plot(current_casses_X_test, current_casses_y_pred, color='blue', linewidth=3)
+    #
+    # plt.xticks(())
+    # plt.yticks(())
+    #
+    # plt.show()
