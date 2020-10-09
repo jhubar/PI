@@ -78,8 +78,11 @@ def test_accuracy(model, X_LS, y_LS, X_TS, y_TS):
     print(roc_auc_score(y_pred, y_TS))
 
 def load_current_casses(X_data):
-    X = ([i[0] for i in X_data])
-    y = ([i[1] for i in X_data])
+    # X = [([i[0] for i in X_data])]
+    # y = [([i[1] for i in X_data])]
+    X = (np.array(([i[0] for i in X_data]))).reshape(-1,1)
+    y = np.array(([i[1] for i in X_data])).reshape(-1,1)
+
     return X,y
 
 
@@ -97,26 +100,27 @@ if __name__ == '__main__':
     # print(reg.predict(np.array([[6, 5]])))
 
     # Load the current casses dataset
-    print([i[0] for i in X])
-    print([i[1] for i in X])
-    current_casses_X, diabetes_y = load_current_casses(X)
+
+    current_casses_X, current_casses_y = load_current_casses(X)
 
     # Use only one feature
     # current_casses_X = current_casses_X[:, np.newaxis, 2]
 
     # Split the data into training/testing sets
-    current_casses_X_train = current_casses[:-1]
-    current_casses_test = current_casses[-4:]
-
+    current_casses_X_train = current_casses_X[:-2]
+    current_casses_X_test = current_casses_X[-2:]
+    # print(current_casses_X_train)
+    # print(current_casses_X_test)
     # Split the targets into training/testing sets
-    current_casses_train = current_casses_y[:-4]
-    current_casses_test = current_casses_y[-4:]
-
+    current_casses_y_train = current_casses_y[:-2]
+    current_casses_y_test = current_casses_y[-2:]
+    print(current_casses_y_train)
+    print(current_casses_y_test)
     # Create linear regression object
     regr = linear_model.LinearRegression()
 
     # Train the model using the training sets
-    regr.fit(current_casses_train, current_casses_train)
+    regr.fit(current_casses_X_train, current_casses_y_train)
 
     # Make predictions using the testing set
     current_casses_y_pred = regr.predict(current_casses_X_test)
