@@ -99,6 +99,12 @@
           </div>
         </div>
       </li>
+      <!-- Nav Item - Tables -->
+      <li class="nav-item">
+        <a class="nav-link" href="Calendar.html">
+          <i class="fas fa-fw fa-calendar-alt"></i>
+          <span>Calendar</span></a>
+      </li>
       <!-- Divider -->
       <hr class="sidebar-divider">
 
@@ -252,11 +258,11 @@
           </ul>
         </p>
         <h1 class="h4 mb-4 text-gray-800">
-          Modélisation d'une épidémie: 
+          Modélisation d'une épidémie:
           </h1>
           <p>
-		  Pour modéliser la propagation d’une maladie, nous devons séparer la population en différentes classes épidémiologiques, 
-		  c’est ce que l’on appelle les modèles compartimentaux. 
+		  Pour modéliser la propagation d’une maladie, nous devons séparer la population en différentes classes épidémiologiques,
+		  c’est ce que l’on appelle les modèles compartimentaux.
 		  <br>
 		  Une première façon de faire est le modèle SI. Nous séparons donc
             la population en deux compartiments : les individus S (sains), et
@@ -305,15 +311,15 @@
               décroître suivant l’augmentation de la proportion d’individus
               immunisés dans la population. </li>
           </ul>
-          Dans le cas de beaucoup de maladies infectieuses, (tel que le coronavirus), 
-		  il semblerait que le taux de réinfection soit très faible. Cela laisse 
-		  suggérer que les individus atteints créent une immunité durable contre 
-		  l’agent infectieux. Il devient dès-lors judicieux d’identifier dans 
-		  notre population les individus « R » pour résistant, et qui ne peuvent 
-		  donc plus contracter la maladie. Cette information peut être directement 
-		  déduite des résultats déjà obtenus dans le modèle précédent, mais également 
-		  par d’autres types de tests tel que les tests sérologiques. Ces tests 
-		  permettent de mettre en évidence l’apparition d’immunité adaptative chez 
+          Dans le cas de beaucoup de maladies infectieuses, (tel que le coronavirus),
+		  il semblerait que le taux de réinfection soit très faible. Cela laisse
+		  suggérer que les individus atteints créent une immunité durable contre
+		  l’agent infectieux. Il devient dès-lors judicieux d’identifier dans
+		  notre population les individus « R » pour résistant, et qui ne peuvent
+		  donc plus contracter la maladie. Cette information peut être directement
+		  déduite des résultats déjà obtenus dans le modèle précédent, mais également
+		  par d’autres types de tests tel que les tests sérologiques. Ces tests
+		  permettent de mettre en évidence l’apparition d’immunité adaptative chez
 		  l’individu testé par la présence d’anticorps dirigés contre l’agent pathogène.  <br>
           L’utilisation de tests sérologiques permet dans un premier temps de
           vérifier l’hypothèse du déploiement d’une immunité durable chez les
@@ -366,27 +372,27 @@
             <li>dR(t)/dt = 1/gamma</li>
             <li>dS(t)/dt = -Beta*I(t)*S(t)</li>
           </ul>
-		  Un aspect important pour la modélisation de certaines épidémies que le 
-		  modèle SIR ne prend pas en compte, est la présence d’une période d’incubation. 
-		  En effet, un individu S contaminé à un instant t ne va être malade et/ou 
-		  contagieux qu’après une certaine période. Le modèle SIR peut donc être 
-		  complété en un modèle SEIR (E pour Exposed), les individus E ayant étant 
-		  en période d’incubation. Nous pouvons donc également introduire sigma = 
-		  « incubation rate » et représente la proportion d’individus latents qui 
-		  deviennent infectieux à chaque passage à l’unité de temps supérieure. 
+		  Un aspect important pour la modélisation de certaines épidémies que le
+		  modèle SIR ne prend pas en compte, est la présence d’une période d’incubation.
+		  En effet, un individu S contaminé à un instant t ne va être malade et/ou
+		  contagieux qu’après une certaine période. Le modèle SIR peut donc être
+		  complété en un modèle SEIR (E pour Exposed), les individus E ayant étant
+		  en période d’incubation. Nous pouvons donc également introduire sigma =
+		  « incubation rate » et représente la proportion d’individus latents qui
+		  deviennent infectieux à chaque passage à l’unité de temps supérieure.
 		  Le a durée moyenne d’une incubation est donc de 1/sigma. <br>
-		  Dans la population étudiée, nous avons donc les relations: 
+		  Dans la population étudiée, nous avons donc les relations:
 		  <ul>
 			<li>dS(t)/dt = -Beta*S(t)*I(t)/N</li>
 			<li>dE(t)/dt = (Beta*S(t)*I(t)/N) - sigma*E(t)</li>
 			<li>dI(t)/dt = sigma*E(t) - gamma*I(t)</li>
 			<li>dR(t)/dt = gamma*I(t)</li>
 		  </ul>
-		  
-          Ce modèle SEIR représente un modèle général simplifié que l’on peut appliquer 
-		  dans de nombreux cas d’épidémies. A ce modèle de base, nous pouvons également 
-		  envisager l’ajout de beaucoup de détails qui peuvent avoir de l’importance 
-		  suivant la situation : 
+
+          Ce modèle SEIR représente un modèle général simplifié que l’on peut appliquer
+		  dans de nombreux cas d’épidémies. A ce modèle de base, nous pouvons également
+		  envisager l’ajout de beaucoup de détails qui peuvent avoir de l’importance
+		  suivant la situation :
           <ul>
             <li>A la place d’utiliser un simple statut « I », nous pourrions
                faire la distinction entre les individus asymptomatiques, les
@@ -416,12 +422,12 @@
         l’impact sur la santé de la population et l’impact des mesures sur le
         système économique.
          </p>
-		 
+
 		<h1 class="h4 mb-4 text-gray-800">
-          Exploiter les données à notre disposition: 
+          Exploiter les données à notre disposition:
         </h1>
 		<p>
-		Les infos dont nous disposons à l'heure actuelle: 
+		Les infos dont nous disposons à l'heure actuelle:
 		<ul>
 			<li>Num_positive : le nombre de tests positifs du jour </li>
 			<li>Num_hospitalized : nombre d’individus actuellement en hospitalisation</li>
@@ -430,23 +436,23 @@
 			<li>Num_fatalities : nombre de mots cumulé. </li>
 		</ul>
 		<br>
-		La maladie sur laquelle nous devons travailler étant inconnue, 
-		il nous manque encore beaucoup d’informations pour pouvoir construire 
-		notre modèle SEIR à partir de chiffres tel que le nombre de nouveaux 
+		La maladie sur laquelle nous devons travailler étant inconnue,
+		il nous manque encore beaucoup d’informations pour pouvoir construire
+		notre modèle SEIR à partir de chiffres tel que le nombre de nouveaux
 		cas détectés par jours.  <br>
-		A ce stade de début d'épidémie, les informations que nous pouvons déduire sont: 
+		A ce stade de début d'épidémie, les informations que nous pouvons déduire sont:
 		<ul>
 			<li>Une approximaion du taux de reproduction du virus au sein de notre population
 			Avec l'évolution du nombre d'individus hospitalisés, cela peut déjà nous indiquer si
 			les contaminations vont s'accélérer, et si oui dans combien de temps les hôpitaux seront surchargés.</li>
 		</ul>
-		
-		
+
+
 		</p>
-		 
-		 
-		 
-		 
+
+
+
+
         </div>
         <!-- /.container-fluid -->
 
