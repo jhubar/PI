@@ -1035,12 +1035,12 @@
           var size = result.length-1;
           //return result; //JavaScript object
 
-          var percentChange = (((result[size-1].num_positive -result[size-2].num_positive)/result[size-2].num_positive)).toFixed(2);
+          var percentChange = ((((result[size-1].num_positive -result[size-2].num_positive)/result[size-2].num_positive))*100).toFixed(0);
           if(percentChange <= 0){
             result = `
 
 
-            <td class="fas fa-caret-down fa-1x text-danger">${ percentChange }</td>
+            <td class="fas fa-caret-up fa-1x text-danger">${ percentChange }</td>
             <td class="text-danger">${ "%" }</td>`
             $("#casesKpi").html(result)
           }
@@ -1054,7 +1054,7 @@
           else{
             result = `
 
-            <td class="fas fa-caret-up fa-1x text-success">${ percentChange }</td>
+            <td class="fas fa-caret-down fa-1x text-success">${ percentChange }</td>
             <td class="text-success">${ "%" }</td>`
             $("#casesKpi").html(result)
           }
@@ -1213,7 +1213,7 @@
             dataUnderfit_num_fatalities[i]= tmpUnderfit_num_fatalities.toString()/1.1;
           }
 
-          var percentChange = (((dataLinearfit[label.length-1] - dataLinearfit[label.length-8]) /dataLinearfit[label.length-8])).toFixed(2);
+          var percentChange = ((((dataLinearfit[label.length-1] - dataLinearfit[label.length-8]) /dataLinearfit[label.length-8]))*100).toFixed(0);
 
           if(percentChange <= 0){
             result = `
@@ -1242,7 +1242,7 @@
 
           // hospitalized
 
-          var percentChange_num_hospitalised = (((dataLinearfit_num_hospitalised[label.length-1] - dataLinearfit_num_hospitalised[label.length-8]) /dataLinearfit_num_hospitalised[label.length-8])).toFixed(2);
+          var percentChange_num_hospitalised = ((((dataLinearfit_num_hospitalised[label.length-1] - dataLinearfit_num_hospitalised[label.length-8]) /dataLinearfit_num_hospitalised[label.length-8]))*100).toFixed(0);
 
           if(percentChange_num_hospitalised <= 0){
             result_num_hospitalised = `
@@ -1272,7 +1272,7 @@
           $("#num_hospitalisedForcast").html(forcastResult_num_hospitalised)
 
           // critical
-          var percentChange_num_critical = (((dataLinearfit_num_critical[label.length-1] - dataLinearfit_num_critical[label.length-8]) /dataLinearfit_num_critical[label.length-8])).toFixed(2);
+          var percentChange_num_critical = ((((dataLinearfit_num_critical[label.length-1] - dataLinearfit_num_critical[label.length-8]) /dataLinearfit_num_critical[label.length-8]))*100).toFixed(2);
 
           if(percentChange_num_critical <= 0){
             result_num_critical = `
@@ -1305,7 +1305,7 @@
           $("#num_criticalOfcasesKPIForcast").html(forcastResult_num_critical)
           // fatalities
 
-          var percentChange_num_fatalities = (((dataLinearfit_num_fatalities[label.length-1] - dataLinearfit_num_fatalities[label.length-8]) /dataLinearfit_num_fatalities[label.length-8])).toFixed(2);
+          var percentChange_num_fatalities = ((((dataLinearfit_num_fatalities[label.length-1] - dataLinearfit_num_fatalities[label.length-8]) /dataLinearfit_num_fatalities[label.length-8]))*100).toFixed(0);
 
           if(percentChange_num_fatalities <= 0){
 
@@ -1378,7 +1378,7 @@
           var size = result.length-1;
           //return result; //JavaScript object
 
-          var percentChange = (((result[size-1].num_hospitalised - result[size-2].num_hospitalised) /result[size-2].num_hospitalised)).toFixed(2);
+          var percentChange = ((((result[size-1].num_hospitalised - result[size-2].num_hospitalised) /result[size-2].num_hospitalised))*100).toFixed(0);
           if(percentChange <= 0){
             result = `
 
@@ -1462,7 +1462,7 @@
           var size = result.length-1;
           //return result; //JavaScript object
 
-          var percentChange = (((result[size-1].num_critical -result[size-2].num_critical)/result[size-2].num_positive)).toFixed(2);
+          var percentChange = ((((result[size-1].num_critical -result[size-2].num_critical)/result[size-2].num_positive))*100).toFixed(0);
           if(percentChange <= 0){
             result = `
 
@@ -1524,7 +1524,7 @@
           var size = result.length-1;
           //return result; //JavaScript object
 
-          var percentChange = (((result[size-1].num_fatalities -result[size-2].num_fatalities)/result[size-2].num_positive)).toFixed(2);
+          var percentChange = ((((result[size-1].num_fatalities -result[size-2].num_fatalities)/result[size-2].num_positive))).toFixed(0);
           if(percentChange <= 0){
             result = `
             <td class="fas fa-caret-down fa-1x text-success">${ percentChange }</td>
