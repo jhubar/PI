@@ -14,7 +14,7 @@
 1. Choissir une template qui devra être conservée durant le projet
 
 # Authors 
-1. Pierre Dumoulin
+1. [Pierre Dumoulin](https://github.com/PierreDML)
 1. Andreas Duquenne
 1. [François Lievens](https://github.com/francoislievens)
 1. [Hubar Julien](https://github.com/julien1941)
