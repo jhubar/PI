@@ -225,6 +225,8 @@
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+
                   
                 </table>
               </div>
@@ -350,10 +352,22 @@
           }
         }
 
+        function generateTfootTable(table, data1) {
+          let thead = table.createTHead();
+          let row = thead.insertRow();
+          for (let key of data1) {
+            let th = document.createElement("th");
+            let text = document.createTextNode(key);
+            th.appendChild(text);
+            row.appendChild(th);
+          }
+        }
+
         let table = document.querySelector("table");
         let data1 = Object.keys(results[0]);
         generateTableHead(table, data1);
         generateTable(table, results);
+        generateTfootTable(table,data1);
 
 
         })

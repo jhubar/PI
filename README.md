@@ -16,6 +16,7 @@
 1. Combien de temps les gens reste malade ?
 1. Probleme des symptomatiques et asymptomatiques
 1. Déterminer le temps qu'ils sont contagieux en fonction de leur catégorie.
+1. Prendre en compte les weekend 
 
 # Authors
 1. [Pierre Dumoulin](https://github.com/PierreDML)
