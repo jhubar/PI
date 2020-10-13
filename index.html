@@ -1235,9 +1235,10 @@
             <td class="text-danger">${ "%" }</td>`
             $("#num_OfcasesKPIPredicated").html(result)
           }
+          var currentforcastResult = (parseInt(dataLinearfit[label.length-1]).toFixed(0)).toString();
 
           forcastResult = `
-          <td class="text-secondary">${ dataLinearfit[label.length-1] }</td>`
+          <td class="text-secondary">${ currentforcastResult }</td>`
           $("#num_OfcasesKPIForcast").html(forcastResult)
 
           // hospitalized
@@ -1266,7 +1267,7 @@
             <td class="text-danger">${ "%" }</td>`
             $("#num_hospitalisedKpiPredicated").html(result_num_hospitalised)
           }
-          var varforcastResult_num_hospitalised = (parseInt(dataLinearfit_num_hospitalised[label.length-1]).toFixed(2)).toString();
+          var varforcastResult_num_hospitalised = (parseInt(dataLinearfit_num_hospitalised[label.length-1]).toFixed(0)).toString();
           forcastResult_num_hospitalised = `
           <td class="text-secondary">${ varforcastResult_num_hospitalised }</td>`
           $("#num_hospitalisedForcast").html(forcastResult_num_hospitalised)
