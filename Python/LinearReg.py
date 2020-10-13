@@ -10,6 +10,7 @@ import numpy as np
 from sklearn import datasets, linear_model
 from sklearn.metrics import mean_squared_error, r2_score
 
+
 def measure_time(label):
     """
     Context manager to measure time of computation.
@@ -116,6 +117,7 @@ if __name__ == '__main__':
     regr.fit(current_casses_X_train, current_casses_y_train)
 
     # Make predictions using the testing set
+
     current_casses_y_pred = regr.predict(current_casses_X_test)
 
     # The coefficients
@@ -126,13 +128,25 @@ if __name__ == '__main__':
     # The coefficient of determination: 1 is perfect prediction
     print('Coefficient of determination: %.2f'
           % r2_score(current_casses_y_test, current_casses_y_pred))
-        
+
+
+    current_casses_X_pred = (np.append(current_casses_X_test,[10])).reshape((4, 1))
+
+    for i in range(11,19):
+        current_casses_X_pred = (np.append(current_casses_X_pred,[i])).reshape(-1,1)
+
+
+    current_casses_y_pred = regr.predict(current_casses_X_pred)
+    # The coefficient of determination: 1 is perfect prediction
+    array_length = len(current_casses_y_pred)
+    print("NEXT WEEK'S FORECAST FOR THE NUMBER OF CASES",current_casses_y_pred[array_length-1])
+
     # Plot outputs
 
     plt.scatter(current_casses_X_train, current_casses_y_train,  color='green')
-    plt.plot(current_casses_X_train, current_casses_y_train, color='green', linewidth=3)
+    plt.plot(current_casses_X, current_casses_y, color='green', linewidth=3)
     plt.scatter(current_casses_X_test, current_casses_y_test,  color='black')
-    plt.plot(current_casses_X_test, current_casses_y_pred, color='blue', linewidth=3)
+    plt.plot(current_casses_X_pred, current_casses_y_pred, color='blue', linewidth=3)
 
     # plt.xticks(())
     # plt.yticks(())
