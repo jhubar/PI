@@ -126,13 +126,16 @@ if __name__ == '__main__':
     # The coefficient of determination: 1 is perfect prediction
     print('Coefficient of determination: %.2f'
           % r2_score(current_casses_y_test, current_casses_y_pred))
-
+        
     # Plot outputs
+
+    plt.scatter(current_casses_X_train, current_casses_y_train,  color='green')
+    plt.plot(current_casses_X_train, current_casses_y_train, color='green', linewidth=3)
     plt.scatter(current_casses_X_test, current_casses_y_test,  color='black')
     plt.plot(current_casses_X_test, current_casses_y_pred, color='blue', linewidth=3)
 
-    plt.xticks(())
-    plt.yticks(())
+    # plt.xticks(())
+    # plt.yticks(())
 
     # plt.show()
 
