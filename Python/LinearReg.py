@@ -146,10 +146,12 @@ if __name__ == '__main__':
 
     print("NEXT WEEK'S FORECAST FOR THE NUMBER OF CASES",current_casses_y_pred[array_length-1])
 
-    for i in range(0,len(current_casses_y_pred)):
-        current_casses_X_pred=np.delete(current_casses_X_pred, i, 0)
-        current_casses_y_pred=np.delete(current_casses_y_pred, i, 0)
 
+    for i in range(0,4):
+        current_casses_X_pred=np.delete(current_casses_X_pred, 0, 0)
+        current_casses_y_pred=np.delete(current_casses_y_pred, 0, 0)
+
+    print(current_casses_X_pred)
     # Plot outputs
 
     plt.scatter(current_casses_X_train, current_casses_y_train,  color='green')
@@ -166,14 +168,25 @@ if __name__ == '__main__':
 
     plt.savefig('img/Reglin.png')
 
-    current_casses_X_pred=np.delete(current_casses_X_pred, 1, 0)
-    current_casses_y_pred=np.delete(current_casses_y_pred, 1, 0)
+    current_casses_X_pred=np.delete(current_casses_X_pred, 0, 0)
+    current_casses_y_pred=np.delete(current_casses_y_pred, 0, 0)
     import json
 
     dataJSON = {}
-    dataJSON = []
+    dataJSON['current'] = []
+    dataJSON['prediction'] = []
+    for i in range(0,len(current_casses_X)):
+        dataJSON['current'].append({
+            "Day": str(current_casses_X[i][0]),
+            "num_positive": str(current_casses_y[i][0]),
+            # "num_hospitalised": "1",
+            # "num_cumulative_hospitalizations": "1",
+            # "num_critical": "0",
+            # "num_fatalities": "0"
+        })
+
     for i in range(0,len(current_casses_X_train)):
-        dataJSON.append({
+        dataJSON['prediction'].append({
             "Day": str(current_casses_X_train[i][0]),
             "num_positive": str(current_casses_y_train[i][0]),
             # "num_hospitalised": "1",
@@ -182,7 +195,7 @@ if __name__ == '__main__':
             # "num_fatalities": "0"
         })
     for i in range(0,len(current_casses_y_pred)):
-        dataJSON.append({
+        dataJSON['prediction'].append({
             "Day": str(current_casses_X_pred[i][0]),
             "num_positive": str(current_casses_y_pred[i][0]),
             # "num_hospitalised": "1",
@@ -192,5 +205,5 @@ if __name__ == '__main__':
         })
 
 
-    with open('data.json', 'w') as outfile:
+    with open('Data/data.json', 'w') as outfile:
         json.dump(dataJSON, outfile)
