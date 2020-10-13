@@ -132,17 +132,23 @@ if __name__ == '__main__':
 
 
     current_casses_X_pred = (np.append(current_casses_X_test,[10])).reshape((4, 1))
-    print(len(current_casses_X_train))
-    print(len(current_casses_X_pred)+forcast_number_day)
-    for i in range(0,len(current_casses_X_train)+forcast_number_day+1):
+
+
+
+    print(len(current_casses_X_test))
+    for i in range(current_casses_X_pred[len(current_casses_X_pred)-2][0],len(current_casses_X_train)+forcast_number_day+1):
         current_casses_X_pred = (np.append(current_casses_X_pred,[i])).reshape(-1,1)
 
 
     current_casses_y_pred = regr.predict(current_casses_X_pred)
     # The coefficient of determination: 1 is perfect prediction
     array_length = len(current_casses_y_pred)
-    print(len(current_casses_y_pred))
+
     print("NEXT WEEK'S FORECAST FOR THE NUMBER OF CASES",current_casses_y_pred[array_length-1])
+
+    for i in range(0,len(current_casses_y_pred)):
+        current_casses_X_pred=np.delete(current_casses_X_pred, i, 0)
+        current_casses_y_pred=np.delete(current_casses_y_pred, i, 0)
 
     # Plot outputs
 
@@ -159,3 +165,32 @@ if __name__ == '__main__':
     # plt.show()
 
     plt.savefig('img/Reglin.png')
+
+    current_casses_X_pred=np.delete(current_casses_X_pred, 1, 0)
+    current_casses_y_pred=np.delete(current_casses_y_pred, 1, 0)
+    import json
+
+    dataJSON = {}
+    dataJSON = []
+    for i in range(0,len(current_casses_X_train)):
+        dataJSON.append({
+            "Day": str(current_casses_X_train[i][0]),
+            "num_positive": str(current_casses_y_train[i][0]),
+            # "num_hospitalised": "1",
+            # "num_cumulative_hospitalizations": "1",
+            # "num_critical": "0",
+            # "num_fatalities": "0"
+        })
+    for i in range(0,len(current_casses_y_pred)):
+        dataJSON.append({
+            "Day": str(current_casses_X_pred[i][0]),
+            "num_positive": str(current_casses_y_pred[i][0]),
+            # "num_hospitalised": "1",
+            # "num_cumulative_hospitalizations": "1",
+            # "num_critical": "0",
+            # "num_fatalities": "0"
+        })
+
+
+    with open('data.json', 'w') as outfile:
+        json.dump(dataJSON, outfile)
