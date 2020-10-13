@@ -234,6 +234,105 @@
           <div class="class">
             <img src="Python/img/Reglin.png" alt="Italian Trulli">
           </div>
+          <!-- Content Row Actives Cases -->
+          <div class="row">
+
+            <!-- Area Chart Active Cases -->
+            <div class="col-xl-8 col-lg-7">
+              <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">Active cases</h6>
+                  <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                      <div class="dropdown-header">senario:</div>
+                      <a class="dropdown-item" href="#">test paticipation 25% </a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#">test paticipation 50%</a>
+                        <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#">test paticipation 75% </a>
+
+                    </div>
+                  </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                  <div class="chart-area">
+                    <canvas id="regLin-chart"></canvas>
+                  </div>
+                  <div class="mt-4 text-center small">
+                    <span class="mr-2">
+                      <i class="fas fa-circle text-primary"></i> Current Day
+                    </span>
+                    <span class="mr-2">
+                      <i class="fas fa-circle text-danger"></i> Linear Predicated Day
+                    </span>
+                    <span class="mr-2">
+                      <i class="fas fa-circle text-warning"></i> Overfit Predicated Day
+                    </span>
+                    <span class="mr-2">
+                      <i class="fas fa-circle text-warning"></i> Underfit Predicated Day
+                    </span>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Prediction in one week -->
+            <div class="col-xl-4 col-lg-3 mb-4">
+              <div class="card border-left-primary shadow h-10 py-2">
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Next week's forecast for the number of cases </div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_OfcasesKPIForcast"></a></div>
+                    </div>
+                    <div class="col-auto">
+                      <i></a><a id = "num_OfcasesKPIPredicated"></a></i>
+                      <i class="fas fas fa-head-side-cough fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br>
+              <div class="card border-left-primary shadow h-10 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Next week's forecast for the number of cases (mask) </div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800"></a></div>
+                  </div>
+                  <div class="col-auto">
+                    <i></a></i>
+                    <i class="fas fa-head-side-mask fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div></div>
+              <br>
+
+
+              <br>
+              <!-- With lockdown -->
+              <div class="card border-left-primary shadow h-10 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Next week's forecast for the number of hospitalized cases (lockdown) </div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_fatalitiesForcast"></a></div>
+                  </div>
+                  <div class="col-auto">
+                    <i></a></a></i>
+                    <i class="fas fa-user-lock fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+              </div>
+            </div>
+
+          </div>
 
         </div>
         <!-- /.container-fluid -->
@@ -290,7 +389,12 @@
 
   <!-- Custom scripts for all pages-->
   <script src="js/sb-admin-2.min.js"></script>
+  <!-- Page level plugins -->
+  <script src="vendor/chart.js/Chart.min.js"></script>
+  <!-- Api connection -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+  <script src="js/PythonChart/chart-area-ActiveCases-regLin.js"></script>
 </body>
 
 </html>
