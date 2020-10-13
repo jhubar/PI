@@ -134,7 +134,7 @@ if __name__ == '__main__':
     current_casses_X_pred = (np.append(current_casses_X_test,[10])).reshape((4, 1))
     print(len(current_casses_X_train))
     print(len(current_casses_X_pred)+forcast_number_day)
-    for i in range(len(current_casses_X_train)+1,len(current_casses_X_train)+forcast_number_day+1):
+    for i in range(0,len(current_casses_X_train)+forcast_number_day+1):
         current_casses_X_pred = (np.append(current_casses_X_pred,[i])).reshape(-1,1)
 
 
@@ -149,11 +149,12 @@ if __name__ == '__main__':
     plt.scatter(current_casses_X_train, current_casses_y_train,  color='green')
     plt.plot(current_casses_X, current_casses_y, color='green', linewidth=3)
     plt.scatter(current_casses_X_test, current_casses_y_test,  color='black')
-
+    plt.grid()
     plt.plot(current_casses_X_pred, current_casses_y_pred, color='blue', linewidth=3)
 
-    # plt.xticks(())
-    # plt.yticks(())
+    plt.xlabel('Day')
+    plt.ylabel('Active cases ')
+
 
     # plt.show()
 
