@@ -92,6 +92,7 @@ if __name__ == '__main__':
     url = 'https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/data.csv'
     data = load_from_url(url)
     data_array = np.array(data)
+    forcast_number_day = 14
     X = np.delete(data_array, [2,3,4,5], axis=1)
 
     # Load the current casses dataset
@@ -131,14 +132,16 @@ if __name__ == '__main__':
 
 
     current_casses_X_pred = (np.append(current_casses_X_test,[10])).reshape((4, 1))
-
-    for i in range(11,19):
+    print(len(current_casses_X_train))
+    print(len(current_casses_X_pred)+forcast_number_day)
+    for i in range(len(current_casses_X_train)+1,len(current_casses_X_train)+forcast_number_day+1):
         current_casses_X_pred = (np.append(current_casses_X_pred,[i])).reshape(-1,1)
 
 
     current_casses_y_pred = regr.predict(current_casses_X_pred)
     # The coefficient of determination: 1 is perfect prediction
     array_length = len(current_casses_y_pred)
+    print(len(current_casses_y_pred))
     print("NEXT WEEK'S FORECAST FOR THE NUMBER OF CASES",current_casses_y_pred[array_length-1])
 
     # Plot outputs
@@ -146,6 +149,7 @@ if __name__ == '__main__':
     plt.scatter(current_casses_X_train, current_casses_y_train,  color='green')
     plt.plot(current_casses_X, current_casses_y, color='green', linewidth=3)
     plt.scatter(current_casses_X_test, current_casses_y_test,  color='black')
+
     plt.plot(current_casses_X_pred, current_casses_y_pred, color='blue', linewidth=3)
 
     # plt.xticks(())
