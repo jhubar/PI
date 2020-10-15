@@ -527,11 +527,10 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
                       <div class="dropdown-header">senario:</div>
-                      <a class="dropdown-item" href="#"><button type="button" onclick="cum_cases(1,dataC)">Without cumulatives cases</button> </a>
+                      <a class="dropdown-item" href="#" onclick="without_cum_cases()">Without cumulatives cases</button> </a>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#"><button type="button" onclick="cum_cases('blue')">With cumulatives cases</button></a>
-                        <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">test paticipation 75% </a>
+                      <a class="dropdown-item" href="#" onclick="cum_cases_add()">With cumulatives cases</button></a>
+
 
                     </div>
                   </div>
@@ -837,6 +836,7 @@
                 <div class="card-body">
                   <div class="chart-area">
                     <canvas id="myAreaChartFatalities"></canvas>
+
                   </div>
                   <div class="mt-4 text-center small">
                     <span class="mr-2">
