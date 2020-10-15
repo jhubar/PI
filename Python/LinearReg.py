@@ -130,8 +130,8 @@ if __name__ == '__main__':
     print('Coefficient of determination: %.2f'
           % r2_score(current_casses_y_test, current_casses_y_pred))
 
-
-    current_casses_X_pred = (np.append(current_casses_X_test,[10])).reshape((4, 1))
+    print(len(current_casses_X_test))
+    current_casses_X_pred = (np.append(current_casses_X_test,[10])).reshape((len(current_casses_X_test)+1, 1))
 
 
 

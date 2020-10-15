@@ -392,26 +392,7 @@
           <!-- Content Row -->
           <div class="row">
 
-            <!-- DAY -->
-            <div class="col-xl-2 col-md-6 mb-4">
-              <div class="card border-left-info shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Day</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">
-                        <tr>
-                          <a id="result"> </a>
-                        </tr>
-                      </div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+
             <!-- num_positive-->
             <div class="col-xl-2 col-md-6 mb-4">
               <div class="card border-left-primary shadow h-100 py-2">
@@ -424,7 +405,7 @@
                       </div>
                     </div>
                     <div class="col-auto">
-                      <i class="text-success"><a id="casesKpi"></a></i>
+                      <i class="text-danger"><a id="casesKpi"></a></i>
                       <i class="fas fa-viruses fa-2x text-gray-300"></i>
                     </div>
 
@@ -466,6 +447,9 @@
                 </div>
               </div>
             </div>
+
+
+
             <!-- Nnum_critical-->
             <div class="col-xl-2 col-md-6 mb-4">
               <div class="card border-left-warning shadow h-100 py-2">
@@ -501,6 +485,28 @@
                 </div>
               </div>
             </div>
+
+            <!-- DAY -->
+            <div class="col-xl-2 col-md-6 mb-4">
+              <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Day</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">
+                        <tr>
+                          <a id="result"> </a>
+                        </tr>
+                      </div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
 
           </div>
 
@@ -1036,7 +1042,17 @@
           //return result; //JavaScript object
 
           var percentChange = ((((result[size-1].num_positive -result[size-2].num_positive)/result[size-2].num_positive))*100).toFixed(0);
-          if(percentChange <= 0){
+
+          if(percentChange == 0){
+
+            result = `
+
+            <td class="fas fa-caret-right text-success">${ percentChange }</td>
+            <td class="text-success">${ "%" }</td>`
+            $("#casesKpi").html(result)
+          }
+          if(percentChange > 0){
+
             result = `
 
 
@@ -1044,14 +1060,8 @@
             <td class="text-danger">${ "%" }</td>`
             $("#casesKpi").html(result)
           }
-          if(percentChange == 0){
-            result = `
-
-            <td class="fas fa-caret-right text-danger">${ percentChange }</td>
-            <td class="text-danger">${ "%" }</td>`
-            $("#casesKpi").html(result)
-          }
           else{
+            console.log(percentChange)
             result = `
 
             <td class="fas fa-caret-down fa-1x text-success">${ percentChange }</td>
@@ -1215,17 +1225,17 @@
 
           var percentChange = ((((dataLinearfit[label.length-1] - dataLinearfit[label.length-8]) /dataLinearfit[label.length-8]))*100).toFixed(0);
 
-          if(percentChange <= 0){
-            result = `
-            <td class="fas fa-caret-down fa-1x text-success">${ percentChange }</td>
-            <td class="text-success">${ "%" }</td>`
-            $("#num_OfcasesKPIPredicated").html(result)
-          }
           if(percentChange == 0){
             result = `
 
 
             <td class="fas fa-caret-right text-success">${ percentChange }</td>
+            <td class="text-success">${ "%" }</td>`
+            $("#num_OfcasesKPIPredicated").html(result)
+          }
+          if(percentChange <= 0){
+            result = `
+            <td class="fas fa-caret-down fa-1x text-success">${ percentChange }</td>
             <td class="text-success">${ "%" }</td>`
             $("#num_OfcasesKPIPredicated").html(result)
           }
@@ -1244,15 +1254,6 @@
           // hospitalized
 
           var percentChange_num_hospitalised = ((((dataLinearfit_num_hospitalised[label.length-1] - dataLinearfit_num_hospitalised[label.length-8]) /dataLinearfit_num_hospitalised[label.length-8]))*100).toFixed(0);
-
-          if(percentChange_num_hospitalised <= 0){
-            result_num_hospitalised = `
-
-
-            <td class="fas fa-caret-down fa-1x text-success">${ percentChange_num_hospitalised }</td>
-            <td class="text-success">${ "%" }</td>`
-            $("#num_hospitalisedKpiPredicated").html(result_num_hospitalised)
-          }
           if(percentChange == 0){
             result_num_hospitalised = `
 
@@ -1261,6 +1262,15 @@
             <td class="text-success">${ "%" }</td>`
             $("#num_hospitalisedKpiPredicated").html(result_num_hospitalised)
           }
+          else if(percentChange_num_hospitalised < 0){
+            result_num_hospitalised = `
+
+
+            <td class="fas fa-caret-down fa-1x text-success">${ percentChange_num_hospitalised }</td>
+            <td class="text-success">${ "%" }</td>`
+            $("#num_hospitalisedKpiPredicated").html(result_num_hospitalised)
+          }
+
           else{
             result_num_hospitalised = `
             <td class="fas fa-caret-up fa-1x text-danger">${ percentChange_num_hospitalised }</td>
@@ -1275,12 +1285,6 @@
           // critical
           var percentChange_num_critical = ((((dataLinearfit_num_critical[label.length-1] - dataLinearfit_num_critical[label.length-8]) /dataLinearfit_num_critical[label.length-8]))*100).toFixed(2);
 
-          if(percentChange_num_critical <= 0){
-            result_num_critical = `
-            <td class="fas fa-caret-down fa-1x text-success">${ percentChange_num_critical }</td>
-            <td class="text-success">${ "%" }</td>`
-            $("#num_criticalKPIPredicated").html(result_num_critical)
-          }
           if(percentChange_num_critical == 0){
             result_num_critical = `
 
@@ -1288,9 +1292,15 @@
             <td class="text-success">${ "%" }</td>`
             $("#num_criticalKPIPredicated").html(result_num_critical)
           }
-          if(dataLinearfit_num_critical[label.length-8] == 0){
+          else if(dataLinearfit_num_critical[label.length-8] == 0){
             result_num_critical = `
             <td class="fas fa-caret-right text-success">${ "0" }</td>
+            <td class="text-success">${ "%" }</td>`
+            $("#num_criticalKPIPredicated").html(result_num_critical)
+          }
+          else if(percentChange_num_critical < 0){
+            result_num_critical = `
+            <td class="fas fa-caret-down fa-1x text-success">${ percentChange_num_critical }</td>
             <td class="text-success">${ "%" }</td>`
             $("#num_criticalKPIPredicated").html(result_num_critical)
           }
@@ -1307,14 +1317,6 @@
           // fatalities
 
           var percentChange_num_fatalities = ((((dataLinearfit_num_fatalities[label.length-1] - dataLinearfit_num_fatalities[label.length-8]) /dataLinearfit_num_fatalities[label.length-8]))*100).toFixed(0);
-
-          if(percentChange_num_fatalities <= 0){
-
-            result_num_fatalities = `
-            <td class="fas fa-caret-down fa-1x text-success">${ percentChange_num_fatalities }</td>
-            <td class="text-success">${ "%" }</td>`
-            $("#num_fatalitiesKPIPredicated").html(result_num_fatalities)
-          }
           if(percentChange_num_fatalities == 0){
             result_num_fatalities = `
 
@@ -1322,7 +1324,15 @@
             <td class="text-success">${ "%" }</td>`
             $("#num_fatalitiesKPIPredicated").html(result_num_fatalities)
           }
-          if(dataLinearfit_num_fatalities[label.length-8] == 0){
+          else if(percentChange_num_fatalities < 0){
+
+            result_num_fatalities = `
+            <td class="fas fa-caret-down fa-1x text-success">${ percentChange_num_fatalities }</td>
+            <td class="text-success">${ "%" }</td>`
+            $("#num_fatalitiesKPIPredicated").html(result_num_fatalities)
+          }
+
+          else if(dataLinearfit_num_fatalities[label.length-8] == 0){
             result_num_fatalities = `
             <td class="fas fa-caret-right text-success">${ "0" }</td>
             <td class="text-success">${ "%" }</td>`
@@ -1380,14 +1390,6 @@
           //return result; //JavaScript object
 
           var percentChange = ((((result[size-1].num_hospitalised - result[size-2].num_hospitalised) /result[size-2].num_hospitalised))*100).toFixed(0);
-          if(percentChange <= 0){
-            result = `
-
-
-            <td class="fas fa-caret-down fa-1x text-success">${ percentChange }</td>
-            <td text-success>${ "%" }</td>`
-            $("#num_hospitalisedKpi").html(result)
-          }
           if(percentChange == 0){
             result = `
 
@@ -1396,6 +1398,15 @@
             <td text-success>${ "%" }</td>`
             $("#num_hospitalisedKpi").html(result)
           }
+          else if(percentChange < 0){
+            result = `
+
+
+            <td class="fas fa-caret-down fa-1x text-success">${ percentChange }</td>
+            <td text-success>${ "%" }</td>`
+            $("#num_hospitalisedKpi").html(result)
+          }
+
           else{
             result = `
             <td class="fas fa-caret-up fa-1x text-danger">${ percentChange }</td>
@@ -1464,14 +1475,6 @@
           //return result; //JavaScript object
 
           var percentChange = ((((result[size-1].num_critical -result[size-2].num_critical)/result[size-2].num_positive))*100).toFixed(0);
-          if(percentChange <= 0){
-            result = `
-
-
-            <td class="fas fa-caret-down fa-1x text-success">${ percentChange }</td>
-            <td class="fa-1x text-success">${ "%" }</td>`
-            $("#num_criticalKpi").html(result)
-          }
           if(percentChange == 0){
             result = `
             <td class="fas fa-caret-right fa-1x text-success">${ percentChange }</td>
@@ -1479,6 +1482,15 @@
 
             $("#num_criticalKpi").html(result)
           }
+          else if(percentChange < 0){
+            result = `
+
+
+            <td class="fas fa-caret-down fa-1x text-success">${ percentChange }</td>
+            <td class="fa-1x text-success">${ "%" }</td>`
+            $("#num_criticalKpi").html(result)
+          }
+
           else{
             result = `
             <td class="fas fa-caret-up fa-1x text-danger">${ percentChange }</td>
@@ -1526,18 +1538,19 @@
           //return result; //JavaScript object
 
           var percentChange = ((((result[size-1].num_fatalities -result[size-2].num_fatalities)/result[size-2].num_positive))).toFixed(0);
-          if(percentChange <= 0){
-            result = `
-            <td class="fas fa-caret-down fa-1x text-success">${ percentChange }</td>
-            <td class="text-success">${ "%" }</td>`
-            $("#num_fatalitiesKpi").html(result)
-          }
           if(percentChange == 0){
             result = `
             <td class="fas fa-caret-right fa-1x text-success">${ percentChange }</td>
             <td class="text-success">${ "%" }</td>`
             $("#num_fatalitiesKpi").html(result)
           }
+          else if(percentChange < 0){
+            result = `
+            <td class="fas fa-caret-down fa-1x text-success">${ percentChange }</td>
+            <td class="text-success">${ "%" }</td>`
+            $("#num_fatalitiesKpi").html(result)
+          }
+
           else{
             result = `
             <td class="fas fa-caret-up fa-1x text-danger">${ percentChange }</td>
