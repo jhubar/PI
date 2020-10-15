@@ -6,6 +6,12 @@
 ## Documentation
 
 - [Cov-invaders link](https://julien1941.github.io/PI/)
+
+## To do
+
+- Submit review 1 (15/10)
+- Mail (nom groupe + membres)
+
 ## Rapport
 
 - [Intermediate reviews](https://www.overleaf.com/1492324357bbbzgzpcwmmv)
@@ -23,3 +29,4 @@
 1. [Andreas Duquenne](https://githut.com/AnDuquenne)
 1. [François Lievens](https://github.com/francoislievens)
 1. [Hubar Julien](https://github.com/julien1941)
+
