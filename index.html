@@ -527,9 +527,9 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
                       <div class="dropdown-header">senario:</div>
-                      <a class="dropdown-item" href="#">test paticipation 25% </a>
+                      <a class="dropdown-item" href="#"><button type="button" onclick="cum_cases(1,dataC)">Without cumulatives cases</button> </a>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">test paticipation 50%</a>
+                      <a class="dropdown-item" href="#"><button type="button" onclick="cum_cases('blue')">With cumulatives cases</button></a>
                         <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="#">test paticipation 75% </a>
 
@@ -553,6 +553,9 @@
                     </span>
                     <span class="mr-2">
                       <i class="fas fa-circle text-warning"></i> Underfit Predicated Day
+                    </span>
+                    <span class="mr-2">
+                      <i class="fas fa-circle text-success"></i> Cumulatives cases
                     </span>
 
                   </div>
@@ -970,6 +973,10 @@
   <script src="js/demo/chart-area-Critical.js"></script>
   <script src="js/demo/chart-area-Fatalities.js"></script>
   <!-- <script src="js/demo/chart-pie-demo.js"></script> -->
+  <!-- Load d3.js -->
+  <script src="https://d3js.org/d3.v4.js"></script>
+
+
 
   <!-- Api connection -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

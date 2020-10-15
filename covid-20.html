@@ -1,4 +1,4 @@
-user<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -56,35 +56,85 @@ user<!DOCTYPE html>
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCovid" aria-expanded="true" aria-controls="collapseCovid">
           <i class="fas fa-fw fa-cog"></i>
           <span>Covid-Version</span>
         </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapseCovid" class="collapse" aria-labelledby="headingCovid" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Custom Components:</h6>
-            <a class="collapse-item" href="index.html">Covid-19</a>
-            <a class="collapse-item" href="covid-20.html">Covid-20</a>
+            <h6 class="collapse-header">Covid data:</h6>
+            <a class="collapse-item" href="covid19.html">Covid-19</a>
+            <a class="collapse-item" href="index.html">Covid-20</a>
           </div>
         </div>
       </li>
 
       <!-- Nav Item - Utilities Collapse Menu -->
-      <!-- <li class="nav-item">
+      <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
           <i class="fas fa-fw fa-wrench"></i>
-          <span>Utilities</span>
+          <span>Tools</span>
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Custom Utilities:</h6>
-            <a class="collapse-item" href="utilities-color.html">Colors</a>
-            <a class="collapse-item" href="utilities-border.html">Borders</a>
-            <a class="collapse-item" href="utilities-animation.html">Animations</a>
-            <a class="collapse-item" href="utilities-other.html">Other</a>
+            <!-- <h6 class="collapse-header">Custom Utilities:</h6> -->
+            <a class="collapse-item" href="ResumeEpidemio.html">Resume Epidemio</a>
+            <a class="collapse-item" href="#" onclick="window.open('Documents/Dernière mise à jour de la situation épidémiologique.pdf', '_blank', 'fullscreen=yes'); return false;">Belgium Epidemio</a>
           </div>
         </div>
-      </li> -->
+      </li>
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Nav Item - Utilities Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePython" aria-expanded="true" aria-controls="collapsePython">
+          <i class="fab fa-python"></i>
+          <span>Python Pred</span>
+        </a>
+        <div id="collapsePython" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <!-- <h6 class="collapse-header">Custom Utilities:</h6> -->
+            <a class="collapse-item" href="PyLinearRegression.html">LinearRegression</a>
+          </div>
+        </div>
+      </li>
+        <hr class="sidebar-divider">
+      <!-- Nav Item - Tables -->
+      <li class="nav-item">
+        <a class="nav-link" href="tables.html">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Tables</span></a>
+      </li>
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+
+      <!-- Nav Item - Tables -->
+      <li class="nav-item">
+        <a class="nav-link" href="calendar.html">
+          <i class="fas fa-fw fa-calendar-alt"></i>
+          <span>Calendar</span></a>
+      </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+      <!-- Nav Item -About -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAbout" aria-expanded="true" aria-controls="collapseAbout">
+          <i class="fas fa-id-badge"></i>
+          <span>About</span>
+
+        </a>
+        <div id="collapseAbout" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="contact.html">Contact</a>
+          </div>
+        </div>
+      </li>
+
+
+
 
       <!-- Divider -->
       <!-- <hr class="sidebar-divider"> -->
@@ -333,26 +383,119 @@ user<!DOCTYPE html>
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-            <a onclick="refreshdata"><a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Refresh Data</a></a>
+            <h1 class="h3 mb-0 text-gray-800">Covid-20</h1>
+            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+              <i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
           </div>
-
 
 
           <!-- Content Row -->
           <div class="row">
 
-            <!-- Cumulative cases -->
-            <div class="col-xl-3 col-md-6 mb-4">
+
+            <!-- num_positive-->
+            <div class="col-xl-2 col-md-6 mb-4">
               <div class="card border-left-primary shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Day</div>
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Positive cases</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">
+                        <a id="num_positive"></a>
+                      </div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="text-danger"><a id="casesKpi"></a></i>
+                      <i class="fas fa-viruses fa-2x text-gray-300"></i>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- num_hospitalised-->
+            <div class="col-xl-2 col-md-6 mb-4">
+              <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Number of Hospitalised</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_hospitalised"></a></div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="text-success"><a id="num_hospitalisedKpi">" "</a></i>
+                      <i class="fas fa-hospital-symbol fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- num_cumulative_hospitalizations-->
+            <div class="col-xl-2 col-md-6 mb-4">
+              <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Cumulative hospitalizations</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_cumulative_hospitalizations"></a></div>
+                    </div>
+                    <div class="col-auto">
+
+                      <i class="fas fa-users fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+            <!-- Nnum_critical-->
+            <div class="col-xl-2 col-md-6 mb-4">
+              <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Critical</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_critical"></a></div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="text-success"><a id="num_criticalKpi"></a></i>
+                      <i class="fas fa-exclamation-triangle fa-2x text-gray-300"></i>
+                      <!-- <i class="fas fa-head-side-cough "></i> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- num_fatalities-->
+            <div class="col-xl-2 col-md-6 mb-4">
+              <div class="card border-left-danger shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Fatalties</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_fatalities"></a></div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="text-success"><a id="num_fatalitiesKpi"></a></i>
+                      <i class="fas fa-dizzy fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- DAY -->
+            <div class="col-xl-2 col-md-6 mb-4">
+              <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Day</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800">
                         <tr>
-                              <a id="result"></a>
+                          <a id="result"> </a>
                         </tr>
                       </div>
                     </div>
@@ -364,117 +507,121 @@ user<!DOCTYPE html>
               </div>
             </div>
 
-            <!-- num_positive-->
-            <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Positive cases</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_positive"></a></div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-user fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- num_hospitalised-->
-            <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Number of Hospitalised</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_hospitalised"></a></div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-user fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- num_cumulative_hospitalizations-->
-            <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Cumulative hospitalizations</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_cumulative_hospitalizations"></a></div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-user fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Nnum_critical-->
-            <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Critical</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_critical"></a></div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-user fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- num_fatalities-->
-            <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Fatalties</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_fatalities"></a></div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-user fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
 
-
-
-            <!-- Global Deaths -->
-            <!-- <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-warning shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Global Deaths</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-comments fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-          <!-- </div> -->
           </div>
 
-          <!-- Content Row -->
 
+
+          <!-- Content Row Actives Cases -->
           <div class="row">
 
-            <!-- Area Chart -->
+            <!-- Area Chart Active Cases -->
             <div class="col-xl-8 col-lg-7">
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Cases</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Active cases</h6>
+                  <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                      <div class="dropdown-header">senario:</div>
+                      <a class="dropdown-item" href="#">test paticipation 25% </a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#">test paticipation 50%</a>
+                        <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#">test paticipation 75% </a>
+
+                    </div>
+                  </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                  <div class="chart-area">
+                    <canvas id="myAreaChart"></canvas>
+                  </div>
+                  <div class="mt-4 text-center small">
+                    <span class="mr-2">
+                      <i class="fas fa-circle text-primary"></i> Current Day
+                    </span>
+                    <span class="mr-2">
+                      <i class="fas fa-circle text-danger"></i> Linear Predicated Day
+                    </span>
+                    <span class="mr-2">
+                      <i class="fas fa-circle text-warning"></i> Overfit Predicated Day
+                    </span>
+                    <span class="mr-2">
+                      <i class="fas fa-circle text-warning"></i> Underfit Predicated Day
+                    </span>
+                    <span class="mr-2">
+                      <i class="fas fa-circle text-success"></i> Cumulatives cases
+                    </span>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Prediction in one week -->
+            <div class="col-xl-4 col-lg-3 mb-4">
+              <div class="card border-left-primary shadow h-10 py-2">
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Next week's forecast for the number of cases </div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_OfcasesKPIForcast"></a></div>
+                    </div>
+                    <div class="col-auto">
+                      <i></a><a id = "num_OfcasesKPIPredicated"></a></i>
+                      <i class="fas fas fa-head-side-cough fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br>
+              <div class="card border-left-primary shadow h-10 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Next week's forecast for the number of cases (mask) </div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800"></a></div>
+                  </div>
+                  <div class="col-auto">
+                    <i></a></i>
+                    <i class="fas fa-head-side-mask fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div></div>
+              <br>
+
+
+              <br>
+              <!-- With lockdown -->
+              <div class="card border-left-primary shadow h-10 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Next week's forecast for the number of hospitalized cases (lockdown) </div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_fatalitiesForcast"></a></div>
+                  </div>
+                  <div class="col-auto">
+                    <i></a></a></i>
+                    <i class="fas fa-user-lock fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+              </div>
+            </div>
+
+          </div>
+          <!-- Content Row numberOfHospitalied-->
+          <div class="row">
+              <!-- Area Chart Hospitalised -->
+              <div class="col-xl-8 col-lg-7">
+              <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-success">Number of Hospitalised</h6>
                   <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -491,18 +638,91 @@ user<!DOCTYPE html>
                 <!-- Card Body -->
                 <div class="card-body">
                   <div class="chart-area">
-                    <canvas id="myAreaChart"></canvas>
+                    <canvas id="myAreaChartHospitalised"></canvas>
+                  </div>
+                  <div class="mt-4 text-center small">
+                    <span class="mr-2">
+                      <i class="fas fa-circle text-primary"></i> Current Day
+                    </span>
+                    <span class="mr-2">
+                      <i class="fas fa-circle text-danger"></i> Linear Predicated Day
+                    </span>
+                    <span class="mr-2">
+                      <i class="fas fa-circle text-warning"></i> Overfit Predicated Day
+                    </span>
+                    <span class="mr-2">
+                      <i class="fas fa-circle text-warning"></i> Underfit Predicated Day
+                    </span>
+
                   </div>
                 </div>
               </div>
+
+            </div>
+              <!-- Prediction in one week -->
+              <div class="col-xl-4 col-lg-3 mb-4">
+                <div class="card border-left-success shadow h-10 py-2">
+                    <div class="card-body">
+                      <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Next week's forecast for the number of hospitalized cases </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_hospitalisedForcast"></a></div>
+                      </div>
+                      <div class="col-auto">
+                        <i></a><a id = "num_hospitalisedKpiPredicated"></a></i>
+                        <i class="fas fas fa-head-side-cough fa-2x text-gray-300"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <br>
+
+                <!-- With mask -->
+                <div class="card border-left-success shadow h-10 py-2">
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Next week's forecast for the number of hospitalized cases (mask) </div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_fatalitiesForcast"></a></div>
+                    </div>
+                    <div class="col-auto">
+                      <i></a></a></i>
+                      <i class="fas fa-head-side-mask fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+                </div>
+                <br>
+
+
+                <br>
+                <!-- With lockdown -->
+                <div class="card border-left-success shadow h-10 py-2">
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Next week's forecast for the number of hospitalized cases (lockdown) </div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_fatalitiesForcast"></a></div>
+                    </div>
+                    <div class="col-auto">
+                      <i></a></a></i>
+                      <i class="fas fa-user-lock fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+                </div>
             </div>
 
-            <!-- Pie Chart -->
-            <div class="col-xl-4 col-lg-5">
+          </div>
+          <!-- Content Row number of Critical-->
+          <div class="row">
+
+            <!-- Area Chart criticals -->
+            <div class="col-xl-8 col-lg-7">
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Cases</h6>
+                  <h6 class="m-0 font-weight-bold text-warning">Number of Criticals</h6>
                   <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -518,161 +738,177 @@ user<!DOCTYPE html>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                  <div class="chart-pie pt-4 pb-2">
-                    <canvas id="myPieChart"></canvas>
+                  <div class="chart-area">
+                    <canvas id="myAreaChartCriticals"></canvas>
                   </div>
                   <div class="mt-4 text-center small">
                     <span class="mr-2">
-                      <i class="fas fa-circle text-primary"></i> Direct
+                      <i class="fas fa-circle text-primary"></i> Current Day
                     </span>
                     <span class="mr-2">
-                      <i class="fas fa-circle text-success"></i> Social
+                      <i class="fas fa-circle text-danger"></i> Linear Predicated Day
                     </span>
                     <span class="mr-2">
-                      <i class="fas fa-circle text-info"></i> Referral
+                      <i class="fas fa-circle text-warning"></i> Overfit Predicated Day
                     </span>
+                    <span class="mr-2">
+                      <i class="fas fa-circle text-warning"></i> Underfit Predicated Day
+                    </span>
+
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+            <!-- Prediction in one week -->
+            <div class="col-xl-4 col-lg-3 mb-4">
+              <div class="card border-left-warning shadow h-10 py-2">
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Next week's forecast for the number of critical cases </div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_criticalOfcasesKPIForcast"></a></div>
+                    </div>
+                    <div class="col-auto">
+                      <i></a><a id = "num_criticalKPIPredicated"></a></i>
+                      <i class="fas fas fa-head-side-cough fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br>
+              <div class="card border-left-warning shadow h-10 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Next week's forecast for the number of hospitalized cases (mask) </div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_fatalitiesForcast"></a></div>
+                  </div>
+                  <div class="col-auto">
+                    <i></a><a id = "num_hospitalisedKpiPredicated"></a></i>
+                    <i class="fas fa-head-side-mask fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br>
 
-          <!-- Content Row -->
+
+            <br>
+            <!-- With lockdown -->
+            <div class="card border-left-warning shadow h-10 py-2">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                  <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Next week's forecast for the number of hospitalized cases (lockdown) </div>
+                  <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_fatalitiesForcast"></a></div>
+                </div>
+                <div class="col-auto">
+                  <i></a></a></i>
+                  <i class="fas fa-user-lock fa-2x text-gray-300"></i>
+                </div>
+              </div>
+            </div>
+            </div>
+            </div>
+          </div>
+          <!-- Content Row number of fatalities -->
           <div class="row">
 
-            <!-- Content Column -->
-            <div class="col-lg-6 mb-4">
-
-              <!-- Project Card Example -->
+            <!-- Area Chart Fatalities -->
+            <div class="col-xl-8 col-lg-7">
               <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Stat</h6>
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-danger">Number of Fatalities</h6>
+                  <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                      <div class="dropdown-header">Dropdown Header:</div>
+                      <a class="dropdown-item" href="#">Action</a>
+                      <a class="dropdown-item" href="#">Another action</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                  </div>
                 </div>
+                <!-- Card Body -->
                 <div class="card-body">
-                  <h4 class="small font-weight-bold">Percent of hospitalizations <span class="float-right">2%</span></h4>
-                  <div class="progress mb-4">
-                    <div class="progress-bar bg-danger" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                  <div class="chart-area">
+                    <canvas id="myAreaChartFatalities"></canvas>
                   </div>
-                  <h4 class="small font-weight-bold">Sales Tracking <span class="float-right">40%</span></h4>
-                  <div class="progress mb-4">
-                    <div class="progress-bar bg-warning" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <h4 class="small font-weight-bold">Customer Database <span class="float-right">60%</span></h4>
-                  <div class="progress mb-4">
-                    <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <h4 class="small font-weight-bold">Payout Details <span class="float-right">80%</span></h4>
-                  <div class="progress mb-4">
-                    <div class="progress-bar bg-info" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <h4 class="small font-weight-bold">Account Setup <span class="float-right">Complete!</span></h4>
-                  <div class="progress">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </div>
-              </div>
+                  <div class="mt-4 text-center small">
+                    <span class="mr-2">
+                      <i class="fas fa-circle text-primary"></i> Current Day
+                    </span>
+                    <span class="mr-2">
+                      <i class="fas fa-circle text-danger"></i> Linear Predicated Day
+                    </span>
+                    <span class="mr-2">
+                      <i class="fas fa-circle text-warning"></i> Overfit Predicated Day
+                    </span>
+                    <span class="mr-2">
+                      <i class="fas fa-circle text-warning"></i> Underfit Predicated Day
+                    </span>
 
-              <!-- Color System -->
-              <div class="row">
-                <!-- <div class="col-lg-6 mb-4">
-                  <div class="card bg-primary text-white shadow">
-                    <div class="card-body">
-                      Primary
-                      <div class="text-white-50 small">#4e73df</div>
-                    </div>
-                  </div>
-                </div> -->
-                <!-- <div class="col-lg-6 mb-4">
-                  <div class="card bg-success text-white shadow">
-                    <div class="card-body">
-                      Success
-                      <div class="text-white-50 small">#1cc88a</div>
-                    </div>
                   </div>
                 </div>
-                <div class="col-lg-6 mb-4">
-                  <div class="card bg-info text-white shadow">
-                    <div class="card-body">
-                      Info
-                      <div class="text-white-50 small">#36b9cc</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                  <div class="card bg-warning text-white shadow">
-                    <div class="card-body">
-                      Warning
-                      <div class="text-white-50 small">#f6c23e</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                  <div class="card bg-danger text-white shadow">
-                    <div class="card-body">
-                      Danger
-                      <div class="text-white-50 small">#e74a3b</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                  <div class="card bg-secondary text-white shadow">
-                    <div class="card-body">
-                      Secondary
-                      <div class="text-white-50 small">#858796</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                  <div class="card bg-light text-black shadow">
-                    <div class="card-body">
-                      Light
-                      <div class="text-black-50 small">#f8f9fc</div>
-                    </div>
-                  </div>
               </div>
-              <div class="col-lg-6 mb-4">
-                <div class="card bg-dark text-white shadow">
+            </div>
+
+
+            <!-- Prediction in one week -->
+            <div class="col-xl-4 col-lg-3 mb-4">
+              <div class="card border-left-danger shadow h-10 py-2">
                   <div class="card-body">
-                      Dark
-                      <div class="text-white-50 small">#5a5c69</div>
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Next week's forecast for the number of Fataliets cases </div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_fatalitiesOfcasesKPIForcast"></a></div>
+                    </div>
+                    <div class="col-auto">
+                      <i></a><a id = "num_fatalitiesKPIPredicated"></a></i>
+                      <i class="fas fas fa-head-side-cough fa-2x text-gray-300"></i>
+                    </div>
                   </div>
                 </div>
-              </div> -->
-            </div>
-
-            </div>
-
-            <div class="col-lg-6 mb-4">
-
-              <!-- Illustrations -->
-              <!-- <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
-                </div>
+              </div>
+              <br>
+              <div class="card border-left-danger shadow h-10 py-2">
                 <div class="card-body">
-                  <div class="text-center">
-                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="img/undraw_posting_photo.svg" alt="">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Next week's forecast for the number of Fatalies cases (mask) </div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_fatalitiesForcast"></a></div>
                   </div>
-                  <p>Add some quality, svg illustrations to your project courtesy of <a target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a constantly updated collection of beautiful svg images that you can use completely free and without attribution!</p>
-                  <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on unDraw &rarr;</a>
+                  <div class="col-auto">
+                    <i></a><a id = "num_hospitalisedKpiPredicated"></a></i>
+                    <i class="fas fa-head-side-mask fa-2x text-gray-300"></i>
+                  </div>
                 </div>
-              </div> -->
-
-              <!-- Approach -->
-              <!-- <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
-                </div>
-                <div class="card-body">
-                  <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce CSS bloat and poor page performance. Custom CSS classes are used to create custom components and custom utility classes.</p>
-                  <p class="mb-0">Before working with this theme, you should become familiar with the Bootstrap framework, especially the utility classes.</p>
-                </div>
-              </div> -->
-
+              </div>
             </div>
+            <br>
+            <!-- With lockdown -->
+            <div class="card border-left-danger shadow h-10 py-2">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                  <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Next week's forecast for the number of hospitalized cases (lockdown) </div>
+                  <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_fatalitiesForcast"></a></div>
+                </div>
+                <div class="col-auto">
+                  <i></a></a></i>
+                  <i class="fas fa-user-lock fa-2x text-gray-300"></i>
+                </div>
+              </div>
+            </div>
+            </div>
+
           </div>
 
-        </div>
+
         <!-- /.container-fluid -->
 
       </div>
@@ -682,7 +918,7 @@ user<!DOCTYPE html>
       <footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2020</span>
+            <span>Copyright &copy; Cov-invaders 2020</span>
           </div>
         </div>
       </footer>
@@ -732,8 +968,11 @@ user<!DOCTYPE html>
   <script src="vendor/chart.js/Chart.min.js"></script>
 
   <!-- Page level custom scripts -->
-  <script src="js/demo/chart-area-demo.js"></script>
-  <script src="js/demo/chart-pie-demo.js"></script>
+  <script src="js/demo/chart-area-ActiveCases.js"></script>
+  <script src="js/demo/chart-area-Hospitalised.js"></script>
+  <script src="js/demo/chart-area-Critical.js"></script>
+  <script src="js/demo/chart-area-Fatalities.js"></script>
+  <!-- <script src="js/demo/chart-pie-demo.js"></script> -->
 
   <!-- Api connection -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -788,6 +1027,333 @@ user<!DOCTYPE html>
             $("#num_positive").html(result)
 
         })
+        // Positives casesKPI
+        $.get(url,function(data){
+
+          var lines=data.split("\n");
+          var result = [];
+          var headers=lines[0].split(",");
+          for(var i=1;i<lines.length;i++){
+            var obj = {};
+            var currentline=lines[i].split(",");
+            for(var j=0;j<headers.length;j++){
+              obj[headers[j]] = currentline[j];
+            }
+            result.push(obj);
+          }
+          var size = result.length-1;
+          //return result; //JavaScript object
+
+          var percentChange = ((((result[size-1].num_positive -result[size-2].num_positive)/result[size-2].num_positive))*100).toFixed(0);
+
+          if(percentChange == 0){
+
+            result = `
+
+            <td class="fas fa-caret-right text-success">${ percentChange }</td>
+            <td class="text-success">${ "%" }</td>`
+            $("#casesKpi").html(result)
+          }
+          if(percentChange > 0){
+
+            result = `
+
+
+            <td class="fas fa-caret-up fa-1x text-danger">${ percentChange }</td>
+            <td class="text-danger">${ "%" }</td>`
+            $("#casesKpi").html(result)
+          }
+          else{
+            console.log(percentChange)
+            result = `
+
+            <td class="fas fa-caret-down fa-1x text-success">${ percentChange }</td>
+            <td class="text-success">${ "%" }</td>`
+            $("#casesKpi").html(result)
+          }
+
+        })
+        //predicated numberOfcasesKPIPredicated
+        $.get(url,function(data){
+
+          var lines=data.split("\n");
+          var result = [];
+
+          var headers=lines[0].split(",");
+          for(var i=1;i<lines.length;i++){
+            var obj = {};
+            var currentline=lines[i].split(",");
+            for(var j=0;j<headers.length;j++){
+              obj[headers[j]] = currentline[j];
+            }
+            result.push(obj);
+          }
+          var size = result.length-1;
+          //return result; //JavaScript object
+          label = [];
+          dataL = [];
+          dataOverfit = [];
+          dataUnderfit = [];
+          dataLinearfit = [];
+          // num_hospitalised
+          dataL_num_hospitalised = [];
+          dataOverfit_num_hospitalised = [];
+          dataUnderfit_num_hospitalised = [];
+          dataLinearfit_num_hospitalised = [];
+          // num_critical
+          dataL_num_critical = [];
+          dataOverfit_num_critical = [];
+          dataUnderfit_num_critical = [];
+          dataLinearfit_num_critical = [];
+          // num_fatalities
+          dataL_num_fatalities = [];
+          dataOverfit_num_fatalities = [];
+          dataUnderfit_num_fatalities = [];
+          dataLinearfit_num_fatalities = [];
+
+          for(var i=0;i<result.length-1;i++){
+            label.push(result[i].Day);
+
+            dataL.push(result[i].num_positive);
+            dataOverfit.push(result[i].num_positive);
+            dataUnderfit.push(result[i].num_positive);
+            dataLinearfit.push(result[i].num_positive);
+
+
+            dataL_num_hospitalised .push(result[i].num_hospitalised);
+            dataOverfit_num_hospitalised.push(result[i].num_hospitalised);
+            dataUnderfit_num_hospitalised.push(result[i].num_hospitalised);
+            dataLinearfit_num_hospitalised.push(result[i].num_hospitalised);
+
+            dataL_num_critical.push(result[i].num_critical);
+            dataOverfit_num_critical.push(result[i].num_critical);
+            dataUnderfit_num_critical.push(result[i].num_critical);
+            dataLinearfit_num_critical.push(result[i].num_critical);
+
+            dataL_num_fatalities.push(result[i].num_fatalities);
+            dataOverfit_num_fatalities.push(result[i].num_fatalities);
+            dataUnderfit_num_fatalities.push(result[i].num_fatalities);
+            dataLinearfit_num_fatalities.push(result[i].num_fatalities);
+
+          }
+
+          for(var i=0;i<7;i++){
+            label.push((result.length+i).toString());
+          }
+
+
+
+          tmpOverfit = dataL[result.length-2];
+          tmpUnderfit = dataL[result.length-2];
+          tmpLinearfit = dataL[result.length-2];
+          // num_hospitalised
+          tmpOverfit_num_hospitalised = dataL_num_hospitalised[result.length-2];
+          tmpUnderfit_num_hospitalised = dataL_num_hospitalised[result.length-2];
+          tmpLinearfit_num_hospitalised = dataL_num_hospitalised[result.length-2];
+          // num_critical
+          tmpOverfit_num_critical = dataL_num_critical[result.length-2];
+          tmpUnderfit_num_critical = dataL_num_critical[result.length-2];
+          tmpLinearfit_num_critical = dataL_num_critical[result.length-2];
+          //num_fatalities
+          tmpOverfit_num_fatalities = dataL_num_fatalities[result.length-2];
+          tmpUnderfit_num_fatalities = dataL_num_fatalities[result.length-2];
+          tmpLinearfit_num_fatalities = dataL_num_fatalities[result.length-2];
+
+          var m = 0;
+          var m_num_hospitalised = 0;
+          var m_num_critical = 0;
+          var m_num_fatalities = 0;
+
+          for(var i=1;i<result.length-1;i++){
+              m +=(dataL[i] - dataL[i-1])/((label[i] - label[i-1]));
+              m_num_hospitalised +=(dataL_num_hospitalised[i] - dataL_num_hospitalised[i-1])/((label[i] - label[i-1]));
+              m_num_critical +=(dataL_num_critical[i] - dataL_num_critical[i-1])/((label[i] - label[i-1]));
+              m_num_fatalities +=(dataL_num_fatalities[i] - dataL_num_fatalities[i-1])/((label[i] - label[i-1]));
+          }
+
+          m/=result.length-1;
+          m_num_hospitalised/=result.length-1;
+          m_num_critical/=result.length-1;
+          m_num_fatalities/=result.length-1;
+
+          for(var i=result.length-1;i<label.length;i++){
+            tmpLinearfit = m * parseInt(label[i]);
+            tmpLinearfit_num_hospitalised = m_num_hospitalised * parseInt(label[i]);
+            tmpLinearfit_num_critical = m_num_critical * parseInt(label[i]);
+            tmpLinearfit_num_fatalities = m_num_fatalities * parseInt(label[i]);
+            if(i%2 == 0){
+              tmpOverfit = 4 + parseInt(tmpLinearfit);
+              tmpUnderfit = parseInt(tmpLinearfit) - 4;
+
+              tmpOverfit_num_hospitalised = 4 + parseInt(tmpLinearfit_num_hospitalised);
+              tmpUnderfit_num_hospitalised = parseInt(tmpLinearfit_num_hospitalised) - 4;
+
+              tmpOverfit_num_critical = 0.05 + parseInt(tmpLinearfit_num_critical);
+              tmpUnderfit_num_critical = parseInt(tmpLinearfit_num_critical) - 0.05;
+
+              tmpOverfit_num_fatalities = 0.04 + parseInt(tmpLinearfit_num_fatalities);
+              tmpUnderfit_num_fatalities = parseInt(tmpLinearfit_num_fatalities) - 0.004;
+            }
+            else{
+              tmpOverfit = 3 + parseInt(tmpLinearfit);
+              tmpUnderfit = parseInt(tmpLinearfit)-3;
+
+              tmpOverfit_num_hospitalised = 3 + parseInt(tmpLinearfit_num_hospitalised);
+              tmpUnderfit_num_hospitalised = parseInt(tmpLinearfit_num_hospitalised)-3;
+
+              tmpOverfit_num_critical = 0.01 + parseInt(tmpLinearfit_num_critical);
+              tmpUnderfit_num_critical = parseInt(tmpLinearfit_num_critical) - 0.05;
+
+              tmpOverfit_num_fatalities = 0.03 + parseInt(tmpLinearfit_num_fatalities);
+              tmpUnderfit_num_fatalities = parseInt(tmpLinearfit_num_fatalities) - 0.003;
+            }
+
+
+            dataLinearfit[i]= tmpLinearfit.toString();
+            dataOverfit[i]= tmpOverfit.toString()*1.1;
+            dataUnderfit[i]= tmpUnderfit.toString()/1.1;
+
+            dataLinearfit_num_hospitalised[i]= tmpLinearfit_num_hospitalised.toString();
+            dataOverfit_num_hospitalised[i]= tmpOverfit_num_hospitalised.toString()*1.1;
+            dataUnderfit_num_hospitalised[i]= tmpUnderfit_num_hospitalised.toString()/1.1;
+
+            dataLinearfit_num_critical[i]= tmpLinearfit_num_critical.toString();
+            dataOverfit_num_critical[i]= tmpOverfit_num_critical.toString()*1.1;
+            dataUnderfit_num_critical[i]= tmpUnderfit_num_critical.toString()/1.1;
+
+            dataLinearfit_num_fatalities[i]= tmpLinearfit_num_fatalities.toString();
+            dataOverfit_num_fatalities[i]= tmpOverfit_num_fatalities.toString()*1.1;
+            dataUnderfit_num_fatalities[i]= tmpUnderfit_num_fatalities.toString()/1.1;
+          }
+
+          var percentChange = ((((dataLinearfit[label.length-1] - dataLinearfit[label.length-8]) /dataLinearfit[label.length-8]))*100).toFixed(0);
+
+          if(percentChange == 0){
+            result = `
+
+
+            <td class="fas fa-caret-right text-success">${ percentChange }</td>
+            <td class="text-success">${ "%" }</td>`
+            $("#num_OfcasesKPIPredicated").html(result)
+          }
+          if(percentChange <= 0){
+            result = `
+            <td class="fas fa-caret-down fa-1x text-success">${ percentChange }</td>
+            <td class="text-success">${ "%" }</td>`
+            $("#num_OfcasesKPIPredicated").html(result)
+          }
+          else{
+            result = `
+            <td class="fas fa-caret-up fa-1x text-danger">${ percentChange }</td>
+            <td class="text-danger">${ "%" }</td>`
+            $("#num_OfcasesKPIPredicated").html(result)
+          }
+          var currentforcastResult = (parseInt(dataLinearfit[label.length-1]).toFixed(0)).toString();
+
+          forcastResult = `
+          <td class="text-secondary">${ currentforcastResult }</td>`
+          $("#num_OfcasesKPIForcast").html(forcastResult)
+
+          // hospitalized
+
+          var percentChange_num_hospitalised = ((((dataLinearfit_num_hospitalised[label.length-1] - dataLinearfit_num_hospitalised[label.length-8]) /dataLinearfit_num_hospitalised[label.length-8]))*100).toFixed(0);
+          if(percentChange == 0){
+            result_num_hospitalised = `
+
+
+            <td class="fas fa-caret-right text-success">${ percentChange_num_hospitalised }</td>
+            <td class="text-success">${ "%" }</td>`
+            $("#num_hospitalisedKpiPredicated").html(result_num_hospitalised)
+          }
+          else if(percentChange_num_hospitalised < 0){
+            result_num_hospitalised = `
+
+
+            <td class="fas fa-caret-down fa-1x text-success">${ percentChange_num_hospitalised }</td>
+            <td class="text-success">${ "%" }</td>`
+            $("#num_hospitalisedKpiPredicated").html(result_num_hospitalised)
+          }
+
+          else{
+            result_num_hospitalised = `
+            <td class="fas fa-caret-up fa-1x text-danger">${ percentChange_num_hospitalised }</td>
+            <td class="text-danger">${ "%" }</td>`
+            $("#num_hospitalisedKpiPredicated").html(result_num_hospitalised)
+          }
+          var varforcastResult_num_hospitalised = (parseInt(dataLinearfit_num_hospitalised[label.length-1]).toFixed(0)).toString();
+          forcastResult_num_hospitalised = `
+          <td class="text-secondary">${ varforcastResult_num_hospitalised }</td>`
+          $("#num_hospitalisedForcast").html(forcastResult_num_hospitalised)
+
+          // critical
+          var percentChange_num_critical = ((((dataLinearfit_num_critical[label.length-1] - dataLinearfit_num_critical[label.length-8]) /dataLinearfit_num_critical[label.length-8]))*100).toFixed(2);
+
+          if(percentChange_num_critical == 0){
+            result_num_critical = `
+
+            <td class="fas fa-caret-right text-success">${ percentChange_num_critical }</td>
+            <td class="text-success">${ "%" }</td>`
+            $("#num_criticalKPIPredicated").html(result_num_critical)
+          }
+          else if(dataLinearfit_num_critical[label.length-8] == 0){
+            result_num_critical = `
+            <td class="fas fa-caret-right text-success">${ "0" }</td>
+            <td class="text-success">${ "%" }</td>`
+            $("#num_criticalKPIPredicated").html(result_num_critical)
+          }
+          else if(percentChange_num_critical < 0){
+            result_num_critical = `
+            <td class="fas fa-caret-down fa-1x text-success">${ percentChange_num_critical }</td>
+            <td class="text-success">${ "%" }</td>`
+            $("#num_criticalKPIPredicated").html(result_num_critical)
+          }
+          else{
+            result_num_critical = `
+            <td class="fas fa-caret-up fa-1x text-danger">${ percentChange_num_critical }</td>
+            <td class="text-danger">${ "%" }</td>`
+            $("#num_criticalKPIPredicated").html(result_num_critical)
+          }
+
+          forcastResult_num_critical = `
+          <td class="text-secondary">${ dataLinearfit_num_critical[label.length-1] }</td>`
+          $("#num_criticalOfcasesKPIForcast").html(forcastResult_num_critical)
+          // fatalities
+
+          var percentChange_num_fatalities = ((((dataLinearfit_num_fatalities[label.length-1] - dataLinearfit_num_fatalities[label.length-8]) /dataLinearfit_num_fatalities[label.length-8]))*100).toFixed(0);
+          if(percentChange_num_fatalities == 0){
+            result_num_fatalities = `
+
+            <td class="fas fa-caret-right text-success">${ percentChange_num_fatalities }</td>
+            <td class="text-success">${ "%" }</td>`
+            $("#num_fatalitiesKPIPredicated").html(result_num_fatalities)
+          }
+          else if(percentChange_num_fatalities < 0){
+
+            result_num_fatalities = `
+            <td class="fas fa-caret-down fa-1x text-success">${ percentChange_num_fatalities }</td>
+            <td class="text-success">${ "%" }</td>`
+            $("#num_fatalitiesKPIPredicated").html(result_num_fatalities)
+          }
+
+          else if(dataLinearfit_num_fatalities[label.length-8] == 0){
+            result_num_fatalities = `
+            <td class="fas fa-caret-right text-success">${ "0" }</td>
+            <td class="text-success">${ "%" }</td>`
+            $("#num_fatalitiesKPIPredicated").html(result_num_fatalities)
+          }
+          else{
+            result_num_fatalities = `
+            <td class="fas fa-caret-up fa-1x text-danger">${ percentChange_num_fatalities }</td>
+            <td class="text-danger">${ "%" }</td>`
+            $("#num_fatalitiesKPIPredicated").html(result_num_fatalities)
+          }
+
+          forcastResult_num_fatalities = `
+          <td class="text-secondary">${ dataLinearfit_num_fatalities[label.length-1] }</td>`
+          $("#num_fatalitiesOfcasesKPIForcast").html(forcastResult_num_fatalities)
+
+
+        })
         // Number of Hospitalised
         $.get(url,function(data){
 
@@ -807,6 +1373,49 @@ user<!DOCTYPE html>
             result = `
             <td>${ result[size-1].num_hospitalised }</td>`
             $("#num_hospitalised").html(result)
+
+        })
+        // NumberOfHospitaliedKPI
+        $.get(url,function(data){
+
+          var lines=data.split("\n");
+          var result = [];
+          var headers=lines[0].split(",");
+          for(var i=1;i<lines.length;i++){
+            var obj = {};
+            var currentline=lines[i].split(",");
+            for(var j=0;j<headers.length;j++){
+              obj[headers[j]] = currentline[j];
+            }
+            result.push(obj);
+          }
+          var size = result.length-1;
+          //return result; //JavaScript object
+
+          var percentChange = ((((result[size-1].num_hospitalised - result[size-2].num_hospitalised) /result[size-2].num_hospitalised))*100).toFixed(0);
+          if(percentChange == 0){
+            result = `
+
+
+            <td class="fas fa-caret-right text-success">${ percentChange }</td>
+            <td text-success>${ "%" }</td>`
+            $("#num_hospitalisedKpi").html(result)
+          }
+          else if(percentChange < 0){
+            result = `
+
+
+            <td class="fas fa-caret-down fa-1x text-success">${ percentChange }</td>
+            <td text-success>${ "%" }</td>`
+            $("#num_hospitalisedKpi").html(result)
+          }
+
+          else{
+            result = `
+            <td class="fas fa-caret-up fa-1x text-danger">${ percentChange }</td>
+            <td text-danger>${ "%" }</td>`
+            $("#num_hospitalisedKpi").html(result)
+          }
 
         })
         // num_cumulative_hospitalizations
@@ -851,6 +1460,48 @@ user<!DOCTYPE html>
             $("#num_critical").html(result)
 
         })
+        // num_criticalKPI
+        $.get(url,function(data){
+
+          var lines=data.split("\n");
+          var result = [];
+          var headers=lines[0].split(",");
+          for(var i=1;i<lines.length;i++){
+            var obj = {};
+            var currentline=lines[i].split(",");
+            for(var j=0;j<headers.length;j++){
+              obj[headers[j]] = currentline[j];
+            }
+            result.push(obj);
+          }
+          var size = result.length-1;
+          //return result; //JavaScript object
+
+          var percentChange = ((((result[size-1].num_critical -result[size-2].num_critical)/result[size-2].num_positive))*100).toFixed(0);
+          if(percentChange == 0){
+            result = `
+            <td class="fas fa-caret-right fa-1x text-success">${ percentChange }</td>
+            <td class="fa-1x text-success">${ "%" }</td>`
+
+            $("#num_criticalKpi").html(result)
+          }
+          else if(percentChange < 0){
+            result = `
+
+
+            <td class="fas fa-caret-down fa-1x text-success">${ percentChange }</td>
+            <td class="fa-1x text-success">${ "%" }</td>`
+            $("#num_criticalKpi").html(result)
+          }
+
+          else{
+            result = `
+            <td class="fas fa-caret-up fa-1x text-danger">${ percentChange }</td>
+            <td class="fa-1x text-danger">${ "%" }</td>`
+            $("#num_criticalKpi").html(result)
+          }
+
+        })
         // num_fatalities
         $.get(url,function(data){
 
@@ -870,6 +1521,45 @@ user<!DOCTYPE html>
             result = `
             <td>${ result[size-1].num_fatalities }</td>`
             $("#num_fatalities").html(result)
+
+        })
+        // num_fatalitiesKPI
+        $.get(url,function(data){
+
+          var lines=data.split("\n");
+          var result = [];
+          var headers=lines[0].split(",");
+          for(var i=1;i<lines.length;i++){
+            var obj = {};
+            var currentline=lines[i].split(",");
+            for(var j=0;j<headers.length;j++){
+              obj[headers[j]] = currentline[j];
+            }
+            result.push(obj);
+          }
+          var size = result.length-1;
+          //return result; //JavaScript object
+
+          var percentChange = ((((result[size-1].num_fatalities -result[size-2].num_fatalities)/result[size-2].num_positive))).toFixed(0);
+          if(percentChange == 0){
+            result = `
+            <td class="fas fa-caret-right fa-1x text-success">${ percentChange }</td>
+            <td class="text-success">${ "%" }</td>`
+            $("#num_fatalitiesKpi").html(result)
+          }
+          else if(percentChange < 0){
+            result = `
+            <td class="fas fa-caret-down fa-1x text-success">${ percentChange }</td>
+            <td class="text-success">${ "%" }</td>`
+            $("#num_fatalitiesKpi").html(result)
+          }
+
+          else{
+            result = `
+            <td class="fas fa-caret-up fa-1x text-danger">${ percentChange }</td>
+            <td class="text-success">${ "%" }</td>`
+            $("#num_fatalitiesKpi").html(result)
+          }
 
         })
       }

@@ -26,6 +26,14 @@ function number_format(number, decimals, dec_point, thousands_sep) {
   }
   return s.join(dec);
 }
+function cum_cases(ans, dataC){
+  if(ans == 1){
+    return dataC;
+  }else{
+    return [];
+  }
+
+}
 function loadData(){
   var url = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/data.csv"
   var data = ''
@@ -47,6 +55,7 @@ function loadData(){
 
     label = [];
     dataL = [];
+    dataC = [];
     dataOverfit = [];
     dataUnderfit = [];
     dataLinearfit = [];
@@ -56,7 +65,18 @@ function loadData(){
       dataOverfit.push(result[i].num_positive);
       dataUnderfit.push(result[i].num_positive);
       dataLinearfit.push(result[i].num_positive);
+      if(i >= 7 ){
+        dataC.push((parseInt(result[i].num_positive) + parseInt(dataC[i-1]) - parseInt(dataL[i-1]) ).toString());
+      }
+      else if (i != 0) {
+        dataC.push((parseInt(result[i].num_positive) + parseInt(dataC[i-1])).toString());
+      }
+      else {
+        dataC.push(result[i].num_positive);
+      }
     }
+
+
 
     for(var i=0;i<7;i++){
       label.push((result.length+i).toString());
@@ -89,6 +109,12 @@ function loadData(){
       dataLinearfit[i]= tmpLinearfit.toString();
       dataOverfit[i]= tmpOverfit.toString()*1.1;
       dataUnderfit[i]= tmpUnderfit.toString()/1.1;
+
+      pred_cum = (parseInt(tmpLinearfit) + parseInt(dataC[i-1]) - parseInt(dataLinearfit[i-7]))
+
+      if ( pred_cum >=  0 ){
+        dataC.push(pred_cum.toString());
+      }
     }
 
 
@@ -99,6 +125,23 @@ function loadData(){
     data: {
       labels: label,
       datasets: [
+        //cumulatives cases
+        {
+          label: "Cumulative ",
+          lineTension: 0.6,
+          backgroundColor: "rgba(34,139,34, 0.2)",
+          borderColor: "rgba(34,139,34, 0.1)",
+          pointRadius: 4,
+          pointBackgroundColor: "rgba(34,139,34, 0.1)",
+          pointBorderColor: "rgba(34,139,34, 0.1)",
+          pointHoverRadius: 4,
+          pointHoverBackgroundColor: "rgba(34,139,34, 0.1)",
+          pointHoverBorderColor: "rgba(34,139,34, 0.1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 4,
+          data: cum_cases(0,dataC),
+        },
+        // current cases
         {
           label: "Current ",
           lineTension: 0.6,
