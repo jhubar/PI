@@ -28,10 +28,12 @@ function number_format(number, decimals, dec_point, thousands_sep) {
   return s.join(dec);
 }
 function without_cum_cases() {
-  // ctx.destroy();
-  ctx = document.getElementById("myAreaChart");
+  if (typeof(myLineChart) != "undefined"){
+    myLineChart.destroy();
+  }
 
-  var myLineChart = new Chart(ctx, {
+  ctx = document.getElementById("myAreaChart");
+  myLineChart = new Chart(ctx, {
     type: 'line',
     data: {
       labels: label,
@@ -197,10 +199,13 @@ function without_cum_cases() {
 }
 
 function cum_cases_add() {
-  // ctx.clear();
-  ctx = document.getElementById("myAreaChart");
+  if (typeof(myLineChart) != "undefined"){
+    myLineChart.destroy();
+  }
 
-  var myLineChart = new Chart(ctx, {
+
+  ctx = document.getElementById("myAreaChart");
+  myLineChart = new Chart(ctx, {
     type: 'line',
     data: {
       labels: label,
@@ -460,7 +465,9 @@ function loadData(){
 
 
   var ctx = document.getElementById("myAreaChart");
+
   without_cum_cases();
+
 },
 );
 
