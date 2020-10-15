@@ -27,13 +27,16 @@ function number_format(number, decimals, dec_point, thousands_sep) {
   }
   return s.join(dec);
 }
-function without_cum_cases() {
+function without_cum_cases(ans) {
+
   if (typeof(myLineChart) != "undefined"){
+
     myLineChart.destroy();
+
   }
 
-  ctx = document.getElementById("myAreaChart");
-  myLineChart = new Chart(ctx, {
+  ctx_active_cases = document.getElementById("myAreaChart");
+  myLineChart = new Chart(ctx_active_cases, {
     type: 'line',
     data: {
       labels: label,
@@ -52,7 +55,7 @@ function without_cum_cases() {
           pointHoverBorderColor: "rgba(34,139,34, 0.1)",
           pointHitRadius: 10,
           pointBorderWidth: 4,
-          data: [],
+          data: cum_cases(ans,dataC),
         },
         // current cases
         {
@@ -198,183 +201,14 @@ function without_cum_cases() {
 
 }
 
-function cum_cases_add() {
-  if (typeof(myLineChart) != "undefined"){
-    myLineChart.destroy();
-  }
 
-
-  ctx = document.getElementById("myAreaChart");
-  myLineChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: label,
-      datasets: [
-        //cumulatives cases
-        {
-          label: "Cumulative ",
-          lineTension: 0.6,
-          backgroundColor: "rgba(34,139,34, 0.2)",
-          borderColor: "rgba(34,139,34, 0.1)",
-          pointRadius: 4,
-          pointBackgroundColor: "rgba(34,139,34, 0.1)",
-          pointBorderColor: "rgba(34,139,34, 0.1)",
-          pointHoverRadius: 4,
-          pointHoverBackgroundColor: "rgba(34,139,34, 0.1)",
-          pointHoverBorderColor: "rgba(34,139,34, 0.1)",
-          pointHitRadius: 10,
-          pointBorderWidth: 4,
-          data: dataC,
-        },
-        // current cases
-        {
-          label: "Current ",
-          lineTension: 0.6,
-          backgroundColor: "rgba(78, 115, 223, 0.2)",
-          borderColor: "rgba(78, 115, 223, 1)",
-          pointRadius: 4,
-          pointBackgroundColor: "rgba(78, 115, 223, 1)",
-          pointBorderColor: "rgba(78, 115, 223, 1)",
-          pointHoverRadius: 4,
-          pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-          pointHoverBorderColor: "rgba(78, 115, 223, 1)",
-          pointHitRadius: 10,
-          pointBorderWidth: 4,
-          data: dataL,
-        },
-        //Underfit line
-        {
-          label: "Underfit ",
-          lineTension: 0.1,
-          backgroundColor: "rgba(255,255,255,1)",
-          borderColor: "rgba(255, 193, 7,0.1)",
-          pointRadius: 3,
-          pointBackgroundColor: "rgba(255, 193, 7,1)",
-          pointBorderColor: "rgba(255, 193, 7,1)",
-          pointHoverRadius: 3,
-          pointHoverBackgroundColor: "rgba(255, 193, 7, 1)",
-          pointHoverBorderColor: "rgba(255, 193, 7, 1)",
-          pointHitRadius: 10,
-          pointBorderWidth: 2,
-          data: dataUnderfit,
-        },
-        // linear line
-        {
-          label: "Linear ",
-          lineTension: 0.3,
-          backgroundColor: "rgba(255, 193, 7,0.1)",
-          borderColor: "rgba(237, 0, 59, 1)",
-          pointRadius: 3,
-          pointBackgroundColor: "rgba(237, 0, 59, 1)",
-          pointBorderColor: "rgba(237, 0, 59, 1)",
-          pointHoverRadius: 3,
-          pointHoverBackgroundColor: "rgba(237, 0, 59, 1)",
-          pointHoverBorderColor: "rgba(237, 0, 59, 1)",
-          pointHitRadius: 10,
-          pointBorderWidth: 2,
-          data: dataLinearfit,
-        },
-        //Overfitt line
-        {
-          label: "Overfit ",
-          lineTension: 0.1,
-          backgroundColor: "rgba(255, 193, 7,0.3)",
-          borderColor: "rgba(255, 193, 7,0.1)",
-          pointRadius: 3,
-          pointBackgroundColor: "rgba(255, 193, 7,1)",
-          pointBorderColor: "rgba(255, 193, 7,1)",
-          pointHoverRadius: 3,
-          pointHoverBackgroundColor: "rgba(255, 193, 7, 1)",
-          pointHoverBorderColor: "rgba(255, 193, 7, 1)",
-          pointHitRadius: 10,
-          pointBorderWidth: 2,
-          data: dataOverfit,
-        }
-
-
-
-
-    ],
-    },
-    options: {
-      maintainAspectRatio: false,
-      layout: {
-        padding: {
-          left: 10,
-          right: 25,
-          top: 25,
-          bottom: 0
-        }
-      },
-      scales: {
-        xAxes: [{
-          time: {
-            unit: 'date'
-          },
-          gridLines: {
-            display: false,
-            drawBorder: false
-          },
-          ticks: {
-            maxTicksLimit: 7,
-            // callback: function(value, index, values) {
-            //   return number_format(value)+ ' Days';
-            // }
-          }
-        }],
-        yAxes: [{
-          ticks: {
-            maxTicksLimit: 5,
-            padding: 10,
-
-            callback: function(value, index, values) {
-              return number_format(value)+ ' Cases';
-            }
-          },
-          gridLines: {
-            color: "rgb(234, 236, 244)",
-            zeroLineColor: "rgb(234, 236, 244)",
-            drawBorder: false,
-            borderDash: [2],
-            zeroLineBorderDash: [2]
-          }
-        }],
-      },
-      legend: {
-        display: false
-      },
-      tooltips: {
-        backgroundColor: "rgb(255,255,255)",
-        bodyFontColor: "#858796",
-        titleMarginBottom: 10,
-        titleFontColor: '#6e707e',
-        titleFontSize: 14,
-        borderColor: '#dddfeb',
-        borderWidth: 1,
-        xPadding: 15,
-        yPadding: 15,
-        displayColors: false,
-        intersect: false,
-        mode: 'index',
-        caretPadding: 10,
-        callbacks: {
-          label: function(tooltipItem, chart) {
-            var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-            return datasetLabel + number_format(tooltipItem.yLabel)+ ': Cases';
-          }
-        }
-      }
-    }
-  },);
-
-
-}
 
 
 function cum_cases(ans, dataC){
-  if(ans == 1){
+  if(ans == 2){
     return dataC;
-  }else{
+  }
+  if(ans == 1){
     return [];
   }
 
@@ -464,9 +298,9 @@ function loadData(){
 
 
 
-  var ctx = document.getElementById("myAreaChart");
+  var ctx_active_cases = document.getElementById("myAreaChart");
 
-  without_cum_cases();
+  without_cum_cases(1);
 
 },
 );
