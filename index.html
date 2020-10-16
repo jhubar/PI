@@ -568,11 +568,15 @@
                     <div class="row no-gutters align-items-center">
                       <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Next week's forecast for the number of cases </div>
+
+
+
                       <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_OfcasesKPIForcast"></a></div>
                     </div>
                     <div class="col-auto">
                       <i></a><a id = "num_OfcasesKPIPredicated"></a></i>
                       <i class="fas fas fa-head-side-cough fa-2x text-gray-300"></i>
+
                     </div>
                   </div>
                 </div>
@@ -583,14 +587,16 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Spreading period </div>
-                    <form>
-        
-                      <input type="range" class="custom-range" id="customRange" name="points1">
-                    </form>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800"></a></div>
+
+                    <div class="d-flex justify-content-center my-4">
+                      <div class="w-75">
+                        <input type="range" class="custom-range" id="range_spreading_period" min="3" max="21">
+                      </div>
+                      <span class="font-weight-bold text-primary ml-2 value_spreading_period"></span>
+                    </div>
                   </div>
                   <div class="col-auto">
-                    <i></a></i>
+
                     <i class="fas fa-head-side-mask fa-2x text-gray-300"></i>
                   </div>
                 </div>
@@ -976,6 +982,7 @@
   <script src="js/demo/chart-area-Hospitalised.js"></script>
   <script src="js/demo/chart-area-Critical.js"></script>
   <script src="js/demo/chart-area-Fatalities.js"></script>
+  <script src="js/Slider/slidervalue.js"></script>
   <!-- <script src="js/demo/chart-pie-demo.js"></script> -->
   <!-- Load d3.js -->
   <script src="https://d3js.org/d3.v4.js"></script>
