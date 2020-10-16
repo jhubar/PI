@@ -27,6 +27,7 @@ function number_format(number, decimals, dec_point, thousands_sep) {
   }
   return s.join(dec);
 }
+
 function without_cum_cases(ans) {
 
   if (typeof(myLineChart) != "undefined"){
@@ -300,7 +301,12 @@ function loadData(){
 
   var ctx_active_cases = document.getElementById("myAreaChart");
 
-  without_cum_cases(1);
+
+
+  without_cum_cases(2);
+
+
+
 
 },
 );
