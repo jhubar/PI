@@ -3,6 +3,116 @@ Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,Bli
 Chart.defaults.global.defaultFontColor = '#858796';
 loadData();
 
+
+const $value_spreading_period = $('.value_spreading_period');
+const $value = $('#range_spreading_period');
+$value_spreading_period.html($value.val());
+$value.on('input change', () => {
+  // loadData();
+  $value_spreading_period.html($value.val());
+
+  var url = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/data.csv"
+  var data = ''
+  // DAp
+  var tmp ;
+  $.get(url,function(data){
+    var result = [];
+    var lines=data.split("\n");
+    var headers=lines[0].split(",");
+    for(var i=1;i<lines.length;i++){
+      var obj = {};
+      var currentline=lines[i].split(",");
+      for(var j=0;j<headers.length;j++){
+        obj[headers[j]] = currentline[j];
+      }
+      result.push(obj);
+    }
+
+
+    label = [];
+    dataL = [];
+    dataC = [];
+    dataOverfit = [];
+    dataUnderfit = [];
+    dataLinearfit = [];
+    for(var i=0;i<result.length-1;i++){
+      label.push(result[i].Day);
+      dataL.push(result[i].num_positive);
+      dataOverfit.push(result[i].num_positive);
+      dataUnderfit.push(result[i].num_positive);
+      dataLinearfit.push(result[i].num_positive);
+      if(i >= $value.val() && dataL[i-1] >=0){
+
+        dataC.push((parseInt(result[i].num_positive) + parseInt(dataC[i-1]) - parseInt(dataLinearfit[i-1]) ).toString());
+      }
+      else if (i != 0) {
+        dataC.push((parseInt(result[i].num_positive) + parseInt(dataC[i-1])).toString());
+      }
+      else {
+        dataC.push(result[i].num_positive);
+      }
+    }
+
+
+
+    for(var i=0;i<7;i++){
+      label.push((result.length+i).toString());
+    }
+
+
+
+    tmpOverfit = dataL[result.length-2];
+    tmpUnderfit = dataL[result.length-2];
+    tmpLinearfit = dataL[result.length-2];
+
+    var m = 0;
+    for(var i=1;i<result.length-1;i++){
+        m +=(dataL[i] - dataL[i-1])/((label[i] - label[i-1]));
+    }
+    m/=result.length-1;
+
+    for(var i=result.length-1;i<label.length;i++){
+      tmpLinearfit = m * parseInt(label[i]);
+      if(i%2 == 0){
+        tmpOverfit = 4 + parseInt(tmpLinearfit);
+        tmpUnderfit = parseInt(tmpLinearfit) - 4;
+      }
+      else{
+        tmpOverfit = 3 + parseInt(tmpLinearfit);
+        tmpUnderfit = parseInt(tmpLinearfit)-3;
+      }
+
+
+      dataLinearfit[i]= tmpLinearfit.toString();
+      dataOverfit[i]= tmpOverfit.toString()*1.1;
+      dataUnderfit[i]= tmpUnderfit.toString()/1.1;
+
+      pred_cum = (parseInt(tmpLinearfit) + parseInt(dataC[i-1]) - parseInt(dataLinearfit[i-1]))
+
+      if ( pred_cum >=  0 ){
+        dataC.push(pred_cum.toString());
+      }
+    }
+
+
+
+  var ctx_active_cases = document.getElementById("myAreaChart");
+
+
+
+  without_cum_cases(2);
+
+
+
+
+},
+);
+
+
+
+
+});
+
 function number_format(number, decimals, dec_point, thousands_sep) {
   // *     example: number_format(1234.56, 2, ',', ' ');
   // *     return: '1 234,56'
@@ -203,8 +313,6 @@ function without_cum_cases(ans) {
 }
 
 
-
-
 function cum_cases(ans, dataC){
   if(ans == 2){
     return dataC;
@@ -214,6 +322,7 @@ function cum_cases(ans, dataC){
   }
 
 }
+
 function loadData(){
   var url = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/data.csv"
   var data = ''
@@ -245,8 +354,9 @@ function loadData(){
       dataOverfit.push(result[i].num_positive);
       dataUnderfit.push(result[i].num_positive);
       dataLinearfit.push(result[i].num_positive);
-      if(i >= 7 ){
-        dataC.push((parseInt(result[i].num_positive) + parseInt(dataC[i-1]) - parseInt(dataL[i-1]) ).toString());
+      if(i >= 7 && dataL[i-1] >=0){
+
+        dataC.push((parseInt(result[i].num_positive) + parseInt(dataC[i-1]) - parseInt(dataLinearfit[i-1]) ).toString());
       }
       else if (i != 0) {
         dataC.push((parseInt(result[i].num_positive) + parseInt(dataC[i-1])).toString());
@@ -290,7 +400,7 @@ function loadData(){
       dataOverfit[i]= tmpOverfit.toString()*1.1;
       dataUnderfit[i]= tmpUnderfit.toString()/1.1;
 
-      pred_cum = (parseInt(tmpLinearfit) + parseInt(dataC[i-1]) - parseInt(dataLinearfit[i-7]))
+      pred_cum = (parseInt(tmpLinearfit) + parseInt(dataC[i-1]) - parseInt(dataLinearfit[i-1]))
 
       if ( pred_cum >=  0 ){
         dataC.push(pred_cum.toString());
@@ -309,6 +419,4 @@ function loadData(){
 
 
 },
-);
-
-}
+);}
