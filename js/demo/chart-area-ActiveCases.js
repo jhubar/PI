@@ -91,9 +91,10 @@ $value.on('input change', () => {
 
       if ( pred_cum >=  0 ){
         dataC.push(pred_cum.toString());
+
       }
     }
-
+//
 
 
   var ctx_active_cases = document.getElementById("myAreaChart");
@@ -102,6 +103,7 @@ $value.on('input change', () => {
 
   without_cum_cases(2);
 
+  $("#num_Of_cum_casesKPIForcast").html(dataC[dataC.length-1])
 
 
 
@@ -414,8 +416,7 @@ function loadData(){
 
 
   without_cum_cases(2);
-
-
+  $("#num_Of_cum_casesKPIForcast").html(dataC[dataC.length-1])
 
 
 },
