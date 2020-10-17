@@ -50,9 +50,13 @@ function loadData(){
     dataOverfit = [];
     dataUnderfit = [];
     dataLinearfit = [];
+    dataCLinearfit = [];
+    dataC = [];
     for(var i=0;i<result.length-1;i++){
       label.push(result[i].Day);
       dataL.push(result[i].num_hospitalised);
+      dataC.push(result[i].num_cumulative_hospitalizations);
+      dataCLinearfit.push(result[i].num_cumulative_hospitalizations);
       dataOverfit.push(result[i].num_hospitalised);
       dataUnderfit.push(result[i].num_hospitalised);
       dataLinearfit.push(result[i].num_hospitalised);
@@ -67,14 +71,19 @@ function loadData(){
     tmpOverfit = dataL[result.length-2];
     tmpUnderfit = dataL[result.length-2];
     tmpLinearfit = dataL[result.length-2];
+    tmpDataCLinearfit = dataC[result.length-2];
 
     var m = 0;
+    var mc =0;
     for(var i=1;i<result.length-1;i++){
         m +=(dataL[i] - dataL[i-1])/((label[i] - label[i-1]));
+        mc +=(dataC[i] - dataC[i-1])/((label[i] - label[i-1]));
     }
     m/=result.length-1;
+    mc/=result.length-1;
     for(var i=result.length-1;i<label.length;i++){
       tmpLinearfit = m * parseInt(label[i]);
+      tmpDataCLinearfit = mc * parseInt(label[i]);
       if(i%2 == 0){
         tmpOverfit = 4 + parseInt(tmpLinearfit);
         tmpUnderfit = parseInt(tmpLinearfit) - 4;
@@ -86,6 +95,7 @@ function loadData(){
 
 
       dataLinearfit[i]= tmpLinearfit.toString();
+      dataCLinearfit[i]= tmpDataCLinearfit.toString();
       dataOverfit[i]= tmpOverfit.toString()*1.1;
       dataUnderfit[i]= tmpUnderfit.toString()/1.1;
     }
@@ -113,6 +123,23 @@ function loadData(){
           pointBorderWidth: 4,
           data: dataL,
         },
+        {
+          label: "Cumulative ",
+          lineTension: 0.6,
+          backgroundColor: "rgba(34,139,34, 0.2)",
+          borderColor: "rgba(34,139,34, 0.1)",
+          pointRadius: 4,
+          pointBackgroundColor: "rgba(34,139,34, 0.1)",
+          pointBorderColor: "rgba(34,139,34, 0.1)",
+          pointHoverRadius: 4,
+          pointHoverBackgroundColor: "rgba(34,139,34, 0.1)",
+          pointHoverBorderColor: "rgba(34,139,34, 0.1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 4,
+          data: dataC,
+        },
+
+
         //Underfit line
         {
           label: "Underfit ",
@@ -145,6 +172,22 @@ function loadData(){
           pointBorderWidth: 2,
           data: dataLinearfit,
         },
+        // Data cumulative linear fit
+        {
+          label: "Cumulative linear ",
+          lineTension: 0.3,
+          backgroundColor: "rgba(255, 193, 7,0.1)",
+          borderColor: "rgba(237, 0, 59, 0.1)",
+          pointRadius: 3,
+          pointBackgroundColor: "rgba(237, 0, 59, 0.1)",
+          pointBorderColor: "rgba(237, 0, 59, 0.1)",
+          pointHoverRadius: 3,
+          pointHoverBackgroundColor: "rgba(237, 0, 59, 0.1)",
+          pointHoverBorderColor: "rgba(237, 0, 59, 0.1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 2,
+          data: dataCLinearfit,
+        },
         //Overfitt line
         {
           label: "Overfit",
@@ -161,6 +204,7 @@ function loadData(){
           pointBorderWidth: 2,
           data: dataOverfit,
         }
+
 
 
 
