@@ -400,9 +400,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Positive cases</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">
-                        <a id="num_positive"></a>
-                      </div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_positive"></a></div>
                     </div>
                     <div class="col-auto">
                       <i class="text-danger"><a id="casesKpi"></a></i>
@@ -423,7 +421,7 @@
                       <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_hospitalised"></a></div>
                     </div>
                     <div class="col-auto">
-                      <i class="text-success"><a id="num_hospitalisedKpi">" "</a></i>
+                      <i class="text-danger"><a id="num_hospitalisedKpi">" "</a></i>
                       <i class="fas fa-hospital-symbol fa-2x text-gray-300"></i>
                     </div>
                   </div>
@@ -576,13 +574,11 @@
                     </div>
                   </div>
                   <span>
-                  <span>
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Next week's forecast for the cumulative number of cases </div>
                       <div class="h5 mb-0 font-weight-bold text-success-600"><a id="num_Of_cum_casesKPIForcast"></a></div>
                   </div>
-
                 </div>
                 </div>
               </div>
@@ -591,23 +587,30 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-
-
-
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Spreading period </div>
-                    <div class="d-flex justify-content-center my-4">
-                      <div class="w-75">
-                        <input type="range" class="custom-range" id="range_spreading_period" min="3" max="14">
-                      </div>
-                      <span class="font-weight-bold text-primary ml-2 value_spreading_period"></span>
-
+                        <div class="d-flex my-2">
+                          <div class="w-75">
+                            <input type="range" class="custom-range" id="range_spreading_period" min="3" max="14">
+                          </div>
+                          <span class="font-weight-bold text-primary ml-2 value_spreading_period"></span>
                     </div>
                   </div>
-                  <div class="col-auto">
-
+                  <!-- <div class="col-auto">
                     <i class="fas fa-head-side-mask fa-2x text-gray-300"></i>
-                  </div>
+                  </div> -->
                 </div>
+                <spna>
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Time period prediciton</div>
+                        <div class="d-flex my-2">
+                          <div class="w-75">
+                            <input type="range" class="custom-range" id="range_time_period" min="0" max="21">
+                          </div>
+                          <span class="font-weight-bold text-primary ml-2 value_time_period"></span>
+                    </div>
+                  </div>
+
               </div></div>
               <br>
 
@@ -1080,7 +1083,7 @@
             <td class="text-success">${ "%" }</td>`
             $("#casesKpi").html(result)
           }
-          if(percentChange > 0){
+          else if(percentChange > 0){
 
             result = `
 
@@ -1428,6 +1431,7 @@
             $("#num_hospitalisedKpi").html(result)
           }
           else if(percentChange < 0){
+
             result = `
 
 
@@ -1437,6 +1441,7 @@
           }
 
           else{
+
             result = `
             <td class="fas fa-caret-up fa-1x text-danger">${ percentChange }</td>
             <td text-danger>${ "%" }</td>`

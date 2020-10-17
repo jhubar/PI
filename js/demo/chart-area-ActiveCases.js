@@ -2,7 +2,118 @@
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
 loadData();
+const $value_time_period = $('.value_time_period');
+const $value_time = $('#range_time_period');
+$value_time_period.html($value_time.val());
+$value_time.on('input change', () => {
+  // loadData();
+  $value_spreading_period.html($value.val());
+  $value_time_period.html($value_time.val());
 
+  var url = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/data.csv"
+  var data = ''
+  // DAp
+  var tmp ;
+  $.get(url,function(data){
+    var result = [];
+    var lines=data.split("\n");
+    var headers=lines[0].split(",");
+    for(var i=1;i<lines.length;i++){
+      var obj = {};
+      var currentline=lines[i].split(",");
+      for(var j=0;j<headers.length;j++){
+        obj[headers[j]] = currentline[j];
+      }
+      result.push(obj);
+    }
+
+
+    label = [];
+    dataL = [];
+    dataC = [];
+    dataOverfit = [];
+    dataUnderfit = [];
+    dataLinearfit = [];
+    for(var i=0;i<result.length-1;i++){
+      label.push(result[i].Day);
+      dataL.push(result[i].num_positive);
+      dataOverfit.push(result[i].num_positive);
+      dataUnderfit.push(result[i].num_positive);
+      dataLinearfit.push(result[i].num_positive);
+      if(i >= $value.val() && dataL[i-1] >=0){
+
+        dataC.push((parseInt(result[i].num_positive) + parseInt(dataC[i-1]) - parseInt(dataLinearfit[i-1]) ).toString());
+      }
+      else if (i != 0) {
+        dataC.push((parseInt(result[i].num_positive) + parseInt(dataC[i-1])).toString());
+      }
+      else {
+        dataC.push(result[i].num_positive);
+      }
+    }
+
+
+
+    for(var i=0;i<$value_time.val();i++){
+      label.push((result.length+i).toString());
+    }
+
+
+
+    tmpOverfit = dataL[result.length-2];
+    tmpUnderfit = dataL[result.length-2];
+    tmpLinearfit = dataL[result.length-2];
+
+    var m = 0;
+    for(var i=1;i<result.length-1;i++){
+        m +=(dataL[i] - dataL[i-1])/((label[i] - label[i-1]));
+    }
+    m/=result.length-1;
+
+    for(var i=result.length-1;i<label.length;i++){
+      tmpLinearfit = m * parseInt(label[i]);
+      if(i%2 == 0){
+        tmpOverfit = 4 + parseInt(tmpLinearfit);
+        tmpUnderfit = parseInt(tmpLinearfit) - 4;
+      }
+      else{
+        tmpOverfit = 3 + parseInt(tmpLinearfit);
+        tmpUnderfit = parseInt(tmpLinearfit)-3;
+      }
+
+
+      dataLinearfit[i]= tmpLinearfit.toString();
+      dataOverfit[i]= tmpOverfit.toString()*1.1;
+      dataUnderfit[i]= tmpUnderfit.toString()/1.1;
+
+      pred_cum = (parseInt(tmpLinearfit) + parseInt(dataC[i-1]) - parseInt(dataLinearfit[i-1]))
+
+      if ( pred_cum >=  0 ){
+        dataC.push(pred_cum.toString());
+
+      }
+    }
+//
+
+
+  var ctx_active_cases = document.getElementById("myAreaChart");
+
+
+
+  without_cum_cases(2);
+
+  $("#num_Of_cum_casesKPIForcast").html(dataC[dataC.length-1])
+  
+
+
+
+},
+);
+
+
+
+
+});
 
 const $value_spreading_period = $('.value_spreading_period');
 const $value = $('#range_spreading_period');
