@@ -2,9 +2,14 @@
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
 loadData();
+const $value_spreading_period = $('.value_spreading_period');
+const $value = $('#range_spreading_period');
+$value_spreading_period.html($value.val());
+
 const $value_time_period = $('.value_time_period');
 const $value_time = $('#range_time_period');
 $value_time_period.html($value_time.val());
+
 $value_time.on('input change', () => {
   // loadData();
   $value_spreading_period.html($value.val());
@@ -103,7 +108,33 @@ $value_time.on('input change', () => {
   without_cum_cases(2);
 
   $("#num_Of_cum_casesKPIForcast").html(dataC[dataC.length-1])
+  var percentChange = ((((dataLinearfit[label.length-1] - dataLinearfit[label.length-8]) /dataLinearfit[label.length-8]))*100).toFixed(0);
 
+  if(percentChange == 0){
+    result = `
+
+
+    <td class="fas fa-caret-right text-success">${ percentChange }</td>
+    <td class="text-success">${ "%" }</td>`
+    $("#num_OfcasesKPIPredicated").html(result)
+  }
+  if(percentChange <= 0){
+    result = `
+    <td class="fas fa-caret-down fa-1x text-success">${ percentChange }</td>
+    <td class="text-success">${ "%" }</td>`
+    $("#num_OfcasesKPIPredicated").html(result)
+  }
+  else{
+    result = `
+    <td class="fas fa-caret-up fa-1x text-danger">${ percentChange }</td>
+    <td class="text-danger">${ "%" }</td>`
+    $("#num_OfcasesKPIPredicated").html(result)
+  }
+  var currentforcastResult = (parseInt(dataLinearfit[label.length-1]).toFixed(0)).toString();
+
+  forcastResult = `
+  <td class="text-secondary">${ currentforcastResult }</td>`
+  $("#num_OfcasesKPIForcast").html(forcastResult)
 
 
 
@@ -115,9 +146,8 @@ $value_time.on('input change', () => {
 
 });
 
-const $value_spreading_period = $('.value_spreading_period');
-const $value = $('#range_spreading_period');
-$value_spreading_period.html($value.val());
+
+
 $value.on('input change', () => {
   // loadData();
   $value_spreading_period.html($value.val());
@@ -215,7 +245,33 @@ $value.on('input change', () => {
   without_cum_cases(2);
 
   $("#num_Of_cum_casesKPIForcast").html(dataC[dataC.length-1])
+  var percentChange = ((((dataLinearfit[label.length-1] - dataLinearfit[label.length-8]) /dataLinearfit[label.length-8]))*100).toFixed(0);
 
+  if(percentChange == 0){
+    result = `
+
+
+    <td class="fas fa-caret-right text-success">${ percentChange }</td>
+    <td class="text-success">${ "%" }</td>`
+    $("#num_OfcasesKPIPredicated").html(result)
+  }
+  if(percentChange <= 0){
+    result = `
+    <td class="fas fa-caret-down fa-1x text-success">${ percentChange }</td>
+    <td class="text-success">${ "%" }</td>`
+    $("#num_OfcasesKPIPredicated").html(result)
+  }
+  else{
+    result = `
+    <td class="fas fa-caret-up fa-1x text-danger">${ percentChange }</td>
+    <td class="text-danger">${ "%" }</td>`
+    $("#num_OfcasesKPIPredicated").html(result)
+  }
+  var currentforcastResult = (parseInt(dataLinearfit[label.length-1]).toFixed(0)).toString();
+
+  forcastResult = `
+  <td class="text-secondary">${ currentforcastResult }</td>`
+  $("#num_OfcasesKPIForcast").html(forcastResult)
 
 
 },
@@ -528,6 +584,33 @@ function loadData(){
 
   without_cum_cases(2);
   $("#num_Of_cum_casesKPIForcast").html(dataC[dataC.length-1])
+  var percentChange = ((((dataLinearfit[label.length-1] - dataLinearfit[label.length-8]) /dataLinearfit[label.length-8]))*100).toFixed(0);
+
+  if(percentChange == 0){
+    result = `
+
+
+    <td class="fas fa-caret-right text-success">${ percentChange }</td>
+    <td class="text-success">${ "%" }</td>`
+    $("#num_OfcasesKPIPredicated").html(result)
+  }
+  if(percentChange <= 0){
+    result = `
+    <td class="fas fa-caret-down fa-1x text-success">${ percentChange }</td>
+    <td class="text-success">${ "%" }</td>`
+    $("#num_OfcasesKPIPredicated").html(result)
+  }
+  else{
+    result = `
+    <td class="fas fa-caret-up fa-1x text-danger">${ percentChange }</td>
+    <td class="text-danger">${ "%" }</td>`
+    $("#num_OfcasesKPIPredicated").html(result)
+  }
+  var currentforcastResult = (parseInt(dataLinearfit[label.length-1]).toFixed(0)).toString();
+
+  forcastResult = `
+  <td class="text-secondary">${ currentforcastResult }</td>`
+  $("#num_OfcasesKPIForcast").html(forcastResult)
 
 
 },

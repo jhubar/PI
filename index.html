@@ -1255,33 +1255,7 @@
             dataUnderfit_num_fatalities[i]= tmpUnderfit_num_fatalities.toString()/1.1;
           }
 
-          var percentChange = ((((dataLinearfit[label.length-1] - dataLinearfit[label.length-8]) /dataLinearfit[label.length-8]))*100).toFixed(0);
-
-          if(percentChange == 0){
-            result = `
-
-
-            <td class="fas fa-caret-right text-success">${ percentChange }</td>
-            <td class="text-success">${ "%" }</td>`
-            $("#num_OfcasesKPIPredicated").html(result)
-          }
-          if(percentChange <= 0){
-            result = `
-            <td class="fas fa-caret-down fa-1x text-success">${ percentChange }</td>
-            <td class="text-success">${ "%" }</td>`
-            $("#num_OfcasesKPIPredicated").html(result)
-          }
-          else{
-            result = `
-            <td class="fas fa-caret-up fa-1x text-danger">${ percentChange }</td>
-            <td class="text-danger">${ "%" }</td>`
-            $("#num_OfcasesKPIPredicated").html(result)
-          }
-          var currentforcastResult = (parseInt(dataLinearfit[label.length-1]).toFixed(0)).toString();
-
-          forcastResult = `
-          <td class="text-secondary">${ currentforcastResult }</td>`
-          $("#num_OfcasesKPIForcast").html(forcastResult)
+          
 
           // hospitalized
 
