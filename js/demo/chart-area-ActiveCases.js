@@ -151,6 +151,7 @@ $value_time.on('input change', () => {
 $value.on('input change', () => {
   // loadData();
   $value_spreading_period.html($value.val());
+  $value_time_period.html($value_time.val());
 
   var url = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/data.csv"
   var data = ''
@@ -196,7 +197,7 @@ $value.on('input change', () => {
 
 
 
-    for(var i=0;i<7;i++){
+    for(var i=0;i<$value_time.val();i++){
       label.push((result.length+i).toString());
     }
 

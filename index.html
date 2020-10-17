@@ -565,7 +565,7 @@
                   <div class="card-body">
                     <div class="row no-gutters align-items-center">
                       <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Next week's forecast for the number of cases </div>
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Next forecast for the number of cases </div>
                       <div class="h5 mb-0 font-weight-bold text-gray-600"><a id="num_OfcasesKPIForcast"></a> </div>
                     </div>
                     <div class="col-auto">
@@ -576,7 +576,7 @@
                   <span>
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Next week's forecast for the cumulative number of cases </div>
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Next forecast for the cumulative number of cases </div>
                       <div class="h5 mb-0 font-weight-bold text-success-600"><a id="num_Of_cum_casesKPIForcast"></a></div>
                   </div>
                 </div>
@@ -1093,7 +1093,7 @@
             $("#casesKpi").html(result)
           }
           else{
-            console.log(percentChange)
+
             result = `
 
             <td class="fas fa-caret-down fa-1x text-success">${ percentChange }</td>
@@ -1255,12 +1255,12 @@
             dataUnderfit_num_fatalities[i]= tmpUnderfit_num_fatalities.toString()/1.1;
           }
 
-          
+
 
           // hospitalized
 
           var percentChange_num_hospitalised = ((((dataLinearfit_num_hospitalised[label.length-1] - dataLinearfit_num_hospitalised[label.length-8]) /dataLinearfit_num_hospitalised[label.length-8]))*100).toFixed(0);
-          if(percentChange == 0){
+          if(percentChange_num_hospitalised == 0){
             result_num_hospitalised = `
 
 
