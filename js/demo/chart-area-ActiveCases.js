@@ -369,22 +369,8 @@ function without_cum_cases(ans) {
           pointBorderWidth: 4,
           data: cum_recovered_population,
         },
-        // recovered_population
-        {
-          label: "Recovered cases ",
-          lineTension: 0.6,
-          backgroundColor: "rgba( 133, 135, 150 , 0.2)",
-          borderColor: "rgba( 133, 135, 150 , 0.2)",
-          pointRadius: 4,
-          pointBackgroundColor: "rgba( 133, 135, 150 , 0.2)",
-          pointBorderColor: "rgba( 133, 135, 150 , 0.2)",
-          pointHoverRadius: 4,
-          pointHoverBackgroundColor: "rgba( 133, 135, 150 , 0.2)",
-          pointHoverBorderColor: "rgba( 133, 135, 150 , 0.2)",
-          pointHitRadius: 10,
-          pointBorderWidth: 4,
-          data: recovered_population,
-        },
+        
+
         //cumulatives cases
         {
           label: "Cumulative ",
