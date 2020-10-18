@@ -1082,7 +1082,8 @@
             result = `
 
             <td class="fas fa-caret-right text-success">${ percentChange }</td>
-            <td class="text-success">${ "%" }</td>`
+            <td class="fas fa-percent text-success"></td>`
+
             $("#casesKpi").html(result)
           }
           else if(percentChange > 0){
@@ -1091,7 +1092,7 @@
 
 
             <td class="fas fa-caret-up fa-1x text-danger">${ percentChange }</td>
-            <td class="text-danger">${ "%" }</td>`
+            <td class="fas fa-percent text-denger"></td>`
             $("#casesKpi").html(result)
           }
           else{
@@ -1099,7 +1100,7 @@
             result = `
 
             <td class="fas fa-caret-down fa-1x text-success">${ percentChange }</td>
-            <td class="text-success">${ "%" }</td>`
+            <td class="fas fa-percent text-denger"></td>`
             $("#casesKpi").html(result)
           }
 
@@ -1267,7 +1268,7 @@
 
 
             <td class="fas fa-caret-right text-success">${ percentChange_num_hospitalised }</td>
-            <td class="text-success">${ "%" }</td>`
+            <td class="fas fa-percent text-success"></td>`
             $("#num_hospitalisedKpiPredicated").html(result_num_hospitalised)
           }
           else if(percentChange_num_hospitalised < 0){
@@ -1275,14 +1276,14 @@
 
 
             <td class="fas fa-caret-down fa-1x text-success">${ percentChange_num_hospitalised }</td>
-            <td class="text-success">${ "%" }</td>`
+            <td class="fas fa-percent text-success"></td>`
             $("#num_hospitalisedKpiPredicated").html(result_num_hospitalised)
           }
 
           else{
             result_num_hospitalised = `
             <td class="fas fa-caret-up fa-1x text-danger">${ percentChange_num_hospitalised }</td>
-            <td class="text-danger">${ "%" }</td>`
+            <td class="fas fa-percent text-danger"></td>`
             $("#num_hospitalisedKpiPredicated").html(result_num_hospitalised)
           }
           var varforcastResult_num_hospitalised = (parseInt(dataLinearfit_num_hospitalised[label.length-1]).toFixed(0)).toString();
@@ -1297,13 +1298,13 @@
             result_num_critical = `
 
             <td class="fas fa-caret-right text-success">${ percentChange_num_critical }</td>
-            <td class="text-success">${ "%" }</td>`
+            <td class="fas fa-percent text-success"></td>`
             $("#num_criticalKPIPredicated").html(result_num_critical)
           }
           else if(dataLinearfit_num_critical[label.length-8] == 0){
             result_num_critical = `
             <td class="fas fa-caret-right text-success">${ "0" }</td>
-            <td class="text-success">${ "%" }</td>`
+            <td class="fas fa-percent text-success"></td>`
             $("#num_criticalKPIPredicated").html(result_num_critical)
           }
           else if(percentChange_num_critical < 0){
@@ -1315,7 +1316,7 @@
           else{
             result_num_critical = `
             <td class="fas fa-caret-up fa-1x text-danger">${ percentChange_num_critical }</td>
-            <td class="text-danger">${ "%" }</td>`
+            <td class="fas fa-percent text-denger"></td>`
             $("#num_criticalKPIPredicated").html(result_num_critical)
           }
 
@@ -1329,27 +1330,27 @@
             result_num_fatalities = `
 
             <td class="fas fa-caret-right text-success">${ percentChange_num_fatalities }</td>
-            <td class="text-success">${ "%" }</td>`
+            <td class="fas fa-percent text-success"></td>`
             $("#num_fatalitiesKPIPredicated").html(result_num_fatalities)
           }
           else if(percentChange_num_fatalities < 0){
 
             result_num_fatalities = `
             <td class="fas fa-caret-down fa-1x text-success">${ percentChange_num_fatalities }</td>
-            <td class="text-success">${ "%" }</td>`
+            <td class="fas fa-percent text-success"></td>`
             $("#num_fatalitiesKPIPredicated").html(result_num_fatalities)
           }
 
           else if(dataLinearfit_num_fatalities[label.length-8] == 0){
             result_num_fatalities = `
             <td class="fas fa-caret-right text-success">${ "0" }</td>
-            <td class="text-success">${ "%" }</td>`
+            <td class="fas fa-percent text-success"></td>`
             $("#num_fatalitiesKPIPredicated").html(result_num_fatalities)
           }
           else{
             result_num_fatalities = `
             <td class="fas fa-caret-up fa-1x text-danger">${ percentChange_num_fatalities }</td>
-            <td class="text-danger">${ "%" }</td>`
+            <td class="fas fa-percent text-danger"></td>`
             $("#num_fatalitiesKPIPredicated").html(result_num_fatalities)
           }
 
@@ -1403,7 +1404,7 @@
 
 
             <td class="fas fa-caret-right text-success">${ percentChange }</td>
-            <td text-success>${ "%" }</td>`
+            <td class="fas fa-percent text-success"></td>`
             $("#num_hospitalisedKpi").html(result)
           }
           else if(percentChange < 0){
@@ -1412,7 +1413,7 @@
 
 
             <td class="fas fa-caret-down fa-1x text-success">${ percentChange }</td>
-            <td text-success>${ "%" }</td>`
+            <td class="fas fa-percent text-success"></td>`
             $("#num_hospitalisedKpi").html(result)
           }
 
@@ -1420,7 +1421,7 @@
 
             result = `
             <td class="fas fa-caret-up fa-1x text-danger">${ percentChange }</td>
-            <td text-danger>${ "%" }</td>`
+            <td class="fas fa-percent text-danger"></td>`
             $("#num_hospitalisedKpi").html(result)
           }
 
@@ -1488,7 +1489,7 @@
           if(percentChange == 0){
             result = `
             <td class="fas fa-caret-right fa-1x text-success">${ percentChange }</td>
-            <td class="fa-1x text-success">${ "%" }</td>`
+            <td class="fas fa-percent text-success"></td>`
 
             $("#num_criticalKpi").html(result)
           }
@@ -1497,14 +1498,14 @@
 
 
             <td class="fas fa-caret-down fa-1x text-success">${ percentChange }</td>
-            <td class="fa-1x text-success">${ "%" }</td>`
+            <td class="fas fa-percent text-success"></td>`
             $("#num_criticalKpi").html(result)
           }
 
           else{
             result = `
             <td class="fas fa-caret-up fa-1x text-danger">${ percentChange }</td>
-            <td class="fa-1x text-danger">${ "%" }</td>`
+            <td class="fas fa-percent text-danger"></td>`
             $("#num_criticalKpi").html(result)
           }
 
@@ -1551,20 +1552,20 @@
           if(percentChange == 0){
             result = `
             <td class="fas fa-caret-right fa-1x text-success">${ percentChange }</td>
-            <td class="text-success">${ "%" }</td>`
+            <td class="fas fa-percent text-success"></td>`
             $("#num_fatalitiesKpi").html(result)
           }
           else if(percentChange < 0){
             result = `
             <td class="fas fa-caret-down fa-1x text-success">${ percentChange }</td>
-            <td class="text-success">${ "%" }</td>`
+            <td class="fas fa-percent text-success"></td>`
             $("#num_fatalitiesKpi").html(result)
           }
 
           else{
             result = `
             <td class="fas fa-caret-up fa-1x text-danger">${ percentChange }</td>
-            <td class="text-success">${ "%" }</td>`
+            <td class="fas fa-percent text-danger"></td>`
             $("#num_fatalitiesKpi").html(result)
           }
 
