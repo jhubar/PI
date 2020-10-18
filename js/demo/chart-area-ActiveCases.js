@@ -94,11 +94,11 @@ $value_time.on('input change', () => {
       dataOverfit[i]= tmpOverfit.toString()*1.1;
       dataUnderfit[i]= tmpUnderfit.toString()/1.1;
 
-      pred_cum = (parseInt(tmpLinearfit) + parseInt(dataC[i-1]) - parseInt(dataLinearfit[i-1]))
+      pred_cum = (parseInt(tmpLinearfit) + parseInt(dataC[i-1]) - parseInt(dataLinearfit[i-$value.val()]))
 
       if ( pred_cum >=  0 ){
         dataC.push(pred_cum.toString());
-        recovered_population.push(dataLinearfit[i-1]);
+        recovered_population.push(dataLinearfit[i-$value.val()]);
 
       }
     }
@@ -236,11 +236,11 @@ $value.on('input change', () => {
       dataOverfit[i]= tmpOverfit.toString()*1.1;
       dataUnderfit[i]= tmpUnderfit.toString()/1.1;
 
-      pred_cum = (parseInt(tmpLinearfit) + parseInt(dataC[i-1]) - parseInt(dataLinearfit[i-1]))
+      pred_cum = (parseInt(tmpLinearfit) + parseInt(dataC[i-1]) - parseInt(dataLinearfit[i-$value.val()]))
 
       if ( pred_cum >=  0 ){
         dataC.push(pred_cum.toString());
-        recovered_population.push(dataLinearfit[i-1]);
+        recovered_population.push(dataLinearfit[i-$value.val()]);
 
       }
     }
@@ -600,11 +600,11 @@ function loadData(){
       dataOverfit[i]= tmpOverfit.toString()*1.1;
       dataUnderfit[i]= tmpUnderfit.toString()/1.1;
 
-      pred_cum = (parseInt(tmpLinearfit) + parseInt(dataC[i-1]) - parseInt(dataLinearfit[i-1]))
+      pred_cum = (parseInt(tmpLinearfit) + parseInt(dataC[i-1]) - parseInt(dataLinearfit[i-$value.val()]))
 
       if ( pred_cum >=  0 ){
         dataC.push(pred_cum.toString());
-        recovered_population.push(dataLinearfit[i-1]);
+        recovered_population.push(dataLinearfit[i-$value.val()]);
       }
     }
 
