@@ -153,6 +153,11 @@ $value_time.on('input change', () => {
   <td class="text-secondary">${ current_recovered_cases }</td>`
   $("#num_recovered_cases").html(num_recovered_cases)
 
+  var current_collective_immunity = (parseInt(current_recovered_cases)/1000000).toString();
+  num_collective_immunity = `
+  <td class="text-info">${ current_collective_immunity }</td>
+  <td class="fas fa-percent text-info"></td>`
+  $("#collective_immunity").html(num_collective_immunity)
 
 
 
@@ -305,9 +310,15 @@ $value.on('input change', () => {
   <td class="text-secondary">${ current_recovered_cases }</td>`
   $("#num_recovered_cases").html(num_recovered_cases)
 
+  var current_collective_immunity = (parseInt(current_recovered_cases)/1000000).toString();
+  num_collective_immunity = `
+  <td class="text-info">${ current_collective_immunity }</td>
+  <td class="fas fa-percent text-info"></td>`
+  $("#collective_immunity").html(num_collective_immunity)
 
 
-},
+
+ },
 );
 
 
@@ -680,6 +691,12 @@ function loadData(){
   num_recovered_cases = `
   <td class="text-secondary">${ current_recovered_cases }</td>`
   $("#num_recovered_cases").html(num_recovered_cases)
+
+  var current_collective_immunity = (parseInt(current_recovered_cases)/1000000).toString();
+  num_collective_immunity = `
+  <td class="text-info">${ current_collective_immunity }</td>
+  <td class="fas fa-percent text-info"></td>`
+  $("#collective_immunity").html(num_collective_immunity)
 
 
 
