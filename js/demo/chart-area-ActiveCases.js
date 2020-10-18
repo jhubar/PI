@@ -148,7 +148,7 @@ $value_time.on('input change', () => {
   <td class="text-secondary">${ currentforcastResult }</td>`
   $("#num_OfcasesKPIForcast").html(num_recovered_cases)
 
-  var current_recovered_cases = (parseInt(recovered_population[label.length - parseInt($value_time.val()) ]).toFixed(0)).toString();
+  var current_recovered_cases = (parseInt(cum_recovered_population[label.length - parseInt($value_time.val()) ]).toFixed(0)).toString();
   num_recovered_cases = `
   <td class="text-secondary">${ current_recovered_cases }</td>`
   $("#num_recovered_cases").html(num_recovered_cases)
@@ -300,7 +300,7 @@ $value.on('input change', () => {
   <td class="text-secondary">${ currentforcastResult }</td>`
   $("#num_OfcasesKPIForcast").html(forcastResult)
 
-  var current_recovered_cases = (parseInt(recovered_population[label.length - parseInt($value_time.val()) ]).toFixed(0)).toString();
+  var current_recovered_cases = (parseInt(cum_recovered_population[label.length - parseInt($value_time.val()) ]).toFixed(0)).toString();
   num_recovered_cases = `
   <td class="text-secondary">${ current_recovered_cases }</td>`
   $("#num_recovered_cases").html(num_recovered_cases)
@@ -369,7 +369,7 @@ function without_cum_cases(ans) {
           pointBorderWidth: 4,
           data: cum_recovered_population,
         },
-        
+
 
         //cumulatives cases
         {
@@ -676,7 +676,7 @@ function loadData(){
   <td class="text-secondary">${ currentforcastResult }</td>`
   $("#num_OfcasesKPIForcast").html(forcastResult)
 
-  var current_recovered_cases = (parseInt(recovered_population[label.length - parseInt($value_time.val()) ]).toFixed(0)).toString();
+  var current_recovered_cases = (parseInt(cum_recovered_population[label.length - parseInt($value_time.val()) ]).toFixed(0)).toString();
   num_recovered_cases = `
   <td class="text-secondary">${ current_recovered_cases }</td>`
   $("#num_recovered_cases").html(num_recovered_cases)
