@@ -119,19 +119,19 @@ $value_time.on('input change', () => {
 
 
     <td class="fas fa-caret-right text-success">${ percentChange }</td>
-    <td class="text-success">${ "%" }</td>`
+    <td class="fas fa-percent text-success"></td>`
     $("#num_OfcasesKPIPredicated").html(result)
   }
   if(percentChange <= 0){
     result = `
     <td class="fas fa-caret-down fa-1x text-success">${ percentChange }</td>
-    <td class="text-success">${ "%" }</td>`
+    <td class="fas fa-percent text-success"></td>`
     $("#num_OfcasesKPIPredicated").html(result)
   }
   else{
     result = `
     <td class="fas fa-caret-up fa-1x text-danger">${ percentChange }</td>
-    <td class="text-danger">${ "%" }</td>`
+    <td class="fas fa-percent text-danger"></td>`
     $("#num_OfcasesKPIPredicated").html(result)
   }
   var currentforcastResult = (parseInt(dataLinearfit[label.length-1]).toFixed(0)).toString();
@@ -261,19 +261,19 @@ $value.on('input change', () => {
 
 
     <td class="fas fa-caret-right text-success">${ percentChange }</td>
-    <td class="text-success">${ "%" }</td>`
+    <td class="fas fa-percent text-success"></td>`
     $("#num_OfcasesKPIPredicated").html(result)
   }
   if(percentChange <= 0){
     result = `
     <td class="fas fa-caret-down fa-1x text-success">${ percentChange }</td>
-    <td class="text-success">${ "%" }</td>`
+    <td class="fas fa-percent text-success"></td>`
     $("#num_OfcasesKPIPredicated").html(result)
   }
   else{
     result = `
     <td class="fas fa-caret-up fa-1x text-danger">${ percentChange }</td>
-    <td class="text-danger">${ "%" }</td>`
+    <td class="fas fa-percent text-danger"></td>`
     $("#num_OfcasesKPIPredicated").html(result)
   }
   var currentforcastResult = (parseInt(dataLinearfit[label.length-1]).toFixed(0)).toString();
@@ -623,19 +623,19 @@ function loadData(){
 
 
     <td class="fas fa-caret-right text-success">${ percentChange }</td>
-    <td class="text-success">${ "%" }</td>`
+    <td class="fas fa-percent text-success"></td>`
     $("#num_OfcasesKPIPredicated").html(result)
   }
   if(percentChange <= 0){
     result = `
     <td class="fas fa-caret-down fa-1x text-success">${ percentChange }</td>
-    <td class="text-success">${ "%" }</td>`
+    <td class="fas fa-percent text-success"></td>`
     $("#num_OfcasesKPIPredicated").html(result)
   }
   else{
     result = `
     <td class="fas fa-caret-up fa-1x text-danger">${ percentChange }</td>
-    <td class="text-danger">${ "%" }</td>`
+    <td class="fas fa-percent text-danger"></td>`
     $("#num_OfcasesKPIPredicated").html(result)
   }
   var currentforcastResult = (parseInt(dataLinearfit[label.length-1]).toFixed(0)).toString();
