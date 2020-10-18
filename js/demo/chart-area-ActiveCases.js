@@ -39,6 +39,7 @@ $value_time.on('input change', () => {
     dataOverfit = [];
     dataUnderfit = [];
     dataLinearfit = [];
+    recovered_population =[];
     for(var i=0;i<result.length-1;i++){
       label.push(result[i].Day);
       dataL.push(result[i].num_positive);
@@ -46,14 +47,16 @@ $value_time.on('input change', () => {
       dataUnderfit.push(result[i].num_positive);
       dataLinearfit.push(result[i].num_positive);
       if(i >= $value.val() && dataL[i-1] >=0){
-
+        recovered_population.push(parseInt(dataLinearfit[i-1]).toString());
         dataC.push((parseInt(result[i].num_positive) + parseInt(dataC[i-1]) - parseInt(dataLinearfit[i-1]) ).toString());
       }
       else if (i != 0) {
         dataC.push((parseInt(result[i].num_positive) + parseInt(dataC[i-1])).toString());
+        recovered_population.push("0");
       }
       else {
         dataC.push(result[i].num_positive);
+        recovered_population.push("0");
       }
     }
 
@@ -95,6 +98,7 @@ $value_time.on('input change', () => {
 
       if ( pred_cum >=  0 ){
         dataC.push(pred_cum.toString());
+        recovered_population.push(dataLinearfit[i-1]);
 
       }
     }
@@ -177,6 +181,7 @@ $value.on('input change', () => {
     dataOverfit = [];
     dataUnderfit = [];
     dataLinearfit = [];
+    recovered_population =[];
     for(var i=0;i<result.length-1;i++){
       label.push(result[i].Day);
       dataL.push(result[i].num_positive);
@@ -184,14 +189,16 @@ $value.on('input change', () => {
       dataUnderfit.push(result[i].num_positive);
       dataLinearfit.push(result[i].num_positive);
       if(i >= $value.val() && dataL[i-1] >=0){
-
+        recovered_population.push(parseInt(dataLinearfit[i-1]).toString());
         dataC.push((parseInt(result[i].num_positive) + parseInt(dataC[i-1]) - parseInt(dataLinearfit[i-1]) ).toString());
       }
       else if (i != 0) {
         dataC.push((parseInt(result[i].num_positive) + parseInt(dataC[i-1])).toString());
+        recovered_population.push("0");
       }
       else {
         dataC.push(result[i].num_positive);
+        recovered_population.push("0");
       }
     }
 
@@ -233,6 +240,7 @@ $value.on('input change', () => {
 
       if ( pred_cum >=  0 ){
         dataC.push(pred_cum.toString());
+        recovered_population.push(dataLinearfit[i-1]);
 
       }
     }
@@ -322,6 +330,22 @@ function without_cum_cases(ans) {
     data: {
       labels: label,
       datasets: [
+        // recovered_population
+        {
+          label: "Recovered cases ",
+          lineTension: 0.6,
+          backgroundColor: "rgba( 133, 135, 150 , 0.2)",
+          borderColor: "rgba( 133, 135, 150 , 0.2)",
+          pointRadius: 4,
+          pointBackgroundColor: "rgba( 133, 135, 150 , 0.2)",
+          pointBorderColor: "rgba( 133, 135, 150 , 0.2)",
+          pointHoverRadius: 4,
+          pointHoverBackgroundColor: "rgba( 133, 135, 150 , 0.2)",
+          pointHoverBorderColor: "rgba( 133, 135, 150 , 0.2)",
+          pointHitRadius: 10,
+          pointBorderWidth: 4,
+          data: recovered_population,
+        },
         //cumulatives cases
         {
           label: "Cumulative ",
@@ -518,27 +542,31 @@ function loadData(){
     dataOverfit = [];
     dataUnderfit = [];
     dataLinearfit = [];
+    recovered_population = [];
     for(var i=0;i<result.length-1;i++){
       label.push(result[i].Day);
       dataL.push(result[i].num_positive);
       dataOverfit.push(result[i].num_positive);
       dataUnderfit.push(result[i].num_positive);
       dataLinearfit.push(result[i].num_positive);
-      if(i >= 7 && dataL[i-1] >=0){
+      if(i >= $value.val() && dataL[i-1] >=0){
 
-        dataC.push((parseInt(result[i].num_positive) + parseInt(dataC[i-1]) - parseInt(dataLinearfit[i-1]) ).toString());
+        dataC.push((parseInt(result[i].num_positive) + parseInt(dataC[i-1]) - parseInt(dataLinearfit[i-$value.val()]) ).toString());
+        recovered_population.push(parseInt(dataLinearfit[i-1]).toString());
       }
       else if (i != 0) {
         dataC.push((parseInt(result[i].num_positive) + parseInt(dataC[i-1])).toString());
+        recovered_population.push("0");
       }
       else {
         dataC.push(result[i].num_positive);
+        recovered_population.push("0");
       }
     }
 
 
 
-    for(var i=0;i<7;i++){
+    for(var i=0;i<$value_time.val();i++){
       label.push((result.length+i).toString());
     }
 
@@ -547,7 +575,9 @@ function loadData(){
     tmpOverfit = dataL[result.length-2];
     tmpUnderfit = dataL[result.length-2];
     tmpLinearfit = dataL[result.length-2];
-
+    beta =  0.5841185;
+    gamma = 0.4158816;
+    r0 = beta * (1/gamma);
     var m = 0;
     for(var i=1;i<result.length-1;i++){
         m +=(dataL[i] - dataL[i-1])/((label[i] - label[i-1]));
@@ -574,6 +604,7 @@ function loadData(){
 
       if ( pred_cum >=  0 ){
         dataC.push(pred_cum.toString());
+        recovered_population.push(dataLinearfit[i-1]);
       }
     }
 
