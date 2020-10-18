@@ -140,6 +140,11 @@ $value_time.on('input change', () => {
   <td class="text-secondary">${ currentforcastResult }</td>`
   $("#num_OfcasesKPIForcast").html(forcastResult)
 
+  var num_recovered_cases = (parseInt(dataLinearfit[label.length-1]).toFixed(0)).toString();
+  num_recovered_cases = `
+  <td class="text-secondary">${ currentforcastResult }</td>`
+  $("#num_OfcasesKPIForcast").html(num_recovered_cases)
+
 
 
 },
@@ -643,6 +648,12 @@ function loadData(){
   forcastResult = `
   <td class="text-secondary">${ currentforcastResult }</td>`
   $("#num_OfcasesKPIForcast").html(forcastResult)
+
+  var current_recovered_cases = (parseInt(recovered_population[label.length - parseInt($value.val()) ]).toFixed(0)).toString();
+  num_recovered_cases = `
+  <td class="text-secondary">${ current_recovered_cases }</td>`
+  $("#num_recovered_cases").html(num_recovered_cases)
+
 
 
 },
