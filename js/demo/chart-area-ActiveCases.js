@@ -102,7 +102,10 @@ $value_time.on('input change', () => {
 
       }
     }
-//
+    cum_recovered_population = [recovered_population[0]];
+    for(var i=1;i<recovered_population.length;i++){
+        cum_recovered_population.push( (parseInt(recovered_population[i]) + parseInt(cum_recovered_population[i-1])).toString() );
+    }
 
 
   var ctx_active_cases = document.getElementById("myAreaChart");
@@ -144,6 +147,12 @@ $value_time.on('input change', () => {
   num_recovered_cases = `
   <td class="text-secondary">${ currentforcastResult }</td>`
   $("#num_OfcasesKPIForcast").html(num_recovered_cases)
+
+  var current_recovered_cases = (parseInt(recovered_population[label.length - parseInt($value_time.val()) ]).toFixed(0)).toString();
+  num_recovered_cases = `
+  <td class="text-secondary">${ current_recovered_cases }</td>`
+  $("#num_recovered_cases").html(num_recovered_cases)
+
 
 
 
@@ -249,7 +258,11 @@ $value.on('input change', () => {
 
       }
     }
-//
+
+  cum_recovered_population = [recovered_population[0]];
+  for(var i=1;i<recovered_population.length;i++){
+      cum_recovered_population.push( (parseInt(recovered_population[i]) + parseInt(cum_recovered_population[i-1])).toString() );
+  }
 
 
   var ctx_active_cases = document.getElementById("myAreaChart");
@@ -286,6 +299,12 @@ $value.on('input change', () => {
   forcastResult = `
   <td class="text-secondary">${ currentforcastResult }</td>`
   $("#num_OfcasesKPIForcast").html(forcastResult)
+
+  var current_recovered_cases = (parseInt(recovered_population[label.length - parseInt($value_time.val()) ]).toFixed(0)).toString();
+  num_recovered_cases = `
+  <td class="text-secondary">${ current_recovered_cases }</td>`
+  $("#num_recovered_cases").html(num_recovered_cases)
+
 
 
 },
@@ -335,6 +354,21 @@ function without_cum_cases(ans) {
     data: {
       labels: label,
       datasets: [
+        {
+          label: "Recovered cases ",
+          lineTension: 0.6,
+          backgroundColor: "rgba( 133, 135, 150 , 0.2)",
+          borderColor: "rgba( 133, 135, 150 , 0.2)",
+          pointRadius: 4,
+          pointBackgroundColor: "rgba( 133, 135, 150 , 0.2)",
+          pointBorderColor: "rgba( 133, 135, 150 , 0.2)",
+          pointHoverRadius: 4,
+          pointHoverBackgroundColor: "rgba( 133, 135, 150 , 0.2)",
+          pointHoverBorderColor: "rgba( 133, 135, 150 , 0.2)",
+          pointHitRadius: 10,
+          pointBorderWidth: 4,
+          data: cum_recovered_population,
+        },
         // recovered_population
         {
           label: "Recovered cases ",
@@ -548,6 +582,7 @@ function loadData(){
     dataUnderfit = [];
     dataLinearfit = [];
     recovered_population = [];
+
     for(var i=0;i<result.length-1;i++){
       label.push(result[i].Day);
       dataL.push(result[i].num_positive);
@@ -613,6 +648,12 @@ function loadData(){
       }
     }
 
+  cum_recovered_population = [recovered_population[0]];
+  for(var i=1;i<recovered_population.length;i++){
+
+      cum_recovered_population.push( (parseInt(recovered_population[i]) + parseInt(cum_recovered_population[i-1])).toString() );
+  }
+
 
 
   var ctx_active_cases = document.getElementById("myAreaChart");
@@ -649,7 +690,7 @@ function loadData(){
   <td class="text-secondary">${ currentforcastResult }</td>`
   $("#num_OfcasesKPIForcast").html(forcastResult)
 
-  var current_recovered_cases = (parseInt(recovered_population[label.length - parseInt($value.val()) ]).toFixed(0)).toString();
+  var current_recovered_cases = (parseInt(recovered_population[label.length - parseInt($value_time.val()) ]).toFixed(0)).toString();
   num_recovered_cases = `
   <td class="text-secondary">${ current_recovered_cases }</td>`
   $("#num_recovered_cases").html(num_recovered_cases)
