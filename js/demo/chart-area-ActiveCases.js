@@ -1,7 +1,7 @@
 // Set new default font family and font color to mimic Bootstrap's default styling
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
-loadData();
+
 const $value_spreading_period = $('.value_spreading_period');
 const $value = $('#range_spreading_period');
 $value_spreading_period.html($value.val());
@@ -9,7 +9,7 @@ $value_spreading_period.html($value.val());
 const $value_time_period = $('.value_time_period');
 const $value_time = $('#range_time_period');
 $value_time_period.html($value_time.val());
-
+loadData();
 $value_time.on('input change', () => {
   // loadData();
   $value_spreading_period.html($value.val());
@@ -551,7 +551,7 @@ function loadData(){
       dataLinearfit.push(result[i].num_positive);
       if(i >= $value.val() && dataL[i-1] >=0){
 
-        dataC.push((parseInt(result[i].num_positive) + parseInt(dataC[i-1]) - parseInt(dataLinearfit[i-$value.val()]) ).toString());
+        dataC.push((parseInt(result[i].num_positive) + parseInt(dataC[i-1]) - parseInt(dataLinearfit[i-1]) ).toString());
         recovered_population.push(parseInt(dataLinearfit[i-1]).toString());
       }
       else if (i != 0) {
