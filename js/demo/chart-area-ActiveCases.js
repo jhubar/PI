@@ -47,8 +47,8 @@ $value_time.on('input change', () => {
       dataUnderfit.push(result[i].num_positive);
       dataLinearfit.push(result[i].num_positive);
       if(i >= $value.val() && dataL[i-1] >=0){
-        recovered_population.push(parseInt(dataLinearfit[i-1]).toString());
-        dataC.push((parseInt(result[i].num_positive) + parseInt(dataC[i-1]) - parseInt(dataLinearfit[i-1]) ).toString());
+        dataC.push((parseInt(result[i].num_positive) + parseInt(dataC[i-1]) - parseInt(dataLinearfit[i-$value.val()+1]) ).toString());
+        recovered_population.push(parseInt(dataLinearfit[i-$value.val()+1]).toString());
       }
       else if (i != 0) {
         dataC.push((parseInt(result[i].num_positive) + parseInt(dataC[i-1])).toString());
@@ -189,8 +189,8 @@ $value.on('input change', () => {
       dataUnderfit.push(result[i].num_positive);
       dataLinearfit.push(result[i].num_positive);
       if(i >= $value.val() && dataL[i-1] >=0){
-        recovered_population.push(parseInt(dataLinearfit[i-1]).toString());
-        dataC.push((parseInt(result[i].num_positive) + parseInt(dataC[i-1]) - parseInt(dataLinearfit[i-1]) ).toString());
+        dataC.push((parseInt(result[i].num_positive) + parseInt(dataC[i-1]) - parseInt(dataLinearfit[i-$value.val()+1]) ).toString());
+        recovered_population.push(parseInt(dataLinearfit[i-$value.val()+1]).toString());
       }
       else if (i != 0) {
         dataC.push((parseInt(result[i].num_positive) + parseInt(dataC[i-1])).toString());
@@ -551,8 +551,8 @@ function loadData(){
       dataLinearfit.push(result[i].num_positive);
       if(i >= $value.val() && dataL[i-1] >=0){
 
-        dataC.push((parseInt(result[i].num_positive) + parseInt(dataC[i-1]) - parseInt(dataLinearfit[i-1]) ).toString());
-        recovered_population.push(parseInt(dataLinearfit[i-1]).toString());
+        dataC.push((parseInt(result[i].num_positive) + parseInt(dataC[i-1]) - parseInt(dataLinearfit[i-$value.val()+1]) ).toString());
+        recovered_population.push(parseInt(dataLinearfit[i-$value.val()+1]).toString());
       }
       else if (i != 0) {
         dataC.push((parseInt(result[i].num_positive) + parseInt(dataC[i-1])).toString());
