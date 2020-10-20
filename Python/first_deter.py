@@ -19,8 +19,8 @@ class SIR_model():
         """
         Init the model
         """
-        self.beta = 0.58
-        self.gamma = 0.48
+        self.beta = 1
+        self.gamma = 0.69
 
     def set_beta(self, beta_value):
         """
@@ -68,6 +68,12 @@ class SIR_model():
         #Export matrix:
         savetxt('see_matrix.csv', SSE, delimiter=",")
 
+        X, Y = np.meshgrid(beta_range, gamma_range)
+        # Z = SSE.reshape((1, range_size**2))
+        print(X.shape)
+        print(Y.shape)
+
+
 
         print("Minimal value")
         print("SEE = {}".format(min[0]))
@@ -76,7 +82,8 @@ class SIR_model():
 
         fig = plt.figure()
         ax = fig.add_subplot(111, projection='3d')
-        ax.plot_wireframe(beta_range, gamma_range, )
+        ax.plot_wireframe(X, Y, SSE)
+        plt.show()
 
 
         pass
@@ -92,10 +99,13 @@ class SIR_model():
         tt = [t0];
         dt = 1;
         t = t0
+        DDI = []
+        DDI.append(0)
         while t <= t1:
             dS = -self.beta * S * I / N
             dI = self.beta * S * I / N - self.gamma * I
             dR = self.gamma * I
+            DDI.append(self.beta * S * I / N)
             S = S + dt * dS;
             I = I + dt * dI;
             R = R + dt * dR;
@@ -104,7 +114,7 @@ class SIR_model():
             RR.append(R)
             t = t + dt;
             tt.append(t)
-        return (SS, II, RR, tt)
+        return (SS, II, RR, tt, DDI)
 
     def predict_perso(self, S0, I0, R0, t0, t1, beta, gamma):
         N = S0 + R0 + I0;
@@ -121,7 +131,7 @@ class SIR_model():
         while t <= t1:
             dS = -beta * S * I / N
             dI = beta * S * I / N - gamma * I
-            DDI.append(dI)
+            DDI.append(beta * S * I / N)
             dR = gamma * I
             S = S + dt * dS;
             I = I + dt * dI;
@@ -179,16 +189,21 @@ if __name__ == "__main__":
     R_0 = 0
     model = SIR_model()
     # Make predictions:
-    S, I, R, t = model.predict(S_0, I_0, R_0, t_0, t_f)
+    S, I, R, t, DDI = model.predict(S_0, I_0, R_0, t_0, t_f)
 
     plt.plot(t, S, c="green")
     plt.plot(t, I, c="red")
     plt.plot(t, R, c="blue")
     plt.show()
 
+    plt.plot(t, DDI)
+    plt.show()
+
     model.fit(data_matrix)
 
-
+    for i in range(0, 25):
+        print(DDI[i])
+        print(data_matrix[i][1])
 
 
     pass
