@@ -3,6 +3,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib
 import requests # to dowload csv file in github
+from numpy import asarray
+from numpy import savetxt
+
 
 url = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/data.csv"
 
@@ -37,29 +40,38 @@ class SIR_model():
         positives = dataset[:, 1]
         t_zero = dataset[0][0]
         t_final = dataset[dataset.shape[0]-1][0]
+        range_size = 100
         pop_size = 1000000
         # Creation d'une matrice avec toutes les valeurs possibles:
-        SSE = np.zeros((1000, 1000))
+        SSE = np.zeros((range_size, range_size))
         gamma_range = []
         beta_range = []
-        interval = 1 / 1000
+        interval = 1 / range_size
+        min = (99999999, 0, 0)
         value = 0
-        min = (0, 0, 0)
-        for i in range(0, 1000):
+        for i in range(0, range_size):
             value += interval
             gamma_range.append(value)
             beta_range.append(value)
 
-        for i in range(0, 1000):
-            for j in range(0, 1000):
+        for i in range(0, range_size):
+            for j in range(0, range_size):
                 # make predictions:
-                DDI = self.predict_perso(pop_size, 1, 0, t_zero, t_final, gamma_range[i], beta_range[j])
+                DDI = self.predict_perso(pop_size, 1, 0, 1, dataset.shape[0] - 1, beta_range[i], gamma_range[j])
 
                 for k in range(0, len(DDI)):
                     SSE[i][j] += (DDI[k] - dataset[k][1])**2
+                if SSE[i][j] <= min[0]:
+                    min = (SSE[i][j], i, j)
+
+        #Export matrix:
+        savetxt('see_matrix.csv', SSE, delimiter=",")
+
 
         print("Minimal value")
-        print(min)
+        print("SEE = {}".format(min[0]))
+        print("beta = {}".format(beta_range[min[1]]))
+        print("gamma = {}".format(gamma_range[min[2]]))
 
         pass
 
@@ -72,7 +84,7 @@ class SIR_model():
         RR = [R0];
         II = [I0];
         tt = [t0];
-        dt = 0.1;
+        dt = 1;
         t = t0
         while t <= t1:
             dS = -self.beta * S * I / N
@@ -97,7 +109,7 @@ class SIR_model():
         RR = [R0];
         II = [I0];
         tt = [t0];
-        dt = 0.1;
+        dt = 1;
         t = t0
         DDI = []
         while t <= t1:
