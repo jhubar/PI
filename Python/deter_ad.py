@@ -42,8 +42,8 @@ class SIR_model():
         population = 1000000
 
         # Creation d'une matrice avec toutes les valeurs possibles:
-        gamma_range = np.linspace(0., 1, 1000)
-        beta_range = np.linspace(0, 1, 1000)
+        gamma_range = np.linspace(0., 1, 100)
+        beta_range = np.linspace(0, 1, 100)
 
         SSE = np.zeros((len(beta_range), len(gamma_range)))
 
@@ -146,16 +146,15 @@ class SIR_model():
 
         return contaminations
 
-    def plot_model(df, contaminations):
+    def plot_model(self, t, df, contaminations):
 
         t = ar.array('i', range(0, df.shape[0]))
 
         plt.plot(t, df['num_positive'], label='num_positive')
-        plt.plot(t, DDI, label='DDI')
+        plt.plot(t, contaminations, label='contaminations')
 
         plt.legend()
         plt.show()
-
 
 
 if __name__ == "__main__":
@@ -182,14 +181,9 @@ if __name__ == "__main__":
     plt.plot(t, R, c="blue")
     plt.show()
 
-    plt.plot(t, data['num_positive'], label='num_positive')
-    plt.plot(t, contaminations, label='contaminations')
-    plt.legend()
-    plt.show()
+    model.plot_model(t, data, contaminations)
 
     model.fit(data)
-
-    #model.plot_model(data, contaminations)
 
     pass
 
