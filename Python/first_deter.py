@@ -5,6 +5,7 @@ import matplotlib
 import requests # to dowload csv file in github
 from numpy import asarray
 from numpy import savetxt
+from mpl_toolkits.mplot3d import Axes3D
 
 
 url = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/data.csv"
@@ -72,6 +73,11 @@ class SIR_model():
         print("SEE = {}".format(min[0]))
         print("beta = {}".format(beta_range[min[1]]))
         print("gamma = {}".format(gamma_range[min[2]]))
+
+        fig = plt.figure()
+        ax = fig.add_subplot(111, projection='3d')
+        ax.plot_wireframe(beta_range, gamma_range, )
+
 
         pass
 
@@ -169,7 +175,7 @@ if __name__ == "__main__":
     t_0 = 0
     t_f = 500
     I_0 = 1
-    S_0 = 999
+    S_0 = 999999
     R_0 = 0
     model = SIR_model()
     # Make predictions:
