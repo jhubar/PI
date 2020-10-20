@@ -4,6 +4,7 @@ import numpy as np
 import array as ar
 import time
 
+
 from scipy.integrate import solve_ivp
 
 url = 'https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/data.csv'
