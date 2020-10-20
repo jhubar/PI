@@ -15,8 +15,8 @@ class SIR_model():
         """
         Init the model
         """
-        self.beta = 5
-        self.gamma = 4.8
+        self.beta = 1
+        self.gamma = 0.7
 
     def set_beta(self, beta_value):
         """
@@ -42,7 +42,7 @@ class SIR_model():
         population = 1000000
 
         # Creation d'une matrice avec toutes les valeurs possibles:
-        gamma_range = np.linspace(0., 1, 100)
+        gamma_range = np.linspace(0, 1, 100)
         beta_range = np.linspace(0, 1, 100)
 
         SSE = np.zeros((len(beta_range), len(gamma_range)))
@@ -53,13 +53,13 @@ class SIR_model():
             for j in range(len(beta_range)):
 
                 # make predictions:
-                contaminations = self.predict_perso(S0=999999,
-                                         I0=1,
-                                         R0=0,
-                                         t0=df['Day'][0],
-                                         t1=len(df['Day']),
-                                         beta=gamma_range[i],
-                                         gamma=beta_range[j])
+                contaminations = self.predict_det_model(S0=999999,
+                                                        I0=1,
+                                                        R0=0,
+                                                        t0=df['Day'][0],
+                                                        t1=len(df['Day']),
+                                                        beta=gamma_range[i],
+                                                        gamma=beta_range[j])
                 
                 for k in range(len(contaminations)):
                     SSE[i][j] += (contaminations[k] - df['num_positive'][k]) ** 2
@@ -111,7 +111,7 @@ class SIR_model():
 
         return SS, II, RR, tt, contaminations
 
-    def predict_perso(self, S0, I0, R0, t0, t1, beta, gamma):
+    def predict_det_model(self, S0, I0, R0, t0, t1, beta, gamma):
 
         N = S0 + R0 + I0
         S = S0
@@ -146,7 +146,7 @@ class SIR_model():
 
         return contaminations
 
-    def plot_model(self, t, df, contaminations):
+    def plot_fitting(self, t, df, contaminations):
 
         t = ar.array('i', range(0, df.shape[0]))
 
@@ -174,14 +174,15 @@ if __name__ == "__main__":
 
     model = SIR_model()
     # Make predictions:
-    S, I, R, t, contaminations = model.predict(S_0, I_0, R_0, t_0, t_f)
+    S, I, R, t, contaminations = model.predict(S_0, I_0, R_0, 0, 100)
 
-    plt.plot(t, S, c="green")
-    plt.plot(t, I, c="red")
-    plt.plot(t, R, c="blue")
+    plt.plot(t, S, c="blue", label='Susceptible')
+    plt.plot(t, I, c="red", label='Infected')
+    plt.plot(t, R, c="green", label='Recovered')
+    plt.legend()
     plt.show()
 
-    model.plot_model(t, data, contaminations)
+    model.plot_fitting(t, data, contaminations)
 
     model.fit(data)
 
