@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import matplotlib
 import requests # to dowload csv file in github
 
-url = "https://github.com/ADelau/proj0016-epidemic-data/blob/main/data.csv"
+url = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/data.csv"
 
 # Import datas from github
 # Trouver un moyen d'importer le fichier à partir de github
@@ -100,7 +100,7 @@ if __name__ == "__main__":
     """
     # Store datas:
     t_0 = 0
-    t_f = 50
+    t_f = 500
     I_0 = 1
     S_0 = 999
     R_0 = 0
@@ -113,9 +113,7 @@ if __name__ == "__main__":
     plt.plot(t, R, c="blue")
     plt.show()
 
-    print(S)
-    print(I)
-    print(R)
+    print(data)
 
 
     pass
