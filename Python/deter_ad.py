@@ -177,8 +177,6 @@ if __name__ == "__main__":
     # Make predictions:
     S, I, R, t, contaminations = model.predict(S_0, I_0, R_0, t_0, t_f)
 
-    a = contaminations
-
     plt.plot(t, S, c="green")
     plt.plot(t, I, c="red")
     plt.plot(t, R, c="blue")
