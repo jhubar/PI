@@ -15,8 +15,8 @@ class SIR_model():
         """
         Init the model
         """
-        self.beta = 0.01
-        self.gamma = 0.04
+        self.beta = 0.58
+        self.gamma = 0.48
 
     def set_beta(self, beta_value):
         """
@@ -37,6 +37,31 @@ class SIR_model():
         pass
 
     def predict(self, S0, I0, R0, t0, t1):
+        N = S0 + R0 + I0;
+        S = S0;
+        R = R0;
+        I = I0;
+        SS = [S0];
+        RR = [R0];
+        II = [I0];
+        tt = [t0];
+        dt = 0.1;
+        t = t0
+        while t <= t1:
+            dS = -self.beta * S * I / N
+            dI = self.beta * S * I / N - self.gamma * I
+            dR = self.gamma * I
+            S = S + dt * dS;
+            I = I + dt * dI;
+            R = R + dt * dR;
+            SS.append(S);
+            II.append(I);
+            RR.append(R)
+            t = t + dt;
+            tt.append(t)
+        return (SS, II, RR, tt)
+
+    def predict_old(self, S0, I0, R0, t0, t1):
         """
         SIR model:
         """
@@ -84,9 +109,7 @@ if __name__ == "__main__":
     S, I, R, t = model.predict(S_0, I_0, R_0, t_0, t_f)
 
     plt.plot(t, S, c="green")
-    plt.show()
     plt.plot(t, I, c="red")
-    plt.show()
     plt.plot(t, R, c="blue")
     plt.show()
 
