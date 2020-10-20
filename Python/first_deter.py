@@ -20,7 +20,7 @@ class SIR_model():
         Init the model
         """
         self.beta = 0.2
-        self.gamma = 0.012
+        self.gamma = 0.12
 
     def set_beta(self, beta_value):
         """
@@ -100,7 +100,7 @@ class SIR_model():
         else:
             beta_val = beta
         if gamma == -1:
-            gamma_val = -1
+            gamma_val = self.gamma
         else:
             gamma_val = gamma
         # Repartition of population
@@ -116,11 +116,17 @@ class SIR_model():
         contaminations = []
         contaminations.append(0)
         while t <= t1:
-            dS = float(-(beta_val * S * I / N))
-            #dI = float((beta_val * S * I / N) - gamma_val * I)
-            dR = float(gamma_val * I)
-            dI = (-1)*dS + dR
-            contaminations.append(beta_val * S * I / N)
+            if I > 0.0001:
+                dS = float(-(beta_val * S * I)/N)
+                dR = float(gamma_val * I)
+                dI = beta_val * S * I / N - gamma_val*I
+                conta = beta_val * S * I / N
+            else:
+                dS = 0
+                dR = 0
+                dI = 0
+                conta = 0
+            contaminations.append(conta)
             S += dS
             I += dI
             R += dR
@@ -148,25 +154,21 @@ if __name__ == "__main__":
     """
     # Store datas:
     t_0 = 0
-    t_f = 30
+    t_f = 100
     I_0 = 1
-    S_0 = 999999
+    S_0 = 99
     R_0 = 0
     model = SIR_model()
     # Make predictions:
     S, I, R, t = model.predict(S_0, I_0, R_0, t_0, t_f)
     DDI = model.predict(S_0, I_0, R_0, t_0, t_f, conta_curve=True)
 
+    plt.plot(t, I, c="red")
+    plt.plot(t, R, c="blue")
     plt.plot(t, S, c="green")
-
-    #plt.plot(t, I, c="red")
-    #plt.plot(t, R, c="blue")
     plt.show()
 
-    plt.plot(t, DDI)
-    plt.show()
-
-    model.fit(data_matrix, beta_min=0.15, beta_max=0.3, gamma_min=0.01, gamma_max=0.1, range_size=500)
+    model.fit(data_matrix, beta_min=0.0, beta_max=0.3, gamma_min=0.1, gamma_max=0.3, range_size=500)
 
 
 
