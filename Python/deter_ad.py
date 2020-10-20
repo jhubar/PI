@@ -48,7 +48,7 @@ class SIR_model():
         SSE = np.zeros((len(beta_range), len(gamma_range)))
 
         min_ms = (float('inf'), 0, 0)
-        
+
         for i in range(len(gamma_range)):
             for j in range(len(beta_range)):
 
@@ -60,9 +60,7 @@ class SIR_model():
                                          t1=len(df['Day']),
                                          beta=gamma_range[i],
                                          gamma=beta_range[j])
-                # print('beta = {}, gamma = {}'.format(i, j))
-                # print(contaminations)
-                # print("\n\n\n")
+                
                 for k in range(len(contaminations)):
                     SSE[i][j] += (contaminations[k] - df['num_positive'][k]) ** 2
 
