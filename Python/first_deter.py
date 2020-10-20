@@ -168,7 +168,7 @@ if __name__ == "__main__":
     plt.plot(t, S, c="green")
     plt.show()
 
-    model.fit(data_matrix, beta_min=0.0, beta_max=0.3, gamma_min=0.1, gamma_max=0.3, range_size=500)
+    model.fit(data_matrix, beta_min=0, beta_max=0.5, gamma_min=0.02, gamma_max=0.3, range_size=500)
 
 
 
