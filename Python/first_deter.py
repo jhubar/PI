@@ -34,6 +34,33 @@ class SIR_model():
         """
         Find optimal value of beta and gamma parameters for the given dataset
         """
+        positives = dataset[:, 1]
+        t_zero = dataset[0][0]
+        t_final = dataset[dataset.shape[0]-1][0]
+        pop_size = 1000000
+        # Creation d'une matrice avec toutes les valeurs possibles:
+        SSE = np.zeros((1000, 1000))
+        gamma_range = []
+        beta_range = []
+        interval = 1 / 1000
+        value = 0
+        min = (0, 0, 0)
+        for i in range(0, 1000):
+            value += interval
+            gamma_range.append(value)
+            beta_range.append(value)
+
+        for i in range(0, 1000):
+            for j in range(0, 1000):
+                # make predictions:
+                DDI = self.predict_perso(pop_size, 1, 0, t_zero, t_final, gamma_range[i], beta_range[j])
+
+                for k in range(0, len(DDI)):
+                    SSE[i][j] += (DDI[k] - dataset[k][1])**2
+
+        print("Minimal value")
+        print(min)
+
         pass
 
     def predict(self, S0, I0, R0, t0, t1):
@@ -60,6 +87,33 @@ class SIR_model():
             t = t + dt;
             tt.append(t)
         return (SS, II, RR, tt)
+
+    def predict_perso(self, S0, I0, R0, t0, t1, beta, gamma):
+        N = S0 + R0 + I0;
+        S = S0;
+        R = R0;
+        I = I0;
+        SS = [S0];
+        RR = [R0];
+        II = [I0];
+        tt = [t0];
+        dt = 0.1;
+        t = t0
+        DDI = []
+        while t <= t1:
+            dS = -beta * S * I / N
+            dI = beta * S * I / N - gamma * I
+            DDI.append(dI)
+            dR = gamma * I
+            S = S + dt * dS;
+            I = I + dt * dI;
+            R = R + dt * dR;
+            SS.append(S);
+            II.append(I);
+            RR.append(R)
+            t = t + dt;
+            tt.append(t)
+        return DDI
 
     def predict_old(self, S0, I0, R0, t0, t1):
         """
@@ -95,6 +149,7 @@ if __name__ == "__main__":
 
     # Import datas
     data = pd.read_csv('git_data.csv', sep=',', header=0)
+    data_matrix = data.to_numpy()
     """
     make first sir pred:
     """
@@ -113,7 +168,9 @@ if __name__ == "__main__":
     plt.plot(t, R, c="blue")
     plt.show()
 
-    print(data)
+    model.fit(data_matrix)
+
+
 
 
     pass
