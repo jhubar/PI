@@ -6,7 +6,8 @@ import requests # to dowload csv file in github
 from numpy import asarray
 from numpy import savetxt
 from mpl_toolkits.mplot3d import Axes3D
-
+from matplotlib import cm
+from matplotlib.ticker import LinearLocator
 
 url = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/data.csv"
 
@@ -20,7 +21,7 @@ class SIR_model():
         Init the model
         """
         self.beta = 0.2
-        self.gamma = 0.12
+        self.gamma = 0
 
     def set_beta(self, beta_value):
         """
@@ -88,8 +89,28 @@ class SIR_model():
         fig = plt.figure()
         ax = fig.add_subplot(111, projection='3d')
         ax.plot_wireframe(X, Y, SSE)
+        ax.view_init(15, 60)
         plt.show()
 
+        # Find beta value with the best SEE for each gamma value
+            # 1er colonne = valeur de gamma
+            # 2e colonne = meilleure valeur de beta pour ce gamma
+            # 3e col = SEE associé à cette combinaison beta gamma
+        min_beta = np.zeros((len(gamma_range), 3))
+        for i in range(0, len(gamma_range)):
+            min_beta[i][0] = gamma_range[i]
+            min_beta[i][2] = 99999999
+            for j in range(0, len(beta_range)):
+                if SSE[i][j] <= min_beta[i][2]:
+                    min_beta[i][2] = SSE[i][j]
+                    min_beta[i][1] = gamma_range[j]
+        # plot results:
+        plt.plot(min_beta[:, 0], min_beta[:, 1])
+        plt.show()
+        plt.plot(min_beta[:, 0], min_beta[:, 2])
+        plt.show()
+        for i in range(0, len(gamma_range)):
+            print("Gamma= {}, best beta= {}, SEE={}".format(min_beta[i][0], min_beta[i][1], min_beta[i][2]))
 
         pass
 
@@ -168,7 +189,7 @@ if __name__ == "__main__":
     plt.plot(t, S, c="green")
     plt.show()
 
-    model.fit(data_matrix, beta_min=0, beta_max=0.5, gamma_min=0.02, gamma_max=0.3, range_size=500)
+    #model.fit(data_matrix, beta_min=0, beta_max=0.5, gamma_min=0.02, gamma_max=0.3, range_size=200)
 
 
 
