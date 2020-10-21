@@ -3,6 +3,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import array as ar
 
+from mpl_toolkits.mplot3d import Axes3D
+
 
 url = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/data.csv"
 
@@ -12,58 +14,44 @@ url = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/data
 class SIR_model():
 
     def __init__(self):
-        """
-        Init the model
-        """
-        self.beta = 1
-        self.gamma = 0.7
+        
+        self.beta = 0.5
+        self.gamma = 0.1
 
     def set_beta(self, beta_value):
-        """
-        Manualy define the value of beta
-        """
+        
         self.beta = beta_value
 
     def set_gamma(self, gamma_value):
-        """
-        Manually define the value of set_gamma
-        """
+        
         self.gamma = gamma_value
 
     def fit(self, df):
-        """
-        Find optimal value of beta and gamma parameters for the given dataset
-        """
-        num_popositive = df['num_positive']
-
-        t_zero = 0
-        t_final = df.shape[0] - 1
-
-        population = 1000000
-
-        # Creation d'une matrice avec toutes les valeurs possibles:
-        gamma_range = np.linspace(0, 1, 100)
-        beta_range = np.linspace(0, 1, 100)
+        
+        gamma_range = np.linspace(0, 0.5, 50)
+        beta_range = np.linspace(0, 0.5, 50)
 
         SSE = np.zeros((len(beta_range), len(gamma_range)))
 
         min_ms = (float('inf'), 0, 0)
 
+        # test of beta and gamma
         for i in range(len(gamma_range)):
             for j in range(len(beta_range)):
 
                 # make predictions:
-                contaminations = self.predict_det_model(S0=999999,
-                                                        I0=1,
-                                                        R0=0,
-                                                        t0=df['Day'][0],
-                                                        t1=len(df['Day']),
-                                                        beta=gamma_range[i],
-                                                        gamma=beta_range[j])
-                
+                contaminations = self.predict(S0=999999,
+                                              I0=1,
+                                              R0=0,
+                                              t0=df['Day'][0],
+                                              t1=len(df['Day']),
+                                              conta_curve=True,
+                                              beta=gamma_range[i],
+                                              gamma=beta_range[j])
+                # least mean square
                 for k in range(len(contaminations)):
                     SSE[i][j] += (contaminations[k] - df['num_positive'][k]) ** 2
-
+                    
                 if(SSE[i][j] < min_ms[0]):
                     min_ms = (SSE[i][j], i, j)
 
@@ -73,10 +61,38 @@ class SIR_model():
         print("SEE = {}".format(min_ms[0]))
         print("beta = {}".format(beta_range[min_ms[1]]))
         print("gamma = {}".format(gamma_range[min_ms[2]]))
+        
+        # plot 3d graph
+        fig = plt.figure(figsize=(25, 20))
+        ax = fig.add_subplot(111, projection='3d')
+        
+        X, Y = np.meshgrid(beta_range, gamma_range)
+        ax.scatter(X, Y, SSE)
+        ax.invert_xaxis()
+        #ax.invert_yaxis()
+        #ax.invert_zaxis()
+        ax.set_title("Representation of least mean square error\n" +
+                     " depending on the parameters beta and gamma",
+                     fontsize=30)
+        ax.set_xlabel('beta', fontsize=30)
+        ax.set_ylabel('gamma', fontsize=30)
+        ax.set_zlabel('Least mean square error', fontsize=30)
+        fig.savefig("LMS.png")
 
         pass
 
-    def predict(self, S0, I0, R0, t0, t1):
+    def predict(self, S0, I0, R0, t0, t1, conta_curve=False, beta=-1, gamma=-1):
+
+        if (beta == -1):
+            beta_ = self.beta
+        else:
+            beta_ = beta
+            
+        if (gamma == -1):
+            gamma_ = self.gamma
+        else:
+            gamma_ = gamma        
+    
 
         N = S0 + R0 + I0
         S = S0
@@ -94,57 +110,33 @@ class SIR_model():
         
         while (t <= t1):
 
-            dS = -self.beta * S * I / N
-            dI = self.beta * S * I / N - self.gamma * I
-            dR = self.gamma * I
+            if(I > 0.0001):
+                dS = - beta_ * S * I / N
+                dI = (beta_ * S * I / N) - gamma_ * I
+                dR = gamma_ * I
+                contaminations.append(beta_ * S * I / N)
+            
+            else:
+                dS = 0
+                dI = 0
+                dR = 0
+                contaminations.append(0)
             
             S += dS
             I += dI
             R += dR
             t += dt
 
-            contaminations.append(self.beta * S * I / N)
+            
             SS.append(S)
             II.append(I)
             RR.append(R)
             tt.append(t)
 
-        return SS, II, RR, tt, contaminations
-
-    def predict_det_model(self, S0, I0, R0, t0, t1, beta, gamma):
-
-        N = S0 + R0 + I0
-        S = S0
-        R = R0
-        I = I0
-
-        SS = [S0]
-        RR = [R0]
-        II = [I0]
-        tt = [t0]
-
-        dt = 1
-        t = t0 + 1
-        contaminations = [0]
-
-        while (t <= t1):
-
-            dS = -beta * S * I / N
-            dI = (beta * S * I / N) - gamma * I
-            dR = gamma * I
-
-            S = S + dt * dS
-            I = I + dt * dI
-            R = R + dt * dR
-            t = t + dt
-
-            contaminations.append(beta * S * I / N)
-            SS.append(S)
-            II.append(I)
-            RR.append(R)
-            tt.append(t)
-
-        return contaminations
+        if conta_curve:
+            return contaminations
+        
+        return SS, II, RR, tt
 
     def plot_fitting(self, t, df, contaminations):
 
@@ -174,7 +166,8 @@ if __name__ == "__main__":
 
     model = SIR_model()
     # Make predictions:
-    S, I, R, t, contaminations = model.predict(S_0, I_0, R_0, 0, 100)
+    S, I, R, t = model.predict(S_0, I_0, R_0, t_0, t_f)
+    contaminations = model.predict(S_0, I_0, R_0, t_0, t_f, True)
 
     plt.plot(t, S, c="blue", label='Susceptible')
     plt.plot(t, I, c="red", label='Infected')
