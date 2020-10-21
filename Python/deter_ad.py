@@ -8,9 +8,6 @@ from mpl_toolkits.mplot3d import Axes3D
 
 url = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/data.csv"
 
-# Import datas from github
-# Trouver un moyen d'importer le fichier à partir de github
-
 class SIR_model():
 
     def __init__(self):
