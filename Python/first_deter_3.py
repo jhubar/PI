@@ -39,13 +39,9 @@ class SIR_model():
         """
         Find optimal value of beta and gamma parameters for the given dataset
         """
-        # Make cumulative observed data
-        # Revient à avoir I + R
-        cumul_data = []
-        tmp = 0
-        for item in dataset[:, 1]:
-            tmp += item
-            cumul_data.append(tmp)
+        delta_data = [0]
+        for i in range(1, dataset.shape[0]):
+            delta_data.append(dataset[i][1] - dataset[i-1][1])
 
         beta_interval = (beta_max - beta_min) / range_size
         gamma_interval = (gamma_max - gamma_min) / range_size
@@ -55,26 +51,31 @@ class SIR_model():
             beta_range.append(beta_range[i-1] + beta_interval)
             gamma_range.append(gamma_range[i-1] + gamma_interval)
         # Create SSE matrix:
-        MSE = np.zeros((range_size, range_size))
+        SSE = np.zeros((range_size, range_size))
 
         best_tuple = (9999999, 0, 0)
 
         # Make simulations:
         for b in range(0, range_size):         # Navigate in beta
             for g in range(0, range_size):      # Navigate in gamma
-                S, I, R, t = self.predict(999999, 1, 0, dataset[0][0], dataset[len(cumul_data)-1][0], beta_range[b], gamma_range[g])
-                # Make cumul:
-                SI = []
-                for i in range(0, len(I)):
-                    SI.append(I[i] + R[i])
-                # Make mean square error:
-                sse = 0.0
-                for i in range(0, len(cumul_data)):
-                    sse += (SI[i] - cumul_data[i])**2
-                MSE[b][g] = sse / len(cumul_data)
+                conta= self.predict(999999, 1, 0, dataset[0][0], dataset[len(delta_data)-1][0], beta_range[b], gamma_range[g], show_conta=True)
+                # Make delta:
+                delta_conta = [0]
+                for i in range(1, dataset.shape[0]):
+                    delta_conta.append(conta[i] - conta[i-1])
+
+                tmp_sse = 0
+                tmp_diff = []
+                for i in range(0, len(delta_conta)):
+                    tmp_sse += (delta_data[i] - delta_conta[i])**2
+                    tmp_diff.append((delta_data[i] - delta_conta[i])**2)
+                SSE[b][g] = np.std(tmp_diff)
                 # is best?
-                if MSE[b][g] <= best_tuple[0]:
-                    best_tuple = (MSE[b][g], b, g)
+                if SSE[b][g] <= best_tuple[0]:
+                    best_tuple = (SSE[b][g], b, g)
+                if SSE[b][g] > 15000:
+                    SSE[b][g] = 0
+
             print("test {} sur {}".format(b, range_size))
 
         print("Minimal value")
@@ -82,10 +83,13 @@ class SIR_model():
         print("beta = {}".format(beta_range[best_tuple[1]]))
         print("gamma = {}".format(gamma_range[best_tuple[2]]))
 
+        self.beta = best_tuple[1]
+        self.gamma = best_tuple[2]
+
         X, Y = np.meshgrid(beta_range, gamma_range)
         fig = plt.figure()
         ax = fig.add_subplot(111, projection='3d')
-        ax.plot_wireframe(X, Y, MSE)
+        ax.plot_wireframe(X, Y, SSE)
         ax.view_init(15, 60)
         plt.show()
 
@@ -238,9 +242,14 @@ def covid_19():
     """
     Test sur les données belges
     """
-    df = pd.read_csv("https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv", sep=',')
+    url_1 = "https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv"
+    url_2 = "https://raw.githubusercontent.com/RamiKrispin/coronavirus/master/csv/coronavirus.csv"
+    df = pd.read_csv(url_2, sep=',')
+
     # Return a serie pandas with cases per date
-    cases = df.groupby("DATE")["CASES"].sum()
+    df.filter("country" == "Belgium")
+    print(df)
+    cases = df.groupby("date")["cases"].sum()
     cases_np = cases.values
     time = []
     cases = []
@@ -248,24 +257,23 @@ def covid_19():
         time.append(i)
         cases.append(cases_np[i])
     # Plot data evolution
-    plt.plot(time, cases)
-    plt.show()
+    #plt.plot(time, cases)
+    #plt.show()
 
     """
     Fiter the model on the 20 first days
     """
-    dataset = np.zeros((30, 2))
-    for i in range(0, 30):
+    dataset = np.zeros((40, 2))
+    for i in range(0, 40):
         dataset[i][0] = i + 1
         dataset[i][1] = cases_np[i]
 
 
     model = SIR_model()
-    model.fit_beta(dataset, beta_min=0.3, beta_max=0.8, range_size=2000)
-    model.fit_gamma(dataset, gamma_min=0.1, gamma_max=0.8, range_size=2000)
+    #model.fit(dataset, 0.1, 0.8, 0.1, 0.8, 200)
 
     # Compare mmodèle et données:
-    predict = model.predict(11000000, dataset[0][1], 0, dataset[0][0], dataset[dataset.shape[0]-1][0], show_conta=True)
+    predict = model.predict(11000000, dataset[0][1], 0, dataset[0][0], dataset[dataset.shape[0]-1][0], show_conta=True, beta=0.5798, gamma=0.4201656)
 
     plt.plot(dataset[:, 0], dataset[:, 1], c="green")
     plt.plot(dataset[:, 0], predict, c="red")
