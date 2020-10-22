@@ -20,8 +20,9 @@ class SIR_model():
         """
         Init the model
         """
-        self.beta = 0.2
-        self.gamma = 0
+        self.beta = 1/3
+        self.gamma = 1/8
+        self.sigma = 1/6
 
     def set_beta(self, beta_value):
         """
@@ -34,6 +35,10 @@ class SIR_model():
         Manually define the value of set_gamma
         """
         self.gamma = gamma_value
+
+    def set_sigma(self, sigma_value):
+
+        self.sigma = sigma_value
 
     def fit(self, dataset, beta_min=0, beta_max=1, gamma_min=0, gamma_max=1, range_size=100, pop_size=1000000):
         """
@@ -63,21 +68,21 @@ class SIR_model():
         for i in range(0, range_size):  # Beta pour les lignes
             for j in range(0, range_size):  # Gamma pour les colonnes
                 # compute the number of people infected each days
-                infect_in_day = self.predict(pop_size-1, 1, 0, 1, dataset.shape[0], conta_curve=True,
+                infect_in_day = self.predict(pop_size-1, 1, 1, 0, 1, dataset.shape[0], conta_curve=True,
                                              beta=beta_range[i], gamma=gamma_range[j])
                 for k in range(0, dataset.shape[0]):
                     SSE[i][j] += (infect_in_day[k] - dataset[k][1])**2
                 if SSE[i][j] <= min[0]:
                     min = (SSE[i][j], i, j)
-            # print(i)
+            print(i)
 
         #Export matrix:
         savetxt('see_matrix.csv', SSE, delimiter=",")
 
         X, Y = np.meshgrid(beta_range, gamma_range)
         # Z = SSE.reshape((1, range_size**2))
-        # print(X.shape)
-        # print(Y.shape)
+        print(X.shape)
+        print(Y.shape)
 
 
 
@@ -114,7 +119,49 @@ class SIR_model():
 
         pass
 
-    def predict(self, S0, I0, R0, t0, t1, conta_curve=False, beta=-1, gamma=-1):
+    def fit_beta_sigma(self, dataset, beta_min, beta_max, sigma_min, sigma_max, range_size):
+        # Make cumulative observed data
+        # Revient à avoir I + R
+        cumul_data = []
+        tmp = 0
+        for item in dataset[:, 1]:
+            tmp += item
+            cumul_data.append(tmp)
+
+        beta_interval = (beta_max - beta_min) / range_size
+        sigma_interval = (sigma_max - sigma_min) / range_size
+        beta_range = [beta_interval + beta_min]
+        sigma_range = [sigma_interval + sigma_min]
+        for i in range(1, range_size):
+            beta_range.append(beta_range[i-1] + beta_interval)
+            sigma_range.append(sigma_range[i-1] + sigma_interval)
+        # Create SSE matrix:
+        SSE = np.zeros((range_size, range_size))
+
+        optimal = (9999999, 0, 0)
+        for b in range(0, range_size):
+            for s in range(0, range_size):
+                S, E, I, R, t = self.predict(999999, 1, 1, 0, dataset[0][0], dataset[len(cumul_data)-1][0], gamma=0, sigma=sigma_range[s], beta=beta_range[b])
+                tmp_sse = 0
+                for i in range(0, len(cumul_data)):
+                    tmp_sse += (I[i] - cumul_data[i])**2
+                SSE[b][s] = tmp_sse
+                if tmp_sse < optimal[0]:
+                    optimal = (tmp_sse, beta_range[b], sigma_range[s])
+            print(b)
+
+        print("Minimal value")
+        print("SEE = {}".format(optimal[0]))
+        print("beta = {}".format(optimal[1]))
+        print("sigma = {}".format(optimal[2]))
+        X, Y = np.meshgrid(beta_range, sigma_range)
+        fig = plt.figure()
+        ax = fig.add_subplot(111, projection='3d')
+        ax.plot_wireframe(X, Y, SSE)
+        ax.view_init(15, 60)
+        plt.show()
+
+    def predict(self, S0, E0, I0, R0, t0, t1, conta_curve=False, beta=-1, gamma=-1, sigma=-1):
         # If beta or gama are given
         if beta == -1:
             beta_val = self.beta
@@ -124,12 +171,18 @@ class SIR_model():
             gamma_val = self.gamma
         else:
             gamma_val = gamma
+        if sigma == -1:
+            sigma_val = self.sigma
+        else:
+            sigma_val = sigma
         # Repartition of population
         N = S0 + R0 + I0
         S = S0
+        E = E0
         R = R0
         I = I0
         SS = [S0]
+        EE = [E0]
         RR = [R0]
         II = [I0]
         tt = [t0]
@@ -139,19 +192,23 @@ class SIR_model():
         while t <= t1:
             if I > 0.0001:
                 dS = float(-(beta_val * S * I)/N)
+                dE = (beta_val * S * I /N) - sigma_val * E
                 dR = float(gamma_val * I)
-                dI = beta_val * S * I / N - gamma_val*I
+                dI = sigma_val * E - gamma_val*I
                 conta = beta_val * S * I / N
             else:
                 dS = 0
+                dE = 0
                 dR = 0
                 dI = 0
                 conta = 0
             contaminations.append(conta)
             S += dS
+            E += dE
             I += dI
             R += dR
             SS.append(S)
+            EE.append(E)
             II.append(I)
             RR.append(R)
             t += 1
@@ -160,7 +217,7 @@ class SIR_model():
         # If we want contamination curve:
         if conta_curve:
             return contaminations
-        return SS, II, RR, tt
+        return SS, EE, II, RR, tt
 
 
 
@@ -175,22 +232,38 @@ if __name__ == "__main__":
     """
     # Store datas:
     t_0 = 0
-    t_f = 100
+    t_f = 200
     I_0 = 1
-    S_0 = 99
+    S_0 = 999
     R_0 = 0
+    E_0 = 0
     model = SIR_model()
     # Make predictions:
-    S, I, R, t = model.predict(S_0, I_0, R_0, t_0, t_f)
-    DDI = model.predict(S_0, I_0, R_0, t_0, t_f, conta_curve=True)
+    S, E, I, R, t = model.predict(S_0, E_0, I_0, R_0, t_0, t_f)
+    DDI = model.predict(S_0, E_0, I_0, R_0, t_0, t_f, conta_curve=True)
 
     plt.plot(t, I, c="red")
+    plt.plot(t, E, c="orange")
     plt.plot(t, R, c="blue")
     plt.plot(t, S, c="green")
     plt.show()
 
-    #model.fit(data_matrix, beta_min=0, beta_max=0.5, gamma_min=0.02, gamma_max=0.3, range_size=200)
+    model.fit_beta_sigma(data_matrix, beta_min=0, beta_max=0.6, sigma_min=0, sigma_max=0.6, range_size=200)
 
 
 
     pass
+
+
+
+
+
+
+
+
+
+
+
+
+
+
