@@ -1,3 +1,4 @@
+import argparse
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -281,23 +282,17 @@ def covid_19():
 
 if __name__ == "__main__":
 
-    #covid_20()
-    covid_19()
+    parser = argparse.ArgumentParser()
 
 
+    parser.add_argument("--ni")
+    parser.add_argument("--tw")
+
+    args = parser.parse_args()
+
+    if args.ni:
+        covid_19()
+    elif args.tw:
+        covid_20()
 
     pass
-
-
-
-
-
-
-
-
-
-
-
-
-
-
