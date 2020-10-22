@@ -20,8 +20,8 @@ class SIR_model():
         """
         Init the model
         """
-        self.beta = 0.2
-        self.gamma = 0.12
+        self.beta = 0
+        self.gamma = 0
 
     def set_beta(self, beta_value):
         """
@@ -107,9 +107,9 @@ class SIR_model():
         # Create SSE vector:
         SSE = []
 
-        optimal_beta = (9999999, 0)
+        optimal_beta = (99999999999999, 0)
         for b in range(0, range_size):
-            S, I, R, t = self.predict(999999, 1, 0, dataset[0][0], dataset[len(cumul_data)-1][0], beta_range[b], gamma=0)
+            S, I, R, t = self.predict(999999, 1, 0, dataset[0][0], dataset[len(cumul_data)-1][0], beta_range[b])
             tmp_sse = 0
             for i in range(0, len(cumul_data)):
                 tmp_sse += (I[i] - cumul_data[i])**2
@@ -140,7 +140,7 @@ class SIR_model():
         for b in range(0, range_size):
             contaminations = self.predict(999999, 1, 0, dataset[0][0], dataset[len(data)-1][0], gamma=gamma_range[b], show_conta=True)
             tmp_sse = 0
-            for i in range(0, len(data)):
+            for i in range(0, len(contaminations)):
                 tmp_sse += (contaminations[i] - data[i])**2
             SSE.append(tmp_sse)
             if tmp_sse < optimal_gamma[0]:
@@ -194,11 +194,10 @@ class SIR_model():
 
         return SS, II, RR, tt
 
-
-
-
-if __name__ == "__main__":
-
+def covid_20():
+    """
+    Fit and predict on covid 20
+    """
     # Import datas
     url = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/data.csv"
     data = pd.read_csv(url, sep=',', header=0)
@@ -215,8 +214,9 @@ if __name__ == "__main__":
     R_0 = 0
     model = SIR_model()
 
-    model.fit_beta(data_matrix, beta_min=0.45, beta_max=0.55, range_size=200)
+    model.fit_beta(data_matrix, beta_min=0.35, beta_max=0.55, range_size=200)
     model.fit_gamma(data_matrix, gamma_min=0, gamma_max=0.8, range_size=200)
+
 
     simul_conta_curve = model.predict(S_0, I_0, R_0, t_0, t_f-1, show_conta=True)
     plt.plot(data_matrix[:, 0], data_matrix[:, 1], c="red")
@@ -229,6 +229,61 @@ if __name__ == "__main__":
     plt.plot(t, S, c="blue")
     plt.plot(t, I, c="red")
     plt.show()
+
+def covid_19():
+    """
+    Test sur les données belges
+    """
+    df = pd.read_csv("https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv", sep=',')
+    # Return a serie pandas with cases per date
+    cases = df.groupby("DATE")["CASES"].sum()
+    cases_np = cases.values
+    time = []
+    cases = []
+    for i in range(0, len(cases_np)):
+        time.append(i)
+        cases.append(cases_np[i])
+    # Plot data evolution
+    plt.plot(time, cases)
+    plt.show()
+
+    """
+    Fiter the model on the 20 first days
+    """
+    dataset = np.zeros((20, 2))
+    for i in range(0, 20):
+        dataset[i][0] = i + 1
+        dataset[i][1] = cases_np[i]
+
+
+    model = SIR_model()
+    model.fit_beta(dataset, beta_min=0.01, beta_max=0.9, range_size=1000)
+    model.fit_gamma(dataset, gamma_min=0.01, gamma_max=0.8, range_size=1000)
+    model.fit_beta(dataset, beta_min=0.01, beta_max=0.9, range_size=1000)
+    model.fit_gamma(dataset, gamma_min=0.01, gamma_max=0.8, range_size=1000)
+    model.fit_beta(dataset, beta_min=0.01, beta_max=0.9, range_size=1000)
+    model.fit_gamma(dataset, gamma_min=0.01, gamma_max=0.8, range_size=1000)
+    model.fit_beta(dataset, beta_min=0.01, beta_max=0.9, range_size=1000)
+    model.fit_gamma(dataset, gamma_min=0.01, gamma_max=0.8, range_size=1000)
+
+
+    # Compare mmodèle et données:
+    predict = model.predict(11000000, dataset[0][1], 0, dataset[0][0], dataset[dataset.shape[0]-1][0], show_conta=True)
+
+    plt.plot(dataset[:, 0], dataset[:, 1], c="green")
+    plt.plot(dataset[:, 0], predict, c="red")
+    plt.show()
+
+
+
+    pass
+
+
+if __name__ == "__main__":
+
+    #covid_20()
+    covid_19()
+
 
 
     pass
