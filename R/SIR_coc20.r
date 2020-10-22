@@ -1,3 +1,6 @@
+library(readr)
+cov_20_be <- read_csv("Documents/#Master1/PI/R/cov_20_be.csv")
+
 SIR <- function(time, state, parameters) {
   par <- as.list(c(state, parameters))
   with(par, {
@@ -31,9 +34,9 @@ df <- coronavirus %>%
     death_cum = cumsum(death),
     recovered_cum = cumsum(recovered),
     active_cum = cumsum(active)
-)
+  )
 
-
+df <- cov_20_be
 
 
 
@@ -44,7 +47,7 @@ df <- coronavirus %>%
 library(lubridate)
 
 sir_start_date <- "2020-02-04"
-sir_end_date <- "2020-03-18"
+sir_end_date <- "2020-02-18"
 
 Infected <- subset(df, date >= ymd(sir_start_date) & date <= ymd(sir_end_date))$active_cum
 
@@ -53,7 +56,7 @@ Infected <- subset(df, date >= ymd(sir_start_date) & date <= ymd(sir_end_date))$
 Day <- 1:(length(Infected))
 
 # now specify initial values for N, S, I and R
-N <- 11515793
+N <- 1000000
 init <- c(
   S = N - Infected[1],
   I = Infected[1],
