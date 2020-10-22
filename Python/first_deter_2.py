@@ -223,6 +223,13 @@ if __name__ == "__main__":
     plt.plot(data_matrix[:, 0], simul_conta_curve, c="green")
     plt.show()
 
+    # Simulation sur le long terme:
+    S, I, R, t = model.predict(S_0, I_0, R_0, t_0, 100)
+    plt.plot(t, R, c="black")
+    plt.plot(t, S, c="blue")
+    plt.plot(t, I, c="red")
+    plt.show()
+
 
     pass
 
