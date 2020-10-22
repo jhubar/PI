@@ -287,6 +287,7 @@ if __name__ == "__main__":
 
     parser.add_argument("--ni")
     parser.add_argument("--tw")
+    
 
     args = parser.parse_args()
 
@@ -294,5 +295,6 @@ if __name__ == "__main__":
         covid_19()
     elif args.tw:
         covid_20()
+
 
     pass
