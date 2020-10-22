@@ -68,15 +68,15 @@ class SIR_model():
                     SSE[i][j] += (infect_in_day[k] - dataset[k][1])**2
                 if SSE[i][j] <= min[0]:
                     min = (SSE[i][j], i, j)
-            print(i)
+            # print(i)
 
         #Export matrix:
         savetxt('see_matrix.csv', SSE, delimiter=",")
 
         X, Y = np.meshgrid(beta_range, gamma_range)
         # Z = SSE.reshape((1, range_size**2))
-        print(X.shape)
-        print(Y.shape)
+        # print(X.shape)
+        # print(Y.shape)
 
 
 
@@ -173,17 +173,3 @@ if __name__ == "__main__":
 
 
     pass
-
-
-
-
-
-
-
-
-
-
-
-
-
-
