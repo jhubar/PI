@@ -10,6 +10,8 @@ from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import cm
 from matplotlib.ticker import LinearLocator
 from scipy.integrate import odeint
+import desolver as de
+import desolver.backend as D
 
 
 class SIR_model():
@@ -21,20 +23,24 @@ class SIR_model():
         self.beta = 0.5
         self.gamma = 0.5
         self.population = 1000000
-        self.S_0
-        self.I_0
-        self.R_0
+        self.infected = data['num_positive']
+        self.S = self.population - self.infected[1]
+        self.I = self.infeted[1]
+        self.R = 0
+        self.Day = data['Day']
         self.sir_start_date = "2020-02-02"
-        self.sir_end_date = "2020-02-02
+        self.sir_end_date = "2020-02-18"
 
-    def predictor(self, SIR_values):
+
+
+    def predictor(self, SIR_values, time):
 
         dS = -self.beta * SIR_values[0] * SIR_values[1] / self.population
         dI = (self.beta * SIR_values[0] * SIR_values[1] / self.population) - (self.gamma * SIR_values[1])
         dR = self.gamma * SIR_values[1]
         return dS, dI, dR
 
-    def RSS(self, parameters):
+    def RSS(self, beta_min=0.1, beta_max=0.8, gamma_min=0.1, gamma_max=0.8, range_size=200):
 
         # Compute range to test
         beta_interval = (beta_max - beta_min) / range_size
@@ -47,8 +53,15 @@ class SIR_model():
 
         # Vector of initial values:
         SIR_init = [self.S_0, self.I_0, self.R_0]
-        predict = odeint(predictor, SIR_init, 17)
+        # time vector:
+        t = np.linspace(1, 150)
+        predict = odeint(self.predictor, SIR_init, t)
+        print(predict.shape)
 
+        plt.plot(t, predict[:, 0])
+        plt.plot(t, predict[:, 1], c="red")
+        plt.plot(t, predict[:, 2], c="green")
+        plt.show()
 
 
     def optim(self,RSS, [1,2], upper):
@@ -66,15 +79,27 @@ def covid_20():
 
 def plot():
 
+    #Parameters
     title = "COVID-20 fitted vs observed cumulative incidence, Belgium"
     subtitle = "(Red = fitted from SIR model, blue = observed)"
 
 
+    #Plot configuration
     plt.figure()
     plt.title(title)
     plt.subtitle(subtitle)
     plt.xlabal("Date")
-    plt.ylabal("")
+    plt.ylabal("Persons")
+
+    #Plot curves
+    #x =
+    #y =
+
+    p1 = plt.plot(x,y1)
+    p2 = plt.plot(x,y2)
+
+    plt.xlim()
+    plt.ylim(0,population)
 
 
 
