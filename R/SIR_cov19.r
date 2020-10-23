@@ -132,3 +132,59 @@ Opt_par
 
 R0 <- as.numeric(Opt_par[1] / Opt_par[2])
 R0
+
+# time in days for predictions
+t <- 1:220
+
+# get the fitted values from our SIR model
+fitted_cumulative_incidence <- data.frame(ode(
+  y = init, times = t,
+  func = SIR, parms = Opt_par
+))
+
+# add a Date column and join the observed incidence data
+fitted_cumulative_incidence <- fitted_cumulative_incidence %>%
+  mutate(
+    Date = ymd(sir_start_date) + days(t - 1),
+    Country = "Belgium",
+    cumulative_incident_cases = c(Infected, rep(NA, length(t) - length(Infected)))
+  )
+
+# plot the data
+fitted_cumulative_incidence %>%
+  ggplot(aes(x = Date)) +
+  geom_line(aes(y = I), colour = "red") +
+  geom_line(aes(y = S), colour = "black") +
+  geom_line(aes(y = R), colour = "green") +
+  geom_point(aes(y = cumulative_incident_cases),
+             colour = "blue"
+  ) +
+  scale_y_continuous(labels = scales::comma) +
+  labs(y = "Persons", title = "COVID-20 fitted vs observed cumulative incidence, Belgium") +
+  scale_colour_manual(name = "", values = c(
+    red = "red", black = "black",
+    green = "green", blue = "blue"
+  ), labels = c(
+    "Susceptible",
+    "Recovered", "Observed", "Infectious"
+  )) +
+  theme_minimal()
+
+# plot the data
+fitted_cumulative_incidence %>%
+  ggplot(aes(x = Date)) +
+  geom_line(aes(y = I, colour = "red")) +
+  geom_line(aes(y = S, colour = "black")) +
+  geom_line(aes(y = R, colour = "green")) +
+  geom_point(aes(y = cumulative_incident_cases, colour = "blue")) +
+  scale_y_log10(labels = scales::comma) +
+  labs(
+    y = "Persons",
+    title = "COVID-20 fitted vs observed cumulative incidence, Belgium"
+  ) +
+  scale_colour_manual(
+    name = "",
+    values = c(red = "red", black = "black", green = "green", blue = "blue"),
+    labels = c("Susceptible", "Observed", "Recovered", "Infectious")
+  ) +
+  theme_minimal()
