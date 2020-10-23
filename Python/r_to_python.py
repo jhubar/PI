@@ -40,7 +40,9 @@ class SIR_model():
         dR = self.gamma * SIR_values[1]
         return dS, dI, dR
 
-    def RSS(self, beta_min=0.1, beta_max=0.8, gamma_min=0.1, gamma_max=0.8, range_size=200):
+    def deriv(self, ):
+
+    def RSS(self, parameters):
 
         # Compute range to test
         beta_interval = (beta_max - beta_min) / range_size
