@@ -20,6 +20,8 @@ class SIR_model():
         self.beta = 0
         self.gamma = 0
 
+    def deriv(self, ):
+
     def RSS(self, parameters):
 
 
