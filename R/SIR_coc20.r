@@ -69,7 +69,12 @@ init <- c(
 RSS <- function(parameters) {
   names(parameters) <- c("beta", "gamma")
   out <- ode(y = init, times = Day, func = SIR, parms = parameters)
+  
   fit <- out[, 3]
+  print(fit)
+  print(" - ")
+  print(Infected)
+  print("\n")
   sum((Infected - fit)^2)
 }
 
