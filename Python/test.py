@@ -48,11 +48,21 @@ class SIR_model():
         t = np.zeros(self.dataset.shape[0])
         for i in range(0, len(t)):
             t[i] = i
-        predict = odeint(self.manual_predictor, SIR_init, t, args=parameters)
+        args = (parameters[0], parameters[1])
+        predict = odeint(self.manual_predictor, SIR_init, t, args=args)
 
         # Compute SSE
         SSE = (self.dataset[:, 1] - predict[:, 1] - predict[:, 2])**2
-        return SSE
+        return np.sum(SSE)
+
+    def fit(self):
+
+        start_values = np.array([0.5, 0.5])
+
+        #ret_val = minimize(self.RSS, method="L-BFGS-B", x0=start_values, bounds=((0.01, 0.09), (0.01, 0.09)))
+        ret_val = minimize(self.RSS, x0=start_values, method="L-BFGS-B", bounds=((0.01, 0.09), (0.01, 0.09)))
+        print(ret_val)
+
 
 
 
@@ -72,7 +82,7 @@ def covid_20():
 
     model = SIR_model()
     model.dataset = dataset
-    model.RSS((0.5717, 0.42))
+    model.fit()
 
 
 
