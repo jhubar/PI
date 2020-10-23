@@ -28,8 +28,6 @@ class SIR_model():
         self.sir_end_date = "2020-02-18"
         self.dataset = np.ones(1)
 
-    def curves(self):
-
 
     def predictor(self, SIR_values, time):
         dS = -self.beta * SIR_values[0] * SIR_values[1] / self.population
@@ -42,6 +40,7 @@ class SIR_model():
         dI = (beta * SIR_values[0] * SIR_values[1] / self.population) - (gamma * SIR_values[1])
         dR = gamma * SIR_values[1]
         return dS, dI, dR
+
     def RSS(self, parameters):
 
         # Vector of initial values:
@@ -54,8 +53,29 @@ class SIR_model():
         predict = odeint(self.manual_predictor, SIR_init, t, args=args)
 
         # Compute SSE
-        SSE = (self.dataset[:, 1] - predict[:, 1] - predict[:, 2])**2
+        SSE = (self.dataset[:, 1] - predict[:, 2])**2
         return np.sum(SSE)
+
+    def curves(self):
+
+        SIR_init = [999995, 5, 0]
+        # time vector:
+        t = np.zeros(15)
+        for i in range(0, 15):
+            t[i] = i
+        predict = odeint(self.predictor, SIR_init, t)
+
+        plt.plot(t, predict[:, 0])
+        plt.plot(t, predict[:, 1])
+        plt.plot(t, predict[:, 2])
+        plt.show()
+
+        for i in range(0, predict.shape[0]):
+            value = predict[i][0] + predict[i][1] + predict[i][2]
+            print("S={}, I={}, R={}".format(predict[i][0], predict[i][1], predict[i][2]))
+
+
+
 
     def fit(self):
 
@@ -102,7 +122,6 @@ def covid_20():
     # Import datas
     url = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/data.csv"
     data = pd.read_csv(url, sep=',', header=0)
-    print(data)
     dataset = data.to_numpy()
     # make cumul data:
     for i in range(1, dataset.shape[0]):
@@ -110,7 +129,7 @@ def covid_20():
 
     model = SIR_model()
     model.dataset = dataset
-    model.fit_manual(dataset, beta_min=0.01, beta_max=0.9, gamma_min=0.1, gamma_max=0.8, range_size=200 )
+    model.fit_manual(dataset, beta_min=0.01, beta_max=0.9, gamma_min=0.1, gamma_max=0.8, range_size=200)
 
 
 
@@ -122,3 +141,6 @@ def covid_20():
 if __name__ == "__main__":
 
     covid_20()
+
+    #model = SIR_model()
+    #model.curves()
