@@ -243,22 +243,19 @@ def covid_19():
     Test sur les données belges
     """
     url_1 = "https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.csv"
-    url_2 = "https://raw.githubusercontent.com/RamiKrispin/coronavirus/master/csv/coronavirus.csv"
-    df = pd.read_csv(url_2, sep=',')
+    url_2 = "https://raw.githubusercontent.com/julien1941/PI/master/R/cov_19_be.csv?token=AOOPK5A27QLGULUZ76GAG4C7TL7T2"
+    df = pd.read_csv("data_perso.csv", sep=',')
 
     # Return a serie pandas with cases per date
-    df.filter("country" == "Belgium")
-    print(df)
-    cases = df.groupby("date")["cases"].sum()
-    cases_np = cases.values
-    time = []
-    cases = []
-    for i in range(0, len(cases_np)):
-        time.append(i)
-        cases.append(cases_np[i])
-    # Plot data evolution
-    #plt.plot(time, cases)
-    #plt.show()
+    cases = df.to_numpy()
+    cases = cases[:, 2]
+    data = np.zeros((cases.shape[0], 2))
+    for i in range(0, 40):
+        data[i][0] = i + 1
+        data[i][1] = cases[i]
+    print(data)
+
+
 
     """
     Fiter the model on the 20 first days
@@ -266,7 +263,7 @@ def covid_19():
     dataset = np.zeros((40, 2))
     for i in range(0, 40):
         dataset[i][0] = i + 1
-        dataset[i][1] = cases_np[i]
+        dataset[i][1] = cases[i]
 
 
     model = SIR_model()

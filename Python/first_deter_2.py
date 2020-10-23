@@ -173,7 +173,7 @@ class SIR_model():
         t = t0
         contaminations = []
         while t <= t1:
-            if I > 0.0001:
+            if I > 0.01:
                 dS = float(-(beta_val * S * I)/N)
                 dR = float(gamma_val * I)
                 dI = beta_val * S * I / N - gamma_val*I
@@ -258,14 +258,11 @@ def covid_19():
 
 
     model = SIR_model()
+    # model.fit(dataset, beta_min=0.1, beta_max=0.9, gamma_min=0.1, gamma_max=0.9, range_size=200)
+
     model.fit_beta(dataset, beta_min=0.01, beta_max=0.9, range_size=1000)
     model.fit_gamma(dataset, gamma_min=0.01, gamma_max=0.8, range_size=1000)
-    model.fit_beta(dataset, beta_min=0.01, beta_max=0.9, range_size=1000)
-    model.fit_gamma(dataset, gamma_min=0.01, gamma_max=0.8, range_size=1000)
-    model.fit_beta(dataset, beta_min=0.01, beta_max=0.9, range_size=1000)
-    model.fit_gamma(dataset, gamma_min=0.01, gamma_max=0.8, range_size=1000)
-    model.fit_beta(dataset, beta_min=0.01, beta_max=0.9, range_size=1000)
-    model.fit_gamma(dataset, gamma_min=0.01, gamma_max=0.8, range_size=1000)
+
 
 
     # Compare mmodèle et données:
@@ -284,10 +281,12 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
 
+    covid_19()
 
     parser.add_argument("--ni")
     parser.add_argument("--tw")
-    
+
+
 
     args = parser.parse_args()
 
