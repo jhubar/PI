@@ -46,7 +46,7 @@ df <- cov_20_be
 # Feb 4 to March 30 into a vector called Infected
 library(lubridate)
 
-sir_start_date <- "2020-02-02"
+sir_start_date <- "2020-01-22"
 sir_end_date <- "2020-02-18"
 
 Infected <- subset(df, date >= ymd(sir_start_date) & date <= ymd(sir_end_date))$active_cum
@@ -125,7 +125,7 @@ fitted_cumulative_incidence %>%
   geom_point(aes(y = cumulative_incident_cases), colour = "blue") +
   labs(
     y = "Cumulative incidence",
-    title = "COVID-19 fitted vs observed cumulative incidence, Belgium",
+    title = "COVID-20 fitted vs observed cumulative incidence, Belgium",
     subtitle = "(Red = fitted from SIR model, blue = observed)"
   ) +
   theme_minimal() +

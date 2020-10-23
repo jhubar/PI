@@ -2,6 +2,9 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import array as ar
+from datetime import datetime
+
+
 
 from mpl_toolkits.mplot3d import Axes3D
 
@@ -185,42 +188,72 @@ class SIR_model():
         df['num_positive_underfit'] = new_u
         df['num_positive_overfit'] = new_o
 
+    # def sir(self, time, staet, parameters){
+    #     par = np.list(state,parameter)
+    # }
 
 
 
 if __name__ == "__main__":
 
     # Import datas
-    data = pd.read_csv(url, error_bad_lines=False)
-    data_matrix = data.to_numpy()
+    data = pd.read_csv("/Users/julienhubar/Documents/#Master1/PI/R/cov_20_be.csv")
+    # data_matrix = data.to_numpy()
     """
     make first sir pred:
     """
+
+
+    sir_start_date = "2020-02-04"
+    sir_end_date = "2020-02-18"
+
+
+    Infected = data[data.date >= sir_start_date]
+    print(Infected)
+    # & date <= ymd(sir_end_date))$active_cum
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     # Store datas:
-    t_0 = data['Day'][0]
-    t_f = len(data['Day'])+3
-    I_0 = 1
-    S_0 = 999999
-    R_0 = 0
-
-    model = SIR_model()
-    # Make predictions:
-    S, I, R, t = model.predict(S_0, I_0, R_0, t_0, t_f)
-    contaminations = model.predict(S_0, I_0, R_0, t_0, t_f, True)
-
-
-    model.add_total_positive_atm(data, 1/model.gamma)
-    plt.scatter(data['Day'],data['Total_positive_atm'], c = "orange", label='Cumulative infected')
-    plt.plot(data['Day'],data['num_positive'], label='Positives cases')
-    # plt.plot(t, S, c="blue", label='Susceptible')
-    plt.scatter(t, I, c="red", label='Infected')
-
-    plt.plot(t, R, c="green", label='Recovered')
-    plt.legend()
-    plt.savefig('img/deter_ad.png')
-
-    # model.plot_fitting(t, data, contaminations)
-
-    model.fit(data)
+    # t_0 = data['Day'][0]
+    # t_f = len(data['Day'])+3
+    # I_0 = 1
+    # S_0 = 999999
+    # R_0 = 0
+    #
+    # model = SIR_model()
+    # # Make predictions:
+    # S, I, R, t = model.predict(S_0, I_0, R_0, t_0, t_f)
+    # contaminations = model.predict(S_0, I_0, R_0, t_0, t_f, True)
+    #
+    #
+    # model.add_total_positive_atm(data, 1/model.gamma)
+    # plt.scatter(data['Day'],data['Total_positive_atm'], c = "orange", label='Cumulative infected')
+    # plt.plot(data['Day'],data['num_positive'], label='Positives cases')
+    # # plt.plot(t, S, c="blue", label='Susceptible')
+    # plt.scatter(t, I, c="red", label='Infected')
+    #
+    # plt.plot(t, R, c="green", label='Recovered')
+    # plt.legend()
+    # plt.savefig('img/deter_ad.png')
+    #
+    # # model.plot_fitting(t, data, contaminations)
+    #
+    # model.fit(data)
 
     pass
