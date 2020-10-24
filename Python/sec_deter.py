@@ -12,8 +12,10 @@ class SIR():
 
     def __init__(self):
 
-        self.beta = 0.5717
-        self.gamma = 0.4282
+        self.beta = 0.57009
+        #self.beta = 0.35427
+        self.gamma = 0.48789
+        #self.gamma = 0.18040
 
 
     def differential(self, SIR_values, time, beta=-1, gamma=-1):
@@ -46,7 +48,7 @@ class SIR():
         for i in range(0, dataset.shape[0]):
             #print("iter: {}, dataset= {}, pred I ={}, pred R ={}".format(i, dataset[i][1], predictions[i][1] , predictions[i][2]))
             #error += (round(dataset[i][1], 4) - round(predictions[i][1], 4) - round(predictions[i][2], 4))**2
-            error += (dataset[i][1] - predictions[i][1] - predictions[i][2]) ** 2
+            error += (dataset[i][1] - predictions[i][2]) ** 2
 
         return error
 
@@ -55,7 +57,10 @@ class SIR():
         Fit the model
         """
         # Load the dataset
-        dataset = self.load_testing_data(args="cumul_positives", dataset=data)
+        if data == "covid_20":
+            dataset = self.load_testing_data(args="positives", dataset=data)
+        else:
+            dataset = self.load_testing_data(args="cumul_positives", dataset=data)
         if dataset[0][1] == 0:
             dataset[0][1] = 1
         pop_size = 1000000
@@ -64,16 +69,16 @@ class SIR():
         # Initial state
         initial_state = (pop_size - dataset[0][1], dataset[0][1], 0)
         # Sub parameters
-        beta_min = 0.1
+        beta_min = 0
         beta_max = 0.9
         gamma_min = 0.1
         gamma_max = 0.9
         range_size = 200
         # Range vectors
         beta_range = np.linspace(beta_min, beta_max, range_size)
-        beta_range = np.round(beta_range, decimals=4)
+        #beta_range = np.round(beta_range, decimals=4)
         gamma_range = np.linspace(gamma_min, gamma_max, range_size)
-        gamma_range = np.round(gamma_range, decimals=4)
+        #gamma_range = np.round(gamma_range, decimals=4)
         # Least square matrix:
         SSE = np.zeros((range_size, range_size))
         # Fill the matrix:
@@ -182,17 +187,10 @@ class SIR():
 
     def plot_sse_space(self, SSE, beta_range, gamma_range):
 
-        SSE_new = np.zeros(SSE.shape)
-        for i in range(0, SSE_new.shape[0]):
-            for j in range(0, SSE_new.shape[1]):
-                if SSE[i][j] < 100000000:
-                    SSE_new[i][j] = SSE[i][j]
-                else:
-                    SSE_new[i][j] = np.nan
         X, Y = np.meshgrid(beta_range, gamma_range)
         fig = plt.figure()
         ax = fig.add_subplot(111, projection='3d')
-        ax.plot_wireframe(X, Y, SSE_new)
+        ax.plot_wireframe(X, Y, SSE)
         ax.set_zscale('log')
         ax.view_init(15, 60)
         plt.show()
@@ -231,23 +229,24 @@ class SIR():
             # load pandas dataframe and convert to nparray:
             df = pd.read_csv(url, sep=",", header=0)
             # Remove first row
-            df = df.drop([0], axis=0)
+            #df = df.drop([0], axis=0)
             # Convert to numpy array
             np_df = df.to_numpy()
             # Sum confirmed and hospit ??? voir si nécessaire
-            np_df[:, 1] = np_df[:, 1] + np_df[:, 2]
+            # np_df[:, 1] = np_df[:, 1] + np_df[:, 2]
             time = np.arange(np_df.shape[0])
-            positives = np.vstack((time, np_df[:, 1])).T
+            positives = np.vstack((time, np_df[:, 3])).T
         if dataset == "covid_19":
             url = "https://raw.githubusercontent.com/julien1941/PI/master/R/cov_19_be.csv?token=AOOPK5GEPW4DUM5XDUD73OC7TVWKC"
             # load pandas dataframe
             df = pd.read_csv(url, sep=",", header=0)
             # Remove 40 first rows
             df = df.to_numpy()
-            df = df[40:70, :]
+            df = df[14:69, :]
             for i in range(0, df.shape[0]):
                 df[i][0] = i
             positives = np.vstack((df[:, 0], df[:, 2])).T
+            positives[0] = 1
         if args == "positives":
             return positives
         if args == "cumul_positives":
@@ -263,7 +262,10 @@ class SIR():
         Compare model's result with given dataset
         """
         # Load the dataset of cumulative confirmed cases
-        dataset = self.load_testing_data(args="cumul_positives", dataset=data)
+        if data == "covid_20":
+            dataset = self.load_testing_data(args="positives", dataset=data)
+        else:
+            dataset = self.load_testing_data(args="cumul_positives", dataset=data)
         print(dataset)
         # Make predictions
         predictions = self.predict(S_0=1000000-dataset[0][1], I_0=dataset[0][1], R_0=0, duration=dataset.shape[0])
@@ -292,9 +294,11 @@ def covid_20():
 def covid_19():
 
     model = SIR()
-    #model.compare_with_dataset(data="covid_19")
-    model.fit(data="covid_19")
+    model.compare_with_dataset(data="covid_19")
+    #model.fit(data="covid_19")
     #model.sequential_fit(data="covid_19")
+
+
 
     pass
 
