@@ -46,11 +46,21 @@ class SIR():
 
     def fit_sequential(self, dataset, args="hospit", method='fit_on_R', range_size=2000):
         """
-        Args:
-            - hospit = fit on cumulative hospitalisations
-            - show = plot
-        Method:
-            - Fit on R: try to fit the R compartiment
+        This method try to fit the beta and gamma parameters of the model by doing the following steps:
+            a. Start from an initial value of beta and gamma.
+            b. Continue this loop while the beta and gamma variation is more than a precision boundary:
+                - Enumerate a range_size length sequence of beta values to test for the actual value of gamma
+                - Set as parameter the value of beta who return the smallest squared error.
+                - Do the same thing for the parameter gamma
+                - back to the start of the loop.
+        After a small number of execution, the model converge to the optimal value.
+        ----------------
+        1. Args: take the type of input data to fit. Can be:
+            - hospit: to fit on the cumulative number of hospitalisations
+            - positive: to fit on the cumulative number of positive tests. Note: make the cumul himself.
+        2. method: the parameter of the SIR model to fit:
+            - fit_on_R: try to fit on the R curve (default)
+            - fit_on_RI: try to fit on the sum of the cures R and I
         """
         if "hospit" in args:
             time = dataset[:, 0]
@@ -88,13 +98,14 @@ class SIR():
 
     def fit_bruteforce(self, dataset, args="hospit", method='fit_on_R', range_size=200, print_space=False):
         """
-        This method will search the optimal value while testing a certain number of combinations
-        Search only for SIR model, so with sigma = 1
-        Args:
-            - hospit = fit on cumulative hospitalisations
-            - show = plot
-        Method:
-            - Fit on R: try to fit the R compartiment
+        Try to find the best value of beta and gamma by enumerating the most combinations of beta and gamma.
+        This method return the combination who have the best sum of square error.
+        1. Args: take the type of input data to fit. Can be:
+            - hospit: to fit on the cumulative number of hospitalisations
+            - positive: to fit on the cumulative number of positive tests. Note: make the cumul himself.
+        2. method: the parameter of the SIR model to fit:
+            - fit_on_R: try to fit on the R curve (default)
+            - fit_on_RI: try to fit on the sum of the cures R and I
         """
         if "hospit" in args:
             time = dataset[:, 0]
@@ -133,7 +144,16 @@ class SIR():
             self.plot_sse_space(SSE, beta_range, gamma_range)
 
     def fit_scipy(self, dataset, args="hospit", method='fit_on_R'):
-
+        """
+        Use scipy.optimize.minimize to search the optimal combination of
+        beta and gamma
+        1. Args: take the type of input data to fit. Can be:
+            - hospit: to fit on the cumulative number of hospitalisations
+            - positive: to fit on the cumulative number of positive tests. Note: make the cumul himself.
+        2. method: the parameter of the SIR model to fit:
+            - fit_on_R: try to fit on the R curve (default)
+            - fit_on_RI: try to fit on the sum of the cures R and I
+        """
         if "hospit" in args:
             time = dataset[:, 0]
             data = dataset[:, 3]
