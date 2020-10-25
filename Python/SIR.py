@@ -276,7 +276,7 @@ class SIR():
             if curve_choise == "fit_on_RI":
                 Y = predictions[:, 2] + predictions[:, 3]
                 plt.scatter(predictions[:, 0], data[:, 3], c="blue")
-                plt.plot(predictions[:, 0], X, c="red")
+                plt.plot(predictions[:, 0], Y, c="red")
 
             plt.show()
 
@@ -304,19 +304,20 @@ def covid_20(fit_method="scipy"):
     method = "fit_on_R"
     if "fit_on_RI" in fit_method:
         method = "fit_on_RI"
+
     if "scipy" in fit_method:
-        model.fit_scipy(dataset=data, args='hospit', method='method')
+        model.fit_scipy(dataset=data, args='hospit', method=method)
     if "sequential" in fit_method:
-        model.fit_sequential(data, args="hospit", method='method', range_size=2000)
+        model.fit_sequential(data, args="hospit", method=method, range_size=2000)
     if "bruteforce" in fit_method:
-        model.fit_bruteforce(data, args='hospit', method='method', range_size=200)
+        model.fit_bruteforce(data, args='hospit', method=method, range_size=200)
     # Make predictions:
     predictions = model.predict(S_0=999999, I_0=1, R_0=0, duration=300)
     # Plot predictions:
     model.plot_curves(predictions, args="show save",
                       title="Predi with beta={}, gamma={}".format(model.beta, model.gamma),
                       f_name="plot_after_fitting")
-    model.compare_with_dataset(data, "cumul_hospit")
+    model.compare_with_dataset(data, curve_choise=method, data_choise='hospit')
 
 
 
