@@ -56,6 +56,15 @@ class SIR():
             time = dataset[:, 0]
             data = dataset[:, 3]
 
+        if "positive" in args:
+            time = dataset[:, 0]
+            data = dataset[:, 1]
+            # Make sure we don't have a zero at the first time step
+            if data[0] == 0:
+                data[0] == 1
+            for i in range(1, len(data)):
+                data[i] += data[i - 1]
+
         # Initialize model's parameters
         self.beta = 0.5
         self.gamma = 0.5
@@ -91,6 +100,15 @@ class SIR():
             time = dataset[:, 0]
             data = dataset[:, 3]
 
+        if "positive" in args:
+            time = dataset[:, 0]
+            data = dataset[:, 1]
+            # Make sure we don't have a zero at the first time step
+            if data[0] == 0:
+                data[0] == 1
+            for i in range(1, len(data)):
+                data[i] += data[i-1]
+
         beta_range = np.linspace(0, 1, range_size)
         gamma_range = np.linspace(0, 1, range_size)
         self.sigma = 1
@@ -119,6 +137,16 @@ class SIR():
         if "hospit" in args:
             time = dataset[:, 0]
             data = dataset[:, 3]
+
+        if "positive" in args:
+            time = dataset[:, 0]
+            data = dataset[:, 1]
+            # Make sure we don't have a zero at the first time step
+            if data[0] == 0:
+                data[0] == 1
+            for i in range(1, len(data)):
+                data[i] += data[i - 1]
+
         # Set initial state:
         initial_state = (1000000 - data[0], data[0], 0)
         start_values = [0.4, 0.3]
@@ -128,7 +156,9 @@ class SIR():
         self.gamma = res.x[1]
 
     def plot_sse_space(self, SSE, beta_range, gamma_range):
-
+        """
+        Draw a 3D map of SSE in fuction of the two parameters beta and gamma
+        """
         X, Y = np.meshgrid(beta_range, gamma_range)
         fig = plt.figure()
         ax = fig.add_subplot(111, projection='3d')
@@ -277,8 +307,26 @@ class SIR():
                 Y = predictions[:, 2] + predictions[:, 3]
                 plt.scatter(predictions[:, 0], data[:, 3], c="blue")
                 plt.plot(predictions[:, 0], Y, c="red")
-
             plt.show()
+
+        if data_choise == "positive":
+            # Make cumul:
+            cumul = [data[0][1]]
+            if cumul[0] == 0:
+                cumul[0] = 1
+            for i in range(1, data.shape[0]):
+                cumul.append(data[i][1] + cumul[i-1])
+            # Make predictions:
+            predictions = self.predict(S_0=1000000 - cumul[0], I_0=cumul[0], R_0=0, duration=data.shape[0])
+            if curve_choise == "fit_on_R":
+                plt.scatter(predictions[:, 0], cumul, c="blue")
+                plt.plot(predictions[:, 0], predictions[:, 3], c="red")
+            if curve_choise == "fit_on_RI":
+                Y = predictions[:, 2] + predictions[:, 3]
+                plt.scatter(predictions[:, 0], cumul, c="blue")
+                plt.plot(predictions[:, 0], Y, c="red")
+            plt.show()
+
 
 
 def covid_20(fit_method="scipy"):
@@ -293,6 +341,7 @@ def covid_20(fit_method="scipy"):
             - fit_on_RI: essaie de fitter la courbe R + I
         3. Choix des données covid_20 à utiliser pour le fitting:
             - hospit : (valeur par default) : fit le cumul des hospitalisations
+            - positive : fite the cumul of positive tests
 
     """
 
@@ -304,26 +353,23 @@ def covid_20(fit_method="scipy"):
     method = "fit_on_R"
     if "fit_on_RI" in fit_method:
         method = "fit_on_RI"
+    data_to_fit = "hospit"  # Default value
+    if "positive" in fit_method:
+        data_to_fit = "positive"
 
     if "scipy" in fit_method:
-        model.fit_scipy(dataset=data, args='hospit', method=method)
+        model.fit_scipy(dataset=data, args=data_to_fit, method=method)
     if "sequential" in fit_method:
-        model.fit_sequential(data, args="hospit", method=method, range_size=2000)
+        model.fit_sequential(data, args=data_to_fit, method=method, range_size=2000)
     if "bruteforce" in fit_method:
-        model.fit_bruteforce(data, args='hospit', method=method, range_size=200)
+        model.fit_bruteforce(data, args=data_to_fit, method=method, range_size=200)
     # Make predictions:
     predictions = model.predict(S_0=999999, I_0=1, R_0=0, duration=300)
     # Plot predictions:
     model.plot_curves(predictions, args="show save",
                       title="Predi with beta={}, gamma={}".format(model.beta, model.gamma),
                       f_name="plot_after_fitting")
-    model.compare_with_dataset(data, curve_choise=method, data_choise='hospit')
-
-
-
-
-
-
+    model.compare_with_dataset(data, curve_choise=method, data_choise=data_to_fit)
 
 
 if __name__ == "__main__":
