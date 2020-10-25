@@ -58,6 +58,7 @@ class SIR():
         1. Args: take the type of input data to fit. Can be:
             - hospit: to fit on the cumulative number of hospitalisations
             - positive: to fit on the cumulative number of positive tests. Note: make the cumul himself.
+            - positive+hospit: cumulative of positive case + cumulative of hospit
         2. method: the parameter of the SIR model to fit:
             - fit_on_R: try to fit on the R curve (default)
             - fit_on_RI: try to fit on the sum of the cures R and I
@@ -74,27 +75,35 @@ class SIR():
                 data[0] == 1
             for i in range(1, len(data)):
                 data[i] += data[i - 1]
+        if "positive+hospit" in args:
+            time = dataset[:, 0]
+            data = dataset[:, 1]
+            # Make cumul
+            if data[0] == 0:
+                data[0] == 1
+            for i in range(1, len(data)):
+                data[i] += data[i - 1]
+            # Add cumul hospit:
+            data = data + dataset[:, 3]
 
         # Initialize model's parameters
-        self.beta = 0.5
-        self.gamma = 0.5
+        self.beta = 0.4
+        self.gamma = 0.3
         # Set initial state:
         initial_state = (1000000 - data[0], data[0], 0)
         # Store the sum of each parameters variation
         dt = math.inf
-        it = 0
-        while it < 5:
+        while dt > 0.00001:
             dt = 0
             # store precedent value of beta and fit beta
             beta_0 = self.beta
-            self.fit_on_beta(time, data, initial_state, method, range_size, show=True)
+            self.fit_on_beta(time, data, initial_state, method, range_size, show=False)
             dt += math.fabs(beta_0 - self.beta)
             # store precedent value of gamma and fit on gamma
             gamma_0 = self.gamma
-            self.fit_on_gamma(time, data, initial_state, method, range_size, show=True)
+            self.fit_on_gamma(time, data, initial_state, method, range_size, show=False)
             dt += math.fabs(gamma_0 - self.gamma)
-            it += 1
-            print(dt)
+            print("Sequential fitting, move: {} with beta = {} and gamma = {}".format(dt, self.beta, self.gamma))
 
     def fit_bruteforce(self, dataset, args="hospit", method='fit_on_R', range_size=200, print_space=False):
         """
@@ -119,6 +128,16 @@ class SIR():
                 data[0] == 1
             for i in range(1, len(data)):
                 data[i] += data[i-1]
+        if "positive+hospit" in args:
+            time = dataset[:, 0]
+            data = dataset[:, 1]
+            # Make cumul
+            if data[0] == 0:
+                data[0] == 1
+            for i in range(1, len(data)):
+                data[i] += data[i - 1]
+            # Add cumul hospit:
+            data = data + dataset[:, 3]
 
         beta_range = np.linspace(0, 1, range_size)
         gamma_range = np.linspace(0, 1, range_size)
@@ -166,6 +185,16 @@ class SIR():
                 data[0] == 1
             for i in range(1, len(data)):
                 data[i] += data[i - 1]
+        if "positive+hospit" in args:
+            time = dataset[:, 0]
+            data = dataset[:, 1]
+            # Make cumul
+            if data[0] == 0:
+                data[0] == 1
+            for i in range(1, len(data)):
+                data[i] += data[i - 1]
+            # Add cumul hospit:
+            data = data + dataset[:, 3]
 
         # Set initial state:
         initial_state = (1000000 - data[0], data[0], 0)
@@ -347,7 +376,38 @@ class SIR():
                 plt.plot(predictions[:, 0], Y, c="red")
             plt.show()
 
+        if data_choise == "positive+hospit":
+            # Make cumul:
+            cumul = [data[0][1]]
+            if cumul[0] == 0:
+                cumul[0] = 1
+            for i in range(1, data.shape[0]):
+                cumul.append(data[i][1] + cumul[i-1])
+            for i in range(0, data.shape[0]):
+                cumul[i] = cumul[i] + data[i][3]
+            # Make predictions:
+            predictions = self.predict(S_0=1000000 - cumul[0], I_0=cumul[0], R_0=0, duration=data.shape[0])
+            if curve_choise == "fit_on_R":
+                plt.scatter(predictions[:, 0], cumul, c="blue")
+                plt.plot(predictions[:, 0], predictions[:, 3], c="red")
+            if curve_choise == "fit_on_RI":
+                Y = predictions[:, 2] + predictions[:, 3]
+                plt.scatter(predictions[:, 0], cumul, c="blue")
+                plt.plot(predictions[:, 0], Y, c="red")
+            plt.show()
 
+
+def plot_dataset(dataset):
+
+    plt.plot(dataset[:, 0], dataset[:, 1], c='orange', label='Positive')
+    plt.plot(dataset[:, 0], dataset[:, 2], c='red', label='Hospitalised')
+    plt.plot(dataset[:, 0], dataset[:, 3], c='blue', label='Cumul Hospit')
+    plt.plot(dataset[:, 0], dataset[:, 4], c='yellow', label='Critical')
+    plt.plot(dataset[:, 0], dataset[:, 5], c='black', label='Death')
+    plt.xlabel("Time in days")
+    plt.ylabel("Number of people")
+    plt.title("Dataset COVID 20")
+    plt.show()
 
 def covid_20(fit_method="scipy"):
     """
@@ -362,6 +422,7 @@ def covid_20(fit_method="scipy"):
         3. Choix des données covid_20 à utiliser pour le fitting:
             - hospit : (valeur par default) : fit le cumul des hospitalisations
             - positive : fite the cumul of positive tests
+            - positive+hospit : Cumul of positives + cumul of hospit
 
     """
 
@@ -369,6 +430,8 @@ def covid_20(fit_method="scipy"):
     model = SIR()
     # Load the testing dataset
     data = model.import_dataset(args="covid_20, np")
+    # Plot the dataset
+    plot_dataset(data)
     # Fit the model:
     method = "fit_on_R"
     if "fit_on_RI" in fit_method:
@@ -376,6 +439,8 @@ def covid_20(fit_method="scipy"):
     data_to_fit = "hospit"  # Default value
     if "positive" in fit_method:
         data_to_fit = "positive"
+    if "positive+hospit" in fit_method:
+        data_to_fit = "positive+hospit"
 
     if "scipy" in fit_method:
         model.fit_scipy(dataset=data, args=data_to_fit, method=method)
@@ -394,7 +459,8 @@ def covid_20(fit_method="scipy"):
 
 if __name__ == "__main__":
 
-    # covid_20(fit_method="sequential")
+    # covid_20(fit_method="sequential hospit fit_on_RI")
     # covid_20(fit_method="scipy")
     # covid_20(fit_method="bruteforce")
+    # covid_20(fit_method="scipy positive+hospit fit_on_RI")
     covid_20(fit_method="scipy hospit fit_on_RI")
