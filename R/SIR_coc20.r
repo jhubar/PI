@@ -1,15 +1,7 @@
 library(readr)
 cov_20_be <- read_csv("https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/data.csv")
 
-SIR <- function(time, state, parameters) {
-  par <- as.list(c(state, parameters))
-  with(par, {
-    dS <- -beta * I * S / N
-    dI <- beta * I * S / N - gamma * I
-    dR <- gamma * I
-    list(c(dS, dI, dR))
-  })
-}
+
 
 # devtools::install_github("RamiKrispin/coronavirus")
 library(coronavirus)
@@ -69,13 +61,12 @@ init <- c(
 RSS <- function(parameters) {
   names(parameters) <- c("beta", "gamma")
   out <- ode(y = init, times = Day, func = SIR, parms = parameters)
-  
+  print(init)
   fit <- out[, 3]
-  print(fit)
-  print(" - ")
-  print(Infected)
-  print("\n")
+  
+ 
   sum((Infected - fit)^2)
+  print(sum((Infected - fit)^2))
 }
 
 library(deSolve)
