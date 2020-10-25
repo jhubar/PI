@@ -38,7 +38,8 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Python" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="org.jetbrains.r.configuration.RSettingsProjectConfigurable" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -49,6 +50,9 @@
       <option name="presentableId" value="Default" />
       <updated>1603453543317</updated>
       <workItem from="1603453544627" duration="752000" />
+      <workItem from="1603540194983" duration="74000" />
+      <workItem from="1603556312011" duration="9950000" />
+      <workItem from="1603566518796" duration="9232000" />
     </task>
     <servers />
   </component>
@@ -65,11 +69,30 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="421" y="100" key="FileChooserDialogImpl" timestamp="1603455471287">
+    <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1603540205432">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
+    <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.689@0.0.1280.689" timestamp="1603540205432" />
+    <state x="632" y="152" key="FileChooserDialogImpl" timestamp="1603565739624">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="632" y="152" key="FileChooserDialogImpl/-1920.0.1280.700/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1603565739624" />
     <state x="421" y="100" key="FileChooserDialogImpl/0.0.1280.689@0.0.1280.689" timestamp="1603455471287" />
+    <state x="213" y="0" key="SettingsEditor" timestamp="1603566541302">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="213" y="0" key="SettingsEditor/-1920.0.1280.700/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1603566541302" />
+    <state x="142" y="0" key="SettingsEditor/0.0.1280.689@0.0.1280.689" timestamp="1603540235000" />
+    <state width="968" height="533" key="XDebugger.FullValuePopup" timestamp="1603570200115">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state width="968" height="533" key="XDebugger.FullValuePopup/-1920.0.1280.700/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1603570200115" />
+    <state x="1922" y="0" width="779" height="718" maximized="true" key="dock-window-1" timestamp="1603566542127">
+      <screen x="1920" y="0" width="1920" height="1050" />
+    </state>
+    <state x="1922" y="0" width="779" height="718" maximized="true" key="dock-window-1/-1920.0.1280.700/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1603566542127" />
   </component>
 </project>

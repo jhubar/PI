@@ -1,5 +1,5 @@
 library(readr)
-cov_20_be <- read_csv("Documents/#Master1/PI/R/cov_20_be.csv")
+cov_20_be <- read_csv("https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/data.csv")
 
 
 

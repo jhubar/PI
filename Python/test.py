@@ -3,7 +3,6 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib
-import requests # to dowload csv file in github
 from numpy import asarray
 from numpy import savetxt
 from mpl_toolkits.mplot3d import Axes3D
@@ -29,6 +28,7 @@ class SIR_model():
         self.sir_end_date = "2020-02-18"
         self.dataset = np.ones(1)
 
+
     def predictor(self, SIR_values, time):
         dS = -self.beta * SIR_values[0] * SIR_values[1] / self.population
         dI = (self.beta * SIR_values[0] * SIR_values[1] / self.population) - (self.gamma * SIR_values[1])
@@ -40,6 +40,7 @@ class SIR_model():
         dI = (beta * SIR_values[0] * SIR_values[1] / self.population) - (gamma * SIR_values[1])
         dR = gamma * SIR_values[1]
         return dS, dI, dR
+
     def RSS(self, parameters):
 
         # Vector of initial values:
@@ -52,16 +53,63 @@ class SIR_model():
         predict = odeint(self.manual_predictor, SIR_init, t, args=args)
 
         # Compute SSE
-        SSE = (self.dataset[:, 1] - predict[:, 1] - predict[:, 2])**2
+        SSE = (self.dataset[:, 1] - predict[:, 2])**2
         return np.sum(SSE)
+
+    def curves(self):
+
+        SIR_init = [999995, 5, 0]
+        # time vector:
+        t = np.zeros(15)
+        for i in range(0, 15):
+            t[i] = i
+        predict = odeint(self.predictor, SIR_init, t)
+
+        plt.plot(t, predict[:, 0])
+        plt.plot(t, predict[:, 1])
+        plt.plot(t, predict[:, 2])
+        plt.show()
+
+        for i in range(0, predict.shape[0]):
+            value = predict[i][0] + predict[i][1] + predict[i][2]
+            print("S={}, I={}, R={}".format(predict[i][0], predict[i][1], predict[i][2]))
+
+
+
 
     def fit(self):
 
         start_values = np.array([0.5, 0.5])
 
         #ret_val = minimize(self.RSS, method="L-BFGS-B", x0=start_values, bounds=((0.01, 0.09), (0.01, 0.09)))
-        ret_val = minimize(self.RSS, x0=start_values, method="L-BFGS-B", bounds=((0.01, 0.09), (0.01, 0.09)))
+        ret_val = minimize(self.RSS, x0=start_values, method="L-BFGS-B", bounds=((0.01, 0.9), (0.01, 0.9)))
         print(ret_val)
+
+    def fit_manual(self, dataset, beta_min=0, beta_max=1, gamma_min=0, gamma_max=1, range_size=100):
+        """
+        Find optimal value of beta and gamma parameters for the given dataset
+        """
+        beta_interval = (beta_max - beta_min) / range_size
+        gamma_interval = (gamma_max - gamma_min) / range_size
+        beta_range = [beta_interval + beta_min]
+        gamma_range = [gamma_interval + gamma_min]
+        for i in range(1, range_size):
+            beta_range.append(beta_range[i - 1] + beta_interval)
+            gamma_range.append(gamma_range[i - 1] + gamma_interval)
+
+        SSE = np.zeros((range_size, range_size))
+        best_val = (999999999999, 0, 0)
+        for b in range(0, range_size):
+            for g in range(0, range_size):
+                parameters = (beta_range[b], gamma_range[g])
+                SSE[b][g] = self.RSS(parameters)
+                if SSE[b][g] < best_val[0]:
+                    best_val = (SSE[b][g], beta_range[b], beta_range[g])
+
+        print(best_val)
+
+
+
 
 
 
@@ -74,7 +122,6 @@ def covid_20():
     # Import datas
     url = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/data.csv"
     data = pd.read_csv(url, sep=',', header=0)
-    print(data)
     dataset = data.to_numpy()
     # make cumul data:
     for i in range(1, dataset.shape[0]):
@@ -82,7 +129,7 @@ def covid_20():
 
     model = SIR_model()
     model.dataset = dataset
-    model.fit()
+    model.fit_manual(dataset, beta_min=0.01, beta_max=0.9, gamma_min=0.1, gamma_max=0.8, range_size=200)
 
 
 
@@ -94,3 +141,6 @@ def covid_20():
 if __name__ == "__main__":
 
     covid_20()
+
+    #model = SIR_model()
+    #model.curves()
