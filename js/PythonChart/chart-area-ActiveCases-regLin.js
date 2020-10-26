@@ -15,7 +15,7 @@ $value_time_SIR.on('input change', () => {
 
 
 
-    var url = "https://github.com/julien1941/PI/blob/master/Python/Data/data.json"
+    var url = "https://raw.githubusercontent.com/julien1941/PI/master/Python/Data/data.json?token=AL3RLGJRRU4F6OP3KXMQDCS7T7X2Q"
     var data = ''
     // DAp
     var tmp ;
@@ -35,7 +35,7 @@ $value_time_SIR.on('input change', () => {
       dataLinearfit = [];
 
 
-      for(var i=0;i<=$value_time_SIR.val();i++){
+      for(var i=0;i<$value_time_SIR.val();i++){
 
         data_day.push(result.current[i].Day);
         data_sir_s.push(result.current[i].SIR_S);
@@ -52,12 +52,12 @@ $value_time_SIR.on('input change', () => {
   without_cum_cases(2);
 
 
-  $("#num_Of_Susceptible").html((parseInt(data_sir_s[data_sir_s.length-1]).toFixed(2)).toString())
-  $("#num_Of_infected").html((parseInt(data_sir_i[data_sir_i.length-1]).toFixed(2)).toString())
-  $("#num_Of_Recovered").html((parseInt(data_sir_r[data_sir_r.length-1]).toFixed(2)).toString())
-  $("#num_Of_day").html((parseInt(data_day[data_sir_i.length-1]).toFixed(0)).toString())
-  $("#id_beta").html((parseInt(result.parameter[0].beta).toFixed(6)).toString())
-  $("#id_gamma").html((parseInt(result.parameter[0].gamma).toFixed(6)).toString())
+  $("#num_Of_Susceptible").html((parseFloat(data_sir_s[data_sir_s.length-1]).toFixed(2)).toString())
+  $("#num_Of_infected").html((parseFloat(data_sir_i[data_sir_i.length-1]).toFixed(2)).toString())
+  $("#num_Of_Recovered").html((parseFloat(data_sir_r[data_sir_r.length-1]).toFixed(2)).toString())
+  $("#num_Of_day").html((parseFloat(data_day[data_sir_i.length-1]).toFixed(0)).toString())
+  $("#id_beta").html((parseFloat(result.parameter[0].beta).toFixed(6)).toString())
+  $("#id_gamma").html((parseFloat(result.parameter[0].gamma).toFixed(6)).toString())
 
 
 
@@ -271,7 +271,7 @@ function loadData(){
       dataLinearfit = [];
 
 
-      for(var i=0;i<=$value_time_SIR.val();i++){
+      for(var i=0;i<$value_time_SIR.val();i++){
 
         data_day.push(result.current[i].Day);
         data_sir_s.push(result.current[i].SIR_S);
@@ -288,12 +288,12 @@ function loadData(){
 
   without_cum_cases(2);
 
-  $("#num_Of_Susceptible").html((parseInt(data_sir_s[data_sir_s.length-1]).toFixed(2)).toString())
-  $("#num_Of_infected").html((parseInt(data_sir_i[data_sir_i.length-1]).toFixed(2)).toString())
-  $("#num_Of_Recovered").html((parseInt(data_sir_r[data_sir_r.length-1]).toFixed(2)).toString())
-  $("#num_Of_day").html((parseInt(data_day[data_sir_i.length-1]).toFixed(0)).toString())
-  $("#id_beta").html((parseInt(result.parameter[0].beta).toFixed(6)).toString())
-  $("#id_gamma").html((parseInt(result.parameter[0].gamma).toFixed(6)).toString())
+  $("#num_Of_Susceptible").html((parseFloat(data_sir_s[data_sir_s.length-1]).toFixed(2)).toString())
+  $("#num_Of_infected").html((parseFloat(data_sir_i[data_sir_i.length-1]).toFixed(2)).toString())
+  $("#num_Of_Recovered").html((parseFloat(data_sir_r[data_sir_r.length-1]).toFixed(2)).toString())
+  $("#num_Of_day").html((parseFloat(data_day[data_sir_i.length-1]).toFixed(0)).toString())
+  $("#id_beta").html((parseFloat(result.parameter[0].beta).toFixed(6)).toString())
+  $("#id_gamma").html((parseFloat(result.parameter[0].gamma).toFixed(6)).toString())
 
 
 
