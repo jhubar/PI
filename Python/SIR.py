@@ -206,8 +206,6 @@ class SIR():
         self.gamma = res.x[1]
 
 
-
-
     def plot_sse_space(self, SSE, beta_range, gamma_range):
         """
         Draw a 3D map of SSE in fuction of the two parameters beta and gamma
@@ -433,6 +431,9 @@ def plot_dataset(dataset):
     plt.xlabel("Time in days")
     plt.ylabel("Number of people")
     plt.title("Dataset COVID 20")
+
+
+    plt.legend(loc='upper left')
     plt.show()
 
 def covid_20(fit_method="scipy"):
