@@ -27,17 +27,15 @@ function number_format(number, decimals, dec_point, thousands_sep) {
   return s.join(dec);
 }
 function loadData(){
-  
+
   var url = "https://raw.githubusercontent.com/julien1941/PI/master/Python/Data/data.json?token=AL3RLGM2NSZGK6SHJKFIME27T7DIU"
   var data = ''
   // DAp
   var tmp ;
+
   $.get(url,function(data){
 
     const result = JSON.parse(data);
-
-
-
 
 
 
