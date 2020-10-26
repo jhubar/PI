@@ -717,14 +717,10 @@
                       <i class="fas fa-circle text-primary"></i> Current Day
                     </span>
                     <span class="mr-2">
-                      <i class="fas fa-circle text-danger"></i> Linear Predicated Day
+                      <i class="fas fa-circle text-danger"></i> Fitted SIR model
                     </span>
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-warning"></i> Overfit Predicated Day
-                    </span>
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-warning"></i> Underfit Predicated Day
-                    </span>
+
+
                     <span class="mr-2">
                       <i class="fas fa-circle text-success"></i> Cumulative cases
                     </span>
@@ -1366,12 +1362,13 @@
           else{
             result_num_critical = `
             <td class="fas fa-caret-up fa-1x text-danger">${ percentChange_num_critical }</td>
-            <td class="fas fa-percent text-denger"></td>`
+            <td class="fas fa-percent text-danger"></td>`
             $("#num_criticalKPIPredicated").html(result_num_critical)
           }
 
+          var forcastResult_num_critical = (parseFloat(dataLinearfit_num_critical[label.length-1]).toFixed(3)).toString();
           forcastResult_num_critical = `
-          <td class="text-secondary">${ dataLinearfit_num_critical[label.length-1] }</td>`
+          <td class="text-secondary">${ forcastResult_num_critical }</td>`
           $("#num_criticalOfcasesKPIForcast").html(forcastResult_num_critical)
           // fatalities
 
