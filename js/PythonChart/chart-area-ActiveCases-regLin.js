@@ -49,50 +49,14 @@ $value_time_SIR.on('input change', () => {
 
 
   without_cum_cases(2);
-  $("#num_Of_Recovered").html(data_sir_s[data_sir_s.length-1])
-  $("#num_Of_infected").html(data_sir_i[data_sir_i.length-1])
-  $("#num_Of_Susceptible").html(data_sir_r[data_sir_r.length-1])
-  $("#num_Of_day").html(data_day[data_day.length-1])
 
-  // $("#num_Of_cum_casesKPIForcast").html(dataC[dataC.length-1])
-  // var percentChange = ((((dataLinearfit[label.length-1] - dataLinearfit[label.length-8]) /dataLinearfit[label.length-8]))*100).toFixed(0);
-  //
-  // if(percentChange == 0){
-  //   result = `
-  //
-  //
-  //   <td class="fas fa-caret-right text-success">${ percentChange }</td>
-  //   <td class="fas fa-percent text-success"></td>`
-  //   $("#num_OfcasesKPIPredicated").html(result)
-  // }
-  // if(percentChange <= 0){
-  //   result = `
-  //   <td class="fas fa-caret-down fa-1x text-success">${ percentChange }</td>
-  //   <td class="fas fa-percent text-success"></td>`
-  //   $("#num_OfcasesKPIPredicated").html(result)
-  // }
-  // else{
-  //   result = `
-  //   <td class="fas fa-caret-up fa-1x text-danger">${ percentChange }</td>
-  //   <td class="fas fa-percent text-danger"></td>`
-  //   $("#num_OfcasesKPIPredicated").html(result)
-  // }
-  // var currentforcastResult = (parseInt(dataLinearfit[label.length-1]).toFixed(0)).toString();
-  //
-  // forcastResult = `
-  // <td class="text-secondary">${ currentforcastResult }</td>`
-  // $("#num_OfcasesKPIForcast").html(forcastResult)
-  //
-  // var current_recovered_cases = (parseInt(cum_recovered_population[label.length - 1 ]).toFixed(0)).toString();
-  // num_recovered_cases = `
-  // <td class="text-secondary">${ current_recovered_cases }</td>`
-  // $("#num_recovered_cases").html(num_recovered_cases)
-  //
-  // var current_collective_immunity = (parseInt(current_recovered_cases)/1000000).toString();
-  // num_collective_immunity = `
-  // <td class="text-info">${ current_collective_immunity }</td>
-  // <td class="fas fa-percent text-info"></td>`
-  // $("#collective_immunity").html(num_collective_immunity)
+
+  $("#num_Of_Susceptible").html((parseInt(data_sir_s[data_sir_s.length-1]).toFixed(2)).toString())
+  $("#num_Of_infected").html((parseInt(data_sir_i[data_sir_i.length-1]).toFixed(2)).toString())
+  $("#num_Of_Recovered").html((parseInt(data_sir_r[data_sir_r.length-1]).toFixed(2)).toString())
+  $("#num_Of_day").html((parseInt(data_day[data_sir_i.length-1]).toFixed(2)).toString())
+
+
 
 
 
@@ -304,7 +268,7 @@ function loadData(){
       dataLinearfit = [];
 
 
-      for(var i=0;i<result.current.length;i++){
+      for(var i=0;i<$value_time_SIR.val();i++){
 
         data_day.push(result.current[i].Day);
         data_sir_s.push(result.current[i].SIR_S);
@@ -321,10 +285,11 @@ function loadData(){
 
   without_cum_cases(2);
 
-  $("#num_Of_Recovered").html(data_sir_s[data_sir_s.length-1])
-  $("#num_Of_infected").html(data_sir_i[data_sir_i.length-1])
-  $("#num_Of_Susceptible").html(data_sir_r[data_sir_r.length-1])
-  $("#num_Of_day").html(data_day[data_day.length-1])
+  $("#num_Of_Susceptible").html((parseInt(data_sir_s[data_sir_s.length-1]).toFixed(2)).toString())
+  $("#num_Of_infected").html((parseInt(data_sir_i[data_sir_i.length-1]).toFixed(2)).toString())
+  $("#num_Of_Recovered").html((parseInt(data_sir_r[data_sir_r.length-1]).toFixed(2)).toString())
+  $("#num_Of_day").html((parseInt(data_day[data_sir_i.length-1]).toFixed(2)).toString())
+
 
 
 
