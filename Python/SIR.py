@@ -66,7 +66,7 @@ class SIR():
         """
         if "hospit" in args:
             time = dataset[:, 0]
-            data = dataset[:, 3]
+            data = dataset[:, 4]
 
         if "positive" in args:
             time = dataset[:, 0]
@@ -85,7 +85,7 @@ class SIR():
             for i in range(1, len(data)):
                 data[i] += data[i - 1]
             # Add cumul hospit:
-            data = data + dataset[:, 3]
+            data = data + dataset[:, 4]
 
         # Initialize model's parameters
         self.beta = 0.4
@@ -119,7 +119,7 @@ class SIR():
         """
         if "hospit" in args:
             time = dataset[:, 0]
-            data = dataset[:, 3]
+            data = dataset[:, 4]
 
         if "positive" in args:
             time = dataset[:, 0]
@@ -138,7 +138,7 @@ class SIR():
             for i in range(1, len(data)):
                 data[i] += data[i - 1]
             # Add cumul hospit:
-            data = data + dataset[:, 3]
+            data = data + dataset[:, 4]
 
         beta_range = np.linspace(0, 1, range_size)
         gamma_range = np.linspace(0, 1, range_size)
@@ -176,7 +176,7 @@ class SIR():
         """
         if "hospit" in args:
             time = dataset[:, 0]
-            data = dataset[:, 3]
+            data = dataset[:, 4]
 
         if "positive" in args:
             time = dataset[:, 0]
@@ -195,7 +195,7 @@ class SIR():
             for i in range(1, len(data)):
                 data[i] += data[i - 1]
             # Add cumul hospit:
-            data = data + dataset[:, 3]
+            data = data + dataset[:, 4]
 
         # Set initial state:
         initial_state = (1000000 - data[0], data[0], 0)
@@ -372,13 +372,14 @@ class SIR():
 
         if data_choise == "hospit":
             # Make predictions:
-            predictions = self.predict(S_0=1000000 - data[0][3], I_0=data[0][3], R_0=0, duration=data.shape[0])
+            predictions = self.predict(S_0=1000000 - data[0][4], I_0=data[0][3], R_0=0, duration=data.shape[0])
             if curve_choise == "fit_on_R":
-                plt.scatter(predictions[:, 0], data[:, 3], c="blue")
+                plt.scatter(predictions[:, 0], data[:, 4], c="blue")
                 plt.plot(predictions[:, 0], predictions[:, 3], c="red")
+
             if curve_choise == "fit_on_RI":
                 Y = predictions[:, 2] + predictions[:, 3]
-                plt.scatter(predictions[:, 0], data[:, 3], c="blue")
+                plt.scatter(predictions[:, 0], data[:, 4], c="blue")
                 plt.plot(predictions[:, 0], Y, c="red")
             plt.show()
 
@@ -408,7 +409,7 @@ class SIR():
             for i in range(1, data.shape[0]):
                 cumul.append(data[i][1] + cumul[i-1])
             for i in range(0, data.shape[0]):
-                cumul[i] = cumul[i] + data[i][3]
+                cumul[i] = cumul[i] + data[i][4]
             # Make predictions:
             predictions = self.predict(S_0=1000000 - cumul[0], I_0=cumul[0], R_0=0, duration=data.shape[0])
             if curve_choise == "fit_on_R":
@@ -424,15 +425,14 @@ class SIR():
 def plot_dataset(dataset):
 
     plt.plot(dataset[:, 0], dataset[:, 1], c='orange', label='Positive')
-    plt.plot(dataset[:, 0], dataset[:, 2], c='red', label='Hospitalised')
-    plt.plot(dataset[:, 0], dataset[:, 3], c='blue', label='Cumul Hospit')
-    plt.plot(dataset[:, 0], dataset[:, 4], c='yellow', label='Critical')
-    plt.plot(dataset[:, 0], dataset[:, 5], c='black', label='Death')
+    plt.plot(dataset[:, 0], dataset[:, 2], c='tan', label='num_tested')
+    plt.plot(dataset[:, 0], dataset[:, 3], c='red', label='Hospitalised')
+    plt.plot(dataset[:, 0], dataset[:, 4], c='blue', label='Cumul Hospit')
+    plt.plot(dataset[:, 0], dataset[:, 5], c='yellow', label='Critical')
+    plt.plot(dataset[:, 0], dataset[:, 6], c='black', label='Death')
     plt.xlabel("Time in days")
     plt.ylabel("Number of people")
     plt.title("Dataset COVID 20")
-
-
     plt.legend(loc='upper left')
     plt.show()
 
