@@ -334,9 +334,10 @@ class SIR():
         plt.xlabel('Time (days)')
         plt.ylabel('Number of peoples')
         plt.title(title)
-
+        
         dataJSON = {}
         dataJSON['current'] = []
+        dataJSON['parameter'] = []
         for i in range(0,len(seir_matrix[:,0])):
             dataJSON['current'].append({
                 "Day": str(seir_matrix[i][0]),
@@ -348,6 +349,11 @@ class SIR():
                 # "num_critical": "0",
                 # "num_fatalities": "0"
             })
+
+        dataJSON['parameter'].append({
+        "beta": str(self.beta),
+        "gamme": str(self.gamma)})
+
         with open('Data/data.json', 'w') as outfile:
             json.dump(dataJSON, outfile)
         if "save" in args:
