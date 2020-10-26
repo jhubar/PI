@@ -13,6 +13,7 @@ class SIR():
         # Parameter's values
         self.beta = 0.57
         self.gamma = 0.2
+        self.dataJSON = {}
 
     def differential(self, state, time, beta, gamma):
         """
@@ -333,11 +334,11 @@ class SIR():
         plt.ylabel('Number of peoples')
         plt.title(title)
 
-        dataJSON = {}
-        dataJSON['current'] = []
-        dataJSON['parameter'] = []
+
+        self.dataJSON['current'] = []
+        self.dataJSON['parameter'] = []
         for i in range(0,len(seir_matrix[:,0])):
-            dataJSON['current'].append({
+            self.dataJSON['current'].append({
                 "Day": str(seir_matrix[i][0]),
                 "SIR_S": str(seir_matrix[i][1]),
                 "SIR_I": str(seir_matrix[i][2]),
@@ -348,12 +349,11 @@ class SIR():
                 # "num_fatalities": "0"
             })
 
-        dataJSON['parameter'].append({
+        self.dataJSON['parameter'].append({
         "beta": str(self.beta),
         "gamma": str(self.gamma)})
 
-        with open('Data/data.json', 'w') as outfile:
-            json.dump(dataJSON, outfile)
+
         if "save" in args:
             plt.savefig(fname="fig/{}.pdf".format(f_name))
         if "show" in args:
@@ -369,16 +369,41 @@ class SIR():
             2. data_choise: the data that we have choise:
                 - if hospit: draw the points of the cumul hospitalisation data
         """
+        self.dataJSON['available_data'] = []
+        for i in range(0,len(data[:,0])):
+            self.dataJSON['available_data'].append({
+                "Day": str(data[i][0]),
+                "num_positive": str(data[i][1]),
+                "num_tested": str(data[i][2]),
+                "num_hospitalised": str(data[i][3]),
+                "num_cumulative_hospitalizations": str(data[i][4]),
+                "num_critical": str(data[i][5]),
+                "num_fatalities": str(data[i][6]),
+            })
 
         if data_choise == "hospit":
             # Make predictions:
             predictions = self.predict(S_0=1000000 - data[0][4], I_0=data[0][3], R_0=0, duration=data.shape[0])
             if curve_choise == "fit_on_R":
+                self.dataJSON['hospit_fit_on_R'] = []
+                for i in range(0,len(predictions[:, 0])):
+                    self.dataJSON['hospit_fit_on_R'].append({
+                        "Day_prediciton": str(predictions[i][0]),
+                        "prediciton": str(predictions[i][3]),
+
+                    })
                 plt.scatter(predictions[:, 0], data[:, 4], c="blue")
                 plt.plot(predictions[:, 0], predictions[:, 3], c="red")
 
             if curve_choise == "fit_on_RI":
                 Y = predictions[:, 2] + predictions[:, 3]
+                self.dataJSON['hospit_fit_on_RI'] = []
+                for i in range(0,len(predictions[:, 0])):
+                    self.dataJSON['hospit_fit_on_RI'].append({
+                        "Day_prediciton": str(predictions[i][0]),
+                        "prediciton": str(predictions[i][2]+predictions[i][3]),
+
+                    })
                 plt.scatter(predictions[:, 0], data[:, 4], c="blue")
                 plt.plot(predictions[:, 0], Y, c="red")
             plt.show()
@@ -393,10 +418,24 @@ class SIR():
             # Make predictions:
             predictions = self.predict(S_0=1000000 - cumul[0], I_0=cumul[0], R_0=0, duration=data.shape[0])
             if curve_choise == "fit_on_R":
+                self.dataJSON['positive_fit_on_R'] = []
+                for i in range(0,len(predictions[:, 0])):
+                    self.dataJSON['positive_fit_on_R'].append({
+                        "Day_prediciton": str(predictions[i][0]),
+                        "prediciton": str(predictions[i][3]),
+
+                    })
                 plt.scatter(predictions[:, 0], cumul, c="blue")
                 plt.plot(predictions[:, 0], predictions[:, 3], c="red")
             if curve_choise == "fit_on_RI":
                 Y = predictions[:, 2] + predictions[:, 3]
+                self.dataJSON['positive_fit_on_RI'] = []
+                for i in range(0,len(predictions[:, 0])):
+                    self.dataJSON['positive_fit_on_RI'].append({
+                        "Day_prediciton": str(predictions[i][0]),
+                        "prediciton": str(predictions[i][2]+predictions[i][3]),
+
+                    })
                 plt.scatter(predictions[:, 0], cumul, c="blue")
                 plt.plot(predictions[:, 0], Y, c="red")
             plt.show()
@@ -420,6 +459,10 @@ class SIR():
                 plt.scatter(predictions[:, 0], cumul, c="blue")
                 plt.plot(predictions[:, 0], Y, c="red")
             plt.show()
+
+    def saveJson(self):
+        with open('Data/data.json', 'w') as outfile:
+            json.dump(self.dataJSON, outfile)
 
 
 def plot_dataset(dataset):
@@ -483,7 +526,7 @@ def covid_20(fit_method="scipy"):
                       title="Predi with beta={}, gamma={}".format(model.beta, model.gamma),
                       f_name="plot_after_fitting")
     model.compare_with_dataset(data, curve_choise=method, data_choise=data_to_fit)
-    # model.saveJson(predictions)
+    model.saveJson()
 
 
 
