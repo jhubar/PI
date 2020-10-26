@@ -1,7 +1,109 @@
 // Set new default font family and font color to mimic Bootstrap's default styling
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
+
+const $value_time_period_SIR = $('.value_time_period_SIR');
+const $value_time_SIR = $('#range_time_period_SIR');
+$value_time_period_SIR.html($value_time_SIR.val());
+
+
 loadData();
+
+$value_time_SIR.on('input change', () => {
+  // loadData();
+  $value_time_period_SIR.html($value_time_SIR.val());
+
+
+    var url = "https://raw.githubusercontent.com/julien1941/PI/master/Python/Data/data.json?token=AL3RLGM2NSZGK6SHJKFIME27T7DIU"
+    var data = ''
+    // DAp
+    var tmp ;
+
+    $.get(url,function(data){
+
+      const result = JSON.parse(data);
+
+
+
+      data_sir_s = [];
+      data_sir_i = [];
+      data_sir_r = [];
+      data_day = [];
+
+
+      dataLinearfit = [];
+
+
+      for(var i=0;i<$value_time_SIR.val();i++){
+
+        data_day.push(result.current[i].Day);
+        data_sir_s.push(result.current[i].SIR_S);
+        data_sir_i.push(result.current[i].SIR_I);
+        data_sir_r.push(result.current[i].SIR_R);
+
+
+      }
+
+  var ctx_active_cases = document.getElementById("myAreaSirModel");
+
+
+
+  without_cum_cases(2);
+  $("#num_Of_Recovered").html(data_sir_s[data_sir_s.length-1])
+  $("#num_Of_infected").html(data_sir_i[data_sir_i.length-1])
+  $("#num_Of_Susceptible").html(data_sir_r[data_sir_r.length-1])
+  $("#num_Of_day").html(data_day[data_day.length-1])
+
+  // $("#num_Of_cum_casesKPIForcast").html(dataC[dataC.length-1])
+  // var percentChange = ((((dataLinearfit[label.length-1] - dataLinearfit[label.length-8]) /dataLinearfit[label.length-8]))*100).toFixed(0);
+  //
+  // if(percentChange == 0){
+  //   result = `
+  //
+  //
+  //   <td class="fas fa-caret-right text-success">${ percentChange }</td>
+  //   <td class="fas fa-percent text-success"></td>`
+  //   $("#num_OfcasesKPIPredicated").html(result)
+  // }
+  // if(percentChange <= 0){
+  //   result = `
+  //   <td class="fas fa-caret-down fa-1x text-success">${ percentChange }</td>
+  //   <td class="fas fa-percent text-success"></td>`
+  //   $("#num_OfcasesKPIPredicated").html(result)
+  // }
+  // else{
+  //   result = `
+  //   <td class="fas fa-caret-up fa-1x text-danger">${ percentChange }</td>
+  //   <td class="fas fa-percent text-danger"></td>`
+  //   $("#num_OfcasesKPIPredicated").html(result)
+  // }
+  // var currentforcastResult = (parseInt(dataLinearfit[label.length-1]).toFixed(0)).toString();
+  //
+  // forcastResult = `
+  // <td class="text-secondary">${ currentforcastResult }</td>`
+  // $("#num_OfcasesKPIForcast").html(forcastResult)
+  //
+  // var current_recovered_cases = (parseInt(cum_recovered_population[label.length - 1 ]).toFixed(0)).toString();
+  // num_recovered_cases = `
+  // <td class="text-secondary">${ current_recovered_cases }</td>`
+  // $("#num_recovered_cases").html(num_recovered_cases)
+  //
+  // var current_collective_immunity = (parseInt(current_recovered_cases)/1000000).toString();
+  // num_collective_immunity = `
+  // <td class="text-info">${ current_collective_immunity }</td>
+  // <td class="fas fa-percent text-info"></td>`
+  // $("#collective_immunity").html(num_collective_immunity)
+
+
+
+ },
+);
+
+
+
+
+});
+
 function number_format(number, decimals, dec_point, thousands_sep) {
   // *     example: number_format(1234.56, 2, ',', ' ');
   // *     return: '1 234,56'
@@ -26,45 +128,17 @@ function number_format(number, decimals, dec_point, thousands_sep) {
   }
   return s.join(dec);
 }
-function loadData(){
 
-  var url = "https://raw.githubusercontent.com/julien1941/PI/master/Python/Data/data.json?token=AL3RLGM2NSZGK6SHJKFIME27T7DIU"
-  var data = ''
-  // DAp
-  var tmp ;
+function without_cum_cases(ans) {
 
-  $.get(url,function(data){
+  if (typeof(myLineChart) != "undefined"){
 
-    const result = JSON.parse(data);
+    myLineChart.destroy();
 
+  }
 
-
-    data_sir_s = [];
-    data_sir_i = [];
-    data_sir_r = [];
-    data_day = [];
-
-
-    dataLinearfit = [];
-
-
-    for(var i=0;i<result.current.length;i++){
-
-      data_day.push(result.current[i].Day);
-      data_sir_s.push(result.current[i].SIR_S);
-      data_sir_i.push(result.current[i].SIR_I);
-      data_sir_r.push(result.current[i].SIR_R);
-
-
-    }
-
-
-
-
-
-
-  var ctx = document.getElementById("regLin-chart");
-  var myLineChart = new Chart(ctx, {
+  ctx_active_cases = document.getElementById("myAreaSirModel");
+  myLineChart = new Chart(ctx_active_cases, {
     type: 'line',
     data: {
       labels: data_day,
@@ -116,10 +190,7 @@ function loadData(){
           pointHitRadius: 10,
           pointBorderWidth: 4,
           data: data_sir_r,
-        },
-
-
-
+        }
 
 
 
@@ -196,103 +267,66 @@ function loadData(){
       }
     }
   },);
-},
-);
+
 
 }
 
-label = [];
-dataL = [];
-// Area Chart Example
-var ctx = document.getElementById("regLin-chart");
-var myLineChart = new Chart(ctx, {
-  type: 'line',
-  data: {
-    labels: label,
-    datasets: [{
-      label: "Current ",
-      lineTension: 0.3,
-      backgroundColor: "rgba(78, 115, 223, 0.05)",
-      borderColor: "rgba(78, 115, 223, 1)",
-      pointRadius: 3,
-      pointBackgroundColor: "rgba(78, 115, 223, 1)",
-      pointBorderColor: "rgba(78, 115, 223, 1)",
-      pointHoverRadius: 3,
-      pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-      pointHoverBorderColor: "rgba(78, 115, 223, 1)",
-      pointHitRadius: 10,
-      pointBorderWidth: 2,
-      data: dataL,
-    }],
-  },
-  options: {
-    maintainAspectRatio: false,
-    layout: {
-      padding: {
-        left: 10,
-        right: 25,
-        top: 25,
-        bottom: 0
-      }
-    },
-    scales: {
-      xAxes: [{
-        time: {
-          unit: 'date'
-        },
-        gridLines: {
-          display: false,
-          drawBorder: false
-        },
-        ticks: {
-          maxTicksLimit: 7,
-          // callback: function(value, index, values) {
-          //   return number_format(value)+ ' Days';
-          // }
-        }
-      }],
-      yAxes: [{
-        ticks: {
-          maxTicksLimit: 5,
-          padding: 10,
 
-          callback: function(value, index, values) {
-            return number_format(value)+ ' Cases';
-          }
-        },
-        gridLines: {
-          color: "rgb(234, 236, 244)",
-          zeroLineColor: "rgb(234, 236, 244)",
-          drawBorder: false,
-          borderDash: [2],
-          zeroLineBorderDash: [2]
-        }
-      }],
-    },
-    legend: {
-      display: false
-    },
-    tooltips: {
-      backgroundColor: "rgb(255,255,255)",
-      bodyFontColor: "#858796",
-      titleMarginBottom: 10,
-      titleFontColor: '#6e707e',
-      titleFontSize: 14,
-      borderColor: '#dddfeb',
-      borderWidth: 1,
-      xPadding: 15,
-      yPadding: 15,
-      displayColors: false,
-      intersect: false,
-      mode: 'index',
-      caretPadding: 10,
-      callbacks: {
-        label: function(tooltipItem, chart) {
-          var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-          return datasetLabel + number_format(tooltipItem.yLabel)+ ': Cases';
-        }
-      }
-    }
+function cum_cases(ans, dataC){
+  if(ans == 2){
+    return dataC;
   }
-});
-loadData();
+  if(ans == 1){
+    return [];
+  }
+
+}
+
+function loadData(){
+
+    var url = "https://raw.githubusercontent.com/julien1941/PI/master/Python/Data/data.json?token=AL3RLGM2NSZGK6SHJKFIME27T7DIU"
+    var data = ''
+    // DAp
+    var tmp ;
+
+    $.get(url,function(data){
+
+      const result = JSON.parse(data);
+
+
+
+      data_sir_s = [];
+      data_sir_i = [];
+      data_sir_r = [];
+      data_day = [];
+
+
+      dataLinearfit = [];
+
+
+      for(var i=0;i<result.current.length;i++){
+
+        data_day.push(result.current[i].Day);
+        data_sir_s.push(result.current[i].SIR_S);
+        data_sir_i.push(result.current[i].SIR_I);
+        data_sir_r.push(result.current[i].SIR_R);
+
+
+      }
+
+
+  var ctx_active_cases = document.getElementById("myAreaSirModel");
+
+
+
+  without_cum_cases(2);
+
+  $("#num_Of_Recovered").html(data_sir_s[data_sir_s.length-1])
+  $("#num_Of_infected").html(data_sir_i[data_sir_i.length-1])
+  $("#num_Of_Susceptible").html(data_sir_r[data_sir_r.length-1])
+  $("#num_Of_day").html(data_day[data_day.length-1])
+
+
+
+},
+);}
