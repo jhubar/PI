@@ -343,10 +343,7 @@ class SIR():
                 "SIR_S": str(seir_matrix[i][1]),
                 "SIR_I": str(seir_matrix[i][2]),
                 "SIR_R": str(seir_matrix[i][3]),
-                # "num_hospitalised": "1",
-                # "num_cumulative_hospitalizations": "1",
-                # "num_critical": "0",
-                # "num_fatalities": "0"
+                
             })
 
         self.dataJSON['parameter'].append({
