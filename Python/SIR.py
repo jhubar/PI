@@ -1,4 +1,4 @@
-
+import json
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -43,6 +43,7 @@ class SIR():
                          args=parameters)
 
         return np.vstack((time, predict[:, 0], predict[:, 1], predict[:, 2])).T
+
 
     def fit_sequential(self, dataset, args="hospit", method='fit_on_R', range_size=2000):
         """
@@ -204,6 +205,9 @@ class SIR():
         self.beta = res.x[0]
         self.gamma = res.x[1]
 
+
+
+
     def plot_sse_space(self, SSE, beta_range, gamma_range):
         """
         Draw a 3D map of SSE in fuction of the two parameters beta and gamma
@@ -285,7 +289,7 @@ class SIR():
             return sse
 
         """
-        2st method: Fit on RI: 
+        2st method: Fit on RI:
         Try to fit with the R + I curve
         """
         if method == 'fit_on_RI':
@@ -330,6 +334,22 @@ class SIR():
         plt.xlabel('Time (days)')
         plt.ylabel('Number of peoples')
         plt.title(title)
+
+        dataJSON = {}
+        dataJSON['current'] = []
+        for i in range(0,len(seir_matrix[:,0])):
+            dataJSON['current'].append({
+                "Day": str(seir_matrix[i][0]),
+                "SIR_S": str(seir_matrix[i][1]),
+                "SIR_I": str(seir_matrix[i][2]),
+                "SIR_R": str(seir_matrix[i][3]),
+                # "num_hospitalised": "1",
+                # "num_cumulative_hospitalizations": "1",
+                # "num_critical": "0",
+                # "num_fatalities": "0"
+            })
+        with open('Data/data.json', 'w') as outfile:
+            json.dump(dataJSON, outfile)
         if "save" in args:
             plt.savefig(fname="fig/{}.pdf".format(f_name))
         if "show" in args:
@@ -450,11 +470,16 @@ def covid_20(fit_method="scipy"):
         model.fit_bruteforce(data, args=data_to_fit, method=method, range_size=200)
     # Make predictions:
     predictions = model.predict(S_0=999999, I_0=1, R_0=0, duration=300)
+
     # Plot predictions:
     model.plot_curves(predictions, args="show save",
                       title="Predi with beta={}, gamma={}".format(model.beta, model.gamma),
                       f_name="plot_after_fitting")
     model.compare_with_dataset(data, curve_choise=method, data_choise=data_to_fit)
+    # model.saveJson(predictions)
+
+
+
 
 
 if __name__ == "__main__":

@@ -39,31 +39,28 @@ function loadData(){
 
 
 
-    label = [];
-    label_pred = [];
-    dataL = [];
-    // dataOverfit = [];
-    // dataUnderfit = [];
+
+    data_sir_s = [];
+    data_sir_i = [];
+    data_sir_r = [];
+    data_day = [];
+
+
     dataLinearfit = [];
-    console.log(result.current)
-    console.log(result.prediction)
+
+
     for(var i=0;i<result.current.length;i++){
 
-      dataL.push(result.current[i].num_positive);
+      data_day.push(result.current[i].Day);
+      data_sir_s.push(result.current[i].SIR_S);
+      data_sir_i.push(result.current[i].SIR_I);
+      data_sir_r.push(result.current[i].SIR_R);
 
 
     }
 
-    
-
-    for(var i=0;i<result.prediction.length;i++){
-      label.push(result.prediction[i].Day);
 
 
-      // dataOverfit.push(result.prediction[i].num_positive);
-      // dataUnderfit.push(result.prediction[i].num_positive);
-      dataLinearfit.push(result.prediction[i].num_positive);
-    }
 
 
 
@@ -71,7 +68,7 @@ function loadData(){
   var myLineChart = new Chart(ctx, {
     type: 'line',
     data: {
-      labels: label,
+      labels: data_day,
       datasets: [
         {
           label: "Current ",
@@ -86,24 +83,24 @@ function loadData(){
           pointHoverBorderColor: "rgba(78, 115, 223, 1)",
           pointHitRadius: 10,
           pointBorderWidth: 4,
-          data: dataL,
+          data: data_sir_s,
         },
         // //Underfit line
-        // {
-        //   label: "Underfit ",
-        //   lineTension: 0.1,
-        //   backgroundColor: "rgba(255,255,255,1)",
-        //   borderColor: "rgba(255, 193, 7,0.1)",
-        //   pointRadius: 3,
-        //   pointBackgroundColor: "rgba(255, 193, 7,1)",
-        //   pointBorderColor: "rgba(255, 193, 7,1)",
-        //   pointHoverRadius: 3,
-        //   pointHoverBackgroundColor: "rgba(255, 193, 7, 1)",
-        //   pointHoverBorderColor: "rgba(255, 193, 7, 1)",
-        //   pointHitRadius: 10,
-        //   pointBorderWidth: 2,
-        //   data: dataUnderfit,
-        // },
+        {
+          label: "Underfit ",
+          lineTension: 0.1,
+          backgroundColor: "rgba(255,255,255,1)",
+          borderColor: "rgba(255, 193, 7,0.1)",
+          pointRadius: 3,
+          pointBackgroundColor: "rgba(255, 193, 7,1)",
+          pointBorderColor: "rgba(255, 193, 7,1)",
+          pointHoverRadius: 3,
+          pointHoverBackgroundColor: "rgba(255, 193, 7, 1)",
+          pointHoverBorderColor: "rgba(255, 193, 7, 1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 2,
+          data: data_sir_i,
+        },
         // linear line
         {
           label: "Linear ",
@@ -118,24 +115,11 @@ function loadData(){
           pointHoverBorderColor: "rgba(237, 0, 59, 1)",
           pointHitRadius: 10,
           pointBorderWidth: 2,
-          data: dataLinearfit,
+          data: data_sir_r,
         },
-        // //Overfitt line
-        // {
-        //   label: "Overfit ",
-        //   lineTension: 0.1,
-        //   backgroundColor: "rgba(255, 193, 7,0.3)",
-        //   borderColor: "rgba(255, 193, 7,0.1)",
-        //   pointRadius: 3,
-        //   pointBackgroundColor: "rgba(255, 193, 7,1)",
-        //   pointBorderColor: "rgba(255, 193, 7,1)",
-        //   pointHoverRadius: 3,
-        //   pointHoverBackgroundColor: "rgba(255, 193, 7, 1)",
-        //   pointHoverBorderColor: "rgba(255, 193, 7, 1)",
-        //   pointHitRadius: 10,
-        //   pointBorderWidth: 2,
-        //   data: dataOverfit,
-        // }
+        //Overfitt line
+
+
 
 
 
