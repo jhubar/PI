@@ -69,8 +69,9 @@ function loadData(){
     data: {
       labels: data_day,
       datasets: [
+        // Susceptible
         {
-          label: "Current ",
+          label: "Susceptible ",
           lineTension: 0.6,
           backgroundColor: "rgba(78, 115, 223, 0.2)",
           borderColor: "rgba(78, 115, 223, 1)",
@@ -84,25 +85,9 @@ function loadData(){
           pointBorderWidth: 4,
           data: data_sir_s,
         },
-        // //Underfit line
+        // Infectious
         {
-          label: "Underfit ",
-          lineTension: 0.1,
-          backgroundColor: "rgba(255,255,255,1)",
-          borderColor: "rgba(255, 193, 7,0.1)",
-          pointRadius: 3,
-          pointBackgroundColor: "rgba(255, 193, 7,1)",
-          pointBorderColor: "rgba(255, 193, 7,1)",
-          pointHoverRadius: 3,
-          pointHoverBackgroundColor: "rgba(255, 193, 7, 1)",
-          pointHoverBorderColor: "rgba(255, 193, 7, 1)",
-          pointHitRadius: 10,
-          pointBorderWidth: 2,
-          data: data_sir_i,
-        },
-        // linear line
-        {
-          label: "Linear ",
+          label: "Infectious ",
           lineTension: 0.3,
           backgroundColor: "rgba(255, 193, 7,0.1)",
           borderColor: "rgba(237, 0, 59, 1)",
@@ -114,9 +99,25 @@ function loadData(){
           pointHoverBorderColor: "rgba(237, 0, 59, 1)",
           pointHitRadius: 10,
           pointBorderWidth: 2,
+          data: data_sir_i,
+        },
+        // Recovered
+        {
+          label: "Recovered ",
+          lineTension: 0.6,
+          backgroundColor: "rgba(34,139,34, 0.2)",
+          borderColor: "rgba(34,139,34, 0.1)",
+          pointRadius: 4,
+          pointBackgroundColor: "rgba(34,139,34, 0.1)",
+          pointBorderColor: "rgba(34,139,34, 0.1)",
+          pointHoverRadius: 4,
+          pointHoverBackgroundColor: "rgba(34,139,34, 0.1)",
+          pointHoverBorderColor: "rgba(34,139,34, 0.1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 4,
           data: data_sir_r,
         },
-        //Overfitt line
+
 
 
 
