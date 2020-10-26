@@ -14,7 +14,8 @@ $value_time_SIR.on('input change', () => {
   $value_time_period_SIR.html($value_time_SIR.val());
 
 
-    var url = "https://raw.githubusercontent.com/julien1941/PI/master/Python/Data/data.json?token=AL3RLGM2NSZGK6SHJKFIME27T7DIU"
+
+    var url = "https://github.com/julien1941/PI/blob/master/Python/Data/data.json"
     var data = ''
     // DAp
     var tmp ;
@@ -55,6 +56,8 @@ $value_time_SIR.on('input change', () => {
   $("#num_Of_infected").html((parseInt(data_sir_i[data_sir_i.length-1]).toFixed(2)).toString())
   $("#num_Of_Recovered").html((parseInt(data_sir_r[data_sir_r.length-1]).toFixed(2)).toString())
   $("#num_Of_day").html((parseInt(data_day[data_sir_i.length-1]).toFixed(0)).toString())
+  $("#id_beta").html((parseInt(result.parameter[0].beta).toFixed(6)).toString())
+  $("#id_gamma").html((parseInt(result.parameter[0].gamma).toFixed(6)).toString())
 
 
 
@@ -289,6 +292,8 @@ function loadData(){
   $("#num_Of_infected").html((parseInt(data_sir_i[data_sir_i.length-1]).toFixed(2)).toString())
   $("#num_Of_Recovered").html((parseInt(data_sir_r[data_sir_r.length-1]).toFixed(2)).toString())
   $("#num_Of_day").html((parseInt(data_day[data_sir_i.length-1]).toFixed(0)).toString())
+  $("#id_beta").html((parseInt(result.parameter[0].beta).toFixed(6)).toString())
+  $("#id_gamma").html((parseInt(result.parameter[0].gamma).toFixed(6)).toString())
 
 
 

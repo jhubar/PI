@@ -334,7 +334,7 @@ class SIR():
         plt.xlabel('Time (days)')
         plt.ylabel('Number of peoples')
         plt.title(title)
-        
+
         dataJSON = {}
         dataJSON['current'] = []
         dataJSON['parameter'] = []
@@ -352,7 +352,7 @@ class SIR():
 
         dataJSON['parameter'].append({
         "beta": str(self.beta),
-        "gamme": str(self.gamma)})
+        "gamma": str(self.gamma)})
 
         with open('Data/data.json', 'w') as outfile:
             json.dump(dataJSON, outfile)
