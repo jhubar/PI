@@ -34,7 +34,7 @@ $value_time_SIR.on('input change', () => {
       dataLinearfit = [];
 
 
-      for(var i=0;i<$value_time_SIR.val();i++){
+      for(var i=0;i<=$value_time_SIR.val();i++){
 
         data_day.push(result.current[i].Day);
         data_sir_s.push(result.current[i].SIR_S);
@@ -54,7 +54,7 @@ $value_time_SIR.on('input change', () => {
   $("#num_Of_Susceptible").html((parseInt(data_sir_s[data_sir_s.length-1]).toFixed(2)).toString())
   $("#num_Of_infected").html((parseInt(data_sir_i[data_sir_i.length-1]).toFixed(2)).toString())
   $("#num_Of_Recovered").html((parseInt(data_sir_r[data_sir_r.length-1]).toFixed(2)).toString())
-  $("#num_Of_day").html((parseInt(data_day[data_sir_i.length-1]).toFixed(2)).toString())
+  $("#num_Of_day").html((parseInt(data_day[data_sir_i.length-1]).toFixed(0)).toString())
 
 
 
@@ -268,7 +268,7 @@ function loadData(){
       dataLinearfit = [];
 
 
-      for(var i=0;i<$value_time_SIR.val();i++){
+      for(var i=0;i<=$value_time_SIR.val();i++){
 
         data_day.push(result.current[i].Day);
         data_sir_s.push(result.current[i].SIR_S);
@@ -288,7 +288,7 @@ function loadData(){
   $("#num_Of_Susceptible").html((parseInt(data_sir_s[data_sir_s.length-1]).toFixed(2)).toString())
   $("#num_Of_infected").html((parseInt(data_sir_i[data_sir_i.length-1]).toFixed(2)).toString())
   $("#num_Of_Recovered").html((parseInt(data_sir_r[data_sir_r.length-1]).toFixed(2)).toString())
-  $("#num_Of_day").html((parseInt(data_day[data_sir_i.length-1]).toFixed(2)).toString())
+  $("#num_Of_day").html((parseInt(data_day[data_sir_i.length-1]).toFixed(0)).toString())
 
 
 
