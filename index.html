@@ -511,6 +511,21 @@
           <!-- Content Row -->
           <div class="row">
 
+            <!-- Number of tesed -->
+            <div class="col-xl-2 col-md-6 mb-4">
+              <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Number of tested</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="nb_tested"></a></div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
 
             <!-- Recovered cases-->
             <div class="col-xl-2 col-md-6 mb-4">
@@ -542,6 +557,42 @@
                     </div>
                     <div class="col-auto">
 
+                      <i class="fas fa-viruses fa-2x text-gray-300"></i>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Beta -->
+            <div class="col-xl-2 col-md-6 mb-4">
+              <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Beta</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="id_beta"></a></div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="text-danger"><a id="casesKpi"></a></i>
+                      <i class="fas fa-viruses fa-2x text-gray-300"></i>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- gamma  -->
+            <div class="col-xl-2 col-md-6 mb-4">
+              <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Gamma</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="id_gamma"></a></div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="text-danger"><a id="casesKpi"></a></i>
                       <i class="fas fa-viruses fa-2x text-gray-300"></i>
                     </div>
 
@@ -1045,6 +1096,7 @@
   <script src="js/demo/chart-area-Critical.js"></script>
   <script src="js/demo/chart-area-Fatalities.js"></script>
 
+
   <!-- <script src="js/demo/chart-pie-demo.js"></script> -->
   <!-- Load d3.js -->
   <script src="https://d3js.org/d3.v4.js"></script>
@@ -1098,10 +1150,14 @@
             result.push(obj);
           }
           var size = result.length-1;
-          //return result; //JavaScript object
+          var  result_nb = result;
             result = `
             <td>${ result[size-1].num_positive }</td>`
             $("#num_positive").html(result)
+
+            result_nb = `
+            <td>${ result[size-1].num_tested }</td>`
+            $("#nb_tested").html(result_nb)
 
         })
         // Positives casesKPI
