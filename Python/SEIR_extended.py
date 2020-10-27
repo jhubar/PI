@@ -75,9 +75,9 @@ class SEIR():
 
     def fit_beta(self, dataset):
         # Set initial state:
-        H_0 = df_np[0][7]
-        E_0 = 3 * df_np[1][1]  # Vu qu'un tiers de ce nombre devront être positifs à t+1
-        I_0 = df_np[0][1] - H_0  # Les hospitalisés ne participent plus à la contagion
+        H_0 = dataset[0][7]
+        E_0 = 3 * dataset[1][1]  # Vu qu'un tiers de ce nombre devront être positifs à t+1
+        I_0 = dataset[0][1] - H_0  # Les hospitalisés ne participent plus à la contagion
         S_0 = 999999 - H_0 - I_0 - E_0
         R_0 = 0
         initial_state = (S_0, E_0, I_0, H_0, R_0)
@@ -315,6 +315,13 @@ def first_method():
     predictions = model.predict(S_0, E_0, I_0, H_0, R_0, duration=50)
 
     plot_predict_and_compare(df, predictions, args='predict compare no_S log')
+    print("final value for model's parameters: ")
+    print(" beta = {}".format(model.beta))
+    print(" gamma = {}".format(model.gamma))
+    print(" sigma = {}".format(model.sigma))
+    print(" hp = {}".format(model.hp))
+    print(" hcr = {}".format(model.hcr))
+
 
 
 def sec_method():
@@ -398,9 +405,16 @@ def sec_method():
     predictions = model.predict(S_0, E_0, I_0, H_0, R_0, duration=50)
 
     plot_predict_and_compare(df, predictions, args='predict compare no_S log')
+    print("final value for model's parameters: ")
+    print(" beta = {}".format(model.beta))
+    print(" gamma = {}".format(model.gamma))
+    print(" sigma = {}".format(model.sigma))
+    print(" hp = {}".format(model.hp))
+    print(" hcr = {}".format(model.hcr))
 
 if __name__ == "__main__":
 
+    #first_method()
     sec_method()
 
 
