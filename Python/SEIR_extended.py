@@ -131,44 +131,6 @@ class SEIR():
         plt.xlabel('hcr value')
         plt.show()
 
-
-
-    def fit_iterative(self, dataset):
-
-        # Set initial state:
-        H_0 = df_np[0][7]
-        E_0 = 3 * df_np[1][1]  # Vu qu'un tiers de ce nombre devront être positifs à t+1
-        I_0 = df_np[0][1] - H_0  # Les hospitalisés ne participent plus à la contagion
-        S_0 = 999999 - H_0 - I_0 - E_0
-        R_0 = 0
-        initial_state = (S_0, E_0, I_0, H_0, R_0)
-        time = dataset[:, 0]
-        range_size = 200
-
-        # We have to test 200 combinations of the twos parameters
-        beta_range = np.linspace(0, 1, range_size)
-        hcr_range = np.linspace(0, 1, range_size)
-        best = (math.inf, 0, 0)
-        SSE = np.zeros((range_size, range_size))
-        for b in range(0, range_size):
-            for h in range(0, range_size):
-                parameters = (beta_range[b], self.gamma, self.sigma, self.hp, hcr_range[h])
-                sse = self.SSE(parameters, initial_state, time, dataset, method='fit_on_hospit_cumul')
-                SSE[b][h] = sse
-                if sse < best[0]:
-                    best = (sse, b, h)
-            print("Iterative fitting, iter {} / {}".format(b+1, range_size))
-        print("best combination: beta= {}, hcr= {} for an SSE of {}".format(best[1], best[2], best[0]))
-        # print space:
-        X, Y = np.meshgrid(beta_range, hcr_range)
-        fig = plt.figure()
-        ax = fig.add_subplot(111, projection='3d')
-        ax.plot_wireframe(X, Y, SSE)
-        ax.set_zscale('log')
-        ax.view_init(15, 60)
-        plt.show()
-
-
     def SSE(self, parameters, initial_state, time, data, method='fit_on_hospit'):
 
         # Set parameters:
