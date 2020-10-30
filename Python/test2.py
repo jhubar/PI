@@ -6,16 +6,6 @@ from scipy.integrate import odeint
 from scipy.optimize import minimize
 import math
 
-"""
-=======================================================================================================
-
-        Meilleure version à l'heure actuel (sec_methode)
-        
-        ATTENTION probleme de convergeance 
-
-=======================================================================================================
-"""
-
 
 class SEIR():
 
@@ -31,29 +21,29 @@ class SEIR():
     def set_hospit_prop(self, hospit_prop):
         self.hospit_prop = hospit_prop
 
-    def differential_bis(self, state, time, beta, gamma, sigma, hp, hcr):
-        """
-        Differential equations of the model
-        """
-        S, E, I, H, R = state
-
-        dS = -(beta * S * I) / (S + E + I + H + R)
-        dE = (beta * S * I) / (S + E + I + H + R) - E * sigma
-        dI = (1 - hp) * (E * sigma) - (gamma * I)   # Note: on retire la proportion des hospitalisés, ils ne participent plus à la contagion
-        dH = hp * (E * sigma) - hcr * H
-        dR = gamma * I + hcr * H
-
-        return dS, dE, dI, dH, dR
-
     def differential(self, state, time, beta, gamma, sigma, hp, hcr):
         """
         Differential equations of the model
         """
         S, E, I, H, R = state
 
-        dS = -(beta * S * I) / (S + E + I + H + R)
-        dE = (beta * S * I) / (S + E + I + H + R) - E * sigma
-        dI = (E * sigma) - (gamma * I) - (I * hp * gamma)
+        dS = -(beta * S * I) / (S + I + R)
+        dE = (beta * S * I) / (S + I + R) - E * sigma
+        dI = (1 - hp) * (E * sigma) - (gamma * I)   # Note: on retire la proportion des hospitalisés, ils ne participent plus à la contagion
+        dH = hp * (E * sigma) - hcr * H
+        dR = gamma * I + hcr * H
+
+        return dS, dE, dI, dH, dR
+
+    def differential_bis(self, state, time, beta, gamma, sigma, hp, hcr):
+        """
+        Differential equations of the model
+        """
+        S, E, I, H, R = state
+
+        dS = -(beta * S * I) / (S + I + R)
+        dE = (beta * S * I) / (S + I + R) - E * sigma
+        dI = (E * sigma) - (gamma * I) - (I * hp * gamma)   # Note: on retire la proportion des hospitalisés, ils ne participent plus à la contagion
         dH = (I * hp * gamma) - hcr * H
         dR = gamma * I + hcr * H
 
@@ -142,7 +132,7 @@ class SEIR():
         SSE = []
         for b in range(0, range_size):
             parameters = (self.beta, self.gamma, self.sigma, self.hp, hcr_range[b])
-            sse = self.SSE(parameters, initial_state, time, dataset, method='fit_on_hospit')
+            sse = self.SSE(parameters, initial_state, time, dataset, method='fit_on_cumul_mixt')
             SSE.append(sse)
             if sse < best[0]:
                 best = (sse, hcr_range[b])
@@ -162,10 +152,17 @@ class SEIR():
         (également donné).
         Nous fittons les données de testage cummulées sur la somme des courbes I, H et R.
 
+        ATTENTION OPTIMISATEUR UTILISE:
+        Powell: converge
+        Nelder-Mead: NON
+        TNC : NON
+        COBYLA: moyen
+
+
         """
         time = dataset[:, 0]
         # Set initial state:
-        initial_state = (1000000 - dataset[0][1] - 3*dataset[2][1], 3 * dataset[2][1], dataset[0][1], dataset[0][4], 0)
+        initial_state = (1000000 - dataset[0][1] - 3*dataset[2][1], 10 * dataset[2][1], dataset[0][1], dataset[0][4], 0)
         start_values = [self.beta, self.gamma, self.sigma, self.hp, self.hcr]
         bounds = [(0, 1), (1/10, 1/4), (1/5, 1), (0, 1), (self.hcr, self.hcr)]
         res = minimize(self.SSE, np.asarray(start_values), args=(initial_state, time, dataset, 'fit_on_cumul_mixt'),
@@ -174,80 +171,14 @@ class SEIR():
         self.beta = res.x[0]
         self.gamma = res.x[1]
         self.sigma = res.x[2]
+        self.hp = res.x[3]
         """
         Deuxième étape, il ne reste plus qu'à fitter hcr sur la courbe des hospitalisations (non cumulées)
         NOTE : Je ne sais pas pourquoi, mais ça converge pas quand j'utilise minimize alors que ça converge très bien
         en itérant toutes les valeurs
         """
-        self.fit_hcr(dataset)
+        # self.fit_hcr(dataset)
 
-    def fit_on_sigma(self, dataset):
-        # Set initial state:
-        H_0 = dataset[0][7]
-        E_0 = 3 * dataset[1][1]  # Vu qu'un tiers de ce nombre devront être positifs à t+1
-        I_0 = dataset[0][1] - H_0  # Les hospitalisés ne participent plus à la contagion
-        S_0 = 999999 - H_0 - I_0 - E_0
-        R_0 = 0
-        initial_state = (S_0, E_0, I_0, H_0, R_0)
-        time = dataset[:, 0]
-        # Optimisation ittérative:
-        range_size = 1000
-        sigma_range = np.linspace(0, 1, range_size)
-        best = (math.inf, 0)
-        SSE = []
-        done1 = False
-
-        for b in range(0, range_size):
-            parameters = (self.beta, self.gamma, sigma_range[b], self.hp, self.hcr)
-            sse = self.SSE(parameters, initial_state, time, dataset, method='fit_on_cumul_positive')
-            SSE.append(sse)
-            if sigma_range[b] >= 0.3333 and not done1:
-                done1 = True
-                print("SSE for sigma = {} = {}".format(sigma_range[b], sse))
-            if sse < best[0]:
-                best = (sse, sigma_range[b])
-        print("Iterative best fit. Best value for sigma = {} with sse = {}".format(best[1], best[0]))
-        # Set the best value of beta:
-        self.sigma = best[1]
-        # print graph of beta evolution with sse:
-        plt.plot(sigma_range, SSE, c='blue', label='SSE evolution')
-        plt.yscale('log')
-        plt.xlabel('sigma value')
-        plt.show()
-
-    def fit_on_gamma(self, dataset):
-        # Set initial state:
-        H_0 = dataset[0][7]
-        E_0 = 3 * dataset[1][1]  # Vu qu'un tiers de ce nombre devront être positifs à t+1
-        I_0 = dataset[0][1] - H_0  # Les hospitalisés ne participent plus à la contagion
-        S_0 = 999999 - H_0 - I_0 - E_0
-        R_0 = 0
-        initial_state = (S_0, E_0, I_0, H_0, R_0)
-        time = dataset[:, 0]
-        # Optimisation ittérative:
-        range_size = 1000
-        gamma_range = np.linspace(0, 1, range_size)
-        best = (math.inf, 0)
-        SSE = []
-        done1 = False
-
-        for b in range(0, range_size):
-            parameters = (self.beta, self.gamma, gamma_range[b], self.hp, self.hcr)
-            sse = self.SSE(parameters, initial_state, time, dataset, method='fit_on_cumul_positive')
-            SSE.append(sse)
-            if gamma_range[b] >= 0.3333 and not done1:
-                done1 = True
-                print("SSE for gamma = {} = {}".format(gamma_range[b], sse))
-            if sse < best[0]:
-                best = (sse, gamma_range[b])
-        print("Iterative best fit. Best value for gamma = {} with sse = {}".format(best[1], best[0]))
-        # Set the best value of beta:
-        self.gamma = best[1]
-        # print graph of beta evolution with sse:
-        plt.plot(gamma_range, SSE, c='blue', label='SSE evolution')
-        #plt.yscale('log')
-        plt.xlabel('gamma value')
-        plt.show()
 
     def SSE(self, parameters, initial_state, time, data, method='fit_on_hospit'):
 
@@ -277,6 +208,7 @@ class SEIR():
             for i in range(0, len(time)):
                 sse += (data[i][7] - predict[i][2] - predict[i][3] - predict[i][4])**2
             return sse
+
         if method == 'fit_on_cumul_mixt':
             sse = 0.0
             for i in range(0, len(time)):
@@ -493,10 +425,7 @@ def sec_method():
         *****************************************************************************
     """
     model.fit_scipy(df_np)
-    model.fit_on_sigma(df_np)
-    model.fit_beta(df_np)
-    #model.fit_on_gamma(df_np)
-    model.fit_scipy(df_np)
+
     """ *****************************************************************************
         Nous pouvons maintenant comparer les simulations et les données ainsi que 
         dessiner des prédictions à long terme. 
