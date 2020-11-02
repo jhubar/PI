@@ -268,13 +268,13 @@ def first_method():
 
     model.fit_scipy_A(df_np)
 
-    model.sigma = 1
+    model.sigma = 8
 
-    #model.fit_scipy_A(df_np)
+    model.fit_scipy_A(df_np)
 
-    #model.fit_beta(df_np)
+    model.fit_beta(df_np)
 
-    #model.fit_gamma(df_np)
+    model.fit_gamma(df_np)
 
     #model.fit_sigma(df_np)
 
