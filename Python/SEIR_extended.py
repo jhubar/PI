@@ -329,6 +329,7 @@ def first_method():
     df = df.drop([0], axis=0)
     # Insert cumul_positive column at the end
     cumul_positive = df["num_positive"].to_numpy()
+    cumul_positive[0] = 20
     for i in range(1, len(cumul_positive)):
         cumul_positive[i] += cumul_positive[i - 1]
     df.insert(7, "cumul_positive", cumul_positive)

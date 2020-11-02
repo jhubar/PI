@@ -116,6 +116,35 @@ class SEIR():
         plt.xlabel('beta value')
         plt.show()
 
+    def fit_gamma(self, dataset):
+        # Set initial state:
+        H_0 = dataset[0][7]
+        E_0 = 3 * dataset[1][1]  # Vu qu'un tiers de ce nombre devront être positifs à t+1
+        I_0 = dataset[0][1] - H_0  # Les hospitalisés ne participent plus à la contagion
+        S_0 = 999999 - H_0 - I_0 - E_0
+        R_0 = 0
+        initial_state = (S_0, E_0, I_0, H_0, R_0)
+        time = dataset[:, 0]
+        # Optimisation ittérative:
+        range_size = 1000
+        gamma_range = np.linspace(0, 1, range_size)
+        best = (math.inf, 0)
+        SSE = []
+        for b in range(0, range_size):
+            parameters = (self.beta, gamma_range[b], self.sigma, self.hp, self.hcr)
+            sse = self.SSE(parameters, initial_state, time, dataset, method='fit_on_cumul_positive')
+            SSE.append(sse)
+            if sse < best[0]:
+                best = (sse, gamma_range[b])
+        print("Iterative best fit. Best value for gamma = {} with sse = {}".format(best[1], best[0]))
+        # Set the best value of beta:
+        self.gamma = best[1]
+        # print graph of beta evolution with sse:
+        plt.plot(gamma_range, SSE, c='blue', label='SSE evolution')
+        plt.yscale('log')
+        plt.xlabel('gamma value')
+        plt.show()
+
     def fit_hcr(self, dataset):
         # Set initial state:
         H_0 = dataset[0][7]
@@ -162,7 +191,7 @@ class SEIR():
         done1 = False
 
         for b in range(0, range_size):
-            parameters = (self.beta, self.gamma, self.sigma, self.hp, sigma_range[b])
+            parameters = (self.beta, self.gamma, sigma_range[b], self.hp, self.hcr)
             sse = self.SSE(parameters, initial_state, time, dataset, method='fit_on_cumul_positive')
             SSE.append(sse)
             if sigma_range[b] >= 0.3333 and not done1:
