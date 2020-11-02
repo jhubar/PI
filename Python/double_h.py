@@ -351,7 +351,7 @@ def sec_method():
     Import the dataset and add informations
     """
     url = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/data.csv"
-    df = pd.read_csv(url, sep=",", header=0)
+
     # Delete the first line:
     df = df.drop([0], axis=0)
     # Insert cumul_positive column at the end

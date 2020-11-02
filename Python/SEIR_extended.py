@@ -495,7 +495,7 @@ def sec_method():
     """
     model.fit_scipy(df_np)
     model.fit_on_sigma(df_np)
-    model.fit_beta(df_np)
+    #model.fit_beta(df_np)
     #model.fit_on_gamma(df_np)
     model.fit_scipy(df_np)
     """ *****************************************************************************
