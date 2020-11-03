@@ -325,6 +325,8 @@ class SEIR():
             })
 
 
+
+
         self.dataJSON['model'] = []
         self.dataJSON['model'].append({
         "beta": str(self.beta),
@@ -352,6 +354,17 @@ class SEIR():
             for i in range(0, len(self.dataframe['Day'].to_numpy())):
                 cumul_positive.append(pred[i][3] + pred[i][4] + pred[i][5])  # somme de I, H et R
                 hospit.append(pred[i][4])
+
+            print(len(self.dataframe['Day']))
+            self.dataJSON['log'] = []
+            for i in range(0,len(self.dataframe['Day'])):
+                self.dataJSON['log'].append({
+                    "day": str(self.dataframe['Day'][i]),
+                    "cumul_positive": str(self.dataframe['cumul_positive'][i]),
+                    "hospit": str(self.dataframe['num_hospitalised'][i]),
+                    "cumul_positive_fit": str(cumul_positive[i]),
+                    "hospit_fit": str(hospit[i]),
+                })
             plt.plot(self.dataframe['Day'], cumul_positive, c='red')
             plt.plot(self.dataframe['Day'], hospit, c='blue')
             if "log" in args:
