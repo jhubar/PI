@@ -15,7 +15,7 @@ $value_time_SIR.on('input change', () => {
 
 
 
-    var url = "https://raw.githubusercontent.com/julien1941/PI/master/Python/Data/data.json?token=AL3RLGNHLEFWUOC7LHNLLRK7VJRS4"
+    var url = "https://raw.githubusercontent.com/julien1941/PI/master/Python/Data/data.json?token=AL3RLGJRRU4F6OP3KXMQDCS7T7X2Q"
     var data = ''
     // DAp
     var tmp ;
@@ -251,8 +251,7 @@ function cum_cases(ans, dataC){
 
 function loadData(){
 
-
-    var url = "https://raw.githubusercontent.com/julien1941/PI/master/Python/Data/data.json?token=AL3RLGNHLEFWUOC7LHNLLRK7VJRS4"
+    var url = "https://raw.githubusercontent.com/julien1941/PI/master/Python/Data/data.json?token=AL3RLGM2NSZGK6SHJKFIME27T7DIU"
     var data = ''
     // DAp
     var tmp ;

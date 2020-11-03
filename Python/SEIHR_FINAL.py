@@ -36,6 +36,12 @@ class SEIR():
         self.R_0 = None         # Recovered people: can't catch again the agent due to immunity
         self.N = None           # The total size of the population
 
+        # Data to store
+        self.dataJSON = {}
+    def saveJson(self):
+        with open('Data/SEIR.json', 'w') as outfile:
+            json.dump(self.dataJSON, outfile)
+
     def get_initial_state(self):
         """
         Function who return a tuple with the initial state of the model
@@ -185,11 +191,21 @@ class SEIR():
         print("Best value of hcr with sse = {}".format(best[0]))
         print("hcr = {}".format(self.hcr))
 
+
         #plot :
         plt.plot(hcr_range, SSE, c='blue', label='hcr value')
         plt.yscale('log')
         plt.xlabel('hcr value')
         plt.show()
+
+        #Data storing:
+        self.dataJSON['fit_hcr'] = []
+        for i in range(0,range_size):
+            self.dataJSON['fit_hcr'].append({
+                "hcr_value": str(hcr_range[i]),
+                "log": str(SSE[i]),
+
+            })
 
 
     def SSE(self, parameters, initial_state, time, method='fit_on_cumul_positive'):
@@ -296,6 +312,18 @@ class SEIR():
 
     def plot_predict(self, pred, args='no_S'):
 
+        self.dataJSON['predict'] = []
+        for i in range(0,len(pred[:, 0])):
+            self.dataJSON['predict'].append({
+                "predict_day": str(pred[i][0]),
+                "predict_S": str(pred[i][1]),
+                "predict_E": str(pred[i][2]),
+                "predict_I": str(pred[i][3]),
+                "predict_H": str(pred[i][4]),
+                "predict_R": str(pred[i][5]),
+
+            })
+
         if 'predict' in args:
             if "no_S" not in args:
                 plt.plot(pred[:, 0], pred[:, 1], c='black', label="S")
@@ -319,6 +347,8 @@ class SEIR():
             if "log" in args:
                 plt.yscale('log')
             plt.show()
+
+
 
 
 def first_method():
@@ -350,7 +380,7 @@ def first_method():
     print("=======================================================")
     print("This is a small step for man, but a giant step for COV-Invaders")
 
-
+    model.saveJson()
 
 
 
@@ -360,6 +390,3 @@ def first_method():
 if __name__ == "__main__":
 
     first_method()
-
-
-
