@@ -1,63 +1,68 @@
 // Set new default font family and font color to mimic Bootstrap's default styling
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
-
-const $value_time_period_SIR = $('.value_time_period_SIR');
-const $value_time_SIR = $('#range_time_period_SIR');
-$value_time_period_SIR.html($value_time_SIR.val());
+const $url = "https://raw.githubusercontent.com/julien1941/PI/master/Python/Data/SEIR.json?token=AL3RLGIINI2NF3CDPWACJTK7VJ2O4"
+const $value_time_period_SEIR = $('.value_time_period_SEIR');
+const $value_time_SEIR = $('#range_time_period_SEIR');
+$value_time_period_SEIR.html($value_time_SEIR.val());
 
 
 loadData();
 
-$value_time_SIR.on('input change', () => {
+$value_time_SEIR.on('input change', () => {
   // loadData();
-  $value_time_period_SIR.html($value_time_SIR.val());
+  $value_time_period_SEIR.html($value_time_SEIR.val());
 
 
 
-    var url = "https://raw.githubusercontent.com/julien1941/PI/master/Python/Data/data.json?token=AL3RLGJRRU4F6OP3KXMQDCS7T7X2Q"
+
     var data = ''
     // DAp
     var tmp ;
 
-    $.get(url,function(data){
+    $.get($url,function(data){
 
       const result = JSON.parse(data);
 
 
 
-      data_sir_s = [];
-      data_sir_i = [];
-      data_sir_r = [];
-      data_day = [];
+
+        data_day = [];
+        data_seir_s = [];
+        data_seir_e = [];
+        data_seir_i = [];
+        data_seir_r = [];
+        data_seir_h = [];
 
 
-      dataLinearfit = [];
+
+        for(var i=0;i<$value_time_SEIR.val();i++){
+
+          data_day.push(result.predict[i].predict_day);
+          data_seir_s.push(result.predict[i].predict_S);
+          data_seir_e.push(result.predict[i].predict_E);
+          data_seir_i.push(result.predict[i].predict_I);
+          data_seir_r.push(result.predict[i].predict_R);
+          data_seir_h.push(result.predict[i].predict_H);
 
 
-      for(var i=0;i<$value_time_SIR.val();i++){
-
-        data_day.push(result.current[i].Day);
-        data_sir_s.push(result.current[i].SIR_S);
-        data_sir_i.push(result.current[i].SIR_I);
-        data_sir_r.push(result.current[i].SIR_R);
 
 
-      }
+        }
 
-  var ctx_active_cases = document.getElementById("myAreaSirModel");
+  var ctx_active_cases = document.getElementById("myAreaSeirModel");
 
 
 
   without_cum_cases(2);
 
 
-  $("#num_Of_Susceptible").html((parseFloat(data_sir_s[data_sir_s.length-1]).toFixed(2)).toString())
-  $("#num_Of_infected").html((parseFloat(data_sir_i[data_sir_i.length-1]).toFixed(2)).toString())
-  $("#num_Of_Recovered").html((parseFloat(data_sir_r[data_sir_r.length-1]).toFixed(2)).toString())
-  $("#num_Of_day").html((parseFloat(data_day[data_sir_i.length-1]).toFixed(0)).toString())
-  $("#id_beta").html((parseFloat(result.parameter[0].beta).toFixed(6)).toString())
-  $("#id_gamma").html((parseFloat(result.parameter[0].gamma).toFixed(6)).toString())
+  // $("#num_Of_Susceptible").html((parseFloat(data_sir_s[data_sir_s.length-1]).toFixed(2)).toString())
+  // $("#num_Of_infected").html((parseFloat(data_sir_i[data_sir_i.length-1]).toFixed(2)).toString())
+  // $("#num_Of_Recovered").html((parseFloat(data_sir_r[data_sir_r.length-1]).toFixed(2)).toString())
+  // $("#num_Of_day").html((parseFloat(data_day[data_sir_i.length-1]).toFixed(0)).toString())
+  // $("#id_beta").html((parseFloat(result.parameter[0].beta).toFixed(6)).toString())
+  // $("#id_gamma").html((parseFloat(result.parameter[0].gamma).toFixed(6)).toString())
 
 
 
@@ -104,7 +109,7 @@ function without_cum_cases(ans) {
 
   }
 
-  ctx_active_cases = document.getElementById("myAreaSirModel");
+  ctx_active_cases = document.getElementById("myAreaSeirModel");
   myLineChart = new Chart(ctx_active_cases, {
     type: 'line',
     data: {
@@ -124,7 +129,23 @@ function without_cum_cases(ans) {
           pointHoverBorderColor: "rgba(78, 115, 223, 1)",
           pointHitRadius: 10,
           pointBorderWidth: 4,
-          data: data_sir_s,
+          data: data_seir_s,
+        },
+        // e
+        {
+          label: "e ",
+          lineTension: 0.6,
+          backgroundColor: "rgba(78, 115, 223, 0.2)",
+          borderColor: "rgba(78, 115, 223, 1)",
+          pointRadius: 4,
+          pointBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointBorderColor: "rgba(78, 115, 223, 1)",
+          pointHoverRadius: 4,
+          pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 4,
+          data: data_seir_e,
         },
         // Infectious
         {
@@ -140,7 +161,7 @@ function without_cum_cases(ans) {
           pointHoverBorderColor: "rgba(237, 0, 59, 1)",
           pointHitRadius: 10,
           pointBorderWidth: 2,
-          data: data_sir_i,
+          data: data_seir_i,
         },
         // Recovered
         {
@@ -156,8 +177,25 @@ function without_cum_cases(ans) {
           pointHoverBorderColor: "rgba(34,139,34, 0.1)",
           pointHitRadius: 10,
           pointBorderWidth: 4,
-          data: data_sir_r,
+          data: data_seir_r,
+        },
+        // Hospitalized
+        {
+          label: "hospitalized ",
+          lineTension: 0.6,
+          backgroundColor: "rgba(34,139,34, 0.2)",
+          borderColor: "rgba(34,139,34, 0.1)",
+          pointRadius: 4,
+          pointBackgroundColor: "rgba(34,139,34, 0.1)",
+          pointBorderColor: "rgba(34,139,34, 0.1)",
+          pointHoverRadius: 4,
+          pointHoverBackgroundColor: "rgba(34,139,34, 0.1)",
+          pointHoverBorderColor: "rgba(34,139,34, 0.1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 4,
+          data: data_seir_h,
         }
+
 
 
 
@@ -251,49 +289,51 @@ function cum_cases(ans, dataC){
 
 function loadData(){
 
-    var url = "https://raw.githubusercontent.com/julien1941/PI/master/Python/Data/data.json?token=AL3RLGM2NSZGK6SHJKFIME27T7DIU"
+
     var data = ''
     // DAp
     var tmp ;
 
-    $.get(url,function(data){
+    $.get($url,function(data){
 
       const result = JSON.parse(data);
 
 
-
-      data_sir_s = [];
-      data_sir_i = [];
-      data_sir_r = [];
       data_day = [];
+      data_seir_s = [];
+      data_seir_e = [];
+      data_seir_i = [];
+      data_seir_r = [];
+      data_seir_h = [];
 
 
-      dataLinearfit = [];
 
+      for(var i=0;i<$value_time_SEIR.val();i++){
 
-      for(var i=0;i<$value_time_SIR.val();i++){
-
-        data_day.push(result.current[i].Day);
-        data_sir_s.push(result.current[i].SIR_S);
-        data_sir_i.push(result.current[i].SIR_I);
-        data_sir_r.push(result.current[i].SIR_R);
+        data_day.push(result.predict[i].predict_day);
+        data_seir_s.push(result.predict[i].predict_S);
+        data_seir_e.push(result.predict[i].predict_E);
+        data_seir_i.push(result.predict[i].predict_I);
+        data_seir_r.push(result.predict[i].predict_R);
+        data_seir_h.push(result.predict[i].predict_H);
 
 
       }
 
 
-  var ctx_active_cases = document.getElementById("myAreaSirModel");
+
+  var ctx_active_cases = document.getElementById("myAreaSeirModel");
 
 
 
   without_cum_cases(2);
 
-  $("#num_Of_Susceptible").html((parseFloat(data_sir_s[data_sir_s.length-1]).toFixed(2)).toString())
-  $("#num_Of_infected").html((parseFloat(data_sir_i[data_sir_i.length-1]).toFixed(2)).toString())
-  $("#num_Of_Recovered").html((parseFloat(data_sir_r[data_sir_r.length-1]).toFixed(2)).toString())
-  $("#num_Of_day").html((parseFloat(data_day[data_sir_i.length-1]).toFixed(0)).toString())
-  $("#id_beta").html((parseFloat(result.parameter[0].beta).toFixed(6)).toString())
-  $("#id_gamma").html((parseFloat(result.parameter[0].gamma).toFixed(6)).toString())
+  // $("#num_Of_Susceptible").html((parseFloat(data_sir_s[data_sir_s.length-1]).toFixed(2)).toString())
+  // $("#num_Of_infected").html((parseFloat(data_sir_i[data_sir_i.length-1]).toFixed(2)).toString())
+  // $("#num_Of_Recovered").html((parseFloat(data_sir_r[data_sir_r.length-1]).toFixed(2)).toString())
+  // $("#num_Of_day").html((parseFloat(data_day[data_sir_i.length-1]).toFixed(0)).toString())
+  // $("#id_beta").html((parseFloat(result.parameter[0].beta).toFixed(6)).toString())
+  // $("#id_gamma").html((parseFloat(result.parameter[0].gamma).toFixed(6)).toString())
 
 
 
