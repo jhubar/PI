@@ -400,7 +400,7 @@ function drawfit(ans) {
         {
           label: "Susceptible ",
           lineTension: 0.6,
-          backgroundColor: "rgba(78, 115, 223, 0.2)",
+          backgroundColor: "rgba(0, 0, 0, 0)",
           borderColor: "rgba(78, 115, 223, 1)",
           pointRadius: 1,
           pointBackgroundColor: "rgba(78, 115, 223, 1)",
@@ -416,15 +416,15 @@ function drawfit(ans) {
         {
           label: "Exposed ",
           lineTension: 0.6,
-          backgroundColor: "rgba(240, 173, 78, 0.2)",
-          borderColor: "rgba(240, 173, 78, 1)",
-          pointRadius: 1,
+          backgroundColor: "rgba(0, 0, 0, 0.0)",
+          borderColor: "rgba(0, 0, 0, 0)",
+          pointRadius: 4,
           pointBackgroundColor: "rgba(240, 173, 78, 1)",
           pointBorderColor: "rgba(240, 173, 78, 1)",
-          pointHoverRadius: 1,
+          pointHoverRadius: 4,
           pointHoverBackgroundColor: "rgba(240, 173, 78, 1)",
           pointHoverBorderColor: "rgba(240, 173, 78, 1)",
-          pointHitRadius: 5,
+          pointHitRadius: 10,
           pointBorderWidth: 1,
           data: data_seir_fit_hospit,
         },
@@ -432,24 +432,24 @@ function drawfit(ans) {
         {
           label: "Infectious ",
           lineTension: 0.3,
-          backgroundColor: "rgba(237, 0, 59,0.1)",
-          borderColor: "rgba(237, 0, 59, 1)",
-          pointRadius: 1,
+          backgroundColor: "rgba(0, 0, 0,0)",
+          borderColor: "rgba(0, 0, 0, 0)",
+          pointRadius: 2,
           pointBackgroundColor: "rgba(237, 0, 59, 1)",
           pointBorderColor: "rgba(237, 0, 59, 1)",
-          pointHoverRadius: 1,
+          pointHoverRadius: 4,
           pointHoverBackgroundColor: "rgba(237, 0, 59, 1)",
           pointHoverBorderColor: "rgba(237, 0, 59, 1)",
-          pointHitRadius: 5,
-          pointBorderWidth: 1,
+          pointHitRadius: 10,
+          pointBorderWidth: 4,
           data: data_seir_fit_cumul_pos,
         },
         // Recovered
         {
           label: "Recovered ",
           lineTension: 0.6,
-          backgroundColor: "rgba(37, 56, 60, 0.2)",
-          borderColor: "rgba(37, 56, 60, 0.1)",
+          backgroundColor: "rgba(0, 0, 0, 0)",
+          borderColor: "rgba(37, 56, 60, 0.5)",
           pointRadius: 1,
           pointBackgroundColor: "rgba(37, 56, 60, 0.1)",
           pointBorderColor: "rgba(37, 56, 60, 0.1)",
@@ -489,12 +489,14 @@ function drawfit(ans) {
           },
           ticks: {
             maxTicksLimit: 7,
-            // callback: function(value, index, values) {
-            //   return number_format(value)+ ' Days';
-            // }
+            callback: function(value, index, values) {
+              return number_format(value)+ ' Days';
+            }
           }
         }],
         yAxes: [{
+
+          type: 'logarithmic',
           ticks: {
             maxTicksLimit: 5,
             padding: 10,
