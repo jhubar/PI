@@ -323,8 +323,10 @@ class SEIR():
                 "predict_R": str(pred[i][5]),
 
             })
+
+
         self.dataJSON['model'] = []
-        self.dataJSON['predict'].append({
+        self.dataJSON['model'].append({
         "beta": str(self.beta),
         "sigma": str(self.sigma),
         "gamma": str(self.gamma),
