@@ -445,6 +445,8 @@
                     </span>
                     <span class="mr-2">
                       <i class="fas fa-circle text-success"></i>  Hospitalized
+
+
                     </span>
 
 
@@ -466,6 +468,31 @@
                             <input type="range" class="custom-range" id="range_time_period_SEIR" min="0" max="300" value="250">
                           </div>
                           <span class="font-weight-bold text-primary ml-2 value_time_period_SEIR"></span>
+                    </div>
+                    <!-- S -->
+                    <div class="custom-control custom-switch">
+                      <input type="checkbox" class="custom-control-input" id="customSwitchesSusceptible" checked >
+                      <label class="custom-control-label" for="customSwitchesSusceptible"> Susceptible </label>
+                    </div>
+                    <!-- E -->
+                    <div class="custom-control custom-switch">
+                      <input type="checkbox" class="custom-control-input" id="customSwitchesExposed" checked>
+                      <label class="custom-control-label" for="customSwitchesExposed"> Exposed </label>
+                    </div>
+                    <!-- I -->
+                    <div class="custom-control custom-switch">
+                      <input type="checkbox" class="custom-control-input" id="customSwitchesInfectious" checked>
+                      <label class="custom-control-label" for="customSwitchesInfectious"> Infectious </label>
+                    </div>
+                    <!-- R -->
+                    <div class="custom-control custom-switch">
+                      <input type="checkbox" class="custom-control-input" id="customSwitchesRecovered" checked>
+                      <label class="custom-control-label" for="customSwitchesRecovered"> Recovered </label>
+                    </div>
+                    <!-- H -->
+                    <div class="custom-control custom-switch">
+                      <input type="checkbox" class="custom-control-input" id="customSwitchesHospitalized" checked>
+                      <label class="custom-control-label" for="customSwitchesHospitalized"> Hospitalized </label>
                     </div>
                   </div>
                   <!-- <div class="col-auto">

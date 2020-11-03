@@ -4,17 +4,45 @@ Chart.defaults.global.defaultFontColor = '#858796';
 const $url = "https://raw.githubusercontent.com/julien1941/PI/master/Python/Data/SEIR.json?token=AL3RLGKDIGYHJYZ47QY6VJK7VKIMY"
 const $value_time_period_SEIR = $('.value_time_period_SEIR');
 const $value_time_SEIR = $('#range_time_period_SEIR');
+
+const $value_customSwitchesSusceptible = $('#customSwitchesSusceptible');
+
+const $id_switch_Susceptible = document.getElementById('customSwitchesSusceptible');
+const $id_switch_Exosed = document.getElementById('customSwitchesExposed');
+const $id_switch_Infected = document.getElementById('customSwitchesInfectious');
+const $id_switch_Recovered = document.getElementById('customSwitchesRecovered');
+const $id_switch_Hospitalized = document.getElementById('customSwitchesHospitalized');
+
 $value_time_period_SEIR.html($value_time_SEIR.val());
+
+
+
+$id_switch_Susceptible.addEventListener('change',function(){
+    draw();
+});
+
+$id_switch_Exosed.addEventListener('change',function(){
+    draw();
+});
+
+$id_switch_Infected.addEventListener('change',function(){
+    draw();
+});
+
+$id_switch_Recovered.addEventListener('change',function(){
+    draw();
+});
+
+$id_switch_Hospitalized.addEventListener('change',function(){
+    draw();
+});
+
+
 
 
 loadData();
 
-$value_time_SEIR.on('input change', () => {
-  // loadData();
-  $value_time_period_SEIR.html($value_time_SEIR.val());
-
-
-
+function loadData(){
 
     var data = ''
     // DAp
@@ -25,53 +53,55 @@ $value_time_SEIR.on('input change', () => {
       const result = JSON.parse(data);
 
 
-
-
-        data_day = [];
-        data_seir_s = [];
-        data_seir_e = [];
-        data_seir_i = [];
-        data_seir_r = [];
-        data_seir_h = [];
-
-
-
-        for(var i=0;i<$value_time_SEIR.val();i++){
-
-          data_day.push(result.predict[i].predict_day);
-          data_seir_s.push(result.predict[i].predict_S);
-          data_seir_e.push(result.predict[i].predict_E);
-          data_seir_i.push(result.predict[i].predict_I);
-          data_seir_r.push(result.predict[i].predict_R);
-          data_seir_h.push(result.predict[i].predict_H);
+      data_day = [];
+      data_seir_s = [];
+      data_seir_e = [];
+      data_seir_i = [];
+      data_seir_r = [];
+      data_seir_h = [];
 
 
 
+      for(var i=0;i<$value_time_SEIR.val();i++){
 
-        }
+        data_day.push(result.predict[i].predict_day);
+        data_seir_s.push(result.predict[i].predict_S);
+        data_seir_e.push(result.predict[i].predict_E);
+        data_seir_i.push(result.predict[i].predict_I);
+        data_seir_r.push(result.predict[i].predict_R);
+        data_seir_h.push(result.predict[i].predict_H);
+
+
+      }
+
+
 
   var ctx_active_cases = document.getElementById("myAreaSeirModel");
+  $("#id_beta_seir").html((parseFloat(result.model[0].beta).toFixed(6)).toString())
+  $("#id_sigma_seir").html((parseFloat(result.model[0].sigma).toFixed(6)).toString())
+  $("#id_gamma_seir").html((parseFloat(result.model[0].gamma).toFixed(6)).toString())
+  $("#id_hp_seir").html((parseFloat(result.model[0].hp).toFixed(6)).toString())
+  $("#id_hcr_seir").html((parseFloat(result.model[0].hcr).toFixed(6)).toString())
 
 
 
-  without_cum_cases(2);
+  draw();
   load_card_value();
 
 
 
 
+},
+);}
 
+$value_time_SEIR.on('input change', () => {
 
-
-
-
- },
-);
-
-
-
-
+  $value_time_period_SEIR.html($value_time_SEIR.val());
+  loadData();
 });
+
+
+
 
 function number_format(number, decimals, dec_point, thousands_sep) {
   // *     example: number_format(1234.56, 2, ',', ' ');
@@ -98,7 +128,66 @@ function number_format(number, decimals, dec_point, thousands_sep) {
   return s.join(dec);
 }
 
-function without_cum_cases(ans) {
+
+
+
+function load_card_value(){
+  $("#num_Of_Susceptible_seir").html((parseFloat(data_seir_s[data_seir_s.length-1]).toFixed(2)).toString())
+  $("#num_Of_Exposed_seir").html((parseFloat(data_seir_e[data_seir_e.length-1]).toFixed(2)).toString())
+  $("#num_Of_infected_seir").html((parseFloat(data_seir_i[data_seir_i.length-1]).toFixed(2)).toString())
+  $("#num_Of_Recovered_seir").html((parseFloat(data_seir_r[data_seir_r.length-1]).toFixed(2)).toString())
+  $("#num_Of_hospitalized_seir").html((parseFloat(data_seir_h[data_seir_h.length-1]).toFixed(2)).toString())
+  $("#num_Of_day_seir").html((parseFloat(data_day[data_seir_i.length-1]).toFixed(0)).toString())
+
+
+}
+
+
+function susceptible_draw(){
+  if($id_switch_Susceptible.checked == true){
+    return data_seir_s;
+  }
+  else{
+    return [];
+  }
+}
+function exposed_draw(){
+  if($id_switch_Exosed.checked == true){
+    return data_seir_e;
+  }
+  else{
+    return [];
+  }
+}
+
+function infected_draw(){
+  if($id_switch_Infected.checked == true){
+    return data_seir_i;
+  }
+  else{
+    return [];
+  }
+}
+
+function recovered_draw(){
+  if($id_switch_Recovered.checked == true){
+    return data_seir_r;
+  }
+  else{
+    return [];
+  }
+}
+function hospitalized_draw(){
+  if($id_switch_Hospitalized.checked == true){
+    return data_seir_h;
+  }
+  else{
+    return [];
+  }
+}
+
+
+function draw(ans) {
 
   if (typeof(myLineChart) != "undefined"){
 
@@ -126,7 +215,7 @@ function without_cum_cases(ans) {
           pointHoverBorderColor: "rgba(78, 115, 223, 1)",
           pointHitRadius: 5,
           pointBorderWidth: 1,
-          data: data_seir_s,
+          data: susceptible_draw(),
         },
         // Exposed
         {
@@ -142,7 +231,7 @@ function without_cum_cases(ans) {
           pointHoverBorderColor: "rgba(240, 173, 78, 1)",
           pointHitRadius: 5,
           pointBorderWidth: 1,
-          data: data_seir_e,
+          data: exposed_draw(),
         },
         // Infectious
         {
@@ -158,7 +247,7 @@ function without_cum_cases(ans) {
           pointHoverBorderColor: "rgba(237, 0, 59, 1)",
           pointHitRadius: 5,
           pointBorderWidth: 1,
-          data: data_seir_i,
+          data: infected_draw(),
         },
         // Recovered
         {
@@ -174,7 +263,7 @@ function without_cum_cases(ans) {
           pointHoverBorderColor: "rgba(37, 56, 60, 0.1)",
           pointHitRadius: 5,
           pointBorderWidth: 1,
-          data: data_seir_r,
+          data: recovered_draw(),
         },
         // Hospitalized
         {
@@ -190,7 +279,7 @@ function without_cum_cases(ans) {
           pointHoverBorderColor: "rgba(34,139,34, 0.1)",
           pointHitRadius: 5,
           pointBorderWidth: 4,
-          data: data_seir_h,
+          data: hospitalized_draw(),
         }
 
 
@@ -272,79 +361,3 @@ function without_cum_cases(ans) {
 
 
 }
-
-function load_card_value(){
-  $("#num_Of_Susceptible_seir").html((parseFloat(data_seir_s[data_seir_s.length-1]).toFixed(2)).toString())
-  $("#num_Of_Exposed_seir").html((parseFloat(data_seir_e[data_seir_e.length-1]).toFixed(2)).toString())
-  $("#num_Of_infected_seir").html((parseFloat(data_seir_i[data_seir_i.length-1]).toFixed(2)).toString())
-  $("#num_Of_Recovered_seir").html((parseFloat(data_seir_r[data_seir_r.length-1]).toFixed(2)).toString())
-  $("#num_Of_hospitalized_seir").html((parseFloat(data_seir_h[data_seir_h.length-1]).toFixed(2)).toString())
-  $("#num_Of_day_seir").html((parseFloat(data_day[data_seir_i.length-1]).toFixed(0)).toString())
-
-
-
-
-}
-
-
-function cum_cases(ans, dataC){
-  if(ans == 2){
-    return dataC;
-  }
-  if(ans == 1){
-    return [];
-  }
-
-}
-
-function loadData(){
-
-
-    var data = ''
-    // DAp
-    var tmp ;
-
-    $.get($url,function(data){
-
-      const result = JSON.parse(data);
-
-
-      data_day = [];
-      data_seir_s = [];
-      data_seir_e = [];
-      data_seir_i = [];
-      data_seir_r = [];
-      data_seir_h = [];
-
-
-
-      for(var i=0;i<$value_time_SEIR.val();i++){
-
-        data_day.push(result.predict[i].predict_day);
-        data_seir_s.push(result.predict[i].predict_S);
-        data_seir_e.push(result.predict[i].predict_E);
-        data_seir_i.push(result.predict[i].predict_I);
-        data_seir_r.push(result.predict[i].predict_R);
-        data_seir_h.push(result.predict[i].predict_H);
-
-
-      }
-
-
-
-  var ctx_active_cases = document.getElementById("myAreaSeirModel");
-  $("#id_beta_seir").html((parseFloat(result.model[0].beta).toFixed(6)).toString())
-  $("#id_sigma_seir").html((parseFloat(result.model[0].sigma).toFixed(6)).toString())
-  $("#id_gamma_seir").html((parseFloat(result.model[0].gamma).toFixed(6)).toString())
-  $("#id_hp_seir").html((parseFloat(result.model[0].hp).toFixed(6)).toString())
-  $("#id_hcr_seir").html((parseFloat(result.model[0].hcr).toFixed(6)).toString())
-
-
-  without_cum_cases(2);
-  load_card_value();
-
-
-
-
-},
-);}
