@@ -323,6 +323,14 @@ class SEIR():
                 "predict_R": str(pred[i][5]),
 
             })
+        self.dataJSON['model'] = []
+        self.dataJSON['predict'].append({
+        "beta": str(self.beta),
+        "sigma": str(self.sigma),
+        "gamma": str(self.gamma),
+        "hp": str(self.hp),
+        "hcr": str(self.hcr),
+        })
 
         if 'predict' in args:
             if "no_S" not in args:
