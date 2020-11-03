@@ -1,11 +1,7 @@
 // Set new default font family and font color to mimic Bootstrap's default styling
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
-
-
-
-const $id_switch_linear = document.getElementById('customSwitchesLinear');
-const $id_switch_log = document.getElementById('customSwitchesLog');
+const $url = "https://raw.githubusercontent.com/julien1941/PI/master/Python/Data/SEIR.json?token=AL3RLGMAO5MHKOLL2O7CVLC7VLF6U"
 
 
 
@@ -22,55 +18,35 @@ function loadData(){
       const result = JSON.parse(data);
 
 
-      data_day = [];
-      data_seir_s = [];
-      data_seir_e = [];
-      data_seir_i = [];
-      data_seir_r = [];
-      data_seir_h = [];
+      data_day_fit = [];
+      data_seir_fit_cumul_pos = [];
+      data_seir_fit_hospit = [];
+      data_seir_fit_cumul_pos_fit = [];
+      data_seir_fit_hospit_fit = [];
 
 
 
-      for(var i=0;i<$value_time_SEIR.val();i++){
+      for(var i=0;i<result.log.length-1;i++){
 
-        data_day.push(result.predict[i].predict_day);
-        data_seir_s.push(result.predict[i].predict_S);
-        data_seir_e.push(result.predict[i].predict_E);
-        data_seir_i.push(result.predict[i].predict_I);
-        data_seir_r.push(result.predict[i].predict_R);
-        data_seir_h.push(result.predict[i].predict_H);
+        data_day_fit.push(result.log[i].day);
+        data_seir_fit_cumul_pos.push(result.log[i].cumul_positive);
+        data_seir_fit_hospit.push(result.log[i].hospit);
+        data_seir_fit_cumul_pos_fit.push(result.log[i].cumul_positive_fit);
+        data_seir_fit_hospit_fit.push(result.log[i].hospit_fit);
 
 
       }
 
 
 
-  var ctx_active_cases = document.getElementById("myAreaSeirModel");
-  $("#id_beta_seir").html((parseFloat(result.model[0].beta).toFixed(6)).toString())
-  $("#id_sigma_seir").html((parseFloat(result.model[0].sigma).toFixed(6)).toString())
-  $("#id_gamma_seir").html((parseFloat(result.model[0].gamma).toFixed(6)).toString())
-  $("#id_hp_seir").html((parseFloat(result.model[0].hp).toFixed(6)).toString())
-  $("#id_hcr_seir").html((parseFloat(result.model[0].hcr).toFixed(6)).toString())
-
+  var ctx_active_cases = document.getElementById("myAreaSeirfit");
 
 
   draw();
-  load_card_value();
-
-
 
 
 },
 );}
-
-$value_time_SEIR.on('input change', () => {
-
-  $value_time_period_SEIR.html($value_time_SEIR.val());
-  loadData();
-});
-
-
-
 
 function number_format(number, decimals, dec_point, thousands_sep) {
   // *     example: number_format(1234.56, 2, ',', ' ');
@@ -100,60 +76,7 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 
 
 
-function load_card_value(){
-  $("#num_Of_Susceptible_seir").html((parseFloat(data_seir_s[data_seir_s.length-1]).toFixed(2)).toString())
-  $("#num_Of_Exposed_seir").html((parseFloat(data_seir_e[data_seir_e.length-1]).toFixed(2)).toString())
-  $("#num_Of_infected_seir").html((parseFloat(data_seir_i[data_seir_i.length-1]).toFixed(2)).toString())
-  $("#num_Of_Recovered_seir").html((parseFloat(data_seir_r[data_seir_r.length-1]).toFixed(2)).toString())
-  $("#num_Of_hospitalized_seir").html((parseFloat(data_seir_h[data_seir_h.length-1]).toFixed(2)).toString())
-  $("#num_Of_day_seir").html((parseFloat(data_day[data_seir_i.length-1]).toFixed(0)).toString())
 
-
-}
-
-
-function susceptible_draw(){
-  if($id_switch_Susceptible.checked == true){
-    return data_seir_s;
-  }
-  else{
-    return [];
-  }
-}
-function exposed_draw(){
-  if($id_switch_Exosed.checked == true){
-    return data_seir_e;
-  }
-  else{
-    return [];
-  }
-}
-
-function infected_draw(){
-  if($id_switch_Infected.checked == true){
-    return data_seir_i;
-  }
-  else{
-    return [];
-  }
-}
-
-function recovered_draw(){
-  if($id_switch_Recovered.checked == true){
-    return data_seir_r;
-  }
-  else{
-    return [];
-  }
-}
-function hospitalized_draw(){
-  if($id_switch_Hospitalized.checked == true){
-    return data_seir_h;
-  }
-  else{
-    return [];
-  }
-}
 
 
 function draw(ans) {
@@ -168,7 +91,7 @@ function draw(ans) {
   myLineChart = new Chart(ctx_active_cases, {
     type: 'line',
     data: {
-      labels: data_day,
+      labels: data_day_fit,
       datasets: [
         // Susceptible
         {
@@ -184,7 +107,7 @@ function draw(ans) {
           pointHoverBorderColor: "rgba(78, 115, 223, 1)",
           pointHitRadius: 5,
           pointBorderWidth: 1,
-          data: susceptible_draw(),
+          data: data_seir_fit_hospit_fit,
         },
         // Exposed
         {
@@ -200,7 +123,7 @@ function draw(ans) {
           pointHoverBorderColor: "rgba(240, 173, 78, 1)",
           pointHitRadius: 5,
           pointBorderWidth: 1,
-          data: exposed_draw(),
+          data: data_seir_fit_hospit,
         },
         // Infectious
         {
@@ -216,7 +139,7 @@ function draw(ans) {
           pointHoverBorderColor: "rgba(237, 0, 59, 1)",
           pointHitRadius: 5,
           pointBorderWidth: 1,
-          data: infected_draw(),
+          data: data_seir_fit_cumul_pos,
         },
         // Recovered
         {
@@ -232,24 +155,9 @@ function draw(ans) {
           pointHoverBorderColor: "rgba(37, 56, 60, 0.1)",
           pointHitRadius: 5,
           pointBorderWidth: 1,
-          data: recovered_draw(),
+          data: data_seir_fit_cumul_pos_fit,
         },
-        // Hospitalized
-        {
-          label: "hospitalized ",
-          lineTension: 0.6,
-          backgroundColor: "rgba(34,139,34, 0.2)",
-          borderColor: "rgba(34,139,34, 0.1)",
-          pointRadius: 1,
-          pointBackgroundColor: "rgba(34,139,34, 0.1)",
-          pointBorderColor: "rgba(34,139,34, 0.1)",
-          pointHoverRadius: 1,
-          pointHoverBackgroundColor: "rgba(34,139,34, 0.1)",
-          pointHoverBorderColor: "rgba(34,139,34, 0.1)",
-          pointHitRadius: 5,
-          pointBorderWidth: 4,
-          data: hospitalized_draw(),
-        }
+
 
 
 
