@@ -1,7 +1,7 @@
 // Set new default font family and font color to mimic Bootstrap's default styling
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
-const $url = "https://raw.githubusercontent.com/julien1941/PI/master/Python/Data/SEIR.json?token=AL3RLGIINI2NF3CDPWACJTK7VJ2O4"
+const $url = "https://raw.githubusercontent.com/julien1941/PI/master/Python/Data/SEIR.json?token=AL3RLGKDIGYHJYZ47QY6VJK7VKIMY"
 const $value_time_period_SEIR = $('.value_time_period_SEIR');
 const $value_time_SEIR = $('#range_time_period_SEIR');
 $value_time_period_SEIR.html($value_time_SEIR.val());
@@ -55,14 +55,11 @@ $value_time_SEIR.on('input change', () => {
 
 
   without_cum_cases(2);
+  load_card_value();
 
 
-  // $("#num_Of_Susceptible").html((parseFloat(data_sir_s[data_sir_s.length-1]).toFixed(2)).toString())
-  // $("#num_Of_infected").html((parseFloat(data_sir_i[data_sir_i.length-1]).toFixed(2)).toString())
-  // $("#num_Of_Recovered").html((parseFloat(data_sir_r[data_sir_r.length-1]).toFixed(2)).toString())
-  // $("#num_Of_day").html((parseFloat(data_day[data_sir_i.length-1]).toFixed(0)).toString())
-  // $("#id_beta").html((parseFloat(result.parameter[0].beta).toFixed(6)).toString())
-  // $("#id_gamma").html((parseFloat(result.parameter[0].gamma).toFixed(6)).toString())
+
+
 
 
 
@@ -276,6 +273,19 @@ function without_cum_cases(ans) {
 
 }
 
+function load_card_value(){
+  $("#num_Of_Susceptible_seir").html((parseFloat(data_seir_s[data_seir_s.length-1]).toFixed(2)).toString())
+  $("#num_Of_Exposed_seir").html((parseFloat(data_seir_e[data_seir_e.length-1]).toFixed(2)).toString())
+  $("#num_Of_infected_seir").html((parseFloat(data_seir_i[data_seir_i.length-1]).toFixed(2)).toString())
+  $("#num_Of_Recovered_seir").html((parseFloat(data_seir_r[data_seir_r.length-1]).toFixed(2)).toString())
+  $("#num_Of_hospitalized_seir").html((parseFloat(data_seir_h[data_seir_h.length-1]).toFixed(2)).toString())
+  $("#num_Of_day_seir").html((parseFloat(data_day[data_seir_i.length-1]).toFixed(0)).toString())
+
+
+
+
+}
+
 
 function cum_cases(ans, dataC){
   if(ans == 2){
@@ -323,17 +333,15 @@ function loadData(){
 
 
   var ctx_active_cases = document.getElementById("myAreaSeirModel");
-
+  $("#id_beta_seir").html((parseFloat(result.model[0].beta).toFixed(6)).toString())
+  $("#id_sigma_seir").html((parseFloat(result.model[0].sigma).toFixed(6)).toString())
+  $("#id_gamma_seir").html((parseFloat(result.model[0].gamma).toFixed(6)).toString())
+  $("#id_hp_seir").html((parseFloat(result.model[0].hp).toFixed(6)).toString())
+  $("#id_hcr_seir").html((parseFloat(result.model[0].hcr).toFixed(6)).toString())
 
 
   without_cum_cases(2);
-
-  // $("#num_Of_Susceptible").html((parseFloat(data_sir_s[data_sir_s.length-1]).toFixed(2)).toString())
-  // $("#num_Of_infected").html((parseFloat(data_sir_i[data_sir_i.length-1]).toFixed(2)).toString())
-  // $("#num_Of_Recovered").html((parseFloat(data_sir_r[data_sir_r.length-1]).toFixed(2)).toString())
-  // $("#num_Of_day").html((parseFloat(data_day[data_sir_i.length-1]).toFixed(0)).toString())
-  // $("#id_beta").html((parseFloat(result.parameter[0].beta).toFixed(6)).toString())
-  // $("#id_gamma").html((parseFloat(result.parameter[0].gamma).toFixed(6)).toString())
+  load_card_value();
 
 
 
