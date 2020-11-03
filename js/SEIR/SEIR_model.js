@@ -12,10 +12,12 @@ const $id_switch_Exosed = document.getElementById('customSwitchesExposed');
 const $id_switch_Infected = document.getElementById('customSwitchesInfectious');
 const $id_switch_Recovered = document.getElementById('customSwitchesRecovered');
 const $id_switch_Hospitalized = document.getElementById('customSwitchesHospitalized');
-
+const $id_switch_Log = document.getElementById('customSwitchesLog');
 $value_time_period_SEIR.html($value_time_SEIR.val());
 
-
+$id_switch_Log.addEventListener('change',function(){
+    drawfit();
+});
 
 $id_switch_Susceptible.addEventListener('change',function(){
     draw();
@@ -382,6 +384,18 @@ function draw(ans) {
 
 }
 
+
+function ladder(){
+  if($id_switch_Log.checked == true){
+    console.log('logarithmic')
+    return 'logarithmic';
+  }
+  else{
+    console.log('linear')
+    return 'linear';
+  }
+}
+
 function drawfit(ans) {
 
   if (typeof(myLineChartfit) != "undefined"){
@@ -496,7 +510,7 @@ function drawfit(ans) {
         }],
         yAxes: [{
 
-          type: 'logarithmic',
+          type: ladder(),
           ticks: {
             maxTicksLimit: 5,
             padding: 10,
