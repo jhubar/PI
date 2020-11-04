@@ -2,6 +2,14 @@
 <html lang="en">
 
 <head>
+  <style type="text/css">
+      html, body, #container1 {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -570,7 +578,7 @@
 
                     <!-- log -->
                     <div class="custom-control custom-switch">
-        
+
                       <input type="checkbox" class="custom-control-input" id="customSwitchesLog" checked >
                       <label class="custom-control-label" for="customSwitchesLog" > Log </label>
                     </div>
@@ -604,6 +612,34 @@
           </div>
 
         </div>
+
+          </div>
+          <div id="container"></div>
+          <div class ="row">
+            <div class="col-xl-8 col-lg-7">
+              <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">Network</h6>
+
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                  <div class="chart-area">
+                    <div id = "container1"> </div>
+                    <!-- <canvas id="myNet"></canvas> -->
+                  </div>
+
+
+
+
+
+
+
+
+                </div>
+              </div>
+            </div>
           </div>
 
         </div>
@@ -633,24 +669,7 @@
     <i class="fas fa-angle-up"></i>
   </a>
 
-  <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
-        </div>
-      </div>
-    </div>
-  </div>
+
 
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
@@ -665,8 +684,13 @@
   <script src="vendor/chart.js/Chart.min.js"></script>
   <!-- Api connection -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+  <script src="https://cdn.anychart.com/releases/8.8.0/js/anychart-core.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/8.8.0/js/anychart-graph.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/8.8.0/js/anychart-data-adapter.min.js"></script>
   <script src="js/SEIR/SEIR_model.js"></script>
+  <script src="js/Network/network.js"></script>
+
+
 
 </body>
 
