@@ -1,46 +1,50 @@
 {
   "nodes": [
     {
-      "id": "Susceptible",
-      "height": 50,
-      "fill": {
-        "src": "https://awoiaf.westeros.org/images/thumb/d/d5/House_Lannister.svg/500px-House_Lannister.svg.png"
-      }
+      "id": 1,
+      "name": "Susceptible"
     },
     {
-      "id": "Exposed",
-      "height": 50,
-      "fill": {
-        "src": "https://awoiaf.westeros.org/images/thumb/6/61/House_Tully.svg/500px-House_Tully.svg.png"
-      }
+      "id": 2,
+      "name": "Exposed"
     },
     {
-      "id": "Infected",
-      "height": 50,
-      "fill": {
-        "src": "https://awoiaf.westeros.org/images/thumb/2/2d/House_Baratheon.svg/500px-House_Baratheon.svg.png"
-      }
+      "id": 3,
+      "name": "infected"
     },
     {
-      "id": "Recovered",
-      "height": 50,
-      "fill": {
-        "src": "https://awoiaf.westeros.org/images/thumb/7/7e/House_Stark.svg/500px-House_Stark.svg.png"
-      }
+      "id": 4,
+      "name": "Recovered"
     },
     {
-      "id": "Hospitalized",
-      "height": 50,
-      "fill": {
-        "src": "https://awoiaf.westeros.org/images/thumb/9/9e/House_Darry.svg/500px-House_Darry.svg.png"
-      }
+      "id": 5,
+      "name": "Hospitalized"
     }
+
   ],
-  "edges": [
-    { "from": "Susceptible", "to": "Exposed" },
-    { "from": "Exposed", "to": "Infected" },
-    { "from": "Infected", "to": "Recovered" },
-    { "from": "Infected", "to": "Hospitalized" },
-    { "from": "Hospitalized", "to": "Recovered" }
+  "links": [
+
+    {
+      "source": 1,
+      "target": 2
+    },
+    {
+      "source": 2,
+      "target": 3
+    },
+    {
+      "source": 3,
+      "target": 4
+    },
+
+    {
+      "source": 3,
+      "target": 5
+    },
+            {
+      "source": 4,
+      "target": 5
+    }
+    
   ]
 }
