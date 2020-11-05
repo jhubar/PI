@@ -97,6 +97,8 @@ function loadData(){
       data_seir_i = [];
       data_seir_r = [];
       data_seir_h = [];
+      data_seir_c = [];
+      data_seir_f = [];
 
 
 
@@ -110,6 +112,8 @@ function loadData(){
         data_seir_i.push(result.predict[i].predict_I);
         data_seir_r.push(result.predict[i].predict_R);
         data_seir_h.push(result.predict[i].predict_H);
+        data_seir_c.push(result.predict[i].predict_C);
+        data_seir_f.push(result.predict[i].predict_F);
 
 
       }
@@ -217,6 +221,8 @@ function load_card_value_seir(){
   $("#num_Of_infected_seir").html((parseFloat(data_seir_i[data_seir_i.length-1]).toFixed(2)).toString())
   $("#num_Of_Recovered_seir").html((parseFloat(data_seir_r[data_seir_r.length-1]).toFixed(2)).toString())
   $("#num_Of_hospitalized_seir").html((parseFloat(data_seir_h[data_seir_h.length-1]).toFixed(2)).toString())
+  $("#num_Of_criticals_seir").html((parseFloat(data_seir_c[data_seir_c.length-1]).toFixed(2)).toString())
+  $("#num_Of_fatalities_seir").html((parseFloat(data_seir_f[data_seir_f.length-1]).toFixed(2)).toString())
   $("#num_Of_day_seir").html((parseFloat(data_day_seir[data_seir_i.length-1]).toFixed(0)).toString())
 
 
@@ -350,6 +356,7 @@ function fatalities_seir_draw(){
     return [];
   }
 }
+
 $value_time_data.on('input change', () => {
 
   $value_time_period_data.html($value_time_data.val());
@@ -482,7 +489,6 @@ function load_card_kpi_value(){
 
 
 }
-
 function draw_current_data() {
 
   if (typeof(myLineChart_positive) != "undefined"){
@@ -755,6 +761,38 @@ function draw(ans) {
           pointHitRadius: 5,
           pointBorderWidth: 4,
           data: hospitalized_seir_draw(),
+        },
+        // Criticals
+        {
+          label: "Criticals ",
+          lineTension: 0.6,
+          backgroundColor: "rgba(255, 193, 7,0.3)",
+          borderColor: "rgba(255, 193, 7,1)",
+          pointRadius: 1,
+          pointBackgroundColor: "rgba(255, 193, 7,1)",
+          pointBorderColor: "rgba(255, 193, 7,1)",
+          pointHoverRadius: 1,
+          pointHoverBackgroundColor: "rgba(255, 193, 7, 1)",
+          pointHoverBorderColor: "rgba(255, 193, 7, 1)",
+          pointHitRadius: 5,
+          pointBorderWidth: 4,
+          data: criticals_seir_draw(),
+        },
+        // Fatalities
+        {
+          label: "Fatalities",
+          lineTension: 0.6,
+          backgroundColor: "rgba(34,139,34, 0.2)",
+          borderColor: "rgba(34,139,34, 0.1)",
+          pointRadius: 1,
+          pointBackgroundColor: "rgba(34,139,34, 0.1)",
+          pointBorderColor: "rgba(34,139,34, 0.1)",
+          pointHoverRadius: 1,
+          pointHoverBackgroundColor: "rgba(34,139,34, 0.1)",
+          pointHoverBorderColor: "rgba(34,139,34, 0.1)",
+          pointHitRadius: 5,
+          pointBorderWidth: 4,
+          data: fatalities_seir_draw(),
         }
 
 
@@ -836,23 +874,3 @@ function draw(ans) {
 
 
 }
-Chart.types.Line.extend({
-    name: "LineWithLine",
-    draw: function () {
-        Chart.types.Line.prototype.draw.apply(this, arguments);
-
-        var point = this.datasets[0].points[this.options.lineAtIndex]
-        var scale = this.scale
-
-        // draw line
-        this.chart.ctx_active_cases.beginPath();
-        this.chart.ctx_active_cases.moveTo(point.x, scale.startPoint + 24);
-        this.chart.ctx_active_cases.strokeStyle = '#ff0000';
-        this.chart.ctx.lineTo(point.x, scale.endPoint);
-        this.chart.ctx.stroke();
-
-        // write TODAY
-        this.chart.ctx.textAlign = 'center';
-        this.chart.ctx.fillText("TODAY", point.x, scale.startPoint + 12);
-    }
-});
