@@ -2,7 +2,7 @@
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
 const $url_data = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/data.csv"
-const $url = "https://raw.githubusercontent.com/julien1941/PI/master/Python/Data/SEIR.json?token=AL3RLGIXJSLKL2CKKRCID627VTVJS"
+const $url = "https://raw.githubusercontent.com/julien1941/PI/master/Python/Data/SEIR.json?token=AL3RLGKFBUYQJLYUKKDP4327VU7BO"
 const $value_time_period_data = $('.value_time_period_data');
 const $value_time_data = $('#range_time_period_data');
 
@@ -113,7 +113,7 @@ function loadData(){
         data_seir_r.push(result.predict[i].predict_R);
         data_seir_h.push(result.predict[i].predict_H);
         data_seir_c.push(result.predict[i].predict_C);
-        data_seir_f.push(result.predict[i].predict_D);
+        data_seir_f.push(result.predict[i].predict_F);
 
 
       }
@@ -782,14 +782,14 @@ function draw(ans) {
         {
           label: "Fatalities",
           lineTension: 0.6,
-          backgroundColor: "rgba(34,139,34, 0.2)",
-          borderColor: "rgba(34,139,34, 0.1)",
+          backgroundColor: "rgba(255, 193, 7,0.1)",
+          borderColor: "rgba(237, 0, 59, 1)",
           pointRadius: 1,
-          pointBackgroundColor: "rgba(34,139,34, 0.1)",
-          pointBorderColor: "rgba(34,139,34, 0.1)",
+          pointBackgroundColor: "rgba(237, 0, 59, 1)",
+          pointBorderColor: "rgba(237, 0, 59, 1)",
           pointHoverRadius: 1,
-          pointHoverBackgroundColor: "rgba(34,139,34, 0.1)",
-          pointHoverBorderColor: "rgba(34,139,34, 0.1)",
+          pointHoverBackgroundColor: "rgba(237, 0, 59, 1)",
+          pointHoverBorderColor: "rgba(237, 0, 59, 1)",
           pointHitRadius: 5,
           pointBorderWidth: 4,
           data: fatalities_seir_draw(),
