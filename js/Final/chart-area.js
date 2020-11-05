@@ -25,6 +25,8 @@ const $id_switch_Exosed = document.getElementById('customSwitchesExposed');
 const $id_switch_Infected = document.getElementById('customSwitchesInfectious');
 const $id_switch_Recovered = document.getElementById('customSwitchesRecovered');
 const $id_switch_Hospitalized = document.getElementById('customSwitchesHospitalized');
+const $id_switch_seir_criticals = document.getElementById('customSwitchesSeirCriticales');
+const $id_switch_seir_fatalities = document.getElementById('customSwitchesSeirFatalities');
 
 
 $id_switch_positive.addEventListener('change',function(){
@@ -65,6 +67,12 @@ $id_switch_Recovered.addEventListener('change',function(){
 });
 
 $id_switch_Hospitalized.addEventListener('change',function(){
+    draw();
+});
+$id_switch_seir_criticals.addEventListener('change',function(){
+    draw();
+});
+$id_switch_seir_fatalities.addEventListener('change',function(){
     draw();
 });
 
@@ -321,6 +329,22 @@ function recovered_draw(){
 function hospitalized_seir_draw(){
   if($id_switch_Hospitalized.checked == true){
     return data_seir_h;
+  }
+  else{
+    return [];
+  }
+}
+function criticals_seir_draw(){
+  if($id_switch_seir_criticals.checked == true){
+    return data_seir_c;
+  }
+  else{
+    return [];
+  }
+}
+function fatalities_seir_draw(){
+  if($id_switch_seir_fatalities.checked == true){
+    return data_seir_f;
   }
   else{
     return [];
@@ -812,3 +836,23 @@ function draw(ans) {
 
 
 }
+Chart.types.Line.extend({
+    name: "LineWithLine",
+    draw: function () {
+        Chart.types.Line.prototype.draw.apply(this, arguments);
+
+        var point = this.datasets[0].points[this.options.lineAtIndex]
+        var scale = this.scale
+
+        // draw line
+        this.chart.ctx_active_cases.beginPath();
+        this.chart.ctx_active_cases.moveTo(point.x, scale.startPoint + 24);
+        this.chart.ctx_active_cases.strokeStyle = '#ff0000';
+        this.chart.ctx.lineTo(point.x, scale.endPoint);
+        this.chart.ctx.stroke();
+
+        // write TODAY
+        this.chart.ctx.textAlign = 'center';
+        this.chart.ctx.fillText("TODAY", point.x, scale.startPoint + 12);
+    }
+});

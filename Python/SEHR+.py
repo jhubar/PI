@@ -490,6 +490,8 @@ class SEIR():
                 "predict_I": str(pred[i][3]),
                 "predict_H": str(pred[i][4]),
                 "predict_R": str(pred[i][5]),
+                "predict_C": str(pred[i][5]),
+                "predict_D": str(pred[i][5]),
 
             })
 
