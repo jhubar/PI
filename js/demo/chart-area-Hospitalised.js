@@ -1,10 +1,63 @@
-
 // Set new default font family and font color to mimic Bootstrap's default styling
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
+const $url_data = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/data.csv"
 
 
 loadData();
+
+function loadData(){
+
+    var data = ''
+    // DAp
+    var tmp ;
+
+    $.get($url_data,function(data){
+      var result = [];
+      var lines=data.split("\n");
+      var headers=lines[0].split(",");
+      for(var i=1;i<lines.length;i++){
+        var obj = {};
+        var currentline=lines[i].split(",");
+        for(var j=0;j<headers.length;j++){
+          obj[headers[j]] = currentline[j];
+        }
+        result.push(obj);
+      }
+
+
+      data_day = [];
+      data_num_hospitalised = [];
+      data_num_cumulative_hospitalizations = [];
+
+      for(var i=0;i<result.length-1;i++){
+        data_day.push(result[i].Day);
+        data_num_hospitalised.push(result[i].num_hospitalised);
+        data_num_cumulative_hospitalizations.push(result[i].num_cumulative_hospitalizations);
+      }
+
+
+
+
+
+
+
+  var ctx_hospitalized = document.getElementById("myAreaChartHospitalised");
+
+
+
+  draw();
+
+
+
+
+
+
+},
+);}
+
+
+
 
 
 function number_format(number, decimals, dec_point, thousands_sep) {
@@ -32,65 +85,58 @@ function number_format(number, decimals, dec_point, thousands_sep) {
   return s.join(dec);
 }
 
-function draw() {
 
-  if (typeof(myLineChart_h) != "undefined"){
 
-    myLineChart_h.destroy();
+function draw(ans) {
+
+  if (typeof(myLineChart_hospitalized) != "undefined"){
+
+    myLineChart_hospitalized.destroy();
 
   }
 
-  ctx_nb_hospitalised = document.getElementById("myAreaChartHospitalised");
-  myLineChart_h = new Chart(ctx_nb_hospitalised, {
+  ctx_hospitalized = document.getElementById("myAreaChartHospitalised");
+  myLineChart_hospitalized = new Chart(ctx_hospitalized, {
     type: 'line',
     data: {
       labels: data_day,
       datasets: [
+        // Susceptible
         {
-          label: "Current ",
+          label: "Susceptible ",
           lineTension: 0.6,
           backgroundColor: "rgba(78, 115, 223, 0.2)",
           borderColor: "rgba(78, 115, 223, 1)",
-          pointRadius: 4,
+          pointRadius: 1,
           pointBackgroundColor: "rgba(78, 115, 223, 1)",
           pointBorderColor: "rgba(78, 115, 223, 1)",
-          pointHoverRadius: 4,
+          pointHoverRadius: 1,
           pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
           pointHoverBorderColor: "rgba(78, 115, 223, 1)",
-          pointHitRadius: 10,
-          pointBorderWidth: 4,
-          data: data_available_num_hospitalised ,
+          pointHitRadius: 5,
+          pointBorderWidth: 1,
+          data: data_num_hospitalised,
         },
+        // Exposed
         {
-          label: "Cumulative ",
+          label: "Exposed ",
           lineTension: 0.6,
-          backgroundColor: "rgba(34,139,34, 0.2)",
-          borderColor: "rgba(34,139,34, 0.1)",
-          pointRadius: 4,
-          pointBackgroundColor: "rgba(34,139,34, 0.1)",
-          pointBorderColor: "rgba(34,139,34, 0.1)",
-          pointHoverRadius: 4,
-          pointHoverBackgroundColor: "rgba(34,139,34, 0.1)",
-          pointHoverBorderColor: "rgba(34,139,34, 0.1)",
-          pointHitRadius: 10,
-          pointBorderWidth: 4,
-          data: data_available_num_cumulative_hospitalizations ,
+          backgroundColor: "rgba(240, 173, 78, 0.2)",
+          borderColor: "rgba(240, 173, 78, 1)",
+          pointRadius: 1,
+          pointBackgroundColor: "rgba(240, 173, 78, 1)",
+          pointBorderColor: "rgba(240, 173, 78, 1)",
+          pointHoverRadius: 1,
+          pointHoverBackgroundColor: "rgba(240, 173, 78, 1)",
+          pointHoverBorderColor: "rgba(240, 173, 78, 1)",
+          pointHitRadius: 5,
+          pointBorderWidth: 1,
+          data: data_num_cumulative_hospitalizations,
         },
-        {
-          label: "prediciton",
-          lineTension: 0.3,
-          backgroundColor: "rgba(255, 193, 7,0.1)",
-          borderColor: "rgba(237, 0, 59, 1)",
-          pointRadius: 3,
-          pointBackgroundColor: "rgba(237, 0, 59, 1)",
-          pointBorderColor: "rgba(237, 0, 59, 1)",
-          pointHoverRadius: 3,
-          pointHoverBackgroundColor: "rgba(237, 0, 59, 1)",
-          pointHoverBorderColor: "rgba(237, 0, 59, 1)",
-          pointHitRadius: 10,
-          pointBorderWidth: 2,
-          data: data_prediction ,
-        }
+
+
+
+
 
 
     ],
@@ -165,40 +211,6 @@ function draw() {
       }
     }
   },);
+
+
 }
-
-
-function loadData(){
-
-    var url = "https://raw.githubusercontent.com/julien1941/PI/master/Python/Data/data.json?token=AL3RLGKIDP5WUBVAIYSMQ6S7UAPSO"
-
-    var data = ''
-    // DAp
-    var tmp ;
-    $.get(url,function(data){
-      const result = JSON.parse(data);
-
-      data_day = [];
-      data_available_num_hospitalised = [];
-      data_available_num_cumulative_hospitalizations = [];
-
-      data_prediction = [];
-
-
-      for(var i=0;i<result.available_data.length-1;i++){
-
-        data_day.push(result.available_data[i].Day);
-        data_available_num_hospitalised.push(result.available_data[i].num_hospitalised);
-        data_available_num_cumulative_hospitalizations.push(result.available_data[i].num_cumulative_hospitalizations);
-        data_prediction.push(result.hospit_fit_on_RI[i].prediciton);
-      }
-
-
-    var ctx_nb_hospitalised = document.getElementById("myAreaChartHospitalised");
-    draw();
-
-
-
-},
-);}
-loadData();
