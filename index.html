@@ -137,50 +137,7 @@
 
 
 
-      <!-- Divider -->
-      <!-- <hr class="sidebar-divider"> -->
 
-      <!-- Heading -->
-      <!-- <div class="sidebar-heading">
-        Addons
-      </div> -->
-
-      <!-- Nav Item - Pages Collapse Menu -->
-      <!-- <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-          <i class="fas fa-fw fa-folder"></i>
-          <span>Pages</span>
-        </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Login Screens:</h6>
-            <a class="collapse-item" href="login.html">Login</a>
-            <a class="collapse-item" href="register.html">Register</a>
-            <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-            <div class="collapse-divider"></div>
-            <h6 class="collapse-header">Other Pages:</h6>
-            <a class="collapse-item" href="404.html">404 Page</a>
-            <a class="collapse-item" href="blank.html">Blank Page</a>
-          </div>
-        </div>
-      </li> -->
-
-      <!-- Nav Item - Charts -->
-      <!-- <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>Charts</span></a>
-      </li> -->
-
-      <!-- Nav Item - Tables -->
-      <!-- <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-          <i class="fas fa-fw fa-table"></i>
-          <span>Tables</span></a>
-      </li> -->
-
-      <!-- Divider -->
-      <!-- <hr class="sidebar-divider d-none d-md-block"> -->
 
       <!-- Sidebar Toggler (Sidebar) -->
       <div class="text-center d-none d-md-inline">
@@ -522,6 +479,10 @@
                       <input type="checkbox" class="custom-control-input" id="customSwitches_hospitalized" checked>
                       <label class="custom-control-label" for="customSwitches_hospitalized"> Hospitalised </label>
                     </div>
+                    <div class="custom-control custom-switch">
+                      <input type="checkbox" class="custom-control-input" id="customSwitches_cum_hospitalized">
+                      <label class="custom-control-label" for="customSwitches_cum_hospitalized"> Cum Hospitalised </label>
+                    </div>
                     <!-- criticals -->
                     <div class="custom-control custom-switch">
                       <input type="checkbox" class="custom-control-input" id="customSwitches_criticals" checked>
@@ -548,90 +509,7 @@
             </div>
 
           </div>
-          <!-- Content Row numberOfHospitalied-->
-          <div class="row">
-              <!-- Area Chart Hospitalised -->
-              <div class="col-xl-8 col-lg-7">
-              <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-success">Number of Hospitalised</h6>
 
-                </div>
-                <!-- Card Body -->
-                <div class="card-body">
-                  <div class="chart-area">
-                    <canvas id="myAreaChartHospitalised"></canvas>
-                  </div>
-                  <div class="mt-4 text-center small">
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-primary"></i> Current Day
-                    </span>
-
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-success"></i> Cumulative cases
-                    </span>
-
-                  </div>
-                </div>
-              </div>
-
-            </div>
-              <!-- Prediction in one week -->
-              <div class="col-xl-4 col-lg-3 mb-4">
-                <div class="card border-left-success shadow h-10 py-2">
-                    <div class="card-body">
-                      <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Next week's forecast for the number of hospitalized cases </div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_hospitalisedForcast"></a></div>
-                      </div>
-                      <div class="col-auto">
-                        <i></a><a id = "num_hospitalisedKpiPredicated"></a></i>
-                        <i class="fas fas fa-head-side-cough fa-2x text-gray-300"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <br>
-
-                <!-- With mask -->
-                <div class="card border-left-success shadow h-10 py-2">
-                  <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                      <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Next week's forecast for the number of hospitalized cases (mask) </div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_fatalitiesForcast"></a></div>
-                    </div>
-                    <div class="col-auto">
-                      <i></a></a></i>
-                      <i class="fas fa-head-side-mask fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-                </div>
-                <br>
-
-
-                <br>
-                <!-- With lockdown -->
-                <div class="card border-left-success shadow h-10 py-2">
-                  <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                      <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Next week's forecast for the number of hospitalized cases (lockdown) </div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_fatalitiesForcast"></a></div>
-                    </div>
-                    <div class="col-auto">
-                      <i></a></a></i>
-                      <i class="fas fa-user-lock fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-                </div>
-            </div>
-
-          </div>
 
 
 
@@ -759,7 +637,7 @@
             result = `
             <td>${ result[size-1].num_positive }</td>`
             $("#num_positive").html(result)
-            console.log(result_nb)
+
             result_nb = `
             <td>${ result_nb[size-1].num_tested }</td>`
             $("#nb_tested").html(result_nb)
@@ -813,261 +691,261 @@
 
         })
         //predicated numberOfcasesKPIPredicated
-        $.get(url,function(data){
-
-          var lines=data.split("\n");
-          var result = [];
-
-          var headers=lines[0].split(",");
-          for(var i=1;i<lines.length;i++){
-            var obj = {};
-            var currentline=lines[i].split(",");
-            for(var j=0;j<headers.length;j++){
-              obj[headers[j]] = currentline[j];
-            }
-            result.push(obj);
-          }
-          var size = result.length-1;
-          //return result; //JavaScript object
-          label = [];
-          dataL = [];
-          dataOverfit = [];
-          dataUnderfit = [];
-          dataLinearfit = [];
-          // num_hospitalised
-          dataL_num_hospitalised = [];
-          dataOverfit_num_hospitalised = [];
-          dataUnderfit_num_hospitalised = [];
-          dataLinearfit_num_hospitalised = [];
-          // num_critical
-          dataL_num_critical = [];
-          dataOverfit_num_critical = [];
-          dataUnderfit_num_critical = [];
-          dataLinearfit_num_critical = [];
-          // num_fatalities
-          dataL_num_fatalities = [];
-          dataOverfit_num_fatalities = [];
-          dataUnderfit_num_fatalities = [];
-          dataLinearfit_num_fatalities = [];
-
-          for(var i=0;i<result.length-1;i++){
-            label.push(result[i].Day);
-
-            dataL.push(result[i].num_positive);
-            dataOverfit.push(result[i].num_positive);
-            dataUnderfit.push(result[i].num_positive);
-            dataLinearfit.push(result[i].num_positive);
-
-
-            dataL_num_hospitalised .push(result[i].num_hospitalised);
-            dataOverfit_num_hospitalised.push(result[i].num_hospitalised);
-            dataUnderfit_num_hospitalised.push(result[i].num_hospitalised);
-            dataLinearfit_num_hospitalised.push(result[i].num_hospitalised);
-
-            dataL_num_critical.push(result[i].num_critical);
-            dataOverfit_num_critical.push(result[i].num_critical);
-            dataUnderfit_num_critical.push(result[i].num_critical);
-            dataLinearfit_num_critical.push(result[i].num_critical);
-
-            dataL_num_fatalities.push(result[i].num_fatalities);
-            dataOverfit_num_fatalities.push(result[i].num_fatalities);
-            dataUnderfit_num_fatalities.push(result[i].num_fatalities);
-            dataLinearfit_num_fatalities.push(result[i].num_fatalities);
-
-          }
-
-          for(var i=0;i<7;i++){
-            label.push((result.length+i).toString());
-          }
-
-
-
-          tmpOverfit = dataL[result.length-2];
-          tmpUnderfit = dataL[result.length-2];
-          tmpLinearfit = dataL[result.length-2];
-          // num_hospitalised
-          tmpOverfit_num_hospitalised = dataL_num_hospitalised[result.length-2];
-          tmpUnderfit_num_hospitalised = dataL_num_hospitalised[result.length-2];
-          tmpLinearfit_num_hospitalised = dataL_num_hospitalised[result.length-2];
-          // num_critical
-          tmpOverfit_num_critical = dataL_num_critical[result.length-2];
-          tmpUnderfit_num_critical = dataL_num_critical[result.length-2];
-          tmpLinearfit_num_critical = dataL_num_critical[result.length-2];
-          //num_fatalities
-          tmpOverfit_num_fatalities = dataL_num_fatalities[result.length-2];
-          tmpUnderfit_num_fatalities = dataL_num_fatalities[result.length-2];
-          tmpLinearfit_num_fatalities = dataL_num_fatalities[result.length-2];
-
-          var m = 0;
-          var m_num_hospitalised = 0;
-          var m_num_critical = 0;
-          var m_num_fatalities = 0;
-
-          for(var i=1;i<result.length-1;i++){
-              m +=(dataL[i] - dataL[i-1])/((label[i] - label[i-1]));
-              m_num_hospitalised +=(dataL_num_hospitalised[i] - dataL_num_hospitalised[i-1])/((label[i] - label[i-1]));
-              m_num_critical +=(dataL_num_critical[i] - dataL_num_critical[i-1])/((label[i] - label[i-1]));
-              m_num_fatalities +=(dataL_num_fatalities[i] - dataL_num_fatalities[i-1])/((label[i] - label[i-1]));
-          }
-
-          m/=result.length-1;
-          m_num_hospitalised/=result.length-1;
-          m_num_critical/=result.length-1;
-          m_num_fatalities/=result.length-1;
-
-          for(var i=result.length-1;i<label.length;i++){
-            tmpLinearfit = m * parseInt(label[i]);
-            tmpLinearfit_num_hospitalised = m_num_hospitalised * parseInt(label[i]);
-            tmpLinearfit_num_critical = m_num_critical * parseInt(label[i]);
-            tmpLinearfit_num_fatalities = m_num_fatalities * parseInt(label[i]);
-            if(i%2 == 0){
-              tmpOverfit = 4 + parseInt(tmpLinearfit);
-              tmpUnderfit = parseInt(tmpLinearfit) - 4;
-
-              tmpOverfit_num_hospitalised = 4 + parseInt(tmpLinearfit_num_hospitalised);
-              tmpUnderfit_num_hospitalised = parseInt(tmpLinearfit_num_hospitalised) - 4;
-
-              tmpOverfit_num_critical = 0.05 + parseInt(tmpLinearfit_num_critical);
-              tmpUnderfit_num_critical = parseInt(tmpLinearfit_num_critical) - 0.05;
-
-              tmpOverfit_num_fatalities = 0.04 + parseInt(tmpLinearfit_num_fatalities);
-              tmpUnderfit_num_fatalities = parseInt(tmpLinearfit_num_fatalities) - 0.004;
-            }
-            else{
-              tmpOverfit = 3 + parseInt(tmpLinearfit);
-              tmpUnderfit = parseInt(tmpLinearfit)-3;
-
-              tmpOverfit_num_hospitalised = 3 + parseInt(tmpLinearfit_num_hospitalised);
-              tmpUnderfit_num_hospitalised = parseInt(tmpLinearfit_num_hospitalised)-3;
-
-              tmpOverfit_num_critical = 0.01 + parseInt(tmpLinearfit_num_critical);
-              tmpUnderfit_num_critical = parseInt(tmpLinearfit_num_critical) - 0.05;
-
-              tmpOverfit_num_fatalities = 0.03 + parseInt(tmpLinearfit_num_fatalities);
-              tmpUnderfit_num_fatalities = parseInt(tmpLinearfit_num_fatalities) - 0.003;
-            }
-
-
-            dataLinearfit[i]= tmpLinearfit.toString();
-            dataOverfit[i]= tmpOverfit.toString()*1.1;
-            dataUnderfit[i]= tmpUnderfit.toString()/1.1;
-
-            dataLinearfit_num_hospitalised[i]= tmpLinearfit_num_hospitalised.toString();
-            dataOverfit_num_hospitalised[i]= tmpOverfit_num_hospitalised.toString()*1.1;
-            dataUnderfit_num_hospitalised[i]= tmpUnderfit_num_hospitalised.toString()/1.1;
-
-            dataLinearfit_num_critical[i]= tmpLinearfit_num_critical.toString();
-            dataOverfit_num_critical[i]= tmpOverfit_num_critical.toString()*1.1;
-            dataUnderfit_num_critical[i]= tmpUnderfit_num_critical.toString()/1.1;
-
-            dataLinearfit_num_fatalities[i]= tmpLinearfit_num_fatalities.toString();
-            dataOverfit_num_fatalities[i]= tmpOverfit_num_fatalities.toString()*1.1;
-            dataUnderfit_num_fatalities[i]= tmpUnderfit_num_fatalities.toString()/1.1;
-          }
-
-
-
-          // hospitalized
-
-          var percentChange_num_hospitalised = ((((dataLinearfit_num_hospitalised[label.length-1] - dataLinearfit_num_hospitalised[label.length-8]) /dataLinearfit_num_hospitalised[label.length-8]))*100).toFixed(0);
-          if(percentChange_num_hospitalised == 0){
-            result_num_hospitalised = `
-
-
-            <td class="fas fa-caret-right text-success">${ percentChange_num_hospitalised }</td>
-            <td class="fas fa-percent text-success"></td>`
-            $("#num_hospitalisedKpiPredicated").html(result_num_hospitalised)
-          }
-          else if(percentChange_num_hospitalised < 0){
-            result_num_hospitalised = `
-
-
-            <td class="fas fa-caret-down fa-1x text-success">${ percentChange_num_hospitalised }</td>
-            <td class="fas fa-percent text-success"></td>`
-            $("#num_hospitalisedKpiPredicated").html(result_num_hospitalised)
-          }
-
-          else{
-            result_num_hospitalised = `
-            <td class="fas fa-caret-up fa-1x text-danger">${ percentChange_num_hospitalised }</td>
-            <td class="fas fa-percent text-danger"></td>`
-            $("#num_hospitalisedKpiPredicated").html(result_num_hospitalised)
-          }
-          var varforcastResult_num_hospitalised = (parseInt(dataLinearfit_num_hospitalised[label.length-1]).toFixed(0)).toString();
-          forcastResult_num_hospitalised = `
-          <td class="text-secondary">${ varforcastResult_num_hospitalised }</td>`
-          $("#num_hospitalisedForcast").html(forcastResult_num_hospitalised)
-
-          // critical
-          var percentChange_num_critical = ((((dataLinearfit_num_critical[label.length-1] - dataLinearfit_num_critical[label.length-8]) /dataLinearfit_num_critical[label.length-8]))*100).toFixed(2);
-
-          if(percentChange_num_critical == 0){
-            result_num_critical = `
-
-            <td class="fas fa-caret-right text-success">${ percentChange_num_critical }</td>
-            <td class="fas fa-percent text-success"></td>`
-            $("#num_criticalKPIPredicated").html(result_num_critical)
-          }
-          else if(dataLinearfit_num_critical[label.length-8] == 0){
-            result_num_critical = `
-            <td class="fas fa-caret-right text-success">${ "0" }</td>
-            <td class="fas fa-percent text-success"></td>`
-            $("#num_criticalKPIPredicated").html(result_num_critical)
-          }
-          else if(percentChange_num_critical < 0){
-            result_num_critical = `
-            <td class="fas fa-caret-down fa-1x text-success">${ percentChange_num_critical }</td>
-            <td class="text-success">${ "%" }</td>`
-            $("#num_criticalKPIPredicated").html(result_num_critical)
-          }
-          else{
-            result_num_critical = `
-            <td class="fas fa-caret-up fa-1x text-danger">${ percentChange_num_critical }</td>
-            <td class="fas fa-percent text-danger"></td>`
-            $("#num_criticalKPIPredicated").html(result_num_critical)
-          }
-
-          var forcastResult_num_critical = (parseFloat(dataLinearfit_num_critical[label.length-1]).toFixed(3)).toString();
-          forcastResult_num_critical = `
-          <td class="text-secondary">${ forcastResult_num_critical }</td>`
-          $("#num_criticalOfcasesKPIForcast").html(forcastResult_num_critical)
-          // fatalities
-
-          var percentChange_num_fatalities = ((((dataLinearfit_num_fatalities[label.length-1] - dataLinearfit_num_fatalities[label.length-8]) /dataLinearfit_num_fatalities[label.length-8]))*100).toFixed(0);
-          if(percentChange_num_fatalities == 0){
-            result_num_fatalities = `
-
-            <td class="fas fa-caret-right text-success">${ percentChange_num_fatalities }</td>
-            <td class="fas fa-percent text-success"></td>`
-            $("#num_fatalitiesKPIPredicated").html(result_num_fatalities)
-          }
-          else if(percentChange_num_fatalities < 0){
-
-            result_num_fatalities = `
-            <td class="fas fa-caret-down fa-1x text-success">${ percentChange_num_fatalities }</td>
-            <td class="fas fa-percent text-success"></td>`
-            $("#num_fatalitiesKPIPredicated").html(result_num_fatalities)
-          }
-
-          else if(dataLinearfit_num_fatalities[label.length-8] == 0){
-            result_num_fatalities = `
-            <td class="fas fa-caret-right text-success">${ "0" }</td>
-            <td class="fas fa-percent text-success"></td>`
-            $("#num_fatalitiesKPIPredicated").html(result_num_fatalities)
-          }
-          else{
-            result_num_fatalities = `
-            <td class="fas fa-caret-up fa-1x text-danger">${ percentChange_num_fatalities }</td>
-            <td class="fas fa-percent text-danger"></td>`
-            $("#num_fatalitiesKPIPredicated").html(result_num_fatalities)
-          }
-
-          forcastResult_num_fatalities = `
-          <td class="text-secondary">${ dataLinearfit_num_fatalities[label.length-1] }</td>`
-          $("#num_fatalitiesOfcasesKPIForcast").html(forcastResult_num_fatalities)
-
-
-        })
+        // $.get(url,function(data){
+        //
+        //   var lines=data.split("\n");
+        //   var result = [];
+        //
+        //   var headers=lines[0].split(",");
+        //   for(var i=1;i<lines.length;i++){
+        //     var obj = {};
+        //     var currentline=lines[i].split(",");
+        //     for(var j=0;j<headers.length;j++){
+        //       obj[headers[j]] = currentline[j];
+        //     }
+        //     result.push(obj);
+        //   }
+        //   var size = result.length-1;
+        //   //return result; //JavaScript object
+        //   label = [];
+        //   dataL = [];
+        //   dataOverfit = [];
+        //   dataUnderfit = [];
+        //   dataLinearfit = [];
+        //   // num_hospitalised
+        //   dataL_num_hospitalised = [];
+        //   dataOverfit_num_hospitalised = [];
+        //   dataUnderfit_num_hospitalised = [];
+        //   dataLinearfit_num_hospitalised = [];
+        //   // num_critical
+        //   dataL_num_critical = [];
+        //   dataOverfit_num_critical = [];
+        //   dataUnderfit_num_critical = [];
+        //   dataLinearfit_num_critical = [];
+        //   // num_fatalities
+        //   dataL_num_fatalities = [];
+        //   dataOverfit_num_fatalities = [];
+        //   dataUnderfit_num_fatalities = [];
+        //   dataLinearfit_num_fatalities = [];
+        //
+        //   for(var i=0;i<result.length-1;i++){
+        //     label.push(result[i].Day);
+        //
+        //     dataL.push(result[i].num_positive);
+        //     dataOverfit.push(result[i].num_positive);
+        //     dataUnderfit.push(result[i].num_positive);
+        //     dataLinearfit.push(result[i].num_positive);
+        //
+        //
+        //     dataL_num_hospitalised .push(result[i].num_hospitalised);
+        //     dataOverfit_num_hospitalised.push(result[i].num_hospitalised);
+        //     dataUnderfit_num_hospitalised.push(result[i].num_hospitalised);
+        //     dataLinearfit_num_hospitalised.push(result[i].num_hospitalised);
+        //
+        //     dataL_num_critical.push(result[i].num_critical);
+        //     dataOverfit_num_critical.push(result[i].num_critical);
+        //     dataUnderfit_num_critical.push(result[i].num_critical);
+        //     dataLinearfit_num_critical.push(result[i].num_critical);
+        //
+        //     dataL_num_fatalities.push(result[i].num_fatalities);
+        //     dataOverfit_num_fatalities.push(result[i].num_fatalities);
+        //     dataUnderfit_num_fatalities.push(result[i].num_fatalities);
+        //     dataLinearfit_num_fatalities.push(result[i].num_fatalities);
+        //
+        //   }
+        //
+        //   for(var i=0;i<7;i++){
+        //     label.push((result.length+i).toString());
+        //   }
+        //
+        //
+        //
+        //   tmpOverfit = dataL[result.length-2];
+        //   tmpUnderfit = dataL[result.length-2];
+        //   tmpLinearfit = dataL[result.length-2];
+        //   // num_hospitalised
+        //   tmpOverfit_num_hospitalised = dataL_num_hospitalised[result.length-2];
+        //   tmpUnderfit_num_hospitalised = dataL_num_hospitalised[result.length-2];
+        //   tmpLinearfit_num_hospitalised = dataL_num_hospitalised[result.length-2];
+        //   // num_critical
+        //   tmpOverfit_num_critical = dataL_num_critical[result.length-2];
+        //   tmpUnderfit_num_critical = dataL_num_critical[result.length-2];
+        //   tmpLinearfit_num_critical = dataL_num_critical[result.length-2];
+        //   //num_fatalities
+        //   tmpOverfit_num_fatalities = dataL_num_fatalities[result.length-2];
+        //   tmpUnderfit_num_fatalities = dataL_num_fatalities[result.length-2];
+        //   tmpLinearfit_num_fatalities = dataL_num_fatalities[result.length-2];
+        //
+        //   var m = 0;
+        //   var m_num_hospitalised = 0;
+        //   var m_num_critical = 0;
+        //   var m_num_fatalities = 0;
+        //
+        //   for(var i=1;i<result.length-1;i++){
+        //       m +=(dataL[i] - dataL[i-1])/((label[i] - label[i-1]));
+        //       m_num_hospitalised +=(dataL_num_hospitalised[i] - dataL_num_hospitalised[i-1])/((label[i] - label[i-1]));
+        //       m_num_critical +=(dataL_num_critical[i] - dataL_num_critical[i-1])/((label[i] - label[i-1]));
+        //       m_num_fatalities +=(dataL_num_fatalities[i] - dataL_num_fatalities[i-1])/((label[i] - label[i-1]));
+        //   }
+        //
+        //   m/=result.length-1;
+        //   m_num_hospitalised/=result.length-1;
+        //   m_num_critical/=result.length-1;
+        //   m_num_fatalities/=result.length-1;
+        //
+        //   for(var i=result.length-1;i<label.length;i++){
+        //     tmpLinearfit = m * parseInt(label[i]);
+        //     tmpLinearfit_num_hospitalised = m_num_hospitalised * parseInt(label[i]);
+        //     tmpLinearfit_num_critical = m_num_critical * parseInt(label[i]);
+        //     tmpLinearfit_num_fatalities = m_num_fatalities * parseInt(label[i]);
+        //     if(i%2 == 0){
+        //       tmpOverfit = 4 + parseInt(tmpLinearfit);
+        //       tmpUnderfit = parseInt(tmpLinearfit) - 4;
+        //
+        //       tmpOverfit_num_hospitalised = 4 + parseInt(tmpLinearfit_num_hospitalised);
+        //       tmpUnderfit_num_hospitalised = parseInt(tmpLinearfit_num_hospitalised) - 4;
+        //
+        //       tmpOverfit_num_critical = 0.05 + parseInt(tmpLinearfit_num_critical);
+        //       tmpUnderfit_num_critical = parseInt(tmpLinearfit_num_critical) - 0.05;
+        //
+        //       tmpOverfit_num_fatalities = 0.04 + parseInt(tmpLinearfit_num_fatalities);
+        //       tmpUnderfit_num_fatalities = parseInt(tmpLinearfit_num_fatalities) - 0.004;
+        //     }
+        //     else{
+        //       tmpOverfit = 3 + parseInt(tmpLinearfit);
+        //       tmpUnderfit = parseInt(tmpLinearfit)-3;
+        //
+        //       tmpOverfit_num_hospitalised = 3 + parseInt(tmpLinearfit_num_hospitalised);
+        //       tmpUnderfit_num_hospitalised = parseInt(tmpLinearfit_num_hospitalised)-3;
+        //
+        //       tmpOverfit_num_critical = 0.01 + parseInt(tmpLinearfit_num_critical);
+        //       tmpUnderfit_num_critical = parseInt(tmpLinearfit_num_critical) - 0.05;
+        //
+        //       tmpOverfit_num_fatalities = 0.03 + parseInt(tmpLinearfit_num_fatalities);
+        //       tmpUnderfit_num_fatalities = parseInt(tmpLinearfit_num_fatalities) - 0.003;
+        //     }
+        //
+        //
+        //     dataLinearfit[i]= tmpLinearfit.toString();
+        //     dataOverfit[i]= tmpOverfit.toString()*1.1;
+        //     dataUnderfit[i]= tmpUnderfit.toString()/1.1;
+        //
+        //     dataLinearfit_num_hospitalised[i]= tmpLinearfit_num_hospitalised.toString();
+        //     dataOverfit_num_hospitalised[i]= tmpOverfit_num_hospitalised.toString()*1.1;
+        //     dataUnderfit_num_hospitalised[i]= tmpUnderfit_num_hospitalised.toString()/1.1;
+        //
+        //     dataLinearfit_num_critical[i]= tmpLinearfit_num_critical.toString();
+        //     dataOverfit_num_critical[i]= tmpOverfit_num_critical.toString()*1.1;
+        //     dataUnderfit_num_critical[i]= tmpUnderfit_num_critical.toString()/1.1;
+        //
+        //     dataLinearfit_num_fatalities[i]= tmpLinearfit_num_fatalities.toString();
+        //     dataOverfit_num_fatalities[i]= tmpOverfit_num_fatalities.toString()*1.1;
+        //     dataUnderfit_num_fatalities[i]= tmpUnderfit_num_fatalities.toString()/1.1;
+        //   }
+        //
+        //
+        //
+        //   // hospitalized
+        //
+        //   var percentChange_num_hospitalised = ((((dataLinearfit_num_hospitalised[label.length-1] - dataLinearfit_num_hospitalised[label.length-8]) /dataLinearfit_num_hospitalised[label.length-8]))*100).toFixed(0);
+        //   if(percentChange_num_hospitalised == 0){
+        //     result_num_hospitalised = `
+        //
+        //
+        //     <td class="fas fa-caret-right text-success">${ percentChange_num_hospitalised }</td>
+        //     <td class="fas fa-percent text-success"></td>`
+        //     $("#num_hospitalisedKpiPredicated").html(result_num_hospitalised)
+        //   }
+        //   else if(percentChange_num_hospitalised < 0){
+        //     result_num_hospitalised = `
+        //
+        //
+        //     <td class="fas fa-caret-down fa-1x text-success">${ percentChange_num_hospitalised }</td>
+        //     <td class="fas fa-percent text-success"></td>`
+        //     $("#num_hospitalisedKpiPredicated").html(result_num_hospitalised)
+        //   }
+        //
+        //   else{
+        //     result_num_hospitalised = `
+        //     <td class="fas fa-caret-up fa-1x text-danger">${ percentChange_num_hospitalised }</td>
+        //     <td class="fas fa-percent text-danger"></td>`
+        //     $("#num_hospitalisedKpiPredicated").html(result_num_hospitalised)
+        //   }
+        //   var varforcastResult_num_hospitalised = (parseInt(dataLinearfit_num_hospitalised[label.length-1]).toFixed(0)).toString();
+        //   forcastResult_num_hospitalised = `
+        //   <td class="text-secondary">${ varforcastResult_num_hospitalised }</td>`
+        //   $("#num_hospitalisedForcast").html(forcastResult_num_hospitalised)
+        //
+        //   // critical
+        //   var percentChange_num_critical = ((((dataLinearfit_num_critical[label.length-1] - dataLinearfit_num_critical[label.length-8]) /dataLinearfit_num_critical[label.length-8]))*100).toFixed(2);
+        //
+        //   if(percentChange_num_critical == 0){
+        //     result_num_critical = `
+        //
+        //     <td class="fas fa-caret-right text-success">${ percentChange_num_critical }</td>
+        //     <td class="fas fa-percent text-success"></td>`
+        //     $("#num_criticalKPIPredicated").html(result_num_critical)
+        //   }
+        //   else if(dataLinearfit_num_critical[label.length-8] == 0){
+        //     result_num_critical = `
+        //     <td class="fas fa-caret-right text-success">${ "0" }</td>
+        //     <td class="fas fa-percent text-success"></td>`
+        //     $("#num_criticalKPIPredicated").html(result_num_critical)
+        //   }
+        //   else if(percentChange_num_critical < 0){
+        //     result_num_critical = `
+        //     <td class="fas fa-caret-down fa-1x text-success">${ percentChange_num_critical }</td>
+        //     <td class="text-success">${ "%" }</td>`
+        //     $("#num_criticalKPIPredicated").html(result_num_critical)
+        //   }
+        //   else{
+        //     result_num_critical = `
+        //     <td class="fas fa-caret-up fa-1x text-danger">${ percentChange_num_critical }</td>
+        //     <td class="fas fa-percent text-danger"></td>`
+        //     $("#num_criticalKPIPredicated").html(result_num_critical)
+        //   }
+        //
+        //   var forcastResult_num_critical = (parseFloat(dataLinearfit_num_critical[label.length-1]).toFixed(3)).toString();
+        //   forcastResult_num_critical = `
+        //   <td class="text-secondary">${ forcastResult_num_critical }</td>`
+        //   $("#num_criticalOfcasesKPIForcast").html(forcastResult_num_critical)
+        //   // fatalities
+        //
+        //   var percentChange_num_fatalities = ((((dataLinearfit_num_fatalities[label.length-1] - dataLinearfit_num_fatalities[label.length-8]) /dataLinearfit_num_fatalities[label.length-8]))*100).toFixed(0);
+        //   if(percentChange_num_fatalities == 0){
+        //     result_num_fatalities = `
+        //
+        //     <td class="fas fa-caret-right text-success">${ percentChange_num_fatalities }</td>
+        //     <td class="fas fa-percent text-success"></td>`
+        //     $("#num_fatalitiesKPIPredicated").html(result_num_fatalities)
+        //   }
+        //   else if(percentChange_num_fatalities < 0){
+        //
+        //     result_num_fatalities = `
+        //     <td class="fas fa-caret-down fa-1x text-success">${ percentChange_num_fatalities }</td>
+        //     <td class="fas fa-percent text-success"></td>`
+        //     $("#num_fatalitiesKPIPredicated").html(result_num_fatalities)
+        //   }
+        //
+        //   else if(dataLinearfit_num_fatalities[label.length-8] == 0){
+        //     result_num_fatalities = `
+        //     <td class="fas fa-caret-right text-success">${ "0" }</td>
+        //     <td class="fas fa-percent text-success"></td>`
+        //     $("#num_fatalitiesKPIPredicated").html(result_num_fatalities)
+        //   }
+        //   else{
+        //     result_num_fatalities = `
+        //     <td class="fas fa-caret-up fa-1x text-danger">${ percentChange_num_fatalities }</td>
+        //     <td class="fas fa-percent text-danger"></td>`
+        //     $("#num_fatalitiesKPIPredicated").html(result_num_fatalities)
+        //   }
+        //
+        //   forcastResult_num_fatalities = `
+        //   <td class="text-secondary">${ dataLinearfit_num_fatalities[label.length-1] }</td>`
+        //   $("#num_fatalitiesOfcasesKPIForcast").html(forcastResult_num_fatalities)
+        //
+        //
+        // })
         // Number of Hospitalised
         $.get(url,function(data){
 

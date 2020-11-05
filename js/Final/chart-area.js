@@ -10,6 +10,7 @@ $value_time_period_data.html($value_time_data.val());
 
 const $id_switch_positive = document.getElementById('customSwitches_Positive');
 const $id_switch_hospitalized = document.getElementById('customSwitches_hospitalized');
+const $id_switch_cum_hospitalized = document.getElementById('customSwitches_cum_hospitalized');
 const $id_switch_criticals = document.getElementById('customSwitches_criticals');
 const $id_switch_fatalies = document.getElementById('customSwitches_fatalities');
 
@@ -21,6 +22,10 @@ $id_switch_positive.addEventListener('change',function(){
 });
 
 $id_switch_hospitalized.addEventListener('change',function(){
+    draw_current_data();
+});
+
+$id_switch_cum_hospitalized.addEventListener('change',function(){
     draw_current_data();
 });
 
@@ -81,14 +86,11 @@ function loadData(){
 
 
   var ctx_positive = document.getElementById("myAreaChartPositive");
-  var ctx_hospitalized = document.getElementById("myAreaChartHospitalised");
-  var ctx_criticals = document.getElementById("myAreaChartCriticals");
-  var ctx_fatalities = document.getElementById("myAreaChartFatalities");
 
 
 
   draw_current_data();
-  draw_hospitalized();
+
 
 
 
@@ -140,6 +142,14 @@ function positives_draw(){
 function hospitalized_draw(){
   if($id_switch_hospitalized.checked == true){
     return data_num_hospitalised;
+  }
+  else{
+    return [];
+  }
+}
+function cum_hospitalized_draw(){
+  if($id_switch_cum_hospitalized.checked == true){
+    return data_num_cumulative_hospitalizations;
   }
   else{
     return [];
@@ -218,6 +228,22 @@ function draw_current_data() {
           pointBorderWidth: 4,
           data: hospitalized_draw(),
         },
+        // Hospitalised
+        {
+          label: "Hospitalised ",
+          lineTension: 0.6,
+          backgroundColor: "rgba(34,139,34, 0.2)",
+          borderColor: "rgba(34,139,34, 0.1)",
+          pointRadius: 4,
+          pointBackgroundColor: "rgba(34,139,34, 0.1)",
+          pointBorderColor: "rgba(34,139,34, 0.1)",
+          pointHoverRadius: 4,
+          pointHoverBackgroundColor: "rgba(34,139,34, 0.1)",
+          pointHoverBorderColor: "rgba(34,139,34, 0.1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 4,
+          data: cum_hospitalized_draw(),
+        },
         // Criticals
         {
           label: "criticals ",
@@ -249,134 +275,6 @@ function draw_current_data() {
           pointHitRadius: 10,
           pointBorderWidth: 4,
           data: fatalities_draw(),
-        },
-
-
-
-
-
-
-    ],
-    },
-    options: {
-      maintainAspectRatio: false,
-      layout: {
-        padding: {
-          left: 10,
-          right: 25,
-          top: 25,
-          bottom: 0
-        }
-      },
-      scales: {
-        xAxes: [{
-          time: {
-            unit: 'date'
-          },
-          gridLines: {
-            display: false,
-            drawBorder: false
-          },
-          ticks: {
-            maxTicksLimit: 7,
-            // callback: function(value, index, values) {
-            //   return number_format(value)+ ' Days';
-            // }
-          }
-        }],
-        yAxes: [{
-          ticks: {
-            maxTicksLimit: 5,
-            padding: 10,
-
-            callback: function(value, index, values) {
-              return number_format(value)+ ' Cases';
-            }
-          },
-          gridLines: {
-            color: "rgb(234, 236, 244)",
-            zeroLineColor: "rgb(234, 236, 244)",
-            drawBorder: false,
-            borderDash: [2],
-            zeroLineBorderDash: [2]
-          }
-        }],
-      },
-      legend: {
-        display: false
-      },
-      tooltips: {
-        backgroundColor: "rgb(255,255,255)",
-        bodyFontColor: "#858796",
-        titleMarginBottom: 10,
-        titleFontColor: '#6e707e',
-        titleFontSize: 14,
-        borderColor: '#dddfeb',
-        borderWidth: 1,
-        xPadding: 15,
-        yPadding: 15,
-        displayColors: false,
-        intersect: false,
-        mode: 'index',
-        caretPadding: 10,
-        callbacks: {
-          label: function(tooltipItem, chart) {
-            var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-            return datasetLabel + number_format(tooltipItem.yLabel)+ ': Cases';
-          }
-        }
-      }
-    }
-  },);
-
-
-}
-
-function draw_hospitalized() {
-
-  if (typeof(myLineChart_hospitalized) != "undefined"){
-
-    myLineChart_hospitalized.destroy();
-
-  }
-
-  ctx_hospitalized = document.getElementById("myAreaChartHospitalised");
-  myLineChart_hospitalized = new Chart(ctx_hospitalized, {
-    type: 'line',
-    data: {
-      labels: data_day,
-      datasets: [
-        // Susceptible
-        {
-          label: "Susceptible ",
-          lineTension: 0.6,
-          backgroundColor: "rgba(78, 115, 223, 0.2)",
-          borderColor: "rgba(78, 115, 223, 1)",
-          pointRadius: 4,
-          pointBackgroundColor: "rgba(78, 115, 223, 1)",
-          pointBorderColor: "rgba(78, 115, 223, 1)",
-          pointHoverRadius: 4,
-          pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-          pointHoverBorderColor: "rgba(78, 115, 223, 1)",
-          pointHitRadius: 10,
-          pointBorderWidth: 4,
-          data: data_num_hospitalised,
-        },
-        // Exposed
-        {
-          label: "Cumulative ",
-          lineTension: 0.6,
-          backgroundColor: "rgba(34,139,34, 0.2)",
-          borderColor: "rgba(34,139,34, 0.1)",
-          pointRadius: 4,
-          pointBackgroundColor: "rgba(34,139,34, 0.1)",
-          pointBorderColor: "rgba(34,139,34, 0.1)",
-          pointHoverRadius: 4,
-          pointHoverBackgroundColor: "rgba(34,139,34, 0.1)",
-          pointHoverBorderColor: "rgba(34,139,34, 0.1)",
-          pointHitRadius: 10,
-          pointBorderWidth: 4,
-          data: data_num_cumulative_hospitalizations,
         },
 
 
