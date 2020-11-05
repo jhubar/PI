@@ -1,6 +1,6 @@
 var margin = {top: 10, right: 30, bottom: 30, left: 40},
-  width = 400 - margin.left - margin.right,
-  height = 400 - margin.top - margin.bottom;
+  width = 500 - margin.left - margin.right,
+  height = 500 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
 var svg = d3.select("#my_dataviz")
@@ -11,7 +11,7 @@ var svg = d3.select("#my_dataviz")
   .attr("transform",
         "translate(" + margin.left + "," + margin.top + ")");
 
-d3.json("https://raw.githubusercontent.com/julien1941/PI/master/js/Network/dataNet.json?token=AL3RLGNUBAWWLE5W7IHSTQK7VPYVG", function( data) {
+d3.json("https://raw.githubusercontent.com/julien1941/PI/master/js/Network/dataNet.json?token=AL3RLGPFZ3242VLN4LZEL5S7VPZB2", function( data) {
 
   // Initialize the links
   var link = svg
