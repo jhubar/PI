@@ -18,32 +18,33 @@ class SEIR():
     def __init__(self):
 
         # Model's hyperparameters
-        self.beta = 0           # Contagion probability
-        self.sigma = 0          # Probability to go from E to I
-        self.gamma = 0          # Probability parameter to go from I to R (to be cure)
-        self.hp = 0             # Probability to go from I to H
-        self.hcr = 0            # Hospit Cure Rate
-        self.pc = 0             # Probability to fall in ICU each day from H
-        self.pd = 0             # Probability to die each day in icu
-        self.pcr = 0            # Probability to recover from critical
+        self.beta = 0  # Contagion probability
+        self.sigma = 0  # Probability to go from E to I
+        self.gamma = 0  # Probability parameter to go from I to R (to be cure)
+        self.hp = 0  # Probability to go from I to H
+        self.hcr = 0  # Hospit Cure Rate
+        self.pc = 0  # Probability to fall in ICU each day from H
+        self.pd = 0  # Probability to die each day in icu
+        self.pcr = 0  # Probability to recover from critical
 
         # Data to fit
-        self.raw_dataset = None # Original dataset, before preprocessing
-        self.dataset = None     # Numpy matrix format
-        self.dataframe = None   # Dataframe format
+        self.raw_dataset = None  # Original dataset, before preprocessing
+        self.dataset = None  # Numpy matrix format
+        self.dataframe = None  # Dataframe format
 
         # Initial state: to be used to make predictions
-        self.S_0 = None         # Sensible: peoples who can catch the agent
-        self.E_0 = None         # Exposed: people in incubation: Can't spread the agent
-        self.I_0 = None         # Infectious: people who can spread the disease
-        self.H_0 = None         # Hospitalized peoples: can't spread any more the agent
-        self.C_0 = None         # Critical: peoples who are in ICU
-        self.R_0 = None         # Recovered people: can't catch again the agent due to immunity
-        self.D_0 = None         # Dead: people who die in ICU
-        self.N = None           # The total size of the population
+        self.S_0 = None  # Sensible: peoples who can catch the agent
+        self.E_0 = None  # Exposed: people in incubation: Can't spread the agent
+        self.I_0 = None  # Infectious: people who can spread the disease
+        self.H_0 = None  # Hospitalized peoples: can't spread any more the agent
+        self.C_0 = None  # Critical: peoples who are in ICU
+        self.R_0 = None  # Recovered people: can't catch again the agent due to immunity
+        self.D_0 = None  # Dead: people who die in ICU
+        self.N = None  # The total size of the population
 
         # Data to store
         self.dataJSON = {}
+
     def saveJson(self):
         with open('Data/SEIR.json', 'w') as outfile:
             json.dump(self.dataJSON, outfile)
@@ -112,7 +113,7 @@ class SEIR():
         # Time vector:
         time = self.dataset[:, 0]
         # Bounds: Given ranges for beta, sigma and gamma
-        bounds = [(0, 1), (1/5, 1), (1/10, 1/4)]
+        bounds = [(0, 1), (1 / 5, 1), (1 / 10, 1 / 4)]
         # Start values
         start_values = [self.beta, self.sigma, self.gamma]
         # Use Scipy.optimize.minimize with L-BFGS_B method
@@ -131,7 +132,7 @@ class SEIR():
 
         plt.scatter(predictions[:, 0], self.dataset[:, 7], c='blue', label='Original data')
         plt.plot(predictions[:, 0], cumul_positive, c='red', label='Predictions')
-        #plt.title('Comparison between cumulative of positive test and I + R predictions')
+        # plt.title('Comparison between cumulative of positive test and I + R predictions')
         plt.xlabel('Time in days')
         plt.ylabel('Number of peoples')
         plt.legend()
@@ -158,7 +159,6 @@ class SEIR():
         plt.savefig('fig/cumul_hospit_comp.pdf')
         plt.close()
 
-
         # =========================================================================== #
         # PART 3: compute the probability to out of H.
         # WARNING: this probability contain the probability to be cure and the
@@ -173,7 +173,7 @@ class SEIR():
 
         plt.scatter(predictions[:, 0], self.dataset[:, 3], c='blue', label='Original data')
         plt.plot(predictions[:, 0], hospit, c='red', label='Predictions')
-        #plt.title('Comparison between non-cumulative hospitalisation data and predictions')
+        # plt.title('Comparison between non-cumulative hospitalisation data and predictions')
         plt.xlabel('Time in days')
         plt.legend()
         plt.ylabel('Number of peoples')
@@ -260,15 +260,15 @@ class SEIR():
         print("best Gamma = {}".format(self.gamma))
         print("best hp = {}".format(self.hp))
 
-        #plot :
+        # plot :
         plt.plot(proportion_range, np.flip(SSE), c='blue', label='Gamma value')
-        #plt.title('Proportion of Gamma-A assigned to hp')
+        # plt.title('Proportion of Gamma-A assigned to hp')
         plt.yscale('log')
         plt.legend()
         plt.ylabel('log sum of square error')
         plt.xlabel('gamma proportion')
         plt.savefig("fig/gamma_hp_slide.pdf")
-        #plt.show()
+        # plt.show()
         plt.close()
 
     def pcr_pd_slide(self):
@@ -301,7 +301,7 @@ class SEIR():
         self.pcr = best[2]
         self.pd = best[1]
 
-        #plot :
+        # plot :
         plt.plot(proportion_range, np.flip(SSE), c='blue')
         # plt.title('Proportion of pcr_A assigned to pd')
         plt.legend()
@@ -309,13 +309,12 @@ class SEIR():
         plt.ylabel('log sum of square error')
         plt.xlabel('pcr_A proportion')
         plt.savefig("fig/pcr_pd_slide.pdf")
-        #plt.show()
+        # plt.show()
         plt.close()
 
         print("pd/pcr slide: best value with sse = {}".format(best[0]))
         print("best pcr = {}".format(self.pcr))
         print("best pd = {}".format(self.pd))
-
 
     def fit_hcr(self):
         """
@@ -343,7 +342,7 @@ class SEIR():
         print("Best value of hcr with sse = {}".format(best[0]))
         print("hcr = {}".format(self.hcr))
 
-        #plot :
+        # plot :
         plt.plot(hcr_range, SSE, c='blue', label='hcr value')
         # plt.title('Evolution of the sum of square error according to the value of hcr')
         plt.legend()
@@ -354,15 +353,14 @@ class SEIR():
         # plt.show()
         plt.close()
 
-        #Data storing:
+        # Data storing:
         self.dataJSON['fit_hcr'] = []
-        for i in range(0,range_size):
+        for i in range(0, range_size):
             self.dataJSON['fit_hcr'].append({
                 "hcr_value": str(hcr_range[i]),
                 "log": str(SSE[i]),
 
             })
-
 
     def SSE(self, parameters, initial_state, time, method='fit_on_cumul_positive'):
         """
@@ -483,9 +481,7 @@ class SEIR():
         # Write new values in a dataframe
         new_df = pd.DataFrame(smoothed, columns=df.columns)
 
-
         return new_df
-
 
     def import_dataset(self, target='covid_20'):
 
@@ -523,9 +519,8 @@ class SEIR():
             # Ad a new column at the end with cumulative positive cases at the right
             cumul_positive = self.dataframe['num_positive'].to_numpy()
             for i in range(1, len(cumul_positive)):
-                cumul_positive[i] += cumul_positive[i-1]
+                cumul_positive[i] += cumul_positive[i - 1]
             self.dataframe.insert(7, 'cumul_positive', cumul_positive)
-
 
             # Delete the first line with zero test
             for i in range(0, 1):
@@ -544,7 +539,7 @@ class SEIR():
             self.N = 1000000
             self.I_0 = self.dataset[0][7]
             self.H_0 = self.dataset[0][3]
-            self.E_0 = 3 * self.dataset[1][1]    # Because mean of incubation period = 3 days
+            self.E_0 = 3 * self.dataset[1][1]  # Because mean of incubation period = 3 days
             self.R_0 = 0
             self.C_0 = 0
             self.D_0 = 0
@@ -552,15 +547,15 @@ class SEIR():
 
             # Initialize default value to hyper-parameters:
             self.beta = 0.35
-            self.sigma = 1/3
-            self.gamma = 1/7
+            self.sigma = 1 / 3
+            self.gamma = 1 / 7
             self.hp = 0
             self.hcr = 0
 
     def plot_predict(self, pred, args='no_S'):
 
         self.dataJSON['predict'] = []
-        for i in range(0,len(pred[:, 0])):
+        for i in range(0, len(pred[:, 0])):
             self.dataJSON['predict'].append({
                 "predict_day": str(pred[i][0]),
                 "predict_S": str(pred[i][1]),
@@ -573,11 +568,11 @@ class SEIR():
 
         self.dataJSON['model'] = []
         self.dataJSON['model'].append({
-        "beta": str(self.beta),
-        "sigma": str(self.sigma),
-        "gamma": str(self.gamma),
-        "hp": str(self.hp),
-        "hcr": str(self.hcr),
+            "beta": str(self.beta),
+            "sigma": str(self.sigma),
+            "gamma": str(self.gamma),
+            "hp": str(self.hp),
+            "hcr": str(self.hcr),
         })
 
         if 'predict' in args:
@@ -601,19 +596,21 @@ class SEIR():
         if 'compare' in args:
             plt.scatter(self.dataframe['Day'], self.dataframe['cumul_positive'], c='red')
             if self.pc == 0 and self.hcr == 0:
-                plt.scatter(self.dataframe['Day'], self.dataframe['num_cumulative_hospitalizations'], c='blue', label='cumul_hosp')
+                plt.scatter(self.dataframe['Day'], self.dataframe['num_cumulative_hospitalizations'], c='blue',
+                            label='cumul_hosp')
             else:
                 plt.scatter(self.dataframe['Day'], self.dataframe['num_hospitalised'], c='blue', label='hosp')
 
             cumul_positive = []
             hospit = []
             for i in range(0, len(self.dataframe['Day'].to_numpy())):
-                cumul_positive.append(pred[i][3] + pred[i][4] + pred[i][5] + pred[i][7] + pred[i][8])  # sum of I, H, R, C and D
+                cumul_positive.append(
+                    pred[i][3] + pred[i][4] + pred[i][5] + pred[i][7] + pred[i][8])  # sum of I, H, R, C and D
                 hospit.append(pred[i][4])
 
             print(len(self.dataframe['Day']))
             self.dataJSON['log'] = []
-            for i in range(0,len(self.dataframe['Day'])):
+            for i in range(0, len(self.dataframe['Day'])):
                 self.dataJSON['log'].append({
                     "day": str(self.dataframe['Day'][i]),
                     "cumul_positive": str(self.dataframe['cumul_positive'][i]),
@@ -635,8 +632,8 @@ class SEIR():
             plt.plot(self.dataframe['Day'], hospit, c='red')
             plt.show()
 
-def first_method():
 
+def first_method():
     # Initialize the model
     model = SEIR()
 
@@ -659,7 +656,6 @@ def first_method():
     predictions = model.predict(150)
     model.plot_predict(predictions, args='predict no_S')
 
-
     print("=======================================================")
     print("Final value of each model parameters: ")
     print("Beta = {}".format(model.beta))
@@ -675,6 +671,6 @@ def first_method():
 
     model.saveJson()
 
-if __name__ == "__main__":
 
+if __name__ == "__main__":
     first_method()
