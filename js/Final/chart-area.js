@@ -113,7 +113,7 @@ function loadData(){
         data_seir_r.push(result.predict[i].predict_R);
         data_seir_h.push(result.predict[i].predict_H);
         data_seir_c.push(result.predict[i].predict_C);
-        data_seir_f.push(result.predict[i].predict_F);
+        data_seir_f.push(result.predict[i].predict_D);
 
 
       }
