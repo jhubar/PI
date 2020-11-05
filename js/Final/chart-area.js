@@ -83,24 +83,20 @@ function loadData(){
       const result = JSON.parse(data_seir);
 
 
-      data_day = [];
+      data_day_seir = [];
       data_seir_s = [];
       data_seir_e = [];
       data_seir_i = [];
       data_seir_r = [];
       data_seir_h = [];
 
-      data_day_fit = [];
-      data_seir_fit_cumul_pos = [];
-      data_seir_fit_hospit = [];
-      data_seir_fit_cumul_pos_fit = [];
-      data_seir_fit_hospit_fit = [];
+
 
 
 
       for(var i=0;i<$value_time_SEIR.val();i++){
 
-        data_day.push(result.predict[i].predict_day);
+        data_day_seir.push(result.predict[i].predict_day);
         data_seir_s.push(result.predict[i].predict_S);
         data_seir_e.push(result.predict[i].predict_E);
         data_seir_i.push(result.predict[i].predict_I);
@@ -110,16 +106,7 @@ function loadData(){
 
       }
 
-      for(var i=0;i<result.log.length-1;i++){
 
-        data_day_fit.push(result.log[i].day);
-        data_seir_fit_cumul_pos.push(result.log[i].cumul_positive);
-        data_seir_fit_hospit.push(result.log[i].hospit);
-        data_seir_fit_cumul_pos_fit.push(result.log[i].cumul_positive_fit);
-        data_seir_fit_hospit_fit.push(result.log[i].hospit_fit);
-
-
-      }
 
 
 
@@ -222,7 +209,7 @@ function load_card_value_seir(){
   $("#num_Of_infected_seir").html((parseFloat(data_seir_i[data_seir_i.length-1]).toFixed(2)).toString())
   $("#num_Of_Recovered_seir").html((parseFloat(data_seir_r[data_seir_r.length-1]).toFixed(2)).toString())
   $("#num_Of_hospitalized_seir").html((parseFloat(data_seir_h[data_seir_h.length-1]).toFixed(2)).toString())
-  $("#num_Of_day_seir").html((parseFloat(data_day[data_seir_i.length-1]).toFixed(0)).toString())
+  $("#num_Of_day_seir").html((parseFloat(data_day_seir[data_seir_i.length-1]).toFixed(0)).toString())
 
 
 }
@@ -663,7 +650,7 @@ function draw(ans) {
   myLineChart = new Chart(ctx_active_cases, {
     type: 'line',
     data: {
-      labels: data_day,
+      labels: data_day_seir,
       datasets: [
         // Susceptible
         {
