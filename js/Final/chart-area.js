@@ -3,6 +3,39 @@ Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,Bli
 Chart.defaults.global.defaultFontColor = '#858796';
 const $url_data = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/data.csv"
 
+const $value_time_period_data = $('.value_time_period_data');
+const $value_time_data = $('#range_time_period_data');
+
+$value_time_period_data.html($value_time_data.val());
+
+const $id_switch_positive = document.getElementById('customSwitches_Positive');
+const $id_switch_hospitalized = document.getElementById('customSwitches_hospitalized');
+const $id_switch_criticals = document.getElementById('customSwitches_criticals');
+const $id_switch_fatalies = document.getElementById('customSwitches_fatalities');
+
+
+
+
+$id_switch_positive.addEventListener('change',function(){
+    draw_current_data();
+});
+
+$id_switch_hospitalized.addEventListener('change',function(){
+    draw_current_data();
+});
+
+$id_switch_criticals.addEventListener('change',function(){
+    draw_current_data();
+});
+
+$id_switch_fatalies.addEventListener('change',function(){
+    draw_current_data();
+});
+
+
+
+
+
 
 loadData();
 
@@ -33,7 +66,7 @@ function loadData(){
       data_num_critical = [];
       data_num_fatalities = [];
 
-      for(var i=0;i<result.length-1;i++){
+      for(var i=0;i<$value_time_data.val()-1;i++){
         data_day.push(result[i].Day);
         data_num_positive.push(result[i].num_positive);
         data_num_hospitalised.push(result[i].num_hospitalised);
@@ -96,6 +129,49 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 }
 
 
+function positives_draw(){
+  if($id_switch_positive.checked == true){
+    return data_num_positive;
+  }
+  else{
+    return [];
+  }
+}
+function hospitalized_draw(){
+  if($id_switch_hospitalized.checked == true){
+    return data_num_hospitalised;
+  }
+  else{
+    return [];
+  }
+}
+
+function criticals_draw(){
+  if($id_switch_criticals.checked == true){
+    return data_num_critical;
+  }
+  else{
+    return [];
+  }
+}
+
+function fatalities_draw(){
+  if($id_switch_fatalies.checked == true){
+    return data_num_fatalities;
+  }
+  else{
+    return [];
+  }
+}
+$value_time_data.on('input change', () => {
+
+  $value_time_period_data.html($value_time_data.val());
+  loadData();
+});
+
+
+
+
 function draw_current_data() {
 
   if (typeof(myLineChart_positive) != "undefined"){
@@ -124,7 +200,7 @@ function draw_current_data() {
           pointHoverBorderColor: "rgba(78, 115, 223, 1)",
           pointHitRadius: 10,
           pointBorderWidth: 4,
-          data: data_num_positive,
+          data: positives_draw(),
         },
         // Hospitalised
         {
@@ -140,7 +216,7 @@ function draw_current_data() {
           pointHoverBorderColor: "rgba(34,139,34, 0.1)",
           pointHitRadius: 10,
           pointBorderWidth: 4,
-          data: data_num_hospitalised,
+          data: hospitalized_draw(),
         },
         // Criticals
         {
@@ -156,7 +232,7 @@ function draw_current_data() {
           pointHoverBorderColor: "rgba(255, 193, 7, 1)",
           pointHitRadius: 10,
           pointBorderWidth: 2,
-          data: data_num_critical,
+          data: criticals_draw(),
         },
         // Fatalies
         {
@@ -172,7 +248,7 @@ function draw_current_data() {
           pointHoverBorderColor: "rgba(237, 0, 59, 1)",
           pointHitRadius: 10,
           pointBorderWidth: 4,
-          data: data_num_fatalities,
+          data: fatalities_draw(),
         },
 
 
