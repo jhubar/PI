@@ -102,9 +102,10 @@ class SEIR():
         between predictions and original data.
         """
         # =========================================================================== #
-        # PART 1: We fit the parameters beta, sigma and gamma by computing the
+        # PART 1: We fit the parameters beta, sigma and a temp version of gamma by computing the
         # sum of errors between the daily cumulative of positive tests and the
-        # product of the I, H and R curves. So, at this step, we consider
+        # product of the I, H and R curves. All others parameters are set on zero.
+        # So, in this first part, we are equivalent to a basic SEIR model
         # =========================================================================== #
         # Generate initial state:
         initial_state = self.get_initial_state()
@@ -130,9 +131,10 @@ class SEIR():
 
         plt.scatter(predictions[:, 0], self.dataset[:, 7], c='blue', label='Original data')
         plt.plot(predictions[:, 0], cumul_positive, c='red', label='Predictions')
-        plt.title('Comparison between cumulative of positive test and I + R predictions')
+        #plt.title('Comparison between cumulative of positive test and I + R predictions')
         plt.xlabel('Time in days')
         plt.ylabel('Number of peoples')
+        plt.legend()
         plt.savefig('fig/cumul_positif_comp.pdf')
         plt.close()
 
@@ -149,9 +151,10 @@ class SEIR():
 
         plt.scatter(predictions[:, 0], self.dataset[:, 4], c='blue', label='Original data')
         plt.plot(predictions[:, 0], cumul_hospit, c='red', label='Predictions')
-        plt.title('Comparison between cumulative hospitalisation data and predictions')
+        # plt.title('Comparison between cumulative hospitalisation data and predictions')
         plt.xlabel('Time in days')
         plt.ylabel('Number of peoples')
+        plt.legend()
         plt.savefig('fig/cumul_hospit_comp.pdf')
         plt.close()
 
@@ -170,8 +173,9 @@ class SEIR():
 
         plt.scatter(predictions[:, 0], self.dataset[:, 3], c='blue', label='Original data')
         plt.plot(predictions[:, 0], hospit, c='red', label='Predictions')
-        plt.title('Comparison between non-cumulative hospitalisation data and predictions')
+        #plt.title('Comparison between non-cumulative hospitalisation data and predictions')
         plt.xlabel('Time in days')
+        plt.legend()
         plt.ylabel('Number of peoples')
         plt.savefig('fig/non_cum_hospit_comp.pdf')
         plt.close()
@@ -215,7 +219,8 @@ class SEIR():
 
         plt.scatter(predictions[:, 0], self.dataset[:, 5], c='blue', label='Original data')
         plt.plot(predictions[:, 0], critical, c='red', label='Predictions')
-        plt.title('Comparison ICU data and critical predictions')
+        # plt.title('Comparison ICU data and critical predictions')
+        plt.legend()
         plt.xlabel('Time in days')
         plt.ylabel('Number of peoples')
         plt.savefig('fig/critical_com.pdf')
@@ -257,8 +262,9 @@ class SEIR():
 
         #plot :
         plt.plot(proportion_range, np.flip(SSE), c='blue', label='Gamma value')
-        plt.title('Proportion of Gamma-A assigned to hp')
+        #plt.title('Proportion of Gamma-A assigned to hp')
         plt.yscale('log')
+        plt.legend()
         plt.ylabel('log sum of square error')
         plt.xlabel('gamma proportion')
         plt.savefig("fig/gamma_hp_slide.pdf")
@@ -297,7 +303,8 @@ class SEIR():
 
         #plot :
         plt.plot(proportion_range, np.flip(SSE), c='blue')
-        plt.title('Proportion of pcr_A assigned to pd')
+        # plt.title('Proportion of pcr_A assigned to pd')
+        plt.legend()
         plt.yscale('log')
         plt.ylabel('log sum of square error')
         plt.xlabel('pcr_A proportion')
@@ -338,11 +345,12 @@ class SEIR():
 
         #plot :
         plt.plot(hcr_range, SSE, c='blue', label='hcr value')
-        plt.title('Evolution of the sum of square error according to the value of hcr')
+        # plt.title('Evolution of the sum of square error according to the value of hcr')
+        plt.legend()
         plt.yscale('log')
         plt.ylabel('log sum of square error')
         plt.xlabel('hcr value')
-        plt.savefig("fig/pcr_fitting.pdf")
+        plt.savefig("fig/hcr_fitting.pdf")
         # plt.show()
         plt.close()
 
@@ -362,21 +370,24 @@ class SEIR():
         our predictions. In function of the parameters thant we want to fit, we are using
         different fitting strategies:
 
-        1. First_part:
+        1. PART 1:
             This method is use to find the definitive value of beta and sigma, and a temporary value of gamma. In this
             case, hp and hcr are set at Zero and we can fit our parameters by computing the square error between the
             total cumulative positive column of the dataset and the sum of I and R predictions of the model.
             Because we don't care about hospitalized, the actual gamma value takes into account of the hp parameter.
             So the parameters hp and gamma will be separate during the second step
-        2. Second_part:
-            During thi part we extract the value of hp out of gamma by computing the part of gamma who represent
+        2. PART 2:
+            During this part we extract the value of hp out of gamma by computing the part of gamma who represent
             peoples who go to hospital. Because hcr parameter is still set on zero, we can find the definitive values
             of hp and gamma by computing square errors between cumulative hospitalized column of the dataset and and
             the prediction of H curve. A hcr parameter set on zero means that H people will never be cure, and H is
             a cumulative hospitalized curve.
-        3. Third part:
-            The last part compute hcr parameter by computing square error between normal hospitalized column of the
+        3. PART 3:
+            This part compute hcr parameter by computing square error between normal hospitalized column of the
             dataset (non-cumulative), and the curve H.
+        4. PART 4:
+
+        5. PART 5:
         """
         if method == 'first_part':
             # Set parameters: we set hp et hcr to zero
@@ -462,7 +473,6 @@ class SEIR():
         smoothed = np.copy(np_df)
         # How many smothing period can we place in the dataset:
         nb_per = math.floor(np_df.shape[0] / smt_prd)
-        end_point = smt_prd * nb_per
         # Perform smoothing for each attributes
         for i in range(1, np_df.shape[1]):
             smoothed[:, i] = np.convolve(np_df[:, i], smt_vec, mode="same")
@@ -497,14 +507,18 @@ class SEIR():
             x_axe = np.arange(len(y_raw))
             plt.scatter(x_axe, y_raw, c='blue', label='original positives')
             plt.plot(x_axe, y_smooth, c='red', label="smoothed positives")
-            plt.show()
-
             # The same for hospitalisation data:
             y_raw = self.raw_dataset['num_hospitalised']
             y_smooth = self.dataframe['num_hospitalised']
-            plt.scatter(x_axe, y_raw, c='blue', label='original hospitalised')
-            plt.plot(x_axe, y_smooth, c='red', label="smoothed hospitalised")
-            plt.show()
+            plt.scatter(x_axe, y_raw, c='green', label='original hospitalised')
+            plt.plot(x_axe, y_smooth, c='orange', label="smoothed hospitalised")
+            # plt.title("Data Pre-processing")
+            plt.xlabel("Time in days")
+            plt.ylabel("Number of people")
+            plt.legend()
+            plt.savefig("fig/preprocessing.pdf")
+            # plt.show()
+            plt.close()
 
             # Ad a new column at the end with cumulative positive cases at the right
             cumul_positive = self.dataframe['num_positive'].to_numpy()
@@ -543,10 +557,6 @@ class SEIR():
             self.hp = 0
             self.hcr = 0
 
-
-
-
-
     def plot_predict(self, pred, args='no_S'):
 
         self.dataJSON['predict'] = []
@@ -560,9 +570,6 @@ class SEIR():
                 "predict_R": str(pred[i][5]),
 
             })
-
-
-
 
         self.dataJSON['model'] = []
         self.dataJSON['model'].append({
@@ -582,7 +589,14 @@ class SEIR():
             plt.plot(pred[:, 0], pred[:, 5], c='blue', label='R')
             plt.plot(pred[:, 0], pred[:, 7], c='orange', label='C')
             plt.plot(pred[:, 0], pred[:, 8], c='black', label='D')
-            plt.show()
+            plt.xlabel("Time (Days)")
+            plt.ylabel("Number of peoples")
+            if "no_S" not in args:
+                plt.savefig("fig/long_time_predictions_no_s.pdf")
+            else:
+                plt.savefig("fig/long_time_predictions.pdf")
+            # plt.show()
+            plt.close()
 
         if 'compare' in args:
             plt.scatter(self.dataframe['Day'], self.dataframe['cumul_positive'], c='red')
@@ -621,9 +635,6 @@ class SEIR():
             plt.plot(self.dataframe['Day'], hospit, c='red')
             plt.show()
 
-
-
-
 def first_method():
 
     # Initialize the model
@@ -636,15 +647,17 @@ def first_method():
     model.fit()
 
     # Make predictions and compare with dataset
-    predictions = model.predict(50)
-    model.plot_predict(predictions, args='compare log')
-    model.plot_predict(predictions, args='compare')
-    model.plot_predict(predictions, args='hospit')
+    # predictions = model.predict(50)
+    # model.plot_predict(predictions, args='compare log')
+    # model.plot_predict(predictions, args='compare')
+    # model.plot_predict(predictions, args='hospit')
 
     # Draw long term curves:
     predictions = model.predict(365)
 
     model.plot_predict(predictions, args='predict')
+    predictions = model.predict(150)
+    model.plot_predict(predictions, args='predict no_S')
 
 
     print("=======================================================")
@@ -661,11 +674,6 @@ def first_method():
     print("This is a small step for man, but a giant step for COV-Invaders")
 
     model.saveJson()
-
-
-
-
-
 
 if __name__ == "__main__":
 
