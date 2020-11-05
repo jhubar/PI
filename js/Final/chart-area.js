@@ -52,33 +52,42 @@ $id_switch_fatalies.addEventListener('change',function(){
 
 $id_switch_Susceptible.addEventListener('change',function(){
     draw();
+
 });
 
 $id_switch_Exosed.addEventListener('change',function(){
     draw();
+
 });
 
 $id_switch_Infected.addEventListener('change',function(){
     draw();
+
 });
 
 $id_switch_Recovered.addEventListener('change',function(){
     draw();
+
 });
 
 $id_switch_Hospitalized.addEventListener('change',function(){
     draw();
+
+
 });
 $id_switch_seir_criticals.addEventListener('change',function(){
     draw();
+
 });
 $id_switch_seir_fatalities.addEventListener('change',function(){
     draw();
+
 });
 
 
 
 loadData();
+load_cur_Data();
 
 function loadData(){
 
@@ -100,10 +109,6 @@ function loadData(){
       data_seir_c = [];
       data_seir_f = [];
 
-
-
-
-
       for(var i=0;i<$value_time_SEIR.val();i++){
 
         data_day_seir.push(result.predict[i].predict_day);
@@ -119,11 +124,8 @@ function loadData(){
       }
 
 
-
-
-
-
   var ctx_active_cases = document.getElementById("myAreaSeirModel");
+
 
   $("#id_beta_seir").html((parseFloat(result.model[0].beta).toFixed(6)).toString())
   $("#id_sigma_seir").html((parseFloat(result.model[0].sigma).toFixed(6)).toString())
@@ -134,6 +136,8 @@ function loadData(){
 
 
   draw();
+
+
 
   load_card_value_seir();
 
@@ -152,7 +156,6 @@ $value_time_SEIR.on('input change', () => {
 
 
 
-load_cur_Data();
 
 function load_cur_Data(){
 
@@ -215,6 +218,7 @@ function load_cur_Data(){
 },
 );}
 
+
 function load_card_value_seir(){
   $("#num_Of_Susceptible_seir").html((parseFloat(data_seir_s[data_seir_s.length-1]).toFixed(2)).toString())
   $("#num_Of_Exposed_seir").html((parseFloat(data_seir_e[data_seir_e.length-1]).toFixed(2)).toString())
@@ -223,7 +227,7 @@ function load_card_value_seir(){
   $("#num_Of_hospitalized_seir").html((parseFloat(data_seir_h[data_seir_h.length-1]).toFixed(2)).toString())
   $("#num_Of_criticals_seir").html((parseFloat(data_seir_c[data_seir_c.length-1]).toFixed(2)).toString())
   $("#num_Of_fatalities_seir").html((parseFloat(data_seir_f[data_seir_f.length-1]).toFixed(2)).toString())
-  $("#num_Of_day_seir").html((parseFloat(data_day_seir[data_seir_i.length-1]).toFixed(0)).toString())
+  $("#num_Of_day_seir").html(((parseFloat(data_day_seir[data_day_seir.length-1])+1).toFixed(0)).toString())
 
 
 }
@@ -665,10 +669,7 @@ function draw_current_data() {
 
 }
 
-
-
-
-function draw(ans) {
+function draw() {
 
   if (typeof(myLineChart) != "undefined"){
 
