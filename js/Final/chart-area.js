@@ -66,14 +66,17 @@ function loadData(){
 
       data_day = [];
       data_num_positive = [];
+      data_num_tested = [];
       data_num_hospitalised = [];
       data_num_cumulative_hospitalizations = [];
       data_num_critical = [];
       data_num_fatalities = [];
 
-      for(var i=0;i<$value_time_data.val()-1;i++){
+
+      for(var i=0;i<$value_time_data.val();i++){
         data_day.push(result[i].Day);
         data_num_positive.push(result[i].num_positive);
+        data_num_tested.push(result[i].num_tested);
         data_num_hospitalised.push(result[i].num_hospitalised);
         data_num_cumulative_hospitalizations.push(result[i].num_cumulative_hospitalizations);
         data_num_critical.push(result[i].num_critical)
@@ -91,7 +94,8 @@ function loadData(){
 
   draw_current_data();
 
-
+  load_card_value();
+  load_card_kpi_value();
 
 
 
@@ -177,10 +181,134 @@ $value_time_data.on('input change', () => {
 
   $value_time_period_data.html($value_time_data.val());
   loadData();
+  load_card_value();
 });
 
+function load_card_value(){
+  $("#num_day").html((parseFloat(data_day[data_day.length-1]).toFixed(0)).toString());
+  $("#num_positive").html((parseFloat(data_num_positive[data_num_positive.length-1]).toFixed(0)).toString());
+  $("#num_tested").html((parseFloat(data_num_tested[data_num_tested.length-1]).toFixed(0)).toString());
+  $("#num_hospitalised").html((parseFloat(data_num_hospitalised[data_num_hospitalised.length-1]).toFixed(0)).toString());
+  $("#num_cumulative_hospitalizations").html((parseFloat(data_num_cumulative_hospitalizations[data_num_cumulative_hospitalizations.length-1]).toFixed(0)).toString());
+  $("#num_critical").html((parseFloat(data_num_critical[data_num_critical.length-1]).toFixed(0)).toString());
+  $("#num_fatalities").html((parseFloat(data_num_fatalities[data_num_fatalities.length-1]).toFixed(0)).toString());
 
 
+
+}
+function load_card_kpi_value(){
+
+
+  var percentChange_positive = data_num_positive[data_num_positive.length-1]-data_num_positive[data_num_positive.length-2]
+  var percentChange_hos = data_num_hospitalised[data_num_hospitalised.length-1]-data_num_positive[data_num_hospitalised.length-2]
+  var percentChange_cum_hos = data_num_hospitalised[data_num_cumulative_hospitalizations.length-1]-data_num_positive[data_num_cumulative_hospitalizations.length-2]
+  var percentChange_crit = data_num_critical[data_num_critical.length-1]-data_num_critical[data_num_critical.length-2]
+  var percentChange_fat = data_num_fatalities[data_num_fatalities.length-1]-data_num_fatalities[data_num_fatalities.length-2]
+
+  if(percentChange_positive == 0){
+    result = `
+    <td class="fas fa-caret-right text-success">${ percentChange_positive }</td>
+    <td class="fas fa-percent text-success"></td>`
+    $("#casesKpi").html(result)
+  }
+  else if(percentChange_positive > 0){
+    result = `
+    <td class="fas fa-caret-up fa-1x text-danger">${ percentChange_positive }</td>
+    <td class="fas fa-percent text-danger"></td>`
+    $("#casesKpi").html(result)
+  }
+  else{
+    result = `
+    <td class="fas fa-caret-down fa-1x text-success">${ percentChange_positive }</td>
+    <td class="fas fa-percent text-success"></td>`
+    $("#casesKpi").html(result)
+  }
+
+
+  if(percentChange_hos == 0){
+    result = `
+    <td class="fas fa-caret-right text-success">${ percentChange_hos }</td>
+    <td class="fas fa-percent text-success"></td>`
+    $("#num_hospitalisedKpi").html(result)
+  }
+  else if(percentChange_hos < 0){
+    result = `
+    <td class="fas fa-caret-down fa-1x text-success">${ percentChange_hos }</td>
+    <td class="fas fa-percent text-success"></td>`
+    $("#num_hospitalisedKpi").html(result)
+  }
+  else{
+    result = `
+    <td class="fas fa-caret-up fa-1x text-danger">${ percentChange_hos }</td>
+    <td class="fas fa-percent text-danger"></td>`
+    $("#num_hospitalisedKpi").html(result)
+  }
+
+    if(percentChange_cum_hos == 0){
+      result = `
+      <td class="fas fa-caret-right text-success">${ percentChange_cum_hos }</td>
+      <td class="fas fa-percent text-success"></td>`
+      $("#num_cmulative_hospitalizationsKpi").html(result)
+    }
+    else if(percentChange_cum_hos < 0){
+      result = `
+      <td class="fas fa-caret-down fa-1x text-success">${ percentChange_cum_hos }</td>
+      <td class="fas fa-percent text-success"></td>`
+      $("#num_cmulative_hospitalizationsKpi").html(result)
+    }
+    else{
+      result = `
+      <td class="fas fa-caret-up fa-1x text-danger">${ percentChange_cum_hos }</td>
+      <td class="fas fa-percent text-danger"></td>`
+      $("#num_cmulative_hospitalizationsKpi").html(result)
+    }
+
+  if(percentChange_crit == 0){
+    result = `
+    <td class="fas fa-caret-right fa-1x text-success">${ percentChange_crit }</td>
+    <td class="fas fa-percent text-success"></td>`
+
+    $("#num_criticalKpi").html(result)
+  }
+  else if(percentChange_crit < 0){
+    result = `
+
+
+    <td class="fas fa-caret-down fa-1x text-success">${ percentChange_crit }</td>
+    <td class="fas fa-percent text-success"></td>`
+    $("#num_criticalKpi").html(result)
+  }
+
+  else{
+    result = `
+    <td class="fas fa-caret-up fa-1x text-danger">${ percentChange_crit }</td>
+    <td class="fas fa-percent text-danger"></td>`
+    $("#num_criticalKpi").html(result)
+  }
+  if(percentChange_fat == 0){
+    result = `
+    <td class="fas fa-caret-right fa-1x text-success">${ percentChange_fat }</td>
+    <td class="fas fa-percent text-success"></td>`
+    $("#num_fatalitiesKpi").html(result)
+  }
+  else if(percentChange_fat < 0){
+    result = `
+    <td class="fas fa-caret-down fa-1x text-success">${ percentChange_fat }</td>
+    <td class="fas fa-percent text-success"></td>`
+    $("#num_fatalitiesKpi").html(result)
+  }
+
+  else{
+    result = `
+    <td class="fas fa-caret-up fa-1x text-danger">${ percentChange_fat  }</td>
+    <td class="fas fa-percent text-danger"></td>`
+    $("#num_fatalitiesKpi").html(result)
+  }
+
+
+
+
+}
 
 function draw_current_data() {
 
