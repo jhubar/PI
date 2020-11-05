@@ -29,11 +29,15 @@ function loadData(){
       data_day = [];
       data_num_hospitalised = [];
       data_num_cumulative_hospitalizations = [];
+      data_num_critical = [];
+      data_num_fatalities = [];
 
       for(var i=0;i<result.length-1;i++){
         data_day.push(result[i].Day);
         data_num_hospitalised.push(result[i].num_hospitalised);
         data_num_cumulative_hospitalizations.push(result[i].num_cumulative_hospitalizations);
+        data_num_critical.push(result[i].num_critical)
+        data_num_fatalities.push(result[i].num_fatalities);
       }
 
 
@@ -43,10 +47,15 @@ function loadData(){
 
 
   var ctx_hospitalized = document.getElementById("myAreaChartHospitalised");
+  var ctx_criticals = document.getElementById("myAreaChartCriticals");
+  var ctx_fatalities = document.getElementById("myAreaChartFatalities");
 
 
 
-  draw();
+
+  draw_hospitalized();
+  draw_criticals();
+  draw_fatalities();
 
 
 
@@ -87,7 +96,7 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 
 
 
-function draw(ans) {
+function draw_hospitalized() {
 
   if (typeof(myLineChart_hospitalized) != "undefined"){
 
@@ -107,32 +116,257 @@ function draw(ans) {
           lineTension: 0.6,
           backgroundColor: "rgba(78, 115, 223, 0.2)",
           borderColor: "rgba(78, 115, 223, 1)",
-          pointRadius: 1,
+          pointRadius: 4,
           pointBackgroundColor: "rgba(78, 115, 223, 1)",
           pointBorderColor: "rgba(78, 115, 223, 1)",
-          pointHoverRadius: 1,
+          pointHoverRadius: 4,
           pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
           pointHoverBorderColor: "rgba(78, 115, 223, 1)",
-          pointHitRadius: 5,
-          pointBorderWidth: 1,
+          pointHitRadius: 10,
+          pointBorderWidth: 4,
           data: data_num_hospitalised,
         },
         // Exposed
         {
-          label: "Exposed ",
+          label: "Cumulative ",
           lineTension: 0.6,
-          backgroundColor: "rgba(240, 173, 78, 0.2)",
-          borderColor: "rgba(240, 173, 78, 1)",
-          pointRadius: 1,
-          pointBackgroundColor: "rgba(240, 173, 78, 1)",
-          pointBorderColor: "rgba(240, 173, 78, 1)",
-          pointHoverRadius: 1,
-          pointHoverBackgroundColor: "rgba(240, 173, 78, 1)",
-          pointHoverBorderColor: "rgba(240, 173, 78, 1)",
-          pointHitRadius: 5,
-          pointBorderWidth: 1,
+          backgroundColor: "rgba(34,139,34, 0.2)",
+          borderColor: "rgba(34,139,34, 0.1)",
+          pointRadius: 4,
+          pointBackgroundColor: "rgba(34,139,34, 0.1)",
+          pointBorderColor: "rgba(34,139,34, 0.1)",
+          pointHoverRadius: 4,
+          pointHoverBackgroundColor: "rgba(34,139,34, 0.1)",
+          pointHoverBorderColor: "rgba(34,139,34, 0.1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 4,
           data: data_num_cumulative_hospitalizations,
         },
+
+
+
+
+
+
+    ],
+    },
+    options: {
+      maintainAspectRatio: false,
+      layout: {
+        padding: {
+          left: 10,
+          right: 25,
+          top: 25,
+          bottom: 0
+        }
+      },
+      scales: {
+        xAxes: [{
+          time: {
+            unit: 'date'
+          },
+          gridLines: {
+            display: false,
+            drawBorder: false
+          },
+          ticks: {
+            maxTicksLimit: 7,
+            // callback: function(value, index, values) {
+            //   return number_format(value)+ ' Days';
+            // }
+          }
+        }],
+        yAxes: [{
+          ticks: {
+            maxTicksLimit: 5,
+            padding: 10,
+
+            callback: function(value, index, values) {
+              return number_format(value)+ ' Cases';
+            }
+          },
+          gridLines: {
+            color: "rgb(234, 236, 244)",
+            zeroLineColor: "rgb(234, 236, 244)",
+            drawBorder: false,
+            borderDash: [2],
+            zeroLineBorderDash: [2]
+          }
+        }],
+      },
+      legend: {
+        display: false
+      },
+      tooltips: {
+        backgroundColor: "rgb(255,255,255)",
+        bodyFontColor: "#858796",
+        titleMarginBottom: 10,
+        titleFontColor: '#6e707e',
+        titleFontSize: 14,
+        borderColor: '#dddfeb',
+        borderWidth: 1,
+        xPadding: 15,
+        yPadding: 15,
+        displayColors: false,
+        intersect: false,
+        mode: 'index',
+        caretPadding: 10,
+        callbacks: {
+          label: function(tooltipItem, chart) {
+            var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+            return datasetLabel + number_format(tooltipItem.yLabel)+ ': Cases';
+          }
+        }
+      }
+    }
+  },);
+
+
+}
+
+function draw_criticals() {
+
+  if (typeof(myLineChart_criticals) != "undefined"){
+
+    myLineChart_criticals.destroy();
+
+  }
+
+  ctx_criticals = document.getElementById("myAreaChartCriticals");
+  myLineChart_criticals = new Chart(ctx_criticals, {
+    type: 'line',
+    data: {
+      labels: data_day,
+      datasets: [
+        // Susceptible
+        {
+          label: "criticals ",
+          lineTension: 0.6,
+          backgroundColor: "rgba(78, 115, 223, 0.2)",
+          borderColor: "rgba(78, 115, 223, 1)",
+          pointRadius: 4,
+          pointBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointBorderColor: "rgba(78, 115, 223, 1)",
+          pointHoverRadius: 4,
+          pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 4,
+          data: data_num_critical,
+        },
+
+
+
+
+
+
+
+    ],
+    },
+    options: {
+      maintainAspectRatio: false,
+      layout: {
+        padding: {
+          left: 10,
+          right: 25,
+          top: 25,
+          bottom: 0
+        }
+      },
+      scales: {
+        xAxes: [{
+          time: {
+            unit: 'date'
+          },
+          gridLines: {
+            display: false,
+            drawBorder: false
+          },
+          ticks: {
+            maxTicksLimit: 7,
+            // callback: function(value, index, values) {
+            //   return number_format(value)+ ' Days';
+            // }
+          }
+        }],
+        yAxes: [{
+          ticks: {
+            maxTicksLimit: 5,
+            padding: 10,
+
+            callback: function(value, index, values) {
+              return number_format(value)+ ' Cases';
+            }
+          },
+          gridLines: {
+            color: "rgb(234, 236, 244)",
+            zeroLineColor: "rgb(234, 236, 244)",
+            drawBorder: false,
+            borderDash: [2],
+            zeroLineBorderDash: [2]
+          }
+        }],
+      },
+      legend: {
+        display: false
+      },
+      tooltips: {
+        backgroundColor: "rgb(255,255,255)",
+        bodyFontColor: "#858796",
+        titleMarginBottom: 10,
+        titleFontColor: '#6e707e',
+        titleFontSize: 14,
+        borderColor: '#dddfeb',
+        borderWidth: 1,
+        xPadding: 15,
+        yPadding: 15,
+        displayColors: false,
+        intersect: false,
+        mode: 'index',
+        caretPadding: 10,
+        callbacks: {
+          label: function(tooltipItem, chart) {
+            var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+            return datasetLabel + number_format(tooltipItem.yLabel)+ ': Cases';
+          }
+        }
+      }
+    }
+  },);
+
+
+}
+function draw_fatalities() {
+
+  if (typeof(myLineChart_fatalities) != "undefined"){
+
+    myLineChart_fatalities.destroy();
+
+  }
+
+  ctx_fatalities = document.getElementById("myAreaChartFatalities");
+  myLineChart_fatalities = new Chart(ctx_fatalities, {
+    type: 'line',
+    data: {
+      labels: data_day,
+      datasets: [
+        // Susceptible
+        {
+          label: "Susceptible ",
+          lineTension: 0.6,
+          backgroundColor: "rgba(78, 115, 223, 0.2)",
+          borderColor: "rgba(78, 115, 223, 1)",
+          pointRadius: 4,
+          pointBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointBorderColor: "rgba(78, 115, 223, 1)",
+          pointHoverRadius: 4,
+          pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 4,
+          data: data_num_fatalities,
+        },
+
 
 
 
