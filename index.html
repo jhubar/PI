@@ -386,7 +386,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Recovered cases</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_recovered_cases"></a></div>
+                      <!-- <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_recovered_cases"></a></div> -->
                     </div>
                     <div class="col-auto">
 
@@ -405,7 +405,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Collective immunity</div>
-                      <div class="h5 mb-0 font-weight-bold text-info-800"><a id="collective_immunity"></a></div>
+                      <!-- <div class="h5 mb-0 font-weight-bold text-info-800"><a id="collective_immunity"></a></div> -->
                     </div>
                     <div class="col-auto">
 
@@ -426,7 +426,7 @@
                       <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="id_beta"></a></div>
                     </div>
                     <div class="col-auto">
-                      <i class="text-danger"><a id="casesKpi"></a></i>
+                      <!-- <i class="text-danger"><a id="casesKpi"></a></i> -->
                       <i class="fas fa-viruses fa-2x text-gray-300"></i>
                     </div>
 
@@ -444,7 +444,7 @@
                       <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="id_gamma"></a></div>
                     </div>
                     <div class="col-auto">
-                      <i class="text-danger"><a id="casesKpi"></a></i>
+                      <!-- <i class="text-danger"><a id="casesKpi"></a></i> -->
                       <i class="fas fa-viruses fa-2x text-gray-300"></i>
                     </div>
 
@@ -472,76 +472,29 @@
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                   <h6 class="m-0 font-weight-bold text-primary">Active cases</h6>
-                  <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                      <div class="dropdown-header">senario:</div>
-                      <a class="dropdown-item" href="#1" onclick="without_cum_cases(1)">Without cumulatives cases</button> </a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#2" onclick="without_cum_cases(2)">With cumulatives cases</button></a>
 
-
-                    </div>
-                  </div>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
                   <div class="chart-area">
-                    <canvas id="myAreaChart"></canvas>
+                    <canvas id="myAreaChartPositive"></canvas>
                   </div>
                   <div class="mt-4 text-center small">
                     <span class="mr-2">
                       <i class="fas fa-circle text-primary"></i> Current Day
                     </span>
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-danger"></i> Linear Predicated Day
-                    </span>
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-warning"></i> Overfit Predicated Day
-                    </span>
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-warning"></i> Underfit Predicated Day
-                    </span>
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-success"></i> Cumulatives cases
-                    </span>
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-secondary"></i> Recovered cases
-                    </span>
+
                   </div>
                 </div>
               </div>
             </div>
             <!-- Prediction in one week -->
             <div class="col-xl-4 col-lg-3 mb-4">
-              <div class="card border-left-primary shadow h-10 py-2">
-                  <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                      <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Next forecast for the number of cases </div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-600"><a id="num_OfcasesKPIForcast"></a> </div>
-                    </div>
-                    <div class="col-auto">
-                      <i></a><a id = "num_OfcasesKPIPredicated"></a></i>
-                      <i class="fas fas fa-head-side-cough fa-2x text-gray-600"></i>
-                    </div>
-                  </div>
-                  <span>
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Next forecast for the cumulative number of cases </div>
-                      <div class="h5 mb-0 font-weight-bold text-success-600"><a id="num_Of_cum_casesKPIForcast"></a></div>
-                  </div>
-                </div>
-                </div>
-              </div>
-              <br>
+
               <div class="card border-left-primary shadow h-10 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
+                    <!-- <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Spreading period </div>
                         <div class="d-flex my-2">
                           <div class="w-75">
@@ -549,13 +502,13 @@
                           </div>
                           <span class="font-weight-bold text-primary ml-2 value_spreading_period"></span>
                     </div>
-                  </div>
+                  </div> -->
                   <!-- <div class="col-auto">
                     <i class="fas fa-head-side-mask fa-2x text-gray-300"></i>
                   </div> -->
                 </div>
                 <spna>
-                  <div class="row no-gutters align-items-center">
+                  <!-- <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Time period prediciton</div>
                         <div class="d-flex my-2">
@@ -566,7 +519,8 @@
                     </div>
                   </div>
 
-              </div></div>
+              </div> -->
+            </div>
               <br>
 
 

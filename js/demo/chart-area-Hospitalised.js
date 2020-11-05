@@ -27,6 +27,7 @@ function loadData(){
 
 
       data_day = [];
+      data_num_positive = [];
       data_num_hospitalised = [];
       data_num_cumulative_hospitalizations = [];
       data_num_critical = [];
@@ -34,6 +35,7 @@ function loadData(){
 
       for(var i=0;i<result.length-1;i++){
         data_day.push(result[i].Day);
+        data_num_positive.push(result[i].num_positive);
         data_num_hospitalised.push(result[i].num_hospitalised);
         data_num_cumulative_hospitalizations.push(result[i].num_cumulative_hospitalizations);
         data_num_critical.push(result[i].num_critical)
@@ -45,14 +47,14 @@ function loadData(){
 
 
 
-
+  var ctx_positive = document.getElementById("myAreaChartPositive");
   var ctx_hospitalized = document.getElementById("myAreaChartHospitalised");
   var ctx_criticals = document.getElementById("myAreaChartCriticals");
   var ctx_fatalities = document.getElementById("myAreaChartFatalities");
 
 
 
-
+  draw_positive();
   draw_hospitalized();
   draw_criticals();
   draw_fatalities();
@@ -95,6 +97,118 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 }
 
 
+function draw_positive() {
+
+  if (typeof(myLineChart_positive) != "undefined"){
+
+    myLineChart_positive.destroy();
+
+  }
+
+  ctx_positive = document.getElementById("myAreaChartPositive");
+  myLineChart_positive = new Chart(ctx_positive, {
+    type: 'line',
+    data: {
+      labels: data_day,
+      datasets: [
+        // Susceptible
+        {
+          label: "Susceptible ",
+          lineTension: 0.6,
+          backgroundColor: "rgba(78, 115, 223, 0.2)",
+          borderColor: "rgba(78, 115, 223, 1)",
+          pointRadius: 4,
+          pointBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointBorderColor: "rgba(78, 115, 223, 1)",
+          pointHoverRadius: 4,
+          pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 4,
+          data: data_num_positive,
+        }
+
+
+
+
+
+
+
+    ],
+    },
+    options: {
+      maintainAspectRatio: false,
+      layout: {
+        padding: {
+          left: 10,
+          right: 25,
+          top: 25,
+          bottom: 0
+        }
+      },
+      scales: {
+        xAxes: [{
+          time: {
+            unit: 'date'
+          },
+          gridLines: {
+            display: false,
+            drawBorder: false
+          },
+          ticks: {
+            maxTicksLimit: 7,
+            // callback: function(value, index, values) {
+            //   return number_format(value)+ ' Days';
+            // }
+          }
+        }],
+        yAxes: [{
+          ticks: {
+            maxTicksLimit: 5,
+            padding: 10,
+
+            callback: function(value, index, values) {
+              return number_format(value)+ ' Cases';
+            }
+          },
+          gridLines: {
+            color: "rgb(234, 236, 244)",
+            zeroLineColor: "rgb(234, 236, 244)",
+            drawBorder: false,
+            borderDash: [2],
+            zeroLineBorderDash: [2]
+          }
+        }],
+      },
+      legend: {
+        display: false
+      },
+      tooltips: {
+        backgroundColor: "rgb(255,255,255)",
+        bodyFontColor: "#858796",
+        titleMarginBottom: 10,
+        titleFontColor: '#6e707e',
+        titleFontSize: 14,
+        borderColor: '#dddfeb',
+        borderWidth: 1,
+        xPadding: 15,
+        yPadding: 15,
+        displayColors: false,
+        intersect: false,
+        mode: 'index',
+        caretPadding: 10,
+        callbacks: {
+          label: function(tooltipItem, chart) {
+            var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+            return datasetLabel + number_format(tooltipItem.yLabel)+ ': Cases';
+          }
+        }
+      }
+    }
+  },);
+
+
+}
 
 function draw_hospitalized() {
 
@@ -336,6 +450,7 @@ function draw_criticals() {
 
 
 }
+
 function draw_fatalities() {
 
   if (typeof(myLineChart_fatalities) != "undefined"){
