@@ -18,9 +18,9 @@ class SEIR():
     def __init__(self):
 
         # Model's hyperparameters
-        self.beta = 0        # Contagion probability
-        self.sigma = 0       # Probability to go from E to I
-        self.gamma = 0       # Probability parameter to go from I to R (to be cure)
+        self.beta = 0           # Contagion probability
+        self.sigma = 0          # Probability to go from E to I
+        self.gamma = 0          # Probability parameter to go from I to R (to be cure)
         self.hp = 0             # Probability to go from I to H
         self.hcr = 0            # Hospit Cure Rate
         self.pc = 0             # Probability to fall in ICU each day from H
@@ -79,7 +79,7 @@ class SEIR():
 
     def predict(self, duration):
         """
-        Predict epidemic curves
+        Predict epidemic curves from t_0 for the given duration
         """
         # Initialisation vector:
         initial_state = self.get_initial_state()
@@ -98,13 +98,13 @@ class SEIR():
 
     def fit(self):
         """
-        Fitting
+        This method use the given data to find values of our model who minimise square error
+        between predictions and original data.
         """
         # =========================================================================== #
         # PART 1: We fit the parameters beta, sigma and gamma by computing the
-        # sum of errors between the product of positive tests and the product of the
-        # curves I, H and R. In fact, because our parameters hp is fixed at zero,
-        # the curve H = 0
+        # sum of errors between the daily cumulative of positive tests and the
+        # product of the I, H and R curves. So, at this step, we consider
         # =========================================================================== #
         # Generate initial state:
         initial_state = self.get_initial_state()
@@ -122,11 +122,39 @@ class SEIR():
         self.beta = res.x[0]
         self.sigma = res.x[1]
         self.gamma = res.x[2]
+
+        # Compare data with predictions on cumulative positive
+        predictions = self.predict(self.dataset.shape[0])
+        # Store I + R
+        cumul_positive = predictions[:, 3] + predictions[:, 5]
+
+        plt.scatter(predictions[:, 0], self.dataset[:, 7], c='blue', label='Original data')
+        plt.plot(predictions[:, 0], cumul_positive, c='red', label='Predictions')
+        plt.title('Comparison between cumulative of positive test and I + R predictions')
+        plt.xlabel('Time in days')
+        plt.ylabel('Number of peoples')
+        plt.savefig('fig/cumul_positif_comp.pdf')
+        plt.close()
+
         # =========================================================================== #
         # PART 2: In our model, infectious people can go from I to H and not
         # only to R. So, we have to split a part of gamma parameter to hp parameter:
         # =========================================================================== #
         self.gamma_hp_slide()
+
+        # Compare data with predictions on cumulative hospit
+        predictions = self.predict(self.dataset.shape[0])
+        # Store H
+        cumul_hospit = predictions[:, 4]
+
+        plt.scatter(predictions[:, 0], self.dataset[:, 4], c='blue', label='Original data')
+        plt.plot(predictions[:, 0], cumul_hospit, c='red', label='Predictions')
+        plt.title('Comparison between cumulative hospitalisation data and predictions')
+        plt.xlabel('Time in days')
+        plt.ylabel('Number of peoples')
+        plt.savefig('fig/cumul_hospit_comp.pdf')
+        plt.close()
+
 
         # =========================================================================== #
         # PART 3: compute the probability to out of H.
@@ -134,6 +162,19 @@ class SEIR():
         # probability to fall in ICU
         # =========================================================================== #
         self.fit_hcr()
+
+        # Compare data with hospit data and non cumulative h curve
+        predictions = self.predict(self.dataset.shape[0])
+        # Store H
+        hospit = predictions[:, 4]
+
+        plt.scatter(predictions[:, 0], self.dataset[:, 3], c='blue', label='Original data')
+        plt.plot(predictions[:, 0], hospit, c='red', label='Predictions')
+        plt.title('Comparison between non-cumulative hospitalisation data and predictions')
+        plt.xlabel('Time in days')
+        plt.ylabel('Number of peoples')
+        plt.savefig('fig/non_cum_hospit_comp.pdf')
+        plt.close()
 
         # =========================================================================== #
         # PART 4: People in H state can not only being cured. so we will distribute
@@ -167,6 +208,19 @@ class SEIR():
         # =========================================================================== #
         self.pcr_pd_slide()
 
+        # Compare data with critical
+        predictions = self.predict(self.dataset.shape[0])
+        # Store C
+        critical = predictions[:, 7]
+
+        plt.scatter(predictions[:, 0], self.dataset[:, 5], c='blue', label='Original data')
+        plt.plot(predictions[:, 0], critical, c='red', label='Predictions')
+        plt.title('Comparison ICU data and critical predictions')
+        plt.xlabel('Time in days')
+        plt.ylabel('Number of peoples')
+        plt.savefig('fig/critical_com.pdf')
+        plt.close()
+
     def gamma_hp_slide(self):
         """
         This method find definitive value of gamma and hp by evaluating the part of gamma who is represented by infected
@@ -177,6 +231,7 @@ class SEIR():
         initial_gamma = self.gamma
         # Each value of gamma to test
         gamma_range = np.linspace(0, initial_gamma, range_size)
+        proportion_range = np.linspace(0, 1, range_size)
         # Corresponding value of hp:
         hp_range = np.linspace(0, initial_gamma, range_size)
         hp_range = np.flip(hp_range)
@@ -201,10 +256,14 @@ class SEIR():
         print("best hp = {}".format(self.hp))
 
         #plot :
-        plt.plot(gamma_range, SSE, c='blue', label='Gamma value')
+        plt.plot(proportion_range, np.flip(SSE), c='blue', label='Gamma value')
+        plt.title('Proportion of Gamma-A assigned to hp')
         plt.yscale('log')
-        plt.xlabel('gamma prooportion')
-        plt.show()
+        plt.ylabel('log sum of square error')
+        plt.xlabel('gamma proportion')
+        plt.savefig("fig/gamma_hp_slide.pdf")
+        #plt.show()
+        plt.close()
 
     def pcr_pd_slide(self):
         """
@@ -215,6 +274,7 @@ class SEIR():
         initial_pcr = self.gamma
         # Each value of gamma to test
         pcr_range = np.linspace(0, initial_pcr, range_size)
+        proportion_range = np.linspace(0, 1, range_size)
         # Corresponding value of hp:
         pd_range = np.linspace(0, initial_pcr, range_size)
         pd_range = np.flip(pd_range)
@@ -234,15 +294,21 @@ class SEIR():
 
         self.pcr = best[2]
         self.pd = best[1]
+
+        #plot :
+        plt.plot(proportion_range, np.flip(SSE), c='blue')
+        plt.title('Proportion of pcr_A assigned to pd')
+        plt.yscale('log')
+        plt.ylabel('log sum of square error')
+        plt.xlabel('pcr_A proportion')
+        plt.savefig("fig/pcr_pd_slide.pdf")
+        #plt.show()
+        plt.close()
+
         print("pd/pcr slide: best value with sse = {}".format(best[0]))
         print("best pcr = {}".format(self.pcr))
         print("best pd = {}".format(self.pd))
 
-        #plot :
-        plt.plot(pcr_range, SSE, c='blue', label='pcr value')
-        plt.yscale('log')
-        plt.xlabel('pcr prooportion')
-        plt.show()
 
     def fit_hcr(self):
         """
@@ -253,7 +319,6 @@ class SEIR():
         range_size = 1000
         # Each value of gamma to test
         hcr_range = np.linspace(0, 1, range_size)
-
         # Make simulation and compute SSE:
         initial_state = self.get_initial_state()
         time = self.dataset[:, 0]
@@ -271,12 +336,15 @@ class SEIR():
         print("Best value of hcr with sse = {}".format(best[0]))
         print("hcr = {}".format(self.hcr))
 
-
         #plot :
         plt.plot(hcr_range, SSE, c='blue', label='hcr value')
+        plt.title('Evolution of the sum of square error according to the value of hcr')
         plt.yscale('log')
+        plt.ylabel('log sum of square error')
         plt.xlabel('hcr value')
-        plt.show()
+        plt.savefig("fig/pcr_fitting.pdf")
+        # plt.show()
+        plt.close()
 
         #Data storing:
         self.dataJSON['fit_hcr'] = []
@@ -490,8 +558,6 @@ class SEIR():
                 "predict_I": str(pred[i][3]),
                 "predict_H": str(pred[i][4]),
                 "predict_R": str(pred[i][5]),
-                "predict_C": str(pred[i][7]),
-                "predict_F": str(pred[i][8]),
 
             })
 
@@ -577,6 +643,7 @@ def first_method():
 
     # Draw long term curves:
     predictions = model.predict(365)
+
     model.plot_predict(predictions, args='predict')
 
 
