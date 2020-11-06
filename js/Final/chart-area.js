@@ -2,7 +2,7 @@
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
 const $url_data = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/data.csv"
-const $url = "https://raw.githubusercontent.com/julien1941/PI/master/Python/Data/SEIR.json?token=AL3RLGNONYUW5T7CLJNBEQS7VY54A"
+const $url = "https://raw.githubusercontent.com/julien1941/PI/master/Python/Data/SEIR.json?token=AL3RLGOSWZCERKRKR6MS3BK7VY7NM"
 const $value_time_period_data = $('.value_time_period_data');
 const $value_time_data = $('#range_time_period_data');
 
@@ -110,7 +110,7 @@ function loadData(){
       data_seir_f = [];
       console.log(result)
 
-      for(var i=1;i<$value_time_SEIR.val();i++){
+      for(var i=0;i<$value_time_SEIR.val();i++){
 
         data_day_seir.push(result.predict[i].predict_day);
         data_seir_s.push(result.predict[i].predict_S);

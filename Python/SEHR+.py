@@ -655,7 +655,7 @@ def first_method():
     predictions = model.predict(365)
 
     model.plot_predict(predictions, args='predict')
-    predictions = model.predict(150)
+    predictions = model.predict(300)
     model.plot_predict(predictions, args='predict no_S')
 
     print("=======================================================")
