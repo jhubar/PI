@@ -322,7 +322,7 @@
                 <!-- Card Body -->
                 <div class="card-body">
                   <div class="chart-area">
-                    <canvas id="myAreaChartPositive"></canvas>
+                    <canvas id="myAreaCOV19"></canvas>
                   </div>
                   <div class="mt-4 text-center small">
                     <span class="mr-2">
@@ -343,56 +343,7 @@
               </div>
             </div>
 
-            <!-- Prediction in one week -->
-            <div class="col-xl-4 col-lg-3 mb-4">
 
-              <div class="card border-left-primary shadow h-10 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Time period </div>
-                        <div class="d-flex my-2">
-                          <div class="w-75">
-                            <input type="range" class="custom-range" id="range_time_period_data" min="0" max="result" value="32">
-                          </div>
-                          <span class="font-weight-bold text-primary ml-2 value_time_period_data"></span>
-                    </div>
-                    <!-- positives -->
-                    <div class="custom-control custom-switch">
-                      <input type="checkbox" class="custom-control-input" id="customSwitches_Positive" checked >
-                      <label class="custom-control-label" for="customSwitches_Positive"> Positives </label>
-                    </div>
-                    <!-- hospital -->
-                    <div class="custom-control custom-switch">
-                      <input type="checkbox" class="custom-control-input" id="customSwitches_hospitalized" checked>
-                      <label class="custom-control-label" for="customSwitches_hospitalized"> Hospitalised </label>
-                    </div>
-                    <div class="custom-control custom-switch">
-                      <input type="checkbox" class="custom-control-input" id="customSwitches_cum_hospitalized">
-                      <label class="custom-control-label" for="customSwitches_cum_hospitalized"> Cum Hospitalised </label>
-                    </div>
-                    <!-- criticals -->
-                    <div class="custom-control custom-switch">
-                      <input type="checkbox" class="custom-control-input" id="customSwitches_criticals" checked>
-                      <label class="custom-control-label" for="customSwitches_criticals"> Criticals </label>
-                    </div>
-                    <!-- fatalities -->
-                    <div class="custom-control custom-switch">
-                      <input type="checkbox" class="custom-control-input" id="customSwitches_fatalities" checked>
-                      <label class="custom-control-label" for="customSwitches_fatalities"> Fatalies </label>
-                    </div>
-
-                  </div>
-                  <!-- <div class="col-auto">
-                    <i class="fas fa-head-side-mask fa-2x text-gray-300"></i>
-                  </div> -->
-                </div>
-              </div>
-            </div>
-              <br>
-
-
-            </div>
 
           </div>
 
@@ -461,6 +412,7 @@
   <!-- Page level custom scripts -->
   <!-- <script src="js/demo/chart-area-demo.js"></script> -->
   <!-- <script src="js/demo/chart-pie-demo.js"></script> -->
+  <script src="js/Cov19/cov_19_be.js"></script>
   <script src="js/Cov19/chart-area_19.js"></script>
 
   <!-- Api connection -->
