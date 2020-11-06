@@ -2,7 +2,7 @@
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
 const $url_data = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/data.csv"
-const $url = "https://raw.githubusercontent.com/julien1941/PI/master/Python/Data/SEIR.json?token=AL3RLGP6CCVRZ3L6XOHLN4K7VY5GS"
+const $url = "https://raw.githubusercontent.com/julien1941/PI/master/Python/Data/SEIR.json?token=AL3RLGNONYUW5T7CLJNBEQS7VY54A"
 const $value_time_period_data = $('.value_time_period_data');
 const $value_time_data = $('#range_time_period_data');
 
@@ -108,8 +108,9 @@ function loadData(){
       data_seir_h = [];
       data_seir_c = [];
       data_seir_f = [];
+      console.log(result)
 
-      for(var i=0;i<$value_time_SEIR.val();i++){
+      for(var i=1;i<$value_time_SEIR.val();i++){
 
         data_day_seir.push(result.predict[i].predict_day);
         data_seir_s.push(result.predict[i].predict_S);
@@ -119,6 +120,7 @@ function loadData(){
         data_seir_h.push(result.predict[i].predict_H);
         data_seir_c.push(result.predict[i].predict_C);
         data_seir_f.push(result.predict[i].predict_F);
+
 
 
       }
