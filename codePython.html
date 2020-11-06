@@ -229,8 +229,8 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-4 text-gray-800">Epidemio Resume</h1>
-          <pre>
+          <h1 class="h3 mb-4 text-gray-800">Code SEIR+</h1>
+           <pre> <code id="python_code">
             import json
             import numpy as np
             import pandas as pd
@@ -909,7 +909,7 @@
 
             if __name__ == "__main__":
                 first_method()
-
+            </code>
           </pre>
 
 
@@ -969,8 +969,30 @@
   <!-- Core plugin JavaScript-->
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
+  <script src="http://codemirror.net/lib/codemirror.js"></script>
+  <script src="http://codemirror.net/mode/python/python.js"></script>
+
   <!-- Custom scripts for all pages-->
   <script src="js/sb-admin-2.min.js"></script>
+  <script type="text/javascript">
+        window.onload = function(){
+            var codeElement = document.getElementById('python_code');
+            var code = codeElement.innerText;
+
+            codeElement.innerHTML = "";
+
+            var codeMirror = CodeMirror(
+              codeElement,
+              {
+                value: code,
+                mode: "python",
+                theme: "default",
+                lineNumbers: true,
+                readOnly: true
+              }
+            );
+        };
+    </script>
 
 </body>
 
