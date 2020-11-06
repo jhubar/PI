@@ -1,7 +1,7 @@
 // Set new default font family and font color to mimic Bootstrap's default styling
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
-const $url_data_19 = "https://epistat.sciensano.be/Data/COVID19BE_CASES_AGESEX.json"
+const $url_data_19 = "https://raw.githubusercontent.com/julien1941/PI/master/Data/Cov_19_be/COVID19BE_CASES_AGESEX.csv?token=AL3RLGPXWFI5Q3RKFFIZAB27V2XXM"
 
 
 loadData();
@@ -15,33 +15,40 @@ function loadData(){
 
     $.get($url_data_19,function(data_cov19_be){
 
-      const result = JSON.parse(data_cov19_be);
-
+      var result = [];
+      var lines=data_cov19_be.split("\n");
+      var headers=lines[0].split(",");
+      for(var i=1;i<10;i++){
+        var obj = {};
+        var currentline=lines[i].split(",");
+        for(var j=0;j<headers.length;j++){
+          obj[headers[j]] = currentline[j];
+        }
+        result.push(obj);
+      }
       console.log(result)
-      data_day_seir = [];
-      data_seir_s = [];
-      data_seir_e = [];
-      data_seir_i = [];
-      data_seir_r = [];
-      data_seir_h = [];
-      data_seir_c = [];
-      data_seir_f = [];
+
+      data_cov19_be_date = [];
+      data_cov19_be_province = [];
+      data_cov19_be_region = [];
+      data_cov19_be_age_group = [];
+      data_cov19_be_sex = [];
+      data_cov19_be_case = [];
+      for(var i=0;i<result.length-1;i++){
+          data_cov19_be_date.push(result.DATE);
+          data_cov19_be_province.push(result[i].PROVINCE);
+          data_cov19_be_region.push(result[i].REGION);
+          data_cov19_be_age_group.push(result[i].AGEGROUP);
+          data_cov19_be_sex.push(result[i].SEX);
+          data_cov19_be_case.push(result[i].CASES);
+
+      }
+
+      console.log(data_cov19_be_date)
 
 
-      // for(var i=0;i<$value_time_SEIR.val();i++){
-      //
-      //   data_day_seir.push(result.predict[i].predict_day);
-      //   data_seir_s.push(result.predict[i].predict_S);
-      //   data_seir_e.push(result.predict[i].predict_E);
-      //   data_seir_i.push(result.predict[i].predict_I);
-      //   data_seir_r.push(result.predict[i].predict_R);
-      //   data_seir_h.push(result.predict[i].predict_H);
-      //   data_seir_c.push(result.predict[i].predict_C);
-      //   data_seir_f.push(result.predict[i].predict_F);
-      //
-      //
-      //
-      // }
+
+
 
 
   // var ctx_active_cases19 = document.getElementById("myAreaSeirModel");
