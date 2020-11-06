@@ -899,9 +899,10 @@ pre code {
 .CodeMirror {
   /* Set height, width, borders, and global font properties here */
   font-family: monospace;
-  height: 300px;
+  height: 800px;
   color: black;
   direction: ltr;
+
 }
 
 /* PADDING */
@@ -1039,7 +1040,7 @@ pre code {
 .cm-invalidchar {color: #f00;}
 
 .CodeMirror-composing {
-  border-bottom: 2px solid; 
+  border-bottom: 2px solid;
 }
 
 /* Default styles for common addons */
@@ -1057,7 +1058,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #a22;}
 .CodeMirror {
   position: relative;
   overflow: hidden;
-  background: DarkGrey;
+  background: Gainsboro;
 }
 
 .CodeMirror-scroll {
@@ -1134,7 +1135,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {color: #a22;}
 
 .CodeMirror-lines {
   cursor: text;
-  min-height: 1px; /* prevents collapsing before first draw */
+  min-height: 4px; /* prevents collapsing before first draw */
 }
 .CodeMirror pre.CodeMirror-line,
 .CodeMirror pre.CodeMirror-line-like {
