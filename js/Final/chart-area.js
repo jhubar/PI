@@ -89,11 +89,12 @@ $id_switch_seir_fatalities.addEventListener('change',function(){
 });
 
 
-
-loadData();
 load_cur_Data();
+loadData();
+
 
 function loadData(){
+
 
     var data_seir = ''
     // DAp
@@ -127,8 +128,18 @@ function loadData(){
         data_seir_f.push(result.predict[i].predict_F);
         data_num_bed_hospit.push("4586")
 
+        if ($value_time_SEIR.val() < result.length-1 ){
+          data_day.push(result[i].Day);
+          data_num_positive.push(result[i].num_positive);
+          data_num_tested.push(result[i].num_tested);
+          data_num_hospitalised.push(result[i].num_hospitalised);
+          data_num_cumulative_hospitalizations.push(result[i].num_cumulative_hospitalizations);
+          data_num_critical.push(result[i].num_critical)
+          data_num_fatalities.push(result[i].num_fatalities);
+        }
 
       }
+
 
 
   var ctx_active_cases = document.getElementById("myAreaSeirModel");
@@ -615,6 +626,24 @@ function draw_current_data() {
     ],
     },
     options: {
+
+      annotation: {
+        annotations: [
+          {
+            type: "line",
+            mode: "vertical",
+            scaleID: "x-axis-0",
+            value: "16",
+            borderColor: "red",
+            label: {
+              content: "TODAY",
+              enabled: true,
+              position: "top"
+            }
+          }
+        ]
+      },
+
       maintainAspectRatio: false,
       layout: {
         padding: {
@@ -696,9 +725,11 @@ function draw() {
 
   }
 
-  ctx_active_cases = document.getElementById("myAreaSeirModel");
+
+  ctx_active_cases = document.getElementById("myAreaSeirModel").getContext("2d");;
   myLineChart = new Chart(ctx_active_cases, {
     type: 'line',
+
     data: {
       labels: data_day_seir,
       datasets: [
@@ -829,7 +860,89 @@ function draw() {
           pointHitRadius: 10,
           pointBorderWidth: 2,
           data: cum_bed_draw(),
+        },
+        // positives
+        {
+          label: "Positives ",
+          lineTension: 0.6,
+          backgroundColor: "rgba(0, 0, 0,0)",
+          borderColor: "rgba(0, 0, 0,0)",
+          pointRadius: 4,
+          pointBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointBorderColor: "rgba(78, 115, 223, 1)",
+          pointHoverRadius: 4,
+          pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 4,
+          data: positives_draw(),
+        },
+        // Hospitalised
+        {
+          label: "Hospitalised ",
+          lineTension: 0.6,
+          backgroundColor: "rgba(0, 0, 0,0)",
+          borderColor: "rgba(0, 0, 0,0)",
+          pointRadius: 4,
+          pointBackgroundColor: "rgba(34,139,34, 0.1)",
+          pointBorderColor: "rgba(34,139,34, 0.1)",
+          pointHoverRadius: 4,
+          pointHoverBackgroundColor: "rgba(34,139,34, 0.1)",
+          pointHoverBorderColor: "rgba(34,139,34, 0.1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 4,
+          data: hospitalized_draw(),
+        },
+        // Hospitalised
+        {
+          label: "Hospitalised ",
+          lineTension: 0.6,
+          backgroundColor: "rgba(0, 0, 0,0)",
+          borderColor: "rgba(0, 0, 0,0)",
+          pointRadius: 4,
+          pointBackgroundColor: "rgba(34,139,34, 0.1)",
+          pointBorderColor: "rgba(34,139,34, 0.1)",
+          pointHoverRadius: 4,
+          pointHoverBackgroundColor: "rgba(34,139,34, 0.1)",
+          pointHoverBorderColor: "rgba(34,139,34, 0.1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 4,
+          data: cum_hospitalized_draw(),
+        },
+        // Criticals
+        {
+          label: "criticals ",
+          lineTension: 0.6,
+          backgroundColor: "rgba(0, 0, 0,0)",
+          borderColor: "rgba(0, 0, 0,0)",
+          pointRadius: 4,
+          pointBackgroundColor: "rgba(255, 193, 7,1)",
+          pointBorderColor: "rgba(255, 193, 7,1)",
+          pointHoverRadius: 4,
+          pointHoverBackgroundColor: "rgba(255, 193, 7, 1)",
+          pointHoverBorderColor: "rgba(255, 193, 7, 1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 2,
+          data: criticals_draw(),
+        },
+        // Fatalies
+        {
+          label: "Fatalies ",
+          lineTension: 0.6,
+          backgroundColor: "rgba(0, 0, 0,0)",
+          borderColor: "rgba(0, 0, 0,0)",
+          pointRadius: 3,
+          pointBackgroundColor: "rgba(237, 0, 59, 1)",
+          pointBorderColor: "rgba(237, 0, 59, 1)",
+          pointHoverRadius: 3,
+          pointHoverBackgroundColor: "rgba(237, 0, 59, 1)",
+          pointHoverBorderColor: "rgba(237, 0, 59, 1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 4,
+          data: fatalities_draw(),
         }
+
+
 
 
 
@@ -837,7 +950,11 @@ function draw() {
 
     ],
     },
+
     options: {
+
+
+
       maintainAspectRatio: false,
       layout: {
         padding: {
