@@ -6,6 +6,8 @@ from scipy.integrate import odeint
 from scipy.optimize import minimize
 import math
 
+from scipy.signal import savgol_filter
+
 """
 =======================================================================================================
 SEIHR +  MODEL
@@ -46,7 +48,7 @@ class SEIR():
         self.dataJSON = {}
 
     def saveJson(self):
-        with open('Data/SEIR.json', 'w') as outfile:
+        with open('Data/SEIR+.json', 'w') as outfile:
             json.dump(self.dataJSON, outfile)
 
     def get_initial_state(self):
@@ -130,13 +132,13 @@ class SEIR():
         # Store I + R
         cumul_positive = predictions[:, 3] + predictions[:, 5]
 
-        plt.scatter(predictions[:, 0], self.dataset[:, 7], c='blue', label='Original data')
+        plt.scatter(predictions[:, 0], self.raw_dataset['cumul_positive'], c='blue', label='Original data')
         plt.plot(predictions[:, 0], cumul_positive, c='red', label='Predictions')
-        # plt.title('Comparison between cumulative of positive test and I + R predictions')
+        plt.title('Comparison between cumulative of positive test and I + R predictions')
         plt.xlabel('Time in days')
         plt.ylabel('Number of peoples')
         plt.legend()
-        plt.savefig('fig/cumul_positif_comp.pdf')
+        plt.savefig('fig/cumul_positif_comp.png', transparent=True)
         plt.close()
 
         # =========================================================================== #
@@ -152,11 +154,11 @@ class SEIR():
 
         plt.scatter(predictions[:, 0], self.dataset[:, 4], c='blue', label='Original data')
         plt.plot(predictions[:, 0], cumul_hospit, c='red', label='Predictions')
-        # plt.title('Comparison between cumulative hospitalisation data and predictions')
+        plt.title('Comparison between cumulative hospitalisation data and predictions')
         plt.xlabel('Time in days')
         plt.ylabel('Number of peoples')
         plt.legend()
-        plt.savefig('fig/cumul_hospit_comp.pdf')
+        plt.savefig('fig/cumul_hospit_comp.png', transparent=True)
         plt.close()
 
         # =========================================================================== #
@@ -173,11 +175,11 @@ class SEIR():
 
         plt.scatter(predictions[:, 0], self.dataset[:, 3], c='blue', label='Original data')
         plt.plot(predictions[:, 0], hospit, c='red', label='Predictions')
-        # plt.title('Comparison between non-cumulative hospitalisation data and predictions')
+        plt.title('Comparison between non-cumulative hospitalisation data and predictions')
         plt.xlabel('Time in days')
         plt.legend()
         plt.ylabel('Number of peoples')
-        plt.savefig('fig/non_cum_hospit_comp.pdf')
+        plt.savefig('fig/non_cum_hospit_comp.png', transparent=True)
         plt.close()
 
         # =========================================================================== #
@@ -194,9 +196,9 @@ class SEIR():
         # Time vector:
         time = self.dataset[:, 0]
         # Bounds: hcr/pc ratio, pcr
-        bounds = [(0, 1), (0, 1)]
+        bounds = [(1/2, 1), (0.01, 1/4)]
         # Start values
-        start_values = [0.5, 0.5]
+        start_values = [0.6, 0.1]
         # Use Scipy.optimize.minimize with L-BFGS_B method
         res = minimize(self.SSE, np.asarray(start_values), args=(initial_state, time, 'part_four'),
                        method='L-BFGS-B', bounds=bounds)
@@ -219,11 +221,11 @@ class SEIR():
 
         plt.scatter(predictions[:, 0], self.dataset[:, 5], c='blue', label='Original data')
         plt.plot(predictions[:, 0], critical, c='red', label='Predictions')
-        # plt.title('Comparison ICU data and critical predictions')
+        plt.title('Comparison ICU data and critical predictions')
         plt.legend()
         plt.xlabel('Time in days')
         plt.ylabel('Number of peoples')
-        plt.savefig('fig/critical_com.pdf')
+        plt.savefig('fig/critical_com.png', transparent=True)
         plt.close()
 
     def gamma_hp_slide(self):
@@ -262,12 +264,12 @@ class SEIR():
 
         # plot :
         plt.plot(proportion_range, np.flip(SSE), c='blue', label='Gamma value')
-        # plt.title('Proportion of Gamma-A assigned to hp')
+        plt.title('Proportion of Gamma-A assigned to hp')
         plt.yscale('log')
         plt.legend()
         plt.ylabel('log sum of square error')
         plt.xlabel('gamma proportion')
-        plt.savefig("fig/gamma_hp_slide.pdf")
+        plt.savefig("fig/gamma_hp_slide.png", transparent=True)
         # plt.show()
         plt.close()
 
@@ -277,14 +279,13 @@ class SEIR():
         """
         # The number of value to test
         range_size = 1000
-        initial_pcr = self.gamma
+        initial_pcr = self.pcr
         # Each value of gamma to test
         pcr_range = np.linspace(0, initial_pcr, range_size)
         proportion_range = np.linspace(0, 1, range_size)
         # Corresponding value of hp:
         pd_range = np.linspace(0, initial_pcr, range_size)
         pd_range = np.flip(pd_range)
-
         # Make simulation and compute SSE:
         initial_state = self.get_initial_state()
         time = self.dataset[:, 0]
@@ -303,12 +304,12 @@ class SEIR():
 
         # plot :
         plt.plot(proportion_range, np.flip(SSE), c='blue')
-        # plt.title('Proportion of pcr_A assigned to pd')
+        plt.title('Proportion of pcr_A assigned to pd')
         plt.legend()
         plt.yscale('log')
         plt.ylabel('log sum of square error')
         plt.xlabel('pcr_A proportion')
-        plt.savefig("fig/pcr_pd_slide.pdf")
+        plt.savefig("fig/pcr_pd_slide.png", transparent=True)
         # plt.show()
         plt.close()
 
@@ -344,12 +345,12 @@ class SEIR():
 
         # plot :
         plt.plot(hcr_range, SSE, c='blue', label='hcr value')
-        # plt.title('Evolution of the sum of square error according to the value of hcr')
+        plt.title('Evolution of the sum of square error according to the value of hcr')
         plt.legend()
         plt.yscale('log')
         plt.ylabel('log sum of square error')
         plt.xlabel('hcr value')
-        plt.savefig("fig/hcr_fitting.pdf")
+        plt.savefig("fig/hcr_fitting.png", transparent=True)
         # plt.show()
         plt.close()
 
@@ -434,6 +435,7 @@ class SEIR():
             tpl = tuple(parameters)
             params = (self.beta, self.sigma, self.gamma, self.hp,
                       tpl[0] * self.hcr, (1 - tpl[0]) * self.pc, 0, tpl[1])
+            print(params)
             # Make predictions:
             predict = odeint(func=self.differential,
                              y0=initial_state,
@@ -443,6 +445,7 @@ class SEIR():
             for i in range(0, len(time)):
                 # fit on ICU
                 sse += (self.dataset[i][5] - predict[i][6]) ** 2
+
             return sse
 
         if method == 'part_5':
@@ -483,6 +486,27 @@ class SEIR():
 
         return new_df
 
+    def dataframe_smoothing2(self, df):
+
+        # Convert the dataframe to a numpy array:
+        np_df = df.to_numpy()
+        # Smoothing period = 7 days
+        smt_prd = 7
+        smt_vec = np.ones(smt_prd)
+        smt_vec /= smt_prd
+        # Sore smoothed data in a new matrix:
+        smoothed = np.copy(np_df)
+        # How many smothing period can we place in the dataset:
+        nb_per = math.floor(np_df.shape[0] / smt_prd)
+        # Perform smoothing for each attributes
+        for i in range(1, np_df.shape[1]):
+            smoothed[:, i] = savgol_filter(np_df[:, i], smt_prd, 2)
+
+        # Write new values in a dataframe
+        new_df = pd.DataFrame(smoothed, columns=df.columns)
+
+        return new_df
+
     def import_dataset(self, target='covid_20'):
 
         if target == 'covid_20':
@@ -508,19 +532,22 @@ class SEIR():
             y_smooth = self.dataframe['num_hospitalised']
             plt.scatter(x_axe, y_raw, c='green', label='original hospitalised')
             plt.plot(x_axe, y_smooth, c='orange', label="smoothed hospitalised")
-            # plt.title("Data Pre-processing")
+            plt.title("Data Pre-processing")
             plt.xlabel("Time in days")
             plt.ylabel("Number of people")
             plt.legend()
-            plt.savefig("fig/preprocessing.pdf")
+            plt.savefig("fig/preprocessing.png", transparent=True)
             # plt.show()
             plt.close()
 
             # Ad a new column at the end with cumulative positive cases at the right
             cumul_positive = self.dataframe['num_positive'].to_numpy()
+            cumul_positive_non_smooth = self.raw_dataset['num_positive']
             for i in range(1, len(cumul_positive)):
                 cumul_positive[i] += cumul_positive[i - 1]
+                cumul_positive_non_smooth[i] += cumul_positive_non_smooth[i - 1]
             self.dataframe.insert(7, 'cumul_positive', cumul_positive)
+            self.raw_dataset.insert(7, 'cumul_positive', cumul_positive_non_smooth)
 
             # Delete the first line with zero test
             for i in range(0, 1):
@@ -586,10 +613,13 @@ class SEIR():
             plt.plot(pred[:, 0], pred[:, 8], c='black', label='D')
             plt.xlabel("Time (Days)")
             plt.ylabel("Number of peoples")
+            plt.legend()
+            plt.title("Evolution of epidemic curves")
             if "no_S" not in args:
-                plt.savefig("fig/long_time_predictions_no_s.pdf")
+
+                plt.savefig("fig/long_time_predictions_no_s.png", transparent=True)
             else:
-                plt.savefig("fig/long_time_predictions.pdf")
+                plt.savefig("fig/long_time_predictions.png", transparent=True)
             # plt.show()
             plt.close()
 
@@ -650,7 +680,7 @@ def first_method():
     # model.plot_predict(predictions, args='hospit')
 
     # Draw long term curves:
-    predictions = model.predict(365)
+    predictions = model.predict(200)
 
     model.plot_predict(predictions, args='predict')
     predictions = model.predict(150)
