@@ -2,7 +2,7 @@
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
 const $url_data = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/data.csv"
-const $url = "https://raw.githubusercontent.com/julien1941/PI/master/Python/Data/SEIR.json?token=AL3RLGKFBUYQJLYUKKDP4327VU7BO"
+const $url = "https://raw.githubusercontent.com/julien1941/PI/master/Python/Data/SEIR.json?token=AL3RLGLPMODUMPZUMLUKHOS7VZA7O"
 const $value_time_period_data = $('.value_time_period_data');
 const $value_time_data = $('#range_time_period_data');
 
@@ -28,6 +28,7 @@ const $id_switch_Hospitalized = document.getElementById('customSwitchesHospitali
 const $id_switch_seir_criticals = document.getElementById('customSwitchesSeirCriticales');
 const $id_switch_seir_fatalities = document.getElementById('customSwitchesSeirFatalities');
 
+const $id_switch_num_bed_hos = document.getElementById('customSwitches_num_bed_hos');
 
 $id_switch_positive.addEventListener('change',function(){
     draw_current_data();
@@ -53,6 +54,9 @@ $id_switch_fatalies.addEventListener('change',function(){
 $id_switch_Susceptible.addEventListener('change',function(){
     draw();
 
+});
+$id_switch_num_bed_hos.addEventListener('change',function(){
+    draw();
 });
 
 $id_switch_Exosed.addEventListener('change',function(){
@@ -85,11 +89,12 @@ $id_switch_seir_fatalities.addEventListener('change',function(){
 });
 
 
-
-loadData();
 load_cur_Data();
+loadData();
+
 
 function loadData(){
+
 
     var data_seir = ''
     // DAp
@@ -108,6 +113,8 @@ function loadData(){
       data_seir_h = [];
       data_seir_c = [];
       data_seir_f = [];
+      data_num_bed_hospit = [];
+
 
       for(var i=0;i<$value_time_SEIR.val();i++){
 
@@ -119,9 +126,20 @@ function loadData(){
         data_seir_h.push(result.predict[i].predict_H);
         data_seir_c.push(result.predict[i].predict_C);
         data_seir_f.push(result.predict[i].predict_F);
+        data_num_bed_hospit.push("4586")
 
+        if ($value_time_SEIR.val() < result.length-1 ){
+
+
+
+          data_num_hospitalised.push(result[i].num_hospitalised);
+
+          data_num_critical.push(result[i].num_critical)
+          data_num_fatalities.push(result[i].num_fatalities);
+        }
 
       }
+
 
 
   var ctx_active_cases = document.getElementById("myAreaSeirModel");
@@ -186,6 +204,7 @@ function load_cur_Data(){
       data_num_fatalities = [];
 
 
+
       for(var i=0;i<$value_time_data.val();i++){
         data_day.push(result[i].Day);
         data_num_positive.push(result[i].num_positive);
@@ -194,7 +213,9 @@ function load_cur_Data(){
         data_num_cumulative_hospitalizations.push(result[i].num_cumulative_hospitalizations);
         data_num_critical.push(result[i].num_critical)
         data_num_fatalities.push(result[i].num_fatalities);
+
       }
+
 
 
 
@@ -355,6 +376,15 @@ function criticals_seir_draw(){
 function fatalities_seir_draw(){
   if($id_switch_seir_fatalities.checked == true){
     return data_seir_f;
+  }
+  else{
+    return [];
+  }
+}
+
+function cum_bed_draw(){
+  if($id_switch_num_bed_hos.checked == true){
+    return data_num_bed_hospit;
   }
   else{
     return [];
@@ -596,6 +626,24 @@ function draw_current_data() {
     ],
     },
     options: {
+
+      annotation: {
+        annotations: [
+          {
+            type: "line",
+            mode: "vertical",
+            scaleID: "x-axis-0",
+            value: "16",
+            borderColor: "red",
+            label: {
+              content: "TODAY",
+              enabled: true,
+              position: "top"
+            }
+          }
+        ]
+      },
+
       maintainAspectRatio: false,
       layout: {
         padding: {
@@ -677,9 +725,11 @@ function draw() {
 
   }
 
-  ctx_active_cases = document.getElementById("myAreaSeirModel");
+
+  ctx_active_cases = document.getElementById("myAreaSeirModel").getContext("2d");;
   myLineChart = new Chart(ctx_active_cases, {
     type: 'line',
+
     data: {
       labels: data_day_seir,
       datasets: [
@@ -794,7 +844,76 @@ function draw() {
           pointHitRadius: 5,
           pointBorderWidth: 4,
           data: fatalities_seir_draw(),
+        },
+        // Recovered
+        {
+          label: "Bed available",
+          lineTension: 0.6,
+          backgroundColor: "rgba(0, 0, 0, 0)",
+          borderColor: "rgba(0, 0, 0, 0)",
+          pointRadius: 2,
+          pointBackgroundColor: "rgba(37, 56, 60, 0.1)",
+          pointBorderColor: "rgba(37, 56, 60, 0.1)",
+          pointHoverRadius: 3,
+          pointHoverBackgroundColor: "rgba(37, 56, 60, 0.1)",
+          pointHoverBorderColor: "rgba(37, 56, 60, 0.1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 2,
+          data: cum_bed_draw(),
+        },
+        
+        // Hospitalised
+        {
+          label: "Hospitalised ",
+          lineTension: 0.6,
+          backgroundColor: "rgba(0, 0, 0,0)",
+          borderColor: "rgba(0, 0, 0,0)",
+          pointRadius: 4,
+          pointBackgroundColor: "rgba(34,139,34, 0.1)",
+          pointBorderColor: "rgba(34,139,34, 0.1)",
+          pointHoverRadius: 4,
+          pointHoverBackgroundColor: "rgba(34,139,34, 0.1)",
+          pointHoverBorderColor: "rgba(34,139,34, 0.1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 4,
+          data: hospitalized_draw(),
+        },
+
+
+        // Criticals
+        {
+          label: "criticals ",
+          lineTension: 0.6,
+          backgroundColor: "rgba(0, 0, 0,0)",
+          borderColor: "rgba(0, 0, 0,0)",
+          pointRadius: 4,
+          pointBackgroundColor: "rgba(255, 193, 7,1)",
+          pointBorderColor: "rgba(255, 193, 7,1)",
+          pointHoverRadius: 4,
+          pointHoverBackgroundColor: "rgba(255, 193, 7, 1)",
+          pointHoverBorderColor: "rgba(255, 193, 7, 1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 2,
+          data: criticals_draw(),
+        },
+        // Fatalies
+        {
+          label: "Fatalies ",
+          lineTension: 0.6,
+          backgroundColor: "rgba(0, 0, 0,0)",
+          borderColor: "rgba(0, 0, 0,0)",
+          pointRadius: 3,
+          pointBackgroundColor: "rgba(237, 0, 59, 1)",
+          pointBorderColor: "rgba(237, 0, 59, 1)",
+          pointHoverRadius: 3,
+          pointHoverBackgroundColor: "rgba(237, 0, 59, 1)",
+          pointHoverBorderColor: "rgba(237, 0, 59, 1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 4,
+          data: fatalities_draw(),
         }
+
+
 
 
 
@@ -802,7 +921,11 @@ function draw() {
 
     ],
     },
+
     options: {
+
+
+
       maintainAspectRatio: false,
       layout: {
         padding: {
