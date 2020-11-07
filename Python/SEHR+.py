@@ -590,8 +590,6 @@ class SEIR():
                 "predict_I": str(pred[i][3]),
                 "predict_H": str(pred[i][4]),
                 "predict_R": str(pred[i][5]),
-                "predict_C": str(pred[i][7]),
-                "predict_F": str(pred[i][8]),
 
             })
 
@@ -685,7 +683,7 @@ def first_method():
     predictions = model.predict(200)
 
     model.plot_predict(predictions, args='predict')
-    predictions = model.predict(300)
+    predictions = model.predict(150)
     model.plot_predict(predictions, args='predict no_S')
 
     print("=======================================================")
