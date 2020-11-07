@@ -102,7 +102,7 @@ function loadData(){
 
     $.get($url,function(data_seir){
 
-      const result = JSON.parse(data_seir);
+      const result_seir = JSON.parse(data_seir);
 
 
       data_day_seir = [];
@@ -114,18 +114,18 @@ function loadData(){
       data_seir_c = [];
       data_seir_f = [];
       data_num_bed_hospit = [];
-
+      console.log(result_seir)
 
       for(var i=0;i<$value_time_SEIR.val();i++){
 
-        data_day_seir.push(result.predict[i].predict_day);
-        data_seir_s.push(result.predict[i].predict_S);
-        data_seir_e.push(result.predict[i].predict_E);
-        data_seir_i.push(result.predict[i].predict_I);
-        data_seir_r.push(result.predict[i].predict_R);
-        data_seir_h.push(result.predict[i].predict_H);
-        data_seir_c.push(result.predict[i].predict_C);
-        data_seir_f.push(result.predict[i].predict_F);
+        data_day_seir.push(result_seir.predict[i].predict_day);
+        data_seir_s.push(result_seir.predict[i].predict_S);
+        data_seir_e.push(result_seir.predict[i].predict_E);
+        data_seir_i.push(result_seir.predict[i].predict_I);
+        data_seir_r.push(result_seir.predict[i].predict_R);
+        data_seir_h.push(result_seir.predict[i].predict_H);
+        data_seir_c.push(result_seir.predict[i].predict_C);
+        data_seir_f.push(result_seir.predict[i].predict_F);
         data_num_bed_hospit.push("4586")
 
         if ($value_time_SEIR.val() < result.length-1 ){
@@ -145,11 +145,11 @@ function loadData(){
   var ctx_active_cases = document.getElementById("myAreaSeirModel");
 
 
-  $("#id_beta_seir").html((parseFloat(result.model[0].beta).toFixed(6)).toString())
-  $("#id_sigma_seir").html((parseFloat(result.model[0].sigma).toFixed(6)).toString())
-  $("#id_gamma_seir").html((parseFloat(result.model[0].gamma).toFixed(6)).toString())
-  $("#id_hp_seir").html((parseFloat(result.model[0].hp).toFixed(6)).toString())
-  $("#id_hcr_seir").html((parseFloat(result.model[0].hcr).toFixed(6)).toString())
+  $("#id_beta_seir").html((parseFloat(result_seir.model[0].beta).toFixed(6)).toString())
+  $("#id_sigma_seir").html((parseFloat(result_seir.model[0].sigma).toFixed(6)).toString())
+  $("#id_gamma_seir").html((parseFloat(result_seir.model[0].gamma).toFixed(6)).toString())
+  $("#id_hp_seir").html((parseFloat(result_seir.model[0].hp).toFixed(6)).toString())
+  $("#id_hcr_seir").html((parseFloat(result_seir.model[0].hcr).toFixed(6)).toString())
 
 
 
