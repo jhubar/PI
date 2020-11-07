@@ -820,14 +820,14 @@ function draw() {
           lineTension: 0.6,
           backgroundColor: "rgba(0, 0, 0, 0)",
           borderColor: "rgba(0, 0, 0, 0)",
-          pointRadius: 1,
+          pointRadius: 2,
           pointBackgroundColor: "rgba(37, 56, 60, 0.1)",
           pointBorderColor: "rgba(37, 56, 60, 0.1)",
           pointHoverRadius: 3,
           pointHoverBackgroundColor: "rgba(37, 56, 60, 0.1)",
           pointHoverBorderColor: "rgba(37, 56, 60, 0.1)",
-          pointHitRadius: 5,
-          pointBorderWidth: 1,
+          pointHitRadius: 10,
+          pointBorderWidth: 2,
           data: cum_bed_draw(),
         }
 
