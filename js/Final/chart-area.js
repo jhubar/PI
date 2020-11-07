@@ -28,6 +28,7 @@ const $id_switch_Hospitalized = document.getElementById('customSwitchesHospitali
 const $id_switch_seir_criticals = document.getElementById('customSwitchesSeirCriticales');
 const $id_switch_seir_fatalities = document.getElementById('customSwitchesSeirFatalities');
 
+const $id_switch_num_bed_hos = document.getElementById('customSwitches_num_bed_hos');
 
 $id_switch_positive.addEventListener('change',function(){
     draw_current_data();
@@ -53,6 +54,9 @@ $id_switch_fatalies.addEventListener('change',function(){
 $id_switch_Susceptible.addEventListener('change',function(){
     draw();
 
+});
+$id_switch_num_bed_hos.addEventListener('change',function(){
+    draw();
 });
 
 $id_switch_Exosed.addEventListener('change',function(){
@@ -108,7 +112,8 @@ function loadData(){
       data_seir_h = [];
       data_seir_c = [];
       data_seir_f = [];
-      console.log(result)
+      data_num_bed_hospit = [];
+
 
       for(var i=0;i<$value_time_SEIR.val();i++){
 
@@ -120,7 +125,7 @@ function loadData(){
         data_seir_h.push(result.predict[i].predict_H);
         data_seir_c.push(result.predict[i].predict_C);
         data_seir_f.push(result.predict[i].predict_F);
-
+        data_num_bed_hospit.push("4586")
 
 
       }
@@ -188,6 +193,7 @@ function load_cur_Data(){
       data_num_fatalities = [];
 
 
+
       for(var i=0;i<$value_time_data.val();i++){
         data_day.push(result[i].Day);
         data_num_positive.push(result[i].num_positive);
@@ -196,7 +202,9 @@ function load_cur_Data(){
         data_num_cumulative_hospitalizations.push(result[i].num_cumulative_hospitalizations);
         data_num_critical.push(result[i].num_critical)
         data_num_fatalities.push(result[i].num_fatalities);
+
       }
+
 
 
 
@@ -357,6 +365,15 @@ function criticals_seir_draw(){
 function fatalities_seir_draw(){
   if($id_switch_seir_fatalities.checked == true){
     return data_seir_f;
+  }
+  else{
+    return [];
+  }
+}
+
+function cum_bed_draw(){
+  if($id_switch_num_bed_hos.checked == true){
+    return data_num_bed_hospit;
   }
   else{
     return [];
@@ -796,6 +813,22 @@ function draw() {
           pointHitRadius: 5,
           pointBorderWidth: 4,
           data: fatalities_seir_draw(),
+        },
+        // Recovered
+        {
+          label: "Bed available",
+          lineTension: 0.6,
+          backgroundColor: "rgba(0, 0, 0, 0)",
+          borderColor: "rgba(0, 0, 0, 0)",
+          pointRadius: 1,
+          pointBackgroundColor: "rgba(37, 56, 60, 0.1)",
+          pointBorderColor: "rgba(37, 56, 60, 0.1)",
+          pointHoverRadius: 3,
+          pointHoverBackgroundColor: "rgba(37, 56, 60, 0.1)",
+          pointHoverBorderColor: "rgba(37, 56, 60, 0.1)",
+          pointHitRadius: 5,
+          pointBorderWidth: 1,
+          data: cum_bed_draw(),
         }
 
 
