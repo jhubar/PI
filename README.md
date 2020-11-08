@@ -14,9 +14,9 @@
 
 ## Rapport
 
-- [First review: ](https://www.overleaf.com/1492324357bbbzgzpcwmmv)
-- [Second review: ](https://www.overleaf.com/7656166485styjvppjchjq)
-- [Second review (presentation): ](https://www.overleaf.com/9598484631drmnqkcdtptm)
+- [First review](https://www.overleaf.com/1492324357bbbzgzpcwmmv)
+- [Second review](https://www.overleaf.com/7656166485styjvppjchjq)
+- [Second review (presentation)](https://www.overleaf.com/9598484631drmnqkcdtptm)
 
 ## Point a discuter
 1. Choissir une template qui devra être conservée durant le projet
