@@ -316,18 +316,19 @@ function load_card_value_seir(){
 
   if($id_switch_num_bed_hos.checked == true && $id_switch_num_bed_icu.checked == true){
     $("#num_Of_newFat").html((parseFloat(data_seir_f_tot[data_seir_f_tot.length-1]).toFixed(0)).toString());
-    $("#num_Of_hospitalized_seir").html("4586")
-    $("#num_Of_criticals_seir").html("174")
+    $("#num_Of_hospitalized_seir").html((parseFloat(data_seir_h_bis[data_seir_h_bis.length-1]).toFixed(2)).toString())
+    $("#num_Of_criticals_seir").html((parseFloat(data_seir_c_bis[data_seir_c_bis.length-1]).toFixed(2)).toString())
   }
   else if($id_switch_num_bed_hos.checked == false && $id_switch_num_bed_icu.checked == true){
     $("#num_Of_newFat").html((parseFloat(data_seir_fc_bis[data_seir_fc_bis.length-1]).toFixed(0)).toString());
     $("#num_Of_hospitalized_seir").html((parseFloat(data_seir_h[data_seir_h.length-1]).toFixed(2)).toString())
-    $("#num_Of_criticals_seir").html("174")
+    $("#num_Of_criticals_seir").html((parseFloat(data_seir_c_bis[data_seir_c_bis.length-1]).toFixed(2)).toString())
   }
   else if($id_switch_num_bed_hos.checked == true && $id_switch_num_bed_icu.checked == false){
     $("#num_Of_newFat").html((parseFloat(data_seir_f_bis[data_seir_f_bis.length-1]).toFixed(0)).toString());
     $("#num_Of_criticals_seir").html((parseFloat(data_seir_c[data_seir_c.length-1]).toFixed(2)).toString())
-    $("#num_Of_hospitalized_seir").html("4586")
+    $("#num_Of_hospitalized_seir").html((parseFloat(data_seir_h_bis[data_seir_h_bis.length-1]).toFixed(2)).toString())
+
   }else{
     $("#num_Of_newFat").html("Nan");
     $("#num_Of_hospitalized_seir").html((parseFloat(data_seir_h[data_seir_h.length-1]).toFixed(2)).toString())
