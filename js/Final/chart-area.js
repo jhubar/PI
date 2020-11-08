@@ -58,9 +58,11 @@ $id_switch_Susceptible.addEventListener('change',function(){
 });
 $id_switch_num_bed_hos.addEventListener('change',function(){
     draw();
+    load_card_value_seir()
 });
 $id_switch_num_bed_icu.addEventListener('change',function(){
     draw();
+    load_card_value_seir()
 });
 
 
@@ -312,6 +314,20 @@ function load_card_value_seir(){
   $("#num_Of_fatalities_seir").html((parseFloat(data_seir_f[data_seir_f.length-1]).toFixed(2)).toString())
   $("#num_Of_day_seir").html(((parseFloat(data_day_seir[data_day_seir.length-1])+1).toFixed(0)).toString())
 
+  if($id_switch_num_bed_hos.checked == true && $id_switch_num_bed_icu.checked == true){
+    $("#num_Of_newFat").html((parseFloat(data_seir_f_tot[data_seir_f_tot.length-1]).toFixed(0)).toString());
+  }
+  else if($id_switch_num_bed_hos.checked == false && $id_switch_num_bed_icu.checked == true){
+    $("#num_Of_newFat").html((parseFloat(data_seir_fc_bis[data_seir_fc_bis.length-1]).toFixed(0)).toString());
+  }
+  else if($id_switch_num_bed_hos.checked == true && $id_switch_num_bed_icu.checked == false){
+    $("#num_Of_newFat").html((parseFloat(data_seir_f_tot[data_seir_f_bis.length-1]).toFixed(0)).toString());
+  }else{
+    $("#num_Of_newFat").html("Nan");
+  }
+
+
+
 
 }
 
@@ -508,6 +524,7 @@ function load_card_value(){
   $("#num_cumulative_hospitalizations").html((parseFloat(data_num_cumulative_hospitalizations[data_num_cumulative_hospitalizations.length-1]).toFixed(0)).toString());
   $("#num_critical").html((parseFloat(data_num_critical[data_num_critical.length-1]).toFixed(0)).toString());
   $("#num_fatalities").html((parseFloat(data_num_fatalities[data_num_fatalities.length-1]).toFixed(0)).toString());
+
 
 
 
@@ -950,7 +967,7 @@ function draw() {
         },
         // Fatalities
         {
-          label: "Fatalities",
+          label: "new Fatalities",
           lineTension: 0.6,
           backgroundColor: "rgba(255, 193, 7,0.1)",
           borderColor: "rgba(237, 0, 59, 1)",
@@ -1048,7 +1065,7 @@ function draw() {
           data: fatalities_draw(),
         },
         {
-          label: "Fatalies ",
+          label: "new Fatalies ",
           lineTension: 0.6,
           backgroundColor: "rgba(0, 0, 0,0)",
           borderColor: "rgba(0, 0, 0,0)",
