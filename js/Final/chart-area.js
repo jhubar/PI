@@ -29,6 +29,7 @@ const $id_switch_seir_criticals = document.getElementById('customSwitchesSeirCri
 const $id_switch_seir_fatalities = document.getElementById('customSwitchesSeirFatalities');
 
 const $id_switch_num_bed_hos = document.getElementById('customSwitches_num_bed_hos');
+const $id_switch_num_bed_icu = document.getElementById('customSwitches_num_bed_icu');
 
 $id_switch_positive.addEventListener('change',function(){
     draw_current_data();
@@ -58,6 +59,10 @@ $id_switch_Susceptible.addEventListener('change',function(){
 $id_switch_num_bed_hos.addEventListener('change',function(){
     draw();
 });
+$id_switch_num_bed_icu.addEventListener('change',function(){
+    draw();
+});
+
 
 $id_switch_Exosed.addEventListener('change',function(){
     draw();
@@ -112,15 +117,25 @@ function loadData(){
       data_seir_r = [];
       data_seir_h = [];
       data_seir_h_bis = [];
+
       data_seir_c = [];
+      data_seir_c_bis = [];
+
       data_seir_f = [];
       data_seir_f_bis = [];
+      data_seir_fc_bis = [];
+      data_seir_f_tot = [];
+
       data_num_bed_hospit = [];
+      data_num_bed_icu = [];
+
       tmp_data_seir_f_bis = [];
+      tmp_data_seir_fc_bis = [];
 
 
       for(var i=0;i<$value_time_SEIR.val();i++){
         data_num_bed_hospit.push("4586")
+        data_num_bed_icu.push("174")
         data_day_seir.push(result.predict[i].predict_day);
         data_seir_s.push(result.predict[i].predict_S);
         data_seir_e.push(result.predict[i].predict_E);
@@ -153,6 +168,22 @@ function loadData(){
             data_seir_h_bis.push(result.predict[i].predict_H);
             tmp_data_seir_f_bis.push(0);
         }
+
+        if(parseFloat(result.predict[i].predict_day) >= 71.0){
+
+            if(parseFloat(result.predict[i].predict_C) >= 174){
+            data_seir_c_bis.push("174");
+            tmp_data_seir_fc_bis.push(parseFloat(result.predict[i].predict_C)-174.0);
+          }
+          else{
+            data_seir_c_bis.push(result.predict[i].predict_C);
+            tmp_data_seir_fc_bis.push(0);
+          }
+
+        }else{
+            data_seir_c_bis.push(result.predict[i].predict_C);
+            tmp_data_seir_fc_bis.push(0);
+        }
       }
 
 
@@ -160,10 +191,15 @@ function loadData(){
       var tmp_data_seir_f_bis = [];
       myarray.reduce(function(a,b,i) { return tmp_data_seir_f_bis[i] = a+b; },0);
 
+      var myarray2 = tmp_data_seir_fc_bis;
+      var tmp_data_seir_fc_bis = [];
+      myarray2.reduce(function(a,b,i) { return tmp_data_seir_fc_bis[i] = a+b; },0);
+
 
       for(var i=0;i<$value_time_SEIR.val();i++){
-        
+        data_seir_f_tot.push((tmp_data_seir_f_bis[i]+parseFloat(data_seir_f[i])+tmp_data_seir_fc_bis[i]+parseFloat(data_seir_f[i])).toString())
         data_seir_f_bis.push((tmp_data_seir_f_bis[i]+parseFloat(data_seir_f[i])).toString())
+        data_seir_fc_bis.push((tmp_data_seir_fc_bis[i]+parseFloat(data_seir_f[i])).toString())
       }
 
 
@@ -398,7 +434,12 @@ function hospitalized_seir_draw(){
 }
 function criticals_seir_draw(){
   if($id_switch_seir_criticals.checked == true){
-    return data_seir_c;
+    if($id_switch_num_bed_icu.checked == false){
+      return data_seir_c;
+    }
+    else{
+      return data_seir_c_bis;
+    }
   }
   else{
     return [];
@@ -422,8 +463,30 @@ function cum_bed_draw(){
   }
 }
 function cum_bed2_draw(){
-  if($id_switch_num_bed_hos.checked == true){
+  if($id_switch_num_bed_hos.checked == true && $id_switch_num_bed_icu.checked == false){
     return data_seir_f_bis;
+  }
+  else if($id_switch_num_bed_icu.checked == true && $id_switch_num_bed_hos.checked == true){
+    return data_seir_f_tot;
+  }
+  else{
+    return [];
+  }
+}
+function cum_icu_draw(){
+  if($id_switch_num_bed_icu.checked == true){
+    return data_num_bed_icu;
+  }
+  else{
+    return [];
+  }
+}
+function cum_icu2_draw(){
+  if($id_switch_num_bed_icu.checked == true && $id_switch_num_bed_hos.checked == false){
+    return data_seir_fc_bis;
+  }
+  else if($id_switch_num_bed_icu.checked == true && $id_switch_num_bed_hos.checked == true){
+    return data_seir_f_tot;
   }
   else{
     return [];
@@ -917,6 +980,22 @@ function draw() {
           pointBorderWidth: 2,
           data: cum_bed_draw(),
         },
+        // Recovered
+        {
+          label: "Bed available in ICU",
+          lineTension: 0.6,
+          backgroundColor: "rgba(0, 0, 0, 0)",
+          borderColor: "rgba(0, 0, 0, 0)",
+          pointRadius: 2,
+          pointBackgroundColor: "rgba(37, 56, 60, 0.1)",
+          pointBorderColor: "rgba(37, 56, 60, 0.1)",
+          pointHoverRadius: 3,
+          pointHoverBackgroundColor: "rgba(37, 56, 60, 0.1)",
+          pointHoverBorderColor: "rgba(37, 56, 60, 0.1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 2,
+          data: cum_icu_draw(),
+        },
 
         // Hospitalised
         {
@@ -967,6 +1046,21 @@ function draw() {
           pointHitRadius: 10,
           pointBorderWidth: 4,
           data: fatalities_draw(),
+        },
+        {
+          label: "Fatalies ",
+          lineTension: 0.6,
+          backgroundColor: "rgba(0, 0, 0,0)",
+          borderColor: "rgba(0, 0, 0,0)",
+          pointRadius: 1,
+          pointBackgroundColor: "rgba(237, 0, 59, 1)",
+          pointBorderColor: "rgba(237, 0, 59, 1)",
+          pointHoverRadius: 1,
+          pointHoverBackgroundColor: "rgba(237, 0, 59, 1)",
+          pointHoverBorderColor: "rgba(237, 0, 59, 1)",
+          pointHitRadius: 5,
+          pointBorderWidth: 4,
+          data: cum_icu2_draw(),
         }
 
 
