@@ -80,23 +80,6 @@ class SEIR():
 
         return dS, dE, dI, dH, dR, dN, dC, dD
 
-    def differential2(self, state, time, beta, sigma, gamma, hp, hcr, pc, pd, pcr):
-        """
-        Differential equations of the model
-        """
-        S, E, I, H, R, N, C, D = state
-
-        dS = -(beta * S * I) / N
-        dE = (beta * S * I) / N - E * sigma
-        dI = (E * sigma) - (gamma * I) - (hp * I)
-        dH =  - (hcr * H) - (pc * H)
-        dC = (pc * H) - (pd * C) - (pcr * C)
-        dR = (gamma * I) + (hcr * H)
-        dD = (pd * C) + (hp * I)
-        dN = 0
-
-        return dS, dE, dI, dH, dR, dN, dC, dD
-
     def predict(self, duration):
         """
         Predict epidemic curves from t_0 for the given duration
@@ -213,9 +196,9 @@ class SEIR():
         # Time vector:
         time = self.dataset[:, 0]
         # Bounds: hcr/pc ratio, pcr
-        bounds = [(1/2, 1), (0.01, 1/4)]
+        bounds = [(0, 1), (0, 1)]
         # Start values
-        start_values = [0.6, 0.1]
+        start_values = [0.7, 0.1]
         # Use Scipy.optimize.minimize with L-BFGS_B method
         res = minimize(self.SSE, np.asarray(start_values), args=(initial_state, time, 'part_four'),
                        method='L-BFGS-B', bounds=bounds)
@@ -224,6 +207,20 @@ class SEIR():
         self.hcr = res.x[0] * initial_hcr
         self.pc = (1 - res.x[0]) * initial_hcr
         self.pcr = res.x[1]
+
+        # Compare data with critical
+        predictions = self.predict(self.dataset.shape[0])
+        # Store C
+        critical = predictions[:, 7]
+
+        plt.scatter(predictions[:, 0], self.dataset[:, 5], c='blue', label='Original data')
+        plt.plot(predictions[:, 0], critical, c='red', label='Predictions')
+        plt.title('Comparison ICU data and critical predictions')
+        plt.legend()
+        plt.xlabel('Time in days')
+        plt.ylabel('Number of peoples')
+        plt.savefig('fig/critical_com.png', transparent=True)
+        plt.close()
 
         # =========================================================================== #
         # PART 5: We can now slide the actual value of pcr to spare the probability
@@ -234,17 +231,15 @@ class SEIR():
         # Compare data with critical
         predictions = self.predict(self.dataset.shape[0])
         # Store C
-        critical = predictions[:, 7]
+        fatalities = predictions[:, 8]
 
-
-
-        plt.scatter(predictions[:, 0], self.dataset[:, 5], c='blue', label='Original data')
-        plt.plot(predictions[:, 0], critical, c='red', label='Predictions')
-        plt.title('Comparison ICU data and critical predictions')
+        plt.scatter(predictions[:, 0], self.dataset[:, 6], c='blue', label='Original data')
+        plt.plot(predictions[:, 0], fatalities, c='red', label='Predictions')
+        plt.title('Comparison fatalities cumulative data and D curve')
         plt.legend()
         plt.xlabel('Time in days')
         plt.ylabel('Number of peoples')
-        plt.savefig('fig/critical_com.png', transparent=True)
+        plt.savefig('fig/fatal_com.png', transparent=True)
         plt.close()
 
     def gamma_hp_slide(self):
@@ -291,8 +286,6 @@ class SEIR():
         plt.savefig("fig/gamma_hp_slide.png", transparent=True)
         # plt.show()
         plt.close()
-
-
 
     def pcr_pd_slide(self):
         """
@@ -419,7 +412,6 @@ class SEIR():
                              y0=initial_state,
                              t=time,
                              args=params)
-
             sse = 0.0
             for i in range(0, len(time)):
                 sse += (self.dataset[i][7] - predict[i][2] - predict[i][3] - predict[i][4]) ** 2
@@ -433,17 +425,10 @@ class SEIR():
                              y0=initial_state,
                              t=time,
                              args=params)
-            # Make predictions2:
-            predict_2 = odeint(func=self.differential2,
-                             y0=initial_state,
-                             t=time,
-                             args=params)
             sse = 0.0
-            sse_2 = 0.0
             for i in range(0, len(time)):
                 sse += (self.dataset[i][4] - predict[i][3]) ** 2
-                sse_2 += (self.dataset[i][4] - predict_2[i][3]) ** 2
-            return sse, sse_2
+            return sse
 
         if method == 'third_part':
 
@@ -491,8 +476,8 @@ class SEIR():
                 sse += (self.dataset[i][6] - predict[i][7]) ** 2
             return sse
 
-    def dataframe_smoothing(self, df):
-
+    def dataframe_smoothing1(self, df):
+        # Convolution
         # Convert the dataframe to a numpy array:
         np_df = df.to_numpy()
         # Smoothing period = 7 days
@@ -515,8 +500,50 @@ class SEIR():
 
         return new_df
 
-    def dataframe_smoothing2(self, df):
+    def dataframe_smoothing(self, df):
+        # From andreas NRMAS
+        # Convert the dataframe to a numpy array:
+        np_df = df.to_numpy()
+        # Smoothing period = 7 days
+        smt_prd = 7
+        smt_vec = np.ones(smt_prd)
+        smt_vec /= smt_prd
+        # Sore smoothed data in a new matrix:
+        smoothed = np.copy(np_df)
+        # How many smothing period can we place in the dataset:
+        nb_per = math.floor(np_df.shape[0] / smt_prd)
+        # Perform smoothing for each attributes
+        for i in range(1, np_df.shape[1]):
+            smoothed[:, i] = own_NRMAS(np_df[:, i], 7)
 
+        # Write new values in a dataframe
+        new_df = pd.DataFrame(smoothed, columns=df.columns)
+
+        return new_df
+
+    def dataframe_smoothing3(self, df):
+        # From andreas Own MAS
+        # Convert the dataframe to a numpy array:
+        np_df = df.to_numpy()
+        # Smoothing period = 7 days
+        smt_prd = 7
+        smt_vec = np.ones(smt_prd)
+        smt_vec /= smt_prd
+        # Sore smoothed data in a new matrix:
+        smoothed = np.copy(np_df)
+        # How many smothing period can we place in the dataset:
+        nb_per = math.floor(np_df.shape[0] / smt_prd)
+        # Perform smoothing for each attributes
+        for i in range(1, np_df.shape[1]):
+            smoothed[:, i] = own_MAS(np_df[:, i], 7)
+
+        # Write new values in a dataframe
+        new_df = pd.DataFrame(smoothed, columns=df.columns)
+
+        return new_df
+
+    def dataframe_smoothing2(self, df):
+        # Salvago
         # Convert the dataframe to a numpy array:
         np_df = df.to_numpy()
         # Smoothing period = 7 days
@@ -693,6 +720,69 @@ class SEIR():
             plt.plot(self.dataframe['Day'], hospit, c='red')
             plt.show()
 
+
+def own_NRMAS_index(vector, window, index):
+    smoothed_value = 0
+    nb_considered_values = 0
+    max_size = (window - 1) / 2
+    smoothing_window = np.arange(-max_size, max_size + 1, 1)
+
+    for j in range(window):
+
+        sliding_index = int(index + smoothing_window[j])
+
+        if (sliding_index >= 0) and (sliding_index <= len(vector) - 1):
+            smoothed_value += vector[sliding_index]
+            nb_considered_values += 1
+
+    return smoothed_value / nb_considered_values
+
+
+def own_NRMAS(vector, window):
+    smoothed_vector = np.zeros(len(vector))
+
+    if (window % 2) == 0:
+        print("Error window size even")
+        return
+
+    for i in range(len(vector)):
+        smoothed_vector[i] = own_NRMAS_index(vector, window, i)
+
+    return smoothed_vector
+
+
+def own_MAS_index(vector, window, index):
+    smoothed_value = 0
+    max_size = (window - 1) / 2
+
+    # cas de base
+    if (window == 1):
+        smoothed_value = vector[index]
+
+    # case not boundaries
+    elif ((index - max_size) >= 0) and ((index + max_size) <= len(vector) - 1):
+        smoothing_window = np.arange(-max_size, max_size + 1, 1)
+        for j in range(window):
+            smoothed_value += vector[int(index + smoothing_window[j])] / window
+
+    # recusivité
+    else:
+        return own_MAS_index(vector, window - 2, index)
+
+    return smoothed_value
+
+
+def own_MAS(vector, window):
+    smoothed_vector = np.zeros(len(vector))
+
+    if (window % 2) == 0:
+        print("Error window size even")
+        return
+
+    for i in range(len(vector)):
+        smoothed_vector[i] = own_MAS_index(vector, window, i)
+
+    return smoothed_vector
 
 def first_method():
     # Initialize the model
