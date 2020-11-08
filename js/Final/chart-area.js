@@ -155,7 +155,7 @@ function loadData(){
           data_num_fatalities.push(result[i].num_fatalities);
         }
 
-        if(parseFloat(result.predict[i].predict_day) >= 100.0){
+        if(parseFloat(result.predict[i].predict_day) >= 103.0){
 
             if(parseFloat(result.predict[i].predict_H) >= 4586.0){
             data_seir_h_bis.push("4586");
@@ -171,7 +171,7 @@ function loadData(){
             tmp_data_seir_f_bis.push(0);
         }
 
-        if(parseFloat(result.predict[i].predict_day) >= 71.0){
+        if(parseFloat(result.predict[i].predict_day) >= 78.0){
 
             if(parseFloat(result.predict[i].predict_C) >= 174){
             data_seir_c_bis.push("174");
@@ -995,7 +995,7 @@ function draw() {
           pointHoverBorderColor: "rgba(237, 0, 59, 1)",
           pointHitRadius: 5,
           pointBorderWidth: 4,
-          data: cum_bed2_draw(),
+          data:cum_bed2_draw(),
         },
         // Recovered
         {
