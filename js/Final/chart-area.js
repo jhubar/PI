@@ -488,12 +488,16 @@ function cum_bed_draw(){
   }
 }
 function cum_bed2_draw(){
-  if($id_switch_num_bed_hos.checked == true && $id_switch_num_bed_icu.checked == false){
+  if($id_switch_seir_fatalities.checked == false){
+    return [];
+  }
+  else if($id_switch_num_bed_hos.checked == true && $id_switch_num_bed_icu.checked == false){
     return data_seir_f_bis;
   }
   else if($id_switch_num_bed_icu.checked == true && $id_switch_num_bed_hos.checked == true){
     return data_seir_f_tot;
   }
+
   else{
     return [];
   }
@@ -507,7 +511,10 @@ function cum_icu_draw(){
   }
 }
 function cum_icu2_draw(){
-  if($id_switch_num_bed_icu.checked == true && $id_switch_num_bed_hos.checked == false){
+  if($id_switch_seir_fatalities.checked == false){
+    return [];
+  }
+  else if($id_switch_num_bed_icu.checked == true && $id_switch_num_bed_hos.checked == false){
     return data_seir_fc_bis;
   }
   else if($id_switch_num_bed_icu.checked == true && $id_switch_num_bed_hos.checked == true){
