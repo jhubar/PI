@@ -80,6 +80,23 @@ class SEIR():
 
         return dS, dE, dI, dH, dR, dN, dC, dD
 
+    def differential2(self, state, time, beta, sigma, gamma, hp, hcr, pc, pd, pcr):
+        """
+        Differential equations of the model
+        """
+        S, E, I, H, R, N, C, D = state
+
+        dS = -(beta * S * I) / N
+        dE = (beta * S * I) / N - E * sigma
+        dI = (E * sigma) - (gamma * I) - (hp * I)
+        dH =  - (hcr * H) - (pc * H)
+        dC = (pc * H) - (pd * C) - (pcr * C)
+        dR = (gamma * I) + (hcr * H)
+        dD = (pd * C) + (hp * I)
+        dN = 0
+
+        return dS, dE, dI, dH, dR, dN, dC, dD
+
     def predict(self, duration):
         """
         Predict epidemic curves from t_0 for the given duration
@@ -219,6 +236,8 @@ class SEIR():
         # Store C
         critical = predictions[:, 7]
 
+
+
         plt.scatter(predictions[:, 0], self.dataset[:, 5], c='blue', label='Original data')
         plt.plot(predictions[:, 0], critical, c='red', label='Predictions')
         plt.title('Comparison ICU data and critical predictions')
@@ -272,6 +291,8 @@ class SEIR():
         plt.savefig("fig/gamma_hp_slide.png", transparent=True)
         # plt.show()
         plt.close()
+
+
 
     def pcr_pd_slide(self):
         """
@@ -398,6 +419,7 @@ class SEIR():
                              y0=initial_state,
                              t=time,
                              args=params)
+
             sse = 0.0
             for i in range(0, len(time)):
                 sse += (self.dataset[i][7] - predict[i][2] - predict[i][3] - predict[i][4]) ** 2
@@ -411,10 +433,17 @@ class SEIR():
                              y0=initial_state,
                              t=time,
                              args=params)
+            # Make predictions2:
+            predict_2 = odeint(func=self.differential2,
+                             y0=initial_state,
+                             t=time,
+                             args=params)
             sse = 0.0
+            sse_2 = 0.0
             for i in range(0, len(time)):
                 sse += (self.dataset[i][4] - predict[i][3]) ** 2
-            return sse
+                sse_2 += (self.dataset[i][4] - predict_2[i][3]) ** 2
+            return sse, sse_2
 
         if method == 'third_part':
 

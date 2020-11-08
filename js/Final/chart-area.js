@@ -111,33 +111,40 @@ function loadData(){
       data_seir_i = [];
       data_seir_r = [];
       data_seir_h = [];
+      data_seir_h_bis = [];
       data_seir_c = [];
       data_seir_f = [];
+      data_seir_f_bis = [];
       data_num_bed_hospit = [];
 
 
       for(var i=0;i<$value_time_SEIR.val();i++){
-
+        data_num_bed_hospit.push("4586")
         data_day_seir.push(result.predict[i].predict_day);
         data_seir_s.push(result.predict[i].predict_S);
         data_seir_e.push(result.predict[i].predict_E);
         data_seir_i.push(result.predict[i].predict_I);
         data_seir_r.push(result.predict[i].predict_R);
-        data_seir_h.push(result.predict[i].predict_H);
+
         data_seir_c.push(result.predict[i].predict_C);
         data_seir_f.push(result.predict[i].predict_F);
-        data_num_bed_hospit.push("4586")
+
 
         if ($value_time_SEIR.val() < result.length-1 ){
 
-
-
           data_num_hospitalised.push(result[i].num_hospitalised);
-
           data_num_critical.push(result[i].num_critical)
           data_num_fatalities.push(result[i].num_fatalities);
         }
 
+        if(parseFloat(result.predict[i].predict_H) >= 4586){
+            
+            data_seir_h_bis.push("4586");
+            data_seir_f_bis.push((parseFloat(result.predict[i].predict_F)+parseFloat(result.predict[i].predict_H)-4586).toString());
+        }else{
+            data_seir_h_bis.push(result.predict[i].predict_H);
+            data_seir_f_bis.push(result.predict[i].predict_F);
+        }
       }
 
 
@@ -813,6 +820,22 @@ function draw() {
           pointBorderWidth: 4,
           data: hospitalized_seir_draw(),
         },
+        // Hospitalized
+        {
+          label: "hospitalized ",
+          lineTension: 0.6,
+          backgroundColor: "rgba(34,139,34, 0.2)",
+          borderColor: "rgba(34,139,34, 0.1)",
+          pointRadius: 1,
+          pointBackgroundColor: "rgba(34,139,34, 0.1)",
+          pointBorderColor: "rgba(34,139,34, 0.1)",
+          pointHoverRadius: 1,
+          pointHoverBackgroundColor: "rgba(34,139,34, 0.1)",
+          pointHoverBorderColor: "rgba(34,139,34, 0.1)",
+          pointHitRadius: 5,
+          pointBorderWidth: 4,
+          data: data_seir_h_bis,
+        },
         // Criticals
         {
           label: "Criticals ",
@@ -844,6 +867,22 @@ function draw() {
           pointHitRadius: 5,
           pointBorderWidth: 4,
           data: fatalities_seir_draw(),
+        },
+        // Fatalities
+        {
+          label: "Fatalities",
+          lineTension: 0.6,
+          backgroundColor: "rgba(255, 193, 7,0.1)",
+          borderColor: "rgba(237, 0, 59, 1)",
+          pointRadius: 1,
+          pointBackgroundColor: "rgba(237, 0, 59, 1)",
+          pointBorderColor: "rgba(237, 0, 59, 1)",
+          pointHoverRadius: 1,
+          pointHoverBackgroundColor: "rgba(237, 0, 59, 1)",
+          pointHoverBorderColor: "rgba(237, 0, 59, 1)",
+          pointHitRadius: 5,
+          pointBorderWidth: 4,
+          data: data_seir_f_bis,
         },
         // Recovered
         {
