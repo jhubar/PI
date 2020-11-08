@@ -321,7 +321,7 @@ function load_card_value_seir(){
     $("#num_Of_newFat").html((parseFloat(data_seir_fc_bis[data_seir_fc_bis.length-1]).toFixed(0)).toString());
   }
   else if($id_switch_num_bed_hos.checked == true && $id_switch_num_bed_icu.checked == false){
-    $("#num_Of_newFat").html((parseFloat(data_seir_f_tot[data_seir_f_bis.length-1]).toFixed(0)).toString());
+    $("#num_Of_newFat").html((parseFloat(data_seir_f_bis[data_seir_f_bis.length-1]).toFixed(0)).toString());
   }else{
     $("#num_Of_newFat").html("Nan");
   }
