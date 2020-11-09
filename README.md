@@ -17,6 +17,7 @@
 - [First review](https://www.overleaf.com/1492324357bbbzgzpcwmmv)
 - [Second review](https://www.overleaf.com/7656166485styjvppjchjq)
 - [Second review (presentation)](https://www.overleaf.com/9598484631drmnqkcdtptm)
+- [Second review (slides)](https://docs.google.com/presentation/d/1vitNpYH1wZCm37x9IQqmCacr1mpFP3Ws-LN2bmsNQIU/edit?fbclid=IwAR3Tllvh4Qn8Ztu2WHrLuC2n1oe0clxKboAQxggL7CARIG3NJ3muyu7OsY0#slide=id.ga8ac653453_3_13)
 
 ## Point a discuter
 1. Choissir une template qui devra être conservée durant le projet
