@@ -7,11 +7,6 @@
 
 - [Cov-invaders link](https://julien1941.github.io/PI/)
 
-## To do
-
-- Submit review 1 (15/10)
-- Mail (nom groupe + membres)
-
 ## Rapport
 
 - [First review](https://www.overleaf.com/1492324357bbbzgzpcwmmv)
@@ -20,11 +15,7 @@
 - [Second review (slides)](https://docs.google.com/presentation/d/1vitNpYH1wZCm37x9IQqmCacr1mpFP3Ws-LN2bmsNQIU/edit?fbclid=IwAR3Tllvh4Qn8Ztu2WHrLuC2n1oe0clxKboAQxggL7CARIG3NJ3muyu7OsY0#slide=id.ga8ac653453_3_13)
 
 ## Point a discuter
-1. Choissir une template qui devra être conservée durant le projet
-1. Combien de temps les gens reste malade ?
-1. Probleme des symptomatiques et asymptomatiques
-1. Déterminer le temps qu'ils sont contagieux en fonction de leur catégorie.
-1. Prendre en compte les weekend
+1. Caractériser le bruit de la courbe num_positive (sensitivity test, percentage of infected tested) 
 
 ## Questions
 1. We use implicit method so the system is stable.
