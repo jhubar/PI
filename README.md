@@ -16,6 +16,7 @@
 
 ## Point a discuter
 1. Caractériser le bruit de la courbe num_positive (sensitivity test, percentage of infected tested) 
+1. Changer la fonction coût à minimiser (les moindres carrés ne fonctionneront plus)
 
 ## Questions
 1. We use implicit method so the system is stable.
