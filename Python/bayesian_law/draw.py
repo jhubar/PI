@@ -58,19 +58,18 @@ class bayesian_uncertainty():
         day = np_df[:,0]
         num_positive_lower = np.array(np_df[:,1]+np_df[:,1]*((1-sensitivity_lower_bound)/sensitivity_lower_bound))
         num_positive_upper = np.array(np_df[:,1]+np_df[:,1]*((1-sensitivity_lower_bound)/sensitivity_lower_bound))
-
         num_tested = np_df[:,2]
-        num_hospitalised_lower = np.array(np_df[:,3]+np_df[:,3]*((1-sensitivity_lower_bound)/sensitivity_lower_bound))
-        num_hospitalised_upper = np.array(np_df[:,3]+np_df[:,3]*((1-sensitivity_lower_bound)/sensitivity_lower_bound))
-
+        num_hospitalised =  np_df[:,3]
         num_cumulative_hospitalizations = np_df[:,4]
-        num_critical_lower = np.array(np_df[:,5]+np_df[:,5]*((1-sensitivity_lower_bound)/sensitivity_lower_bound))
-        num_critical_upper = np.array(np_df[:,5]+np_df[:,5]*((1-sensitivity_lower_bound)/sensitivity_lower_bound))
+        num_critical = np_df[:,5]
+        num_fatalities = np_df[:,6]
+        num_sym_lower = np_df[:,2]
+        num_sym_upper = np_df[:,2]*2
 
-        num_fatalities_lower = np.array(np_df[:,6]+np_df[:,6]*((1-sensitivity_lower_bound)/sensitivity_lower_bound))
-        num_fatalities_upper = np.array(np_df[:,6]+np_df[:,6]*((1-sensitivity_lower_bound)/sensitivity_lower_bound))
 
-        new_df = np.vstack((day,num_positive_lower,num_positive_upper,num_tested,num_hospitalised_upper,num_hospitalised_lower,num_cumulative_hospitalizations,num_critical_lower,num_critical_upper,num_fatalities_lower,num_fatalities_upper))
+        new_df = np.vstack((day,num_positive_lower,num_positive_upper,num_tested
+            ,num_hospitalised,num_cumulative_hospitalizations,num_critical,num_fatalities
+            ,num_sym_lower,num_sym_upper))
 
         return new_df
 
@@ -96,6 +95,7 @@ def first_method():
 
     # Import the dataset:
     data_with_uncertainty.import_dataset(target='covid_20')
+    
 
 
 if __name__ == "__main__":
