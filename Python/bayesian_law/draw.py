@@ -90,7 +90,15 @@ class bayesian_uncertainty():
 
             self.dataframe = self.dataframe_uncertainty(self.raw_dataset)
 
-            print(self.dataframe)
+            self.dataframe = pd.DataFrame(self.dataframe.T, columns=['day', 'num_positive_lower', 'num_positive_upper',
+                                                                   'num_tested', 'num_hospitalized',
+                                                                   'num_cumulative_hospitalizations', 'num_critical',
+                                                                   'num_fatalities', 'num_sym_lower', 'num_sym_upper'])
+
+            plt.plot(self.dataframe)
+            plt.show()
+
+
 
 def first_method():
     # Initialize the model
