@@ -28,6 +28,7 @@ class bayesian_uncertainty():
         self.pc = 0  # Probability to fall in ICU each day from H
         self.pd = 0  # Probability to die each day in icu
         self.pcr = 0  # Probability to recover from critical
+        self.ran = random.uniform(0.5, 1)
 
         # Data to fit
         self.raw_dataset = None  # Original dataset, before preprocessing
@@ -64,7 +65,8 @@ class bayesian_uncertainty():
         num_critical = np_df[:,5]
         num_fatalities = np_df[:,6]
         num_sym_lower = np_df[:,2]
-        num_sym_upper = np_df[:,2]*2
+
+        num_sym_upper = np_df[:,2]+(np_df[:,2]*self.ran)
 
 
         new_df = np.vstack((day,num_positive_lower,num_positive_upper,num_tested
@@ -96,7 +98,13 @@ class bayesian_uncertainty():
                                                                    'num_fatalities', 'num_sym_lower', 'num_sym_upper'])
 
             plt.plot(self.dataframe)
-            plt.show()
+            pr_mean = self.dataframe['num_sym_lower']
+            next_pr_mean = (2*pr_mean[len(pr_mean)-1]-pr_mean[len(pr_mean)-2])
+            next_nb_tested = next_pr_mean*self.ran
+            print(next_nb_tested)
+            plt.legend()
+            plt.savefig('p_Sym.png')
+
 
 
 
@@ -106,7 +114,7 @@ def first_method():
 
     # Import the dataset:
     data_with_uncertainty.import_dataset(target='covid_20')
-    print(data_with_uncertainty)
+
 
     # plt.show()
     plt.close()
