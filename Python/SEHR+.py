@@ -5,7 +5,8 @@ import matplotlib.pyplot as plt
 from scipy.integrate import odeint
 from scipy.optimize import minimize
 import math
-
+import uncertainpy as un
+import chaospy as cp
 from scipy.signal import savgol_filter
 
 """
@@ -44,8 +45,14 @@ class SEIR():
         self.D_0 = None  # Dead: people who die in ICU
         self.N = None  # The total size of the population
 
+        # Uncertainty infected
+        # self.infected_lower_bound = 0
+        # self.infected_upper_bound = 0
+        # self.cp.Uniform(self.infected_lower_bound,self.infected_upper_bound)
+
         # Data to store
         self.dataJSON = {}
+
 
     def saveJson(self):
         with open('Data/SEIR+.json', 'w') as outfile:

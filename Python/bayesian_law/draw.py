@@ -8,11 +8,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from scipy.integrate import odeint
 from scipy.optimize import minimize
+import uncertainpy as un
+import chaospy as cp                 # To create distributions
+from scipy.integrate import odeint   # To integrate our equation
+
 import math
-# import seaborn
-import seaborn as sns
-# settings for seaborn plotting style
-sns.set(color_codes=True)
 import random
 
 class bayesian_uncertainty():
