@@ -1,19 +1,18 @@
-import numpy as np
+
 import matplotlib.pyplot as plt
 import scipy.stats
 from scipy.stats import norm
-import json
+from scipy.integrate import odeint   # To integrate our equation
+from scipy.optimize import minimize
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-from scipy.integrate import odeint
-from scipy.optimize import minimize
 import uncertainpy as un
 import chaospy as cp                 # To create distributions
-from scipy.integrate import odeint   # To integrate our equation
-
+import json
 import math
 import random
+from smooth import own_NRMAS_index, own_NRMAS
+from plot import plot_current_data
 
 class bayesian_uncertainty():
 
@@ -28,7 +27,8 @@ class bayesian_uncertainty():
         self.pc = 0  # Probability to fall in ICU each day from H
         self.pd = 0  # Probability to die each day in icu
         self.pcr = 0  # Probability to recover from critical
-        self.ran = random.uniform(0.5, 1)
+        # self.ran = random.uniform(0.5, 1)
+        self.ran = np.random.normal(0.75, (0.25**(1/2)))
 
         # Data to fit
         self.raw_dataset = None  # Original dataset, before preprocessing
@@ -46,7 +46,10 @@ class bayesian_uncertainty():
         self.N = None  # The total size of the population
 
         # Data to store
+        self.window = 7
         self.dataJSON = {}
+
+
     def dataframe_uncertainty(self, df):
 
         # Convert the dataframe to a numpy array:
@@ -57,8 +60,12 @@ class bayesian_uncertainty():
         sensitivity_lower_bound = 0.85
 
         day = np_df[:,0]
+        num_positive =np_df[:,1]
         num_positive_lower = np.array(np_df[:,1]+np_df[:,1]*((1-sensitivity_lower_bound)/sensitivity_lower_bound))
-        num_positive_upper = np.array(np_df[:,1]+np_df[:,1]*((1-sensitivity_lower_bound)/sensitivity_lower_bound))
+        num_positive_lower = own_NRMAS(num_positive_lower,self.window)
+        num_positive_upper = np.array(np_df[:,1]+np_df[:,1]*((1-sensitivity_upper_bound)/sensitivity_upper_bound))
+        num_positive_upper = own_NRMAS(num_positive_upper,self.window)
+        num_positive_mean = (num_positive_lower+num_positive_upper)/2
         num_tested = np_df[:,2]
         num_hospitalised =  np_df[:,3]
         num_cumulative_hospitalizations = np_df[:,4]
@@ -69,14 +76,16 @@ class bayesian_uncertainty():
         num_sym_upper = np_df[:,2]+(np_df[:,2]*self.ran)
 
 
-        new_df = np.vstack((day,num_positive_lower,num_positive_upper,num_tested
+        new_df = np.vstack((day,num_positive,num_positive_lower,num_positive_upper,num_tested
             ,num_hospitalised,num_cumulative_hospitalizations,num_critical,num_fatalities
-            ,num_sym_lower,num_sym_upper))
+            ,num_sym_lower,num_sym_upper,num_positive_mean))
 
 
 
 
         return new_df
+
+
 
     def import_dataset(self, target='covid_20'):
 
@@ -92,18 +101,15 @@ class bayesian_uncertainty():
 
             self.dataframe = self.dataframe_uncertainty(self.raw_dataset)
 
-            self.dataframe = pd.DataFrame(self.dataframe.T, columns=['day', 'num_positive_lower', 'num_positive_upper',
+            self.dataframe = pd.DataFrame(self.dataframe.T, columns=['day','num_positive', 'num_positive_lower', 'num_positive_upper',
                                                                    'num_tested', 'num_hospitalized',
                                                                    'num_cumulative_hospitalizations', 'num_critical',
-                                                                   'num_fatalities', 'num_sym_lower', 'num_sym_upper'])
+                                                                   'num_fatalities', 'num_sym_lower', 'num_sym_upper','num_positive_mean'])
 
-            plt.plot(self.dataframe)
-            pr_mean = self.dataframe['num_sym_lower']
-            next_pr_mean = (2*pr_mean[len(pr_mean)-1]-pr_mean[len(pr_mean)-2])
-            next_nb_tested = next_pr_mean*self.ran
-            print(next_nb_tested)
-            plt.legend()
-            plt.savefig('p_Sym.png')
+
+            plot_current_data(self)
+
+
 
 
 
