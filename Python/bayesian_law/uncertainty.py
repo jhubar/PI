@@ -40,6 +40,7 @@ def add_uncertainty(self, df):
     num_sym_upper = np_df[:,2]+(np_df[:,2]*self.ran)
 
 
+
     new_df = np.vstack((day,num_positive,num_positive_lower,num_positive_upper,num_tested
         ,num_hospitalised,num_cumulative_hospitalizations,num_critical,num_fatalities
         ,num_sym_lower,num_sym_upper,num_positive_mean))
@@ -49,7 +50,7 @@ def add_uncertainty(self, df):
                                           ,'num_positive_lower'              #2
                                           ,'num_positive_upper'              #3
                                           ,'num_tested'                      #4
-                                          ,'num_hospitalized'                #5
+                                          ,'num_hospitalised'                #5
                                           ,'num_cumulative_hospitalizations' #6
                                           ,'num_critical'                    #7
                                           ,'num_fatalities'                  #8

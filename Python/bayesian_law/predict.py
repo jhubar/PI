@@ -1,6 +1,8 @@
-import numpy as np 
+import numpy as np
+from scipy.integrate import odeint   # To integrate our equation
 
-def predict(self, duration):
+
+def __predict__(self, duration):
     """
     Predict epidemic curves from t_0 for the given duration
     """
