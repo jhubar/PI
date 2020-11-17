@@ -450,6 +450,7 @@ class seir():
 
 
             #smooth
+            own_NRMAS(self.dataframe['num_tested'],7)
             own_NRMAS(self.dataframe['num_hospitalised'],7)
             own_NRMAS(self.dataframe['num_cumulative_hospitalizations'],7)
             own_NRMAS(self.dataframe['num_critical'],7)

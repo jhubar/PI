@@ -24,7 +24,7 @@ def add_uncertainty(self, df):
     sensitivity_lower_bound = 0.85
 
     day = np_df[:,0]
-    num_positive =np_df[:,1]
+    num_positive = np_df[:,1]
     num_positive_lower = np.array(np_df[:,1]+np_df[:,1]*((1-sensitivity_lower_bound)/sensitivity_lower_bound))
     num_positive_lower = own_NRMAS(num_positive_lower,self.window)
     num_positive_upper = np.array(np_df[:,1]+np_df[:,1]*((1-sensitivity_upper_bound)/sensitivity_upper_bound))
@@ -35,9 +35,10 @@ def add_uncertainty(self, df):
     num_cumulative_hospitalizations = np_df[:,4]
     num_critical = np_df[:,5]
     num_fatalities = np_df[:,6]
-    num_sym_lower = np_df[:,2]
 
-    num_sym_upper = np_df[:,2]+(np_df[:,2]*self.ran)
+    num_sym_lower = np_df[:,2] # nb of tested 
+    # num_sym_upper = np_df[:,2]+(np_df[:,2]*self.ran)
+    num_sym_upper = np_df[:,2]+np_df[:,2]
 
 
 
