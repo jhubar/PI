@@ -102,6 +102,9 @@ def plot_current_data(self):
     fig = plt.figure(figsize=(25,20))
 
     ax = plt.subplot()
+    ax.plot(self.dataframe['day'], self.dataframe['num_sym_lower'], label='lower')
+    ax.plot(self.dataframe['day'], self.dataframe['num_sym_upper'], label='lower')
+    ax.fill_between(self.dataframe['day'], self.dataframe['num_sym_lower'], self.dataframe['num_sym_upper'])
     ax.plot(self.dataframe['day'], self.dataframe['num_positive_lower'], label='lower')
     ax.plot(self.dataframe['day'], self.dataframe['num_positive_mean'], label='mean')
     ax.plot(self.dataframe['day'], self.dataframe['num_positive'], label='current data')

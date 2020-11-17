@@ -36,9 +36,11 @@ def add_uncertainty(self, df):
     num_critical = np_df[:,5]
     num_fatalities = np_df[:,6]
 
-    num_sym_lower = np_df[:,2] # nb of tested 
-    # num_sym_upper = np_df[:,2]+(np_df[:,2]*self.ran)
-    num_sym_upper = np_df[:,2]+np_df[:,2]
+    num_sym_lower = np_df[:,2] # nb of tested
+    # num_sym_lower = own_NRMAS(num_sym_lower,self.window)
+    num_sym_upper = np_df[:,2]+(np_df[:,2]*self.ran)
+    num_sym_upper = own_NRMAS(num_sym_upper,self.window)
+    # num_sym_upper = np_df[:,2]+np_df[:,2]
 
 
 
