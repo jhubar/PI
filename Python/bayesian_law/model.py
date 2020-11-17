@@ -15,9 +15,12 @@ from plot import plot_current_data
 from plot import preporcessing
 from plot import plot_cumul_positif_comp
 from plot import plot_cumul_hospit_comp
+from plot import plot_non_cum_hospit_comp
 from plot import plot_pcr_pd_slide
 from plot import plot_hcr_fitting
 from plot import plot_gamma_hp_slide
+from plot import plot_critical_com
+from plot import plot_fatal_com
 from uncertainty import add_uncertainty
 
 from predict import __predict__
@@ -227,9 +230,7 @@ class seir():
         print("best hp = {}".format(self.hp))
 
         # plot :
-        # plot_gamma_hp_slide(self, proportion_range, SEE)
-
-
+        plot_gamma_hp_slide(self, proportion_range, SSE)
 
     def pcr_pd_slide(self):
         """
@@ -261,7 +262,7 @@ class seir():
         self.pd = best[1]
 
         # plot :
-        # plot_pcr_pd_slide(self)
+        plot_pcr_pd_slide(self,proportion_range,SSE)
 
         print("pd/pcr slide: best value with sse = {}".format(best[0]))
         print("best pcr = {}".format(self.pcr))
@@ -294,7 +295,7 @@ class seir():
         print("hcr = {}".format(self.hcr))
 
         # plot :
-        # plot_hcr_fitting(self)
+        plot_hcr_fitting(self,hcr_range,SSE)
         # Data storing:
         self.dataJSON['fit_hcr'] = []
         for i in range(0, range_size):
@@ -303,6 +304,7 @@ class seir():
                 "log": str(SSE[i]),
 
             })
+
     def fit(self):
         """
         This method use the given data to find values of our model who minimise square error
@@ -351,7 +353,7 @@ class seir():
         # Store H
         cumul_hospit = predictions[:, 4]
 
-        # plot_cumul_hospit_comp(self)
+        plot_cumul_hospit_comp(self,cumul_hospit,predictions)
 
         # =========================================================================== #
         # PART 3: compute the probability to out of H.
@@ -364,7 +366,7 @@ class seir():
         predictions = __predict__(self,self.dataset.shape[0])
         # Store H
         hospit = predictions[:, 4]
-        # plot_non_cum_hospit_comp(self)
+        plot_non_cum_hospit_comp(self,hospit,predictions)
 
 
         # =========================================================================== #
@@ -398,7 +400,7 @@ class seir():
         # Store C
         critical = predictions[:, 7]
 
-        # critical_com(self)
+        plot_critical_com(self,critical,predictions)
 
 
         # =========================================================================== #
@@ -412,13 +414,15 @@ class seir():
         # Store C
         fatalities = predictions[:, 8]
 
+        plot_fatal_com(self,fatalities,predictions)
+
     def predict(self,duration):
         return __predict__(self,duration)
 
     def plot_predict(self,pred, args='no_S'):
         __plot_predict__(self, pred, args='no_S')
 
-        # fatal_com(self)
+
     def print_final_value(self):
         print("=======================================================")
         print("Final value of each model parameters: ")

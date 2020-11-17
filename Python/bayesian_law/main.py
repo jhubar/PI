@@ -9,7 +9,7 @@ def __run__():
     predictions = model.predict(300)
     model.plot_predict(predictions, args='predict no_S')
     model.print_final_value()
-    # model.saveJson()
+    model.saveJson()
 
 if __name__ == "__main__":
     __run__()

@@ -114,7 +114,6 @@ def plot_current_data(self):
     ax.legend(fontsize=30)
     fig.savefig('Plot/current_data_with_uncertainty.png')
 
-
 def plot_cumul_positif_comp(self,cumul_positive,predictions):
     plt.scatter(predictions[:, 0], self.raw_dataset['cumul_positive'], c='blue', label='Original data')
     plt.plot(predictions[:, 0], cumul_positive, c='red', label='Predictions')
@@ -125,7 +124,7 @@ def plot_cumul_positif_comp(self,cumul_positive,predictions):
     plt.savefig('Plot/cumul_positif_comp.png', transparent=True)
     plt.close()
 
-def plot_cumul_hospit_comp(self):
+def plot_cumul_hospit_comp(self,cumul_hospit,predictions):
     plt.scatter(predictions[:, 0], self.dataset[:, 4], c='blue', label='Original data')
     plt.plot(predictions[:, 0], cumul_hospit, c='red', label='Predictions')
     plt.title('Comparison between cumulative hospitalisation data and predictions')
@@ -135,7 +134,7 @@ def plot_cumul_hospit_comp(self):
     plt.savefig('Plot/cumul_hospit_comp.png', transparent=True)
     plt.close()
 
-def plot_non_cum_hospit_comp(self):
+def plot_non_cum_hospit_comp(self,hospit,predictions):
     plt.scatter(predictions[:, 0], self.dataset[:, 3], c='blue', label='Original data')
     plt.plot(predictions[:, 0], hospit, c='red', label='Predictions')
     plt.title('Comparison between non-cumulative hospitalisation data and predictions')
@@ -145,7 +144,7 @@ def plot_non_cum_hospit_comp(self):
     plt.savefig('Plot/non_cum_hospit_comp.png', transparent=True)
     plt.close()
 
-def plot_critical_com(self):
+def plot_critical_com(self,critical,predictions):
     plt.scatter(predictions[:, 0], self.dataset[:, 5], c='blue', label='Original data')
     plt.plot(predictions[:, 0], critical, c='red', label='Predictions')
     plt.title('Comparison ICU data and critical predictions')
@@ -155,7 +154,7 @@ def plot_critical_com(self):
     plt.savefig('Plot/critical_com.png', transparent=True)
     plt.close()
 
-def plot_fatal_com(self):
+def plot_fatal_com(self,fatalities,predictions):
     plt.scatter(predictions[:, 0], self.dataset[:, 6], c='blue', label='Original data')
     plt.plot(predictions[:, 0], fatalities, c='red', label='Predictions')
     plt.title('Comparison fatalities cumulative data and D curve')
@@ -186,7 +185,7 @@ def preporcessing(self):
     # plt.show()
     plt.close()
 
-def plot_pcr_pd_slide(self):
+def plot_pcr_pd_slide(self,proportion_range,SSE):
     # plot :
     plt.plot(proportion_range, np.flip(SSE), c='blue')
     plt.title('Proportion of pcr_A assigned to pd')
@@ -198,14 +197,14 @@ def plot_pcr_pd_slide(self):
     # plt.show()
     plt.close()
 
-def plot_hcr_fitting(self):
+def plot_hcr_fitting(self,hcr_range,SSE):
     plt.plot(hcr_range, SSE, c='blue', label='hcr value')
     plt.title('Evolution of the sum of square error according to the value of hcr')
     plt.legend()
     plt.yscale('log')
     plt.ylabel('log sum of square error')
     plt.xlabel('hcr value')
-    plt.savefig("fig/hcr_fitting.png", transparent=True)
+    plt.savefig("Plot/hcr_fitting.png", transparent=True)
     # plt.show()
     plt.close()
 
@@ -216,6 +215,6 @@ def plot_gamma_hp_slide(self,proportion_range, SSE):
     plt.legend()
     plt.ylabel('log sum of square error')
     plt.xlabel('gamma proportion')
-    plt.savefig("fig/gamma_hp_slide.png", transparent=True)
+    plt.savefig("Plot/gamma_hp_slide.png", transparent=True)
     # plt.show()
     plt.close()
