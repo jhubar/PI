@@ -96,7 +96,7 @@ def add_uncertainty(self, df):
     mu_mul = (norm_num_positive_mean * std_num_postive**2)+(norm_num_tested_mean * std_num_tested**2)/(std_num_postive**2+std_num_tested**2)
     var_mul = (std_num_tested**2*std_num_postive**2)/(std_num_postive**2+std_num_tested**2)
     std_mul = math.sqrt(var_mul)
-    
+
     print("=======================================================")
     print("M_u positive = {}".format(norm_num_positive_mean))
     print("M_u Tested = {}".format(norm_num_tested_mean))

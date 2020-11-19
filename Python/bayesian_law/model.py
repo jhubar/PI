@@ -25,6 +25,7 @@ from uncertainty import add_uncertainty
 
 from predict import __predict__
 from plot import __plot_predict__
+from data_processing import __dataProcessing__
 
 
 class seir():
@@ -47,6 +48,7 @@ class seir():
         self.raw_dataset = None  # Original dataset, before preprocessing
         self.dataset = None  # Numpy matrix format
         self.dataframe = None  # Dataframe format
+        self.dataframeProcessing = None
 
         # Initial state: to be used to make predictions
         self.S_0 = None  # Sensible: peoples who can catch the agent
@@ -463,7 +465,8 @@ class seir():
             self.raw_dataset.insert(11,'num_positive_mean', self.dataframe['num_positive_mean'].to_numpy())
             self.raw_dataset.insert(11,'num_sym_mean', self.dataframe['num_positive_mean'].to_numpy())
             self.raw_dataset.insert(12,'num_tested_upper', self.dataframe['num_tested_upper'].to_numpy())
-
+            self.dataframeProcessing = __dataProcessing__(self)
+            print(self.dataframeProcessing)
             # preporcessing(self)
 
             # # Ad a new column at the end with cumulative positive cases at the right
