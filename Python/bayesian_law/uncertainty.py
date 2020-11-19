@@ -64,7 +64,7 @@ def add_uncertainty(self, df):
     norm_num_positive_upper = np.mean(num_positive)/np.mean(num_positive_upper)
     """
     ============================================================================
-    Normalisation of positive bounds
+    Normalisation of tested bounds
     ============================================================================
     """
     norm_num_tested =np.mean(num_tested)/np.mean(num_tested)
