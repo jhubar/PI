@@ -45,6 +45,8 @@ def __dataProcessing__(self):
         growth_rate_in_5_day.append(growth_rate(num_positive[i+5],num_positive[i-4]))
         growth_rate_in_7_day.append(growth_rate(num_positive[i+7],num_positive[i-7]))
 
+
+
     df_processing = np.vstack((new_day
                     ,new_positive
                     ,confirmed_cases_1_day_ago

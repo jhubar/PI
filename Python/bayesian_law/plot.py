@@ -8,10 +8,18 @@ from scipy.optimize import minimize
 import numpy as np
 import pandas as pd
 import uncertainpy as un
-import chaospy as cp                 # To create distributions
+import chaospy as cp
+import seaborn as sns
 import json
 import math
 import random
+
+def plot_corr(corr):
+    fig = plt.figure(figsize=(25,20))
+    ax = plt.subplot()
+    ax = sns.heatmap(corr,xticklabels=corr.columns.values,yticklabels=corr.columns.values, annot=True)
+    plt.savefig('Plot/corr.png')
+    plt.close()
 
 def plot_normal(mu,std,lab = 'Nan', arg = 'continue'):
     x = np.linspace(mu - 3*std, mu + 3*std, 100)
@@ -19,6 +27,7 @@ def plot_normal(mu,std,lab = 'Nan', arg = 'continue'):
     plt.legend()
     if arg =='stop':
         plt.savefig('Plot/normal_dis.png')
+        plt.close()
 
 
 def __plot_predict__(self, pred, args='no_S'):
@@ -129,6 +138,7 @@ def plot_current_data(self):
     # print(next_nb_tested)
     ax.legend(fontsize=30)
     fig.savefig('Plot/current_data_with_uncertainty.png')
+    plt.close()
 
 
 def plot_cumul_positif_comp(self,cumul_positive,predictions):
