@@ -1,6 +1,7 @@
 
 import matplotlib.pyplot as plt
 import scipy.stats
+import scipy.stats as stats
 from scipy.stats import norm
 from scipy.integrate import odeint   # To integrate our equation
 from scipy.optimize import minimize
@@ -12,10 +13,12 @@ import json
 import math
 import random
 
-def plot_normal(mu,std):
+def plot_normal(mu,std,lab = 'Nan', arg = 'continue'):
     x = np.linspace(mu - 3*std, mu + 3*std, 100)
-    plt.plot(x, stats.norm.pdf(x, mu, std))
-    plt.savefig('Plot/normal_dis')
+    plt.plot(x, stats.norm.pdf(x, mu, std), label = lab)
+    plt.legend()
+    if arg =='stop':
+        plt.savefig('Plot/normal_dis.png')
 
 
 def __plot_predict__(self, pred, args='no_S'):
