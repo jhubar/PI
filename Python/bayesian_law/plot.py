@@ -111,6 +111,9 @@ def plot_current_data(self):
     fig = plt.figure(figsize=(25,20))
 
     ax = plt.subplot()
+    ax.plot(self.dataframe['day'], self.dataframe['num_tested'], label='lower')
+    ax.plot(self.dataframe['day'], self.dataframe['num_tested_upper'], label='lower')
+    ax.fill_between(self.dataframe['day'], self.dataframe['num_tested'], self.dataframe['num_tested_upper'])
     ax.plot(self.dataframe['day'], self.dataframe['num_sym_lower'], label='lower')
     ax.plot(self.dataframe['day'], self.dataframe['num_sym_upper'], label='lower')
     ax.fill_between(self.dataframe['day'], self.dataframe['num_sym_lower'], self.dataframe['num_sym_upper'])
@@ -123,7 +126,7 @@ def plot_current_data(self):
     pr_mean = self.dataframe['num_sym_lower']
     next_pr_mean = (2*pr_mean[len(pr_mean)-1]-pr_mean[len(pr_mean)-2])
     next_nb_tested = next_pr_mean*self.ran
-    print(next_nb_tested)
+    # print(next_nb_tested)
     ax.legend(fontsize=30)
     fig.savefig('Plot/current_data_with_uncertainty.png')
 

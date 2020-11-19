@@ -96,7 +96,16 @@ def add_uncertainty(self, df):
     mu_mul = (norm_num_positive_mean * std_num_postive**2)+(norm_num_tested_mean * std_num_tested**2)/(std_num_postive**2+std_num_tested**2)
     var_mul = (std_num_tested**2*std_num_postive**2)/(std_num_postive**2+std_num_tested**2)
     std_mul = math.sqrt(var_mul)
-
+    
+    print("=======================================================")
+    print("M_u positive = {}".format(norm_num_positive_mean))
+    print("M_u Tested = {}".format(norm_num_tested_mean))
+    print("M_u positive*Tested = {}".format(mu_mul))
+    print("=======================================================")
+    print("sigma positive = {}".format(std_num_postive))
+    print("sigma Tested = {}".format(std_num_tested))
+    print("sigma positive*Tested = {}".format(std_mul))
+    print("=======================================================")
     """
     ============================================================================
     Calules de mercredi
@@ -128,6 +137,7 @@ def add_uncertainty(self, df):
     smooth
     ============================================================================
     """
+
     num_positive_lower = own_NRMAS(num_positive_lower,self.window)
     num_positive_mean = own_NRMAS(num_positive_mean,self.window)
     num_positive_upper = own_NRMAS(num_positive_upper,self.window)
@@ -140,7 +150,7 @@ def add_uncertainty(self, df):
 
     new_df = np.vstack((day,num_positive,num_positive_lower,num_positive_upper,num_tested
         ,num_hospitalised,num_cumulative_hospitalizations,num_critical,num_fatalities
-        ,num_sym_lower,num_sym_upper,num_positive_mean,num_sym_mean))
+        ,num_sym_lower,num_sym_upper,num_positive_mean,num_sym_mean,num_tested_upper))
 
     return pd.DataFrame(new_df.T, columns=['day'                             #0
                                           ,'num_positive'                    #1
@@ -154,4 +164,5 @@ def add_uncertainty(self, df):
                                           ,'num_sym_lower'                   #9
                                           ,'num_sym_upper'                   #10
                                           ,'num_positive_mean'               #11
-                                          ,'num_sym_mean'])                  #12
+                                          ,'num_sym_mean'                    #12
+                                          ,'num_tested_upper'])              #13

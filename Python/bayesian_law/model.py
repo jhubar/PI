@@ -462,6 +462,7 @@ class seir():
             self.raw_dataset.insert(10,'num_sym_upper', self.dataframe['num_sym_upper'].to_numpy())
             self.raw_dataset.insert(11,'num_positive_mean', self.dataframe['num_positive_mean'].to_numpy())
             self.raw_dataset.insert(11,'num_sym_mean', self.dataframe['num_positive_mean'].to_numpy())
+            self.raw_dataset.insert(12,'num_tested_upper', self.dataframe['num_tested_upper'].to_numpy())
 
             # preporcessing(self)
 
