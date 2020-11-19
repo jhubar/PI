@@ -12,6 +12,12 @@ import json
 import math
 import random
 
+def plot_normal(mu,std):
+    x = np.linspace(mu - 3*std, mu + 3*std, 100)
+    plt.plot(x, stats.norm.pdf(x, mu, std))
+    plt.savefig('Plot/normal_dis')
+
+
 def __plot_predict__(self, pred, args='no_S'):
 
     self.dataJSON['predict'] = []
@@ -107,6 +113,7 @@ def plot_current_data(self):
     ax.fill_between(self.dataframe['day'], self.dataframe['num_sym_lower'], self.dataframe['num_sym_upper'])
     ax.plot(self.dataframe['day'], self.dataframe['num_positive_lower'], label='lower')
     ax.plot(self.dataframe['day'], self.dataframe['num_positive_mean'], label='mean')
+    ax.plot(self.dataframe['day'], self.dataframe['num_sym_mean'], label='mean')
     ax.plot(self.dataframe['day'], self.dataframe['num_positive'], label='current data')
     ax.plot(self.dataframe['day'], self.dataframe['num_positive_upper'], label='upper')
     ax.fill_between(self.dataframe['day'], self.dataframe['num_positive_lower'], self.dataframe['num_positive_upper'])
@@ -116,6 +123,7 @@ def plot_current_data(self):
     print(next_nb_tested)
     ax.legend(fontsize=30)
     fig.savefig('Plot/current_data_with_uncertainty.png')
+
 
 def plot_cumul_positif_comp(self,cumul_positive,predictions):
     plt.scatter(predictions[:, 0], self.raw_dataset['cumul_positive'], c='blue', label='Original data')

@@ -461,44 +461,45 @@ class seir():
             self.raw_dataset.insert(9, 'num_sym_lower', self.dataframe['num_sym_lower'].to_numpy())
             self.raw_dataset.insert(10,'num_sym_upper', self.dataframe['num_sym_upper'].to_numpy())
             self.raw_dataset.insert(11,'num_positive_mean', self.dataframe['num_positive_mean'].to_numpy())
+            self.raw_dataset.insert(11,'num_sym_mean', self.dataframe['num_positive_mean'].to_numpy())
 
-            preporcessing(self)
+            # preporcessing(self)
 
-            # Ad a new column at the end with cumulative positive cases at the right
-            cumul_positive = self.dataframe['num_positive'].to_numpy()
-            cumul_positive_non_smooth = self.raw_dataset['num_positive']
-            for i in range(1, len(cumul_positive)):
-                cumul_positive[i] += cumul_positive[i - 1]
-                cumul_positive_non_smooth[i] += cumul_positive_non_smooth[i - 1]
-            self.dataframe.insert(12, 'cumul_positive', cumul_positive)
-            self.raw_dataset.insert(12, 'cumul_positive', cumul_positive_non_smooth)
-
-            # Delete the first line with zero test
-            for i in range(0, 1):
-                self.raw_dataset.drop(axis=0, index=i, inplace=True)
-                self.dataframe.drop(axis=0, index=i, inplace=True)
-            # To reset dataframe index:
-            tmp = self.raw_dataset.to_numpy()
-            self.raw_dataset = pd.DataFrame(tmp, columns=self.raw_dataset.columns)
-            tmp = self.dataframe.to_numpy()
-            self.dataframe = pd.DataFrame(tmp, columns=self.dataframe.columns)
-
-            # Store a numpy version:
-            self.dataset = self.dataframe.to_numpy()
-
-            # Store the initial state who fit with input data
-            self.N = 1000000
-            self.I_0 = self.dataset[0][12]
-            self.H_0 = self.dataset[0][5]
-            self.E_0 = 3 * self.dataset[1][1]  # Because mean of incubation period = 3 days
-            self.R_0 = 0
-            self.C_0 = 0
-            self.D_0 = 0
-            self.S_0 = self.N - self.I_0 - self.H_0 - self.E_0
-
-            # Initialize default value to hyper-parameters:
-            self.beta = 0.35
-            self.sigma = 1 / 3
-            self.gamma = 1 / 7
-            self.hp = 0
-            self.hcr = 0
+            # # Ad a new column at the end with cumulative positive cases at the right
+            # cumul_positive = self.dataframe['num_positive'].to_numpy()
+            # cumul_positive_non_smooth = self.raw_dataset['num_positive']
+            # for i in range(1, len(cumul_positive)):
+            #     cumul_positive[i] += cumul_positive[i - 1]
+            #     cumul_positive_non_smooth[i] += cumul_positive_non_smooth[i - 1]
+            # self.dataframe.insert(13, 'cumul_positive', cumul_positive)
+            # self.raw_dataset.insert(13, 'cumul_positive', cumul_positive_non_smooth)
+            #
+            # # Delete the first line with zero test
+            # for i in range(0, 1):
+            #     self.raw_dataset.drop(axis=0, index=i, inplace=True)
+            #     self.dataframe.drop(axis=0, index=i, inplace=True)
+            # # To reset dataframe index:
+            # tmp = self.raw_dataset.to_numpy()
+            # self.raw_dataset = pd.DataFrame(tmp, columns=self.raw_dataset.columns)
+            # tmp = self.dataframe.to_numpy()
+            # self.dataframe = pd.DataFrame(tmp, columns=self.dataframe.columns)
+            #
+            # # Store a numpy version:
+            # self.dataset = self.dataframe.to_numpy()
+            #
+            # # Store the initial state who fit with input data
+            # self.N = 1000000
+            # self.I_0 = self.dataset[0][13]
+            # self.H_0 = self.dataset[0][5]
+            # self.E_0 = 3 * self.dataset[1][1]  # Because mean of incubation period = 3 days
+            # self.R_0 = 0
+            # self.C_0 = 0
+            # self.D_0 = 0
+            # self.S_0 = self.N - self.I_0 - self.H_0 - self.E_0
+            #
+            # # Initialize default value to hyper-parameters:
+            # self.beta = 0.35
+            # self.sigma = 1 / 3
+            # self.gamma = 1 / 7
+            # self.hp = 0
+            # self.hcr = 0
