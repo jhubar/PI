@@ -6,6 +6,7 @@ from scipy.optimize import minimize
 import math
 from scipy.signal import savgol_filter
 from scipy.stats import binom
+from scipy import optimize
 
 class SEIR():
 
@@ -15,7 +16,7 @@ class SEIR():
         self.sigma = 0.35330
         self.gamma = 0.22725
 
-        self.sensitivity = 1
+        self.sensitivity = 0.6
 
         self.dataframe = None
         self.dataset = None
@@ -29,7 +30,7 @@ class SEIR():
         dI = (E * sigma) - (gamma * I)
         dR = (gamma * I)
 
-        dConta = (beta * S * I) / (S + E + I + R)
+        dConta = E * sigma
 
         return dS, dE, dI, dR, dConta
 
@@ -107,8 +108,8 @@ class SEIR():
 
     def get_initial_state(self):
 
-        I_0 = 5
-        E_0 = 10 * I_0
+        I_0 = self.dataset[0][1]
+        E_0 = 3 * I_0
         R_0 = 0
         S_0 = 1000000 - I_0 - E_0 - R_0
 
@@ -123,10 +124,17 @@ class SEIR():
         #    for j in range(0, 4):
         #        self.manual_fit(param_index=j, prt=True, method='method_3')
 
-        start_values = [self.beta, self.sigma, self.gamma, self.sensitivity]
-        bnd = [(0., 0.5), (0.3, 1.), (0., 0.5), (0.7, 0.85)]
+        #start_values = [self.beta, self.sigma, self.gamma, self.sensitivity]
+        #bnd = [(0.2, 0.5), (0.3, 1.), (0.05, 0.5), (0.7, 0.85)]
 
-        res = minimize(self.objective, np.asarray(start_values), args=('method_4'), bounds=bnd)
+        #res = minimize(self.objective, np.asarray(start_values), args=('method_6'), bounds=bnd, options={'maxls': 100 ,'eps': 1e-03})
+
+        bnd = [(0.2, 0.5), (0.3, 1.), (0.05, 0.5), (0.4, 0.9)]
+        #constraint = ({'type': 'ineq', 'fun': lmbda x:})
+        start_values = [self.beta, self.sigma, self.gamma, self.sensitivity]
+        res = minimize(self.objective, np.asarray(start_values), method='COBYLA', args=('method_7'),
+                       options={'maxiter':20000})
+
 
         print(res)
 
@@ -134,6 +142,7 @@ class SEIR():
         self.sigma = res.x[1]
         self.gamma = res.x[2]
         self.sensitivity = res.x[3]
+        #self.sensitivity = res.x[3]
 
 
 
@@ -263,6 +272,123 @@ class SEIR():
             print(sse)
             return sse
 
+        if method == 'method_5':
+            # Use LOG binomial
+
+            # Make predictions
+            time = self.dataset[:, 0]
+            initial_state = self.get_initial_state()
+            params = tuple(parameters)
+
+            # Make predictions:
+            predict = odeint(func=self.differential,
+                             y0=initial_state,
+                             t=time,
+                             args=params)
+            # Compute new cases
+            test_pred = []
+            test_pred.append(predict[0][4])
+            for i in range(1, predict.shape[0]):
+                test_pred.append(predict[i][4] - params[3] * predict[i - 1][4])
+
+            proba = np.zeros(1, dtype=np.float64)
+            for i in range(0, len(time)):
+                k = self.dataset[i][1]
+                n = test_pred[i]
+                #print('k= {}, n= {}'.format(k/params[3], n))
+                if k > n:
+                    proba += 0
+                else:
+                    #proba += (math.factorial(k)/(math.factorial(k)*math.factorial(n-k))) * (params[3] ** k) * (1 - params[3]) ** (n - k)
+                    pb = binom.pmf(k=k, n=n, p=params[3])
+                    if math.isnan(pb):
+                        pb = 0
+                    proba += pb
+
+            print(- proba)
+            return - proba
+
+        if method == 'method_6':
+
+            # Make predictions
+            time = self.dataset[:, 0]
+            initial_state = self.get_initial_state()
+            tmp_param = (parameters[0], parameters[1], parameters[2], parameters[3])
+            params = tuple(tmp_param)
+            print(parameters)
+
+            # Make predictions:
+            predict = odeint(func=self.differential,
+                             y0=initial_state,
+                             t=time,
+                             args=params)
+            # Compute new cases
+            test_pred = []
+            test_pred.append(predict[0][4])
+            for i in range(1, predict.shape[0]):
+                test_pred.append(predict[i][4] - predict[i - 1][4])
+            for i in range(0, predict.shape[0]):
+                test_pred[i] = test_pred[i] * params[-1]
+            obj = np.zeros(1, dtype=np.float64)
+
+            for i in range(0, len(time)):
+                tmp = (test_pred[i]*self.sensitivity - self.dataset[i][4]) ** 2
+                obj += tmp
+            print(obj)
+            return obj
+
+        if method == 'method_7':
+
+            # Make predictions
+            time = self.dataset[:, 0]
+            initial_state = self.get_initial_state()
+            tmp_param = (parameters[0], parameters[1], parameters[2], parameters[3])
+            params = tuple(tmp_param)
+            print(parameters)
+
+            # Make predictions:
+            predict = odeint(func=self.differential,
+                             y0=initial_state,
+                             t=time,
+                             args=params)
+            # Compute new cases
+            test_pred = []
+            test_pred.append(predict[0][4])
+            for i in range(1, predict.shape[0]):
+                test_pred.append(predict[i][4] - predict[i - 1][4])
+            for i in range(0, predict.shape[0]):
+                test_pred[i] = test_pred[i] * params[-1]
+
+            obj = np.zeros(1, dtype=np.float64)
+
+            for i in range(0, len(time)):
+                n = test_pred[i]
+                k = self.dataset[i][1]
+                pb = binom.pmf(k=k, n=n, p=params[3])
+                obj += pb
+            print(obj)
+            return obj
+
+    def dataframe_smoothing(self, df):
+        # From andreas NRMAS
+        # Convert the dataframe to a numpy array:
+        np_df = df.to_numpy()
+        # Smoothing period = 7 days
+        smt_prd = 7
+        smt_vec = np.ones(smt_prd)
+        smt_vec /= smt_prd
+        # Sore smoothed data in a new matrix:
+        smoothed = np.copy(np_df)
+        # How many smothing period can we place in the dataset:
+        nb_per = math.floor(np_df.shape[0] / smt_prd)
+        # Perform smoothing for each attributes
+        for i in range(1, np_df.shape[1]):
+            smoothed[:, i] = own_NRMAS(np_df[:, i], 7)
+
+        # Write new values in a dataframe
+        new_df = pd.DataFrame(smoothed, columns=df.columns)
+
+        return new_df
 
     def inport_dataset(self):
 
@@ -270,9 +396,38 @@ class SEIR():
         # Import the dataframe:
         raw = pd.read_csv(url, sep=',', header=0)
         raw['num_positive'][0] = 1
+        raw = self.dataframe_smoothing(raw)
         self.dataframe = raw
         self.dataset = raw.to_numpy()
 
+def own_NRMAS_index(vector, window, index):
+    smoothed_value = 0
+    nb_considered_values = 0
+    max_size = (window - 1) / 2
+    smoothing_window = np.arange(-max_size, max_size + 1, 1)
+
+    for j in range(window):
+
+        sliding_index = int(index + smoothing_window[j])
+
+        if (sliding_index >= 0) and (sliding_index <= len(vector) - 1):
+            smoothed_value += vector[sliding_index]
+            nb_considered_values += 1
+
+    return smoothed_value / nb_considered_values
+
+
+def own_NRMAS(vector, window):
+    smoothed_vector = np.zeros(len(vector))
+
+    if (window % 2) == 0:
+        print("Error window size even")
+        return
+
+    for i in range(len(vector)):
+        smoothed_vector[i] = own_NRMAS_index(vector, window, i)
+
+    return smoothed_vector
 
 
 if __name__ == "__main__":
@@ -281,23 +436,33 @@ if __name__ == "__main__":
 
     model.inport_dataset()
 
+    time = model.dataset[:, 0]
+    # Try to fit to make better
+
     model.fit()
 
-    time = model.dataset[:, 0]
+    # Make a prediction with initial values of parameters
+    pred_init = model.predict(model.dataset[:, 0])
+    # De-cumul positives:
+    test_pred = []
+    test_pred.append(pred_init[0][4])
+    for i in range(1, pred_init.shape[0]):
+        test_pred.append(pred_init[i][4] - pred_init[i-1][4])
+    for i in range(0, len(test_pred)):
+        test_pred[i] *= model.sensitivity
 
-    predictions_mean, predictions_std = model.stochastic_mean(time, 200)
-
-    data = model.dataset[:, 1]
-    var = np.zeros(predictions_mean.shape[0])
-    for i in range(len(var)):
-        print(predictions_std[i][4])
-        var[i] = predictions_mean[i][4] + predictions_std[i][4] ** 2
-
-    plt.scatter(time, data, color='blue', label='original/sensit')
-    plt.plot(time, predictions_mean[:, 4], c='red', label='predictions')
-    plt.plot(time, var, c='orange', label='var')
+    plt.scatter(model.dataset[:, 0], model.dataset[:, 1], c='blue', label='positive test')
+    plt.plot(model.dataset[:, 0], test_pred, c='red', label='pred initial parameters')
     plt.legend()
     plt.show()
+
+    print("Beta = {}".format(model.beta))
+    print("sigma = {}".format(model.sigma))
+    print("gamma = {}".format(model.gamma))
+    print("Sensitivity = {}".format(model.sensitivity))
+
+
+
 
 
 

@@ -28,6 +28,8 @@ class SEIR():
         self.pd = 0  # Probability to die each day in icu
         self.pcr = 0  # Probability to recover from critical
 
+        self.sensitivity = 0.8
+
         # Data to fit
         self.raw_dataset = None  # Original dataset, before preprocessing
         self.dataset = None  # Numpy matrix format
@@ -85,6 +87,23 @@ class SEIR():
 
         return dS, dE, dI, dH, dR, dN, dC, dD
 
+    def differential_fit(self, state, time, beta, sigma, gamma, hp, hcr, pc, pd, pcr):
+        """
+        Differential equations of the model
+        """
+        S, E, I, H, R, N, C, D = state
+
+        dS = -(beta * S * I) / N
+        dE = (beta * S * I) / N - E * sigma
+        dI = (E * sigma) - (gamma * I) - (hp * I)
+        dH = (hp * I) - (hcr * H) - (pc * H)
+        dC = (pc * H) - (pd * C) - (pcr * C)
+        dR = (gamma * I) + (hcr * H)
+        dD = (pd * C)
+        dN = 0
+
+        return dS, dE, dI, dH, dR, dN, dC, dD
+
     def predict(self, duration):
         """
         Predict epidemic curves from t_0 for the given duration
@@ -104,7 +123,7 @@ class SEIR():
         return np.vstack((time, predict[:, 0], predict[:, 1], predict[:, 2], predict[:, 3], predict[:, 4],
                           predict[:, 5], predict[:, 6], predict[:, 7])).T
 
-    def fit(self):
+    def fit_B(self):
         """
         This method use the given data to find values of our model who minimise square error
         between predictions and original data.
@@ -124,8 +143,10 @@ class SEIR():
         # Start values
         start_values = [self.beta, self.sigma, self.gamma]
         # Use Scipy.optimize.minimize with L-BFGS_B method
-        res = minimize(self.SSE, np.asarray(start_values), args=(initial_state, time, 'first_part'),
-                       method='L-BFGS-B', bounds=bounds)
+        # res = minimize(self.SSE, np.asarray(start_values), args=(initial_state, time, 'first_part'),
+        #               method='L-BFGS-B', bounds=bounds)
+        res = minimize(self.SSE, np.asarray(start_values), method='COBYLA', args=(initial_state, time, 'first_part'),
+                       options={'maxiter': 20000})
 
         print(res)
         self.beta = res.x[0]
@@ -246,6 +267,54 @@ class SEIR():
         plt.ylabel('Number of peoples')
         plt.savefig('fig/fatal_com.png', transparent=True)
         plt.close()
+
+    def fit(self):
+        """
+        This method use the given data to find values of our model who minimise square error
+        between predictions and original data.
+        """
+        # =========================================================================== #
+        # PART 1: We fit the parameters beta, sigma and a temp version of gamma by computing the
+        # sum of errors between the daily cumulative of positive tests and the
+        # product of the I, H and R curves. All others parameters are set on zero.
+        # So, in this first part, we are equivalent to a basic SEIR model
+        # =========================================================================== #
+        # Generate initial state:
+        initial_state = self.get_initial_state()
+        # Time vector:
+        time = self.dataset[:, 0]
+        # Bounds: Given ranges for beta, sigma and gamma
+        bounds = [(0, 1), (1 / 5, 1), (1 / 10, 1 / 4)]
+        # Start values
+        start_values = [self.beta, self.sigma, self.gamma, self.hp, self.hcr, self.pc, self.pd, self.pcr]
+        # Use Scipy.optimize.minimize with L-BFGS_B method
+        # res = minimize(self.SSE, np.asarray(start_values), args=(initial_state, time, 'first_part'),
+        #               method='L-BFGS-B', bounds=bounds)
+        res = minimize(self.SSE, np.asarray(start_values), method='COBYLA', args=(initial_state, time, 'first_part'),
+                       options={'maxiter': 20000})
+
+        print(res)
+        self.beta = res.x[0]
+        self.sigma = res.x[1]
+        self.gamma = res.x[2]
+        self.hp = res.x[3]
+        self.hcr = res.x[4]
+        self.pc = res.x[5]
+        self.pd = res.x[6]
+        self.pcr = res.x[7]
+
+        # Compare data with predictions on cumulative positive
+        predictions = self.predict(self.dataset.shape[0])
+        # Store I + R
+        cumul_positive = predictions[:, 3] + predictions[:, 5]
+
+        plt.scatter(predictions[:, 0], self.raw_dataset['cumul_positive'], c='blue', label='Original data')
+        plt.plot(predictions[:, 0], cumul_positive, c='red', label='Predictions')
+        plt.title('Comparison between cumulative of positive test and I + R predictions')
+        plt.xlabel('Time in days')
+        plt.ylabel('Number of peoples')
+        plt.legend()
+        plt.show()
 
     def gamma_hp_slide(self):
         """
@@ -480,6 +549,27 @@ class SEIR():
                 # Error on death cases
                 sse += (self.dataset[i][6] - predict[i][7]) ** 2
             return sse
+
+        if method == 'COBYLA':
+
+            params = tuple(parameters)
+            # Make predictions:
+            predict = odeint(func=self.differential,
+                             y0=initial_state,
+                             t=time,
+                             args=params)
+            sse = 0.0
+            for i in range(0, len(time)):
+                # Error on death cases
+                sse += (self.dataset[i][7] - predict[i][2] - predict[i][3] - predict[i][4] - predict[i][6] - predict[i][7])
+                sse += (self.dataset[i][3] - predict[i][3])
+                sse += (self.dataset[i][5] - predict[i][6])
+                sse += (self.dataset[i][6] - predict[i][7])
+            return sse
+
+        if method == 'COBY_2':
+
+            pass
 
     def dataframe_smoothing1(self, df):
         # Convolution
