@@ -469,12 +469,14 @@ class seir():
             self.raw_dataset.insert(11,'num_positive_mean', self.dataframe['num_positive_mean'].to_numpy())
             self.raw_dataset.insert(11,'num_sym_mean', self.dataframe['num_positive_mean'].to_numpy())
             self.raw_dataset.insert(12,'num_tested_upper', self.dataframe['num_tested_upper'].to_numpy())
-            self.dataframeProcessing = __dataProcessing__(self)
+            # self.dataframeProcessing = __dataProcessing__(self)
+            # print(self.dataframeProcessing)
 
-            corr = self.dataframeProcessing.corr()
-            plot_corr(corr)
+            # corr = self.dataframeProcessing.corr()
 
-            rf(self)
+            # plot_corr(corr)
+
+            # rf(self)
 
 
 
