@@ -3,6 +3,7 @@ import scipy.stats
 from scipy.stats import norm
 from scipy.integrate import odeint   # To integrate our equation
 from scipy.optimize import minimize
+
 import numpy as np
 import pandas as pd
 import uncertainpy as un
@@ -10,6 +11,7 @@ import chaospy as cp                 # To create distributions
 import json
 import math
 import random
+import seaborn as sns
 from smooth import own_NRMAS_index, own_NRMAS
 from plot import plot_current_data
 from plot import preporcessing
@@ -21,10 +23,13 @@ from plot import plot_hcr_fitting
 from plot import plot_gamma_hp_slide
 from plot import plot_critical_com
 from plot import plot_fatal_com
+from plot import plot_corr
+from random_forest import rf
 from uncertainty import add_uncertainty
 
 from predict import __predict__
 from plot import __plot_predict__
+from data_processing import __dataProcessing__
 
 
 class seir():
@@ -47,6 +52,7 @@ class seir():
         self.raw_dataset = None  # Original dataset, before preprocessing
         self.dataset = None  # Numpy matrix format
         self.dataframe = None  # Dataframe format
+        self.dataframeProcessing = None
 
         # Initial state: to be used to make predictions
         self.S_0 = None  # Sensible: peoples who can catch the agent
@@ -462,6 +468,15 @@ class seir():
             self.raw_dataset.insert(10,'num_sym_upper', self.dataframe['num_sym_upper'].to_numpy())
             self.raw_dataset.insert(11,'num_positive_mean', self.dataframe['num_positive_mean'].to_numpy())
             self.raw_dataset.insert(11,'num_sym_mean', self.dataframe['num_positive_mean'].to_numpy())
+            self.raw_dataset.insert(12,'num_tested_upper', self.dataframe['num_tested_upper'].to_numpy())
+            self.dataframeProcessing = __dataProcessing__(self)
+
+            corr = self.dataframeProcessing.corr()
+            plot_corr(corr)
+
+            rf(self)
+
+
 
             # preporcessing(self)
 
