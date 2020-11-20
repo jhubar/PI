@@ -5,8 +5,6 @@ import matplotlib.pyplot as plt
 from scipy.integrate import odeint
 from scipy.optimize import minimize
 import math
-import uncertainpy as un
-import chaospy as cp
 from scipy.signal import savgol_filter
 
 """

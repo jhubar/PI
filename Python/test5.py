@@ -218,9 +218,10 @@ if __name__ == "__main__":
     MONTECARLO
     -------------------------------------------------------
     """
-    realisations = np.zeros((1000, positive_set.shape[0]))
+    nb_real = 10000
+    realisations = np.zeros((nb_real, positive_set.shape[0]))
 
-    nb_real = 1000
+
 
     for i in range(0, nb_real):
 
@@ -228,29 +229,28 @@ if __name__ == "__main__":
         realisations[i][0] = 1
         for t in range(1, positive_set.shape[0]):
 
-            # par prediction
-            xt = realisations[i][t - 1] * reg_coef[0] + realisations[i][t - 1] ** 2 * reg_coef[1]
-            print(xt)
-
-            # par mesure
-            et = positive_set[t][1] * np.random.normal(1/0.775, 1/(0.0775*3), 1)
-
-            # Moyenne:
-            realisations[i][t] = (xt + et) / 2
+            sensib = np.random.normal(0.775, (0.075 / 3), 1)
+            test_ratio = np.random.normal(0.75, 0.25/3, 1)
+            tmp = sensib * test_ratio
+            realisations[i][t] = positive_set[t][1] / (sensib * test_ratio)
 
 
     # compute mean and std over realisations
     mean = []
     var = []
-    for i in range(0, positive_set.shape[0]):
+    meanvarup = []
+    meanvardown = []
 
+    for i in range(0, positive_set.shape[0]):
         mean.append(np.mean(realisations[:, i]))
         var.append(np.var(realisations[:, i]))
+        meanvarup.append(mean[i] + var[i])
+        meanvardown.append(mean[i] - var[i])
 
-    print(realisations[5, :])
 
     plt.plot(positive_set[:, 0], mean, c="blue", label='mean')
-    #plt.plot(positive_set[:, 0], mean + var, c='red', label='mean + var')
+    plt.plot(positive_set[:, 0], var, c='red', label='mean + var')
+    #plt.plot(positive_set[:, 0], meanvardown, c='red', label='mean - var')
     plt.legend()
     plt.show()
 
