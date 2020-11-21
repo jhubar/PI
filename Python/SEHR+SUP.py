@@ -6,6 +6,7 @@ from scipy.integrate import odeint
 from scipy.optimize import minimize
 import math
 from scipy.signal import savgol_filter
+from scipy.stats import binom
 
 """
 =======================================================================================================
@@ -91,7 +92,7 @@ class SEIR():
         """
         Differential equations of the model
         """
-        S, E, I, H, R, N, C, D = state
+        S, E, I, H, R, N, C, D, dConta = state
 
         dS = -(beta * S * I) / N
         dE = (beta * S * I) / N - E * sigma
@@ -102,7 +103,9 @@ class SEIR():
         dD = (pd * C)
         dN = 0
 
-        return dS, dE, dI, dH, dR, dN, dC, dD
+        dConta = E * sigma
+
+        return dS, dE, dI, dH, dR, dN, dC, dD, dConta
 
     def predict(self, duration):
         """
@@ -123,7 +126,7 @@ class SEIR():
         return np.vstack((time, predict[:, 0], predict[:, 1], predict[:, 2], predict[:, 3], predict[:, 4],
                           predict[:, 5], predict[:, 6], predict[:, 7])).T
 
-    def fit_B(self):
+    def fit(self):
         """
         This method use the given data to find values of our model who minimise square error
         between predictions and original data.
@@ -141,22 +144,42 @@ class SEIR():
         # Bounds: Given ranges for beta, sigma and gamma
         bounds = [(0, 1), (1 / 5, 1), (1 / 10, 1 / 4)]
         # Start values
-        start_values = [self.beta, self.sigma, self.gamma]
+        #start_values = [self.beta, self.sigma, self.gamma]
         # Use Scipy.optimize.minimize with L-BFGS_B method
         # res = minimize(self.SSE, np.asarray(start_values), args=(initial_state, time, 'first_part'),
         #               method='L-BFGS-B', bounds=bounds)
-        res = minimize(self.SSE, np.asarray(start_values), method='COBYLA', args=(initial_state, time, 'first_part'),
+
+        # Start values
+        init_bis = (self.S_0, self.E_0, self.I_0, self.H_0, self.R_0, self.N, self.C_0, self.D_0, self.dataset[0][1])
+        start_values = [self.beta, self.sigma, self.gamma, self.hp, self.sensitivity]
+        cons = ({'type': 'ineq', 'fun': lambda x: -x[0] + 1},
+                {'type': 'ineq', 'fun': lambda x: -x[1] + 1},
+                {'type': 'ineq', 'fun': lambda x: -x[2] + 1},
+                {'type': 'ineq', 'fun': lambda x: -x[3] + 1},
+                {'type': 'ineq', 'fun': lambda x: -x[4] + 1},
+                {'type': 'ineq', 'fun': lambda x: x[0]},
+                {'type': 'ineq', 'fun': lambda x: x[1]},
+                {'type': 'ineq', 'fun': lambda x: x[2]},
+                {'type': 'ineq', 'fun': lambda x: x[3]},
+                {'type': 'ineq', 'fun': lambda x: x[4]})
+        res = minimize(self.SSE, np.asarray(start_values), method='COBYLA', constraints=cons, args=(init_bis, time, 'first_part_bis'),
                        options={'maxiter': 20000})
 
         print(res)
         self.beta = res.x[0]
         self.sigma = res.x[1]
         self.gamma = res.x[2]
+        self.hp = res.x[3]
+        self.sensitivity = res.x[4]
+
 
         # Compare data with predictions on cumulative positive
         predictions = self.predict(self.dataset.shape[0])
         # Store I + R
-        cumul_positive = predictions[:, 3] + predictions[:, 5]
+        cumul_positive = predictions[:, 3]
+        for i in range(0, len(cumul_positive)):
+            cumul_positive[i] += predictions[i][5] + predictions[i][4] + predictions[i][7] + predictions[i][8]
+            cumul_positive[i] *= self.sensitivity
 
         plt.scatter(predictions[:, 0], self.raw_dataset['cumul_positive'], c='blue', label='Original data')
         plt.plot(predictions[:, 0], cumul_positive, c='red', label='Predictions')
@@ -165,6 +188,7 @@ class SEIR():
         plt.ylabel('Number of peoples')
         plt.legend()
         plt.savefig('fig/cumul_positif_comp.png', transparent=True)
+        plt.show()
         plt.close()
 
         # =========================================================================== #
@@ -268,7 +292,7 @@ class SEIR():
         plt.savefig('fig/fatal_com.png', transparent=True)
         plt.close()
 
-    def fit(self):
+    def fit_b(self):
         """
         This method use the given data to find values of our model who minimise square error
         between predictions and original data.
@@ -280,17 +304,41 @@ class SEIR():
         # So, in this first part, we are equivalent to a basic SEIR model
         # =========================================================================== #
         # Generate initial state:
-        initial_state = self.get_initial_state()
+        initial_state_a = self.get_initial_state()
+        initial_state = []
+        for i in range(0, len(initial_state_a)):
+            initial_state.append(initial_state_a[i])
+        initial_state.append(initial_state[2])
+        initial_state = tuple(initial_state)
         # Time vector:
         time = self.dataset[:, 0]
         # Bounds: Given ranges for beta, sigma and gamma
         bounds = [(0, 1), (1 / 5, 1), (1 / 10, 1 / 4)]
         # Start values
-        start_values = [self.beta, self.sigma, self.gamma, self.hp, self.hcr, self.pc, self.pd, self.pcr]
+        start_values = [self.beta, self.sigma, self.gamma, self.hp, self.hcr, self.pc, self.pd, self.pcr, self.sensitivity]
         # Use Scipy.optimize.minimize with L-BFGS_B method
         # res = minimize(self.SSE, np.asarray(start_values), args=(initial_state, time, 'first_part'),
         #               method='L-BFGS-B', bounds=bounds)
-        res = minimize(self.SSE, np.asarray(start_values), method='COBYLA', args=(initial_state, time, 'first_part'),
+        cons = ({'type': 'ineq', 'fun': lambda x: -x[0] + 1},
+                {'type': 'ineq', 'fun': lambda x: -x[1] + 1},
+                {'type': 'ineq', 'fun': lambda x: -x[2] + 1},
+                {'type': 'ineq', 'fun': lambda x: -x[3] + 1},
+                {'type': 'ineq', 'fun': lambda x: -x[4] + 1},
+                {'type': 'ineq', 'fun': lambda x: -x[5] + 1},
+                {'type': 'ineq', 'fun': lambda x: -x[6] + 1},
+                {'type': 'ineq', 'fun': lambda x: -x[7] + 1},
+                {'type': 'ineq', 'fun': lambda x: -x[8] + 1},
+                {'type': 'ineq', 'fun': lambda x: x[0]},
+                {'type': 'ineq', 'fun': lambda x: x[1]},
+                {'type': 'ineq', 'fun': lambda x: x[2]},
+                {'type': 'ineq', 'fun': lambda x: x[3]},
+                {'type': 'ineq', 'fun': lambda x: x[4]},
+                {'type': 'ineq', 'fun': lambda x: x[5]},
+                {'type': 'ineq', 'fun': lambda x: x[6]},
+                {'type': 'ineq', 'fun': lambda x: x[7]},
+                {'type': 'ineq', 'fun': lambda x: x[8]}
+                )
+        res = minimize(self.SSE, np.asarray(start_values), method='COBYLA', constraints=cons, args=(initial_state, time, 'COBY_3'),
                        options={'maxiter': 20000})
 
         print(res)
@@ -302,14 +350,27 @@ class SEIR():
         self.pc = res.x[5]
         self.pd = res.x[6]
         self.pcr = res.x[7]
-
+        self.sensitivity = res.x[8]
+        params = (self.beta, self.sigma, self.gamma, self.hp, self.hcr, self.pc, self.pd, self.pcr)
         # Compare data with predictions on cumulative positive
-        predictions = self.predict(self.dataset.shape[0])
-        # Store I + R
-        cumul_positive = predictions[:, 3] + predictions[:, 5]
+        # Make predictions:
+        predict = odeint(func=self.differential_fit,
+                         y0=initial_state,
+                         t=time,
+                         args=params)
+        delta_conta = []
+        # Dé-cumul
+        delta_conta.append(predict[0][8])
+        cumul_posit = []
+        for i in range(1, predict.shape[0]):
+            delta_conta.append(predict[i][8] - predict[i - 1][8])
+        # Sensitivity:
+        for i in range(0, len(delta_conta)):
+            delta_conta[i] /= self.sensitivity
+            cumul_posit.append(predict[i][2] + predict[i][3] + predict[i][4] + predict[i][6] + predict[i][7])
 
-        plt.scatter(predictions[:, 0], self.raw_dataset['cumul_positive'], c='blue', label='Original data')
-        plt.plot(predictions[:, 0], cumul_positive, c='red', label='Predictions')
+        plt.scatter(self.dataset[:, 0], self.dataset[:, 7], c='blue', label='Original data')
+        plt.plot(self.dataset[:, 0], cumul_posit, c='red', label='Predictions')
         plt.title('Comparison between cumulative of positive test and I + R predictions')
         plt.xlabel('Time in days')
         plt.ylabel('Number of peoples')
@@ -456,6 +517,7 @@ class SEIR():
         Compute and return the sum of square errors between our dataset of observations and
         our predictions. In function of the parameters thant we want to fit, we are using
         different fitting strategies:
+
         1. PART 1:
             This method is use to find the definitive value of beta and sigma, and a temporary value of gamma. In this
             case, hp and hcr are set at Zero and we can fit our parameters by computing the square error between the
@@ -472,6 +534,7 @@ class SEIR():
             This part compute hcr parameter by computing square error between normal hospitalized column of the
             dataset (non-cumulative), and the curve H.
         4. PART 4:
+
         5. PART 5:
         """
         if method == 'first_part':
@@ -487,6 +550,29 @@ class SEIR():
             sse = 0.0
             for i in range(0, len(time)):
                 sse += (self.dataset[i][7] - predict[i][2] - predict[i][3] - predict[i][4]) ** 2
+            return sse
+
+        if method == 'first_part_bis':
+            # Set parameters: we set hp et hcr to zero
+            tpl = tuple(parameters)
+            params = (tpl[0], tpl[1], tpl[2], tpl[3], 0, 0, 0, 0)
+
+            # Make predictions:
+            predict = odeint(func=self.differential_fit,
+                             y0=initial_state,
+                             t=time,
+                             args=params)
+            test = []
+            test.append(predict[0][8])
+            for i in range(0, predict.shape[0]):
+                test.append(predict[i][8] - predict[i-1][8])
+            for i in range(0, len(test)):
+                test[i] *= parameters[-1]
+
+            sse = 0.0
+            for i in range(0, len(time)):
+                sse += (self.dataset[i][1] - test[i]) ** 2
+                sse += (self.dataset[i][4] - predict[i][4]) ** 2
             return sse
 
         if method == 'second_part':
@@ -567,7 +653,59 @@ class SEIR():
 
         if method == 'COBY_2':
 
-            pass
+            tmp = (parameters[0], parameters[1], parameters[2], parameters[3], parameters[4], parameters[5], parameters[6], parameters[7])
+            params = tuple(tmp)
+            # Make predictions:
+            predict = odeint(func=self.differential_fit,
+                             y0=initial_state,
+                             t=time,
+                             args=params)
+            delta_conta = []
+            # Dé-cumul
+            delta_conta.append(predict[0][8])
+            for i in range(1, predict.shape[0]):
+                delta_conta.append(predict[i][8] - predict[i-1][8])
+            # Fit on evidence proba
+            obj = np.zeros(1, dtype=np.float64)
+
+            for i in range(0, len(time)):
+                n = delta_conta[i]
+                k = self.dataset[i][1]
+                pb = binom.pmf(k=k, n=n, p=parameters[8])
+                if math.isnan(pb):
+                    pb = 0
+                obj += pb
+            print(-obj)
+            return -obj
+
+        if method == 'COBY_3':
+
+            tmp = (parameters[0], parameters[1], parameters[2], parameters[3], parameters[4], parameters[5], parameters[6], parameters[7])
+            params = tuple(tmp)
+            # Make predictions:
+            predict = odeint(func=self.differential_fit,
+                             y0=initial_state,
+                             t=time,
+                             args=params)
+            delta_conta = []
+            # Dé-cumul
+            delta_conta.append(predict[0][8])
+            for i in range(1, predict.shape[0]):
+                delta_conta.append(predict[i][8] - predict[i-1][8])
+            for i in range(0, len(delta_conta)):
+                delta_conta[i] * parameters[8]
+            sse = np.zeros(1, dtype=np.float64)
+            for i in range(0, len(time)):
+                # Error on death cases
+                #sse += (self.dataset[i][1] - delta_conta[i]) ** 2
+                #sse += (self.dataset[i][3] - predict[i][2]) ** 2
+                sse += np.fabs(self.dataset[i][7] - predict[i][2] - predict[i][3] - predict[i][4] - predict[i][6] - predict[i][7])
+                sse += np.fabs(self.dataset[i][3] - predict[i][3])
+                sse += np.fabs(self.dataset[i][5] - predict[i][6])
+                sse += np.fabs(self.dataset[i][6] - predict[i][7])
+            print(sse)
+            return sse
+
 
     def dataframe_smoothing1(self, df):
         # Convolution
@@ -722,7 +860,7 @@ class SEIR():
             self.S_0 = self.N - self.I_0 - self.H_0 - self.E_0
 
             # Initialize default value to hyper-parameters:
-            self.beta = 0.35
+            self.beta = 0.2
             self.sigma = 1 / 3
             self.gamma = 1 / 7
             self.hp = 0
