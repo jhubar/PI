@@ -119,10 +119,10 @@ class SEIR():
 
     def fit(self):
 
-        #Prefit
-        #for i in range(0, 2):
-        #    for j in range(0, 4):
-        #        self.manual_fit(param_index=j, prt=True, method='method_3')
+        # Prefit
+        for i in range(0, 2):
+            for j in range(0, 4):
+                self.manual_fit(param_index=j, prt=True, method='method_3')
 
         #start_values = [self.beta, self.sigma, self.gamma, self.sensitivity]
         #bnd = [(0.2, 0.5), (0.3, 1.), (0.05, 0.5), (0.7, 0.85)]
@@ -132,7 +132,7 @@ class SEIR():
         bnd = [(0.2, 0.5), (0.3, 1.), (0.05, 0.5), (0.4, 0.9)]
         #constraint = ({'type': 'ineq', 'fun': lmbda x:})
         start_values = [self.beta, self.sigma, self.gamma, self.sensitivity]
-        res = minimize(self.objective, np.asarray(start_values), method='COBYLA', args=('method_7'),
+        res = minimize(self.objective, np.asarray(start_values), method='COBYLA', args=('method_5'),
                        options={'maxiter':20000})
 
 
@@ -146,7 +146,7 @@ class SEIR():
 
 
 
-    def manual_fit(self, param_index=0, method='method_2', prt=False, name='Fitting'):
+    def manual_fit(self, param_index=0, method='method_7', prt=False, name='Fitting'):
 
         rg_size = 200
         param_rg = np.linspace(0, 1, rg_size)

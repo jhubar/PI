@@ -29,7 +29,7 @@ class SEIR():
         self.pd = 0  # Probability to die each day in icu
         self.pcr = 0  # Probability to recover from critical
 
-        self.sensitivity = 0.8
+        self.sensitivity = 0.88
 
         # Data to fit
         self.raw_dataset = None  # Original dataset, before preprocessing
@@ -556,6 +556,7 @@ class SEIR():
             # Set parameters: we set hp et hcr to zero
             tpl = tuple(parameters)
             params = (tpl[0], tpl[1], tpl[2], tpl[3], 0, 0, 0, 0)
+            print(params)
 
             # Make predictions:
             predict = odeint(func=self.differential_fit,
@@ -564,16 +565,34 @@ class SEIR():
                              args=params)
             test = []
             test.append(predict[0][8])
-            for i in range(0, predict.shape[0]):
+            for i in range(1, predict.shape[0]):
                 test.append(predict[i][8] - predict[i-1][8])
             for i in range(0, len(test)):
                 test[i] *= parameters[-1]
 
-            sse = 0.0
-            for i in range(0, len(time)):
-                sse += (self.dataset[i][1] - test[i]) ** 2
-                sse += (self.dataset[i][4] - predict[i][4]) ** 2
-            return sse
+            error = 0.0
+            for i in range(0, len(test)):
+                p = parameters[-1]
+                p /= 2
+                n = round(predict[i][8] * 2)
+                k = round(self.dataset[i][7])
+
+                p_a = np.log(binom.pmf(k=k, n=n, p=p))
+                if p_a == - math.inf or math.isnan(p_a):
+                    p_a = -1000
+
+                p = 0.5
+                n = round(predict[i][2] * 2)
+                k = round(self.dataset[i][4])
+
+                p_b = np.log(binom.pmf(k=k, n=n, p=p))
+                if p_b == - math.inf or math.isnan(p_b):
+                    p_b = -1000
+
+                error = error - p_a - p_b
+            print(error)
+            return error
+
 
         if method == 'second_part':
 
