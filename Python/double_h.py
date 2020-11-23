@@ -25,6 +25,9 @@ class SEIR():
         self.hpB = 1/18
         self.hcr = 0  # Hospit Cure Rate: proba de guérir en hospitalisation
 
+    
+
+
     def set_hospit_prop(self, hospit_prop):
         self.hospit_prop = hospit_prop
 
@@ -321,7 +324,8 @@ class SEIR():
 
 def plot_predict_and_compare(df, pred, args='predict'):
     if 'predict' in args:
-        # just print predicted epidemic curves
+        # just print predicted epidemic curves Warning
+
         if "no_S" not in args:
             plt.plot(pred[:, 0], pred[:, 1], c='black', label="S")
         plt.plot(pred[:, 0], pred[:, 2], c='yellow', label="E")
@@ -373,7 +377,7 @@ def sec_method():
     R_0 = 0
 
     """ *****************************************************************************
-        ETAPE 1: 
+        ETAPE 1:
         Trouver le paramètre hp, de la même façon que dans methode 1
         *****************************************************************************
     """
@@ -402,11 +406,11 @@ def sec_method():
     plt.show()
 
     """ *****************************************************************************
-        ETAPE 2: 
-        On fit le modèle: 
+        ETAPE 2:
+        On fit le modèle:
             - D'abord les paramètres beta, gamma et sigma. Le paramètre hp a été fixé
                 à l'étape 1 et le paramètre hcr est fixé à zéro car n'intervient pas
-                dans le cas ou l'on fit sur les courbes I+R+H 
+                dans le cas ou l'on fit sur les courbes I+R+H
             - Après on fit hcr sur la courbe des hospitalisations.
         *****************************************************************************
     """
@@ -428,8 +432,8 @@ def sec_method():
 
 
     """ *****************************************************************************
-        Nous pouvons maintenant comparer les simulations et les données ainsi que 
-        dessiner des prédictions à long terme. 
+        Nous pouvons maintenant comparer les simulations et les données ainsi que
+        dessiner des prédictions à long terme.
         *****************************************************************************
     """
     predictions = model.predict(S_0, E_0, IA_0, IB_0, H_0, R_0, duration=150)
@@ -450,5 +454,3 @@ def sec_method():
 if __name__ == "__main__":
     # first_method()
     sec_method()
-
-

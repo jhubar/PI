@@ -24,8 +24,8 @@ class SEIR():
         self.hp = 0.05          # Hospit rate
         self.hcr = 0.2          # Hospit recovery rate
         self.pc = 0.1           # Critical rate
-        self.pd = 0.1           # Critical recovery rate
-        self.pcr = 0.3          # Critical mortality
+        self.pd = 0.1           # Critical mortality
+        self.pcr = 0.3          # Critical recovery rate
         self.s = 0.765          # Sensitivity
         self.t = 0.75           # Testing rate in symptomatical
 
@@ -98,6 +98,99 @@ class SEIR():
         self.cobyla = True
         self.LBFGSB = False
         self.auto = False
+
+
+    def stochastic_predic(self, time):
+
+
+
+        output = np.zeros((len(time), 7))
+        # Initial state:
+        output[0][0] = self.S_0                       #s
+        output[0][1] = self.E_0                       #E
+        output[0][2] = self.I_0                       #i
+        output[0][3] = self.R_0                       #R
+        output[0][4] = self.H_0                       #H
+        output[0][5] = self.C_0                       #C
+        output[0][6] = self.D_0                       #F
+
+        N = 1000000
+
+        params = (self.beta, self.sigma, self.gamma, self.sensitivity)
+
+        for i in range(1, len(time)):
+
+            S_to_E = np.random.binomial(output[i-1][0], self.beta * output[i-1][2] / N)
+            E_to_I = np.random.binomial(output[i-1][1], self.sigma)
+            I_to_R = np.random.binomial(output[i-1][2], self.gamma)
+            I_to_H = np.random.binomial(output[i-1][2], self.hp)
+            H_to_C = np.random.binomial(output[i-1][4], self.pc)
+            H_to_R = np.random.binomial(output[i-1][4], self.hcr)
+            C_to_F = np.random.binomial(output[i-1][5], self.pd)
+            C_to_R = np.random.binomial(output[i-1][5], self.pcr)
+
+
+
+            # Update staes:
+            output[i][0] = output[i-1][0] - S_to_E                        #S
+            output[i][1] = output[i-1][1] + S_to_E - E_to_I               #E
+            output[i][2] = output[i-1][2] + E_to_I - I_to_R - I_to_H      #I
+            output[i][3] = output[i-1][3] + I_to_R + H_to_C + H_to_R      #R
+            output[i][4] = output[i-1][4] + I_to_H - H_to_R - H_to_C      #H
+            output[i][5] = output[i-1][5] + H_to_C - C_to_R - C_to_F      #C
+            output[i][6] = output[i-1][6] + C_to_F                        #F
+            output[i][7] = output[i-1][1]  
+
+
+        return output
+
+    def stochastic_mean(self, time, nb_simul):
+
+        result_S = np.zeros((len(time), nb_simul))
+        result_E = np.zeros((len(time), nb_simul))
+        result_I = np.zeros((len(time), nb_simul))
+        result_R = np.zeros((len(time), nb_simul))
+        result_H = np.zeros((len(time), nb_simul))
+        result_C = np.zeros((len(time), nb_simul))
+        result_F = np.zeros((len(time), nb_simul))
+
+        result_Conta = np.zeros((len(time), nb_simul))
+        for i in range(0, nb_simul):
+
+            pred = self.stochastic_predic(time)
+            for j in range(0, len(time)):
+                result_S[j][i] = pred[j][0]
+                result_E[j][i] = pred[j][1]
+                result_I[j][i] = pred[j][2]
+                result_R[j][i] = pred[j][3]
+                result_H[j][i] = pred[j][4]
+                result_C[j][i] = pred[j][5]
+                result_F[j][i] = pred[j][6]
+                result_Conta[j][i] = pred[j][7]
+
+        mean = np.zeros((len(time), 8))
+        std = np.zeros((len(time), 8))
+        for i in range(0, len(time)):
+            mean[i][0] = np.mean(result_S[i, :])
+            mean[i][1] = np.mean(result_E[i, :])
+            mean[i][2] = np.mean(result_I[i, :])
+            mean[i][3] = np.mean(result_R[i, :])
+            mean[i][4] = np.mean(result_H[i, :])
+            mean[i][5] = np.mean(result_C[i, :])
+            mean[i][6] = np.mean(result_F[i, :])
+            mean[i][7] = np.mean(result_Conta[i, :])
+
+            std[i][0] = np.std(result_S[i, :])
+            std[i][1] = np.std(result_E[i, :])
+            std[i][2] = np.std(result_I[i, :])
+            std[i][3] = np.std(result_R[i, :])
+            std[i][4] = np.std(result_H[i, :])
+            std[i][5] = np.std(result_C[i, :])
+            std[i][6] = np.std(result_F[i, :])
+            std[i][7] = np.std(result_Conta[i, :])
+
+
+        return mean, std
 
     def get_parameters(self):
 
@@ -212,7 +305,7 @@ class SEIR():
 
 
         # Print optimizer result
-        print(res)
+        # print(res)
         # Update model parameters:
         self.beta = res.x[0]
         self.sigma = res.x[1]
@@ -239,9 +332,11 @@ class SEIR():
             for i in range(0, pred.shape[0]):
                 conta.append(pred[i][7] - pred[i-1][7])
 
+
             # Compare with dataset:
             prb = 0
-            print(params)
+            # print(params)
+
             for i in range(0, pred.shape[0]):
                 p_k1 = p_k2 = p_k3 = p_k4 = p_k5 = p_k6 = self.overflow
                 # ======================================= #
@@ -250,11 +345,16 @@ class SEIR():
                 pa = params[8] * params[9]
                 n = np.around(pred[i][7] * pa)
                 k = self.dataset[i][7]
+                if i > 10 and i < 12:
+                    print(n)
+                    print(k)
                 p = 1 / self.b_s_1
-                if k < 0 and n < 0:
+                if k < 0 and n < 0:   # a vérifer k<0
+
                     k *= -1
                     n *= -1
                 if k > n:
+
                     tmp = n
                     n = k
                     k = tmp
@@ -277,6 +377,7 @@ class SEIR():
                 k = self.dataset[i][1]
                 p = 1 / self.b_s_2
                 if k < 0 and n < 0:
+                    print("hello 2")
                     k *= -1
                     n *= -1
                 if k > n:
@@ -301,6 +402,7 @@ class SEIR():
                 k = self.dataset[i][3]
                 p = 1 / self.b_s_3
                 if k < 0 and n < 0:
+                    print("hello 3")
                     k *= -1
                     n *= -1
                 if k > n:
@@ -325,6 +427,7 @@ class SEIR():
                 k = self.dataset[i][4]
                 p = 1 / self.b_s_4
                 if k < 0 and n < 0:
+                    print("hello 4")
                     k *= -1
                     n *= -1
                 if k > n:
@@ -348,7 +451,9 @@ class SEIR():
                 n = np.around(pred[i][5])
                 k = self.dataset[i][5]
                 p = 1 / self.b_s_5
+
                 if k < 0 and n < 0:
+                    print("hello 5")
                     k *= -1
                     n *= -1
                 if k > n:
@@ -373,6 +478,7 @@ class SEIR():
                 k = self.dataset[i][6]
                 p = 1 / self.b_s_6
                 if k < 0 and n < 0:
+                    print("hello 5")
                     k *= -1
                     n *= -1
                 if k > n:
@@ -399,7 +505,7 @@ class SEIR():
                     print('critical: {} - {}'.format(np.around(pred[i][5]), self.dataset[i][5]))
                     print('Fatalities: {} - {}'.format(np.around(pred[i][6]), self.dataset[i][6]))
 
-            print(prb)
+            # print(prb)
 
             return prb
 
@@ -423,6 +529,7 @@ class SEIR():
         self.E_0 = self.I_0 * 5
         self.R_0 = 0
         self.S_0 = 1000000 - self.I_0 - self.E_0
+        print(self.dataframe)
 
     def sensib_finder(self):
 
@@ -499,6 +606,8 @@ if __name__ == "__main__":
         print('dataset: {}, predict = {}'.format(model.dataset[i, 3], prd[i][4]))
     print('===  E values: ')
     print(prd[:, 1])
+
+
 
     # Plot
     plt.scatter(model.dataset[:, 0], model.dataset[:, 7], c='blue', label='testing data')
