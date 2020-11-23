@@ -124,8 +124,6 @@ class SEIR():
 
         for i in range(1, len(time)):
 
-
-
             S_to_E = np.random.multinomial(output[i-1][0], [self.beta * output[i-1][2] / N, 1-(self.beta * output[i-1][2] / N)])[0]
             #print(S_to_E)
             E_to_I = np.random.multinomial(output[i-1][1], [self.sigma, 1-self.sigma])[0]
@@ -686,5 +684,5 @@ if __name__ == "__main__":
     # print('===  E values: ')
     # print(prd[:, 1])
 
-    model.plot('test2.png', '--det-I --det-H --det-C --sto-I --sto-H --sto-C',300)
+    model.plot('testtest.png', '--det-I --det-H --det-C --sto-I --sto-H --sto-C',300)
     print("Nombre de simulation éclatée au sol: \n")
