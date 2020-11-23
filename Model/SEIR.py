@@ -100,19 +100,14 @@ class SEIR():
         self.slsqp = True
         self.auto = False
 
-        self.nbEclatax_S = 0
-        self.nbEclatax_E = 0
+
         self.nbEclatax_I = 0
-        self.nbEclatax_R = 0
         self.nbEclatax_H = 0
         self.nbEclatax_C = 0
-        self.nbEclatax_F = 0
-        self.nbEclatax_CI = 0
-        self.nbEclatax_CH = 0
         self.nbEclatax_ITOT = 0
         self.nbEclatax_HTOT = 0
         self.nbEclatax_CTOT = 0
-        self.nbEclatax_RTOT = 0
+
 
     #Return output composed of value of S E I R H C F and CI for each day
     def stochastic_predic(self, time):
@@ -131,18 +126,11 @@ class SEIR():
 
         N = 1000000
 
-        eclatax_S = False
-        eclatax_E = False
         eclatax_I = False
-        eclatax_R = False
         eclatax_H = False
         eclatax_C = False
-        eclatax_F = False
-        eclatax_CI = False
-        eclatax_CH = False
         eclatax_ITOT = False
         eclatax_HTOT = False
-        eclatax_RTOT = False
         eclatax_CTOT = False
 
         #params = (self.beta, self.sigma, self.gamma, self.sensitivity)
@@ -180,40 +168,52 @@ class SEIR():
             # Update states:
 
             output[i][0] = output[i-1][0] - S_to_E                        #S
-            # WARNING:
-            if output[i][0] < 0:
-                output[i][0] = 0
-
-                eclatax_S = True
-
             output[i][1] = output[i-1][1] + S_to_E - E_to_I               #E
-            # WARNING:
-            if output[i][1] < 0:
-                output[i][1] = 0
-                eclatax_E = True
 
             output[i][2] = output[i-1][2] + E_to_I - I_to_R - I_to_H      #I
             # WARNING: if the epidemic die (infected <= 0) we consider a population of 0 infected
             if output[i][2] < 0:
+
+                print("output[i][2]",output[i][2])
+                I_to_R -= abs(output[i][2])*(self.gamma/(self.gamma+self.hp))
+                print("I_to_R",I_to_R)
+                I_to_H -= abs(output[i][2])*(self.hp/(self.gamma+self.hp))
+                print("I_to_H",I_to_H)
+
+                if ((I_to_R*10) % 5) == 0:
+                    I_to_H += 0.1
+
+                I_to_H = np.round(I_to_H)
+                I_to_R = np.round(I_to_R)
+                print("floor I_to_H",I_to_R)
+
+                print("ceil I_to_H",I_to_H)
+
                 output[i][2] = 0
-                output[i-1][2] -=1
+
+
                 if i < 130:
                     eclatax_I = True
                 eclatax_ITOT = True
 
             output[i][3] = output[i-1][3] + I_to_R + C_to_R + H_to_R      #R
-            # WARNING:
-            if output[i][3] < 0:
-                output[i][3] = 0
-                if i < 130:
-                    eclatax_R = True
-                eclatax_RTOT = True
-
 
             output[i][4] = output[i-1][4] + I_to_H - H_to_R - H_to_C      #H
             # WARNING:
             if output[i][4] < 0:
+
+                H_to_R -= abs(output[i][4])*self.pc/self.pc+self.hcr
+
+                H_to_C -= abs(output[i][4])*self.hcr/self.pc+self.hcr
+
+                if ((H_to_R*10) % 5) == 0:
+                    H_to_R += 0.1
+
+                H_to_R = np.round(H_to_R)
+                H_to_C = np.round(H_to_C)
+
                 output[i][4] = 0
+
                 if i < 130:
                     eclatax_H = True
                 eclatax_HTOT = True
@@ -221,58 +221,45 @@ class SEIR():
             output[i][5] = output[i-1][5] + H_to_C - C_to_R - C_to_F      #C
             # WARNING:
             if output[i][5] < 0:
+
+                C_to_R -= abs(output[i][5])*self.pcr/self.pcr+self.pd
+                C_to_F -= abs(output[i][5])*self.pd/self.pcr+self.pd
+
+                if ((C_to_F*10) % 5) == 0:
+                    C_to_F += 0.1
+
+                C_to_R = np.round(C_to_R)
+                C_to_F = np.round(C_to_F)
+
                 output[i][5] = 0
                 if i < 130:
                     eclatax_C = True
                 eclatax_CTOT = True
 
             output[i][6] = output[i-1][6] + C_to_F                        #F
-            # WARNING:
-            if output[i][6] < 0:
-                output[i][6] = 0
-
-                eclatax_F = True
-
             output[i][7] = output[i-1][7] + np.random.binomial(E_to_I, self.s)      #CI
-            # WARNING:
-            if output[i][7] < 0:
-                output[i][7] = 0
-                eclatax_CI = True
-
             output[i][8] = output[i-1][8] + I_to_H     #CH
-            # WARNING:
-            if output[i][8] < 0:
-                output[i][8] = 0
-                eclatax_CH = True
 
 
 
-        if(eclatax_S):
-            self.nbEclatax_S +=1
-        if(eclatax_E):
-            self.nbEclatax_E +=1
+
+
+
         if(eclatax_I):
             self.nbEclatax_I +=1
-        elif(eclatax_R):
-            self.nbEclatax_R +=1
         if(eclatax_H):
             self.nbEclatax_H +=1
         if(eclatax_C):
             self.nbEclatax_C +=1
-        if(eclatax_F):
-            self.nbEclatax_F +=1
-        if(eclatax_CI):
-            self.nbEclatax_CI +=1
-        if(eclatax_CH):
-            self.nbEclatax_CH +=1
+
+
         if(eclatax_ITOT):
             self.nbEclatax_ITOT +=1
         if(eclatax_CTOT):
             self.nbEclatax_CTOT +=1
         if(eclatax_HTOT):
             self.nbEclatax_HTOT +=1
-        if(eclatax_RTOT):
-            self.nbEclatax_RTOT +=1
+
 
         return output
 
@@ -746,17 +733,11 @@ if __name__ == "__main__":
 
     model.plot('test2.png', '--det-I --det-H --det-C --sto-I --sto-H --sto-C',300)
     print("Nombre de simulation éclatée au sol: \n")
-    print("S: ",model.nbEclatax_S,
-        "\n E: ", model.nbEclatax_E,
-        "\n I: ", model.nbEclatax_I,
-        "\n R: ", model.nbEclatax_R,
+    print("\n I: ", model.nbEclatax_I,
         "\n H: ",model.nbEclatax_H,
         "\n C: ", model.nbEclatax_C,
-        "\n F: ", model.nbEclatax_F,
-        "\n:CI: ", model.nbEclatax_CI,
-        "\n CH: ", model.nbEclatax_CH,
+
         "\n Itot: ", model.nbEclatax_ITOT,
-        "\n Rtot: ", model.nbEclatax_RTOT,
         "\n Htot: ", model.nbEclatax_HTOT,
         "\n Ctot: ", model.nbEclatax_CTOT,
         )
