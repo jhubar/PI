@@ -1,6 +1,6 @@
 # Big data project
 <p align="center">
-  <img src= https://github.com/julien1941/PI/blob/master/image/covid.gif/>
+  <img src= https://github.com/julien1941/PI/blob/master/img/covid.gif/>
 </p>
 
 ## Documentation
@@ -16,7 +16,7 @@
 - [Second review (slides)](https://docs.google.com/presentation/d/1vitNpYH1wZCm37x9IQqmCacr1mpFP3Ws-LN2bmsNQIU/edit?fbclid=IwAR3Tllvh4Qn8Ztu2WHrLuC2n1oe0clxKboAQxggL7CARIG3NJ3muyu7OsY0#slide=id.ga8ac653453_3_13)
 
 ## Point a discuter
-1. Caractériser le bruit de la courbe num_positive (sensitivity test, percentage of infected tested) 
+1. Caractériser le bruit de la courbe num_positive (sensitivity test, percentage of infected tested)
 1. Changer la fonction coût à minimiser (les moindres carrés ne fonctionneront plus)
 
 ## Questions
@@ -27,4 +27,3 @@
 1. [Andreas Duquenne](https://githut.com/AnDuquenne)
 1. [François Lievens](https://github.com/francoislievens)
 1. [Hubar Julien](https://github.com/julien1941)
-
