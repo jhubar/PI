@@ -23,7 +23,7 @@ def plot_dataset(self, filename, type, duration_=0):
                                   - num_cum_hospit =
                                     num_cumulative_hospitalization
                                   - num_fatal = num_fatalities
-                                  - cum-num-pos = cumul_num_positive
+                                  - cum_num_pos = cumul_num_positive
                                   (det, sto)
                                   - S = Succeptible
                                   - E = Exposed
