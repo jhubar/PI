@@ -99,12 +99,12 @@ class SEIR():
         self.LBFGSB = False
         self.auto = False
 
-
+    #Return output composed of value of S E I R H C F and CI for each day
     def stochastic_predic(self, time):
 
 
 
-        output = np.zeros((len(time), 7))
+        output = np.zeros((len(time), 8))
         # Initial state:
         output[0][0] = self.S_0                       #s
         output[0][1] = self.E_0                       #E
@@ -113,6 +113,7 @@ class SEIR():
         output[0][4] = self.H_0                       #H
         output[0][5] = self.C_0                       #C
         output[0][6] = self.D_0                       #F
+        output[0][7] = self.I_0                       #CI
 
         N = 1000000
 
@@ -139,7 +140,7 @@ class SEIR():
             output[i][4] = output[i-1][4] + I_to_H - H_to_R - H_to_C      #H
             output[i][5] = output[i-1][5] + H_to_C - C_to_R - C_to_F      #C
             output[i][6] = output[i-1][6] + C_to_F                        #F
-            output[i][7] = output[i-1][1]  
+            output[i][7] = output[i-1][7] + E_to_I * self.sensitivity     #CI
 
 
         return output
@@ -189,7 +190,6 @@ class SEIR():
             std[i][6] = np.std(result_F[i, :])
             std[i][7] = np.std(result_Conta[i, :])
 
-
         return mean, std
 
     def get_parameters(self):
@@ -211,7 +211,7 @@ class SEIR():
         init = (S_0, E_0, I_0, R_0, H_0, C_0, D_0, CT_0, CH_0)
         return init
 
-    def differential(self, state, time, beta, sigma, gamma, hp, hcr, pc, pd, pcr, s, t):
+    def differential(self, state, time, beta, sigma, gamma, hp, hcr, pc, pd, pcr):
 
         S, E, I, R, H, C, D, CT, CH = state
 
