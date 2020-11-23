@@ -7,7 +7,7 @@ import math
 from scipy.stats import binom as binom
 
 from smoothing import dataframe_smoothing
-
+from plot import plot_dataset
 
 
 
@@ -59,7 +59,7 @@ class SEIR():
         self.overflow = - 1000
 
         # Smoothing data or not
-        self.smoothing = False
+        self.smoothing = True
 
         # Binomial smoother: ex: if = 2: predicted value *= 2 and p /= 2 WARNING: only use integer
         self.b_s_1 = 6
@@ -211,7 +211,7 @@ class SEIR():
         init = (S_0, E_0, I_0, R_0, H_0, C_0, D_0, CT_0, CH_0)
         return init
 
-    def differential(self, state, time, beta, sigma, gamma, hp, hcr, pc, pd, pcr):
+    def differential(self, state, time, beta, sigma, gamma, hp, hcr, pc, pd, pcr,s,t):
 
         S, E, I, R, H, C, D, CT, CH = state
 
@@ -294,8 +294,8 @@ class SEIR():
             if self.cobyla:
                 res = minimize(self.objective, np.asarray(init_prm),
                                method='COBYLA',
-                               options={'eps': self.opti_step},
                                args=('method_1'),
+                               options={'eps': 0.05},
                                constraints=cons)
             else:   # Auto
                 res = minimize(self.objective, np.asarray(init_prm),
@@ -345,9 +345,7 @@ class SEIR():
                 pa = params[8] * params[9]
                 n = np.around(pred[i][7] * pa)
                 k = self.dataset[i][7]
-                if i > 10 and i < 12:
-                    print(n)
-                    print(k)
+
                 p = 1 / self.b_s_1
                 if k < 0 and n < 0:   # a vérifer k<0
 
@@ -402,7 +400,7 @@ class SEIR():
                 k = self.dataset[i][3]
                 p = 1 / self.b_s_3
                 if k < 0 and n < 0:
-                    print("hello 3")
+
                     k *= -1
                     n *= -1
                 if k > n:
@@ -427,7 +425,7 @@ class SEIR():
                 k = self.dataset[i][4]
                 p = 1 / self.b_s_4
                 if k < 0 and n < 0:
-                    print("hello 4")
+
                     k *= -1
                     n *= -1
                 if k > n:
@@ -453,7 +451,7 @@ class SEIR():
                 p = 1 / self.b_s_5
 
                 if k < 0 and n < 0:
-                    print("hello 5")
+
                     k *= -1
                     n *= -1
                 if k > n:
@@ -478,7 +476,7 @@ class SEIR():
                 k = self.dataset[i][6]
                 p = 1 / self.b_s_6
                 if k < 0 and n < 0:
-                    print("hello 5")
+
                     k *= -1
                     n *= -1
                 if k > n:
@@ -509,8 +507,6 @@ class SEIR():
 
             return prb
 
-
-
     def import_dataset(self):
 
         url = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/data.csv"
@@ -529,7 +525,7 @@ class SEIR():
         self.E_0 = self.I_0 * 5
         self.R_0 = 0
         self.S_0 = 1000000 - self.I_0 - self.E_0
-        print(self.dataframe)
+
 
     def sensib_finder(self):
 
@@ -576,6 +572,10 @@ class SEIR():
         print('best sensib = {} with error = {}'.format(best[1], best[0]))
         self.s = best[1]
 
+    def plot(self, filename, type):
+        plot_dataset(self,filename , type)
+
+
 
 if __name__ == "__main__":
 
@@ -590,9 +590,6 @@ if __name__ == "__main__":
     params = model.get_parameters()
     #model.objective(params, 'method_1', print_details=True)
 
-
-
-
     # Make a prediction:
     prd = model.predict(model.dataset.shape[0])
     for i in range(0, prd.shape[0]):
@@ -606,24 +603,4 @@ if __name__ == "__main__":
         print('dataset: {}, predict = {}'.format(model.dataset[i, 3], prd[i][4]))
     print('===  E values: ')
     print(prd[:, 1])
-
-
-
-    # Plot
-    plt.scatter(model.dataset[:, 0], model.dataset[:, 7], c='blue', label='testing data')
-    plt.scatter(model.dataset[:, 0], model.dataset[:, 3], c='green', label='hospit')
-    plt.plot(model.dataset[:, 0], prd[:, 4], c='yellow', label='hospit pred')
-    plt.plot(model.dataset[:, 0], prd[:, 7], c='red', label='predictions')
-    plt.legend()
-    plt.savefig('plot1.png')
-
-
-    plt.scatter(model.dataset[:, 0], model.dataset[:, 5], c='blue', label='critical data')
-    plt.plot(model.dataset[:, 0], prd[:, 5], c='red', label='critical prediction')
-    plt.scatter(model.dataset[:, 0], model.dataset[:, 6], c='yellow', label='dead data')
-    plt.plot(model.dataset[:, 0], prd[:, 6], c='green', label='dead predict')
-    plt.legend()
-    plt.savefig('plot2.png')
-
-    for i in range(0, model.dataset.shape[0]):
-        print('critical pred vs deaad pred: {} : {}'.format(prd[i][5], prd[i][6]))
+    model.plot('test.png','--ds-num_hospit')
