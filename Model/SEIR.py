@@ -59,7 +59,7 @@ class SEIR():
         self.overflow = - 1000
 
         # Smoothing data or not
-        self.smoothing = True
+        self.smoothing = False
 
         # Binomial smoother: ex: if = 2: predicted value *= 2 and p /= 2 WARNING: only use integer
         self.b_s_1 = 6
@@ -95,16 +95,29 @@ class SEIR():
         self.t_max = 1
 
         # Optimizer choise:
-        self.cobyla = True
+        self.cobyla = False
         self.LBFGSB = False
+        self.slsqp = True
         self.auto = False
+
+        self.nbEclatax_S = 0
+        self.nbEclatax_E = 0
+        self.nbEclatax_I = 0
+        self.nbEclatax_R = 0
+        self.nbEclatax_H = 0
+        self.nbEclatax_C = 0
+        self.nbEclatax_F = 0
+        self.nbEclatax_CI = 0
+        self.nbEclatax_CH = 0
+        self.nbEclatax_ITOT = 0
+        self.nbEclatax_HTOT = 0
+        self.nbEclatax_CTOT = 0
+        self.nbEclatax_RTOT = 0
 
     #Return output composed of value of S E I R H C F and CI for each day
     def stochastic_predic(self, time):
 
-
-
-        output = np.zeros((len(time), 8))
+        output = np.zeros((len(time), 9))
         # Initial state:
         output[0][0] = self.S_0                       #s
         output[0][1] = self.E_0                       #E
@@ -114,34 +127,152 @@ class SEIR():
         output[0][5] = self.C_0                       #C
         output[0][6] = self.D_0                       #F
         output[0][7] = self.I_0                       #CI
+        output[0][8] = self.H_0                       #CH
 
         N = 1000000
 
-        params = (self.beta, self.sigma, self.gamma, self.sensitivity)
+        eclatax_S = False
+        eclatax_E = False
+        eclatax_I = False
+        eclatax_R = False
+        eclatax_H = False
+        eclatax_C = False
+        eclatax_F = False
+        eclatax_CI = False
+        eclatax_CH = False
+        eclatax_ITOT = False
+        eclatax_HTOT = False
+        eclatax_RTOT = False
+        eclatax_CTOT = False
+
+        #params = (self.beta, self.sigma, self.gamma, self.sensitivity)
+
 
         for i in range(1, len(time)):
 
-            S_to_E = np.random.binomial(output[i-1][0], self.beta * output[i-1][2] / N)
-            E_to_I = np.random.binomial(output[i-1][1], self.sigma)
-            I_to_R = np.random.binomial(output[i-1][2], self.gamma)
-            I_to_H = np.random.binomial(output[i-1][2], self.hp)
-            H_to_C = np.random.binomial(output[i-1][4], self.pc)
-            H_to_R = np.random.binomial(output[i-1][4], self.hcr)
-            C_to_F = np.random.binomial(output[i-1][5], self.pd)
-            C_to_R = np.random.binomial(output[i-1][5], self.pcr)
+
+
+            S_to_E = np.random.multinomial(output[i-1][0], [self.beta * output[i-1][2] / N, 1-(self.beta * output[i-1][2] / N)])[0]
+            #print(S_to_E)
+            E_to_I = np.random.multinomial(output[i-1][1], [self.sigma, 1-self.sigma])[0]
+            #print(E_to_I)
+
+            I_to_R = np.random.multinomial(output[i-1][2], [self.gamma, self.hp, 1-(self.gamma+self.hp)])[0]
+
+            I_to_H = np.random.multinomial(output[i-1][2], [self.gamma, self.hp, 1-(self.gamma+self.hp)])[1]
+
+            H_to_C = np.random.multinomial(output[i-1][4], [self.pc, self.hcr, 1-(self.pc+self.hcr)])[0]
+            H_to_R = np.random.multinomial(output[i-1][4], [self.pc, self.hcr, 1-(self.pc+self.hcr)])[1]
+
+            C_to_R = np.random.multinomial(output[i-1][5], [self.pcr, self.pd, 1-(self.pcr+self.pd)])[0]
+            C_to_F = np.random.multinomial(output[i-1][5], [self.pcr, self.pd, 1-(self.pcr+self.pd)])[1]
+
+
+            # I_to_R = np.random.binomial(output[i-1][2], self.gamma)
+            # I_to_H = np.random.binomial(output[i-1][2], self.hp)
+            # H_to_C = np.random.binomial(output[i-1][4], self.pc)
+            # H_to_R = np.random.binomial(output[i-1][4], self.hcr)
+            # C_to_F = np.random.binomial(output[i-1][5], self.pd)
+            # C_to_R = np.random.binomial(output[i-1][5], self.pcr)
 
 
 
-            # Update staes:
+            # Update states:
+
             output[i][0] = output[i-1][0] - S_to_E                        #S
-            output[i][1] = output[i-1][1] + S_to_E - E_to_I               #E
-            output[i][2] = output[i-1][2] + E_to_I - I_to_R - I_to_H      #I
-            output[i][3] = output[i-1][3] + I_to_R + H_to_C + H_to_R      #R
-            output[i][4] = output[i-1][4] + I_to_H - H_to_R - H_to_C      #H
-            output[i][5] = output[i-1][5] + H_to_C - C_to_R - C_to_F      #C
-            output[i][6] = output[i-1][6] + C_to_F                        #F
-            output[i][7] = output[i-1][7] + E_to_I * self.sensitivity     #CI
+            # WARNING:
+            if output[i][0] < 0:
+                output[i][0] = 0
 
+                eclatax_S = True
+
+            output[i][1] = output[i-1][1] + S_to_E - E_to_I               #E
+            # WARNING:
+            if output[i][1] < 0:
+                output[i][1] = 0
+                eclatax_E = True
+
+            output[i][2] = output[i-1][2] + E_to_I - I_to_R - I_to_H      #I
+            # WARNING: if the epidemic die (infected <= 0) we consider a population of 0 infected
+            if output[i][2] < 0:
+                output[i][2] = 0
+                output[i-1][2] -=1
+                if i < 130:
+                    eclatax_I = True
+                eclatax_ITOT = True
+
+            output[i][3] = output[i-1][3] + I_to_R + C_to_R + H_to_R      #R
+            # WARNING:
+            if output[i][3] < 0:
+                output[i][3] = 0
+                if i < 130:
+                    eclatax_R = True
+                eclatax_RTOT = True
+
+
+            output[i][4] = output[i-1][4] + I_to_H - H_to_R - H_to_C      #H
+            # WARNING:
+            if output[i][4] < 0:
+                output[i][4] = 0
+                if i < 130:
+                    eclatax_H = True
+                eclatax_HTOT = True
+
+            output[i][5] = output[i-1][5] + H_to_C - C_to_R - C_to_F      #C
+            # WARNING:
+            if output[i][5] < 0:
+                output[i][5] = 0
+                if i < 130:
+                    eclatax_C = True
+                eclatax_CTOT = True
+
+            output[i][6] = output[i-1][6] + C_to_F                        #F
+            # WARNING:
+            if output[i][6] < 0:
+                output[i][6] = 0
+
+                eclatax_F = True
+
+            output[i][7] = output[i-1][7] + np.random.binomial(E_to_I, self.s)      #CI
+            # WARNING:
+            if output[i][7] < 0:
+                output[i][7] = 0
+                eclatax_CI = True
+
+            output[i][8] = output[i-1][8] + I_to_H     #CH
+            # WARNING:
+            if output[i][8] < 0:
+                output[i][8] = 0
+                eclatax_CH = True
+
+
+
+        if(eclatax_S):
+            self.nbEclatax_S +=1
+        if(eclatax_E):
+            self.nbEclatax_E +=1
+        if(eclatax_I):
+            self.nbEclatax_I +=1
+        elif(eclatax_R):
+            self.nbEclatax_R +=1
+        if(eclatax_H):
+            self.nbEclatax_H +=1
+        if(eclatax_C):
+            self.nbEclatax_C +=1
+        if(eclatax_F):
+            self.nbEclatax_F +=1
+        if(eclatax_CI):
+            self.nbEclatax_CI +=1
+        if(eclatax_CH):
+            self.nbEclatax_CH +=1
+        if(eclatax_ITOT):
+            self.nbEclatax_ITOT +=1
+        if(eclatax_CTOT):
+            self.nbEclatax_CTOT +=1
+        if(eclatax_HTOT):
+            self.nbEclatax_HTOT +=1
+        if(eclatax_RTOT):
+            self.nbEclatax_RTOT +=1
 
         return output
 
@@ -295,6 +426,11 @@ class SEIR():
                 res = minimize(self.objective, np.asarray(init_prm),
                                method='COBYLA',
                                args=('method_1'),
+                               constraints=cons)
+            elif self.slsqp:
+                res = minimize(self.objective, np.asarray(init_prm),
+                               method='SLSQP',
+                               args=('method_1'),
                                options={'eps': 0.05},
                                constraints=cons)
             else:   # Auto
@@ -352,13 +488,12 @@ class SEIR():
                     k *= -1
                     n *= -1
                 if k > n:
-
                     tmp = n
                     n = k
                     k = tmp
                 if k < 0:
-                    k = 1
                     n += k + 1
+                    k = 1
                 n *= self.b_s_1
                 prob = binom.pmf(k=k, n=n, p=p)
                 if prob > 0:
@@ -383,8 +518,8 @@ class SEIR():
                     n = k
                     k = tmp
                 if k < 0:
-                    k = 1
                     n += k + 1
+                    k = 1
                 n *= self.b_s_2
                 prob = binom.pmf(k=k, n=n, p=p)
                 if prob > 0:
@@ -408,8 +543,9 @@ class SEIR():
                     n = k
                     k = tmp
                 if k < 0:
-                    k = 1
+
                     n += k + 1
+                    k = 1
                 n *= self.b_s_3
                 prob = binom.pmf(k=k, n=n, p=p)
                 if prob > 0:
@@ -433,8 +569,9 @@ class SEIR():
                     n = k
                     k = tmp
                 if k < 0:
-                    k = 1
+
                     n += k + 1
+                    k = 1
                 n *= self.b_s_4
                 prob = binom.pmf(k=k, n=n, p=p)
                 if prob > 0:
@@ -459,8 +596,9 @@ class SEIR():
                     n = k
                     k = tmp
                 if k < 0:
-                    k = 1
+
                     n += k + 1
+                    k = 1
                 n *= self.b_s_5
                 prob = binom.pmf(k=k, n=n, p=p)
                 if prob > 0:
@@ -484,8 +622,9 @@ class SEIR():
                     n = k
                     k = tmp
                 if k < 0:
-                    k = 1
+
                     n += k + 1
+                    k = 1
                 n *= self.b_s_6
                 prob = binom.pmf(k=k, n=n, p=p)
                 if prob > 0:
@@ -521,10 +660,11 @@ class SEIR():
         else: self.dataframe = raw
         self.dataset = self.dataframe.to_numpy()
 
-        self.I_0 = self.dataset[0][1] / (self.s * self.t)
-        self.E_0 = self.I_0 * 5
-        self.R_0 = 0
-        self.S_0 = 1000000 - self.I_0 - self.E_0
+        self.I_0 = int(self.dataset[0][1] / (self.s * self.t))
+
+        self.E_0 = int(self.I_0 * 5)
+        self.R_0 = int(0)
+        self.S_0 = int(1000000 - self.I_0 - self.E_0)
 
 
     def sensib_finder(self):
@@ -572,8 +712,8 @@ class SEIR():
         print('best sensib = {} with error = {}'.format(best[1], best[0]))
         self.s = best[1]
 
-    def plot(self, filename, type):
-        plot_dataset(self,filename , type)
+    def plot(self, filename, type, duration=0):
+        plot_dataset(self, filename , type, duration)
 
 
 
@@ -585,22 +725,38 @@ if __name__ == "__main__":
     model.import_dataset()
 
     # Fit:
-    model.fit()
+    # model.fit()
 
-    params = model.get_parameters()
-    #model.objective(params, 'method_1', print_details=True)
+    # params = model.get_parameters()
+    # #model.objective(params, 'method_1', print_details=True)
+    #
+    # # Make a prediction:
+    # prd = model.predict(model.dataset.shape[0])
+    # for i in range(0, prd.shape[0]):
+    #     prd[i][3] = prd[i][3] * model.s * model.t
+    #
+    # print('=== For cumul positif: ')
+    # for i in range(0, 10):
+    #     print('dataset: {}, predict = {}'.format(model.dataset[i, 7], prd[i][7]))
+    # print('=== For hospit: ')
+    # for i in range(0, 10):
+    #     print('dataset: {}, predict = {}'.format(model.dataset[i, 3], prd[i][4]))
+    # print('===  E values: ')
+    # print(prd[:, 1])
 
-    # Make a prediction:
-    prd = model.predict(model.dataset.shape[0])
-    for i in range(0, prd.shape[0]):
-        prd[i][3] = prd[i][3] * model.s * model.t
-
-    print('=== For cumul positif: ')
-    for i in range(0, 10):
-        print('dataset: {}, predict = {}'.format(model.dataset[i, 7], prd[i][7]))
-    print('=== For hospit: ')
-    for i in range(0, 10):
-        print('dataset: {}, predict = {}'.format(model.dataset[i, 3], prd[i][4]))
-    print('===  E values: ')
-    print(prd[:, 1])
-    model.plot('test.png','--ds-num_hospit')
+    model.plot('test2.png', '--det-I --det-H --det-C --sto-I --sto-H --sto-C',300)
+    print("Nombre de simulation éclatée au sol: \n")
+    print("S: ",model.nbEclatax_S,
+        "\n E: ", model.nbEclatax_E,
+        "\n I: ", model.nbEclatax_I,
+        "\n R: ", model.nbEclatax_R,
+        "\n H: ",model.nbEclatax_H,
+        "\n C: ", model.nbEclatax_C,
+        "\n F: ", model.nbEclatax_F,
+        "\n:CI: ", model.nbEclatax_CI,
+        "\n CH: ", model.nbEclatax_CH,
+        "\n Itot: ", model.nbEclatax_ITOT,
+        "\n Rtot: ", model.nbEclatax_RTOT,
+        "\n Htot: ", model.nbEclatax_HTOT,
+        "\n Ctot: ", model.nbEclatax_CTOT,
+        )
