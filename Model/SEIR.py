@@ -101,13 +101,6 @@ class SEIR():
         self.auto = False
 
 
-        self.nbEclatax_I = 0
-        self.nbEclatax_H = 0
-        self.nbEclatax_C = 0
-        self.nbEclatax_ITOT = 0
-        self.nbEclatax_HTOT = 0
-        self.nbEclatax_CTOT = 0
-
 
     #Return output composed of value of S E I R H C F and CI for each day
     def stochastic_predic(self, time):
@@ -125,13 +118,6 @@ class SEIR():
         output[0][8] = self.H_0                       #CH
 
         N = 1000000
-
-        eclatax_I = False
-        eclatax_H = False
-        eclatax_C = False
-        eclatax_ITOT = False
-        eclatax_HTOT = False
-        eclatax_CTOT = False
 
         #params = (self.beta, self.sigma, self.gamma, self.sensitivity)
 
@@ -156,56 +142,46 @@ class SEIR():
             C_to_F = np.random.multinomial(output[i-1][5], [self.pcr, self.pd, 1-(self.pcr+self.pd)])[1]
 
 
-            # I_to_R = np.random.binomial(output[i-1][2], self.gamma)
-            # I_to_H = np.random.binomial(output[i-1][2], self.hp)
-            # H_to_C = np.random.binomial(output[i-1][4], self.pc)
-            # H_to_R = np.random.binomial(output[i-1][4], self.hcr)
-            # C_to_F = np.random.binomial(output[i-1][5], self.pd)
-            # C_to_R = np.random.binomial(output[i-1][5], self.pcr)
-
-
-
             # Update states:
 
             output[i][0] = output[i-1][0] - S_to_E                        #S
             output[i][1] = output[i-1][1] + S_to_E - E_to_I               #E
 
+
             output[i][2] = output[i-1][2] + E_to_I - I_to_R - I_to_H      #I
             # WARNING: if the epidemic die (infected <= 0) we consider a population of 0 infected
             if output[i][2] < 0:
-
-                print("output[i][2]",output[i][2])
+                """
+                Remove the number of people going out I compartiment
+                who doesn't exist (when output value <0)
+                """
                 I_to_R -= abs(output[i][2])*(self.gamma/(self.gamma+self.hp))
-                print("I_to_R",I_to_R)
                 I_to_H -= abs(output[i][2])*(self.hp/(self.gamma+self.hp))
-                print("I_to_H",I_to_H)
-
+                """
+                DIY to work well
+                """
                 if ((I_to_R*10) % 5) == 0:
                     I_to_H += 0.1
-
                 I_to_H = np.round(I_to_H)
                 I_to_R = np.round(I_to_R)
-                print("floor I_to_H",I_to_R)
-
-                print("ceil I_to_H",I_to_H)
-
                 output[i][2] = 0
 
 
-                if i < 130:
-                    eclatax_I = True
-                eclatax_ITOT = True
-
             output[i][3] = output[i-1][3] + I_to_R + C_to_R + H_to_R      #R
+
 
             output[i][4] = output[i-1][4] + I_to_H - H_to_R - H_to_C      #H
             # WARNING:
             if output[i][4] < 0:
-
+                """
+                Remove the number of people going out H compartiment
+                who doesn't exist (when output value <0)
+                """
                 H_to_R -= abs(output[i][4])*self.pc/self.pc+self.hcr
-
                 H_to_C -= abs(output[i][4])*self.hcr/self.pc+self.hcr
-
+                """
+                DIY to work well
+                """
                 if ((H_to_R*10) % 5) == 0:
                     H_to_R += 0.1
 
@@ -214,17 +190,18 @@ class SEIR():
 
                 output[i][4] = 0
 
-                if i < 130:
-                    eclatax_H = True
-                eclatax_HTOT = True
-
             output[i][5] = output[i-1][5] + H_to_C - C_to_R - C_to_F      #C
             # WARNING:
             if output[i][5] < 0:
-
+                """
+                Remove the number of people going out C compartiment
+                who doesn't exist (when output value <0)
+                """
                 C_to_R -= abs(output[i][5])*self.pcr/self.pcr+self.pd
                 C_to_F -= abs(output[i][5])*self.pd/self.pcr+self.pd
-
+                """
+                DIY to work well
+                """
                 if ((C_to_F*10) % 5) == 0:
                     C_to_F += 0.1
 
@@ -232,33 +209,11 @@ class SEIR():
                 C_to_F = np.round(C_to_F)
 
                 output[i][5] = 0
-                if i < 130:
-                    eclatax_C = True
-                eclatax_CTOT = True
+
 
             output[i][6] = output[i-1][6] + C_to_F                        #F
             output[i][7] = output[i-1][7] + np.random.binomial(E_to_I, self.s)      #CI
             output[i][8] = output[i-1][8] + I_to_H     #CH
-
-
-
-
-
-
-        if(eclatax_I):
-            self.nbEclatax_I +=1
-        if(eclatax_H):
-            self.nbEclatax_H +=1
-        if(eclatax_C):
-            self.nbEclatax_C +=1
-
-
-        if(eclatax_ITOT):
-            self.nbEclatax_ITOT +=1
-        if(eclatax_CTOT):
-            self.nbEclatax_CTOT +=1
-        if(eclatax_HTOT):
-            self.nbEclatax_HTOT +=1
 
 
         return output
@@ -733,11 +688,3 @@ if __name__ == "__main__":
 
     model.plot('test2.png', '--det-I --det-H --det-C --sto-I --sto-H --sto-C',300)
     print("Nombre de simulation éclatée au sol: \n")
-    print("\n I: ", model.nbEclatax_I,
-        "\n H: ",model.nbEclatax_H,
-        "\n C: ", model.nbEclatax_C,
-
-        "\n Itot: ", model.nbEclatax_ITOT,
-        "\n Htot: ", model.nbEclatax_HTOT,
-        "\n Ctot: ", model.nbEclatax_CTOT,
-        )
