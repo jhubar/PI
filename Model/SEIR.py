@@ -609,12 +609,23 @@ class SEIR():
         raw = pd.read_csv(url, sep=',', header=0)
         raw['num_positive'][0] = 1
         # Ad a new column at the end with cumulative positive cases at the right
-        cumul_positive = raw['num_positive'].to_numpy()
+        cumul_positive = np.copy(raw['num_positive'].to_numpy())
+
+        for i in range(1, len(cumul_positive)):
+            cumul_positive[i] += cumul_positive[i-1]
+
         raw.insert(7, 'cumul_positive', cumul_positive)
+
         if self.smoothing:
             self.dataframe = dataframe_smoothing(raw)
-        else: self.dataframe = raw
+        else:
+            self.dataframe = raw
+
         self.dataset = self.dataframe.to_numpy()
+
+        self.set_initial_values()
+
+    def set_initial_values(self):
 
         self.I_0 = int(self.dataset[0][1] / (self.s * self.t))
         self.E_0 = int(self.I_0 * 5)
@@ -672,7 +683,7 @@ class SEIR():
         self.s = best[1]
 
     def plot(self, filename, type, duration=0, plot_conf_inter=False, global_view=False):
-        plot_dataset(self, filename , type, duration, plot_conf_inter, global_view)
+        plot_dataset(self, filename, type, duration, plot_conf_inter, global_view)
 
 
 if __name__ == "__main__":
@@ -680,33 +691,18 @@ if __name__ == "__main__":
     # Create the model:
     model = SEIR()
 
-    # Fit:
-    # model.fit()
-
-    # params = model.get_parameters()
-    # #model.objective(params, 'method_1', print_details=True)
-    #
-    # # Make a prediction:
-    # prd = model.predict(model.dataset.shape[0])
-    # for i in range(0, prd.shape[0]):
-    #     prd[i][3] = prd[i][3] * model.s * model.t
-    #
-    # print('=== For cumul positif: ')
-    # for i in range(0, 10):
-    #     print('dataset: {}, predict = {}'.format(model.dataset[i, 7], prd[i][7]))
-    # print('=== For hospit: ')
-    # for i in range(0, 10):
-    #     print('dataset: {}, predict = {}'.format(model.dataset[i, 3], prd[i][4]))
-    # print('===  E values: ')
-    # print(prd[:, 1])
-
-    model.plot('testtest.pdf',
-               '--sto-I --sto-E --sto-H --sto-C --sto-F' +
-               '--det-I --det-E --det-H --det-C --det-F' ,
+    model.plot(filename="testtest.pdf",
+               type='--sto-I --sto-E --sto-H --sto-C --sto-F' +
+                    '--det-I --det-E --det-H --det-C --det-F' ,
                duration=200,
                plot_conf_inter=True)
 
-    model.plot('testtest2.pdf',
-               '--sto-S --sto-R --det-S --det-R',
-               duration=200,
+    model.plot(filename="fitting_on_cum_num_pos.pdf",
+               type='--ds-cum_num_pos --ds-num_pos --det-+CC --sto-+CC',
                plot_conf_inter=True)
+
+    model.plot(filename="beauplot.pdf",
+               type='--sto-S --sto-I --sto-R',
+               duration=200,
+               global_view=True)
+
