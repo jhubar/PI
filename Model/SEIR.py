@@ -10,7 +10,6 @@ from smoothing import dataframe_smoothing
 from plot import plot_dataset
 
 
-
 class SEIR():
 
     def __init__(self):
@@ -43,8 +42,6 @@ class SEIR():
         self.D_0 = 0
         self.CT_0 = 0                # Contamined
         self.CH_0 = 0
-
-
 
         # ========================================== #
         #        Hyperparameters dashboard:
