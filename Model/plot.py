@@ -37,8 +37,7 @@ def plot_dataset(self, filename, type, duration_=0):
 
     Exemple
     -------
-    plot_dataset("--det-I --df-num_pos"), to see the smoothing on
-    num_positive
+    plot_dataset("--det-I --ds-num_pos")
 
     Returns
     -------
