@@ -18,14 +18,14 @@ class SEIR():
         # ========================================== #
         #           Model parameters
         # ========================================== #
-        self.beta = 0.3         # Contamination rate
-        self.sigma = 0.8        # Incubation rate
-        self.gamma = 0.15       # Recovery rate
-        self.hp = 0.05          # Hospit rate
-        self.hcr = 0.2          # Hospit recovery rate
-        self.pc = 0.1           # Critical rate
-        self.pd = 0.1           # Critical mortality
-        self.pcr = 0.3          # Critical recovery rate
+        self.beta = 0.545717         # Contamination rate
+        self.sigma = 0.778919        # Incubation rate
+        self.gamma = 0.2158      # Recovery rate
+        self.hp = 0.196489          # Hospit rate
+        self.hcr = 0.0514          # Hospit recovery rate
+        self.pc = 0.075996           # Critical rate
+        self.pd = 0.0458608           # Critical mortality
+        self.pcr = 0.293681          # Critical recovery rate
         self.s = 0.765          # Sensitivity
         self.t = 0.75           # Testing rate in symptomatical
 
@@ -34,14 +34,17 @@ class SEIR():
         self.dataset = None
 
         # Initial state
-        self.I_0 = 2                        # Infected
-        self.E_0 = 3                        # Exposed
-        self.R_0 = 0                        # Recovered
-        self.S_0 = 1000000 - self.I_0 - self.E_0      # Sensible
+        self.I_0 = 0                                    # Infected
+        self.E_0 = 0                                    # Exposed
+        self.R_0 = 0       # Recovered
+        self.S_0 = 0      # Sensible
         self.H_0 = 0
         self.C_0 = 0
         self.D_0 = 0
-        self.CT_0 = self.I_0                # Contamined
+        self.CT_0 = 0                # Contamined
+        self.CH_0 = 0
+
+
 
         # ========================================== #
         #        Hyperparameters dashboard:
@@ -59,7 +62,7 @@ class SEIR():
         self.overflow = - 1000
 
         # Smoothing data or not
-        self.smoothing = False
+        self.smoothing = True
 
         # Binomial smoother: ex: if = 2: predicted value *= 2 and p /= 2 WARNING: only use integer
         self.b_s_1 = 6
@@ -100,9 +103,8 @@ class SEIR():
         self.slsqp = True
         self.auto = False
 
+        self.import_dataset()
 
-
-    #Return output composed of value of S E I R H C F and CI for each day
     def stochastic_predic(self, time):
 
         output = np.zeros((len(time), 9))
@@ -241,7 +243,12 @@ class SEIR():
                 result_Conta[j][i] = pred[j][7]
 
         mean = np.zeros((len(time), 8))
+        hquant = np.zeros((len(time), 8))
+        lquant = np.zeros((len(time), 8))
         std = np.zeros((len(time), 8))
+
+        n_std = 2
+
         for i in range(0, len(time)):
             mean[i][0] = np.mean(result_S[i, :])
             mean[i][1] = np.mean(result_E[i, :])
@@ -261,7 +268,28 @@ class SEIR():
             std[i][6] = np.std(result_F[i, :])
             std[i][7] = np.std(result_Conta[i, :])
 
-        return mean, std
+            # WARNING: 70% confidence interval
+            hquant[i][0] = np.mean(result_S[i, :]) + n_std * std[i][0]
+            hquant[i][1] = np.mean(result_E[i, :]) + n_std * std[i][1]
+            hquant[i][2] = np.mean(result_I[i, :]) + n_std * std[i][2]
+            hquant[i][3] = np.mean(result_R[i, :]) + n_std * std[i][3]
+            hquant[i][4] = np.mean(result_H[i, :]) + n_std * std[i][4]
+            hquant[i][5] = np.mean(result_C[i, :]) + n_std * std[i][5]
+            hquant[i][6] = np.mean(result_F[i, :]) + n_std * std[i][6]
+            hquant[i][7] = np.mean(result_Conta[i, :]) + n_std * std[i][7]
+
+            lquant[i][0] = np.mean(result_S[i, :]) - n_std * std[i][0]
+            lquant[i][1] = np.mean(result_E[i, :]) - n_std * std[i][1]
+            lquant[i][2] = np.mean(result_I[i, :]) - n_std * std[i][2]
+            lquant[i][3] = np.mean(result_R[i, :]) - n_std * std[i][3]
+            lquant[i][4] = np.mean(result_H[i, :]) - n_std * std[i][4]
+            lquant[i][5] = np.mean(result_C[i, :]) - n_std * std[i][5]
+            lquant[i][6] = np.mean(result_F[i, :]) - n_std * std[i][6]
+            lquant[i][7] = np.mean(result_Conta[i, :]) - n_std * std[i][7]
+
+
+
+        return mean, hquant, lquant, std, result_S, result_E, result_I, result_R, result_H, result_C, result_F, result_Conta
 
     def get_parameters(self):
 
@@ -270,16 +298,7 @@ class SEIR():
 
     def get_initial_state(self):
 
-        I_0 = self.dataset[0][1]
-        H_0 = self.dataset[0][3]
-        E_0 = I_0
-        D_0 = 0
-        C_0 = 0
-        S_0 = 1000000 - I_0 - H_0 - E_0
-        R_0 = 0
-        CT_0 = I_0
-        CH_0 = H_0
-        init = (S_0, E_0, I_0, R_0, H_0, C_0, D_0, CT_0, CH_0)
+        init = (self.S_0, self.E_0, self.I_0, self.R_0, self.H_0, self.C_0, self.D_0, self.CT_0, self.CH_0)
         return init
 
     def differential(self, state, time, beta, sigma, gamma, hp, hcr, pc, pd, pcr,s,t):
@@ -601,11 +620,14 @@ class SEIR():
         self.dataset = self.dataframe.to_numpy()
 
         self.I_0 = int(self.dataset[0][1] / (self.s * self.t))
-
         self.E_0 = int(self.I_0 * 5)
         self.R_0 = int(0)
         self.S_0 = int(1000000 - self.I_0 - self.E_0)
-
+        self.H_0 = 0
+        self.C_0 = 0
+        self.D_0 = 0
+        self.CT_0 = self.I_0  # Contamined
+        self.CH_0 = int(self.dataset[0][4])
 
     def sensib_finder(self):
 
@@ -652,17 +674,14 @@ class SEIR():
         print('best sensib = {} with error = {}'.format(best[1], best[0]))
         self.s = best[1]
 
-    def plot(self, filename, type, duration=0):
-        plot_dataset(self, filename , type, duration)
-
+    def plot(self, filename, type, duration=0, plot_conf_inter=False, global_view=False):
+        plot_dataset(self, filename , type, duration, plot_conf_inter, global_view)
 
 
 if __name__ == "__main__":
 
     # Create the model:
     model = SEIR()
-    # Import dataset:
-    model.import_dataset()
 
     # Fit:
     # model.fit()
@@ -684,5 +703,13 @@ if __name__ == "__main__":
     # print('===  E values: ')
     # print(prd[:, 1])
 
-    model.plot('testtest.png', '--det-I --det-H --det-C --sto-I --sto-H --sto-C',300)
-    print("Nombre de simulation éclatée au sol: \n")
+    model.plot('testtest.pdf',
+               '--sto-I --sto-E --sto-H --sto-C --sto-F' +
+               '--det-I --det-E --det-H --det-C --det-F' ,
+               duration=200,
+               plot_conf_inter=True)
+
+    model.plot('testtest2.pdf',
+               '--sto-S --sto-R --det-S --det-R',
+               duration=200,
+               plot_conf_inter=True)
