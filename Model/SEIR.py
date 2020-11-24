@@ -19,29 +19,29 @@ class SEIR():
         # ========================================== #
         self.beta = 0.545717         # Contamination rate
         self.sigma = 0.778919        # Incubation rate
-        self.gamma = 0.2158      # Recovery rate
-        self.hp = 0.196489          # Hospit rate
-        self.hcr = 0.0514          # Hospit recovery rate
+        self.gamma = 0.2158          # Recovery rate
+        self.hp = 0.196489           # Hospit rate
+        self.hcr = 0.0514            # Hospit recovery rate
         self.pc = 0.075996           # Critical rate
-        self.pd = 0.0458608           # Critical mortality
+        self.pd = 0.0458608          # Critical mortality
         self.pcr = 0.293681          # Critical recovery rate
-        self.s = 0.765          # Sensitivity
-        self.t = 0.75           # Testing rate in symptomatical
+        self.s = 0.765               # Sensitivity
+        self.t = 0.75                # Testing rate in symptomatical
 
         # Learning set
         self.dataframe = None
         self.dataset = None
 
         # Initial state
-        self.I_0 = 0                                    # Infected
-        self.E_0 = 0                                    # Exposed
-        self.R_0 = 0       # Recovered
-        self.S_0 = 0      # Sensible
-        self.H_0 = 0
-        self.C_0 = 0
-        self.D_0 = 0
-        self.CT_0 = 0                # Contamined
-        self.CH_0 = 0
+        self.I_0 = 0                   # Infected
+        self.E_0 = 0                   # Exposed
+        self.R_0 = 0                   # Recovered
+        self.S_0 = 0                   # Sensible
+        self.H_0 = 0                   # Hospitalized
+        self.C_0 = 0                   # Criticals
+        self.D_0 = 0                   # Deaths
+        self.CT_0 = 0                  # Contamined cumul
+        self.CH_0 = 0                  # Hospitalized cumul
 
         # ========================================== #
         #        Hyperparameters dashboard:
@@ -103,6 +103,18 @@ class SEIR():
         self.import_dataset()
 
     def stochastic_predic(self, time):
+        '''
+        Make prediction based on the stochastic model
+
+        Parameters
+        ----------
+        time: vector (int)
+            vector of time to evaluate the prediction
+
+        Returns
+        -------
+
+        '''
 
         output = np.zeros((len(time), 9))
         # Initial state:
@@ -216,6 +228,21 @@ class SEIR():
         return output
 
     def stochastic_mean(self, time, nb_simul):
+        '''
+        Used to predict the stochastical model based on the mean of an important number of simulations
+
+        Parameters
+        ----------
+        time: vector(int)
+            vector of time to evaluate the stochastic prediction
+        nb_simul: (int)
+            number of simulation to evaluate the mean on
+
+        Returns
+        -------
+
+
+        '''
 
         result_S = np.zeros((len(time), nb_simul))
         result_E = np.zeros((len(time), nb_simul))
@@ -289,17 +316,52 @@ class SEIR():
         return mean, hquant, lquant, std, result_S, result_E, result_I, result_R, result_H, result_C, result_F, result_Conta
 
     def get_parameters(self):
+        '''
+        return the parameters
+
+        Returns
+        -------
+
+        '''
 
         prm = (self.beta, self.sigma, self.gamma, self.hp, self.hcr, self.pc, self.pd, self.pcr, self.s, self.t)
         return prm
 
     def get_initial_state(self):
+        '''
+        Returns initial state
+
+        Returns
+        -------
+
+        '''
 
         init = (self.S_0, self.E_0, self.I_0, self.R_0, self.H_0, self.C_0, self.D_0, self.CT_0, self.CH_0)
         return init
 
     def differential(self, state, time, beta, sigma, gamma, hp, hcr, pc, pd, pcr,s,t):
+        '''
+        Definition of the deferential equation of the deterministic model
 
+        Parameters
+        ----------
+        state
+        time
+        beta
+        sigma
+        gamma
+        hp
+        hcr
+        pc
+        pd
+        pcr
+        s
+        t
+
+        Returns
+        -------
+
+        '''
         S, E, I, R, H, C, D, CT, CH = state
 
         dS = -(beta * S * I) / (S + I + E + R + H + C + D)
@@ -666,7 +728,6 @@ class SEIR():
                 p /= 2
                 n = round(pred[i][4] * 2)
                 k = round(self.dataset[i][1])
-
 
                 p_k = np.log(binom.pmf(k=k, n=n, p=p))
                 if p_k == - math.inf or math.isnan(p_k):
