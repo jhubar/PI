@@ -91,8 +91,9 @@ def plot_dataset(self, filename, type, duration_=0, plot_conf_inter=False, globa
 
     time = np.arange(1, duration + 1, 1)
     det = self.predict(duration)
-    sto_m, sto_hq, sto_lq, _, res_S, res_E, res_I, res_R, res_H, res_C, res_F, res_Conta = self.stochastic_mean(time,
-                                                                                                                1000)
+    sto_m, sto_hq, sto_lq, _,\
+        res_S, res_E, res_I, res_R, res_H, res_C, res_F, res_Conta = \
+            self.stochastic_mean(time, 1000)
 
     # --------------------------------------------#
     #              Plot deterministic
@@ -375,16 +376,17 @@ def plot_dataset(self, filename, type, duration_=0, plot_conf_inter=False, globa
     plt.xlabel('Days', fontsize=30)
     plt.legend(fontsize=30)
     plt.suptitle(filename + '(smoothed={})'.format(self.smoothing), fontsize=30)
-    plt.title("beta={},sigma={},gamma={},hp={},hcr={},pc={},pd={},pcr={},s={},t={}".format(self.beta,
-                                                                                           self.sigma,
-                                                                                           self.gamma,
-                                                                                           self.hp,
-                                                                                           self.hcr,
-                                                                                           self.pc,
-                                                                                           self.pd,
-                                                                                           self.pcr,
-                                                                                           self.s,
-                                                                                           self.t), fontsize=20)
+    plt.title("beta={},sigma={},gamma={},hp={}," +
+              "hcr={},pc={},pd={},pcr={},s={},t={}".format(self.beta,
+                                                           self.sigma,
+                                                           self.gamma,
+                                                           self.hp,
+                                                           self.hcr,
+                                                           self.pc,
+                                                           self.pd,
+                                                           self.pcr,
+                                                           self.s,
+                                                           self.t), fontsize=20)
     for tick in ax_plot_dataset.xaxis.get_major_ticks():
         tick.label.set_fontsize(30)
     for tick in ax_plot_dataset.yaxis.get_major_ticks():
