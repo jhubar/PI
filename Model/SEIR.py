@@ -17,14 +17,14 @@ class SEIR():
         # ========================================== #
         #           Model parameters
         # ========================================== #
-        self.beta = 0.545717         # Contamination rate
-        self.sigma = 0.778919        # Incubation rate
-        self.gamma = 0.2158          # Recovery rate
-        self.hp = 0.196489           # Hospit rate
-        self.hcr = 0.0514            # Hospit recovery rate
-        self.pc = 0.075996           # Critical rate
-        self.pd = 0.0458608          # Critical mortality
-        self.pcr = 0.293681          # Critical recovery rate
+        self.beta = 0.455717         # Contamination rate
+        self.sigma = 0.98519        # Incubation rate
+        self.gamma = 0.2386          # Recovery rate
+        self.hp = 0.02071           # Hospit rate
+        self.hcr = 0.0313            # Hospit recovery rate
+        self.pc = 0.07767           # Critical rate
+        self.pd = 0.04177          # Critical mortality
+        self.pcr = 0.244847          # Critical recovery rate
         self.s = 0.765               # Sensitivity
         self.t = 0.75                # Testing rate in symptomatical
 
@@ -809,4 +809,6 @@ if __name__ == "__main__":
                type='--sto-E --sto-I --sto-H --sto-C --sto-D',
                duration=200,
                global_view=True)
+
+
 

@@ -313,7 +313,7 @@ def plot_dataset(self, filename, type, duration_=0, plot_conf_inter=False, globa
                                  color='grey',
                                  linewidth=0.3)
             ax_plot_dataset.plot(time,
-                                 sto_hq[:, 7],
+                                 sto_lq[:, 7],
                                  color='grey',
                                  linewidth=0.3)
             ax_plot_dataset.fill_between(time,
