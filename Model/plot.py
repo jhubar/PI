@@ -389,6 +389,6 @@ def plot_dataset(self, filename, type, duration_=0, plot_conf_inter=False, globa
         tick.label.set_fontsize(30)
     for tick in ax_plot_dataset.yaxis.get_major_ticks():
         tick.label.set_fontsize(30)
-    fig_plot_dataset.savefig(filename)
+    fig_plot_dataset.savefig('img/'+filename)
 
     plt.close()
