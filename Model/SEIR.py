@@ -103,18 +103,12 @@ class SEIR():
         self.import_dataset()
 
     def stochastic_predic(self, time):
-        '''
-        Make prediction based on the stochastic model
-
-        Parameters
-        ----------
-        time: vector (int)
-            vector of time to evaluate the prediction
-
-        Returns
-        -------
-
-        '''
+        """
+        @param:time
+        @type:vector(int)
+        @coucou
+        @return :
+        """
 
         output = np.zeros((len(time), 9))
         # Initial state:
@@ -744,7 +738,55 @@ class SEIR():
         self.s = best[1]
 
     def plot(self, filename, type, duration=0, plot_conf_inter=False, global_view=False):
+        """
+        @param filename(@type String): name of file to save plot in
+        @param type(@type String): type of curves to plot
+        @param duration(@type int): duration of predictions
+        @param plot_conf_inter(@type bool): plot confidence range
+        @param global_view(@type bool): plot all stochastic curves
+        @return:
+        """
         plot_dataset(self, filename, type, duration, plot_conf_inter, global_view)
+
+    def plot_fit_cumul(self, duration=0, plot_conf_inter=False, global_view=False):
+        """
+        See. self.plot()
+        """
+        self.plot(filename='fit_on_cum_num_pos.pdf',
+                  type='--ds-cum_num_pos --ds-num_pos --det-+CC --sto-+CC',
+                  duration=duration,
+                  plot_conf_inter=plot_conf_inter,
+                  global_view=global_view)
+
+    def plot_fit_hosp(self, duration=0, plot_conf_inter=False, global_view=False):
+        """
+        See. self.plot()
+        """
+        self.plot(filename='fit_on_cum_hospitalized.pdf',
+                  type='--ds-num_cum_hospit --det-+CH',
+                  duration=duration,
+                  plot_conf_inter=plot_conf_inter,
+                  global_view=global_view)
+
+    def plot_fit_crit(self, duration=0, plot_conf_inter=False, global_view=False):
+        """
+        See. self.plot()
+        """
+        self.plot(filename='fit_on_criticals.pdf',
+                  type='--ds-num_crit --det-C --sto-C',
+                  duration=duration,
+                  plot_conf_inter=plot_conf_inter,
+                  global_view=global_view)
+
+    def plot_fit_death(self, duration=0, plot_conf_inter=False, global_view=False):
+        """
+        See. self.plot()
+        """
+        self.plot(filename='fit_on_death.pdf',
+                  type='--ds-num_fatal --det-D --sto-D',
+                  duration=duration,
+                  plot_conf_inter=plot_conf_inter,
+                  global_view=global_view)
 
 
 if __name__ == "__main__":
@@ -752,18 +794,19 @@ if __name__ == "__main__":
     # Create the model:
     model = SEIR()
 
-    model.plot(filename="testtest.pdf",
-               type='--sto-I --sto-E --sto-H --sto-C --sto-F' +
-                    '--det-I --det-E --det-H --det-C --det-F' ,
-               duration=200,
-               plot_conf_inter=True)
+    # model.plot(filename="testtest.pdf",
+    #            type='--sto-I --sto-E --sto-H --sto-C --sto-F' +
+    #                 '--det-I --det-E --det-H --det-C --det-F' ,
+    #            duration=200,
+    #            plot_conf_inter=True)
 
-    model.plot(filename="fitting_on_cum_num_pos.pdf",
-               type='--ds-cum_num_pos --ds-num_pos --det-+CC --sto-+CC',
-               plot_conf_inter=True)
+    # model.plot_fit_cumul(plot_conf_inter=True)
+    # model.plot_fit_hosp(plot_conf_inter=True)
+    # model.plot_fit_crit(plot_conf_inter=True)
+    # model.plot_fit_death(plot_conf_inter=True)
 
     model.plot(filename="beauplot.pdf",
-               type='--sto-S --sto-I --sto-R',
+               type='--sto-E --sto-I --sto-H --sto-C --sto-D',
                duration=200,
                global_view=True)
 

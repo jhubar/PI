@@ -3,15 +3,14 @@ import numpy as np
 
 
 def plot_dataset(self, filename, type, duration_=0, plot_conf_inter=False, global_view=False):
-    '''
+    """
 	Parameters
 	----------
-    self:
 
-	filename: String
+	@filename: String
 		Name of the pdf file to save the plot in
 
-	type : String
+	@type: String
 		Type of dataset to plot.
 		Format: "--typeofdataset1-curve1 --typeofdataset2-curve2"
 
@@ -38,7 +37,7 @@ def plot_dataset(self, filename, type, duration_=0, plot_conf_inter=False, globa
 								  - D = Deaths
 								  - +CC = Cumulative contaminations
 								  - +CH = Cumulative hospitalization (only deterministic)
-	plot_conf_inter: Bool
+	@plot_conf_inter: Bool
 		Print 67% confidence interval  for each  stochastic curve plotted if set to TRUE
 
 	Exemple
@@ -48,7 +47,7 @@ def plot_dataset(self, filename, type, duration_=0, plot_conf_inter=False, globa
 	Returns
 	-------
 	None.
-	'''
+	"""
 
     fig_plot_dataset = plt.figure("plt_dataset", figsize=(25, 20))
     ax_plot_dataset = plt.subplot()
@@ -140,62 +139,71 @@ def plot_dataset(self, filename, type, duration_=0, plot_conf_inter=False, globa
     #               Plot all curves
     # --------------------------------------------#
     line_width = 0.3
+    qt_of_plot = 10
     if global_view:
         if "--sto-S" in type:
             for i in range(res_S.shape[1]):
-                ax_plot_dataset.plot(time,
-                                     res_S[:, i],
-                                     linewidth=line_width,
-                                     color='green')
+                if i%qt_of_plot == 0:
+                    ax_plot_dataset.plot(time,
+                                         res_S[:, i],
+                                         linewidth=line_width,
+                                         color='green')
 
         if "--sto-E" in type:
             for i in range(res_E.shape[1]):
-                ax_plot_dataset.plot(time,
-                                     res_E[:, i],
-                                     linewidth=line_width,
-                                     color='orange')
+                if i%qt_of_plot == 0:
+                    ax_plot_dataset.plot(time,
+                                         res_E[:, i],
+                                         linewidth=line_width,
+                                         color='orange')
 
         if "--sto-I" in type:
             for i in range(res_I.shape[1]):
-                ax_plot_dataset.plot(time,
-                                     res_I[:, i],
-                                     linewidth=line_width,
-                                     color='indianred')
+                if i%qt_of_plot == 0:
+                    ax_plot_dataset.plot(time,
+                                         res_I[:, i],
+                                         linewidth=line_width,
+                                         color='indianred')
 
         if "--sto-R" in type:
             for i in range(res_R.shape[1]):
-                ax_plot_dataset.plot(time,
-                                     res_R[:, i],
-                                     linewidth=line_width,
-                                     color='mediumpurple')
+                if i%qt_of_plot == 0:
+                    ax_plot_dataset.plot(time,
+                                         res_R[:, i],
+                                         linewidth=line_width,
+                                         color='mediumpurple')
 
         if "--sto-H" in type:
             for i in range(res_H.shape[1]):
-                ax_plot_dataset.plot(time,
-                                     res_H[:, i],
-                                     linewidth=line_width,
-                                     color='steelblue')
+                if i%qt_of_plot == 0:
+                    ax_plot_dataset.plot(time,
+                                         res_H[:, i],
+                                         linewidth=line_width,
+                                         color='steelblue')
 
         if "--sto-C" in type:
             for i in range(res_C.shape[1]):
-                ax_plot_dataset.plot(time,
-                                     res_C[:, i],
-                                     linewidth=line_width,
-                                     color='plum')
+                if i%qt_of_plot == 0:
+                    ax_plot_dataset.plot(time,
+                                         res_C[:, i],
+                                         linewidth=line_width,
+                                         color='plum')
 
         if "--sto-D" in type:
             for i in range(res_F.shape[1]):
-                ax_plot_dataset.plot(time,
-                                     res_F[:, i],
-                                     linewidth=line_width,
-                                     color='peru')
+                if i%qt_of_plot == 0:
+                    ax_plot_dataset.plot(time,
+                                         res_F[:, i],
+                                         linewidth=line_width,
+                                         color='peru')
 
         if "--sto-+CC" in type:
             for i in range(res_Conta.shape[1]):
-                ax_plot_dataset.plot(time,
-                                     res_Conta[:, i],
-                                     linewidth=line_width,
-                                     color='cornflowerblue')
+                if i%qt_of_plot == 0:
+                    ax_plot_dataset.plot(time,
+                                         res_Conta[:, i],
+                                         linewidth=line_width,
+                                         color='cornflowerblue')
     # --------------------------------------------#
     #            Plot stochastic hq & lq
     # --------------------------------------------#
