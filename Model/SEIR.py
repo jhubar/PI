@@ -25,8 +25,8 @@ class SEIR():
         self.pc = 0.07767           # Critical rate
         self.pd = 0.04177          # Critical mortality
         self.pcr = 0.244847          # Critical recovery rate
-        self.s = 0.765               # Sensitivity
-        self.t = 0.75                # Testing rate in symptomatical
+        self.s = 0.74               # Sensitivity
+        self.t = 0.89                # Testing rate in symptomatical
 
         # Learning set
         self.dataframe = None
@@ -103,12 +103,6 @@ class SEIR():
         self.import_dataset()
 
     def stochastic_predic(self, time):
-        """
-        @param:time
-        @type:vector(int)
-        @coucou
-        @return :
-        """
 
         output = np.zeros((len(time), 9))
         # Initial state:
@@ -334,28 +328,7 @@ class SEIR():
         return init
 
     def differential(self, state, time, beta, sigma, gamma, hp, hcr, pc, pd, pcr,s,t):
-        '''
-        Definition of the deferential equation of the deterministic model
 
-        Parameters
-        ----------
-        state
-        time
-        beta
-        sigma
-        gamma
-        hp
-        hcr
-        pc
-        pd
-        pcr
-        s
-        t
-
-        Returns
-        -------
-
-        '''
         S, E, I, R, H, C, D, CT, CH = state
 
         dS = -(beta * S * I) / (S + I + E + R + H + C + D)
@@ -684,10 +657,10 @@ class SEIR():
     def set_initial_values(self):
 
         self.I_0 = int(self.dataset[0][1] / (self.s * self.t))
-        self.E_0 = int(self.I_0 * 5)
-        self.R_0 = int(0)
-        self.S_0 = int(1000000 - self.I_0 - self.E_0)
+        self.E_0 = int(self.I_0 * 1)
+        self.R_0 = 0
         self.H_0 = 0
+        self.S_0 = int(1000000 - self.I_0 - self.E_0 - self.H_0)
         self.C_0 = 0
         self.D_0 = 0
         self.CT_0 = self.I_0  # Contamined
@@ -805,10 +778,14 @@ if __name__ == "__main__":
     model.plot_fit_crit(plot_conf_inter=True)
     model.plot_fit_death(plot_conf_inter=True)
 
-    model.plot(filename="SEIR-MODEl(E,I,H,C,D).pdf",
+    model.plot(filename="SEIR-MODEL(E,I,H,C,D).pdf",
                type='--sto-E --sto-I --sto-H --sto-C --sto-D',
                duration=200,
                global_view=True)
 
+    model.plot(filename="SEIR-MODEL-determinist(S,E,I,R).pdf",
+               type='--det-S --det-E --det-I --det-R',
+               duration=200,
+               global_view=True)
 
 
