@@ -770,7 +770,7 @@ if __name__ == "__main__":
     model.plot(filename="Sto(I,E,H,C,F).pdf",
                type='--sto-I --sto-E --sto-H --sto-C --sto-F',
                duration=200,
-               global_vue=True)
+               global_view=True)
 
     model.plot(filename="Sto(S,R).pdf",
                type='--sto-S --sto-R',
