@@ -710,7 +710,8 @@ class SEIR():
         print('best sensib = {} with error = {}'.format(best[1], best[0]))
         self.s = best[1]
 
-    def plot(self, filename, type, duration=0, plot_conf_inter=False, global_view=False):
+    def plot(self, filename, type, duration=0, plot_conf_inter=False,
+             global_view=False, plot_param=False):
         """
         @param filename(@type String): name of file to save plot in
         @param type(@type String): type of curves to plot
@@ -719,47 +720,56 @@ class SEIR():
         @param global_view(@type bool): plot all stochastic curves
         @return:
         """
-        plot_dataset(self, filename, type, duration, plot_conf_inter, global_view)
+        plot_dataset(self, filename, type, duration, plot_conf_inter,
+                     global_view, plot_param)
 
-    def plot_fit_cumul(self, duration=0, plot_conf_inter=False, global_view=False):
+    def plot_fit_cumul(self, duration=0, plot_conf_inter=False,
+                       global_view=False, plot_param=False):
         """
         See. self.plot()
         """
-        self.plot(filename='fit_on_cum_num_pos.pdf',
+        self.plot(filename='fit_on_cum_num_pos',
                   type='--ds-cum_num_pos --ds-num_pos --det-+CC --sto-+CC',
                   duration=duration,
                   plot_conf_inter=plot_conf_inter,
-                  global_view=global_view)
+                  global_view=global_view,
+                  plot_param=plot_param)
 
-    def plot_fit_hosp(self, duration=0, plot_conf_inter=False, global_view=False):
+    def plot_fit_hosp(self, duration=0, plot_conf_inter=False,
+                      global_view=False, plot_param=False):
         """
         See. self.plot()
         """
-        self.plot(filename='fit_on_cum_hospitalized.pdf',
+        self.plot(filename='fit_on_cum_hospitalized',
                   type='--ds-num_cum_hospit --det-+CH',
                   duration=duration,
                   plot_conf_inter=plot_conf_inter,
-                  global_view=global_view)
+                  global_view=global_view,
+                  plot_param=plot_param)
 
-    def plot_fit_crit(self, duration=0, plot_conf_inter=False, global_view=False):
+    def plot_fit_crit(self, duration=0, plot_conf_inter=False,
+                      global_view=False, plot_param=False):
         """
         See. self.plot()
         """
-        self.plot(filename='fit_on_criticals.pdf',
+        self.plot(filename='fit_on_criticals',
                   type='--ds-num_crit --det-C --sto-C',
                   duration=duration,
                   plot_conf_inter=plot_conf_inter,
-                  global_view=global_view)
+                  global_view=global_view,
+                  plot_param=plot_param)
 
-    def plot_fit_death(self, duration=0, plot_conf_inter=False, global_view=False):
+    def plot_fit_death(self, duration=0, plot_conf_inter=False,
+                       global_view=False, plot_param=False):
         """
         See. self.plot()
         """
-        self.plot(filename='fit_on_death.pdf',
+        self.plot(filename='fit_on_death',
                   type='--ds-num_fatal --det-D --sto-D',
                   duration=duration,
                   plot_conf_inter=plot_conf_inter,
-                  global_view=global_view)
+                  global_view=global_view,
+                  plot_param=plot_param)
 
 
 if __name__ == "__main__":
@@ -784,9 +794,9 @@ if __name__ == "__main__":
                plot_conf_inter=True)
 
 
-    model.plot(filename="Compare_stocha_and_deter1.pdf",
-               type='--sto-I --sto-E --sto-H --sto-C --sto-F' +
-                    '--det-I --det-E --det-H --det-C --det-F' ,
+    model.plot(filename="Compare_stocha_and_deter2.pdf",
+               type='--sto-S --sto-R' +
+                    '--det-S --det-R' ,
                duration=200,
                plot_conf_inter=True)
 
