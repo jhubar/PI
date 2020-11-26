@@ -141,7 +141,7 @@ def plot_dataset(self, filename, type, duration_=0,
     #               Plot all curves
     # --------------------------------------------#
     line_width = 0.3
-    qt_of_plot = 10
+    qt_of_plot = 20
     if global_view:
         if "--sto-S" in type:
             for i in range(res_S.shape[1]):
@@ -378,7 +378,7 @@ def plot_dataset(self, filename, type, duration_=0,
     plt.legend(fontsize=30)
 
     if plot_param == True:
-        plt.suptitle(filename + ".pdf" + '(smoothed={})'.format(self.smoothing), fontsize=30)
+        plt.suptitle(filename + ".pdf" + '(smoothed={})'.format(self.smoothing), fontsize=40)
         plt.title("beta={},sigma={},gamma={},hp={},".format(self.beta,
                                                                self.sigma,
                                                                self.gamma,
@@ -401,7 +401,7 @@ def plot_dataset(self, filename, type, duration_=0,
 
     else:
         plt.title(filename + '(smoothed={})'.format(self.smoothing),
-                     fontsize=30)
+                     fontsize=40)
 
     for tick in ax_plot_dataset.xaxis.get_major_ticks():
         tick.label.set_fontsize(30)
