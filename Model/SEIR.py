@@ -17,16 +17,16 @@ class SEIR():
         # ========================================== #
         #           Model parameters
         # ========================================== #
-        self.beta = 0.455717         # Contamination rate
-        self.sigma = 0.98519        # Incubation rate
-        self.gamma = 0.2386          # Recovery rate
-        self.hp = 0.02071           # Hospit rate
-        self.hcr = 0.0313            # Hospit recovery rate
-        self.pc = 0.07767           # Critical rate
-        self.pd = 0.04177          # Critical mortality
-        self.pcr = 0.244847          # Critical recovery rate
+        self.beta = 0.375         # Contamination rate
+        self.sigma = 0.313        # Incubation rate
+        self.gamma = 0.18          # Recovery rate
+        self.hp = 0.017           # Hospit rate
+        self.hcr = 0.03            # Hospit recovery rate
+        self.pc = 0.08          # Critical rate
+        self.pd = 0.04          # Critical mortality
+        self.pcr = 0.24         # Critical recovery rate
         self.s = 0.74               # Sensitivity
-        self.t = 0.89                # Testing rate in symptomatical
+        self.t = 0.37                # Testing rate in symptomatical
 
         # Learning set
         self.dataframe = None
@@ -659,7 +659,7 @@ class SEIR():
         self.I_0 = int(self.dataset[0][1] / (self.s * self.t))
         self.E_0 = int(self.I_0 * 1)
         self.R_0 = 0
-        self.H_0 = 0
+        self.H_0 = int(self.dataset[0][3])
         self.S_0 = int(1000000 - self.I_0 - self.E_0 - self.H_0)
         self.C_0 = 0
         self.D_0 = 0
@@ -767,7 +767,24 @@ if __name__ == "__main__":
     # Create the model:
     model = SEIR()
 
-    model.plot(filename="Compare_stocha_and_deter.pdf",
+    model.plot(filename="Sto(I,E,H,C,F).pdf",
+               type='--sto-I --sto-E --sto-H --sto-C --sto-F',
+               duration=200,
+               global_vue=True)
+
+    model.plot(filename="Sto(S,R).pdf",
+               type='--sto-S --sto-R',
+               duration=200,
+               global_view=True)
+
+    model.plot(filename="Compare_stocha_and_deter1.pdf",
+               type='--sto-I --sto-E --sto-H --sto-C --sto-F' +
+                    '--det-I --det-E --det-H --det-C --det-F' ,
+               duration=200,
+               plot_conf_inter=True)
+
+
+    model.plot(filename="Compare_stocha_and_deter1.pdf",
                type='--sto-I --sto-E --sto-H --sto-C --sto-F' +
                     '--det-I --det-E --det-H --det-C --det-F' ,
                duration=200,
@@ -778,6 +795,7 @@ if __name__ == "__main__":
     model.plot_fit_crit(plot_conf_inter=True)
     model.plot_fit_death(plot_conf_inter=True)
 
+    '''
     model.plot(filename="SEIR-MODEL(E,I,H,C,D).pdf",
                type='--sto-E --sto-I --sto-H --sto-C --sto-D',
                duration=200,
@@ -787,5 +805,5 @@ if __name__ == "__main__":
                type='--det-S --det-E --det-I --det-R',
                duration=200,
                global_view=True)
-
+    '''
 
