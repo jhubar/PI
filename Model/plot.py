@@ -141,7 +141,7 @@ def plot_dataset(self, filename, type, duration_=0,
     #               Plot all curves
     # --------------------------------------------#
     line_width = 0.3
-    qt_of_plot = 20
+    qt_of_plot = 10
     if global_view:
         if "--sto-S" in type:
             for i in range(res_S.shape[1]):
@@ -407,6 +407,7 @@ def plot_dataset(self, filename, type, duration_=0,
         tick.label.set_fontsize(30)
     for tick in ax_plot_dataset.yaxis.get_major_ticks():
         tick.label.set_fontsize(30)
-    fig_plot_dataset.savefig('img/'+filename+".pdf")
+    fig_plot_dataset.savefig('img/' + filename + ".pdf")
+    fig_plot_dataset.savefig('img/' + filename + ".png")
 
     plt.close()
