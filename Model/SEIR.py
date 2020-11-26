@@ -782,7 +782,7 @@ if __name__ == "__main__":
                duration=200,
                global_view=True)
 
-    model.plot(filename="Sto(S,R).pdf",
+    model.plot(filename="Sto(S,R)",
                type='--sto-S --sto-R',
                duration=200,
                global_view=True)
