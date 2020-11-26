@@ -400,13 +400,13 @@ def plot_dataset(self, filename, type, duration_=0,
                   fontsize=20)
 
     else:
-        plt.suptitle(filename + ".pdf" + '(smoothed={})'.format(self.smoothing),
+        plt.title(filename + '(smoothed={})'.format(self.smoothing),
                      fontsize=30)
 
     for tick in ax_plot_dataset.xaxis.get_major_ticks():
         tick.label.set_fontsize(30)
     for tick in ax_plot_dataset.yaxis.get_major_ticks():
         tick.label.set_fontsize(30)
-    fig_plot_dataset.savefig('img/'+filename)
+    fig_plot_dataset.savefig('img/'+filename+".pdf")
 
     plt.close()

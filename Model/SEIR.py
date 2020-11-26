@@ -777,7 +777,7 @@ if __name__ == "__main__":
     # Create the model:
     model = SEIR()
 
-    model.plot(filename="Sto(I,E,H,C,F).pdf",
+    model.plot(filename="Sto(I,E,H,C,F)",
                type='--sto-I --sto-E --sto-H --sto-C --sto-F',
                duration=200,
                global_view=True)
@@ -787,14 +787,14 @@ if __name__ == "__main__":
                duration=200,
                global_view=True)
 
-    model.plot(filename="Compare_stocha_and_deter1.pdf",
+    model.plot(filename="Compare_stocha_and_deter(I,E,H,C,F)",
                type='--sto-I --sto-E --sto-H --sto-C --sto-F' +
                     '--det-I --det-E --det-H --det-C --det-F' ,
                duration=200,
                plot_conf_inter=True)
 
 
-    model.plot(filename="Compare_stocha_and_deter2.pdf",
+    model.plot(filename="Compare_stocha_and_deter(S,R)",
                type='--sto-S --sto-R' +
                     '--det-S --det-R' ,
                duration=200,
