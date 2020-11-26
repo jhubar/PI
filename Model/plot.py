@@ -386,7 +386,7 @@ def plot_dataset(self, filename, type, duration_=0, plot_conf_inter=False, globa
                                                            self.pcr,
                                                            self.s,
                                                            self.t) +
-              "\n" +
+              "\n \n" +
               "S_0={},E_0={},I_0={},R_0={},H_0={},C_0={},D_0={}".format(self.S_0,
                                                                        self.E_0,
                                                                        self.I_0,
