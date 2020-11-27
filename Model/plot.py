@@ -2,7 +2,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def plot_dataset(self, filename, type, duration_=0, plot_conf_inter=False, global_view=False):
+def plot_dataset(self, filename, type, duration_=0,
+                 plot_conf_inter=False, global_view=False,plot_param=False):
     """
 	Parameters
 	----------
@@ -375,31 +376,38 @@ def plot_dataset(self, filename, type, duration_=0, plot_conf_inter=False, globa
     plt.figure("plt_dataset")
     plt.xlabel('Days', fontsize=30)
     plt.legend(fontsize=30)
-    plt.suptitle(filename + '(smoothed={})'.format(self.smoothing), fontsize=30)
-    plt.title("beta={},sigma={},gamma={},hp={},".format(self.beta,
-                                                           self.sigma,
-                                                           self.gamma,
-                                                           self.hp) +
-              "hcr={},pc={},pd={},pcr={},s={},t={}".format(self.hcr,
-                                                           self.pc,
-                                                           self.pd,
-                                                           self.pcr,
-                                                           self.s,
-                                                           self.t) +
-              "\n" +
-              "S_0={},E_0={},I_0={},R_0={},H_0={},C_0={},D_0={}".format(self.S_0,
-                                                                       self.E_0,
-                                                                       self.I_0,
-                                                                       self.R_0,
-                                                                       self.H_0,
-                                                                       self.C_0,
-                                                                       self.D_0),
-              fontsize=20)
+
+    if plot_param == True:
+        plt.suptitle(filename + ".pdf" + '(smoothed={})'.format(self.smoothing), fontsize=40)
+        plt.title("beta={},sigma={},gamma={},hp={},".format(self.beta,
+                                                               self.sigma,
+                                                               self.gamma,
+                                                               self.hp) +
+                  "hcr={},pc={},pd={},pcr={},s={},t={}".format(self.hcr,
+                                                               self.pc,
+                                                               self.pd,
+                                                               self.pcr,
+                                                               self.s,
+                                                               self.t) +
+                  "\n \n" +
+                  "S_0={},E_0={},I_0={},R_0={},H_0={},C_0={},D_0={}".format(self.S_0,
+                                                                           self.E_0,
+                                                                           self.I_0,
+                                                                           self.R_0,
+                                                                           self.H_0,
+                                                                           self.C_0,
+                                                                           self.D_0),
+                  fontsize=20)
+
+    else:
+        plt.title(filename + '(smoothed={})'.format(self.smoothing),
+                     fontsize=40)
 
     for tick in ax_plot_dataset.xaxis.get_major_ticks():
         tick.label.set_fontsize(30)
     for tick in ax_plot_dataset.yaxis.get_major_ticks():
         tick.label.set_fontsize(30)
-    fig_plot_dataset.savefig('img/'+filename)
+    fig_plot_dataset.savefig('img/' + filename + ".pdf")
+    fig_plot_dataset.savefig('img/' + filename + ".png")
 
     plt.close()
