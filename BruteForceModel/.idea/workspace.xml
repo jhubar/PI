@@ -41,7 +41,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.result_analysis">
+  <component name="RunManager" selected="Python.bf_Francois_1">
     <configuration name="bf_Francois_1" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="BruteForceModel" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -176,10 +176,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.bf_Francois_1" />
         <item itemvalue="Python.result_analysis" />
         <item itemvalue="Python.bf_Francois_2" />
         <item itemvalue="Python.main" />
-        <item itemvalue="Python.bf_Francois_1" />
         <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
@@ -192,7 +192,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1606420957693</updated>
-      <workItem from="1606420959021" duration="20155000" />
+      <workItem from="1606420959021" duration="20535000" />
     </task>
     <servers />
   </component>

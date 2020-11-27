@@ -295,9 +295,9 @@ class SEIR():
         if self.basis_obj_display:
             print(params)
 
-        if method == 'bruteforce':
-            start_t = 7
-            end_t = 35
+        #if method == 'bruteforce':
+        #    start_t = 7
+        #    end_t = 35
         # Uncumul tests predictions:
         infections = [predictions[0][7]]
         for i in range(1, end_t):
