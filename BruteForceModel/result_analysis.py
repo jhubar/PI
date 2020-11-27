@@ -32,6 +32,9 @@ if __name__ == "__main__":
     result.sort_values(by=['score'], inplace=True, ignore_index=True, ascending=True)
     print(result)
 
+    # Save All the table in a csv in order to analyze them in a tabar
+    result.to_csv('Total_result.csv', sep=';', header=True, index=True)
+
     npr = result.to_numpy()
 
     for i in range(0, npr.shape[0]):
