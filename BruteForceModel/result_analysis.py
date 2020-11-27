@@ -30,6 +30,7 @@ if __name__ == "__main__":
 
     # Sort:
     result.sort_values(by=['score'], inplace=True, ignore_index=True, ascending=True)
+    print(result)
 
     npr = result.to_numpy()
 
