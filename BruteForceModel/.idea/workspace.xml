@@ -41,7 +41,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.bf_Francois_1">
+  <component name="RunManager" selected="Python.result_analysis">
     <configuration name="bf_Francois_1" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="BruteForceModel" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -176,8 +176,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.bf_Francois_1" />
         <item itemvalue="Python.result_analysis" />
+        <item itemvalue="Python.bf_Francois_1" />
         <item itemvalue="Python.bf_Francois_2" />
         <item itemvalue="Python.main" />
         <item itemvalue="Python.test" />
@@ -192,7 +192,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1606420957693</updated>
-      <workItem from="1606420959021" duration="21008000" />
+      <workItem from="1606420959021" duration="22120000" />
     </task>
     <servers />
   </component>
@@ -211,30 +211,30 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state width="1877" height="249" key="GridCell.Tab.0.bottom" timestamp="1606442333368">
+    <state width="1877" height="249" key="GridCell.Tab.0.bottom" timestamp="1606465179076">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="249" key="GridCell.Tab.0.bottom/-1920.0.1280.700/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1606442333368" />
-    <state width="1877" height="249" key="GridCell.Tab.0.center" timestamp="1606442333368">
+    <state width="1877" height="249" key="GridCell.Tab.0.bottom/-1920.0.1280.700/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1606465179076" />
+    <state width="1877" height="249" key="GridCell.Tab.0.center" timestamp="1606465179075">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="249" key="GridCell.Tab.0.center/-1920.0.1280.700/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1606442333368" />
-    <state width="1877" height="249" key="GridCell.Tab.0.left" timestamp="1606442333368">
+    <state width="1877" height="249" key="GridCell.Tab.0.center/-1920.0.1280.700/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1606465179075" />
+    <state width="1877" height="249" key="GridCell.Tab.0.left" timestamp="1606465179075">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="249" key="GridCell.Tab.0.left/-1920.0.1280.700/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1606442333368" />
-    <state width="1877" height="249" key="GridCell.Tab.0.right" timestamp="1606442333368">
+    <state width="1877" height="249" key="GridCell.Tab.0.left/-1920.0.1280.700/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1606465179075" />
+    <state width="1877" height="249" key="GridCell.Tab.0.right" timestamp="1606465179075">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="249" key="GridCell.Tab.0.right/-1920.0.1280.700/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1606442333368" />
+    <state width="1877" height="249" key="GridCell.Tab.0.right/-1920.0.1280.700/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1606465179075" />
     <state x="461" y="170" key="SettingsEditor" timestamp="1606421100049">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="461" y="170" key="SettingsEditor/-1920.0.1280.700/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1606421100049" />
-    <state x="2456" y="0" width="788" height="884" maximized="true" key="dock-window-1" timestamp="1606442740843">
+    <state x="2456" y="0" width="788" height="884" key="dock-window-1" timestamp="1606465295988">
       <screen x="1920" y="0" width="1920" height="1050" />
     </state>
-    <state x="2456" y="0" width="788" height="884" maximized="true" key="dock-window-1/-1920.0.1280.700/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1606442740843" />
+    <state x="2456" y="0" width="788" height="884" key="dock-window-1/-1920.0.1280.700/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1606465295988" />
     <state x="623" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1606437272400">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
@@ -243,8 +243,8 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/BruteForceModel$bf_Francois_2.coverage" NAME="bf_Francois_2 Coverage Results" MODIFIED="1606440591271" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/BruteForceModel$test.coverage" NAME="test Coverage Results" MODIFIED="1606434500470" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/BruteForceModel$result_analysis.coverage" NAME="result_analysis Coverage Results" MODIFIED="1606441699360" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/BruteForceModel$result_analysis.coverage" NAME="result_analysis Coverage Results" MODIFIED="1606465179060" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/BruteForceModel$main.coverage" NAME="main Coverage Results" MODIFIED="1606438954661" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/BruteForceModel$bf_Francois_1.coverage" NAME="bf_Francois_1 Coverage Results" MODIFIED="1606442333222" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/BruteForceModel$bf_Francois_1.coverage" NAME="bf_Francois_1 Coverage Results" MODIFIED="1606442889854" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
