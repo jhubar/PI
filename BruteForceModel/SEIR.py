@@ -54,23 +54,23 @@ class SEIR():
         self.var_w_5 = 3
 
         # Optimizer constraints
-        self.beta_min = 0.1
-        self.beta_max = 0.9
+        self.beta_min = 0.01
+        self.beta_max = 1
         self.sigma_min = 1/5
         self.sigma_max = 1
         self.gamma_min = 1/10
         self.gamma_max = 1/4
         self.hp_min = 0.001
-        self.hp_max = 0.5
-        self.hcr_min = 0.01
-        self.hcr_max = 0.4
-        self.pc_min = 0.01
-        self.pc_max = 0.4
-        self.pd_min = 0.01
-        self.pd_max = 0.5
-        self.pcr_min = 0.01
-        self.pcr_max = 0.4
-        self.s_min = 0.7
+        self.hp_max = 1
+        self.hcr_min = 0.001
+        self.hcr_max = 1
+        self.pc_min = 0.001
+        self.pc_max = 1
+        self.pd_min = 0.001
+        self.pd_max = 1
+        self.pcr_min = 0.001
+        self.pcr_max = 1
+        self.s_min = 0.70
         self.s_max = 0.85
         self.t_min = 0.5
         self.t_max = 1
@@ -82,7 +82,7 @@ class SEIR():
         self.I_0 = 3
 
         # Smoothing the dataset?
-        self.smoothing = False
+        self.smoothing = True
 
         # Optimizer hyperparameter: LBFGSB or COBYLA
         self.optimizer = 'LBFGSB'
