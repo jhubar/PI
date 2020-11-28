@@ -130,6 +130,8 @@ def result_concatener(options=''):
 
     npr = result.to_numpy()
 
+    print('Number of total entries = {}'.format(npr.shape[0]))
+
     if 'boundaries' in options:
 
         # open the file to write:
@@ -181,6 +183,7 @@ def result_concatener(options=''):
 
                 idx += 1
         file.close()
+        print('number of no_boundaries entries = {}'.format(idx))
 
 def result_reader(file_name='result_analysis/global_no_boundaries.csv'):
 
@@ -248,29 +251,94 @@ def result_reader(file_name='result_analysis/global_no_boundaries.csv'):
         plt.title('index {}'.format(i))
         plt.show()
 
-def rel_var_weights_score(file_name='result_analysis/global_no_boundaries.csv'):
+def rel_var_weights_score():
 
-    # Import file in a dataframe:
+    """    # Import file in a dataframe:
+    file_name = 'result_analysis/global_no_boundaries.csv'
+    result = pd.read_csv(file_name, header=0, sep=';', index_col=0)
+    # Numpy version
+    npr = result.to_numpy()
+    marker_size = 2
+    plt.scatter(result['score'], result['vw1'], c='blue', label='vw1', s=marker_size)
+    plt.scatter(result['score'], result['vw2'], c='red', label='vw2', s=marker_size)
+    plt.scatter(result['score'], result['vw3'], c='black', label='vw3', s=marker_size)
+    plt.scatter(result['score'], result['vw4'], c='yellow', label='vw4', s=marker_size)
+    plt.scatter(result['score'], result['vw5'], c='green', label='vw5', s=marker_size)
+    plt.legend()
+    plt.title('relation between score and variance weights in no_boudaries'.format(file_name))
+    plt.savefig('result_analysis/figures/var_weigts_no_bound.pdf')
+    plt.show()
+    """
+    file_name = 'result_analysis/global_result.csv'
     result = pd.read_csv(file_name, header=0, sep=';', index_col=0)
     # Numpy version
     npr = result.to_numpy()
 
-    plt.scatter(result['score'], result['vw1'], c='blue', label='vw1')
-    plt.scatter(result['score'], result['vw2'], c='red', label='vw2')
-    plt.scatter(result['score'], result['vw3'], c='black', label='vw3')
-    plt.scatter(result['score'], result['vw4'], c='yellow', label='vw4')
-    plt.scatter(result['score'], result['vw5'], c='green', label='vw5')
-    plt.legend()
-    plt.title('relation between score and variance weights in {}'.format(file_name))
-    plt.savefig('result_analysis/figures/var_weigts.pdf')
+    # Analyse of the probability to reach boundary and var weights:
+    bound_reach = []
+    # Boundaries:
+    sigma_min = 1 / 5
+    sigma_max = 1
+    gamma_min = 1 / 10
+    gamma_max = 1 / 4
+    s_min = 0.7
+    s_max = 0.85
+    t_min = 0.5
+    t_max = 1
+    for i in range(0, npr.shape[0]):
+
+        select = True
+        # Boundaries checking
+        if np.fabs(npr[i][2] - sigma_min) < 0.01:
+            select = False
+        if np.fabs(npr[i][2] - sigma_max) < 0.01:
+            select = False
+        if np.fabs(npr[i][3] - gamma_min) < 0.01:
+            select = False
+        if np.fabs(npr[i][3] - gamma_max) < 0.01:
+            select = False
+        if np.fabs(npr[i][9] - s_min) < 0.01:
+            select = False
+        if np.fabs(npr[i][9] - s_max) < 0.01:
+            select = False
+        if np.fabs(npr[i][10] - t_min) < 0.01:
+            select = False
+        if np.fabs(npr[i][10] - t_max) < 0.01:
+            select = False
+
+        bound_reach.append(select)
+
+    # Add the new column in the dataset
+    result.insert(npr.shape[1], 'bd_reach', bound_reach)
+    # Convert boolean to color:
+    bnd_colors = []
+    for i in range(0, len(bound_reach)):
+        if bound_reach[i]:
+            bnd_colors.append('blue')
+        else:
+            bnd_colors.append('red')
+
+    # Plot correlations plot:
+    size = 10
+    corr = result.corr()
+    fig, ax = plt.subplots(figsize=(size, size))
+    ax.matshow(corr)
+    plt.xticks(range(len(corr.columns)), corr.columns)
+    plt.yticks(range(len(corr.columns)), corr.columns)
     plt.show()
+
+
+
 
 
 
 if __name__ == "__main__":
 
-    #result_concatener(options='boundaries')
+    # Concatène tous les dataset en un fichier Global_result
+    # Et un fichier global_no_boundaries ne contenant que les vombinaisons ne touchant pas de bornes
+    result_concatener(options='boundaries')
 
-    #result_reader()
+    # Lit un fichier au choix, puis permet de choisir l'index de la ligue que l'on veut ploter
+    result_reader(file_name='result_analysis/global_no_boundaries.csv')
 
-    rel_var_weights_score()
+    #rel_var_weights_score()
