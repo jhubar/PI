@@ -79,10 +79,10 @@ class SEIR():
         self.N = 1000000
 
         # Estimation of the number of infected at t_0
-        self.I_0 = 3
+        self.I_0 = 20
 
         # Smoothing the dataset?
-        self.smoothing = True
+        self.smoothing = False
 
         # Optimizer hyperparameter: LBFGSB or COBYLA
         self.optimizer = 'LBFGSB'
