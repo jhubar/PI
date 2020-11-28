@@ -6,12 +6,7 @@ import os
 
 
 
-
-
-
-
-if __name__ == "__main__":
-
+def sequential_analysis():
     # List of file in the result folder
     files_lst = os.listdir('result/')
     # Import header:
@@ -103,3 +98,179 @@ if __name__ == "__main__":
 
         print("<Press enter/return to continue>")
         input()
+
+def result_concatener(options=''):
+    """
+    This method read each bruteforce result file, concatenate each in one dataframe, sort result by ascending score and
+    export everything in global_result.csv
+    Options:
+        - 'boundaries' : delete each row who converge against boundaries
+    """
+    # List of file in the result folder
+    files_lst = os.listdir('result/')
+    # Import header:
+    hd = 'score;beta_final;sigma_final;gamma_final;hp_final;hcr_final;pc_final;pd_final;pcr_final;s_final;' \
+             't_final;beta_init;sigma_init;gamma_init;hp_init;hcr_init;pc_init;pd_init;pcr_init;s_init;t_init;' \
+             'w1;w2;w3;w4;w5;vw1;vw2;vw3;vw4;vw5;smoothing;optimizer;step_sizee;I_0'
+    hd_lst = hd.split(";")
+    # Store in a list of dataframe:
+    df_lst = []
+    # Import each file in the dataframe:
+    for filename in files_lst:
+        df = pd.read_csv('result/{}'.format(filename), header=0, names=hd_lst, sep=';')
+        df_lst.append(df)
+    # Concat all dataframes:
+    result = pd.concat(df_lst, axis=0, ignore_index=True)
+
+    # Sort:
+    result.sort_values(by=['score'], inplace=True, ignore_index=True, ascending=True)
+
+    # Save All the table in a csv in order to analyze them in a tabar
+    result.to_csv('result_analysis\global_result.csv', sep=';', header=True, index=True)
+
+    npr = result.to_numpy()
+
+    if 'boundaries' in options:
+
+        # open the file to write:
+        file = open('result_analysis/global_no_boundaries.csv', 'w')
+        # Write headers
+        file.write(';')
+        file.write(hd)
+        file.write('\n')
+
+        # Boundaries:
+        sigma_min = 1 / 5
+        sigma_max = 1
+        gamma_min = 1 / 10
+        gamma_max = 1 / 4
+        s_min = 0.7
+        s_max = 0.85
+        t_min = 0.5
+        t_max = 1
+
+        idx = 0
+        for i in range(0, npr.shape[0]):
+
+            select = True
+            # Boundaries checking
+            if np.fabs(npr[i][2] - sigma_min) < 0.01:
+                select = False
+            if np.fabs(npr[i][2] - sigma_max) < 0.01:
+                select = False
+            if np.fabs(npr[i][3] - gamma_min) < 0.01:
+                select = False
+            if np.fabs(npr[i][3] - gamma_max) < 0.01:
+                select = False
+            if np.fabs(npr[i][9] - s_min) < 0.01:
+                select = False
+            if np.fabs(npr[i][9] - s_max) < 0.01:
+                select = False
+            if np.fabs(npr[i][10] - t_min) < 0.01:
+                select = False
+            if np.fabs(npr[i][10] - t_max) < 0.01:
+                select = False
+
+            if select:
+                string = [str(idx)]
+                for j in range(0, npr.shape[1]):
+                    string.append(str(npr[i][j]))
+                # Write in the file
+                file.write(';'.join(string))
+                file.write('\n')
+
+                idx += 1
+        file.close()
+
+def result_reader(file_name='result_analysis/global_no_boundaries.csv'):
+
+    # Import file in a dataframe:
+    result = pd.read_csv(file_name, header=0, sep=';', index_col=0)
+    # Numpy version
+    npr = result.to_numpy()
+
+    # Create a model:
+    model = SEIR()
+    # Import the dataset
+    model.import_dataset()
+
+    while True:
+
+        print("===========================Enter the index of the row to analyse=================================")
+        i = int(input())
+
+        # Print the selected row
+        row = result.loc[i, :]
+        print(row)
+
+        # Load parameters:
+        model.beta = npr[i][1]
+        model.sigma = npr[i][2]
+        model.gamma = npr[i][3]
+        model.hp = npr[i][4]
+        model.hcr = npr[i][5]
+        model.pc = npr[i][6]
+        model.pd = npr[i][7]
+        model.pcr = npr[i][8]
+        model.s = npr[i][9]
+        model.t = npr[i][10]
+
+        # Make predictions
+        predictions = model.predict(duration=model.dataset.shape[0])
+
+        # Uncumul contaminations data
+        uncumul = []
+        uncumul.append(predictions[0][7])
+        for j in range(1, predictions.shape[0]):
+            uncumul.append(predictions[j][7] - predictions[j - 1][7])
+
+        # Plot:
+        time = model.dataset[:, 0]
+        # Adapt test + with sensit and testing rate
+        for j in range(0, len(time)):
+            uncumul[j] = uncumul[j] * model.s * model.t
+
+        # Plot cumul positive
+        plt.scatter(time, model.dataset[:, 1], c='blue', label='test+')
+        plt.plot(time, uncumul, c='blue', label='test+')
+        # Plot hospit
+        plt.scatter(time, model.dataset[:, 3], c='red', label='hospit data')
+        plt.plot(time, predictions[:, 4], c='red', label='hospit pred')
+        plt.legend()
+        plt.title('Index {}'.format(i))
+        plt.show()
+
+        plt.scatter(time, model.dataset[:, 5], c='green', label='Critical data')
+        plt.plot(time, predictions[:, 5], c='green', label='Critical predictions')
+        plt.scatter(time, model.dataset[:, 6], c='black', label='Fatalities data')
+        plt.plot(time, predictions[:, 6], c='black', label='Fatalities predictions')
+        plt.legend()
+        plt.title('index {}'.format(i))
+        plt.show()
+
+def rel_var_weights_score(file_name='result_analysis/global_no_boundaries.csv'):
+
+    # Import file in a dataframe:
+    result = pd.read_csv(file_name, header=0, sep=';', index_col=0)
+    # Numpy version
+    npr = result.to_numpy()
+
+    plt.scatter(result['score'], result['vw1'], c='blue', label='vw1')
+    plt.scatter(result['score'], result['vw2'], c='red', label='vw2')
+    plt.scatter(result['score'], result['vw3'], c='black', label='vw3')
+    plt.scatter(result['score'], result['vw4'], c='yellow', label='vw4')
+    plt.scatter(result['score'], result['vw5'], c='green', label='vw5')
+    plt.legend()
+    plt.title('relation between score and variance weights in {}'.format(file_name))
+    plt.savefig('result_analysis/figures/var_weigts.pdf')
+    plt.show()
+
+
+
+if __name__ == "__main__":
+
+    #result_concatener(options='boundaries')
+
+    #result_reader()
+
+    rel_var_weights_score()
