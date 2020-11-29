@@ -228,14 +228,14 @@ class SEIR():
         # Initial state:
         init_state = self.get_initial_state()
         output[0][0] = int(init_state[0])                       #s
-        output[0][1] = int(init_state[0])                       #E
-        output[0][2] = int(init_state[0])                       #i
-        output[0][3] = int(init_state[0])                       #R
-        output[0][4] = int(init_state[0])                       #H
-        output[0][5] = int(init_state[0])                       #C
-        output[0][6] = int(init_state[0])                       #F
-        output[0][7] = int(init_state[0])                       #CI
-        output[0][8] = int(init_state[0])                       #CH
+        output[0][1] = int(init_state[1])                       #E
+        output[0][2] = int(init_state[2])                       #i
+        output[0][3] = int(init_state[3])                       #R
+        output[0][4] = int(init_state[4])                       #H
+        output[0][5] = int(init_state[5])                       #C
+        output[0][6] = int(init_state[6])                       #F
+        output[0][7] = int(init_state[7])                       #CI
+        output[0][8] = int(init_state[8])                       #CH
 
         N = 1000000
 
