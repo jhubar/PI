@@ -149,6 +149,8 @@ def reader():
         plt.title('index {}'.format(i))
         plt.show()
 
+        model.ploter()
+
 
 if __name__ == "__main__":
 

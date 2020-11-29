@@ -6,7 +6,7 @@ from scipy.optimize import minimize
 import math
 from scipy.stats import binom as binom
 import tools
-
+from plot import plot_dataset
 from smoothing import dataframe_smoothing
 
 class SEIR():
@@ -170,6 +170,7 @@ class SEIR():
         self.s = df['s_final']
         self.t = df['t_final']
         self.I_0 = df['I_0']
+
     def differential(self, state, time, beta, sigma, gamma, hp, hcr, pc, pd, pcr, s, t):
         """
         ODE who describe the evolution of the model with the time
@@ -220,6 +221,207 @@ class SEIR():
                          t=time,
                          args=(tuple(prm)))
         return predict
+
+    def stochastic_predic(self, time):
+
+        output = np.zeros((len(time), 9))
+        # Initial state:
+        init_state = self.get_initial_state()
+        output[0][0] = int(init_state[0])                       #s
+        output[0][1] = int(init_state[0])                       #E
+        output[0][2] = int(init_state[0])                       #i
+        output[0][3] = int(init_state[0])                       #R
+        output[0][4] = int(init_state[0])                       #H
+        output[0][5] = int(init_state[0])                       #C
+        output[0][6] = int(init_state[0])                       #F
+        output[0][7] = int(init_state[0])                       #CI
+        output[0][8] = int(init_state[0])                       #CH
+
+        N = 1000000
+
+        #params = (self.beta, self.sigma, self.gamma, self.sensitivity)
+
+
+        for i in range(1, len(time)):
+
+            S_to_E = np.random.multinomial(output[i-1][0], [self.beta * output[i-1][2] / N, 1-(self.beta * output[i-1][2] / N)])[0]
+            #print(S_to_E)
+            E_to_I = np.random.multinomial(output[i-1][1], [self.sigma, 1-self.sigma])[0]
+            #print(E_to_I)
+
+            I_to_R = np.random.multinomial(output[i-1][2], [self.gamma, self.hp, 1-(self.gamma+self.hp)])[0]
+
+            I_to_H = np.random.multinomial(output[i-1][2], [self.gamma, self.hp, 1-(self.gamma+self.hp)])[1]
+
+            H_to_C = np.random.multinomial(output[i-1][4], [self.pc, self.hcr, 1-(self.pc+self.hcr)])[0]
+            H_to_R = np.random.multinomial(output[i-1][4], [self.pc, self.hcr, 1-(self.pc+self.hcr)])[1]
+
+            C_to_R = np.random.multinomial(output[i-1][5], [self.pcr, self.pd, 1-(self.pcr+self.pd)])[0]
+            C_to_F = np.random.multinomial(output[i-1][5], [self.pcr, self.pd, 1-(self.pcr+self.pd)])[1]
+
+
+            # Update states:
+
+            output[i][0] = output[i-1][0] - S_to_E                        #S
+            output[i][1] = output[i-1][1] + S_to_E - E_to_I               #E
+
+
+            output[i][2] = output[i-1][2] + E_to_I - I_to_R - I_to_H      #I
+            # WARNING: if the epidemic die (infected <= 0) we consider a population of 0 infected
+            if output[i][2] < 0:
+                """
+                Remove the number of people going out I compartiment
+                who doesn't exist (when output value <0)
+                """
+                I_to_R -= abs(output[i][2])*(self.gamma/(self.gamma+self.hp))
+                I_to_H -= abs(output[i][2])*(self.hp/(self.gamma+self.hp))
+                """
+                DIY to work well
+                """
+                if ((I_to_R*10) % 5) == 0:
+                    I_to_H += 0.1
+                I_to_H = np.round(I_to_H)
+                I_to_R = np.round(I_to_R)
+                output[i][2] = 0
+
+
+            output[i][3] = output[i-1][3] + I_to_R + C_to_R + H_to_R      #R
+
+
+            output[i][4] = output[i-1][4] + I_to_H - H_to_R - H_to_C      #H
+            # WARNING:
+            if output[i][4] < 0:
+                """
+                Remove the number of people going out H compartiment
+                who doesn't exist (when output value <0)
+                """
+                H_to_R -= abs(output[i][4])*self.pc/self.pc+self.hcr
+                H_to_C -= abs(output[i][4])*self.hcr/self.pc+self.hcr
+                """
+                DIY to work well
+                """
+                if ((H_to_R*10) % 5) == 0:
+                    H_to_R += 0.1
+
+                H_to_R = np.round(H_to_R)
+                H_to_C = np.round(H_to_C)
+
+                output[i][4] = 0
+
+            output[i][5] = output[i-1][5] + H_to_C - C_to_R - C_to_F      #C
+            # WARNING:
+            if output[i][5] < 0:
+                """
+                Remove the number of people going out C compartiment
+                who doesn't exist (when output value <0)
+                """
+                C_to_R -= abs(output[i][5])*self.pcr/self.pcr+self.pd
+                C_to_F -= abs(output[i][5])*self.pd/self.pcr+self.pd
+                """
+                DIY to work well
+                """
+                if ((C_to_F*10) % 5) == 0:
+                    C_to_F += 0.1
+
+                C_to_R = np.round(C_to_R)
+                C_to_F = np.round(C_to_F)
+
+                output[i][5] = 0
+
+
+            output[i][6] = output[i-1][6] + C_to_F                        #F
+            output[i][7] = output[i-1][7] + np.random.binomial(E_to_I, self.s)      #CI
+            output[i][8] = output[i-1][8] + I_to_H     #CH
+
+
+        return output
+
+    def stochastic_mean(self, time, nb_simul):
+        '''
+        Used to predict the stochastical model based on the mean of an important number of simulations
+
+        Parameters
+        ----------
+        time: vector(int)
+            vector of time to evaluate the stochastic prediction
+        nb_simul: (int)
+            number of simulation to evaluate the mean on
+
+        Returns
+        -------
+
+
+        '''
+
+        result_S = np.zeros((len(time), nb_simul))
+        result_E = np.zeros((len(time), nb_simul))
+        result_I = np.zeros((len(time), nb_simul))
+        result_R = np.zeros((len(time), nb_simul))
+        result_H = np.zeros((len(time), nb_simul))
+        result_C = np.zeros((len(time), nb_simul))
+        result_F = np.zeros((len(time), nb_simul))
+
+        result_Conta = np.zeros((len(time), nb_simul))
+        for i in range(0, nb_simul):
+
+            pred = self.stochastic_predic(time)
+            for j in range(0, len(time)):
+                result_S[j][i] = pred[j][0]
+                result_E[j][i] = pred[j][1]
+                result_I[j][i] = pred[j][2]
+                result_R[j][i] = pred[j][3]
+                result_H[j][i] = pred[j][4]
+                result_C[j][i] = pred[j][5]
+                result_F[j][i] = pred[j][6]
+                result_Conta[j][i] = pred[j][7]
+
+        mean = np.zeros((len(time), 8))
+        hquant = np.zeros((len(time), 8))
+        lquant = np.zeros((len(time), 8))
+        std = np.zeros((len(time), 8))
+
+        n_std = 2
+
+        for i in range(0, len(time)):
+            mean[i][0] = np.mean(result_S[i, :])
+            mean[i][1] = np.mean(result_E[i, :])
+            mean[i][2] = np.mean(result_I[i, :])
+            mean[i][3] = np.mean(result_R[i, :])
+            mean[i][4] = np.mean(result_H[i, :])
+            mean[i][5] = np.mean(result_C[i, :])
+            mean[i][6] = np.mean(result_F[i, :])
+            mean[i][7] = np.mean(result_Conta[i, :])
+
+            std[i][0] = np.std(result_S[i, :])
+            std[i][1] = np.std(result_E[i, :])
+            std[i][2] = np.std(result_I[i, :])
+            std[i][3] = np.std(result_R[i, :])
+            std[i][4] = np.std(result_H[i, :])
+            std[i][5] = np.std(result_C[i, :])
+            std[i][6] = np.std(result_F[i, :])
+            std[i][7] = np.std(result_Conta[i, :])
+
+            # WARNING: 70% confidence interval
+            hquant[i][0] = np.mean(result_S[i, :]) + n_std * std[i][0]
+            hquant[i][1] = np.mean(result_E[i, :]) + n_std * std[i][1]
+            hquant[i][2] = np.mean(result_I[i, :]) + n_std * std[i][2]
+            hquant[i][3] = np.mean(result_R[i, :]) + n_std * std[i][3]
+            hquant[i][4] = np.mean(result_H[i, :]) + n_std * std[i][4]
+            hquant[i][5] = np.mean(result_C[i, :]) + n_std * std[i][5]
+            hquant[i][6] = np.mean(result_F[i, :]) + n_std * std[i][6]
+            hquant[i][7] = np.mean(result_Conta[i, :]) + n_std * std[i][7]
+
+            lquant[i][0] = np.mean(result_S[i, :]) - n_std * std[i][0]
+            lquant[i][1] = np.mean(result_E[i, :]) - n_std * std[i][1]
+            lquant[i][2] = np.mean(result_I[i, :]) - n_std * std[i][2]
+            lquant[i][3] = np.mean(result_R[i, :]) - n_std * std[i][3]
+            lquant[i][4] = np.mean(result_H[i, :]) - n_std * std[i][4]
+            lquant[i][5] = np.mean(result_C[i, :]) - n_std * std[i][5]
+            lquant[i][6] = np.mean(result_F[i, :]) - n_std * std[i][6]
+            lquant[i][7] = np.mean(result_Conta[i, :]) - n_std * std[i][7]
+
+        return mean, hquant, lquant, std, result_S, result_E, result_I, result_R, result_H, result_C, result_F, result_Conta
+
 
     def fit(self, method='Normal'):
         """
@@ -636,3 +838,107 @@ class SEIR():
         self.E_0 = self.I_0 * 2
         self.R_0 = 0
         self.S_0 = 1000000 - self.I_0 - self.E_0
+
+    def plot(self, filename, type, duration=0, plot_conf_inter=False,
+             global_view=False, plot_param=False):
+        """
+        @param filename(@type String): name of file to save plot in
+        @param type(@type String): type of curves to plot
+        @param duration(@type int): duration of predictions
+        @param plot_conf_inter(@type bool): plot confidence range
+        @param global_view(@type bool): plot all stochastic curves
+        @return:
+        """
+        plot_dataset(self, filename, type, duration, plot_conf_inter,
+                     global_view, plot_param)
+
+    def plot_fit_cumul(self, duration=0, plot_conf_inter=False,
+                       global_view=False, plot_param=False):
+        """
+        See. self.plot()
+        """
+        self.plot(filename='fit_on_cum_num_pos',
+                  type='--ds-cum_num_pos --ds-num_pos --det-+CC --sto-+CC',
+                  duration=duration,
+                  plot_conf_inter=plot_conf_inter,
+                  global_view=global_view,
+                  plot_param=plot_param)
+
+    def plot_fit_hosp(self, duration=0, plot_conf_inter=False,
+                      global_view=False, plot_param=False):
+        """
+        See. self.plot()
+        """
+        self.plot(filename='fit_on_cum_hospitalized',
+                  type='--ds-num_cum_hospit --det-+CH',
+                  duration=duration,
+                  plot_conf_inter=plot_conf_inter,
+                  global_view=global_view,
+                  plot_param=plot_param)
+
+    def plot_fit_crit(self, duration=0, plot_conf_inter=False,
+                      global_view=False, plot_param=False):
+        """
+        See. self.plot()
+        """
+        self.plot(filename='fit_on_criticals',
+                  type='--ds-num_crit --det-C --sto-C',
+                  duration=duration,
+                  plot_conf_inter=plot_conf_inter,
+                  global_view=global_view,
+                  plot_param=plot_param)
+
+    def plot_fit_death(self, duration=0, plot_conf_inter=False,
+                       global_view=False, plot_param=False):
+        """
+        See. self.plot()
+        """
+        self.plot(filename='fit_on_death',
+                  type='--ds-num_fatal --det-D --sto-D',
+                  duration=duration,
+                  plot_conf_inter=plot_conf_inter,
+                  global_view=global_view,
+                  plot_param=plot_param)
+
+
+    def ploter(self):
+
+        self.plot(filename="Sto(I,E,H,C,F)",
+                   type='--sto-I --sto-E --sto-H --sto-C --sto-F',
+                   duration=200,
+                   global_view=True)
+
+        self.plot(filename="Sto(S,R)",
+                   type='--sto-S --sto-R',
+                   duration=200,
+                   global_view=True)
+
+        self.plot(filename="Compare_stocha_and_deter(I,E,H,C,F)",
+                   type='--sto-I --sto-E --sto-H --sto-C --sto-F' +
+                        '--det-I --det-E --det-H --det-C --det-F' ,
+                   duration=200,
+                   plot_conf_inter=True)
+
+
+        self.plot(filename="Compare_stocha_and_deter(S,R)",
+                   type='--sto-S --sto-R' +
+                        '--det-S --det-R' ,
+                   duration=200,
+                   plot_conf_inter=True)
+
+        self.plot_fit_cumul(plot_conf_inter=True)
+        self.plot_fit_hosp(plot_conf_inter=True)
+        self.plot_fit_crit(plot_conf_inter=True)
+        self.plot_fit_death(plot_conf_inter=True)
+
+        '''
+        model.plot(filename="SEIR-MODEL(E,I,H,C,D).pdf",
+                   type='--sto-E --sto-I --sto-H --sto-C --sto-D',
+                   duration=200,
+                   global_view=True)
+    
+        model.plot(filename="SEIR-MODEL-determinist(S,E,I,R).pdf",
+                   type='--det-S --det-E --det-I --det-R',
+                   duration=200,
+                   global_view=True)
+        '''
