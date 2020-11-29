@@ -35,12 +35,14 @@ def brute_force_fitting(name='Francois', id='1'):
         mdl.pcr = np.random.uniform(mdl.pcr_min, mdl.pcr_max)
         mdl.s = np.random.uniform(mdl.s_min, mdl.s_max)
         mdl.t = np.random.uniform(mdl.t_min, mdl.t_max)
-        mdl.var_w_1 = 2
-        mdl.var_w_2 = 2
-        mdl.var_w_3 = 2
-        mdl.var_w_4 = 2
-        mdl.var_w_5 = 2
-        mdl.I_0 = np.random.uniform(1, 20)
+        mdl.var_w_1 = 3
+        mdl.var_w_2 = 3
+        mdl.var_w_3 = 3
+        mdl.var_w_4 = 3
+        mdl.var_w_5 = 3
+        mdl.I_0 = np.random.uniform(3, 30)
+        mdl.smoothing = False
+
 
         # Store initial parameters value:
         init_params = mdl.get_parameters()

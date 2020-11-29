@@ -151,7 +151,16 @@ def result_concatener(options=''):
         t_min = 0.5
         t_max = 1
 
-        idx = 0
+        # If we sant to store a file who only contain smoothing and unbounded data
+        if 'smoothing' in options:
+            smooth_file = open('result/smoothed_unbounded.csv', 'w')
+            # Write headers
+            smooth_file.write(';')
+            smooth_file.write(hd)
+            smooth_file.write('\n')
+
+        idx_A = 0
+        idx_B = 0
         for i in range(0, npr.shape[0]):
 
             select = True
@@ -174,16 +183,27 @@ def result_concatener(options=''):
                 select = False
 
             if select:
-                string = [str(idx)]
+                string_A = [str(idx_A)]
+                string_B = [str(idx_B)]
                 for j in range(0, npr.shape[1]):
-                    string.append(str(npr[i][j]))
+                    string_A.append(str(npr[i][j]))
+                    string_B.append(str(npr[i][j]))
                 # Write in the file
-                file.write(';'.join(string))
+                file.write(';'.join(string_A))
                 file.write('\n')
 
-                idx += 1
+                # Data smoothing checking:
+                if npr[i][31] == 'True' and 'smoothing' in options:
+                    smooth_file.write(';'.join(string_B))
+                    smooth_file.write('\n')
+                    idx_B += 1
+
+
+                idx_A += 1
         file.close()
-        print('number of no_boundaries entries = {}'.format(idx))
+        smooth_file.close()
+        print('number of no_boundaries entries = {}'.format(idx_A))
+        print('number of no_boundaries and smoothed dataframe: = {}'.format(idx_B))
 
 def result_reader(file_name='result_analysis/global_no_boundaries.csv'):
 
@@ -217,7 +237,7 @@ def result_reader(file_name='result_analysis/global_no_boundaries.csv'):
         model.pcr = npr[i][8]
         model.s = npr[i][9]
         model.t = npr[i][10]
-
+        model.I_0 = npr[i][34]
         # Make predictions
         predictions = model.predict(duration=model.dataset.shape[0])
 
@@ -336,9 +356,9 @@ if __name__ == "__main__":
 
     # Concatène tous les dataset en un fichier Global_result
     # Et un fichier global_no_boundaries ne contenant que les vombinaisons ne touchant pas de bornes
-    result_concatener(options='boundaries')
+    #result_concatener(options='boundaries smoothing')
 
     # Lit un fichier au choix, puis permet de choisir l'index de la ligue que l'on veut ploter
     result_reader(file_name='result_analysis/global_no_boundaries.csv')
-
+    #result_reader(file_name='result/smoothed_unbounded.csv')
     #rel_var_weights_score()

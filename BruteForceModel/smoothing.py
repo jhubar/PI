@@ -47,8 +47,13 @@ def dataframe_smoothing(df):
     # Perform smoothing for each attributes
     for i in range(1, np_df.shape[1]):
         smoothed[:, i] = own_NRMAS(np_df[:, i], 7)
+    # Replace original last week
+    for i in range(np_df.shape[0]-7, np_df.shape[0]):
+        for j in range(1, np_df.shape[1]):
+            smoothed[i][j] = np_df[i][j]
 
     # Write new values in a dataframe
     new_df = pd.DataFrame(smoothed, columns=df.columns)
 
     return new_df
+

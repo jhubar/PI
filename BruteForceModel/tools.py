@@ -76,7 +76,7 @@ def initial_infected_estimator(dataset):
 
 
     # Make a polynomial regression of infected:
-    regressor = PolynomialRegressor(m=5)
+    regressor = PolynomialRegressor(m=10)
     time_bis = []
     idx = -10
     while(idx < 50):

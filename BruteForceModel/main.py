@@ -17,7 +17,7 @@ if __name__ == "__main__":
     # Find an optimal value for initial state
     #init_I = tools.initial_infected_estimator(model.dataset)
 
-    model.fit()
+    #model.fit()
     predictions = model.predict(duration=model.dataset.shape[0])
 
     print(model.get_parameters())
@@ -49,3 +49,23 @@ if __name__ == "__main__":
     plt.plot(time, predictions[:, 6], c='black', label='fatalities pred')
     plt.legend()
     plt.show()
+
+    # Smoothing test:
+    unsmooth_data = model.dataset
+
+    # Import a smoothed dataset:
+    model.smoothing = True
+    model.import_dataset()
+    smooth_data = model.dataset
+
+    # plot the data
+    plt.scatter(smooth_data[:, 0], smooth_data[:, 1], color='blue', label='smoothed testing data')
+    plt.scatter(smooth_data[:, 0], unsmooth_data[:, 1], color='green', label='unsmoothed testing data')
+    plt.legend()
+    plt.show()
+    # Print initial data:
+    for i in range(0, 15):
+        print('Time: {} - smoothed: {} - original: {}'.format(i, smooth_data[i][1], unsmooth_data[i][1]))
+
+    # Check best initial number of infected:
+    tools.initial_infected_estimator(smooth_data)
