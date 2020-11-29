@@ -532,12 +532,15 @@ class SEIR():
             # ================================================ #
             # PART 1: Test number fitting
             # ================================================ #
-            # the predicted value is multiply by
+            # Predictions: the number of contamination is multiply by the testing rate
             pred = infections[i] * testing_rate
+            # Evidences: the testing number of the day
             evid = self.dataset[i][2]
-            # Standardize and use normal distribution:
+            # The variance of the distribution
             sigma_sq = np.fabs(self.var_w_1 * evid)
+            # Difference between prediction and evidence
             dx = np.fabs(pred - evid)
+            # Avoid the exact case
             if sigma_sq == 0:
                 sigma_sq = 1
             prob_1 = tools.normal_density(sigma_sq, dx)
