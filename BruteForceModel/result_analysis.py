@@ -105,6 +105,7 @@ def result_concatener(options=''):
     export everything in global_result.csv
     Options:
         - 'boundaries' : delete each row who converge against boundaries
+        - 'restrictif_sort' : select data with more constraint
     """
     # List of file in the result folder
     files_lst = os.listdir('result/')
@@ -126,7 +127,7 @@ def result_concatener(options=''):
     result.sort_values(by=['score'], inplace=True, ignore_index=True, ascending=True)
 
     # Save All the table in a csv in order to analyze them in a tabar
-    result.to_csv('result_analysis\global_result.csv', sep=';', header=True, index=True)
+    result.to_csv('result_analysis/global_result.csv', sep=';', header=True, index=True)
 
     npr = result.to_numpy()
 
@@ -153,17 +154,26 @@ def result_concatener(options=''):
 
         # If we sant to store a file who only contain smoothing and unbounded data
         if 'smoothing' in options:
-            smooth_file = open('result/smoothed_unbounded.csv', 'w')
+            smooth_file = open('result_analysis/smoothed_unbounded.csv', 'w')
             # Write headers
             smooth_file.write(';')
             smooth_file.write(hd)
             smooth_file.write('\n')
 
+        if 'restrictif_sort' in options:
+            restirct_file = open('result_analysis/restrictif_sort.csv', 'w')
+            # Write headers
+            restirct_file.write(';')
+            restirct_file.write(hd)
+            restirct_file.write('\n')
+
         idx_A = 0
         idx_B = 0
+        idx_C = 0
         for i in range(0, npr.shape[0]):
 
             select = True
+            restrict = True
             # Boundaries checking
             if np.fabs(npr[i][2] - sigma_min) < 0.01:
                 select = False
@@ -181,13 +191,25 @@ def result_concatener(options=''):
                 select = False
             if np.fabs(npr[i][10] - t_max) < 0.01:
                 select = False
-
+            if npr[i][1] > 0.6:
+                restrict = False
+            if npr[i][2] > 0.9:
+                restrict = False
+            if npr[i][4] >= 0.1:
+                restrict = False
+            if npr[i][5] > 0.2:
+                restrict = False
+            if npr[i][8] > 0.5:
+                restrict = False
             if select:
                 string_A = [str(idx_A)]
                 string_B = [str(idx_B)]
+                string_C = [str(idx_C)]
                 for j in range(0, npr.shape[1]):
                     string_A.append(str(npr[i][j]))
                     string_B.append(str(npr[i][j]))
+                    string_C.append(str(npr[i][j]))
+
                 # Write in the file
                 file.write(';'.join(string_A))
                 file.write('\n')
@@ -197,13 +219,18 @@ def result_concatener(options=''):
                     smooth_file.write(';'.join(string_B))
                     smooth_file.write('\n')
                     idx_B += 1
-
+                if restrict:
+                    restirct_file.write(';'.join(string_C))
+                    restirct_file.write('\n')
+                    idx_C += 1
 
                 idx_A += 1
         file.close()
         smooth_file.close()
+        restirct_file.close()
         print('number of no_boundaries entries = {}'.format(idx_A))
         print('number of no_boundaries and smoothed dataframe: = {}'.format(idx_B))
+        print('number of restrictif entries: {}'.format(idx_C))
 
 def result_reader(file_name='result_analysis/global_no_boundaries.csv'):
 
@@ -356,9 +383,10 @@ if __name__ == "__main__":
 
     # Concatène tous les dataset en un fichier Global_result
     # Et un fichier global_no_boundaries ne contenant que les vombinaisons ne touchant pas de bornes
-    #result_concatener(options='boundaries smoothing')
+
+    #result_concatener(options='boundaries smoothing restrictif_sort')
 
     # Lit un fichier au choix, puis permet de choisir l'index de la ligue que l'on veut ploter
-    result_reader(file_name='result_analysis/global_no_boundaries.csv')
-    #result_reader(file_name='result/smoothed_unbounded.csv')
+    result_reader(file_name='result_analysis/restrictif_sort.csv')
+
     #rel_var_weights_score()

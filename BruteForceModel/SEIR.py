@@ -22,8 +22,11 @@ class SEIR():
         self.hp = 0.05          # Hospit rate
         self.hcr = 0.2          # Hospit recovery rate
         self.pc = 0.1           # Critical rate
-        self.pd = 0.1           # Critical recovery rate
-        self.pcr = 0.3          # Critical mortality
+        self.pd = 0.1           # Critical mortality rate
+        self.pcr = 0.3          # Critical recovery rate
+
+        # Only for fit_part_2
+        self.I_out = None       # Sum of probability to leave I each day
 
         # ========================================== #
         #       Testing protocol parameters
@@ -98,6 +101,7 @@ class SEIR():
         # Basis informations about objective function:
         self.basis_obj_display = True
         self.full_obj_display = False
+        self.fit_2_display = True
 
 
     def get_parameters(self):
@@ -150,6 +154,22 @@ class SEIR():
         init = (S_0, E_0, I_0, R_0, H_0, C_0, D_0, dE_to_I_0, dI_to_H_0, dI_to_R_0)
         return init
 
+    def set_parameters_from_bf(self, df):
+        """
+        This method initialize the values of parameters from a one row dataframe
+        at the format who is given by the bruteforce process
+        """
+        self.beta = df['beta_final']
+        self.sigma = df['sigma_final']
+        self.gamma = df['gamma_final']
+        self.hp = df['hp_final']
+        self.hcr = df['hcr_final']
+        self.pc = df['pc_final']
+        self.pd = df['pd_final']
+        self.pcr = df['pcr_final']
+        self.s = df['s_final']
+        self.t = df['t_final']
+        self.I_0 = df['I_0']
     def differential(self, state, time, beta, sigma, gamma, hp, hcr, pc, pd, pcr, s, t):
         """
         ODE who describe the evolution of the model with the time
@@ -405,11 +425,193 @@ class SEIR():
 
             error += err1 + err2 + err3 + err4 + err5
 
+        return error
+
+    def objective_part_2(self, parameters):
+
+
+        params = (self.beta, self.sigma, self.gamma, self.hp, parameters[0], parameters[1],
+                  parameters[2], parameters[3], self.s, self.t)
+
+        sensitivity = params[8]
+        testing_rate = params[9]
+
+        # Get an initial state:
+        init_state = self.get_initial_state(sensib=sensitivity, test_rate=testing_rate, sigma=params[1])
+        # Make prediction
+        predictions = self.predict(duration=self.dataset.shape[0],
+                                   parameters=params,
+                                   initial_state=init_state)
+        # Time to compare:
+        start_t = 3
+        end_t = self.dataset.shape[0]
+
+        if self.basis_obj_display:
+            print(params)
+
+        # if method == 'bruteforce':
+        #    start_t = 7
+        #    end_t = 35
+        # Uncumul tests predictions:
+        infections = [predictions[0][7]]
+        for i in range(1, end_t):
+            infections.append(predictions[i][7] - predictions[i - 1][7])
+
+        # Compare with dataset and compute the likelyhood value
+        error = 0.0
+        for i in range(start_t, end_t):
+            err3 = err4 = err5 = 0.0
+
+            # ================================================ #
+            # PART 3: Fit on hospitalized data
+            # ================================================ #
+            # the predicted value is multiply by
+            pred = predictions[i][4]
+            evid = self.dataset[i][3]
+            # Standardize and use normal distribution:
+            sigma_sq = np.fabs(self.var_w_3 * evid)
+            dx = np.fabs(pred - evid)
+            if sigma_sq == 0:
+                sigma_sq = 1
+            prob_3 = tools.normal_density(sigma_sq, dx)
+            # Add to the log probability
+            if prob_3 < 0.00000000000000000001:
+                err3 += 50 * self.w_3
+            else:
+                err3 -= np.log(prob_3) * self.w_3
+
+            # ================================================ #
+            # PART 4: Fit on critical
+            # ================================================ #
+            # the predicted value is multiply by
+            pred = predictions[i][5]
+            evid = self.dataset[i][5]
+            # Standardize and use normal distribution:
+            sigma_sq = np.fabs(self.var_w_4 * evid)
+            dx = np.fabs(pred - evid)
+            if sigma_sq == 0:
+                sigma_sq = 1
+            prob_4 = tools.normal_density(sigma_sq, dx)
+            # Add to the log probability
+            if prob_4 < 0.00000000000000000001:
+                err4 += 50 * self.w_4
+            else:
+                err4 -= np.log(prob_4) * self.w_4
+
+            # ================================================ #
+            # PART 5: Fit on Fatalities
+            # ================================================ #
+            # the predicted value is multiply by
+            pred = predictions[i][6]
+            evid = self.dataset[i][6]
+            # Standardize and use normal distribution:
+            sigma_sq = np.fabs(self.var_w_5 * evid)
+            dx = np.fabs(pred - evid)
+            if sigma_sq == 0:
+                sigma_sq = 1
+            prob_5 = tools.normal_density(sigma_sq, dx)
+            # Add to the log probability
+            if prob_5 < 0.00000000000000000001:
+                err5 += 50 * self.w_5
+            else:
+                err5 -= np.log(prob_5) * self.w_5
+
+            error += err3 + err4 + err5
 
         return error
 
+    def objective_cumul_hospit(self, gamma, hp):
+        """
+        Compute the score for the curent model only on cumul hospit
+        """
+        # Put parameters into a tuple
+        params = self.beta, self.sigma, gamma, hp, self.hcr, self.pc, self.pd, self.pcr, self.s, self.t
+
+        # Get an initial state:
+        init_state = self.get_initial_state(sensib=self.s, test_rate=self.t, sigma=params[1])
+        # Make prediction
+        predictions = self.predict(duration=self.dataset.shape[0],
+                            parameters=params,
+                            initial_state=init_state)
+        # Time to compare:
+        start_t = 3
+        end_t = self.dataset.shape[0]
+
+        # Compare with dataset
+        error = 0.0
+        for i in range(start_t, end_t):
+            err = 0.0
+            # ================================================ #
+            # PART 1: Fit on hospitalized data CUMUL
+            # ================================================ #
+            # the predicted value is multiply by
+            pred = predictions[i][8]
+            evid = self.dataset[i][4]
+            # Standardize and use normal distribution:
+            sigma_sq = np.fabs(self.var_w_2 * evid)
+            dx = np.fabs(pred - evid)
+            if sigma_sq == 0:
+                sigma_sq = 1
+            prob = tools.normal_density(sigma_sq, dx)
+            # Add to the log probability
+            if prob < 0.00000000000000000001:
+                err += 50 * self.w_3
+            else:
+                err -= np.log(prob) * self.w_3
+
+            error += err
+        return error
 
 
+    def fit_part_2(self):
+
+        # Initial value of parameters:
+        init_prm = (self.hcr, self.pc, self.pd, self.pcr)
+        # Bounds
+        bds = [(0, 0.5), (0, 0.5), (0, 0.5), (0.1, 0.5)]
+        # Minimize
+        res = minimize(self.objective_part_2, np.asarray(init_prm),
+                       method='L-BFGS-B',
+                       bounds=bds)
+        if self.fit_2_display:
+            print(res)
+
+        # Update parameters:
+        self.hcr = res.x[0]
+        self.pc = res.x[1]
+        self.pd = res.x[2]
+        self.pcr = res.x[3]
+
+        return res.fun
+
+    def fit_gamma_hp_rate(self, plot=True):
+
+        gamma = self.gamma
+        hp = self.hp
+        hs_sum = gamma + hp
+
+        gamma_range = np.linspace(0, hs_sum, 200)
+        hp_range = np.zeros(len(gamma_range))
+        for i in range(0, len(gamma_range)):
+            hp_range[i] = gamma_range[-(i+1)]
+        proportion_range = np.linspace(0, 1, 200)
+        best = (math.inf, 0, 0)
+        error = []
+        for i in range(0, len(gamma_range)):
+
+            err = self.objective_cumul_hospit(gamma_range[i], hp_range[i])
+            error.append(err)
+            if err < best[0]:
+                best = (err, gamma_range[i], hp_range[i])
+
+        if plot:
+
+            plt.plot(proportion_range, error, color='red')
+            plt.title('Evolution of the error in fit_gamma_hp_rate')
+            plt.show()
+
+        self.gamma = best[1]
+        self.hp = best[2]
 
 
 

@@ -78,3 +78,73 @@ def brute_force_fitting(name='Francois', id='1'):
         file.write('\n')
         file.close()
 
+def little_bruteforce(model):
+
+
+    # Crate a new model:
+    mdl = SEIR()
+    mdl.import_dataset()
+    mdl.beta = model.beta
+    mdl.sigma = model.sigma
+    mdl.gamma = model.gamma
+    mdl.hp = model.hp
+    mdl.s = model.s
+    mdl.t = model.t
+    mdl.I_0 = model.I_0
+    mdl.fit_display = False
+    mdl.basis_obj_display = False
+    mdl.full_obj_display = False
+    mdl.fit_2_display = True
+    mdl.I_out = model.gamma + model.hp
+
+    iter = 0
+    while True:
+        iter += 1
+        mdl.gamma = np.random.uniform(0, mdl.I_out)
+        mdl.hp = mdl.I_out - mdl.gamma
+        mdl.hcr = np.random.uniform(0, 0.3)
+        mdl.pc = np.random.uniform(0, 0.3)
+        mdl.pd = np.random.uniform(0, 0.3)
+        mdl.pcr = np.random.uniform(0, 0.3)
+
+        # Store initial parameters value:
+        init_params = mdl.get_parameters()
+        # Store hyperparameters:
+        init_hparams = mdl.get_hyperparameters()
+
+        print('================================================')
+        print('Iteration {}'.format(iter))
+        print('Epidemic starting parameters: ')
+        print(init_params)
+
+        # Fit the model
+        score = mdl.fit_part_2()
+        print('Score = {}'.format(score))
+        final_param = mdl.get_parameters()
+        print('Final parameters: ')
+        print(final_param)
+
+        # Make the string and store in file
+        pre_string = [str(score)]
+        for item in final_param:
+            pre_string.append(str(item))
+        for item in init_params:
+            pre_string.append(str(item))
+        for item in init_hparams:
+            pre_string.append(str(item))
+
+        string = ';'.join(pre_string)
+
+        # Open and write in the file
+        file = open('result/little_bruteforce.csv', 'a')
+        file.write(string)
+        file.write('\n')
+        file.close()
+
+
+
+
+
+
+
+
