@@ -14,12 +14,7 @@ class stats():
         self.workplaces_df = None
 
     def import_stats(self):
-        self.age_df = pd.read_csv(self.age_path)
-        self.households_df = pd.read_csv(self.households_path)
-        self.schools_df = pd.read_csv(self.schools_path)
-        self.workplaces_df = pd.read_csv(self.workplaces_path)
-
-
-
-
-    
+        self.age_df = pd.read_csv(self.age_path,sep = ';')
+        self.households_df = pd.read_csv(self.households_path,sep = ';')
+        self.schools_df = pd.read_csv(self.schools_path,sep = ';')
+        self.workplaces_df = pd.read_csv(self.workplaces_path,sep = ';')
