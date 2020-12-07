@@ -263,20 +263,6 @@ class SEIR():
             H_to_C, H_to_R = v_H_to_C_to_R(output[i-1, 4, :], params[4], params[4])
             C_to_R, C_to_F = v_C_to_R_to_F(output[i-1, 5, :], params[7], params[6])
 
-            """
-            S_to_E = self.rng.multinomial(np.reshape(output[i-1, 0, :], (1, 1000)), [params[0] * np.reshape(output[i-1, 2, :], (1, 1000)).flatten() / N,
-                                                               1-(params[0] * np.asarray(output[i-1, 2, :]).flatten() / N)])[0]
-            E_to_I = self.rng.multinomial(output[i-1, 1, :], [params[1], 1-params[1]])[0]
-
-            I_to_R, I_to_H = self.rng.multinomial(output[i-1, 2, :],
-                                                   [params[2], params[3], 1-(params[2] + params[3])])
-
-            H_to_C, H_to_R = self.rng.multinomial(output[i-1, 4, :], [params[5], params[4], 1-(params[5] + params[4])])
-
-            C_to_R, C_to_F = self.rng.multinomial(output[i-1, 5, :], [params[7], params[6], 1-(params[7] + params[6])])
-            
-            """
-
             # Update states:
 
             output[i, 0, :] = output[i-1, 0, :] - S_to_E                        #S
@@ -298,39 +284,20 @@ class SEIR():
     def E_to_I(self, E, sigma):
         return self.rng.multinomial(E, [sigma, 1-sigma])[0]
 
-    def I_to_R(self, I, gamma, hp):
-        return self.rng.multinomial(I, [gamma, hp, 1-(gamma + hp)])[0]
-
-    def I_to_H(self, I, gamma, hp):
-        return self.rng.multinomial(I, [gamma, hp, 1-(gamma + hp)])[1]
-
     def I_to_R_to_H(self, I, gamma, hp):
         tmp = self.rng.multinomial(I, [gamma, hp, 1 - (gamma + hp)])
         return tmp[0], tmp[1]
 
-    def H_to_C(self, H, pc, hcr):
-        print(H)
-        return self.rng.multinomial(H, [pc, hcr, 1-(pc + hcr)])[0]
-
-    def H_to_R(self, H, pc, hcr):
-        return self.rng.multinomial(H, [pc, hcr, 1-(pc + hcr)])[1]
-
     def H_to_C_to_R(self, H, pc, hcr):
         tmp = self.rng.multinomial(H, [pc, hcr, 1-(pc + hcr)])
         return tmp[0], tmp[1]
-
-    def C_to_R(self, C, pcr, pd):
-        print(C)
-        return self.rng.multinomial(C, [pcr, pd, 1-(pcr + pd)])[0]
-
-    def C_to_F(self, C, pcr, pd):
-        return self.rng.multinomial(C, [pcr, pd, 1-(pcr + pd)])[1]
 
     def C_to_R_to_F(self, C, pcr, pd):
         tmp = self.rng.multinomial(C, [pcr, pd, 1-(pcr + pd)])
         return tmp[0], tmp[1]
 
     def stochastic_mean(self, time, nb_simul):
+        
         '''
         Used to predict the stochastical model based on the mean of an important number of simulations
 
