@@ -103,6 +103,7 @@ class SEIR():
         self.full_obj_display = False
         self.fit_2_display = True
 
+        self.timeseed = 0
 
     def get_parameters(self):
 
@@ -241,7 +242,8 @@ class SEIR():
 
         #params = (self.beta, self.sigma, self.gamma, self.sensitivity)
 
-
+        self.timeseed += 1
+        np.random.seed(self.timeseed)
         for i in range(1, len(time)):
 
             S_to_E = np.random.multinomial(output[i-1][0], [self.beta * output[i-1][2] / N, 1-(self.beta * output[i-1][2] / N)])[0]
@@ -945,3 +947,119 @@ class SEIR():
                    duration=200,
                    global_view=True)
         '''
+
+    def stocha_perso(self):
+
+        nb_simul = 200
+        time = np.arange(self.dataset.shape[0])
+        result_S = np.zeros((len(time), nb_simul))
+        result_E = np.zeros((len(time), nb_simul))
+        result_I = np.zeros((len(time), nb_simul))
+        result_R = np.zeros((len(time), nb_simul))
+        result_H = np.zeros((len(time), nb_simul))
+        result_C = np.zeros((len(time), nb_simul))
+        result_F = np.zeros((len(time), nb_simul))
+
+        result_Conta = np.zeros((len(time), nb_simul))
+        for i in range(0, nb_simul):
+
+            pred = self.stochastic_predic(time)
+            for j in range(0, len(time)):
+                result_S[j][i] = pred[j][0]
+                result_E[j][i] = pred[j][1]
+                result_I[j][i] = pred[j][2]
+                result_R[j][i] = pred[j][3]
+                result_H[j][i] = pred[j][4]
+                result_C[j][i] = pred[j][5]
+                result_F[j][i] = pred[j][6]
+                result_Conta[j][i] = pred[j][7]
+
+        mean = np.zeros((len(time), 8))
+        hquant = np.zeros((len(time), 8))
+        lquant = np.zeros((len(time), 8))
+        std = np.zeros((len(time), 8))
+
+        n_std = 2
+
+        for i in range(0, len(time)):
+            mean[i][0] = np.mean(result_S[i, :])
+            mean[i][1] = np.mean(result_E[i, :])
+            mean[i][2] = np.mean(result_I[i, :])
+            mean[i][3] = np.mean(result_R[i, :])
+            mean[i][4] = np.mean(result_H[i, :])
+            mean[i][5] = np.mean(result_C[i, :])
+            mean[i][6] = np.mean(result_F[i, :])
+            mean[i][7] = np.mean(result_Conta[i, :])
+
+            std[i][0] = np.std(result_S[i, :])
+            std[i][1] = np.std(result_E[i, :])
+            std[i][2] = np.std(result_I[i, :])
+            std[i][3] = np.std(result_R[i, :])
+            std[i][4] = np.std(result_H[i, :])
+            std[i][5] = np.std(result_C[i, :])
+            std[i][6] = np.std(result_F[i, :])
+            std[i][7] = np.std(result_Conta[i, :])
+
+            # WARNING: 70% confidence interval
+            hquant[i][0] = np.mean(result_S[i, :]) + n_std * std[i][0]
+            hquant[i][1] = np.mean(result_E[i, :]) + n_std * std[i][1]
+            hquant[i][2] = np.mean(result_I[i, :]) + n_std * std[i][2]
+            hquant[i][3] = np.mean(result_R[i, :]) + n_std * std[i][3]
+            hquant[i][4] = np.mean(result_H[i, :]) + n_std * std[i][4]
+            hquant[i][5] = np.mean(result_C[i, :]) + n_std * std[i][5]
+            hquant[i][6] = np.mean(result_F[i, :]) + n_std * std[i][6]
+            hquant[i][7] = np.mean(result_Conta[i, :]) + n_std * std[i][7]
+
+            lquant[i][0] = np.mean(result_S[i, :]) - n_std * std[i][0]
+            lquant[i][1] = np.mean(result_E[i, :]) - n_std * std[i][1]
+            lquant[i][2] = np.mean(result_I[i, :]) - n_std * std[i][2]
+            lquant[i][3] = np.mean(result_R[i, :]) - n_std * std[i][3]
+            lquant[i][4] = np.mean(result_H[i, :]) - n_std * std[i][4]
+            lquant[i][5] = np.mean(result_C[i, :]) - n_std * std[i][5]
+            lquant[i][6] = np.mean(result_F[i, :]) - n_std * std[i][6]
+            lquant[i][7] = np.mean(result_Conta[i, :]) - n_std * std[i][7]
+
+
+        # Predictions deterministes:
+        predictions = self.predict(self.dataset.shape[0])
+
+
+
+        # Plot I
+        for i in range(0, result_Conta.shape[1]-1):
+            plt.plot(time, result_I[:, i], c='green', linewidth=0.1)
+        plt.plot(time, result_I[:, result_I.shape[1]-1], c='green', linewidth=0.1, label='Stochastic I')
+        #plt.plot(time, mean[:, 2], c='blue', label='Stochastic I mean prediction')
+        plt.scatter(time, predictions[:, 2], c='black', label='Deterministic I')
+        plt.legend()
+        plt.title('Infected curves')
+        plt.show()
+
+        # Plot Critical
+        for i in range(0, result_Conta.shape[1]-1):
+            plt.plot(time, result_C[:, i], c='red', linewidth=0.1)
+        plt.plot(time, result_C[:, result_C.shape[1]-1], c='red', linewidth=0.1, label='Stochastic C')
+        plt.scatter(time, predictions[:, 5], c='blue', label='Deterministic C')
+        plt.legend()
+        plt.title('Critical curves')
+        plt.show()
+
+        # Plot Hospit
+        for i in range(0, result_Conta.shape[1]-1):
+            plt.plot(time, result_H[:, i], c='yellow', linewidth=0.1)
+        plt.plot(time, result_H[:, result_C.shape[1]-1], c='yellow', linewidth=0.1, label='Stochastic H')
+        plt.scatter(time, predictions[:, 4], c='black', label='Deterministic H')
+        plt.legend()
+        plt.title('Hospitalized curves')
+        plt.show()
+
+        # Plot Fatalities
+        for i in range(0, result_Conta.shape[1]-1):
+            plt.plot(time, result_F[:, i], c='blue', linewidth=0.1)
+        plt.plot(time, result_F[:, result_C.shape[1]-1], c='blue', linewidth=0.1, label='Stochastic F')
+        plt.scatter(time, predictions[:, 6], c='red', label='Deterministic F')
+        plt.legend()
+        plt.title('Fatalities curves')
+        plt.show()
+
+

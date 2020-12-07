@@ -138,7 +138,9 @@ def reader():
         plt.scatter(time, model.dataset[:, 3], c='red', label='hospit data')
         plt.plot(time, predictions[:, 4], c='red', label='hospit pred')
         plt.legend()
-        plt.title('Index {}'.format(i))
+        plt.xlabel('Time (days)')
+        plt.ylabel('Number of people')
+        # plt.title('Index {}'.format(i))
         plt.show()
 
         plt.scatter(time, model.dataset[:, 5], c='green', label='Critical data')
@@ -146,10 +148,12 @@ def reader():
         plt.scatter(time, model.dataset[:, 6], c='black', label='Fatalities data')
         plt.plot(time, predictions[:, 6], c='black', label='Fatalities predictions')
         plt.legend()
-        plt.title('index {}'.format(i))
+        plt.xlabel('Time (days)')
+        plt.ylabel('Number of people')
+        # plt.title('index {}'.format(i))
         plt.show()
 
-        model.ploter()
+        model.stocha_perso()
 
 
 if __name__ == "__main__":
