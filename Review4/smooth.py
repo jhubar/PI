@@ -18,14 +18,18 @@ def own_NRMAS_index(vector, window, index):
     return smoothed_value / nb_considered_values
 
 
-def own_NRMAS(vector, window):
+def own_NRMAS_age(vector, window):
     smoothed_vector = np.zeros(len(vector))
 
     if (window % 2) == 0:
         print("Error window size even")
         return
 
-    for i in range(len(vector)):
+    for i in range(len(vector)-20):
         smoothed_vector[i] = own_NRMAS_index(vector, window, i)
 
+    for i in range(len(vector)- 20, len(vector)-1):
+        smoothed_vector[i] = own_NRMAS_index(vector, window+19, i)
+
+    smoothed_vector[-1]=smoothed_vector[-2]
     return smoothed_vector
