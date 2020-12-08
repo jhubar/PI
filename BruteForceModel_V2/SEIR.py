@@ -4,11 +4,11 @@ import matplotlib.pyplot as plt
 from scipy.integrate import odeint
 from scipy.optimize import minimize
 import math
-from scipy.stats import binom as binom
 import tools
 from plot import plot_dataset
 from smoothing import dataframe_smoothing
-
+from scipy.stats import binom as binom
+import os
 class SEIR():
 
     def __init__(self):
@@ -16,14 +16,14 @@ class SEIR():
         # ========================================== #
         #       Epidemic's model parameters
         # ========================================== #
-        self.beta = 0.4         # Contamination rate
-        self.sigma = 0.9        # Incubation rate
-        self.gamma = 0.1        # Recovery rate
-        self.hp = 0.05          # Hospit rate
-        self.hcr = 0.2          # Hospit recovery rate
-        self.pc = 0.1           # Critical rate
-        self.pd = 0.1           # Critical mortality rate
-        self.pcr = 0.3          # Critical recovery rate
+        self.beta = 0.401739         # Contamination rate
+        self.sigma = 0.849249        # Incubation rate
+        self.gamma = 0.27155        # Recovery rate
+        self.hp = 0.0143677         # Hospit rate
+        self.hcr = 0.0505969          # Hospit recovery rate
+        self.pc = 0.0281921           # Critical rate
+        self.pd = 0.0489863          # Critical mortality rate
+        self.pcr = 0.105229         # Critical recovery rate
 
         # Only for fit_part_2
         self.I_out = None       # Sum of probability to leave I each day
@@ -31,8 +31,8 @@ class SEIR():
         # ========================================== #
         #       Testing protocol parameters
         # ========================================== #
-        self.s = 0.77           # Sensitivity
-        self.t = 0.7            # Testing rate in symptomatical
+        self.s = 0.799943           # Sensitivity
+        self.t = 0.946585            # Testing rate in symptomatical
 
         # Learning set
         self.dataframe = None
@@ -82,7 +82,7 @@ class SEIR():
         self.N = 1000000
 
         # Estimation of the number of infected at t_0
-        self.I_0 = 20
+        self.I_0 = 28.6756
 
         # Smoothing the dataset?
         self.smoothing = False
@@ -98,6 +98,13 @@ class SEIR():
         self.rng = np.random.default_rng()
 
         # ========================================== #
+        #        Stochastic Pystan Model:
+        # ========================================== #
+
+        # Create the model:
+
+
+        # ========================================== #
         #                   Printers
         # ========================================== #
 
@@ -107,6 +114,8 @@ class SEIR():
         self.basis_obj_display = True
         self.full_obj_display = False
         self.fit_2_display = True
+        # Stochastic evidences adapter
+        self.stocha_ev_print = False
 
         self.timeseed = 0
 
@@ -158,7 +167,8 @@ class SEIR():
         dI_to_H_0 = H_0
         dI_to_R_0 = 0
         init = (S_0, E_0, I_0, R_0, H_0, C_0, D_0, dE_to_I_0, dI_to_H_0, dI_to_R_0)
-        return init
+        init = np.around(init)
+        return np.asarray(init, dtype=int)
 
     def set_parameters_from_bf(self, df):
         """
@@ -220,7 +230,9 @@ class SEIR():
         init = initial_state
         if init is None:
             init = self.get_initial_state(sensib=prm[8], test_rate=prm[9], sigma=prm[1])
-
+        print('initial state deter = ')
+        print(init)
+        print(prm)
         # Make prediction:
         predict = odeint(func=self.differential,
                          y0=init,
@@ -228,21 +240,24 @@ class SEIR():
                          args=(tuple(prm)))
         return predict
 
-    def stochastic_predic(self, duration, parameters=None):
+    def stochastic_predic_sans_ev(self, duration, parameters=None, init=None):
 
+        # Get parameters:
+        params = parameters
+        if params is None:
+            params = self.get_parameters()
         # time vector
         time = np.arange(duration)
         # General array to store predictions
         output = np.zeros((len(time), 9, self.nb_simul), dtype=int)
         # get and store initial state
-        init_state = np.asarray(self.get_initial_state(), dtype=int)
+        init_state = init
+        if init is None:
+            init_state = np.asarray(self.get_initial_state(sensib=params[8], test_rate=params[9], sigma=params[1]),
+                                    dtype=int)
         for i in range(0, 9):
             output[0, i, :] = init_state[i]
         N = 1000000
-        # Get parameters:
-        params = parameters
-        if params is None:
-            params = self.get_parameters()
 
         # Vectorize transitions functions:
         v_S_to_E = np.vectorize(self.S_to_E)
@@ -278,7 +293,99 @@ class SEIR():
 
         return output
 
+    def stochastic_predic(self, duration, parameters=None, nb_simul=200):
+
+        # Get parameters:
+        params = parameters
+        if params is None:
+            params = self.get_parameters()
+        # time vector
+        time = np.arange(duration)
+        # General array to store predictions
+        output = np.zeros((len(time), 9, nb_simul), dtype=int)
+        # get and store initial state
+        init_state = np.asarray(self.get_initial_state(sensib=params[8], test_rate=params[9], sigma=params[1]), dtype=int)
+        for i in range(0, 9):
+            output[0, i, :] = init_state[i]
+        N = 1000000
+
+
+        # Get prior distributions
+        priori_lngth = duration
+        if duration >= self.dataset.shape[0]:
+            priori_lngth = self.dataset.shape[0]
+        max_n = self.dataset[priori_lngth-1, 1]*2
+        # Matrix to store distribution
+        priori = np.zeros((max_n, priori_lngth))
+        # values of n
+        n_vec = np.arange(priori.shape[0])
+        k_vec = self.dataset[0:priori.shape[1], 1]
+
+        # Build prior distributions
+        for i in range(0, priori.shape[0]):
+            # Build the binomial object
+            binom_obj = binom(n=i, p=params[8]*params[9])
+            # Compute the probability of the evidence given prediction
+            priori[i, :] = binom_obj.pmf(k=k_vec)
+
+        # Get posterior probabilities distribution
+        # Vectorize transitions functions:
+        v_S_to_E = np.vectorize(self.S_to_E)
+        v_E_to_I = np.vectorize(self.E_to_I)
+        v_I_to_R_to_H = np.vectorize(self.I_to_R_to_H, otypes=[int, int])
+        v_H_to_C_to_R = np.vectorize(self.H_to_C_to_R, otypes=[int, int])
+        v_C_to_R_to_F = np.vectorize(self.C_to_R_to_F, otypes=[int, int])
+        v_E_to_I_ev = np.vectorize(self.E_to_I_ev, excluded=['priori', 'k_vec'])
+
+        for i in range(1, len(time)):
+            if i % 10 == 0:
+                print(i)
+
+            # Get class moves
+            S_to_E = v_S_to_E(output[i-1, 0, :], output[i-1, 2, :], N, params[0])
+            if i >= priori_lngth:
+                E_to_I = v_E_to_I(output[i-1, 1, :], params[1])
+            else:
+                E_to_I = v_E_to_I_ev(output[i-1, 1, :], sigma=params[1], priori=priori[:, i], k_vec=n_vec)
+
+
+            I_to_R, I_to_H = v_I_to_R_to_H(output[i-1, 2, :], params[2], params[3])
+            H_to_C, H_to_R = v_H_to_C_to_R(output[i-1, 4, :], params[4], params[4])
+            C_to_R, C_to_F = v_C_to_R_to_F(output[i-1, 5, :], params[7], params[6])
+
+            # Update states:
+
+            output[i, 0, :] = output[i-1, 0, :] - S_to_E                        #S
+            output[i, 1, :] = output[i-1, 1, :] + S_to_E - E_to_I               #E
+            output[i, 2, :] = output[i-1, 2, :] + E_to_I - I_to_R - I_to_H      #I
+            output[i, 3, :] = output[i-1, 3, :] + I_to_R + C_to_R + H_to_R      #R
+            output[i, 4, :] = output[i-1, 4, :] + I_to_H - H_to_R - H_to_C      #H
+            output[i, 5, :] = output[i-1, 5, :] + H_to_C - C_to_R - C_to_F      #C
+            output[i, 6, :] = output[i-1, 6, :] + C_to_F                        #F
+            output[i, 7, :] = output[i-1, 7, :] + E_to_I                        #CI
+            output[i, 8, :] = output[i-1, 8, :] + I_to_H                        #CH
+
+
+        return output
+
+    def E_to_I_ev(self, E, sigma, priori, k_vec):
+        binom_obj = binom(n=E, p=sigma)
+        poste = binom_obj.pmf(k_vec)
+        distri = priori * poste
+
+        # normalize:
+        np.nan_to_num(distri, copy=False)
+        smn = np.sum(distri)
+        if smn == 0:
+            a = np.argmax(priori)
+            b = np.argmax(poste)
+            return np.around((a + b) / 2)
+        distri /= smn
+        choise = np.random.choice(k_vec, p=distri)
+        return choise
+
     def S_to_E(self, S, I, N, beta):
+
         return self.rng.multinomial(S, [beta * I / N, 1 - (beta * I / N)])[0]
 
     def E_to_I(self, E, sigma):
@@ -295,93 +402,6 @@ class SEIR():
     def C_to_R_to_F(self, C, pcr, pd):
         tmp = self.rng.multinomial(C, [pcr, pd, 1-(pcr + pd)])
         return tmp[0], tmp[1]
-
-    def stochastic_mean(self, time, nb_simul):
-        
-        '''
-        Used to predict the stochastical model based on the mean of an important number of simulations
-
-        Parameters
-        ----------
-        time: vector(int)
-            vector of time to evaluate the stochastic prediction
-        nb_simul: (int)
-            number of simulation to evaluate the mean on
-
-        Returns
-        -------
-
-
-        '''
-
-        result_S = np.zeros((len(time), nb_simul))
-        result_E = np.zeros((len(time), nb_simul))
-        result_I = np.zeros((len(time), nb_simul))
-        result_R = np.zeros((len(time), nb_simul))
-        result_H = np.zeros((len(time), nb_simul))
-        result_C = np.zeros((len(time), nb_simul))
-        result_F = np.zeros((len(time), nb_simul))
-
-        result_Conta = np.zeros((len(time), nb_simul))
-        for i in range(0, nb_simul):
-
-            pred = self.stochastic_predic(time)
-            for j in range(0, len(time)):
-                result_S[j][i] = pred[j][0]
-                result_E[j][i] = pred[j][1]
-                result_I[j][i] = pred[j][2]
-                result_R[j][i] = pred[j][3]
-                result_H[j][i] = pred[j][4]
-                result_C[j][i] = pred[j][5]
-                result_F[j][i] = pred[j][6]
-                result_Conta[j][i] = pred[j][7]
-
-        mean = np.zeros((len(time), 8))
-        hquant = np.zeros((len(time), 8))
-        lquant = np.zeros((len(time), 8))
-        std = np.zeros((len(time), 8))
-
-        n_std = 2
-
-        for i in range(0, len(time)):
-            mean[i][0] = np.mean(result_S[i, :])
-            mean[i][1] = np.mean(result_E[i, :])
-            mean[i][2] = np.mean(result_I[i, :])
-            mean[i][3] = np.mean(result_R[i, :])
-            mean[i][4] = np.mean(result_H[i, :])
-            mean[i][5] = np.mean(result_C[i, :])
-            mean[i][6] = np.mean(result_F[i, :])
-            mean[i][7] = np.mean(result_Conta[i, :])
-
-            std[i][0] = np.std(result_S[i, :])
-            std[i][1] = np.std(result_E[i, :])
-            std[i][2] = np.std(result_I[i, :])
-            std[i][3] = np.std(result_R[i, :])
-            std[i][4] = np.std(result_H[i, :])
-            std[i][5] = np.std(result_C[i, :])
-            std[i][6] = np.std(result_F[i, :])
-            std[i][7] = np.std(result_Conta[i, :])
-
-            # WARNING: 70% confidence interval
-            hquant[i][0] = np.mean(result_S[i, :]) + n_std * std[i][0]
-            hquant[i][1] = np.mean(result_E[i, :]) + n_std * std[i][1]
-            hquant[i][2] = np.mean(result_I[i, :]) + n_std * std[i][2]
-            hquant[i][3] = np.mean(result_R[i, :]) + n_std * std[i][3]
-            hquant[i][4] = np.mean(result_H[i, :]) + n_std * std[i][4]
-            hquant[i][5] = np.mean(result_C[i, :]) + n_std * std[i][5]
-            hquant[i][6] = np.mean(result_F[i, :]) + n_std * std[i][6]
-            hquant[i][7] = np.mean(result_Conta[i, :]) + n_std * std[i][7]
-
-            lquant[i][0] = np.mean(result_S[i, :]) - n_std * std[i][0]
-            lquant[i][1] = np.mean(result_E[i, :]) - n_std * std[i][1]
-            lquant[i][2] = np.mean(result_I[i, :]) - n_std * std[i][2]
-            lquant[i][3] = np.mean(result_R[i, :]) - n_std * std[i][3]
-            lquant[i][4] = np.mean(result_H[i, :]) - n_std * std[i][4]
-            lquant[i][5] = np.mean(result_C[i, :]) - n_std * std[i][5]
-            lquant[i][6] = np.mean(result_F[i, :]) - n_std * std[i][6]
-            lquant[i][7] = np.mean(result_Conta[i, :]) - n_std * std[i][7]
-
-        return mean, hquant, lquant, std, result_S, result_E, result_I, result_R, result_H, result_C, result_F, result_Conta
 
 
     def fit(self, method='Normal'):
@@ -467,21 +487,28 @@ class SEIR():
 
         # Get an initial state:
         init_state = self.get_initial_state(sensib=sensitivity, test_rate=testing_rate, sigma=params[1])
+        if self.basis_obj_display:
+            print(params)
         # Make prediction
-        predictions = self.predict(duration=self.dataset.shape[0],
-                            parameters=params,
-                            initial_state=init_state)
+        if method == 'normal':
+            predictions = self.predict(duration=self.dataset.shape[0],
+                                parameters=params,
+                                initial_state=init_state)
+        if method == 'stocha':
+            # Predict with 200 simulations
+            tmp = self.nb_simul
+            self.nb_simul = 200
+            # Get predictions matrix:
+            prd_mat = self.stochastic_predic_sans_ev(duration=self.dataset.shape[0],
+                                           parameters=params,
+                                           init=init_state)
+            self.nb_simul = tmp
+            # Get mean vectors
+            predictions = np.mean(prd_mat, axis=2)
         # Time to compare:
         start_t = 3
         end_t = self.dataset.shape[0]
 
-        if self.basis_obj_display:
-            print(params)
-
-        #if method == 'bruteforce':
-        #    start_t = 7
-        #    end_t = 35
-        # Uncumul tests predictions:
         infections = [predictions[0][7]]
         for i in range(1, end_t):
             infections.append(predictions[i][7] - predictions[i-1][7])
@@ -590,7 +617,8 @@ class SEIR():
                 err5 -= np.log(prob_5) * self.w_5
 
             error += err1 + err2 + err3 + err4 + err5
-
+        if self.basis_obj_display:
+            print('score = {}'.format(error))
         return error
 
     def objective_part_2(self, parameters):
@@ -910,7 +938,7 @@ class SEIR():
     def stocha_perso(self):
 
         nb_simul = 200
-        time = np.arange(self.dataset.shape[0])
+        time = np.arange(self.dataset.shape[0]+7)
         self.nb_simul = nb_simul
         res = self.stochastic_predic(len(time))
 
@@ -929,16 +957,27 @@ class SEIR():
         for i in range(0, nb_simul-1):
             plt.plot(time, res[:, 2, i], c='green', linewidth=0.1)
         plt.plot(time, res[:, 2, nb_simul-1], c='green', linewidth=0.1, label='Stochastic I')
-        #plt.plot(time, mean[:, 2], c='blue', label='Stochastic I mean prediction')
+        plt.plot(time, mean[:, 2], c='blue', label='Stochastic I mean prediction')
         plt.scatter(time, predictions[:, 2], c='black', label='Deterministic I')
         plt.legend()
         plt.title('Infected curves')
+        plt.show()
+
+        # Plot Conta
+        for i in range(0, nb_simul-1):
+            plt.plot(time, res[:, 7, i], c='green', linewidth=0.1)
+        plt.plot(time, res[:, 7, nb_simul-1], c='green', linewidth=0.1, label='Stochastic conta')
+        plt.plot(time, mean[:, 7], c='blue', label='Stochastic conta mean prediction')
+        plt.scatter(self.dataset[:, 0], self.dataset[:, 7]/(self.s*self.t), c='black', label='Dataset conta')
+        plt.legend()
+        plt.title('Contaminations curves')
         plt.show()
 
         # Plot Critical
         for i in range(0, nb_simul-1):
             plt.plot(time, res[:, 5, i], c='red', linewidth=0.1)
         plt.plot(time, res[:, 5, nb_simul-1], c='red', linewidth=0.1, label='Stochastic C')
+        plt.plot(time, mean[:, 5], c='green', label='Stochastic C mean prediction')
         plt.scatter(time, predictions[:, 5], c='blue', label='Deterministic C')
         plt.legend()
         plt.title('Critical curves')
@@ -948,6 +987,7 @@ class SEIR():
         for i in range(0, nb_simul-1):
             plt.plot(time, res[:, 4, i], c='yellow', linewidth=0.1)
         plt.plot(time, res[:, 4, nb_simul-1], c='yellow', linewidth=0.1, label='Stochastic H')
+        plt.plot(time, mean[:, 4], c='blue', label='Stochastic H mean prediction')
         plt.scatter(time, predictions[:, 4], c='black', label='Deterministic H')
         plt.legend()
         plt.title('Hospitalized curves')
@@ -957,6 +997,7 @@ class SEIR():
         for i in range(0, nb_simul-1):
             plt.plot(time, res[:, 6, i], c='blue', linewidth=0.1)
         plt.plot(time, res[:, 6, nb_simul-1], c='blue', linewidth=0.1, label='Stochastic F')
+        plt.plot(time, mean[:, 6], c='green', label='Stochastic F mean prediction')
         plt.scatter(time, predictions[:, 6], c='red', label='Deterministic F')
         plt.legend()
         plt.title('Fatalities curves')

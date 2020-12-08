@@ -19,7 +19,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/BruteForceModel_V2" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Unif/Machine learning/Projets 2020/P3/ML_P3" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -29,7 +29,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1607347922414</updated>
-      <workItem from="1607347923591" duration="2025000" />
+      <workItem from="1607347923591" duration="2055000" />
     </task>
     <servers />
   </component>
@@ -37,10 +37,10 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="2660" y="280" key="FileChooserDialogImpl" timestamp="1607349361731">
+    <state x="2660" y="280" key="FileChooserDialogImpl" timestamp="1607377938703">
       <screen x="1920" y="0" width="1920" height="1050" />
     </state>
     <state x="740" y="280" key="FileChooserDialogImpl/-1920.0.1280.700/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1607348862404" />
-    <state x="2660" y="280" key="FileChooserDialogImpl/-1920.0.1280.700/1920.0.1920.1050/0.0.1920.1050@1920.0.1920.1050" timestamp="1607349361731" />
+    <state x="2660" y="280" key="FileChooserDialogImpl/-1920.0.1280.700/1920.0.1920.1050/0.0.1920.1050@1920.0.1920.1050" timestamp="1607377938703" />
   </component>
 </project>

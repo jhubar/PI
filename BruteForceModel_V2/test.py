@@ -1,29 +1,17 @@
 import numpy as np
 from scipy.stats import norm
 import matplotlib.pyplot as plt
+from scipy.stats import binom
 
-def normal_density(sigma_sq, dx):
 
-    return (np.exp(((dx ** 2) / sigma_sq) * (-0.5)) / np.sqrt(sigma_sq * 2 * np.pi))
+binom_obj = binom(n=100, p=0.5)
 
-x = np.linspace(-5, 20, 35)
-y = []
-ev = 12
-for item in x:
+k = np.arange(0, 150)
 
-    sigma_sq = np.fabs(ev)
-    dx = np.fabs(item - ev)
-    if sigma_sq == 0:
-        sigma_sq = 1
-    y.append(norm.ppf(normal_density(sigma_sq, dx)))
+probs = binom_obj.pmf(k)
 
-plt.scatter(x, y)
+plt.scatter(k, probs, c='blue')
 plt.show()
 
-for i in range(0, len(x)):
-    print('{} - {}'.format(x[i], y[i]))
-
-print(np.log(0.00000000000000000001))
-
-for i in range(0, 30):
-    print(np.random.uniform(0.3, 0.8))
+for i in range(0, len(k)):
+    print('{} - {}'.format(k[i], probs[i]))
