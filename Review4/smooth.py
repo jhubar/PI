@@ -33,3 +33,16 @@ def own_NRMAS_age(vector, window):
 
     smoothed_vector[-1]=smoothed_vector[-2]
     return smoothed_vector
+
+def own_NRMAS_houseHolds(vector, window):
+    smoothed_vector = np.zeros(len(vector))
+
+    if (window % 2) == 0:
+        print("Error window size even")
+        return
+
+    for i in range(len(vector)):
+        smoothed_vector[i] = own_NRMAS_index(vector, window, i)
+
+
+    return smoothed_vector
