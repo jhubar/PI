@@ -98,11 +98,51 @@ class SEIR():
         self.rng = np.random.default_rng()
 
         # ========================================== #
-        #        Stochastic Pystan Model:
+        #        Interventions Time Line
         # ========================================== #
 
-        # Create the model:
+        # General contacts distribution
+        # For youngs
+        self.gc_youngs = {
+            'total': 0.075 * self.N,
+            'school': 0,
+            'work': 0,
+            'home': 4.12,
+            'comu': 20
+        }
+        self.gc_juniors = {
+            'total': 0.217 * self.N,
+            'school': 298.3,
+            'work': 0,
+            'home': 3.25,
+            'comu': 20
+        }
+        self.gc_mediors = {
+            'total': 0.587 * self.N,
+            'school': 0,
+            'work': 19.87,
+            'home': 2.53,
+            'comu': 20
+        }
+        self.gc_seignors = {
+            'total': 0.122 * self.N,
+            'school': 0,
+            'work': 0,
+            'home': 1.46,
+            'comu': 20
+        }
+        self.gc_global = {
+            'youngs': self.gc_youngs,
+            'juniors': self.gc_juniors,
+            'mediors': self.gc_mediors,
+            'seignors': self.gc_seignors
+        }
+        # Get a matrix format:
+        self.contacts_time_line = None
 
+
+        # Beta time line
+        self.beta_time_line = None
 
         # ========================================== #
         #                   Printers
@@ -293,12 +333,12 @@ class SEIR():
 
         return output
 
-    def stochastic_predic(self, duration, parameters=None, nb_simul=200):
+    def stochastic_predic(self, duration, parameters=None, nb_simul=200, scenar=False):
 
         # Get parameters:
         params = parameters
         if params is None:
-            params = self.get_parameters()
+            params = np.asarray(self.get_parameters())
         # time vector
         time = np.arange(duration)
         # General array to store predictions
@@ -340,6 +380,9 @@ class SEIR():
         for i in range(1, len(time)):
             if i % 10 == 0:
                 print(i)
+            if scenar:
+                params[0] = self.beta_time_line[i]
+
 
             # Get class moves
             S_to_E = v_S_to_E(output[i-1, 0, :], output[i-1, 2, :], N, params[0])
@@ -1002,5 +1045,175 @@ class SEIR():
         plt.legend()
         plt.title('Fatalities curves')
         plt.show()
+
+    def set_scenario(self, scenario):
+
+        # Lenght
+        predict_length = scenario['duration']
+        # Get scenarios items
+        scenario_keys = scenario.keys()
+
+        # Build the beta time line:
+        self.beta_time_line = np.ones(predict_length)
+        self.beta_time_line *= self.beta
+        # Build the contacts matrix time line
+        self.contacts_time_line = np.zeros((predict_length, 4, 5))
+        i = 0
+        for age_keys in self.gc_global.keys():
+            j = 0
+            for place_keys in self.gc_seignors.keys():
+                self.contacts_time_line[:, i, j] = self.gc_global[age_keys][place_keys]
+                j += 1
+            i += 1
+
+        # School management:
+        if 'close_schools' in scenario_keys:
+            print('--------------------------')
+            for i in range(0, 150):
+                print(self.contacts_time_line[i, 1, 1])
+            # Get times:
+            start, end = scenario['close_schools']
+            # Modify time line contact matrix
+            self.contacts_time_line[start:end, :, 1] = 0
+
+        if 'case_isolation' in scenario_keys:
+            """
+            WARNING: only 50 - 70% of infected are symptomatic
+            Infection rate with isolated reduce by :
+                - 25% at home
+                - 90% in communities
+                - 100% at work and school
+            """
+            # Get times:
+            start, end = scenario['case_isolation']
+            # Modify time line contact matrix
+            # At school
+            self.contacts_time_line[start:end, :, 1] -= self.contacts_time_line[start:end, :, 1] * 0.9 * 0.6
+            # At work
+            self.contacts_time_line[start:end, :, 2] -= self.contacts_time_line[start:end, :, 2] * 0.9 * 0.6
+            # At home
+            self.contacts_time_line[start:end, :, 3] -= self.contacts_time_line[start:end, :, 3] * 0.9 * 0.6 * 0.25
+            # In communities
+            self.contacts_time_line[start:end, :, 4] -= self.contacts_time_line[start:end, :, 4] * 0.9 * 0.6 * 0.9
+
+        if 'home_quarantine' in scenario_keys:
+            """
+            Exactly the same that case isolation but also apply to assymptomatics
+            """
+            # Get times:
+            start, end = scenario['case_isolation']
+            # Modify time line contact matrix
+            # At school
+            self.contacts_time_line[start:end, :, 1] -= self.contacts_time_line[start:end, :, 1] * 0.9
+            # At work
+            self.contacts_time_line[start:end, :, 2] -= self.contacts_time_line[start:end, :, 2] * 0.9
+            # At home
+            self.contacts_time_line[start:end, :, 3] -= self.contacts_time_line[start:end, :, 3] * 0.9 * 0.25
+            # In communities
+            self.contacts_time_line[start:end, :, 4] -= self.contacts_time_line[start:end, :, 4] * 0.9 * 0.9
+
+        if 'lock_down' in scenario_keys:
+            """
+            Reduce of 
+                - 100% schools
+                - 75% communities
+                - 75% work
+            """
+            # Get times:
+            start, end = scenario['case_isolation']
+            # Modify time line contact matrix
+            # At school
+            self.contacts_time_line[start:end, :, 1] = 0
+            # At work
+            self.contacts_time_line[start:end, :, 2] -= self.contacts_time_line[start:end, :, 2] * 0.9 * 0.75
+            # At home
+            self.contacts_time_line[start:end, :, 3] -= 0
+            # In communities
+            self.contacts_time_line[start:end, :, 4] -= self.contacts_time_line[start:end, :, 4] * 0.9 * 0.75
+
+        if 'social_dist' in scenario_keys:
+            """
+            Reduce of 
+                - 75 % at work and communities
+                - Parameter start age: if we take junior or not 
+            """
+            # Get times:
+            start, end, age = scenario['social_dist']
+            # Modify time line contact matrix
+            if age < 6:
+                for i in range(start, end):
+                    # At school
+                    self.contacts_time_line[i, :, 1] -= self.contacts_time_line[i, :, 1] * 0.9 * 0.75
+                    # At work
+                    self.contacts_time_line[i, :, 2] -= self.contacts_time_line[i, :, 2] * 0.9 * 0.75
+                    # At home
+                    self.contacts_time_line[i, :, 3] -= 0
+                    # In communities
+                    self.contacts_time_line[i, :, 4] -= self.contacts_time_line[i, :, 4] * 0.9 * 0.75
+            if age >= 6:
+                for i in range(start, end):
+                    # At school
+                    self.contacts_time_line[i, 1:4, 1] -= self.contacts_time_line[i, 1:4, 1] * 0.9 * 0.75
+                    # At work
+                    self.contacts_time_line[i, 1:4, 2] -= self.contacts_time_line[i, 1:4, 2] * 0.9 * 0.75
+                    # At home
+                    self.contacts_time_line[i, 1:4, 3] -= 0
+                    # In communities
+                    self.contacts_time_line[i, 1:4, 4] -= self.contacts_time_line[i, 1:4, 4] * 0.9 * 0.75
+
+        if 'wearing_mask' in scenario_keys:
+            """
+            Decrease of: 
+                - 20% 
+            """
+            # Get times:
+            start, end = scenario['case_isolation']
+            # Modify time line contact matrix
+            # At school
+            self.contacts_time_line[start:end, :, 1] -= self.contacts_time_line[start:end, :, 1] * 0.9 * 0.2
+            # At work
+            self.contacts_time_line[start:end, :, 2] -= self.contacts_time_line[start:end, :, 2] * 0.9 * 0.2
+            # At home
+            self.contacts_time_line[start:end, :, 3] -= 0
+            # In communities
+            self.contacts_time_line[start:end, :, 4] -= self.contacts_time_line[start:end, :, 4] * 0.9 * 0.2
+
+        # Apply to the beta time line vector
+
+        # Get the original number of contacts:
+        a = self.contacts_time_line[0, :, 0] * self.contacts_time_line[0, :, 1]
+        b = self.contacts_time_line[0, :, 0] * self.contacts_time_line[0, :, 2]
+        c = self.contacts_time_line[0, :, 0] * self.contacts_time_line[0, :, 3]
+        d = self.contacts_time_line[0, :, 0] * self.contacts_time_line[0, :, 4]
+        e = a + b + c + d
+        total_contact = np.sum(e)
+
+        total_contact = np.ones(predict_length) * total_contact
+        new_contacts = np.zeros(predict_length)
+        for i in range(0, predict_length):
+            # Get the original number of contacts:
+            a = self.contacts_time_line[i, :, 0] * self.contacts_time_line[i, :, 1]
+            b = self.contacts_time_line[i, :, 0] * self.contacts_time_line[i, :, 2]
+            c = self.contacts_time_line[i, :, 0] * self.contacts_time_line[i, :, 3]
+            d = self.contacts_time_line[i, :, 0] * self.contacts_time_line[i, :, 4]
+            e = a + b + c + d
+            new_contacts[i] = np.sum(e)
+        # Apply the ratio to beta time line vector:
+        for i in range(0, 150):
+            print('{} - {}'.format(total_contact[i], new_contacts[i]))
+        self.beta_time_line = self.beta_time_line * (new_contacts / total_contact)
+
+        for i in range(0, predict_length):
+            print(self.beta_time_line[i])
+
+
+
+
+
+
+
+
+
+
 
 
