@@ -22,28 +22,34 @@ class stats():
         """
         workplaces
         """
+        self._workplaces_df = None
         self.small_workplaces_df = None
         self.medium_workplaces_df = None
         self.large_workplaces_df = None
 
+        self.mean_workplaces = 0
         self.mean_small_workplaces = 0
         self.mean_medium_workplaces = 0
         self.mean_large_workplaces = 0
 
+        self.mean_workplaces_people_meet = 0
         self.mean_small_workplaces_people_meet = 0
         self.mean_medium_workplaces_people_meet = 0
         self.mean_large_workplaces_people_meet = 0
         """
         schools
         """
+        self._schools_df = None
         self.small_schools_df = None
         self.medium_schools_df = None
         self.large_schools_df = None
 
+        self.mean_schools =0
         self.mean_small_schools = 0
         self.mean_medium_schools = 0
         self.mean_large_schools = 0
 
+        self._small_schools_people_meet = 0
         self.mean_small_schools_people_meet = 0
         self.mean_medium_schools_people_meet = 0
         self.mean_large_schools_people_meet = 0
@@ -122,13 +128,13 @@ class stats():
             seignior_people_x.append(_age[i,0])
             seignior_people_y.append(_age[i,1])
 
-        # print("###############################################################")
-        # print("young: " + str(np.sum(young_people_y)))
-        # print("Junior: " + str(np.sum(junior_people_y)))
-        # print("Medior: " + str(np.sum(medior_people_y)))
-        # print("Seignior: " + str(np.sum(seignior_people_y)))
-        # print("tot: " + str( np.sum(_age[:,1])  ))
-        # print("###############################################################")
+        print("###############################################################")
+        print("young: " + str(np.sum(young_people_y)))
+        print("Junior: " + str(np.sum(junior_people_y)))
+        print("Medior: " + str(np.sum(medior_people_y)))
+        print("Seignior: " + str(np.sum(seignior_people_y)))
+        print("tot: " + str( np.sum(_age[:,1])  ))
+        print("###############################################################")
 
 
 
@@ -145,35 +151,57 @@ class stats():
         p_6 = 0.03
         p_7 = 0.029
 
+        somme_y = p_3+p_4+p_5+p_6+p_7
+        somme_j = p_2+p_3+p_4+p_5+p_6+p_7
+        somme_m = p_1+p_2+p_3+p_4+p_5+p_6+p_7
+        somme_s = p_1+p_2
+
         p_y = 0.075
         p_j = 0.217
         p_m = 0.587
         p_s = 0.122
 
         print("###############################################################")
-        print("p_y*p_3: " + str(p_y*p_3))
-        print("p_y*p_4: " + str(p_y*p_4))
-        print("p_y*p_5: " + str(p_y*p_5))
-        print("p_y*p_6: " + str(p_y*p_6))
-        print("p_y*p_7: " + str(p_y*p_7))
+
+
+
+
+        household_mean_y = (((p_3/somme_y)*3)+
+                            ((p_4/somme_y)*4)+
+                            ((p_5/somme_y)*5)+
+                            ((p_6/somme_y)*6)+
+                            ((p_7/somme_y)*7))
+
+        print("mean for young households: "+ str(household_mean_y))
         print("------------------------------------")
-        print("p_j*p_2: " +str(p_j*p_2))
-        print("p_j*p_3: " +str(p_j*p_3))
-        print("p_j*p_4: " +str(p_j*p_4))
-        print("p_j*p_5: " +str(p_j*p_5))
-        print("p_j*p_6: " +str(p_j*p_6))
-        print("p_j*p_7: " +str(p_j*p_7))
+
+
+        household_mean_j = (((p_2/somme_j)*2)+
+                            ((p_3/somme_j)*3)+
+                            ((p_4/somme_j)*4)+
+                            ((p_5/somme_j)*5)+
+                            ((p_6/somme_j)*6)+
+                            ((p_7/somme_j)*7))
+
+        print("mean for junior households: "+ str(household_mean_j))
         print("------------------------------------")
-        print("p_m*p_1: " +str(p_m*p_1))
-        print("p_m*p_2: " +str(p_m*p_2))
-        print("p_m*p_3: " +str(p_m*p_3))
-        print("p_m*p_4: " +str(p_m*p_4))
-        print("p_m*p_5: " +str(p_m*p_5))
-        print("p_m*p_6: " +str(p_m*p_6))
-        print("p_m*p_7: " +str(p_m*p_7))
+        household_mean_m = (((p_1/somme_m)*1)+
+                            ((p_2/somme_m)*2)+
+                            ((p_3/somme_m)*3)+
+                            ((p_4/somme_m)*4)+
+                            ((p_5/somme_m)*5)+
+                            ((p_6/somme_m)*6)+
+                            ((p_7/somme_m)*7))
+
+        print("mean for medior households: "+ str(household_mean_m))
+
         print("------------------------------------")
-        print("p_s*p_1: " +str(p_s*p_1))
-        print("p_s*p_2: " +str(p_s*p_2))
+
+
+        household_mean_s = (((p_1/somme_s)*1)
+                           +((p_2/somme_s)*2))
+
+        print("mean for seignior households: "+ str(household_mean_s))
 
 
         print("###############################################################")
@@ -190,6 +218,8 @@ class stats():
         _workplaces = self.workplaces_df.to_numpy()
         # print("nb worker " +str(np.sum(_workplaces[:,1])))
         small_workplaces = _workplaces[1,1]
+        _workplaces_x = []
+        _workplaces_y = []
         small_workplaces_x = []
         small_workplaces_y = []
         medium_workplaces_x = []
@@ -200,6 +230,10 @@ class stats():
         small_workplaces_x =_workplaces[0,2]
         small_workplaces_y =_workplaces[0,1]
 
+        for i in range(0,_workplaces[:,1].size):
+            _workplaces_x.append(_workplaces[i,2])
+            _workplaces_y.append(_workplaces[i,1])
+
         for i in range(1,10):
             medium_workplaces_x.append(_workplaces[i,2])
             medium_workplaces_y.append(_workplaces[i,1])
@@ -208,14 +242,11 @@ class stats():
             large_workplaces_x.append(_workplaces[i,2])
             large_workplaces_y.append(_workplaces[i,1])
 
-        # print("###############################################################")
-        # print("small: " + str(np.sum(small_workplaces_y)))
-        # print("medium: " + str(np.sum(medium_workplaces_y)))
-        # print("large: " + str(np.sum(large_workplaces_y)))
-        # print("tot: " + str( np.sum(_workplaces[:,1])  ))
-        # print("###############################################################")
+
         plot_pie_workplaces()
 
+        self.mean_workplaces = np.sum(
+                                _workplaces_y)/len(_workplaces_x)
         self.mean_small_workplaces = small_workplaces_y/small_workplaces_x
         self.mean_medium_workplaces = np.sum(
                                 medium_workplaces_y)/len(medium_workplaces_x)
@@ -235,6 +266,11 @@ class stats():
         [(medium_workplaces_x[i]*medium_workplaces_y[i])
         for i in range(0, len(medium_workplaces_x))]))
         /np.sum(medium_workplaces_y))
+
+        self.mean_workplaces_people_meet = ((np.sum(
+        [(_workplaces_x[i]*_workplaces_y[i])
+        for i in range(0, len(_workplaces_x))]))
+        /np.sum(_workplaces_y))
 
         self.mean_medium_workplaces_people_meet = ((np.sum(
         [(medium_workplaces_x[i]*medium_workplaces_y[i])
@@ -271,6 +307,8 @@ class stats():
 
     def data_preprocessing_schools(self):
         _schools = self.schools_df.to_numpy()
+        _schools_x = []
+        _schools_y = []
         small_schools= _schools[1,1]
         small_schools_x = []
         small_schools_y = []
@@ -280,6 +318,10 @@ class stats():
         large_schools_y = []
 
         # print("nb student " +str(np.sum(_schools[:,1])))
+
+        for i in range(0,_schools[:,1].size):
+            _schools_x.append(_schools[i,2])
+            _schools_y.append(_schools[i,1])
 
         for i in range(0,10):
             small_schools_x.append(_schools[i,2])
@@ -300,12 +342,22 @@ class stats():
         # print("tot: " + str( np.sum(_schools[:,1])  ))
         # print("###############################################################")
         plot_pie_schools()
+        self.mean_schools = np.sum(
+                                _schools_y)/len(_schools_x)
         self.mean_small_schools = np.sum(
                                 small_schools_y)/len(small_schools_x)
         self.mean_medium_schools = np.sum(
                                 medium_schools_y)/len(medium_schools_x)
         self.mean_large_schools = np.sum(
                                 large_schools_y)/len(large_schools_x)
+
+        """
+        compute the mean of people meet in the SMALL schools
+        """
+        self.mean_schools_people_meet = ((np.sum(
+        [(_schools_x[i]*_schools_y[i])
+        for i in range(0, len(_schools_x))]))
+        /np.sum(_schools_y))
 
         """
         compute the mean of people meet in the SMALL schools
@@ -337,6 +389,9 @@ class stats():
         _schoolsUpdated_category = np.array(
                         ["small: [0-100]","medium: [100-500]","large: [500+]"])
 
+        self._schools_df = pd.DataFrame(
+                    {'size_of_schools': _schools_x,
+                    'number': _schools_y})
         self.schools_df = pd.DataFrame(
                     {'size_of_schools': _schoolsUpdated_category,
                     'number': _schoolsUpdated_number})
@@ -361,9 +416,15 @@ class stats():
         self.plot_stats()
 
     def data_information(self):
+        print("###############################################################")
+        print("a student in a school meets: "
+                + str(round(self.mean_schools_people_meet,2))
+                +" persons")
+        print("a worker in a workplaces meets: "
+                + str(round(self.mean_workplaces_people_meet,2))
+                +" persons")
         # print("###############################################################")
-        #
-        # print("###############################################################")
+        print("###############################################################")
         # print("On average,\na person working in a SMALL sized company meets: "
         #         + str(round(self.mean_small_workplaces_people_meet,2))
         #         +" persons")
