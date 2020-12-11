@@ -6,12 +6,26 @@ from SEIR import SEIR
 import tools
 
 
+
 def scenario_julien():
-
     # Create the model:
-    model = SEIR()
+    model_1 = SEIR()
+    model_2 = SEIR()
+    model_3 = SEIR()
+    model_4 = SEIR()
+    model_5= SEIR()
+    model_6 = SEIR()
+    model_7 = SEIR()
+
     # Load the dataset
-    model.import_dataset()
+    model_1.import_dataset()
+    model_2.import_dataset()
+    model_3.import_dataset()
+    model_4.import_dataset()
+    model_5.import_dataset()
+    model_6.import_dataset()
+    model_7.import_dataset()
+
     # Load best models file:
     result = pd.read_csv('FINAL_MODEL.csv', header=0, sep=';', index_col=0)
     # Numpy version
@@ -19,12 +33,12 @@ def scenario_julien():
     # Chose index 0:
     i = 0
     # Print the selected row
-    row = result.loc[i, :]
-    print(row)
+    # row = result.loc[i, :]
+    # print(row)
     # Load parameters
-    model.beta = npr[i][0]
-    model.sigma = npr[i][1]
-    model.gamma = npr[i][2]
+    model1.beta = npr[i][0]
+    model1.sigma = npr[i][1]
+    model1.gamma = npr[i][2]
     model.hp = npr[i][3]
     model.hcr = npr[i][4]
     model.pc = npr[i][5]
@@ -33,262 +47,34 @@ def scenario_julien():
     model.s = npr[i][8]
     model.t = npr[i][9]
     model.I_0 = npr[i][23]
-    # Get time vector:
-    time = np.arange(150)
 
-    # Build scenario
-    scenario = {
-        'duration': 150,
-        'close_schools': [70, 100],
-        # 'social_dist': [85, 120, 6]
-    }
-    model.set_scenario(scenario)
-    # Make stochastic predictions according to scenario
-    pred_scenar = model.stochastic_predic(duration=150, parameters=None, nb_simul=200, scenar=True)
-    # Make normal stochastic predict
-    pred_normal = model.stochastic_predic(duration=150, parameters=None, nb_simul=200, scenar=False)
-
-    # Compute mean predictions
-    mean_scenar = np.mean(pred_scenar, axis=2)
-    mean_normal = np.mean(pred_normal, axis=2)
-    model.nb_simul = 200
-
-    plt.close()
-    # I curve
-    fig, ax1 = plt.subplots()
-    fig.suptitle('I curves')
-    ax1.plot(time, mean_scenar[:, 2], c='blue', label='stocha mean')
-    for i in range(0, model.nb_simul - 1):
-        ax1.plot(time, pred_scenar[:, 2, i], c='green', linewidth=0.1)
-    ax1.plot(time, pred_scenar[:, 2, model.nb_simul - 1], c='green', linewidth=0.1, label='Stochastic I')
-    for i in range(0, model.nb_simul - 1):
-        ax1.plot(time, pred_normal[:, 2, i], c='blue', linewidth=0.1)
-    ax1.plot(time, pred_normal[:, 2, model.nb_simul - 1], c='blue', linewidth=0.1, label='Stochastic I')
-    ax1.legend()
-    plt.savefig('imgJulien/I_curve.png')
-    plt.close()
-
-    # fig.show()
-
-    # Hospit
-    fig, ax1 = plt.subplots()
-    fig.suptitle('Hospit curves')
-    ax1.plot(time, mean_scenar[:, 4], c='black', label='stocha mean')
-    for i in range(0, model.nb_simul - 1):
-        ax1.plot(time, pred_scenar[:, 4, i], c='green', linewidth=0.1)
-    ax1.plot(time, pred_scenar[:, 4, model.nb_simul - 1], c='green', linewidth=0.1, label='Stochastic')
-
-
-    ax1.plot(time, mean_normal[:, 4], c='red', label='stocha mean')
-    for i in range(0, model.nb_simul - 1):
-        ax1.plot(time, pred_normal[:, 4, i], c='green', linewidth=0.1)
-    ax1.plot(time, pred_normal[:, 4, model.nb_simul - 1], c='green', linewidth=0.1, label='Stochastic')
-
-
-
-    # Critical
-
-    ax1.plot(time, mean_scenar[:, 5], c='red', label='stocha mean')
-    for i in range(0, model.nb_simul - 1):
-        ax1.plot(time, pred_scenar[:, 5, i], c='orange', linewidth=0.1)
-    ax1.plot(time, pred_scenar[:, 5, model.nb_simul - 1], c='orange', linewidth=0.1, label='Stochastic')
-
-
-    ax1.plot(time, mean_normal[:, 5], c='red', label='stocha mean')
-    for i in range(0, model.nb_simul - 1):
-        ax1.plot(time, pred_normal[:, 5, i], c='orange', linewidth=0.1)
-    ax1.plot(time, pred_normal[:, 5, model.nb_simul - 1], c='orange', linewidth=0.1, label='Stochastic')
-
-    #Fatalities
-    ax1.plot(time, mean_scenar[:, 6], c='black', label='stocha mean')
-    for i in range(0, model.nb_simul - 1):
-        ax1.plot(time, pred_scenar[:, 6, i], c='red', linewidth=0.1)
-    ax1.plot(time, pred_scenar[:, 6, model.nb_simul - 1], c='red', linewidth=0.1, label='Stochastic')
-
-
-    ax1.plot(time, mean_normal[:, 6], c='black', label='stocha mean')
-    for i in range(0, model.nb_simul - 1):
-        ax1.plot(time, pred_normal[:, 6, i], c='red', linewidth=0.1)
-    ax1.plot(time, pred_normal[:, 6, model.nb_simul - 1], c='red', linewidth=0.1, label='Stochastic')
-
-    ax1.legend()
-    plt.savefig('imgJulien/Hospit.png')
-    plt.close()
-
-def scenario_julien2():
-    # Create the model:
-    model = SEIR()
-    # Load the dataset
-    model.import_dataset()
-    # Load best models file:
-    result = pd.read_csv('FINAL_MODEL.csv', header=0, sep=';', index_col=0)
-    # Numpy version
-    npr = result.to_numpy()
-    # Chose index 0:
-    i = 0
-    # Print the selected row
-    row = result.loc[i, :]
-    print(row)
     # Load parameters
-    model.beta = npr[i][0]
-    model.sigma = npr[i][1]
-    model.gamma = npr[i][2]
-    model.hp = npr[i][3]
-    model.hcr = npr[i][4]
-    model.pc = npr[i][5]
-    model.pd = npr[i][6]
-    model.pcr = npr[i][7]
-    model.s = npr[i][8]
-    model.t = npr[i][9]
-    model.I_0 = npr[i][23]
+    model1.beta = npr[i][0]
+    model1.sigma = npr[i][1]
+    model1.gamma = npr[i][2]
+    model1.hp = npr[i][3]
+    model1.hcr = npr[i][4]
+    model1.pc = npr[i][5]
+    model1.pd = npr[i][6]
+    model1.pcr = npr[i][7]
+    model1.s = npr[i][8]
+    model1.t = npr[i][9]
+    model1.I_0 = npr[i][23]
     # Get time vector:
-    time = np.arange(150)
+    time = np.arange(300)
 
     # Build scenario
     scenario = {
-        'duration': 150,
-        # 'close_schools': [70, 100],
-        'social_dist': [85, 120, 6]
-    }
-    model.set_scenario(scenario)
-    # Make stochastic predictions according to scenario
-    pred_scenar = model.stochastic_predic(duration=150, parameters=None, nb_simul=200, scenar=True)
-    # Make normal stochastic predict
-    pred_normal = model.stochastic_predic(duration=150, parameters=None, nb_simul=200, scenar=False)
-
-    # Compute mean predictions
-    mean_scenar = np.mean(pred_scenar, axis=2)
-    mean_normal = np.mean(pred_normal, axis=2)
-    model.nb_simul = 200
-
-    # Hospit
-    fig, ax1 = plt.subplots()
-    fig.suptitle('Hospit curves')
-    ax1.plot(time, mean_scenar[:, 4], c='green', label='stocha mean')
-    ax1.plot(time, mean_normal[:, 4], c='green', label='stocha mean')
-    # Critical
-
-    ax1.plot(time, mean_scenar[:, 5], c='orange', label='stocha mean')
-    ax1.plot(time, mean_normal[:, 5], c='orange', label='stocha mean')
-
-    #Fatalities
-    ax1.plot(time, mean_scenar[:, 6], c='red', label='stocha mean')
-    ax1.plot(time, mean_normal[:, 6], c='red', label='stocha mean')
-
-
-    ax1.legend()
-    plt.savefig('imgJulien/Criticals.png')
-    plt.close()
-
-
-def scenario_julien3():
-    # Create the model:
-    model = SEIR()
-    # Load the dataset
-    model.import_dataset()
-    # Load best models file:
-    result = pd.read_csv('FINAL_MODEL.csv', header=0, sep=';', index_col=0)
-    # Numpy version
-    npr = result.to_numpy()
-    # Chose index 0:
-    i = 0
-    # Print the selected row
-    row = result.loc[i, :]
-    print(row)
-    # Load parameters
-    model.beta = npr[i][0]
-    model.sigma = npr[i][1]
-    model.gamma = npr[i][2]
-    model.hp = npr[i][3]
-    model.hcr = npr[i][4]
-    model.pc = npr[i][5]
-    model.pd = npr[i][6]
-    model.pcr = npr[i][7]
-    model.s = npr[i][8]
-    model.t = npr[i][9]
-    model.I_0 = npr[i][23]
-    # Get time vector:
-    time = np.arange(150)
-
-    # Build scenario
-    scenario = {
-        'duration': 150,
-        'close_schools': [70, 100],
-        'social_dist': [85, 120, 6]
-    }
-    model.set_scenario(scenario)
-    # Make stochastic predictions according to scenario
-    pred_scenar = model.stochastic_predic(duration=150, parameters=None, nb_simul=200, scenar=True)
-    # Make normal stochastic predict
-    pred_normal = model.stochastic_predic(duration=150, parameters=None, nb_simul=200, scenar=False)
-
-    # Compute mean predictions
-    mean_scenar = np.mean(pred_scenar, axis=2)
-    mean_normal = np.mean(pred_normal, axis=2)
-    model.nb_simul = 200
-
-    # Hospit
-    fig, ax1 = plt.subplots()
-    fig.suptitle('Hospit curves')
-    ax1.plot(time, mean_scenar[:, 4], c='green', label='stocha mean')
-    ax1.plot(time, mean_normal[:, 4], c='green', label='stocha mean')
-    # Critical
-
-    ax1.plot(time, mean_scenar[:, 5], c='orange', label='stocha mean')
-    ax1.plot(time, mean_normal[:, 5], c='orange', label='stocha mean')
-
-    #Fatalities
-    ax1.plot(time, mean_scenar[:, 6], c='red', label='stocha mean')
-    ax1.plot(time, mean_normal[:, 6], c='red', label='stocha mean')
-    plt.hline()
-    plt.hline()
-    ax1.legend()
-    plt.savefig('imgJulien/Criticals2.png')
-    plt.close()
-
-
-
-def scenario_julien3():
-    # Create the model:
-    model = SEIR()
-    # Load the dataset
-    model.import_dataset()
-    # Load best models file:
-    result = pd.read_csv('FINAL_MODEL.csv', header=0, sep=';', index_col=0)
-    # Numpy version
-    npr = result.to_numpy()
-    # Chose index 0:
-    i = 0
-    # Print the selected row
-    row = result.loc[i, :]
-    print(row)
-    # Load parameters
-    model.beta = npr[i][0]
-    model.sigma = npr[i][1]
-    model.gamma = npr[i][2]
-    model.hp = npr[i][3]
-    model.hcr = npr[i][4]
-    model.pc = npr[i][5]
-    model.pd = npr[i][6]
-    model.pcr = npr[i][7]
-    model.s = npr[i][8]
-    model.t = npr[i][9]
-    model.I_0 = npr[i][23]
-    # Get time vector:
-    time = np.arange(150)
-
-    # Build scenario
-    scenario = {
-        'duration': 150,
+        'duration': 300,
         # 'close_schools': [70, 100],
         # 'social_dist': [85, 120, 6],
-        'lock_down': [73, 128],
+        'lock_down': [70, 100]
     }
     model.set_scenario(scenario)
     # Make stochastic predictions according to scenario
-    pred_scenar = model.stochastic_predic(duration=150, parameters=None, nb_simul=200, scenar=True)
+    pred_scenar = model.stochastic_predic(duration=300, parameters=None, nb_simul=200, scenar=True)
     # Make normal stochastic predict
-    pred_normal = model.stochastic_predic(duration=150, parameters=None, nb_simul=200, scenar=False)
+    pred_normal = model.stochastic_predic(duration=300, parameters=None, nb_simul=200, scenar=False)
 
     # Compute mean predictions
     mean_scenar = np.mean(pred_scenar, axis=2)
@@ -300,16 +86,40 @@ def scenario_julien3():
     fig.suptitle('Hospit curves')
     ax1.plot(time, mean_scenar[:, 4], c='green', label='stocha mean')
     ax1.plot(time, mean_normal[:, 4], c='green', label='stocha mean')
-    # Critical
 
-    ax1.plot(time, mean_scenar[:, 5], c='orange', label='stocha mean')
-    ax1.plot(time, mean_normal[:, 5], c='orange', label='stocha mean')
 
     #Fatalities
-    ax1.plot(time, mean_scenar[:, 6], c='red', label='stocha mean')
-    ax1.plot(time, mean_normal[:, 6], c='red', label='stocha mean')
-    plt.hline(300)
-    plt.hline(1500)
+    # ax1.plot(time, mean_scenar[:, 6], c='red', label='stocha mean')
+    # ax1.plot(time, mean_normal[:, 6], c='red', label='stocha mean')
+
+    # Build scenario
+    scenario1 = {
+        'duration': 300,
+        # 'close_schools': [70, 100],
+        'social_dist': [70, 100, 6],
+        # 'lock_down': [73, 100]
+    }
+    model1.set_scenario(scenario1)
+    # Make stochastic predictions according to scenario
+    pred_scenar1 = model1.stochastic_predic(duration=300, parameters=None, nb_simul=200, scenar=True)
+    # Make normal stochastic predict
+    pred_normal1 = model1.stochastic_predic(duration=300, parameters=None, nb_simul=200, scenar=False)
+
+    # Compute mean predictions
+    mean_scenar1 = np.mean(pred_scenar1, axis=2)
+    mean_normal1 = np.mean(pred_normal1, axis=2)
+    model1.nb_simul = 200
+    # Hospit
+
+    fig.suptitle('Hospit curves')
+    ax1.plot(time, mean_scenar1[:, 4], c='green', label='stocha mean 1')
+    ax1.plot(time, mean_normal1[:, 4], c='green', label='stocha mean 1')
+
+    #Fatalities
+    # ax1.plot(time, mean_scenar1[:, 6], c='red', label='stocha mean 1')
+    # ax1.plot(time, mean_normal1[:, 6], c='red', label='stocha mean 1')
+    plt.axhline(300)
+    plt.axhline(3000)
     ax1.legend()
     plt.savefig('imgJulien/lockdonw.png')
     plt.close()

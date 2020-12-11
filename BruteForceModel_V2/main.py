@@ -273,5 +273,5 @@ if __name__ == "__main__":
     # Scenario 1
     # scenario_1()
     # scenario_julien()
-    scenario_julien2()
-    scenario_julien3()
+
+    scenario_julien()

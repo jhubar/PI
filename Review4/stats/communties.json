@@ -1,0 +1,979 @@
+[
+  [
+    {
+      "wardNo": 1,
+      "totalPopulation": 3807,
+      "fracPopulation": 0.0038057669315141895
+    },
+    {
+      "wardNo": 2,
+      "totalPopulation": 4225,
+      "fracPopulation": 0.004223631543379945
+    },
+    {
+      "wardNo": 3,
+      "totalPopulation": 6662,
+      "fracPopulation": 0.006659842211123596
+    },
+    {
+      "wardNo": 4,
+      "totalPopulation": 3352,
+      "fracPopulation": 0.00335091430376558
+    },
+    {
+      "wardNo": 5,
+      "totalPopulation": 4352,
+      "fracPopulation": 0.004350590408707579
+    },
+    {
+      "wardNo": 6,
+      "totalPopulation": 4283,
+      "fracPopulation": 0.0042816127574665805
+    },
+    {
+      "wardNo": 7,
+      "totalPopulation": 6567,
+      "fracPopulation": 0.006564872981154106
+    },
+    {
+      "wardNo": 8,
+      "totalPopulation": 3253,
+      "fracPopulation": 0.003251946369376322
+    },
+    {
+      "wardNo": 9,
+      "totalPopulation": 5353,
+      "fracPopulation": 0.00535126618975452
+    },
+    {
+      "wardNo": 10,
+      "totalPopulation": 7619,
+      "fracPopulation": 0.007616532243553089
+    },
+    {
+      "wardNo": 11,
+      "totalPopulation": 5315,
+      "fracPopulation": 0.005313278497766724
+    },
+    {
+      "wardNo": 12,
+      "totalPopulation": 3413,
+      "fracPopulation": 0.0034118945461670417
+    },
+    {
+      "wardNo": 13,
+      "totalPopulation": 4616,
+      "fracPopulation": 0.004614504900412267
+    },
+    {
+      "wardNo": 14,
+      "totalPopulation": 3328,
+      "fracPopulation": 0.003326922077246972
+    },
+    {
+      "wardNo": 15,
+      "totalPopulation": 6129,
+      "fracPopulation": 0.0061270148471895105
+    },
+    {
+      "wardNo": 16,
+      "totalPopulation": 3690,
+      "fracPopulation": 0.0036888048272359754
+    },
+    {
+      "wardNo": 17,
+      "totalPopulation": 3975,
+      "fracPopulation": 0.003973712517144445
+    },
+    {
+      "wardNo": 18,
+      "totalPopulation": 3536,
+      "fracPopulation": 0.0035348547070749078
+    },
+    {
+      "wardNo": 19,
+      "totalPopulation": 3208,
+      "fracPopulation": 0.003206960944653932
+    },
+    {
+      "wardNo": 20,
+      "totalPopulation": 4802,
+      "fracPopulation": 0.0048004446559314785
+    },
+    {
+      "wardNo": 21,
+      "totalPopulation": 4632,
+      "fracPopulation": 0.004630499718091339
+    },
+    {
+      "wardNo": 22,
+      "totalPopulation": 6632,
+      "fracPopulation": 0.006629851927975336
+    },
+    {
+      "wardNo": 23,
+      "totalPopulation": 3578,
+      "fracPopulation": 0.0035768411034824716
+    },
+    {
+      "wardNo": 24,
+      "totalPopulation": 6412,
+      "fracPopulation": 0.006409923184888097
+    },
+    {
+      "wardNo": 25,
+      "totalPopulation": 3461,
+      "fracPopulation": 0.003459878999204258
+    },
+    {
+      "wardNo": 26,
+      "totalPopulation": 6338,
+      "fracPopulation": 0.006335947153122389
+    },
+    {
+      "wardNo": 27,
+      "totalPopulation": 4958,
+      "fracPopulation": 0.00495639412830243
+    },
+    {
+      "wardNo": 28,
+      "totalPopulation": 7503,
+      "fracPopulation": 0.007500569815379817
+    },
+    {
+      "wardNo": 29,
+      "totalPopulation": 3648,
+      "fracPopulation": 0.0036468184308284116
+    },
+    {
+      "wardNo": 30,
+      "totalPopulation": 3679,
+      "fracPopulation": 0.0036778083900816136
+    },
+    {
+      "wardNo": 31,
+      "totalPopulation": 5403,
+      "fracPopulation": 0.00540124999500162
+    },
+    {
+      "wardNo": 32,
+      "totalPopulation": 4359,
+      "fracPopulation": 0.004357588141442173
+    },
+    {
+      "wardNo": 33,
+      "totalPopulation": 3338,
+      "fracPopulation": 0.003336918838296392
+    },
+    {
+      "wardNo": 34,
+      "totalPopulation": 5198,
+      "fracPopulation": 0.0051963163934885094
+    },
+    {
+      "wardNo": 35,
+      "totalPopulation": 4807,
+      "fracPopulation": 0.004805443036456188
+    },
+    {
+      "wardNo": 36,
+      "totalPopulation": 2483,
+      "fracPopulation": 0.002482195768570983
+    },
+    {
+      "wardNo": 37,
+      "totalPopulation": 1358,
+      "fracPopulation": 0.0013575601505112344
+    },
+    {
+      "wardNo": 38,
+      "totalPopulation": 234,
+      "fracPopulation": 0.0002339242085564277
+    },
+    {
+      "wardNo": 39,
+      "totalPopulation": 2801,
+      "fracPopulation": 0.0028000927699425387
+    },
+    {
+      "wardNo": 40,
+      "totalPopulation": 7894,
+      "fracPopulation": 0.007891443172412138
+    },
+    {
+      "wardNo": 41,
+      "totalPopulation": 4350,
+      "fracPopulation": 0.004348591056497695
+    },
+    {
+      "wardNo": 42,
+      "totalPopulation": 3912,
+      "fracPopulation": 0.0039107329225330995
+    },
+    {
+      "wardNo": 43,
+      "totalPopulation": 2174,
+      "fracPopulation": 0.0021732958521439054
+    },
+    {
+      "wardNo": 44,
+      "totalPopulation": 5421,
+      "fracPopulation": 0.005419244164890575
+    },
+    {
+      "wardNo": 45,
+      "totalPopulation": 3601,
+      "fracPopulation": 0.0035998336538961375
+    },
+    {
+      "wardNo": 46,
+      "totalPopulation": 3665,
+      "fracPopulation": 0.0036638129246124255
+    },
+    {
+      "wardNo": 47,
+      "totalPopulation": 10855,
+      "fracPopulation": 0.010851484119145396
+    },
+    {
+      "wardNo": 48,
+      "totalPopulation": 7709,
+      "fracPopulation": 0.007706503092997869
+    },
+    {
+      "wardNo": 49,
+      "totalPopulation": 5191,
+      "fracPopulation": 0.005189318660753916
+    },
+    {
+      "wardNo": 50,
+      "totalPopulation": 9710,
+      "fracPopulation": 0.009706854978986807
+    },
+    {
+      "wardNo": 51,
+      "totalPopulation": 6612,
+      "fracPopulation": 0.006609858405876496
+    },
+    {
+      "wardNo": 52,
+      "totalPopulation": 4692,
+      "fracPopulation": 0.004690480284387858
+    },
+    {
+      "wardNo": 53,
+      "totalPopulation": 8850,
+      "fracPopulation": 0.00884713352873669
+    },
+    {
+      "wardNo": 54,
+      "totalPopulation": 7768,
+      "fracPopulation": 0.007765483983189447
+    },
+    {
+      "wardNo": 55,
+      "totalPopulation": 8275,
+      "fracPopulation": 0.00827231976839504
+    },
+    {
+      "wardNo": 56,
+      "totalPopulation": 4220,
+      "fracPopulation": 0.004218633162855235
+    },
+    {
+      "wardNo": 57,
+      "totalPopulation": 2568,
+      "fracPopulation": 0.0025671682374910527
+    },
+    {
+      "wardNo": 58,
+      "totalPopulation": 4514,
+      "fracPopulation": 0.004512537937708182
+    },
+    {
+      "wardNo": 59,
+      "totalPopulation": 12944,
+      "fracPopulation": 0.012939807502369232
+    },
+    {
+      "wardNo": 60,
+      "totalPopulation": 6463,
+      "fracPopulation": 0.006460906666240138
+    },
+    {
+      "wardNo": 61,
+      "totalPopulation": 4762,
+      "fracPopulation": 0.004760457611733798
+    },
+    {
+      "wardNo": 62,
+      "totalPopulation": 5533,
+      "fracPopulation": 0.005531207888644079
+    },
+    {
+      "wardNo": 63,
+      "totalPopulation": 2486,
+      "fracPopulation": 0.002485194796885809
+    },
+    {
+      "wardNo": 64,
+      "totalPopulation": 10238,
+      "fracPopulation": 0.010234683962396183
+    },
+    {
+      "wardNo": 65,
+      "totalPopulation": 7922,
+      "fracPopulation": 0.007919434103350515
+    },
+    {
+      "wardNo": 66,
+      "totalPopulation": 8253,
+      "fracPopulation": 0.008250326894086316
+    },
+    {
+      "wardNo": 67,
+      "totalPopulation": 12621,
+      "fracPopulation": 0.012616912120472966
+    },
+    {
+      "wardNo": 68,
+      "totalPopulation": 4857,
+      "fracPopulation": 0.004855426841703288
+    },
+    {
+      "wardNo": 69,
+      "totalPopulation": 2431,
+      "fracPopulation": 0.002430212611113999
+    },
+    {
+      "wardNo": 70,
+      "totalPopulation": 3193,
+      "fracPopulation": 0.003191965803079802
+    },
+    {
+      "wardNo": 71,
+      "totalPopulation": 4258,
+      "fracPopulation": 0.004256620854843031
+    },
+    {
+      "wardNo": 72,
+      "totalPopulation": 4029,
+      "fracPopulation": 0.004027695026811313
+    },
+    {
+      "wardNo": 73,
+      "totalPopulation": 5603,
+      "fracPopulation": 0.005601185215990019
+    },
+    {
+      "wardNo": 74,
+      "totalPopulation": 8651,
+      "fracPopulation": 0.008648197983853231
+    },
+    {
+      "wardNo": 75,
+      "totalPopulation": 4249,
+      "fracPopulation": 0.004247623769898553
+    },
+    {
+      "wardNo": 76,
+      "totalPopulation": 6990,
+      "fracPopulation": 0.0069877359735445715
+    },
+    {
+      "wardNo": 77,
+      "totalPopulation": 8820,
+      "fracPopulation": 0.00881714324558843
+    },
+    {
+      "wardNo": 78,
+      "totalPopulation": 3907,
+      "fracPopulation": 0.0039057345420083892
+    },
+    {
+      "wardNo": 79,
+      "totalPopulation": 7132,
+      "fracPopulation": 0.007129689980446335
+    },
+    {
+      "wardNo": 80,
+      "totalPopulation": 11250,
+      "fracPopulation": 0.011246356180597486
+    },
+    {
+      "wardNo": 81,
+      "totalPopulation": 6024,
+      "fracPopulation": 0.006022048856170601
+    },
+    {
+      "wardNo": 82,
+      "totalPopulation": 3590,
+      "fracPopulation": 0.0035888372167417757
+    },
+    {
+      "wardNo": 83,
+      "totalPopulation": 13011,
+      "fracPopulation": 0.013006785801400347
+    },
+    {
+      "wardNo": 84,
+      "totalPopulation": 4179,
+      "fracPopulation": 0.004177646442552613
+    },
+    {
+      "wardNo": 85,
+      "totalPopulation": 6160,
+      "fracPopulation": 0.006158004806442713
+    },
+    {
+      "wardNo": 86,
+      "totalPopulation": 1635,
+      "fracPopulation": 0.001634470431580168
+    },
+    {
+      "wardNo": 87,
+      "totalPopulation": 3663,
+      "fracPopulation": 0.0036618135724025415
+    },
+    {
+      "wardNo": 88,
+      "totalPopulation": 6768,
+      "fracPopulation": 0.006765807878247447
+    },
+    {
+      "wardNo": 89,
+      "totalPopulation": 54,
+      "fracPopulation": 0.00005398250966686793
+    },
+    {
+      "wardNo": 90,
+      "totalPopulation": 5721,
+      "fracPopulation": 0.005719146996373175
+    },
+    {
+      "wardNo": 91,
+      "totalPopulation": 9209,
+      "fracPopulation": 0.009206017250410866
+    },
+    {
+      "wardNo": 92,
+      "totalPopulation": 5937,
+      "fracPopulation": 0.005935077035040647
+    },
+    {
+      "wardNo": 93,
+      "totalPopulation": 2810,
+      "fracPopulation": 0.0028090898548870165
+    },
+    {
+      "wardNo": 94,
+      "totalPopulation": 6843,
+      "fracPopulation": 0.006840783586118098
+    },
+    {
+      "wardNo": 95,
+      "totalPopulation": 5307,
+      "fracPopulation": 0.005305281088927188
+    },
+    {
+      "wardNo": 96,
+      "totalPopulation": 16194,
+      "fracPopulation": 0.016188754843430728
+    },
+    {
+      "wardNo": 97,
+      "totalPopulation": 8582,
+      "fracPopulation": 0.008579220332612233
+    },
+    {
+      "wardNo": 98,
+      "totalPopulation": 7523,
+      "fracPopulation": 0.007520563337478657
+    },
+    {
+      "wardNo": 99,
+      "totalPopulation": 5613,
+      "fracPopulation": 0.00561118197703944
+    },
+    {
+      "wardNo": 100,
+      "totalPopulation": 3503,
+      "fracPopulation": 0.003501865395611822
+    },
+    {
+      "wardNo": 101,
+      "totalPopulation": 6271,
+      "fracPopulation": 0.006268968854091274
+    },
+    {
+      "wardNo": 102,
+      "totalPopulation": 6207,
+      "fracPopulation": 0.0062049895833749865
+    },
+    {
+      "wardNo": 103,
+      "totalPopulation": 3424,
+      "fracPopulation": 0.003422890983321404
+    },
+    {
+      "wardNo": 104,
+      "totalPopulation": 5399,
+      "fracPopulation": 0.005397251290581852
+    },
+    {
+      "wardNo": 105,
+      "totalPopulation": 8182,
+      "fracPopulation": 0.008179349890635434
+    },
+    {
+      "wardNo": 106,
+      "totalPopulation": 5229,
+      "fracPopulation": 0.005227306352741712
+    },
+    {
+      "wardNo": 107,
+      "totalPopulation": 4857,
+      "fracPopulation": 0.004855426841703288
+    },
+    {
+      "wardNo": 108,
+      "totalPopulation": 5856,
+      "fracPopulation": 0.005854103270540345
+    },
+    {
+      "wardNo": 109,
+      "totalPopulation": 8925,
+      "fracPopulation": 0.008922109236607339
+    },
+    {
+      "wardNo": 110,
+      "totalPopulation": 9883,
+      "fracPopulation": 0.009879798945141774
+    },
+    {
+      "wardNo": 111,
+      "totalPopulation": 9536,
+      "fracPopulation": 0.0095329113367269
+    },
+    {
+      "wardNo": 112,
+      "totalPopulation": 7085,
+      "fracPopulation": 0.007082705203514061
+    },
+    {
+      "wardNo": 113,
+      "totalPopulation": 7099,
+      "fracPopulation": 0.007096700668983249
+    },
+    {
+      "wardNo": 114,
+      "totalPopulation": 8213,
+      "fracPopulation": 0.008210339849888636
+    },
+    {
+      "wardNo": 115,
+      "totalPopulation": 10329,
+      "fracPopulation": 0.010325654487945906
+    },
+    {
+      "wardNo": 116,
+      "totalPopulation": 7488,
+      "fracPopulation": 0.007485574673805687
+    },
+    {
+      "wardNo": 117,
+      "totalPopulation": 2577,
+      "fracPopulation": 0.002576165322435531
+    },
+    {
+      "wardNo": 118,
+      "totalPopulation": 227,
+      "fracPopulation": 0.00022692647582183372
+    },
+    {
+      "wardNo": 119,
+      "totalPopulation": 4758,
+      "fracPopulation": 0.00475645890731403
+    },
+    {
+      "wardNo": 120,
+      "totalPopulation": 3111,
+      "fracPopulation": 0.0031099923624745584
+    },
+    {
+      "wardNo": 121,
+      "totalPopulation": 2464,
+      "fracPopulation": 0.002463201922577085
+    },
+    {
+      "wardNo": 122,
+      "totalPopulation": 3066,
+      "fracPopulation": 0.0030650069377521683
+    },
+    {
+      "wardNo": 123,
+      "totalPopulation": 3119,
+      "fracPopulation": 0.003117989771314094
+    },
+    {
+      "wardNo": 124,
+      "totalPopulation": 2481,
+      "fracPopulation": 0.002480196416361099
+    },
+    {
+      "wardNo": 125,
+      "totalPopulation": 5945,
+      "fracPopulation": 0.005943074443880183
+    },
+    {
+      "wardNo": 126,
+      "totalPopulation": 3432,
+      "fracPopulation": 0.00343088839216094
+    },
+    {
+      "wardNo": 127,
+      "totalPopulation": 4516,
+      "fracPopulation": 0.004514537289918067
+    },
+    {
+      "wardNo": 128,
+      "totalPopulation": 6125,
+      "fracPopulation": 0.006123016142769742
+    },
+    {
+      "wardNo": 129,
+      "totalPopulation": 10243,
+      "fracPopulation": 0.010239682342920893
+    },
+    {
+      "wardNo": 130,
+      "totalPopulation": 3460,
+      "fracPopulation": 0.0034588793230993157
+    },
+    {
+      "wardNo": 131,
+      "totalPopulation": 3976,
+      "fracPopulation": 0.003974712193249387
+    },
+    {
+      "wardNo": 132,
+      "totalPopulation": 8481,
+      "fracPopulation": 0.008478253046013092
+    },
+    {
+      "wardNo": 133,
+      "totalPopulation": 4642,
+      "fracPopulation": 0.004640496479140758
+    },
+    {
+      "wardNo": 134,
+      "totalPopulation": 8809,
+      "fracPopulation": 0.008806146808434067
+    },
+    {
+      "wardNo": 135,
+      "totalPopulation": 2971,
+      "fracPopulation": 0.0029700377077826784
+    },
+    {
+      "wardNo": 136,
+      "totalPopulation": 7054,
+      "fracPopulation": 0.00705171524426086
+    },
+    {
+      "wardNo": 137,
+      "totalPopulation": 6370,
+      "fracPopulation": 0.006367936788480532
+    },
+    {
+      "wardNo": 138,
+      "totalPopulation": 2836,
+      "fracPopulation": 0.0028350814336155087
+    },
+    {
+      "wardNo": 139,
+      "totalPopulation": 13230,
+      "fracPopulation": 0.013225714868382645
+    },
+    {
+      "wardNo": 140,
+      "totalPopulation": 10817,
+      "fracPopulation": 0.010813496427157602
+    },
+    {
+      "wardNo": 141,
+      "totalPopulation": 3733,
+      "fracPopulation": 0.0037317908997484815
+    },
+    {
+      "wardNo": 142,
+      "totalPopulation": 7744,
+      "fracPopulation": 0.0077414917566708385
+    },
+    {
+      "wardNo": 143,
+      "totalPopulation": 2288,
+      "fracPopulation": 0.002287258928107293
+    },
+    {
+      "wardNo": 144,
+      "totalPopulation": 6423,
+      "fracPopulation": 0.006420919622042458
+    },
+    {
+      "wardNo": 145,
+      "totalPopulation": 4789,
+      "fracPopulation": 0.004787448866567233
+    },
+    {
+      "wardNo": 146,
+      "totalPopulation": 4585,
+      "fracPopulation": 0.004583514941159064
+    },
+    {
+      "wardNo": 147,
+      "totalPopulation": 4165,
+      "fracPopulation": 0.004163650977083425
+    },
+    {
+      "wardNo": 148,
+      "totalPopulation": 2181,
+      "fracPopulation": 0.002180293584878499
+    },
+    {
+      "wardNo": 149,
+      "totalPopulation": 3457,
+      "fracPopulation": 0.00345588029478449
+    },
+    {
+      "wardNo": 150,
+      "totalPopulation": 3097,
+      "fracPopulation": 0.0030959968970053703
+    },
+    {
+      "wardNo": 151,
+      "totalPopulation": 2761,
+      "fracPopulation": 0.002760105725744859
+    },
+    {
+      "wardNo": 152,
+      "totalPopulation": 3027,
+      "fracPopulation": 0.0030260195696594303
+    },
+    {
+      "wardNo": 153,
+      "totalPopulation": 5359,
+      "fracPopulation": 0.005357264246384171
+    },
+    {
+      "wardNo": 154,
+      "totalPopulation": 2661,
+      "fracPopulation": 0.0026601381152506587
+    },
+    {
+      "wardNo": 155,
+      "totalPopulation": 2446,
+      "fracPopulation": 0.002445207752688129
+    },
+    {
+      "wardNo": 156,
+      "totalPopulation": 3765,
+      "fracPopulation": 0.0037637805351066257
+    },
+    {
+      "wardNo": 157,
+      "totalPopulation": 3122,
+      "fracPopulation": 0.0031209887996289203
+    },
+    {
+      "wardNo": 158,
+      "totalPopulation": 6331,
+      "fracPopulation": 0.006328949420387794
+    },
+    {
+      "wardNo": 159,
+      "totalPopulation": 3301,
+      "fracPopulation": 0.003299930822413538
+    },
+    {
+      "wardNo": 160,
+      "totalPopulation": 6937,
+      "fracPopulation": 0.006934753139982645
+    },
+    {
+      "wardNo": 161,
+      "totalPopulation": 7705,
+      "fracPopulation": 0.007702504388578101
+    },
+    {
+      "wardNo": 162,
+      "totalPopulation": 9287,
+      "fracPopulation": 0.009283991986596343
+    },
+    {
+      "wardNo": 163,
+      "totalPopulation": 2616,
+      "fracPopulation": 0.002615152690528269
+    },
+    {
+      "wardNo": 164,
+      "totalPopulation": 3204,
+      "fracPopulation": 0.0032029622402341643
+    },
+    {
+      "wardNo": 165,
+      "totalPopulation": 2848,
+      "fracPopulation": 0.0028470775468748127
+    },
+    {
+      "wardNo": 166,
+      "totalPopulation": 6575,
+      "fracPopulation": 0.006572870389993642
+    },
+    {
+      "wardNo": 167,
+      "totalPopulation": 2545,
+      "fracPopulation": 0.002544175687077387
+    },
+    {
+      "wardNo": 168,
+      "totalPopulation": 5521,
+      "fracPopulation": 0.005519211775384775
+    },
+    {
+      "wardNo": 169,
+      "totalPopulation": 2993,
+      "fracPopulation": 0.0029920305820914025
+    },
+    {
+      "wardNo": 170,
+      "totalPopulation": 2451,
+      "fracPopulation": 0.002450206133212839
+    },
+    {
+      "wardNo": 171,
+      "totalPopulation": 9639,
+      "fracPopulation": 0.009635877975535926
+    },
+    {
+      "wardNo": 172,
+      "totalPopulation": 3404,
+      "fracPopulation": 0.003402897461222564
+    },
+    {
+      "wardNo": 173,
+      "totalPopulation": 5816,
+      "fracPopulation": 0.005814116226342665
+    },
+    {
+      "wardNo": 174,
+      "totalPopulation": 4233,
+      "fracPopulation": 0.004231628952219481
+    },
+    {
+      "wardNo": 175,
+      "totalPopulation": 0,
+      "fracPopulation": 0
+    },
+    {
+      "wardNo": 176,
+      "totalPopulation": 55,
+      "fracPopulation": 0.00005498218577180993
+    },
+    {
+      "wardNo": 177,
+      "totalPopulation": 3398,
+      "fracPopulation": 0.003396899404592912
+    },
+    {
+      "wardNo": 178,
+      "totalPopulation": 4845,
+      "fracPopulation": 0.004843430728443984
+    },
+    {
+      "wardNo": 179,
+      "totalPopulation": 2951,
+      "fracPopulation": 0.0029500441856838383
+    },
+    {
+      "wardNo": 180,
+      "totalPopulation": 2748,
+      "fracPopulation": 0.0027471099363806126
+    },
+    {
+      "wardNo": 181,
+      "totalPopulation": 2853,
+      "fracPopulation": 0.0028520759273995226
+    },
+    {
+      "wardNo": 182,
+      "totalPopulation": 3850,
+      "fracPopulation": 0.0038487530040266955
+    },
+    {
+      "wardNo": 183,
+      "totalPopulation": 1968,
+      "fracPopulation": 0.001967362574525854
+    },
+    {
+      "wardNo": 184,
+      "totalPopulation": 4108,
+      "fracPopulation": 0.004106669439101731
+    },
+    {
+      "wardNo": 185,
+      "totalPopulation": 3760,
+      "fracPopulation": 0.0037587821545819154
+    },
+    {
+      "wardNo": 186,
+      "totalPopulation": 2698,
+      "fracPopulation": 0.0026971261311335127
+    },
+    {
+      "wardNo": 187,
+      "totalPopulation": 2470,
+      "fracPopulation": 0.002469199979206737
+    },
+    {
+      "wardNo": 188,
+      "totalPopulation": 2540,
+      "fracPopulation": 0.002539177306552677
+    },
+    {
+      "wardNo": 189,
+      "totalPopulation": 2145,
+      "fracPopulation": 0.0021443052451005874
+    },
+    {
+      "wardNo": 190,
+      "totalPopulation": 3039,
+      "fracPopulation": 0.0030380156829187344
+    },
+    {
+      "wardNo": 191,
+      "totalPopulation": 3237,
+      "fracPopulation": 0.00323595155169725
+    },
+    {
+      "wardNo": 192,
+      "totalPopulation": 2679,
+      "fracPopulation": 0.0026781322851396148
+    },
+    {
+      "wardNo": 193,
+      "totalPopulation": 3090,
+      "fracPopulation": 0.003088999164270776
+    },
+    {
+      "wardNo": 194,
+      "totalPopulation": 4982,
+      "fracPopulation": 0.004980386354821038
+    },
+    {
+      "wardNo": 195,
+      "totalPopulation": 0,
+      "fracPopulation": 0
+    }
+  ]
+]

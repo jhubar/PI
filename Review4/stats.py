@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 from plot import *
 from smooth import *
+import json
 
 class stats():
 
@@ -10,11 +11,14 @@ class stats():
         self.households_path = "stats/households.csv"
         self.schools_path = "stats/schools.csv"
         self.workplaces_path = "stats/workplaces.csv"
+        self.communities_path = "stats/communities.csv"
 
         self.age_df = None
         self.households_df = None
         self.schools_df = None
         self.workplaces_df = None
+        self.communities_df = None
+
 
         self.nbWorker = 0
         self.nbStudent = 0
@@ -63,6 +67,7 @@ class stats():
         self.households_df = pd.read_csv(self.households_path,sep = ';')
         self.schools_df = pd.read_csv(self.schools_path,sep = ';')
         self.workplaces_df = pd.read_csv(self.workplaces_path,sep = ';')
+        self.communities_df = pd.read_csv(self.communities_path,sep = ';')
 
     def plot_stats(self):
         plot_pir()
@@ -128,15 +133,15 @@ class stats():
             seignior_people_x.append(_age[i,0])
             seignior_people_y.append(_age[i,1])
 
-        print("###############################################################")
-        print("young: " + str(np.sum(young_people_y)))
-        print("Junior: " + str(np.sum(junior_people_y)))
-        print("Medior: " + str(np.sum(medior_people_y)))
-        print("Seignior: " + str(np.sum(seignior_people_y)))
-        print("tot: " + str( np.sum(_age[:,1])  ))
-        print("###############################################################")
-
-
+        # print("###############################################################")
+        # print("young: " + str(np.sum(young_people_y)))
+        # print("Junior: " + str(np.sum(junior_people_y)))
+        # print("Medior: " + str(np.sum(medior_people_y)))
+        # print("Seignior: " + str(np.sum(seignior_people_y)))
+        # print("tot: " + str( np.sum(_age[:,1])  ))
+        # print("###############################################################")
+        #
+        #
 
 
         self.age_df = pd.DataFrame({'age': _age[:, 0], 'number': _age[:, 1]})
@@ -212,6 +217,7 @@ class stats():
 
         self.houseHolds_df = pd.DataFrame({'category': _houseHolds[:, 0],
                                                    'number': _houseHolds[:, 1]})
+
 
 
     def data_preprocessing_workplaces(self):
@@ -413,7 +419,32 @@ class stats():
         self.data_preprocessing_households()
         self.data_preprocessing_workplaces()
         self.data_preprocessing_schools()
+        self.data_preprocessing_communities()
         self.plot_stats()
+
+
+    def data_preprocessing_communities(self):
+        _communities = self.communities_df.to_numpy()
+        _communities_x = []
+        _communities_y = []
+
+        for i in range(0,_communities[:,1].size):
+            _communities_x.append(_communities[i,0])
+            _communities_y.append(_communities[i,2])
+
+
+
+        # """
+        # compute the mean of people meet in the SMALL communities
+        # """
+        mean_communities_people_meet = ((np.sum(
+        [(_communities_x[i]*_communities_y[i])
+        for i in range(0, len(_communities_x))]))
+        /np.sum(_communities_y))
+
+        print("mean_communities_people_meet: "+str(mean_communities_people_meet))
+
+
 
     def data_information(self):
         print("###############################################################")

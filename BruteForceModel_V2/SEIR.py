@@ -108,28 +108,28 @@ class SEIR():
             'school': 0,
             'work': 0,
             'home': 4.12,
-            'comu': 20
+            'comu': 93
         }
         self.gc_juniors = {
             'total': 0.217 * self.N,
             'school': 298.3,
             'work': 0,
             'home': 3.25,
-            'comu': 20
+            'comu': 93
         }
         self.gc_mediors = {
             'total': 0.587 * self.N,
             'school': 0,
             'work': 19.87,
             'home': 2.53,
-            'comu': 20
+            'comu': 93
         }
         self.gc_seignors = {
             'total': 0.122 * self.N,
             'school': 0,
             'work': 0,
             'home': 1.46,
-            'comu': 20
+            'comu': 93
         }
         self.gc_global = {
             'youngs': self.gc_youngs,
@@ -1120,7 +1120,7 @@ class SEIR():
                 - 75% work
             """
             # Get times:
-            start, end = scenario['case_isolation']
+            start, end = scenario['lock_down']
             # Modify time line contact matrix
             # At school
             self.contacts_time_line[start:end, :, 1] = 0
