@@ -971,7 +971,7 @@ class SEIR():
                    type='--sto-E --sto-I --sto-H --sto-C --sto-D',
                    duration=200,
                    global_view=True)
-    
+
         model.plot(filename="SEIR-MODEL-determinist(S,E,I,R).pdf",
                    type='--det-S --det-E --det-I --det-R',
                    duration=200,
@@ -1114,7 +1114,7 @@ class SEIR():
 
         if 'lock_down' in scenario_keys:
             """
-            Reduce of 
+            Reduce of
                 - 100% schools
                 - 75% communities
                 - 75% work
@@ -1133,9 +1133,9 @@ class SEIR():
 
         if 'social_dist' in scenario_keys:
             """
-            Reduce of 
+            Reduce of
                 - 75 % at work and communities
-                - Parameter start age: if we take junior or not 
+                - Parameter start age: if we take junior or not
             """
             # Get times:
             start, end, age = scenario['social_dist']
@@ -1163,8 +1163,8 @@ class SEIR():
 
         if 'wearing_mask' in scenario_keys:
             """
-            Decrease of: 
-                - 20% 
+            Decrease of:
+                - 20%
             """
             # Get times:
             start, end = scenario['case_isolation']
@@ -1205,15 +1205,3 @@ class SEIR():
 
         for i in range(0, predict_length):
             print(self.beta_time_line[i])
-
-
-
-
-
-
-
-
-
-
-
-

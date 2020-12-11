@@ -4,6 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from SEIR import SEIR
 import tools
+from  scenarios import *
 
 def compare_stocha():
     # =============================================================================================================== #
@@ -56,6 +57,7 @@ def compare_stocha():
     mean_stocha_basis = np.mean(stocha_pred_basis, axis=2)
     mean_stocha_ev = np.mean(stocha_pred_ev, axis=2)
 
+    plt.close()
     # Contamination cumul plot
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 10))
     fig.suptitle('Contaminations cumul curves')
@@ -74,7 +76,9 @@ def compare_stocha():
         ax2.plot(time, stocha_pred_ev[:, 7, i], c='green', linewidth=0.1)
     ax2.plot(time, stocha_pred_ev[:, 7, model.nb_simul - 1], c='green', linewidth=0.1, label='Stochastic conta')
     ax2.legend()
-    fig.show()
+    plt.savefig('imgJulien/Contamination_cumul_plot.png')
+    plt.close()
+    # fig.show()
 
     # Infection curves
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 10))
@@ -92,7 +96,9 @@ def compare_stocha():
         ax2.plot(time, stocha_pred_ev[:, 2, i], c='green', linewidth=0.1)
     ax2.plot(time, stocha_pred_ev[:, 2, model.nb_simul - 1], c='green', linewidth=0.1, label='Stochastic ')
     ax2.legend()
-    fig.show()
+    plt.savefig('imgJulien/Infection_curves.png')
+    plt.close()
+    # fig.show()
 
     # Hospit
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 10))
@@ -110,7 +116,10 @@ def compare_stocha():
         ax2.plot(time, stocha_pred_ev[:, 4, i], c='yellow', linewidth=0.1)
     ax2.plot(time, stocha_pred_ev[:, 4, model.nb_simul - 1], c='yellow', linewidth=0.1, label='Stochastic')
     ax2.legend()
-    fig.show()
+    plt.savefig('imgJulien/Hospit.png')
+    plt.close()
+
+
 
     # Critical
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 10))
@@ -130,7 +139,8 @@ def compare_stocha():
     ax2.plot(time, stocha_pred_ev[:, 5, model.nb_simul - 1], c='yellow', linewidth=0.1, label='Stochastic')
     ax2.scatter(model.dataset[:, 0], model.dataset[:, 5] / (model.s * model.t), c='black', label='Dataset')
     ax2.legend()
-    fig.show()
+    plt.close()
+    # fig.show()
 
     # Fatalities
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 10))
@@ -150,7 +160,8 @@ def compare_stocha():
     ax2.plot(time, stocha_pred_ev[:, 6, model.nb_simul - 1], c='yellow', linewidth=0.1, label='Stochastic')
     ax2.scatter(model.dataset[:, 0], model.dataset[:, 6] / (model.s * model.t), c='black', label='Dataset')
     ax2.legend()
-    fig.show()
+    plt.close()
+    # fig.show()
 
 def scenario_1():
 
@@ -185,8 +196,8 @@ def scenario_1():
     # Build scenario
     scenario = {
         'duration': 150,
-        #'close_schools': [70, 100],
-        'social_dist': [85, 120, 6]
+        'close_schools': [70, 100],
+        # 'social_dist': [85, 120, 6]
     }
     model.set_scenario(scenario)
     # Make stochastic predictions according to scenario
@@ -199,6 +210,7 @@ def scenario_1():
     mean_normal = np.mean(pred_normal, axis=2)
     model.nb_simul = 200
 
+    plt.close()
     # I curve
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 10))
     fig.suptitle('I curves')
@@ -213,7 +225,10 @@ def scenario_1():
         ax2.plot(time, pred_normal[:, 2, i], c='green', linewidth=0.1)
     ax2.plot(time, pred_normal[:, 2, model.nb_simul - 1], c='green', linewidth=0.1, label='Stochastic I')
     ax2.legend()
-    fig.show()
+    plt.savefig('imgJulien/I_curve.png')
+    plt.close()
+
+    # fig.show()
 
     # Hospit
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 10))
@@ -226,10 +241,12 @@ def scenario_1():
 
     ax2.plot(time, mean_normal[:, 4], c='red', label='stocha mean')
     for i in range(0, model.nb_simul - 1):
-        ax2.plot(time, pred_normal[:, 4, i], c='orange', linewidth=0.1)
-    ax2.plot(time, pred_normal[:, 4, model.nb_simul - 1], c='orange', linewidth=0.1, label='Stochastic')
+        ax2.plot(time, pred_normal[:, 4, i], c='blue', linewidth=0.1)
+    ax2.plot(time, pred_normal[:, 4, model.nb_simul - 1], c='blue', linewidth=0.1, label='Stochastic')
     ax2.legend()
-    fig.show()
+    plt.savefig('imgJulien/Hospit.png')
+    plt.close()
+
 
     # Critical
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 10))
@@ -245,7 +262,8 @@ def scenario_1():
         ax2.plot(time, pred_normal[:, 5, i], c='orange', linewidth=0.1)
     ax2.plot(time, pred_normal[:, 5, model.nb_simul - 1], c='orange', linewidth=0.1, label='Stochastic')
     ax2.legend()
-    fig.show()
+    plt.savefig('imgJulien/Criticals.png')
+    plt.close()
 
 if __name__ == "__main__":
 
@@ -253,12 +271,7 @@ if __name__ == "__main__":
     #compare_stocha()
 
     # Scenario 1
-    scenario_1()
-
-
-
-
-
-
-
-
+    # scenario_1()
+    # scenario_julien()
+    scenario_julien2()
+    scenario_julien3()
