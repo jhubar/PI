@@ -1167,7 +1167,7 @@ class SEIR():
                 - 20%
             """
             # Get times:
-            start, end = scenario['case_isolation']
+            start, end = scenario['wearing_mask']
             # Modify time line contact matrix
             # At school
             self.contacts_time_line[start:end, :, 1] -= self.contacts_time_line[start:end, :, 1] * 0.9 * 0.2
