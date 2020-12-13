@@ -18,6 +18,12 @@ def plot_households(category,households_number):
     plt.savefig('Plot/households.png')
     plt.close()
 
+def plot_communities(category,communities_number):
+    plt.bar(category,communities_number, label = 'communities')
+    plt.legend()
+    plt.savefig('Plot/communities.png')
+    plt.close()
+
 def plot_pie_households():
     # Pie chart, where the slices will be ordered and plotted counter-clockwise:
     labels = '1', '2', '3','4','5','6','7'
@@ -29,6 +35,19 @@ def plot_pie_households():
             shadow=False, startangle=90)
     ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
     plt.savefig('Plot/pie_households.png')
+    plt.close()
+
+def plot_pie_communities():
+    # Pie chart, where the slices will be ordered and plotted counter-clockwise:
+    labels = '1', '2', '3','4','5','6','7'
+    sizes = [125898/394019, 108977/394019, 62988/394019, 47849/394019, 24993/394019, 11855/394019, 11431/394019]
+    explode = (0, 0, 0, 0, 0 ,0.1,0)  # only "explode" the 2nd slice (i.e. 'Hogs')
+
+    fig1, ax1 = plt.subplots()
+    ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
+            shadow=False, startangle=90)
+    ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+    plt.savefig('Plot/pie_communities.png')
     plt.close()
 
 def plot_households_smooth(category,households_number):

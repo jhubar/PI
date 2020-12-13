@@ -23,6 +23,7 @@ class stats():
         self.nbWorker = 0
         self.nbStudent = 0
         self.nbOther = 0
+
         """
         workplaces
         """
@@ -57,7 +58,11 @@ class stats():
         self.mean_small_schools_people_meet = 0
         self.mean_medium_schools_people_meet = 0
         self.mean_large_schools_people_meet = 0
-
+        """
+        Communites
+        """
+        self.mean_communitiess = 0
+        self._communties_people_meet = 0
 
 
 
@@ -100,6 +105,10 @@ class stats():
         plot_large_schools(self.large_schools_df.size_of_schools
                                     ,self.large_schools_df.number
                                     ,self.mean_large_schools)
+
+        plot_communities(self.communities_df.size_of_communities
+                                    ,self.communities_df.number
+                                    )
 
     def data_preprocessing_age(self):
         _age = self.age_df.to_numpy()
@@ -437,12 +446,19 @@ class stats():
         # """
         # compute the mean of people meet in the SMALL communities
         # """
-        mean_communities_people_meet = ((np.sum(
+        self.mean_communities_people_meet = ((np.sum(
         [(_communities_x[i]*_communities_y[i])
         for i in range(0, len(_communities_x))]))
         /np.sum(_communities_y))
 
-        print("mean_communities_people_meet: "+str(mean_communities_people_meet))
+        self.mean_communities = np.sum(
+                                _communities_y)/len(_communities_x)
+
+        print("mean_communities_people_meet: "+str(self.mean_communities_people_meet))
+
+        self.communities_df = pd.DataFrame(
+                    {'size_of_communities': _communities_x,
+                    'number': _communities_y})
 
 
 
