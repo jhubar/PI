@@ -1101,7 +1101,7 @@ class SEIR():
             Exactly the same that case isolation but also apply to assymptomatics
             """
             # Get times:
-            start, end = scenario['case_isolation']
+            start, end = scenario['home_quarantine']
             # Modify time line contact matrix
             # At school
             self.contacts_time_line[start:end, :, 1] -= self.contacts_time_line[start:end, :, 1] * 0.9
