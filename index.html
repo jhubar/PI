@@ -208,7 +208,13 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Susceptible</div>
+                      <!-- S -->
+                      <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="customSwitchesSusceptible" checked >
+                        <label class="custom-control-label text-primary" for="customSwitchesSusceptible">
+                          <i class="fas fa-viruses fa-1x text-primary"></i> Susceptible </label>
+                      </div>
+
                       <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_Of_Susceptible_seir"></a></div>
 
                     </div>
@@ -227,7 +233,12 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Exposed</div>
+                      <!-- E -->
+                      <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="customSwitchesExposed" checked>
+                        <label class="custom-control-label text-warning" for="customSwitchesExposed">
+                          <i class="fas fa-flushed fa-1x text-warning"></i>  Exposed </label>
+                      </div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_Of_Exposed_seir"></a></div>
                     </div>
 
@@ -245,7 +256,12 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Infectious</div>
+                      <!-- I -->
+                      <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="customSwitchesInfectious" checked>
+                        <label class="custom-control-label text-danger" for="customSwitchesInfectious">
+                            <i class="fas fa-biohazard fa-1x text-danger"></i>  Infectious </label>
+                      </div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_Of_infected_seir"></a></div>
                     </div>
                     <div class="col-auto">
@@ -264,7 +280,13 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">Recovered</div>
+                      <!-- R -->
+                      <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="customSwitchesRecovered" checked>
+                        <label class="custom-control-label text-dark" for="customSwitchesRecovered">
+                            <i class="fas fa-heart fa-1x text-dark"></i> Recovered </label>
+                      </div>
+
                       <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_Of_Recovered_seir"></a></div>
                     </div>
                     <div class="col-auto">
@@ -283,7 +305,13 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Hospitalised</div>
+                      <!-- H -->
+                      <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="customSwitchesHospitalized" checked>
+                        <label class="custom-control-label text-success" for="customSwitchesHospitalized">
+                          <i class="fas fa-hospital-symbol fa-1x text-success"></i> Hospitalized </label>
+                      </div>
+
                       <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_Of_hospitalized_seir"></a></div>
                     </div>
                     <div class="col-auto">
@@ -300,7 +328,12 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">criticals</div>
+                      <!-- H -->
+                      <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="customSwitchesSeirCriticales" checked>
+                        <label class="custom-control-label text-warning" for="customSwitchesSeirCriticales">
+                          <i class="fas fa-procedures fa-1x text-warning"></i> Criticals </label>
+                      </div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_Of_criticals_seir"></a></div>
                     </div>
                     <div class="col-auto">
@@ -317,7 +350,13 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">fatalities</div>
+                      <!-- F -->
+                      <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input " id="customSwitchesSeirFatalities" checked>
+                        <label class="custom-control-label text-danger" for="customSwitchesSeirFatalities">
+                          <i class="fas fa-skull-crossbones fa-1x text-danger"></i>  fatalities </label>
+                      </div>
+
                       <div class="h5 mb-0 font-weight-bold text-gray-800"><a id="num_Of_fatalities_seir"></a></div>
                     </div>
                     <div class="col-auto">
@@ -349,6 +388,7 @@
 
 
 
+
           <!-- Content Row Actives Cases -->
           <div class="row">
 
@@ -358,6 +398,11 @@
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                   <h6 class="m-0 font-weight-bold text-primary">SEIR prediciton : <a id="num_Of_day_seir"></a> days </h6>
+                  <div class="w-75">
+                    <span >
+                    <input type="range" class="custom-range" id="range_time_period_SEIR" min="1" max="300" value="250">
+                  </div>
+                  <!-- <span class="font-weight-bold text-primary ml-2 value_time_period_SEIR"></span> -->
                   <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -408,6 +453,8 @@
                     </span>
 
 
+
+
                   </div>
                 </div>
               </div>
@@ -420,55 +467,56 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Time period </div>
+
+                        <!-- Wearing mask -->
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Wearing mask </div>
                         <div class="d-flex my-2">
                           <div class="w-75">
-                            <input type="range" class="custom-range" id="range_time_period_SEIR" min="1" max="300" value="250">
+                            <input type="range" class="custom-range" id="range_time_wearing_mask" min="73" max="300" value="73">
                           </div>
-                          <span class="font-weight-bold text-primary ml-2 value_time_period_SEIR"></span>
-                    </div>
-                    <!-- S -->
-                    <div class="custom-control custom-switch">
-                      <input type="checkbox" class="custom-control-input" id="customSwitchesSusceptible" checked >
-                      <label class="custom-control-label text-primary" for="customSwitchesSusceptible">
-                        <i class="fas fa-viruses fa-1x text-primary"></i> Susceptible </label>
-                    </div>
-                    <!-- E -->
-                    <div class="custom-control custom-switch">
-                      <input type="checkbox" class="custom-control-input" id="customSwitchesExposed" checked>
-                      <label class="custom-control-label text-warning" for="customSwitchesExposed">
-                        <i class="fas fa-flushed fa-1x text-warning"></i>  Exposed </label>
-                    </div>
-                    <!-- I -->
-                    <div class="custom-control custom-switch">
-                      <input type="checkbox" class="custom-control-input" id="customSwitchesInfectious" checked>
-                      <label class="custom-control-label text-danger" for="customSwitchesInfectious">
-                          <i class="fas fa-biohazard fa-1x text-danger"></i>  Infectious </label>
-                    </div>
-                    <!-- R -->
-                    <div class="custom-control custom-switch">
-                      <input type="checkbox" class="custom-control-input" id="customSwitchesRecovered" checked>
-                      <label class="custom-control-label text-dark" for="customSwitchesRecovered">
-                          <i class="fas fa-heart fa-1x text-dark"></i> Recovered </label>
-                    </div>
-                    <!-- H -->
-                    <div class="custom-control custom-switch">
-                      <input type="checkbox" class="custom-control-input" id="customSwitchesHospitalized" checked>
-                      <label class="custom-control-label text-success" for="customSwitchesHospitalized">
-                        <i class="fas fa-hospital-symbol fa-1x text-success"></i> Hospitalized </label>
-                    </div>
-                    <!-- H -->
-                    <div class="custom-control custom-switch">
-                      <input type="checkbox" class="custom-control-input" id="customSwitchesSeirCriticales" checked>
-                      <label class="custom-control-label text-warning" for="customSwitchesSeirCriticales">
-                        <i class="fas fa-procedures fa-1x text-warning"></i> Criticals </label>
-                    </div>
-                    <!-- H -->
-                    <div class="custom-control custom-switch">
-                      <input type="checkbox" class="custom-control-input " id="customSwitchesSeirFatalities" checked>
-                      <label class="custom-control-label text-danger" for="customSwitchesSeirFatalities">
-                        <i class="fas fa-skull-crossbones fa-1x text-danger"></i>  fatalities </label>
-                    </div>
+                          <span class="font-weight-bold text-primary ml-2 range_time_wearing_mask"></span>
+                        </div>
+                        <!-- Social distancing -->
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Social distancing </div>
+                        <div class="d-flex my-2">
+                          <div class="w-75">
+                            <input type="range" class="custom-range" id="range_time_social_distancing" min="73" max="300" value="73">
+                          </div>
+                          <span class="font-weight-bold text-primary ml-2 range_time_social_distancing"></span>
+                        </div>
+                        <!-- home quarantine -->
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Home quarantine </div>
+                        <div class="d-flex my-2">
+                          <div class="w-75">
+                            <input type="range" class="custom-range" id="range_time_home_quarantine" min="73" max="300" value="73">
+                          </div>
+                          <span class="font-weight-bold text-primary ml-2 range_time_home_quarantine"></span>
+                        </div>
+                        <!-- closing of schools -->
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Closing of schools </div>
+                        <div class="d-flex my-2">
+                          <div class="w-75">
+                            <input type="range" class="custom-range" id="range_time_closing_of_schools" min="73" max="300" value="73">
+                          </div>
+                          <span class="font-weight-bold text-primary ml-2 range_time_closing_of_schools"></span>
+                        </div>
+                        <!-- case isolation -->
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Case isolation </div>
+                        <div class="d-flex my-2">
+                          <div class="w-75">
+                            <input type="range" class="custom-range" id="range_time_case_isolation" min="73" max="300" value="73">
+                          </div>
+                          <span class="font-weight-bold text-primary ml-2 range_time_case_isolation"></span>
+                        </div>
+                        <!-- lock down -->
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Lock down </div>
+                        <div class="d-flex my-1">
+                          <div class="w-75">
+                            <input type="range" class="custom-range" id="range_time_lock_down" min="73" max="300" value="73">
+                          </div>
+                          <span class="font-weight-bold text-primary ml-2 range_time_lock_down"></span>
+                        </div>
+
                   </div>
                   <!-- <div class="col-auto">
                     <i class="fas fa-head-side-mask fa-2x text-gray-300"></i>
