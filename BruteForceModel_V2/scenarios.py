@@ -55,77 +55,100 @@ def scenario_julien():
 
     # Choose scenario
 
-    """
+
 
     scenario_1 = {
         'duration': 300,
-        'lock_down': [70, 100]
+        'wearing_mask': [73, 128],
+        'case_isolation': [73, 128]
     }
+    title_1 = 'wm + ci'
+
     scenario_2 = {
         'duration': 300,
-        'close_schools': [70, 100]
+        'wearing_mask': [73, 128],
+        'social_dist': [73, 128, 6]
     }
+    title_2 = 'sd + wm'
+
     scenario_3 = {
         'duration': 300,
-        'social_dist': [85, 120, 6]
+        'wearing_mask': [73, 128],
+        'case_isolation': [73, 93]
     }
+    title_3 = 'wm(all)+ci(73-93)'
+
     scenario_4 = {
         'duration': 300,
-        'wearing_mask': [85, 120]
+        'wearing_mask': [73, 128],
+        'social_dist': [73, 93, 6]
     }
+    title_4 = 'wm(all)+sd(73-93)'
+
     scenario_5 = {
         'duration': 300,
-        'wearing_mask': [85, 120],
-        'close_schools': [70, 100]
+        'home_quarantine': [73, 87],
+        'wearing_mask': [73, 118]
     }
+    title_5 = 'hq(73-87)+wm(all)'
+
     scenario_6 = {
         'duration': 300,
-        'lock_down': [70, 77]
+        'lock_down': [73, 87],
+        'wearing_mask': [73, 118]
     }
+    title_6 = 'ld(73-87)+wm(all)'
+
     scenario_7 = {
         'duration': 300,
-        'lock_down': [70, 77],
-        'wearing_mask': [77, 100]
+        'lock_down': [73, 87],
+        'wearing_mask': [73, 100]
     }
-    """
 
+    """
     scenario_1 = {
         'duration': 300,
-        'wearing_mask': [73, 119]
+        'wearing_mask': [73, 128]
     }
     title_1 = 'Wearing Mask'
+
     scenario_2 = {
         'duration': 300,
-        'social_dist': [73, 119, 6]
+        'social_dist': [73, 128, 6]
     }
     title_2 = 'Social Distancing'
+
     scenario_3 = {
         'duration': 300,
-        'close_schools': [73, 119]
+        'close_schools': [73, 128]
     }
     title_3 = 'Closing schools'
+
     scenario_4 = {
         'duration': 300,
-        'lock_down': [73, 119]
+        'lock_down': [73, 128]
     }
     title_4 = 'Lock Down'
+
     scenario_5 = {
         'duration': 300,
-        'case_isolation': [73, 119]
+        'case_isolation': [73, 128]
     }
     title_5 = 'Case isolation'
+
     scenario_6 = {
         'duration': 300,
-        'home_quarantine': [73, 119]
+        'home_quarantine': [73, 128]
     }
     title_6 = 'Home quarantine'
+    
     scenario_7 = {
         'duration': 300,
-        'social_dist': [73, 119, 6],
-        'wearing_mask': [73, 119]
+        'lockdown': [73, 83, 6],
+        'wearing_mask': [73, 128]
     }
-    title_7 = 'Social distancing + wearing mask'
-
+    title_7 = 'hybrid'
+    """
     # --------------------------- Create models --------------------------- #
 
     model.set_scenario(scenario_1)
@@ -187,11 +210,11 @@ def scenario_julien():
     ax_H.plot(time, mean_scenar_4[:, 4], label=title_4)
     ax_H.plot(time, mean_scenar_5[:, 4], label=title_5)
     ax_H.plot(time, mean_scenar_6[:, 4], label=title_6)
-    ax_H.plot(time, mean_scenar_7[:, 4], label=title_7)
+    #ax_H.plot(time, mean_scenar_7[:, 4], label=title_7)
     plt.axhline(1500, label="max hospit.")
     plt.legend()
     plt.title("Hospitalization")
-    fig_H.savefig("simul_francois/Hospitalization_basis.pdf")
+    fig_H.savefig("img_andreas/Hospitalization_test.pdf")
 
     #Criticals
     fig_C = plt.figure()
@@ -203,11 +226,23 @@ def scenario_julien():
     ax_C.plot(time, mean_scenar_4[:, 5], label=title_4)
     ax_C.plot(time, mean_scenar_5[:, 5], label=title_5)
     ax_C.plot(time, mean_scenar_6[:, 5], label=title_6)
-    ax_C.plot(time, mean_scenar_7[:, 5], label=title_7)
+    #ax_C.plot(time, mean_scenar_7[:, 5], label=title_7)
     plt.axhline(300, label='max criticals')
     plt.legend()
     plt.title("Criticals")
-    fig_C.savefig('simul_francois/Criticals_basis.pdf')
+    fig_C.savefig('img_andreas/Criticals_test.pdf')
+
+
+
+
+
+
+
+
+
+
+
+
 
 def scenario_francois():
     # Create the model:

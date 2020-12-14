@@ -9,6 +9,8 @@ from plot import plot_dataset
 from smoothing import dataframe_smoothing
 from scipy.stats import binom as binom
 import os
+
+
 class SEIR():
 
     def __init__(self):
@@ -16,23 +18,23 @@ class SEIR():
         # ========================================== #
         #       Epidemic's model parameters
         # ========================================== #
-        self.beta = 0.401739         # Contamination rate
-        self.sigma = 0.849249        # Incubation rate
-        self.gamma = 0.27155        # Recovery rate
-        self.hp = 0.0143677         # Hospit rate
-        self.hcr = 0.0505969          # Hospit recovery rate
-        self.pc = 0.0281921           # Critical rate
-        self.pd = 0.0489863          # Critical mortality rate
-        self.pcr = 0.105229         # Critical recovery rate
+        self.beta = 0.401739  # Contamination rate
+        self.sigma = 0.849249  # Incubation rate
+        self.gamma = 0.27155  # Recovery rate
+        self.hp = 0.0143677  # Hospit rate
+        self.hcr = 0.0505969  # Hospit recovery rate
+        self.pc = 0.0281921  # Critical rate
+        self.pd = 0.0489863  # Critical mortality rate
+        self.pcr = 0.105229  # Critical recovery rate
 
         # Only for fit_part_2
-        self.I_out = None       # Sum of probability to leave I each day
+        self.I_out = None  # Sum of probability to leave I each day
 
         # ========================================== #
         #       Testing protocol parameters
         # ========================================== #
-        self.s = 0.799943           # Sensitivity
-        self.t = 0.946585            # Testing rate in symptomatical
+        self.s = 0.799943  # Sensitivity
+        self.t = 0.946585  # Testing rate in symptomatical
 
         # Learning set
         self.dataframe = None
@@ -43,11 +45,11 @@ class SEIR():
         # ========================================== #
 
         # Weights of each probability in the objective function
-        self.w_1 = 1        # Weight of the daily test number
-        self.w_2 = 1        # Weight of the daily number of positive tests
-        self.w_3 = 1        # Weight of hospitalized data
-        self.w_4 = 1        # Weight of critical data
-        self.w_5 = 1        # Weight of fatalities
+        self.w_1 = 1  # Weight of the daily test number
+        self.w_2 = 1  # Weight of the daily number of positive tests
+        self.w_3 = 1  # Weight of hospitalized data
+        self.w_4 = 1  # Weight of critical data
+        self.w_5 = 1  # Weight of fatalities
 
         # Size the variance use fore the normal distribution
         self.var_w_1 = 3
@@ -59,10 +61,10 @@ class SEIR():
         # Optimizer constraints
         self.beta_min = 0.01
         self.beta_max = 1
-        self.sigma_min = 1/5
+        self.sigma_min = 1 / 5
         self.sigma_max = 1
-        self.gamma_min = 1/10
-        self.gamma_max = 1/4
+        self.gamma_min = 1 / 10
+        self.gamma_max = 1 / 4
         self.hp_min = 0.001
         self.hp_max = 1
         self.hcr_min = 0.001
@@ -140,7 +142,6 @@ class SEIR():
         # Get a matrix format:
         self.contacts_time_line = None
 
-
         # Beta time line
         self.beta_time_line = None
 
@@ -161,15 +162,18 @@ class SEIR():
 
     def get_parameters(self):
 
-        prm = (self.beta, self.sigma, self.gamma, self.hp, self.hcr, self.pc, self.pd, self.pcr, self.s, self.t)
+        prm = (
+        self.beta, self.sigma, self.gamma, self.hp, self.hcr, self.pc, self.pd,
+        self.pcr, self.s, self.t)
         return prm
 
     def get_hyperparameters(self):
 
         hprm = (self.w_1, self.w_2, self.w_3, self.w_4, self.w_5,
-                self.var_w_1, self.var_w_2, self.var_w_3, self.var_w_4, self.var_w_5,
+                self.var_w_1, self.var_w_2, self.var_w_3, self.var_w_4,
+                self.var_w_5,
                 self.smoothing, self.optimizer, self.step_size,
-                self. I_0)
+                self.I_0)
         return hprm
 
     def get_initial_state(self, sensib=None, test_rate=None, sigma=None):
@@ -206,7 +210,8 @@ class SEIR():
         dE_to_I_0 = self.dataset[0][1] / (s * t)
         dI_to_H_0 = H_0
         dI_to_R_0 = 0
-        init = (S_0, E_0, I_0, R_0, H_0, C_0, D_0, dE_to_I_0, dI_to_H_0, dI_to_R_0)
+        init = (
+        S_0, E_0, I_0, R_0, H_0, C_0, D_0, dE_to_I_0, dI_to_H_0, dI_to_R_0)
         init = np.around(init)
         return np.asarray(init, dtype=int)
 
@@ -227,7 +232,8 @@ class SEIR():
         self.t = df['t_final']
         self.I_0 = df['I_0']
 
-    def differential(self, state, time, beta, sigma, gamma, hp, hcr, pc, pd, pcr, s, t):
+    def differential(self, state, time, beta, sigma, gamma, hp, hcr, pc, pd, pcr,
+                     s, t):
         """
         ODE who describe the evolution of the model with the time
         :param state: An initial state to use
@@ -269,7 +275,8 @@ class SEIR():
         # Initial state to use:
         init = initial_state
         if init is None:
-            init = self.get_initial_state(sensib=prm[8], test_rate=prm[9], sigma=prm[1])
+            init = self.get_initial_state(sensib=prm[8], test_rate=prm[9],
+                                          sigma=prm[1])
         print('initial state deter = ')
         print(init)
         print(prm)
@@ -293,8 +300,10 @@ class SEIR():
         # get and store initial state
         init_state = init
         if init is None:
-            init_state = np.asarray(self.get_initial_state(sensib=params[8], test_rate=params[9], sigma=params[1]),
-                                    dtype=int)
+            init_state = np.asarray(
+                self.get_initial_state(sensib=params[8], test_rate=params[9],
+                                       sigma=params[1]),
+                dtype=int)
         for i in range(0, 9):
             output[0, i, :] = init_state[i]
         N = 1000000
@@ -306,34 +315,37 @@ class SEIR():
         v_H_to_C_to_R = np.vectorize(self.H_to_C_to_R, otypes=[int, int])
         v_C_to_R_to_F = np.vectorize(self.C_to_R_to_F, otypes=[int, int])
 
-
         self.timeseed += 1
         np.random.seed(self.timeseed)
         for i in range(1, len(time)):
 
             # Get class moves
-            S_to_E = v_S_to_E(output[i-1, 0, :], output[i-1, 2, :], N, params[0])
-            E_to_I = v_E_to_I(output[i-1, 1, :], params[1])
-            I_to_R, I_to_H = v_I_to_R_to_H(output[i-1, 2, :], params[2], params[3])
-            H_to_C, H_to_R = v_H_to_C_to_R(output[i-1, 4, :], params[4], params[4])
-            C_to_R, C_to_F = v_C_to_R_to_F(output[i-1, 5, :], params[7], params[6])
+            S_to_E = v_S_to_E(output[i - 1, 0, :], output[i - 1, 2, :], N,
+                              params[0])
+            E_to_I = v_E_to_I(output[i - 1, 1, :], params[1])
+            I_to_R, I_to_H = v_I_to_R_to_H(output[i - 1, 2, :], params[2],
+                                           params[3])
+            H_to_C, H_to_R = v_H_to_C_to_R(output[i - 1, 4, :], params[4],
+                                           params[4])
+            C_to_R, C_to_F = v_C_to_R_to_F(output[i - 1, 5, :], params[7],
+                                           params[6])
 
             # Update states:
 
-            output[i, 0, :] = output[i-1, 0, :] - S_to_E                        #S
-            output[i, 1, :] = output[i-1, 1, :] + S_to_E - E_to_I               #E
-            output[i, 2, :] = output[i-1, 2, :] + E_to_I - I_to_R - I_to_H      #I
-            output[i, 3, :] = output[i-1, 3, :] + I_to_R + C_to_R + H_to_R      #R
-            output[i, 4, :] = output[i-1, 4, :] + I_to_H - H_to_R - H_to_C      #H
-            output[i, 5, :] = output[i-1, 5, :] + H_to_C - C_to_R - C_to_F      #C
-            output[i, 6, :] = output[i-1, 6, :] + C_to_F                        #F
-            output[i, 7, :] = output[i-1, 7, :] + E_to_I                        #CI
-            output[i, 8, :] = output[i-1, 8, :] + I_to_H                        #CH
-
+            output[i, 0, :] = output[i - 1, 0, :] - S_to_E  # S
+            output[i, 1, :] = output[i - 1, 1, :] + S_to_E - E_to_I  # E
+            output[i, 2, :] = output[i - 1, 2, :] + E_to_I - I_to_R - I_to_H  # I
+            output[i, 3, :] = output[i - 1, 3, :] + I_to_R + C_to_R + H_to_R  # R
+            output[i, 4, :] = output[i - 1, 4, :] + I_to_H - H_to_R - H_to_C  # H
+            output[i, 5, :] = output[i - 1, 5, :] + H_to_C - C_to_R - C_to_F  # C
+            output[i, 6, :] = output[i - 1, 6, :] + C_to_F  # F
+            output[i, 7, :] = output[i - 1, 7, :] + E_to_I  # CI
+            output[i, 8, :] = output[i - 1, 8, :] + I_to_H  # CH
 
         return output
 
-    def stochastic_predic(self, duration, parameters=None, nb_simul=200, scenar=False):
+    def stochastic_predic(self, duration, parameters=None, nb_simul=200,
+                          scenar=False):
 
         # Get parameters:
         params = parameters
@@ -344,17 +356,18 @@ class SEIR():
         # General array to store predictions
         output = np.zeros((len(time), 9, nb_simul), dtype=int)
         # get and store initial state
-        init_state = np.asarray(self.get_initial_state(sensib=params[8], test_rate=params[9], sigma=params[1]), dtype=int)
+        init_state = np.asarray(
+            self.get_initial_state(sensib=params[8], test_rate=params[9],
+                                   sigma=params[1]), dtype=int)
         for i in range(0, 9):
             output[0, i, :] = init_state[i]
         N = 1000000
-
 
         # Get prior distributions
         priori_lngth = duration
         if duration >= self.dataset.shape[0]:
             priori_lngth = self.dataset.shape[0]
-        max_n = self.dataset[priori_lngth-1, 1]*2
+        max_n = self.dataset[priori_lngth - 1, 1] * 2
         # Matrix to store distribution
         priori = np.zeros((max_n, priori_lngth))
         # values of n
@@ -364,7 +377,7 @@ class SEIR():
         # Build prior distributions
         for i in range(0, priori.shape[0]):
             # Build the binomial object
-            binom_obj = binom(n=i, p=params[8]*params[9])
+            binom_obj = binom(n=i, p=params[8] * params[9])
             # Compute the probability of the evidence given prediction
             priori[i, :] = binom_obj.pmf(k=k_vec)
 
@@ -383,31 +396,33 @@ class SEIR():
             if scenar:
                 params[0] = self.beta_time_line[i]
 
-
             # Get class moves
-            S_to_E = v_S_to_E(output[i-1, 0, :], output[i-1, 2, :], N, params[0])
+            S_to_E = v_S_to_E(output[i - 1, 0, :], output[i - 1, 2, :], N,
+                              params[0])
             if i >= priori_lngth:
-                E_to_I = v_E_to_I(output[i-1, 1, :], params[1])
+                E_to_I = v_E_to_I(output[i - 1, 1, :], params[1])
             else:
-                E_to_I = v_E_to_I_ev(output[i-1, 1, :], sigma=params[1], priori=priori[:, i], k_vec=n_vec)
+                E_to_I = v_E_to_I_ev(output[i - 1, 1, :], sigma=params[1],
+                                     priori=priori[:, i], k_vec=n_vec)
 
-
-            I_to_R, I_to_H = v_I_to_R_to_H(output[i-1, 2, :], params[2], params[3])
-            H_to_C, H_to_R = v_H_to_C_to_R(output[i-1, 4, :], params[4], params[4])
-            C_to_R, C_to_F = v_C_to_R_to_F(output[i-1, 5, :], params[7], params[6])
+            I_to_R, I_to_H = v_I_to_R_to_H(output[i - 1, 2, :], params[2],
+                                           params[3])
+            H_to_C, H_to_R = v_H_to_C_to_R(output[i - 1, 4, :], params[4],
+                                           params[4])
+            C_to_R, C_to_F = v_C_to_R_to_F(output[i - 1, 5, :], params[7],
+                                           params[6])
 
             # Update states:
 
-            output[i, 0, :] = output[i-1, 0, :] - S_to_E                        #S
-            output[i, 1, :] = output[i-1, 1, :] + S_to_E - E_to_I               #E
-            output[i, 2, :] = output[i-1, 2, :] + E_to_I - I_to_R - I_to_H      #I
-            output[i, 3, :] = output[i-1, 3, :] + I_to_R + C_to_R + H_to_R      #R
-            output[i, 4, :] = output[i-1, 4, :] + I_to_H - H_to_R - H_to_C      #H
-            output[i, 5, :] = output[i-1, 5, :] + H_to_C - C_to_R - C_to_F      #C
-            output[i, 6, :] = output[i-1, 6, :] + C_to_F                        #F
-            output[i, 7, :] = output[i-1, 7, :] + E_to_I                        #CI
-            output[i, 8, :] = output[i-1, 8, :] + I_to_H                        #CH
-
+            output[i, 0, :] = output[i - 1, 0, :] - S_to_E  # S
+            output[i, 1, :] = output[i - 1, 1, :] + S_to_E - E_to_I  # E
+            output[i, 2, :] = output[i - 1, 2, :] + E_to_I - I_to_R - I_to_H  # I
+            output[i, 3, :] = output[i - 1, 3, :] + I_to_R + C_to_R + H_to_R  # R
+            output[i, 4, :] = output[i - 1, 4, :] + I_to_H - H_to_R - H_to_C  # H
+            output[i, 5, :] = output[i - 1, 5, :] + H_to_C - C_to_R - C_to_F  # C
+            output[i, 6, :] = output[i - 1, 6, :] + C_to_F  # F
+            output[i, 7, :] = output[i - 1, 7, :] + E_to_I  # CI
+            output[i, 8, :] = output[i - 1, 8, :] + I_to_H  # CH
 
         return output
 
@@ -432,20 +447,19 @@ class SEIR():
         return self.rng.multinomial(S, [beta * I / N, 1 - (beta * I / N)])[0]
 
     def E_to_I(self, E, sigma):
-        return self.rng.multinomial(E, [sigma, 1-sigma])[0]
+        return self.rng.multinomial(E, [sigma, 1 - sigma])[0]
 
     def I_to_R_to_H(self, I, gamma, hp):
         tmp = self.rng.multinomial(I, [gamma, hp, 1 - (gamma + hp)])
         return tmp[0], tmp[1]
 
     def H_to_C_to_R(self, H, pc, hcr):
-        tmp = self.rng.multinomial(H, [pc, hcr, 1-(pc + hcr)])
+        tmp = self.rng.multinomial(H, [pc, hcr, 1 - (pc + hcr)])
         return tmp[0], tmp[1]
 
     def C_to_R_to_F(self, C, pcr, pd):
-        tmp = self.rng.multinomial(C, [pcr, pd, 1-(pcr + pd)])
+        tmp = self.rng.multinomial(C, [pcr, pd, 1 - (pcr + pd)])
         return tmp[0], tmp[1]
-
 
     def fit(self, method='Normal'):
         """
@@ -456,8 +470,10 @@ class SEIR():
         init_prm = (self.beta, self.sigma, self.gamma, self.hp,
                     self.hcr, self.pc, self.pd, self.pcr, self.s, self.t)
         # Bounds
-        bds = [(self.beta_min, self.beta_max), (self.sigma_min, self.sigma_max), (self.gamma_min, self.gamma_max),
-               (self.hp_min, self.hp_max), (self.hcr_min, self.hcr_max), (self.pc_min, self.pc_max),
+        bds = [(self.beta_min, self.beta_max), (self.sigma_min, self.sigma_max),
+               (self.gamma_min, self.gamma_max),
+               (self.hp_min, self.hp_max), (self.hcr_min, self.hcr_max),
+               (self.pc_min, self.pc_max),
                (self.pd_min, self.pd_max), (self.pcr_min, self.pcr_max),
                (self.s_min, self.s_max), (self.t_min, self.t_max)]
         # Constraint on parameters:
@@ -487,7 +503,7 @@ class SEIR():
         if self.optimizer == 'LBFGSB':
             res = minimize(self.objective, np.asarray(init_prm),
                            method='L-BFGS-B',
-                           #options={'eps': self.step_size},
+                           # options={'eps': self.step_size},
                            args=(method),
                            bounds=bds)
         else:
@@ -496,7 +512,6 @@ class SEIR():
                                method='COBYLA',
                                args=(method),
                                constraints=cons)
-
 
         if self.fit_display:
             # Print optimizer result
@@ -529,22 +544,25 @@ class SEIR():
         testing_rate = params[9]
 
         # Get an initial state:
-        init_state = self.get_initial_state(sensib=sensitivity, test_rate=testing_rate, sigma=params[1])
+        init_state = self.get_initial_state(sensib=sensitivity,
+                                            test_rate=testing_rate,
+                                            sigma=params[1])
         if self.basis_obj_display:
             print(params)
         # Make prediction
         if method == 'normal':
             predictions = self.predict(duration=self.dataset.shape[0],
-                                parameters=params,
-                                initial_state=init_state)
+                                       parameters=params,
+                                       initial_state=init_state)
         if method == 'stocha':
             # Predict with 200 simulations
             tmp = self.nb_simul
             self.nb_simul = 200
             # Get predictions matrix:
-            prd_mat = self.stochastic_predic_sans_ev(duration=self.dataset.shape[0],
-                                           parameters=params,
-                                           init=init_state)
+            prd_mat = self.stochastic_predic_sans_ev(
+                duration=self.dataset.shape[0],
+                parameters=params,
+                init=init_state)
             self.nb_simul = tmp
             # Get mean vectors
             predictions = np.mean(prd_mat, axis=2)
@@ -554,7 +572,7 @@ class SEIR():
 
         infections = [predictions[0][7]]
         for i in range(1, end_t):
-            infections.append(predictions[i][7] - predictions[i-1][7])
+            infections.append(predictions[i][7] - predictions[i - 1][7])
 
         # Compare with dataset and compute the likelyhood value
         error = 0.0
@@ -581,11 +599,15 @@ class SEIR():
             else:
                 err1 -= np.log(prob_1) * self.w_1
             if self.full_obj_display:
-                print('iter {} - prb_1 {} - sigma2 {} - dx {} - pred {} - ev {}'.format(i, prob_1, sigma_sq,
-                                                                                        dx, pred, evid))
+                print(
+                    'iter {} - prb_1 {} - sigma2 {} - dx {} - pred {} - ev {}'.format(
+                        i, prob_1, sigma_sq,
+                        dx, pred, evid))
             if np.log(prob_1) * self.w_1 > 0:
-                print('iter {} - prb_1 {} - sigma2 {} - dx {} - pred {} - ev {}'.format(i, prob_1, sigma_sq,
-                                                                                        dx, pred, evid))
+                print(
+                    'iter {} - prb_1 {} - sigma2 {} - dx {} - pred {} - ev {}'.format(
+                        i, prob_1, sigma_sq,
+                        dx, pred, evid))
 
             # ================================================ #
             # PART 2: Fit on the number of positive test
@@ -666,15 +688,17 @@ class SEIR():
 
     def objective_part_2(self, parameters):
 
-
-        params = (self.beta, self.sigma, self.gamma, self.hp, parameters[0], parameters[1],
-                  parameters[2], parameters[3], self.s, self.t)
+        params = (
+        self.beta, self.sigma, self.gamma, self.hp, parameters[0], parameters[1],
+        parameters[2], parameters[3], self.s, self.t)
 
         sensitivity = params[8]
         testing_rate = params[9]
 
         # Get an initial state:
-        init_state = self.get_initial_state(sensib=sensitivity, test_rate=testing_rate, sigma=params[1])
+        init_state = self.get_initial_state(sensib=sensitivity,
+                                            test_rate=testing_rate,
+                                            sigma=params[1])
         # Make prediction
         predictions = self.predict(duration=self.dataset.shape[0],
                                    parameters=params,
@@ -765,11 +789,12 @@ class SEIR():
         params = self.beta, self.sigma, gamma, hp, self.hcr, self.pc, self.pd, self.pcr, self.s, self.t
 
         # Get an initial state:
-        init_state = self.get_initial_state(sensib=self.s, test_rate=self.t, sigma=params[1])
+        init_state = self.get_initial_state(sensib=self.s, test_rate=self.t,
+                                            sigma=params[1])
         # Make prediction
         predictions = self.predict(duration=self.dataset.shape[0],
-                            parameters=params,
-                            initial_state=init_state)
+                                   parameters=params,
+                                   initial_state=init_state)
         # Time to compare:
         start_t = 3
         end_t = self.dataset.shape[0]
@@ -798,7 +823,6 @@ class SEIR():
 
             error += err
         return error
-
 
     def fit_part_2(self):
 
@@ -830,7 +854,7 @@ class SEIR():
         gamma_range = np.linspace(0, hs_sum, 200)
         hp_range = np.zeros(len(gamma_range))
         for i in range(0, len(gamma_range)):
-            hp_range[i] = gamma_range[-(i+1)]
+            hp_range[i] = gamma_range[-(i + 1)]
         proportion_range = np.linspace(0, 1, 200)
         best = (math.inf, 0, 0)
         error = []
@@ -850,8 +874,6 @@ class SEIR():
         self.gamma = best[1]
         self.hp = best[2]
 
-
-
     def import_dataset(self):
 
         url = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/data.csv"
@@ -862,11 +884,12 @@ class SEIR():
         # Ad a new column at the end with cumulative positive cases at the right
         cumul_positive = np.copy(raw['num_positive'].to_numpy())
         for i in range(1, len(cumul_positive)):
-            cumul_positive[i] += cumul_positive[i-1]
+            cumul_positive[i] += cumul_positive[i - 1]
         raw.insert(7, 'cumul_positive', cumul_positive)
         if self.smoothing:
             self.dataframe = dataframe_smoothing(raw)
-        else: self.dataframe = raw
+        else:
+            self.dataframe = raw
         self.dataset = self.dataframe.to_numpy()
 
         self.I_0 = self.dataset[0][1] / (self.s * self.t)
@@ -935,31 +958,29 @@ class SEIR():
                   global_view=global_view,
                   plot_param=plot_param)
 
-
     def ploter(self):
 
         self.plot(filename="Sto(I,E,H,C,F)",
-                   type='--sto-I --sto-E --sto-H --sto-C --sto-F',
-                   duration=200,
-                   global_view=True)
+                  type='--sto-I --sto-E --sto-H --sto-C --sto-F',
+                  duration=200,
+                  global_view=True)
 
         self.plot(filename="Sto(S,R)",
-                   type='--sto-S --sto-R',
-                   duration=200,
-                   global_view=True)
+                  type='--sto-S --sto-R',
+                  duration=200,
+                  global_view=True)
 
         self.plot(filename="Compare_stocha_and_deter(I,E,H,C,F)",
-                   type='--sto-I --sto-E --sto-H --sto-C --sto-F' +
-                        '--det-I --det-E --det-H --det-C --det-F' ,
-                   duration=200,
-                   plot_conf_inter=True)
-
+                  type='--sto-I --sto-E --sto-H --sto-C --sto-F' +
+                       '--det-I --det-E --det-H --det-C --det-F',
+                  duration=200,
+                  plot_conf_inter=True)
 
         self.plot(filename="Compare_stocha_and_deter(S,R)",
-                   type='--sto-S --sto-R' +
-                        '--det-S --det-R' ,
-                   duration=200,
-                   plot_conf_inter=True)
+                  type='--sto-S --sto-R' +
+                       '--det-S --det-R',
+                  duration=200,
+                  plot_conf_inter=True)
 
         self.plot_fit_cumul(plot_conf_inter=True)
         self.plot_fit_hosp(plot_conf_inter=True)
@@ -981,7 +1002,7 @@ class SEIR():
     def stocha_perso(self):
 
         nb_simul = 200
-        time = np.arange(self.dataset.shape[0]+7)
+        time = np.arange(self.dataset.shape[0] + 7)
         self.nb_simul = nb_simul
         res = self.stochastic_predic(len(time))
 
@@ -993,54 +1014,62 @@ class SEIR():
         # make deterministic predictions
         predictions = self.predict(len(time))
 
-
-
-
         # Plot I
-        for i in range(0, nb_simul-1):
+        for i in range(0, nb_simul - 1):
             plt.plot(time, res[:, 2, i], c='green', linewidth=0.1)
-        plt.plot(time, res[:, 2, nb_simul-1], c='green', linewidth=0.1, label='Stochastic I')
-        plt.plot(time, mean[:, 2], c='blue', label='Stochastic I mean prediction')
+        plt.plot(time, res[:, 2, nb_simul - 1], c='green', linewidth=0.1,
+                 label='Stochastic I')
+        plt.plot(time, mean[:, 2], c='blue',
+                 label='Stochastic I mean prediction')
         plt.scatter(time, predictions[:, 2], c='black', label='Deterministic I')
         plt.legend()
         plt.title('Infected curves')
         plt.show()
 
         # Plot Conta
-        for i in range(0, nb_simul-1):
+        for i in range(0, nb_simul - 1):
             plt.plot(time, res[:, 7, i], c='green', linewidth=0.1)
-        plt.plot(time, res[:, 7, nb_simul-1], c='green', linewidth=0.1, label='Stochastic conta')
-        plt.plot(time, mean[:, 7], c='blue', label='Stochastic conta mean prediction')
-        plt.scatter(self.dataset[:, 0], self.dataset[:, 7]/(self.s*self.t), c='black', label='Dataset conta')
+        plt.plot(time, res[:, 7, nb_simul - 1], c='green', linewidth=0.1,
+                 label='Stochastic conta')
+        plt.plot(time, mean[:, 7], c='blue',
+                 label='Stochastic conta mean prediction')
+        plt.scatter(self.dataset[:, 0], self.dataset[:, 7] / (self.s * self.t),
+                    c='black', label='Dataset conta')
         plt.legend()
         plt.title('Contaminations curves')
         plt.show()
 
         # Plot Critical
-        for i in range(0, nb_simul-1):
+        for i in range(0, nb_simul - 1):
             plt.plot(time, res[:, 5, i], c='red', linewidth=0.1)
-        plt.plot(time, res[:, 5, nb_simul-1], c='red', linewidth=0.1, label='Stochastic C')
-        plt.plot(time, mean[:, 5], c='green', label='Stochastic C mean prediction')
+        plt.plot(time, res[:, 5, nb_simul - 1], c='red', linewidth=0.1,
+                 label='Stochastic C')
+        plt.plot(time, mean[:, 5], c='green',
+                 label='Stochastic C mean prediction')
         plt.scatter(time, predictions[:, 5], c='blue', label='Deterministic C')
         plt.legend()
         plt.title('Critical curves')
         plt.show()
 
         # Plot Hospit
-        for i in range(0, nb_simul-1):
+        for i in range(0, nb_simul - 1):
             plt.plot(time, res[:, 4, i], c='yellow', linewidth=0.1)
-        plt.plot(time, res[:, 4, nb_simul-1], c='yellow', linewidth=0.1, label='Stochastic H')
-        plt.plot(time, mean[:, 4], c='blue', label='Stochastic H mean prediction')
+        plt.plot(time, res[:, 4, nb_simul - 1], c='yellow', linewidth=0.1,
+                 label='Stochastic H')
+        plt.plot(time, mean[:, 4], c='blue',
+                 label='Stochastic H mean prediction')
         plt.scatter(time, predictions[:, 4], c='black', label='Deterministic H')
         plt.legend()
         plt.title('Hospitalized curves')
         plt.show()
 
         # Plot Fatalities
-        for i in range(0, nb_simul-1):
+        for i in range(0, nb_simul - 1):
             plt.plot(time, res[:, 6, i], c='blue', linewidth=0.1)
-        plt.plot(time, res[:, 6, nb_simul-1], c='blue', linewidth=0.1, label='Stochastic F')
-        plt.plot(time, mean[:, 6], c='green', label='Stochastic F mean prediction')
+        plt.plot(time, res[:, 6, nb_simul - 1], c='blue', linewidth=0.1,
+                 label='Stochastic F')
+        plt.plot(time, mean[:, 6], c='green',
+                 label='Stochastic F mean prediction')
         plt.scatter(time, predictions[:, 6], c='red', label='Deterministic F')
         plt.legend()
         plt.title('Fatalities curves')
@@ -1062,7 +1091,8 @@ class SEIR():
         for age_keys in self.gc_global.keys():
             j = 0
             for place_keys in self.gc_seignors.keys():
-                self.contacts_time_line[:, i, j] = self.gc_global[age_keys][place_keys]
+                self.contacts_time_line[:, i, j] = self.gc_global[age_keys][
+                    place_keys]
                 j += 1
             i += 1
 
@@ -1088,13 +1118,21 @@ class SEIR():
             start, end = scenario['case_isolation']
             # Modify time line contact matrix
             # At school
-            self.contacts_time_line[start:end, :, 1] -= self.contacts_time_line[start:end, :, 1] * 0.9 * 0.6
+            self.contacts_time_line[start:end, :, 1] -= self.contacts_time_line[
+                                                        start:end, :,
+                                                        1] * 0.9 * 0.6
             # At work
-            self.contacts_time_line[start:end, :, 2] -= self.contacts_time_line[start:end, :, 2] * 0.9 * 0.6
+            self.contacts_time_line[start:end, :, 2] -= self.contacts_time_line[
+                                                        start:end, :,
+                                                        2] * 0.9 * 0.6
             # At home
-            self.contacts_time_line[start:end, :, 3] -= self.contacts_time_line[start:end, :, 3] * 0.9 * 0.6 * 0.25
+            self.contacts_time_line[start:end, :, 3] -= self.contacts_time_line[
+                                                        start:end, :,
+                                                        3] * 0.9 * 0.6 * 0.25
             # In communities
-            self.contacts_time_line[start:end, :, 4] -= self.contacts_time_line[start:end, :, 4] * 0.9 * 0.6 * 0.9
+            self.contacts_time_line[start:end, :, 4] -= self.contacts_time_line[
+                                                        start:end, :,
+                                                        4] * 0.9 * 0.6 * 0.9
 
         if 'home_quarantine' in scenario_keys:
             """
@@ -1104,13 +1142,19 @@ class SEIR():
             start, end = scenario['home_quarantine']
             # Modify time line contact matrix
             # At school
-            self.contacts_time_line[start:end, :, 1] -= self.contacts_time_line[start:end, :, 1] * 0.9
+            self.contacts_time_line[start:end, :, 1] -= self.contacts_time_line[
+                                                        start:end, :, 1] * 0.9
             # At work
-            self.contacts_time_line[start:end, :, 2] -= self.contacts_time_line[start:end, :, 2] * 0.9
+            self.contacts_time_line[start:end, :, 2] -= self.contacts_time_line[
+                                                        start:end, :, 2] * 0.9
             # At home
-            self.contacts_time_line[start:end, :, 3] -= self.contacts_time_line[start:end, :, 3] * 0.9 * 0.25
+            self.contacts_time_line[start:end, :, 3] -= self.contacts_time_line[
+                                                        start:end, :,
+                                                        3] * 0.9 * 0.25
             # In communities
-            self.contacts_time_line[start:end, :, 4] -= self.contacts_time_line[start:end, :, 4] * 0.9 * 0.9
+            self.contacts_time_line[start:end, :, 4] -= self.contacts_time_line[
+                                                        start:end, :,
+                                                        4] * 0.9 * 0.9
 
         if 'lock_down' in scenario_keys:
             """
@@ -1125,11 +1169,15 @@ class SEIR():
             # At school
             self.contacts_time_line[start:end, :, 1] = 0
             # At work
-            self.contacts_time_line[start:end, :, 2] -= self.contacts_time_line[start:end, :, 2] * 0.9 * 0.75
+            self.contacts_time_line[start:end, :, 2] -= self.contacts_time_line[
+                                                        start:end, :,
+                                                        2] * 0.9 * 0.75
             # At home
             self.contacts_time_line[start:end, :, 3] -= 0
             # In communities
-            self.contacts_time_line[start:end, :, 4] -= self.contacts_time_line[start:end, :, 4] * 0.9 * 0.75
+            self.contacts_time_line[start:end, :, 4] -= self.contacts_time_line[
+                                                        start:end, :,
+                                                        4] * 0.9 * 0.75
 
         if 'social_dist' in scenario_keys:
             """
@@ -1143,23 +1191,29 @@ class SEIR():
             if age < 6:
                 for i in range(start, end):
                     # At school
-                    self.contacts_time_line[i, :, 1] -= self.contacts_time_line[i, :, 1] * 0.9 * 0.75
+                    self.contacts_time_line[i, :, 1] -= self.contacts_time_line[
+                                                        i, :, 1] * 0.9 * 0.75
                     # At work
-                    self.contacts_time_line[i, :, 2] -= self.contacts_time_line[i, :, 2] * 0.9 * 0.75
+                    self.contacts_time_line[i, :, 2] -= self.contacts_time_line[
+                                                        i, :, 2] * 0.9 * 0.75
                     # At home
                     self.contacts_time_line[i, :, 3] -= 0
                     # In communities
-                    self.contacts_time_line[i, :, 4] -= self.contacts_time_line[i, :, 4] * 0.9 * 0.75
+                    self.contacts_time_line[i, :, 4] -= self.contacts_time_line[
+                                                        i, :, 4] * 0.9 * 0.75
             if age >= 6:
                 for i in range(start, end):
                     # At school
-                    self.contacts_time_line[i, 1:4, 1] -= self.contacts_time_line[i, 1:4, 1] * 0.9 * 0.75
+                    self.contacts_time_line[i, 1:4,
+                    1] -= self.contacts_time_line[i, 1:4, 1] * 0.9 * 0.75
                     # At work
-                    self.contacts_time_line[i, 1:4, 2] -= self.contacts_time_line[i, 1:4, 2] * 0.9 * 0.75
+                    self.contacts_time_line[i, 1:4,
+                    2] -= self.contacts_time_line[i, 1:4, 2] * 0.9 * 0.75
                     # At home
                     self.contacts_time_line[i, 1:4, 3] -= 0
                     # In communities
-                    self.contacts_time_line[i, 1:4, 4] -= self.contacts_time_line[i, 1:4, 4] * 0.9 * 0.75
+                    self.contacts_time_line[i, 1:4,
+                    4] -= self.contacts_time_line[i, 1:4, 4] * 0.9 * 0.75
 
         if 'wearing_mask' in scenario_keys:
             """
@@ -1170,13 +1224,19 @@ class SEIR():
             start, end = scenario['wearing_mask']
             # Modify time line contact matrix
             # At school
-            self.contacts_time_line[start:end, :, 1] -= self.contacts_time_line[start:end, :, 1] * 0.9 * 0.2
+            self.contacts_time_line[start:end, :, 1] -= self.contacts_time_line[
+                                                        start:end, :,
+                                                        1] * 0.9 * 0.2
             # At work
-            self.contacts_time_line[start:end, :, 2] -= self.contacts_time_line[start:end, :, 2] * 0.9 * 0.2
+            self.contacts_time_line[start:end, :, 2] -= self.contacts_time_line[
+                                                        start:end, :,
+                                                        2] * 0.9 * 0.2
             # At home
             self.contacts_time_line[start:end, :, 3] -= 0
             # In communities
-            self.contacts_time_line[start:end, :, 4] -= self.contacts_time_line[start:end, :, 4] * 0.9 * 0.2
+            self.contacts_time_line[start:end, :, 4] -= self.contacts_time_line[
+                                                        start:end, :,
+                                                        4] * 0.9 * 0.2
 
         # Apply to the beta time line vector
 
@@ -1192,16 +1252,21 @@ class SEIR():
         new_contacts = np.zeros(predict_length)
         for i in range(0, predict_length):
             # Get the original number of contacts:
-            a = self.contacts_time_line[i, :, 0] * self.contacts_time_line[i, :, 1]
-            b = self.contacts_time_line[i, :, 0] * self.contacts_time_line[i, :, 2]
-            c = self.contacts_time_line[i, :, 0] * self.contacts_time_line[i, :, 3]
-            d = self.contacts_time_line[i, :, 0] * self.contacts_time_line[i, :, 4]
+            a = self.contacts_time_line[i, :, 0] * self.contacts_time_line[i, :,
+                                                   1]
+            b = self.contacts_time_line[i, :, 0] * self.contacts_time_line[i, :,
+                                                   2]
+            c = self.contacts_time_line[i, :, 0] * self.contacts_time_line[i, :,
+                                                   3]
+            d = self.contacts_time_line[i, :, 0] * self.contacts_time_line[i, :,
+                                                   4]
             e = a + b + c + d
             new_contacts[i] = np.sum(e)
         # Apply the ratio to beta time line vector:
         for i in range(0, 150):
             print('{} - {}'.format(total_contact[i], new_contacts[i]))
-        self.beta_time_line = self.beta_time_line * (new_contacts / total_contact)
+        self.beta_time_line = self.beta_time_line * (
+                    new_contacts / total_contact)
 
         for i in range(0, predict_length):
             print(self.beta_time_line[i])
