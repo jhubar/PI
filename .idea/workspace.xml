@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="749abb67-b151-41a0-950f-d9578cf5d1c3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/other.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BruteForceModel_V2/img_andreas/Criticals.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BruteForceModel_V2/img_andreas/Hospitalization.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/PI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PI.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="749abb67-b151-41a0-950f-d9578cf5d1c3" name="Default Changelist" comment="Change SEIR correction + update scenarios to plot 7 determined scenarios">
+      <change afterPath="$PROJECT_DIR$/BruteForceModel_V2/.ipynb_checkpoints/interactive_scenarios-checkpoint.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BruteForceModel_V2/.ipynb_checkpoints/main-checkpoint.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BruteForceModel_V2/img_andreas/Criticals_basics.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BruteForceModel_V2/img_andreas/Criticals_comb.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BruteForceModel_V2/img_andreas/Criticals_test.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BruteForceModel_V2/img_andreas/Hospitalization_basics.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BruteForceModel_V2/img_andreas/Hospitalization_comb.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BruteForceModel_V2/img_andreas/Hospitalization_test.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BruteForceModel_V2/interactive_scenarios.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BruteForceModel_V2/SEIR.py" beforeDir="false" afterPath="$PROJECT_DIR$/BruteForceModel_V2/SEIR.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BruteForceModel_V2/scenarios.py" beforeDir="false" afterPath="$PROJECT_DIR$/BruteForceModel_V2/scenarios.py" afterDir="false" />
@@ -69,8 +73,18 @@
       <option name="presentableId" value="Default" />
       <updated>1607347922414</updated>
       <workItem from="1607347923591" duration="2055000" />
-      <workItem from="1607731924089" duration="3608000" />
+      <workItem from="1607731924089" duration="4130000" />
+      <workItem from="1607873443574" duration="9171000" />
+      <workItem from="1607893771005" duration="1320000" />
     </task>
+    <task id="LOCAL-00001" summary="Change SEIR correction + update scenarios to plot 7 determined scenarios">
+      <created>1607735940381</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1607735940381</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -86,8 +100,11 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Change SEIR correction + update scenarios to plot 7 determined scenarios" />
+    <option name="LAST_COMMIT_MESSAGE" value="Change SEIR correction + update scenarios to plot 7 determined scenarios" />
   </component>
 </project>
