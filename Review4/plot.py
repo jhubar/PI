@@ -105,7 +105,7 @@ def plot_large_schools(x,y,mean):
 
 def plot_pir():
     # Pie chart, where the slices will be ordered and plotted counter-clockwise:
-    labels = 'young', 'junior', 'medior', 'seignior'
+    labels = 'young', 'junior', 'medior', 'senior'
     sizes = [75211/1000324,216665/1000324 , 586837/1000324,121611/1000324]
     explode = (0, 0, 0,0)  # only "explode" the 2nd slice (i.e. 'Hogs')
 
