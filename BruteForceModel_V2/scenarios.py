@@ -141,7 +141,7 @@ def scenario_julien():
         'home_quarantine': [73, 128]
     }
     title_6 = 'Home quarantine'
-    
+
     scenario_7 = {
         'duration': 300,
         'lockdown': [73, 83, 6],
@@ -394,7 +394,14 @@ def scenario_francois():
     mean_scenar_7 = np.mean(pred_scenar_7, axis=2)
 
     # --------------------------- Plot scenarios --------------------------- #
-
+    # Data storing:
+    # dataJSON['Hospit] = []
+    # for i in range(0, range_size):
+    #     self.dataJSON['fit_hcr'].append({
+    #         "hcr_value": str(hcr_range[i]),
+    #         "log": str(SSE[i]),
+    #
+    #     })
     # Hospit
     fig_H = plt.figure()
     ax_H = plt.subplot()
@@ -431,4 +438,3 @@ def scenario_francois():
 if __name__ == "__main__":
 
     scenario_julien()
-
