@@ -1,11 +1,11 @@
 # Big data project
 <p align="center">
-  <img src= https://github.com/julien1941/PI/blob/master/img/covid.gif/>
+  <img src= https://github.com/jhubar/PI/blob/master/img/covid.gif/>
 </p>
 
 ## Documentation
 
-- [Cov-invaders link](https://julien1941.github.io/PI/)
+- [Cov-invaders link](https://jhubar.github.io/PI/)
 - [github data](https://github.com/ADelau/proj0016-epidemic-data/)
 
 ## Rapport
@@ -25,7 +25,7 @@
 1. We use implicit method so the system is stable.
 
 # Authors
-1. [Pierre Dumoulin](https://github.com/PierreDML)
+1. [Hubar Julien](https://github.com/jhubar)
 1. [Andreas Duquenne](https://githut.com/AnDuquenne)
 1. [François Lievens](https://github.com/francoislievens)
-1. [Hubar Julien](https://github.com/julien1941)
+1. [Pierre Dumoulin](https://github.com/PierreDML)
