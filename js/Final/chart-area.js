@@ -4,7 +4,7 @@ Chart.defaults.global.defaultFontColor = '#858796';
 // const $url_data = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/data.csv"
 const $url_data = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/data.csv"
 const $url_data_pred = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/Cov_invaders.csv"
-const $url = "https://raw.githubusercontent.com/julien1941/PI/master/Python/Data/SEIR.json?token=AL3RLGP5T2ZGOSL2P3IUD6C75G3PU"
+const $url = "https://raw.githubusercontent.com/jhubar/PI/master/Python/Data/SEIR.json?token=AL3RLGMJGY6BC4FHPY6FMGC77VGOS"
 const $value_time_period_data = $('.value_time_period_data');
 const $value_time_data = $('#range_time_period_data');
 
