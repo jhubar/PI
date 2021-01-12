@@ -25,7 +25,7 @@
 1. We use implicit method so the system is stable.
 
 # Authors
-1. [Hubar Julien](https://github.com/jhubar)
+1. [Hubar Julien](https://jhubar.github.io)
 1. [Andreas Duquenne](https://githut.com/AnDuquenne)
 1. [François Lievens](https://github.com/francoislievens)
 1. [Pierre Dumoulin](https://github.com/PierreDML)
