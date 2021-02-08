@@ -242,7 +242,7 @@ function loadData(){
         data_num_hospitalised.push(result[i].I);
         data_num_cumulative_hospitalizations.push(result[i].R);
         data_num_critical.push(result[i].H)
-        data_num_fatalities.push(result[i].C;
+        data_num_fatalities.push(result[i].C);
 
       }
 
