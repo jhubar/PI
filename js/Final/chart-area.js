@@ -225,12 +225,12 @@ function loadData(){
       }
 
 
-      data_day = [];
-      data_num_positive = [];
-      data_num_tested = [];
-      data_num_hospitalised = [];
-      data_num_cumulative_hospitalizations = [];
-      data_num_critical = [];
+      data_date = [];
+      data_S = [];
+      data_E = [];
+      data_I = [];
+      data_R = [];
+      data_C = [];
       data_num_fatalities = [];
 
 
@@ -250,13 +250,13 @@ function loadData(){
 
   var ctx_active_cases = document.getElementById("myAreaSeirModel");
 
-
-  $("#id_beta_seir").html((parseFloat(result.model[0].beta).toFixed(6)).toString())
-  $("#id_sigma_seir").html((parseFloat(result.model[0].sigma).toFixed(6)).toString())
-  $("#id_gamma_seir").html((parseFloat(result.model[0].gamma).toFixed(6)).toString())
-  $("#id_hp_seir").html((parseFloat(result.model[0].hp).toFixed(6)).toString())
-  $("#id_hcr_seir").html((parseFloat(result.model[0].hcr).toFixed(6)).toString())
-
+  //
+  // $("#id_beta_seir").html((parseFloat(result.model[0].beta).toFixed(6)).toString())
+  // $("#id_sigma_seir").html((parseFloat(result.model[0].sigma).toFixed(6)).toString())
+  // $("#id_gamma_seir").html((parseFloat(result.model[0].gamma).toFixed(6)).toString())
+  // $("#id_hp_seir").html((parseFloat(result.model[0].hp).toFixed(6)).toString())
+  // $("#id_hcr_seir").html((parseFloat(result.model[0].hcr).toFixed(6)).toString())
+  //
 
 
   draw();
