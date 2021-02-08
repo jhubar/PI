@@ -4,7 +4,7 @@ Chart.defaults.global.defaultFontColor = '#858796';
 // const $url_data = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/data.csv"
 const $url_data_actu = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/data.csv"
 const $url_data = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/Cov_invaders.csv"
-const $url_seir = "https://raw.githubusercontent.com/jhubar/PI/master/Python/Data/SEIR%2B.json?token=AL3RLGJBVD55CPUZVZE2GUTAA3Z3Y"
+const $url_seir = "https://raw.githubusercontent.com/jhubar/PI/master/Python/Data/SEIR%2B.json?token=AL3RLGOFW37WPE4GVSLXJXTAEYJ4M"
 const $value_time_period_data = $('.value_time_period_data');
 const $value_time_data = $('#range_time_period_data');
 
@@ -104,106 +104,145 @@ loadData();
 
 function loadData(){
 
+    //
+    // var data_seir = ''
+    // // DAp
+    // var tmp ;
+    //
+    // $.get($url_seir,function(data_seir){
+    //
+    //   const result = JSON.parse(data_seir);
+    //
+    //
+    //   data_day_seir = [];
+    //   data_seir_s = [];
+    //   data_seir_e = [];
+    //   data_seir_i = [];
+    //   data_seir_r = [];
+    //   data_seir_h = [];
+    //   data_seir_h_bis = [];
+    //
+    //   data_seir_c = [];
+    //   data_seir_c_bis = [];
+    //
+    //   data_seir_f = [];
+    //   data_seir_f_bis = [];
+    //   data_seir_fc_bis = [];
+    //   data_seir_f_tot = [];
+    //
+    //   data_num_bed_hospit = [];
+    //   data_num_bed_icu = [];
+    //
+    //   tmp_data_seir_f_bis = [];
+    //   tmp_data_seir_fc_bis = [];
+    //
+    //
+    //   for(var i=0;i<$value_time_SEIR.val();i++){
+    //     data_num_bed_hospit.push("4586")
+    //     data_num_bed_icu.push("174")
+    //     data_day_seir.push(result.predict[i].predict_day);
+    //     data_seir_s.push(result.predict[i].predict_S);
+    //     data_seir_e.push(result.predict[i].predict_E);
+    //     data_seir_i.push(result.predict[i].predict_I);
+    //     data_seir_r.push(result.predict[i].predict_R);
+    //     data_seir_h.push(result.predict[i].predict_H);
+    //     data_seir_c.push(result.predict[i].predict_C);
+    //     data_seir_f.push(result.predict[i].predict_F);
+    //
+    //
+    //     if ($value_time_SEIR.val() < result.length-1 ){
+    //
+    //       data_num_hospitalised.push(result[i].num_hospitalised);
+    //       data_num_critical.push(result[i].num_critical)
+    //       data_num_fatalities.push(result[i].num_fatalities);
+    //     }
+    //
+    //     if(parseFloat(result.predict[i].predict_day) >= 103.0){
+    //
+    //         if(parseFloat(result.predict[i].predict_H) >= 4586.0){
+    //         data_seir_h_bis.push("4586");
+    //         tmp_data_seir_f_bis.push(parseFloat(result.predict[i].predict_H)-4586);
+    //       }
+    //       else{
+    //         data_seir_h_bis.push(result.predict[i].predict_H);
+    //         tmp_data_seir_f_bis.push(0);
+    //       }
+    //
+    //     }else{
+    //         data_seir_h_bis.push(result.predict[i].predict_H);
+    //         tmp_data_seir_f_bis.push(0);
+    //     }
+    //
+    //     if(parseFloat(result.predict[i].predict_day) >= 78.0){
+    //
+    //         if(parseFloat(result.predict[i].predict_C) >= 174){
+    //         data_seir_c_bis.push("174");
+    //         tmp_data_seir_fc_bis.push(parseFloat(result.predict[i].predict_C)-174.0);
+    //       }
+    //       else{
+    //         data_seir_c_bis.push(result.predict[i].predict_C);
+    //         tmp_data_seir_fc_bis.push(0);
+    //       }
+    //
+    //     }else{
+    //         data_seir_c_bis.push(result.predict[i].predict_C);
+    //         tmp_data_seir_fc_bis.push(0);
+    //     }
+    //   }
+    //
+    //
+    //   var myarray = tmp_data_seir_f_bis;
+    //   var tmp_data_seir_f_bis = [];
+    //   myarray.reduce(function(a,b,i) { return tmp_data_seir_f_bis[i] = a+b; },0);
+    //
+    //   var myarray2 = tmp_data_seir_fc_bis;
+    //   var tmp_data_seir_fc_bis = [];
+    //   myarray2.reduce(function(a,b,i) { return tmp_data_seir_fc_bis[i] = a+b; },0);
+    //
+    //
+    //   for(var i=0;i<$value_time_SEIR.val();i++){
+    //     data_seir_f_tot.push((tmp_data_seir_f_bis[i]+parseFloat(data_seir_f[i])+tmp_data_seir_fc_bis[i]+parseFloat(data_seir_f[i])).toString())
+    //     data_seir_f_bis.push((tmp_data_seir_f_bis[i]+parseFloat(data_seir_f[i])).toString())
+    //     data_seir_fc_bis.push((tmp_data_seir_fc_bis[i]+parseFloat(data_seir_f[i])).toString())
+    //   }
 
-    var data_seir = ''
+    var data = ''
     // DAp
     var tmp ;
 
-    $.get($url_seir,function(data_seir){
-
-      const result = JSON.parse(data_seir);
-
-
-      data_day_seir = [];
-      data_seir_s = [];
-      data_seir_e = [];
-      data_seir_i = [];
-      data_seir_r = [];
-      data_seir_h = [];
-      data_seir_h_bis = [];
-
-      data_seir_c = [];
-      data_seir_c_bis = [];
-
-      data_seir_f = [];
-      data_seir_f_bis = [];
-      data_seir_fc_bis = [];
-      data_seir_f_tot = [];
-
-      data_num_bed_hospit = [];
-      data_num_bed_icu = [];
-
-      tmp_data_seir_f_bis = [];
-      tmp_data_seir_fc_bis = [];
-
-
-      for(var i=0;i<$value_time_SEIR.val();i++){
-        data_num_bed_hospit.push("4586")
-        data_num_bed_icu.push("174")
-        data_day_seir.push(result.predict[i].predict_day);
-        data_seir_s.push(result.predict[i].predict_S);
-        data_seir_e.push(result.predict[i].predict_E);
-        data_seir_i.push(result.predict[i].predict_I);
-        data_seir_r.push(result.predict[i].predict_R);
-        data_seir_h.push(result.predict[i].predict_H);
-        data_seir_c.push(result.predict[i].predict_C);
-        data_seir_f.push(result.predict[i].predict_F);
-
-
-        if ($value_time_SEIR.val() < result.length-1 ){
-
-          data_num_hospitalised.push(result[i].num_hospitalised);
-          data_num_critical.push(result[i].num_critical)
-          data_num_fatalities.push(result[i].num_fatalities);
+    $.get($url_data,function(data){
+      var result = [];
+      var lines=data.split("\n");
+      var headers=lines[0].split(",");
+      for(var i=1;i<lines.length;i++){
+        var obj = {};
+        var currentline=lines[i].split(",");
+        for(var j=0;j<headers.length;j++){
+          obj[headers[j]] = currentline[j];
         }
-
-        if(parseFloat(result.predict[i].predict_day) >= 103.0){
-
-            if(parseFloat(result.predict[i].predict_H) >= 4586.0){
-            data_seir_h_bis.push("4586");
-            tmp_data_seir_f_bis.push(parseFloat(result.predict[i].predict_H)-4586);
-          }
-          else{
-            data_seir_h_bis.push(result.predict[i].predict_H);
-            tmp_data_seir_f_bis.push(0);
-          }
-
-        }else{
-            data_seir_h_bis.push(result.predict[i].predict_H);
-            tmp_data_seir_f_bis.push(0);
-        }
-
-        if(parseFloat(result.predict[i].predict_day) >= 78.0){
-
-            if(parseFloat(result.predict[i].predict_C) >= 174){
-            data_seir_c_bis.push("174");
-            tmp_data_seir_fc_bis.push(parseFloat(result.predict[i].predict_C)-174.0);
-          }
-          else{
-            data_seir_c_bis.push(result.predict[i].predict_C);
-            tmp_data_seir_fc_bis.push(0);
-          }
-
-        }else{
-            data_seir_c_bis.push(result.predict[i].predict_C);
-            tmp_data_seir_fc_bis.push(0);
-        }
+        result.push(obj);
       }
 
 
-      var myarray = tmp_data_seir_f_bis;
-      var tmp_data_seir_f_bis = [];
-      myarray.reduce(function(a,b,i) { return tmp_data_seir_f_bis[i] = a+b; },0);
+      data_day = [];
+      data_num_positive = [];
+      data_num_tested = [];
+      data_num_hospitalised = [];
+      data_num_cumulative_hospitalizations = [];
+      data_num_critical = [];
+      data_num_fatalities = [];
 
-      var myarray2 = tmp_data_seir_fc_bis;
-      var tmp_data_seir_fc_bis = [];
-      myarray2.reduce(function(a,b,i) { return tmp_data_seir_fc_bis[i] = a+b; },0);
 
 
-      for(var i=0;i<$value_time_SEIR.val();i++){
-        data_seir_f_tot.push((tmp_data_seir_f_bis[i]+parseFloat(data_seir_f[i])+tmp_data_seir_fc_bis[i]+parseFloat(data_seir_f[i])).toString())
-        data_seir_f_bis.push((tmp_data_seir_f_bis[i]+parseFloat(data_seir_f[i])).toString())
-        data_seir_fc_bis.push((tmp_data_seir_fc_bis[i]+parseFloat(data_seir_f[i])).toString())
+      for(var i=0;i<$value_time_data.val();i++){
+        data_day.push(result[i].Day);
+        data_num_positive.push(result[i].num_positive);
+        data_num_tested.push(result[i].num_tested);
+        data_num_hospitalised.push(result[i].num_hospitalised);
+        data_num_cumulative_hospitalizations.push(result[i].num_cumulative_hospitalizations);
+        data_num_critical.push(result[i].num_critical)
+        data_num_fatalities.push(result[i].num_fatalities);
+
       }
 
 

@@ -165,22 +165,18 @@ def scenario():
     # --------------------------- Plot scenarios --------------------------- #
     # Data storing:
 
-    dataJSON = {}
-    dataJSON['Hospit'] = []
-    for i in range(0, len(time)):
-        dataJSON['Hospit'].append({
-            "initial": str(mean_normal_1[i, 4]),
-            str(title_1): str(mean_normal_1[i, 4]),
-            str(title_2): str(mean_normal_1[i, 4]),
-            str(title_3): str(mean_normal_1[i, 4]),
-            str(title_4): str(mean_normal_1[i, 4]),
-            str(title_5): str(mean_normal_1[i, 4]),
-            str(title_6): str(mean_normal_1[i, 4]),
-            str(title_7): str(mean_normal_1[i, 4])
-
-        })
-    with open('Data/pred_hospit.json', 'w') as outfile:
-        json.dump(dataJSON, outfile)
+    data_to_export = pd.DataFrame(dict(date = time,
+                                        S = mean_scenar_1[:,0],
+                                        E = mean_scenar_1[:,1],
+                                        I = mean_scenar_1[:,2],
+                                        R = mean_scenar_1[:,3],
+                                        H = mean_scenar_1[:,4],
+                                        C = mean_scenar_1[:,5],
+                                        D = mean_scenar_1[:,6]
+                                        )
+                                )
+    data_to_export.to_csv(r'scenario_1.csv', header=True, index=False)
+    
     # Hospit
     fig_H = plt.figure()
     ax_H = plt.subplot()
@@ -216,4 +212,4 @@ def scenario():
 
 if __name__ == "__main__":
 
-    scenario_julien()
+    scenario()

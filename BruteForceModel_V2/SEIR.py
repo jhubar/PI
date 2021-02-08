@@ -277,9 +277,9 @@ class SEIR():
         if init is None:
             init = self.get_initial_state(sensib=prm[8], test_rate=prm[9],
                                           sigma=prm[1])
-        print('initial state deter = ')
-        print(init)
-        print(prm)
+        #print('initial state deter = ')
+        #print(init)
+        #print(prm)
         # Make prediction:
         predict = odeint(func=self.differential,
                          y0=init,
@@ -391,8 +391,8 @@ class SEIR():
         v_E_to_I_ev = np.vectorize(self.E_to_I_ev, excluded=['priori', 'k_vec'])
 
         for i in range(1, len(time)):
-            if i % 10 == 0:
-                print(i)
+            #if i % 10 == 0:
+                #print(i)
             if scenar:
                 params[0] = self.beta_time_line[i]
 
@@ -513,9 +513,9 @@ class SEIR():
                                args=(method),
                                constraints=cons)
 
-        if self.fit_display:
+        #if self.fit_display:
             # Print optimizer result
-            print(res)
+            #print(res)
 
         # Update model parameters:
         self.beta = res.x[0]
@@ -547,8 +547,8 @@ class SEIR():
         init_state = self.get_initial_state(sensib=sensitivity,
                                             test_rate=testing_rate,
                                             sigma=params[1])
-        if self.basis_obj_display:
-            print(params)
+        #if self.basis_obj_display:
+            #print(params)
         # Make prediction
         if method == 'normal':
             predictions = self.predict(duration=self.dataset.shape[0],
@@ -598,16 +598,16 @@ class SEIR():
                 err1 += 50 * self.w_1
             else:
                 err1 -= np.log(prob_1) * self.w_1
-            if self.full_obj_display:
-                print(
-                    'iter {} - prb_1 {} - sigma2 {} - dx {} - pred {} - ev {}'.format(
-                        i, prob_1, sigma_sq,
-                        dx, pred, evid))
-            if np.log(prob_1) * self.w_1 > 0:
-                print(
-                    'iter {} - prb_1 {} - sigma2 {} - dx {} - pred {} - ev {}'.format(
-                        i, prob_1, sigma_sq,
-                        dx, pred, evid))
+            #if self.full_obj_display:
+                #print(
+                    #'iter {} - prb_1 {} - sigma2 {} - dx {} - pred {} - ev {}'.format(
+                        #i, prob_1, sigma_sq,
+                        #dx, pred, evid))
+            #if np.log(prob_1) * self.w_1 > 0:
+                #print(
+                    #'iter {} - prb_1 {} - sigma2 {} - dx {} - pred {} - ev {}'.format(
+                        #i, prob_1, sigma_sq,
+                        #dx, pred, evid))
 
             # ================================================ #
             # PART 2: Fit on the number of positive test
@@ -682,8 +682,8 @@ class SEIR():
                 err5 -= np.log(prob_5) * self.w_5
 
             error += err1 + err2 + err3 + err4 + err5
-        if self.basis_obj_display:
-            print('score = {}'.format(error))
+        #if self.basis_obj_display:
+            #print('score = {}'.format(error))
         return error
 
     def objective_part_2(self, parameters):
@@ -707,8 +707,8 @@ class SEIR():
         start_t = 3
         end_t = self.dataset.shape[0]
 
-        if self.basis_obj_display:
-            print(params)
+        #if self.basis_obj_display:
+            #print(params)
 
         # if method == 'bruteforce':
         #    start_t = 7
@@ -834,8 +834,8 @@ class SEIR():
         res = minimize(self.objective_part_2, np.asarray(init_prm),
                        method='L-BFGS-B',
                        bounds=bds)
-        if self.fit_2_display:
-            print(res)
+        #if self.fit_2_display:
+            #print(res)
 
         # Update parameters:
         self.hcr = res.x[0]
@@ -1098,9 +1098,9 @@ class SEIR():
 
         # School management:
         if 'close_schools' in scenario_keys:
-            print('--------------------------')
-            for i in range(0, 150):
-                print(self.contacts_time_line[i, 1, 1])
+            #print('--------------------------')
+            #for i in range(0, 150):
+                #print(self.contacts_time_line[i, 1, 1])
             # Get times:
             start, end = scenario['close_schools']
             # Modify time line contact matrix
@@ -1263,10 +1263,10 @@ class SEIR():
             e = a + b + c + d
             new_contacts[i] = np.sum(e)
         # Apply the ratio to beta time line vector:
-        for i in range(0, 150):
-            print('{} - {}'.format(total_contact[i], new_contacts[i]))
+        #for i in range(0, 150):
+            #print('{} - {}'.format(total_contact[i], new_contacts[i]))
         self.beta_time_line = self.beta_time_line * (
                     new_contacts / total_contact)
 
-        for i in range(0, predict_length):
-            print(self.beta_time_line[i])
+        #for i in range(0, predict_length):
+            #print(self.beta_time_line[i])
