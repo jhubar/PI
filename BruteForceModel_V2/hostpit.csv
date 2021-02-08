@@ -1,4 +1,4 @@
-Day,num_positive,num_tested,num_hospitalised,num_cumulative_hospitalizations,num_critical,num_fatalities
+Date,S,E,I,R,H,C,D
 0,999953.0,8.0,38.0,0.0,1.0,0.0,0.0
 1,999937.8,16.5,33.62,10.59,1.44,0.05,0.0
 2,999924.45,16.12,37.78,19.74,1.79,0.115,0.005
