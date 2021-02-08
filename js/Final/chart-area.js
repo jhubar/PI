@@ -3,8 +3,8 @@ Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,Bli
 Chart.defaults.global.defaultFontColor = '#858796';
 // const $url_data = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/data.csv"
 const $url_data_actu = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/data.csv"
-const $url_data = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/Cov_invaders.csv"
-const $url_seir = "https://raw.githubusercontent.com/jhubar/PI/master/Python/Data/SEIR%2B.json?token=AL3RLGOFW37WPE4GVSLXJXTAEYJ4M"
+// const $url_data = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/Cov_invaders.csv"
+const $url_data =const $url_seir = "https://raw.githubusercontent.com/jhubar/PI/master/Python/Data/SEIR%2B.json?token=AL3RLGOFW37WPE4GVSLXJXTAEYJ4M"
 const $value_time_period_data = $('.value_time_period_data');
 const $value_time_data = $('#range_time_period_data');
 
