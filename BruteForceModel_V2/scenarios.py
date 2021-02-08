@@ -176,7 +176,7 @@ def scenario():
                                         )
                                 )
     data_to_export.to_csv(r'scenario_1.csv', header=True, index=False)
-    
+
     # Hospit
     fig_H = plt.figure()
     ax_H = plt.subplot()

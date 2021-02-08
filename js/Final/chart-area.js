@@ -3,8 +3,9 @@ Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,Bli
 Chart.defaults.global.defaultFontColor = '#858796';
 // const $url_data = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/data.csv"
 const $url_data_actu = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/data.csv"
-// const $url_data = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/Cov_invaders.csv"
-const $url_data =const $url_seir = "https://raw.githubusercontent.com/jhubar/PI/master/Python/Data/SEIR%2B.json?token=AL3RLGOFW37WPE4GVSLXJXTAEYJ4M"
+const $url_data = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/Cov_invaders.csv"
+
+const $url_seir = "https://raw.githubusercontent.com/jhubar/PI/master/Python/Data/SEIR%2B.json?token=AL3RLGOFW37WPE4GVSLXJXTAEYJ4M"
 const $value_time_period_data = $('.value_time_period_data');
 const $value_time_data = $('#range_time_period_data');
 
@@ -235,13 +236,13 @@ function loadData(){
 
 
       for(var i=0;i<$value_time_data.val();i++){
-        data_day.push(result[i].Day);
-        data_num_positive.push(result[i].num_positive);
-        data_num_tested.push(result[i].num_tested);
-        data_num_hospitalised.push(result[i].num_hospitalised);
-        data_num_cumulative_hospitalizations.push(result[i].num_cumulative_hospitalizations);
-        data_num_critical.push(result[i].num_critical)
-        data_num_fatalities.push(result[i].num_fatalities);
+        data_day.push(result[i].date);
+        data_num_positive.push(result[i].S);
+        data_num_tested.push(result[i].E);
+        data_num_hospitalised.push(result[i].I);
+        data_num_cumulative_hospitalizations.push(result[i].R);
+        data_num_critical.push(result[i].H)
+        data_num_fatalities.push(result[i].C;
 
       }
 
