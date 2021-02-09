@@ -1,9 +1,14 @@
 // Set new default font family and font color to mimic Bootstrap's default styling
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
-// const $url_data = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/data.csv"
-const $url_data_actu = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/data.csv"
-const $url_data = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/hostpit.csv"
+const $url_data_prof = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/Cov_invaders.csv"
+const $url_data_scenario_1 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/scenario_1.csv"
+const $url_data_scenario_2 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/scenario_2.csv"
+const $url_data_scenario_3 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/scenario_3.csv"
+const $url_data_scenario_4 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/scenario_4.csv"
+const $url_data_scenario_5 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/scenario_5.csv"
+const $url_data_scenario_6 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/scenario_6.csv"
+const $url_data_scenario_7 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/scenario_7.csv"
 
 
 const $value_time_period_data = $('.value_time_period_data');
@@ -66,16 +71,17 @@ $id_switch_Death.addEventListener('change',function(){
 
 
 
-loadData();
+loadData_scenario_1();
+loadData_prof()
 
 
-function loadData(){
+function loadData_scenario_1(){
 
     var data = ''
     // DAp
     var tmp ;
 
-    $.get($url_data,function(data){
+    $.get($url_data_scenario_1,function(data){
       var result = [];
       var lines=data.split("\n");
       var headers=lines[0].split(",");
@@ -101,7 +107,7 @@ function loadData(){
 
 
       for(var i=0;i<$value_time_SEIR.val();i++){
-        data_day.push(result[i].Date);
+        data_day.push((i).toString());
         data_S.push(result[i].S);
         data_E.push(result[i].E);
         data_I.push(result[i].I);
@@ -112,6 +118,7 @@ function loadData(){
 
 
       }
+
 
 
 
@@ -126,7 +133,7 @@ function loadData(){
 
 
 
-  draw();
+  // draw();
 
 
 
@@ -138,13 +145,87 @@ function loadData(){
 },
 );}
 
+
 $value_time_SEIR.on('input change', () => {
 
   $value_time_period_SEIR.html($value_time_SEIR.val());
-  loadData();
+  loadData_scenario_1();
+  loadData_prof();
 });
 
+function loadData_prof(){
 
+    var data = ''
+    // DAp
+    var tmp ;
+
+    $.get($url_data_prof,function(data){
+      var result = [];
+      var lines=data.split("\n");
+      var headers=lines[0].split(",");
+      for(var i=1;i<lines.length;i++){
+        var obj = {};
+        var currentline=lines[i].split(",");
+        for(var j=0;j<headers.length;j++){
+          obj[headers[j]] = currentline[j];
+        }
+        result.push(obj);
+      }
+
+
+
+      data_prof_num_positive = []
+      data_prof_num_tested = []
+      data_prof_num_hospitalised = []
+      data_prof_num_cumulative_hospitalizations = []
+      data_prof_num_critical = []
+      data_prof_num_fatalities = []
+
+
+
+
+      for(var i=0;i<$value_time_SEIR.val();i++){
+
+        if (i > 191){
+
+          data_prof_num_positive.push(0);
+          data_prof_num_tested.push(0);
+          data_prof_num_hospitalised.push(0);
+          data_prof_num_cumulative_hospitalizations.push(0);
+          data_prof_num_critical.push(0);
+          data_prof_num_fatalities.push(0);
+        }
+        else{
+
+          data_prof_num_positive.push(result[i].num_positive);
+          data_prof_num_tested.push(result[i].num_tested);
+          data_prof_num_hospitalised.push(result[i].num_hospitalised);
+          data_prof_num_cumulative_hospitalizations.push(result[i].num_cumulative_hospitalizations);
+          data_prof_num_critical.push(result[i].num_critical);
+          data_prof_num_fatalities.push(result[i].num_fatalities);
+        }
+
+
+      }
+
+
+
+
+  var ctx_active_cases = document.getElementById("myAreaSeirModel");
+
+
+
+  draw();
+
+
+
+  load_card_value_seir();
+
+
+
+
+},
+);}
 
 
 
@@ -583,6 +664,53 @@ function draw() {
           pointBorderWidth: 4,
           data: fatalities_seir_draw(),
         },
+        // Plot data prof
+        {
+          label: "data_prof_num_hospitalised",
+          lineTension: 0.6,
+          backgroundColor: "rgba(0, 0, 0,0.1)",
+          borderColor: "rgba(0, 0, 0, 1)",
+          pointRadius: 1,
+          pointBackgroundColor: "rgba(0, 0, 0, 1)",
+          pointBorderColor: "rgba(0, 0, 0, 1)",
+          pointHoverRadius: 1,
+          pointHoverBackgroundColor: "rgba(0, 0, 0, 1)",
+          pointHoverBorderColor: "rgba(0, 0, 0, 1)",
+          pointHitRadius: 5,
+          pointBorderWidth: 4,
+          data: data_prof_num_hospitalised,
+        },
+        {
+          label: "data_prof_num_critical",
+          lineTension: 0.6,
+          backgroundColor: "rgba(0, 0, 0,0.1)",
+          borderColor: "rgba(0, 0, 0, 1)",
+          pointRadius: 1,
+          pointBackgroundColor: "rgba(0, 0, 0, 1)",
+          pointBorderColor: "rgba(0, 0, 0, 1)",
+          pointHoverRadius: 1,
+          pointHoverBackgroundColor: "rgba(0, 0, 0, 1)",
+          pointHoverBorderColor: "rgba(0, 0, 0, 1)",
+          pointHitRadius: 5,
+          pointBorderWidth: 4,
+          data: data_prof_num_critical,
+        },
+        {
+          label: "data_prof_num_fatalities",
+          lineTension: 0.6,
+          backgroundColor: "rgba(0, 0, 0,0.1)",
+          borderColor: "rgba(0, 0, 0, 1)",
+          pointRadius: 1,
+          pointBackgroundColor: "rgba(0, 0, 0, 1)",
+          pointBorderColor: "rgba(0, 0, 0, 1)",
+          pointHoverRadius: 1,
+          pointHoverBackgroundColor: "rgba(0, 0, 0, 1)",
+          pointHoverBorderColor: "rgba(0, 0, 0, 1)",
+          pointHitRadius: 5,
+          pointBorderWidth: 4,
+          data: data_prof_num_fatalities,
+        },
+
 
 
 

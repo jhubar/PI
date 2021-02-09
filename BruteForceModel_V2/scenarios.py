@@ -165,7 +165,7 @@ def scenario():
     # --------------------------- Plot scenarios --------------------------- #
     # Data storing:
 
-    data_to_export = pd.DataFrame(dict(date = time,
+    data_to_export = pd.DataFrame(dict(Date = time,
                                         S = mean_scenar_1[:,0],
                                         E = mean_scenar_1[:,1],
                                         I = mean_scenar_1[:,2],
@@ -176,6 +176,81 @@ def scenario():
                                         )
                                 )
     data_to_export.to_csv(r'scenario_1.csv', header=True, index=False)
+    # Data storing:
+
+    data_to_export = pd.DataFrame(dict(Date = time,
+                                        S = mean_scenar_2[:,0],
+                                        E = mean_scenar_2[:,1],
+                                        I = mean_scenar_2[:,2],
+                                        R = mean_scenar_2[:,3],
+                                        H = mean_scenar_2[:,4],
+                                        C = mean_scenar_2[:,5],
+                                        D = mean_scenar_2[:,6]
+                                        )
+                                )
+    data_to_export.to_csv(r'scenario_2.csv', header=True, index=False)
+
+    data_to_export = pd.DataFrame(dict(Date = time,
+                                        S = mean_scenar_3[:,0],
+                                        E = mean_scenar_3[:,1],
+                                        I = mean_scenar_3[:,2],
+                                        R = mean_scenar_3[:,3],
+                                        H = mean_scenar_3[:,4],
+                                        C = mean_scenar_3[:,5],
+                                        D = mean_scenar_3[:,6]
+                                        )
+                                )
+    data_to_export.to_csv(r'scenario_3.csv', header=True, index=False)
+    # Data storing:
+
+    data_to_export = pd.DataFrame(dict(Date = time,
+                                        S = mean_scenar_4[:,0],
+                                        E = mean_scenar_4[:,1],
+                                        I = mean_scenar_4[:,2],
+                                        R = mean_scenar_4[:,3],
+                                        H = mean_scenar_4[:,4],
+                                        C = mean_scenar_4[:,5],
+                                        D = mean_scenar_4[:,6]
+                                        )
+                                )
+    data_to_export.to_csv(r'scenario_4.csv', header=True, index=False)
+
+    data_to_export = pd.DataFrame(dict(Date = time,
+                                        S = mean_scenar_5[:,0],
+                                        E = mean_scenar_5[:,1],
+                                        I = mean_scenar_5[:,2],
+                                        R = mean_scenar_5[:,3],
+                                        H = mean_scenar_5[:,4],
+                                        C = mean_scenar_5[:,5],
+                                        D = mean_scenar_5[:,6]
+                                        )
+                                )
+    data_to_export.to_csv(r'scenario_5.csv', header=True, index=False)
+    # Data storing:
+
+    data_to_export = pd.DataFrame(dict(Date = time,
+                                        S = mean_scenar_6[:,0],
+                                        E = mean_scenar_6[:,1],
+                                        I = mean_scenar_6[:,2],
+                                        R = mean_scenar_6[:,3],
+                                        H = mean_scenar_6[:,4],
+                                        C = mean_scenar_6[:,5],
+                                        D = mean_scenar_6[:,6]
+                                        )
+                                )
+    data_to_export.to_csv(r'scenario_6.csv', header=True, index=False)
+
+    data_to_export = pd.DataFrame(dict(Date = time,
+                                        S = mean_scenar_7[:,0],
+                                        E = mean_scenar_7[:,1],
+                                        I = mean_scenar_7[:,2],
+                                        R = mean_scenar_7[:,3],
+                                        H = mean_scenar_7[:,4],
+                                        C = mean_scenar_7[:,5],
+                                        D = mean_scenar_7[:,6]
+                                        )
+                                )
+    data_to_export.to_csv(r'scenario_7.csv', header=True, index=False)
 
     # Hospit
     fig_H = plt.figure()
