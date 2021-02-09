@@ -31,8 +31,8 @@ const $id_switch_Hospitalized = document.getElementById('customSwitchesHospitali
 const $id_switch_seir_criticals = document.getElementById('customSwitchesSeirCriticales');
 const $id_switch_seir_fatalities = document.getElementById('customSwitchesSeirFatalities');
 
-const $id_switch_num_bed_hos = document.getElementById('customSwitches_num_bed_hos');
-const $id_switch_num_bed_icu = document.getElementById('customSwitches_num_bed_icu');
+// const $id_switch_num_bed_hos = document.getElementById('customSwitches_num_bed_hos');
+// const $id_switch_num_bed_icu = document.getElementById('customSwitches_num_bed_icu');
 
 
 
@@ -40,14 +40,7 @@ $id_switch_Susceptible.addEventListener('change',function(){
     draw();
 
 });
-$id_switch_num_bed_hos.addEventListener('change',function(){
-    draw();
-    load_card_value_seir()
-});
-$id_switch_num_bed_icu.addEventListener('change',function(){
-    draw();
-    load_card_value_seir()
-});
+
 
 
 $id_switch_Exosed.addEventListener('change',function(){
@@ -176,26 +169,26 @@ function load_card_value_seir(){
   $("#num_Of_fatalities_seir").html((parseFloat(data_D[data_D.length-1]).toFixed(2)).toString())
   $("#num_Of_day_seir").html(((parseFloat(data_day[data_day.length-1])+1).toFixed(0)).toString())
 
-  if($id_switch_num_bed_hos.checked == true && $id_switch_num_bed_icu.checked == true){
-    $("#num_Of_newFat").html((parseFloat(data_seir_f_tot[data_seir_f_tot.length-1]).toFixed(0)).toString());
-    $("#num_Of_hospitalized_seir").html((parseFloat(data_seir_h_bis[data_seir_h_bis.length-1]).toFixed(2)).toString())
-    $("#num_Of_criticals_seir").html((parseFloat(data_seir_c_bis[data_seir_c_bis.length-1]).toFixed(2)).toString())
-  }
-  else if($id_switch_num_bed_hos.checked == false && $id_switch_num_bed_icu.checked == true){
-    $("#num_Of_newFat").html((parseFloat(data_seir_fc_bis[data_seir_fc_bis.length-1]).toFixed(0)).toString());
-    $("#num_Of_hospitalized_seir").html((parseFloat(data_seir_h[data_seir_h.length-1]).toFixed(2)).toString())
-    $("#num_Of_criticals_seir").html((parseFloat(data_seir_c_bis[data_seir_c_bis.length-1]).toFixed(2)).toString())
-  }
-  else if($id_switch_num_bed_hos.checked == true && $id_switch_num_bed_icu.checked == false){
-    $("#num_Of_newFat").html((parseFloat(data_seir_f_bis[data_seir_f_bis.length-1]).toFixed(0)).toString());
-    $("#num_Of_criticals_seir").html((parseFloat(data_seir_c[data_seir_c.length-1]).toFixed(2)).toString())
-    $("#num_Of_hospitalized_seir").html((parseFloat(data_seir_h_bis[data_seir_h_bis.length-1]).toFixed(2)).toString())
+  // if($id_switch_num_bed_hos.checked == true && $id_switch_num_bed_icu.checked == true){
+  //   $("#num_Of_newFat").html((parseFloat(data_seir_f_tot[data_seir_f_tot.length-1]).toFixed(0)).toString());
+  //   $("#num_Of_hospitalized_seir").html((parseFloat(data_seir_h_bis[data_seir_h_bis.length-1]).toFixed(2)).toString())
+  //   $("#num_Of_criticals_seir").html((parseFloat(data_seir_c_bis[data_seir_c_bis.length-1]).toFixed(2)).toString())
+  // }
+  // else if($id_switch_num_bed_hos.checked == false && $id_switch_num_bed_icu.checked == true){
+  //   $("#num_Of_newFat").html((parseFloat(data_seir_fc_bis[data_seir_fc_bis.length-1]).toFixed(0)).toString());
+  //   $("#num_Of_hospitalized_seir").html((parseFloat(data_seir_h[data_seir_h.length-1]).toFixed(2)).toString())
+  //   $("#num_Of_criticals_seir").html((parseFloat(data_seir_c_bis[data_seir_c_bis.length-1]).toFixed(2)).toString())
+  // }
+  // else if($id_switch_num_bed_hos.checked == true && $id_switch_num_bed_icu.checked == false){
+  //   $("#num_Of_newFat").html((parseFloat(data_seir_f_bis[data_seir_f_bis.length-1]).toFixed(0)).toString());
+  //   $("#num_Of_criticals_seir").html((parseFloat(data_seir_c[data_seir_c.length-1]).toFixed(2)).toString())
+  //   $("#num_Of_hospitalized_seir").html((parseFloat(data_seir_h_bis[data_seir_h_bis.length-1]).toFixed(2)).toString())
 
-  }else{
-    $("#num_Of_newFat").html("Nan");
-    $("#num_Of_hospitalized_seir").html((parseFloat(data_H[data_H.length-1]).toFixed(2)).toString())
-    $("#num_Of_criticals_seir").html((parseFloat(data_C[data_C.length-1]).toFixed(2)).toString())
-  }
+  // }else{
+  //   $("#num_Of_newFat").html("Nan");
+  //   $("#num_Of_hospitalized_seir").html((parseFloat(data_H[data_H.length-1]).toFixed(2)).toString())
+  //   $("#num_Of_criticals_seir").html((parseFloat(data_C[data_C.length-1]).toFixed(2)).toString())
+  // }
 
 
 
@@ -310,26 +303,16 @@ function recovered_draw(){
 }
 function hospitalized_seir_draw(){
   if($id_switch_Hospitalized.checked == true){
-    if($id_switch_num_bed_hos.checked == false){
       return data_H;
     }
-    else{
-      return data_seir_h_bis;
-    }
-  }
   else{
     return [];
   }
 }
 function criticals_seir_draw(){
   if($id_switch_seir_criticals.checked == true){
-    if($id_switch_num_bed_icu.checked == false){
       return data_C;
     }
-    else{
-      return data_seir_c_bis;
-    }
-  }
   else{
     return [];
   }
@@ -343,51 +326,7 @@ function fatalities_seir_draw(){
   }
 }
 
-function cum_bed_draw(){
-  if($id_switch_num_bed_hos.checked == true){
-    return data_num_bed_hospit;
-  }
-  else{
-    return [];
-  }
-}
-function cum_bed2_draw(){
-  if($id_switch_seir_fatalities.checked == false){
-    return [];
-  }
-  else if($id_switch_num_bed_hos.checked == true && $id_switch_num_bed_icu.checked == false){
-    return data_seir_f_bis;
-  }
-  else if($id_switch_num_bed_icu.checked == true && $id_switch_num_bed_hos.checked == true){
-    return data_seir_f_tot;
-  }
 
-  else{
-    return [];
-  }
-}
-function cum_icu_draw(){
-  if($id_switch_num_bed_icu.checked == true){
-    return data_num_bed_icu;
-  }
-  else{
-    return [];
-  }
-}
-function cum_icu2_draw(){
-  if($id_switch_seir_fatalities.checked == false){
-    return [];
-  }
-  else if($id_switch_num_bed_icu.checked == true && $id_switch_num_bed_hos.checked == false){
-    return data_seir_fc_bis;
-  }
-  else if($id_switch_num_bed_icu.checked == true && $id_switch_num_bed_hos.checked == true){
-    return data_seir_f_tot;
-  }
-  else{
-    return [];
-  }
-}
 
 // $value_time_data.on('input change', () => {
 //
@@ -654,53 +593,6 @@ function draw() {
           data: fatalities_seir_draw(),
         },
         // Fatalities
-        {
-          label: "new Fatalities",
-          lineTension: 0.6,
-          backgroundColor: "rgba(255, 193, 7,0.1)",
-          borderColor: "rgba(237, 0, 59, 1)",
-          pointRadius: 1,
-          pointBackgroundColor: "rgba(237, 0, 59, 1)",
-          pointBorderColor: "rgba(237, 0, 59, 1)",
-          pointHoverRadius: 1,
-          pointHoverBackgroundColor: "rgba(237, 0, 59, 1)",
-          pointHoverBorderColor: "rgba(237, 0, 59, 1)",
-          pointHitRadius: 5,
-          pointBorderWidth: 4,
-          data:cum_bed2_draw(),
-        },
-        // Recovered
-        {
-          label: "Bed available",
-          lineTension: 0.6,
-          backgroundColor: "rgba(0, 0, 0, 0)",
-          borderColor: "rgba(0, 0, 0, 0)",
-          pointRadius: 2,
-          pointBackgroundColor: "rgba(37, 56, 60, 0.1)",
-          pointBorderColor: "rgba(37, 56, 60, 0.1)",
-          pointHoverRadius: 3,
-          pointHoverBackgroundColor: "rgba(37, 56, 60, 0.1)",
-          pointHoverBorderColor: "rgba(37, 56, 60, 0.1)",
-          pointHitRadius: 10,
-          pointBorderWidth: 2,
-          data: cum_bed_draw(),
-        },
-        // Recovered
-        {
-          label: "Bed available in ICU",
-          lineTension: 0.6,
-          backgroundColor: "rgba(0, 0, 0, 0)",
-          borderColor: "rgba(0, 0, 0, 0)",
-          pointRadius: 2,
-          pointBackgroundColor: "rgba(37, 56, 60, 0.1)",
-          pointBorderColor: "rgba(37, 56, 60, 0.1)",
-          pointHoverRadius: 3,
-          pointHoverBackgroundColor: "rgba(37, 56, 60, 0.1)",
-          pointHoverBorderColor: "rgba(37, 56, 60, 0.1)",
-          pointHitRadius: 10,
-          pointBorderWidth: 2,
-          data: cum_icu_draw(),
-        },
 
         // Hospitalised
         {
@@ -751,21 +643,6 @@ function draw() {
           pointHitRadius: 10,
           pointBorderWidth: 4,
           data: fatalities_draw(),
-        },
-        {
-          label: "new Fatalies ",
-          lineTension: 0.6,
-          backgroundColor: "rgba(0, 0, 0,0)",
-          borderColor: "rgba(0, 0, 0,0)",
-          pointRadius: 1,
-          pointBackgroundColor: "rgba(237, 0, 59, 1)",
-          pointBorderColor: "rgba(237, 0, 59, 1)",
-          pointHoverRadius: 1,
-          pointHoverBackgroundColor: "rgba(237, 0, 59, 1)",
-          pointHoverBorderColor: "rgba(237, 0, 59, 1)",
-          pointHitRadius: 5,
-          pointBorderWidth: 4,
-          data: cum_icu2_draw(),
         }
 
 
