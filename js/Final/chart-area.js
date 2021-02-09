@@ -28,8 +28,8 @@ const $id_switch_Exosed = document.getElementById('customSwitchesExposed');
 const $id_switch_Infected = document.getElementById('customSwitchesInfectious');
 const $id_switch_Recovered = document.getElementById('customSwitchesRecovered');
 const $id_switch_Hospitalized = document.getElementById('customSwitchesHospitalized');
-const $id_switch_seir_criticals = document.getElementById('customSwitchesSeirCriticales');
-const $id_switch_seir_fatalities = document.getElementById('customSwitchesSeirFatalities');
+const $id_switch_Criticals = document.getElementById('customSwitchesSeirCriticales');
+const $id_switch_Death = document.getElementById('customSwitchesSeirFatalities');
 
 // const $id_switch_num_bed_hos = document.getElementById('customSwitches_num_bed_hos');
 // const $id_switch_num_bed_icu = document.getElementById('customSwitches_num_bed_icu');
@@ -38,38 +38,30 @@ const $id_switch_seir_fatalities = document.getElementById('customSwitchesSeirFa
 
 $id_switch_Susceptible.addEventListener('change',function(){
     draw();
-
 });
-
-
 
 $id_switch_Exosed.addEventListener('change',function(){
     draw();
-
 });
 
 $id_switch_Infected.addEventListener('change',function(){
     draw();
-
 });
 
 $id_switch_Recovered.addEventListener('change',function(){
     draw();
-
 });
 
 $id_switch_Hospitalized.addEventListener('change',function(){
     draw();
-
-
 });
-$id_switch_seir_criticals.addEventListener('change',function(){
-    draw();
 
+$id_switch_Criticals.addEventListener('change',function(){
+    draw();
 });
-$id_switch_seir_fatalities.addEventListener('change',function(){
-    draw();
 
+$id_switch_Death.addEventListener('change',function(){
+    draw();
 });
 
 
@@ -249,8 +241,7 @@ function cum_hospitalized_draw(){
 }
 
 function criticals_draw(){
-  // if($id_switch_criticals.checked == true){
-  if( true){
+  if($id_switch_Criticals.checked == true){
     return data_C;
   }
   else{
@@ -259,8 +250,8 @@ function criticals_draw(){
 }
 
 function fatalities_draw(){
-  // if($id_switch_fatalies.checked == true){
-  if( true){
+  if($id_switch_Death.checked == true){
+  // if( true){
     return data_D;
   }
   else{
@@ -310,7 +301,7 @@ function hospitalized_seir_draw(){
   }
 }
 function criticals_seir_draw(){
-  if($id_switch_seir_criticals.checked == true){
+  if($id_switch_Criticals.checked == true){
       return data_C;
     }
   else{
@@ -318,7 +309,7 @@ function criticals_seir_draw(){
   }
 }
 function fatalities_seir_draw(){
-  if($id_switch_seir_fatalities.checked == true){
+  if($id_switch_Death.checked == true){
     return data_D;
   }
   else{
@@ -592,58 +583,13 @@ function draw() {
           pointBorderWidth: 4,
           data: fatalities_seir_draw(),
         },
-        // Fatalities
-
-        // Hospitalised
-        {
-          label: "Hospitalised ",
-          lineTension: 0.6,
-          backgroundColor: "rgba(0, 0, 0,0)",
-          borderColor: "rgba(0, 0, 0,0)",
-          pointRadius: 4,
-          pointBackgroundColor: "rgba(34,139,34, 0.1)",
-          pointBorderColor: "rgba(34,139,34, 0.1)",
-          pointHoverRadius: 4,
-          pointHoverBackgroundColor: "rgba(34,139,34, 0.1)",
-          pointHoverBorderColor: "rgba(34,139,34, 0.1)",
-          pointHitRadius: 10,
-          pointBorderWidth: 4,
-          data: data_H,
-        },
 
 
-        // Criticals
-        {
-          label: "criticals ",
-          lineTension: 0.6,
-          backgroundColor: "rgba(0, 0, 0,0)",
-          borderColor: "rgba(0, 0, 0,0)",
-          pointRadius: 4,
-          pointBackgroundColor: "rgba(255, 193, 7,1)",
-          pointBorderColor: "rgba(255, 193, 7,1)",
-          pointHoverRadius: 4,
-          pointHoverBackgroundColor: "rgba(255, 193, 7, 1)",
-          pointHoverBorderColor: "rgba(255, 193, 7, 1)",
-          pointHitRadius: 10,
-          pointBorderWidth: 2,
-          data: criticals_draw(),
-        },
-        // Fatalies
-        {
-          label: "Fatalies ",
-          lineTension: 0.6,
-          backgroundColor: "rgba(0, 0, 0,0)",
-          borderColor: "rgba(0, 0, 0,0)",
-          pointRadius: 3,
-          pointBackgroundColor: "rgba(237, 0, 59, 1)",
-          pointBorderColor: "rgba(237, 0, 59, 1)",
-          pointHoverRadius: 3,
-          pointHoverBackgroundColor: "rgba(237, 0, 59, 1)",
-          pointHoverBorderColor: "rgba(237, 0, 59, 1)",
-          pointHitRadius: 10,
-          pointBorderWidth: 4,
-          data: fatalities_draw(),
-        }
+
+
+
+
+
 
 
 
