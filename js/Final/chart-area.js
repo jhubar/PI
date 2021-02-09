@@ -7,19 +7,19 @@ const $url_data = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForce
 
 
 const $value_time_period_data = $('.value_time_period_data');
-const $value_time_data = $('#range_time_period_data');
+// const $value_time_data = $('#range_time_period_data');
 
 const $value_time_period_SEIR = $('.value_time_period_SEIR');
 const $value_time_SEIR = $('#range_time_period_SEIR');
 
-$value_time_period_data.html($value_time_data.val());
+// $value_time_period_data.html($value_time_data.val());
 $value_time_period_SEIR.html($value_time_SEIR.val());
 
 const $id_switch_positive = document.getElementById('customSwitches_Positive');
 const $id_switch_hospitalized = document.getElementById('customSwitches_hospitalized');
 const $id_switch_cum_hospitalized = document.getElementById('customSwitches_cum_hospitalized');
-const $id_switch_criticals = document.getElementById('customSwitches_criticals');
-const $id_switch_fatalies = document.getElementById('customSwitches_fatalities');
+// const $id_switch_criticals = document.getElementById('customSwitches_criticals');
+// const $id_switch_fatalies = document.getElementById('customSwitches_fatalities');
 
 const $value_customSwitchesSusceptible = $('#customSwitchesSusceptible');
 
@@ -115,7 +115,7 @@ function loadData(){
 
 
 
-      for(var i=0;i<$value_time_data.val();i++){
+      for(var i=0;i<$value_time_SEIR.val();i++){
         data_day.push(result[i].Date);
         data_S.push(result[i].S);
         data_E.push(result[i].E);
@@ -256,7 +256,8 @@ function cum_hospitalized_draw(){
 }
 
 function criticals_draw(){
-  if($id_switch_criticals.checked == true){
+  // if($id_switch_criticals.checked == true){
+  if( true){
     return data_C;
   }
   else{
@@ -265,7 +266,8 @@ function criticals_draw(){
 }
 
 function fatalities_draw(){
-  if($id_switch_fatalies.checked == true){
+  // if($id_switch_fatalies.checked == true){
+  if( true){
     return data_D;
   }
   else{
@@ -387,12 +389,12 @@ function cum_icu2_draw(){
   }
 }
 
-$value_time_data.on('input change', () => {
-
-  $value_time_period_data.html($value_time_data.val());
-  load_cur_Data();
-  load_card_value();
-});
+// $value_time_data.on('input change', () => {
+//
+//   $value_time_period_data.html($value_time_data.val());
+//   load_cur_Data();
+//   load_card_value();
+// });
 
 function load_card_value(){
   $("#num_day").html((parseFloat(data_day[data_day.length-1]).toFixed(0)).toString());
