@@ -16,6 +16,8 @@ const $value_time_period_data = $('.value_time_period_data');
 
 const $value_time_period_SEIR = $('.value_time_period_SEIR');
 const $value_time_SEIR = $('#range_time_period_SEIR');
+const $value_time_wm = $('.range_time_wearing_mask');
+
 
 // $value_time_period_data.html($value_time_data.val());
 $value_time_period_SEIR.html($value_time_SEIR.val());
@@ -23,6 +25,7 @@ $value_time_period_SEIR.html($value_time_SEIR.val());
 const $id_switch_positive = document.getElementById('customSwitches_Positive');
 const $id_switch_hospitalized = document.getElementById('customSwitches_hospitalized');
 const $id_switch_cum_hospitalized = document.getElementById('customSwitches_cum_hospitalized');
+const $id_switch_target_data = document.getElementById('customSwitches_target_data');
 // const $id_switch_criticals = document.getElementById('customSwitches_criticals');
 // const $id_switch_fatalies = document.getElementById('customSwitches_fatalities');
 
@@ -40,6 +43,9 @@ const $id_switch_Death = document.getElementById('customSwitchesSeirFatalities')
 // const $id_switch_num_bed_icu = document.getElementById('customSwitches_num_bed_icu');
 
 
+$id_switch_target_data.addEventListener('change',function(){
+    draw();
+});
 
 $id_switch_Susceptible.addEventListener('change',function(){
     draw();
@@ -72,6 +78,12 @@ $id_switch_Death.addEventListener('change',function(){
 
 
 loadData_scenario_1();
+loadData_scenario_2();
+loadData_scenario_3();
+loadData_scenario_4();
+loadData_scenario_5();
+loadData_scenario_6();
+loadData_scenario_7();
 loadData_prof()
 
 
@@ -145,11 +157,344 @@ function loadData_scenario_1(){
 },
 );}
 
+function loadData_scenario_2(){
+
+    var data = ''
+    // DAp
+    var tmp ;
+
+    $.get($url_data_scenario_2,function(data){
+      var result = [];
+      var lines=data.split("\n");
+      var headers=lines[0].split(",");
+      for(var i=1;i<lines.length;i++){
+        var obj = {};
+        var currentline=lines[i].split(",");
+        for(var j=0;j<headers.length;j++){
+          obj[headers[j]] = currentline[j];
+        }
+        result.push(obj);
+      }
+
+
+
+      data_2_S = []
+      data_2_E = []
+      data_2_I = []
+      data_2_R = []
+      data_2_H = []
+      data_2_C = []
+      data_2_D = []
+
+
+
+      for(var i=0;i<$value_time_SEIR.val();i++){
+
+        data_2_S.push(result[i].S);
+        data_2_E.push(result[i].E);
+        data_2_I.push(result[i].I);
+        data_2_R.push(result[i].R);
+        data_2_H.push(result[i].H)
+        data_2_C.push(result[i].C)
+        data_2_D.push(result[i].D)
+
+
+      }
+
+
+
+
+  var ctx_active_cases = document.getElementById("myAreaSeirModel");
+
+
+  // $("#id_beta_seir").html((parseFloat(result.model[0].beta).toFixed(6)).toString())
+  // $("#id_sigma_seir").html((parseFloat(result.model[0].sigma).toFixed(6)).toString())
+  // $("#id_gamma_seir").html((parseFloat(result.model[0].gamma).toFixed(6)).toString())
+  // $("#id_hp_seir").html((parseFloat(result.model[0].hp).toFixed(6)).toString())
+  // $("#id_hcr_seir").html((parseFloat(result.model[0].hcr).toFixed(6)).toString())
+
+
+
+  // draw();
+
+
+
+  load_card_value_seir();
+
+
+
+
+},
+);}
+function loadData_scenario_3(){
+
+    var data = ''
+    // DAp
+    var tmp ;
+
+    $.get($url_data_scenario_3,function(data){
+      var result = [];
+      var lines=data.split("\n");
+      var headers=lines[0].split(",");
+      for(var i=1;i<lines.length;i++){
+        var obj = {};
+        var currentline=lines[i].split(",");
+        for(var j=0;j<headers.length;j++){
+          obj[headers[j]] = currentline[j];
+        }
+        result.push(obj);
+      }
+
+
+
+      data_3_S = []
+      data_3_E = []
+      data_3_I = []
+      data_3_R = []
+      data_3_H = []
+      data_3_C = []
+      data_3_D = []
+
+
+
+      for(var i=0;i<$value_time_SEIR.val();i++){
+
+        data_3_S.push(result[i].S);
+        data_3_E.push(result[i].E);
+        data_3_I.push(result[i].I);
+        data_3_R.push(result[i].R);
+        data_3_H.push(result[i].H)
+        data_3_C.push(result[i].C)
+        data_3_D.push(result[i].D)
+
+
+      }
+
+
+
+
+  var ctx_active_cases = document.getElementById("myAreaSeirModel");
+
+
+  // $("#id_beta_seir").html((parseFloat(result.model[0].beta).toFixed(6)).toString())
+  // $("#id_sigma_seir").html((parseFloat(result.model[0].sigma).toFixed(6)).toString())
+  // $("#id_gamma_seir").html((parseFloat(result.model[0].gamma).toFixed(6)).toString())
+  // $("#id_hp_seir").html((parseFloat(result.model[0].hp).toFixed(6)).toString())
+  // $("#id_hcr_seir").html((parseFloat(result.model[0].hcr).toFixed(6)).toString())
+
+
+
+  // draw();
+
+
+
+  load_card_value_seir();
+
+
+
+
+},
+);}
+function loadData_scenario_4(){
+
+    var data = ''
+    // DAp
+    var tmp ;
+
+    $.get($url_data_scenario_4,function(data){
+      var result = [];
+      var lines=data.split("\n");
+      var headers=lines[0].split(",");
+      for(var i=1;i<lines.length;i++){
+        var obj = {};
+        var currentline=lines[i].split(",");
+        for(var j=0;j<headers.length;j++){
+          obj[headers[j]] = currentline[j];
+        }
+        result.push(obj);
+      }
+
+
+
+      data_4_S = []
+      data_4_E = []
+      data_4_I = []
+      data_4_R = []
+      data_4_H = []
+      data_4_C = []
+      data_4_D = []
+
+
+
+      for(var i=0;i<$value_time_SEIR.val();i++){
+
+        data_4_S.push(result[i].S);
+        data_4_E.push(result[i].E);
+        data_4_I.push(result[i].I);
+        data_4_R.push(result[i].R);
+        data_4_H.push(result[i].H)
+        data_4_C.push(result[i].C)
+        data_4_D.push(result[i].D)
+
+
+      }
+  var ctx_active_cases = document.getElementById("myAreaSeirModel");
+  load_card_value_seir();
+},
+);}
+function loadData_scenario_5(){
+
+    var data = ''
+    // DAp
+    var tmp ;
+
+    $.get($url_data_scenario_5,function(data){
+      var result = [];
+      var lines=data.split("\n");
+      var headers=lines[0].split(",");
+      for(var i=1;i<lines.length;i++){
+        var obj = {};
+        var currentline=lines[i].split(",");
+        for(var j=0;j<headers.length;j++){
+          obj[headers[j]] = currentline[j];
+        }
+        result.push(obj);
+      }
+
+
+
+      data_5_S = []
+      data_5_E = []
+      data_5_I = []
+      data_5_R = []
+      data_5_H = []
+      data_5_C = []
+      data_5_D = []
+
+
+
+      for(var i=0;i<$value_time_SEIR.val();i++){
+
+        data_5_S.push(result[i].S);
+        data_5_E.push(result[i].E);
+        data_5_I.push(result[i].I);
+        data_5_R.push(result[i].R);
+        data_5_H.push(result[i].H)
+        data_5_C.push(result[i].C)
+        data_5_D.push(result[i].D)
+
+
+      }
+  var ctx_active_cases = document.getElementById("myAreaSeirModel");
+  load_card_value_seir();
+},
+);}
+function loadData_scenario_6(){
+
+    var data = ''
+    // DAp
+    var tmp ;
+
+    $.get($url_data_scenario_6,function(data){
+      var result = [];
+      var lines=data.split("\n");
+      var headers=lines[0].split(",");
+      for(var i=1;i<lines.length;i++){
+        var obj = {};
+        var currentline=lines[i].split(",");
+        for(var j=0;j<headers.length;j++){
+          obj[headers[j]] = currentline[j];
+        }
+        result.push(obj);
+      }
+
+
+
+      data_6_S = []
+      data_6_E = []
+      data_6_I = []
+      data_6_R = []
+      data_6_H = []
+      data_6_C = []
+      data_6_D = []
+
+
+
+      for(var i=0;i<$value_time_SEIR.val();i++){
+
+        data_6_S.push(result[i].S);
+        data_6_E.push(result[i].E);
+        data_6_I.push(result[i].I);
+        data_6_R.push(result[i].R);
+        data_6_H.push(result[i].H)
+        data_6_C.push(result[i].C)
+        data_6_D.push(result[i].D)
+
+
+      }
+  var ctx_active_cases = document.getElementById("myAreaSeirModel");
+  load_card_value_seir();
+},
+);}
+function loadData_scenario_7(){
+
+    var data = ''
+    // DAp
+    var tmp ;
+
+    $.get($url_data_scenario_7,function(data){
+      var result = [];
+      var lines=data.split("\n");
+      var headers=lines[0].split(",");
+      for(var i=1;i<lines.length;i++){
+        var obj = {};
+        var currentline=lines[i].split(",");
+        for(var j=0;j<headers.length;j++){
+          obj[headers[j]] = currentline[j];
+        }
+        result.push(obj);
+      }
+
+
+
+      data_7_S = []
+      data_7_E = []
+      data_7_I = []
+      data_7_R = []
+      data_7_H = []
+      data_7_C = []
+      data_7_D = []
+
+
+
+      for(var i=0;i<$value_time_SEIR.val();i++){
+
+        data_7_S.push(result[i].S);
+        data_7_E.push(result[i].E);
+        data_7_I.push(result[i].I);
+        data_7_R.push(result[i].R);
+        data_7_H.push(result[i].H)
+        data_7_C.push(result[i].C)
+        data_7_D.push(result[i].D)
+
+
+      }
+  var ctx_active_cases = document.getElementById("myAreaSeirModel");
+  load_card_value_seir();
+},
+);}
+
 
 $value_time_SEIR.on('input change', () => {
 
   $value_time_period_SEIR.html($value_time_SEIR.val());
   loadData_scenario_1();
+  loadData_scenario_2();
+  loadData_scenario_3();
+  loadData_scenario_4();
+  loadData_scenario_5();
+  loadData_scenario_6();
+  loadData_scenario_7();
   loadData_prof();
 });
 
@@ -237,6 +582,9 @@ function load_card_value_seir(){
   $("#num_Of_Exposed_seir").html((parseFloat(data_E[data_E.length-1]).toFixed(2)).toString())
   $("#num_Of_infected_seir").html((parseFloat(data_I[data_I.length-1]).toFixed(2)).toString())
   $("#num_Of_Recovered_seir").html((parseFloat(data_R[data_R.length-1]).toFixed(2)).toString())
+  $("#num_Of_hospitalized_seir").html((parseFloat(data_H[data_H.length-1]).toFixed(2)).toString())
+  $("#num_Of_criticals_seir").html((parseFloat(data_C[data_C.length-1]).toFixed(2)).toString())
+
 
 
   $("#num_Of_fatalities_seir").html((parseFloat(data_D[data_D.length-1]).toFixed(2)).toString())
@@ -365,6 +713,9 @@ function infected_draw(){
   }
 }
 
+
+
+
 function recovered_draw(){
   if($id_switch_Recovered.checked == true){
     return data_R;
@@ -381,6 +732,14 @@ function hospitalized_seir_draw(){
     return [];
   }
 }
+function target_hospitalized_draw(){
+  if($id_switch_target_data.checked == true){
+    return data_prof_num_hospitalised;
+  }
+  else{
+    return [];
+  }
+}
 function criticals_seir_draw(){
   if($id_switch_Criticals.checked == true){
       return data_C;
@@ -389,9 +748,25 @@ function criticals_seir_draw(){
     return [];
   }
 }
+function target_criticals_draw(){
+  if($id_switch_target_data.checked == true){
+    return data_prof_num_critical;
+  }
+  else{
+    return [];
+  }
+}
 function fatalities_seir_draw(){
   if($id_switch_Death.checked == true){
     return data_D;
+  }
+  else{
+    return [];
+  }
+}
+function target_death_draw(){
+  if($id_switch_target_data.checked == true){
+    return data_prof_num_fatalities;
   }
   else{
     return [];
@@ -678,7 +1053,8 @@ function draw() {
           pointHoverBorderColor: "rgba(0, 0, 0, 1)",
           pointHitRadius: 5,
           pointBorderWidth: 4,
-          data: data_prof_num_hospitalised,
+          data: target_hospitalized_draw(),
+
         },
         {
           label: "data_prof_num_critical",
@@ -693,7 +1069,7 @@ function draw() {
           pointHoverBorderColor: "rgba(0, 0, 0, 1)",
           pointHitRadius: 5,
           pointBorderWidth: 4,
-          data: data_prof_num_critical,
+          data: target_criticals_draw(),
         },
         {
           label: "data_prof_num_fatalities",
@@ -708,8 +1084,286 @@ function draw() {
           pointHoverBorderColor: "rgba(0, 0, 0, 1)",
           pointHitRadius: 5,
           pointBorderWidth: 4,
-          data: data_prof_num_fatalities,
+          data: target_death_draw(),
         },
+
+        // // Plot scenario 2
+        // {
+        //   label: "data_prof_num_hospitalised",
+        //   lineTension: 0.6,
+        //   backgroundColor: "rgba(0, 0, 0,0.1)",
+        //   borderColor: "rgba(0, 0, 0, 1)",
+        //   pointRadius: 1,
+        //   pointBackgroundColor: "rgba(0, 0, 0, 1)",
+        //   pointBorderColor: "rgba(0, 0, 0, 1)",
+        //   pointHoverRadius: 1,
+        //   pointHoverBackgroundColor: "rgba(0, 0, 0, 1)",
+        //   pointHoverBorderColor: "rgba(0, 0, 0, 1)",
+        //   pointHitRadius: 5,
+        //   pointBorderWidth: 4,
+        //   data: data_2_H,
+        // },
+        // {
+        //   label: "data_prof_num_critical",
+        //   lineTension: 0.6,
+        //   backgroundColor: "rgba(0, 0, 0,0.1)",
+        //   borderColor: "rgba(0, 0, 0, 1)",
+        //   pointRadius: 1,
+        //   pointBackgroundColor: "rgba(0, 0, 0, 1)",
+        //   pointBorderColor: "rgba(0, 0, 0, 1)",
+        //   pointHoverRadius: 1,
+        //   pointHoverBackgroundColor: "rgba(0, 0, 0, 1)",
+        //   pointHoverBorderColor: "rgba(0, 0, 0, 1)",
+        //   pointHitRadius: 5,
+        //   pointBorderWidth: 4,
+        //   data: data_2_C,
+        // },
+        // {
+        //   label: "data_prof_num_fatalities",
+        //   lineTension: 0.6,
+        //   backgroundColor: "rgba(0, 0, 0,0.1)",
+        //   borderColor: "rgba(0, 0, 0, 1)",
+        //   pointRadius: 1,
+        //   pointBackgroundColor: "rgba(0, 0, 0, 1)",
+        //   pointBorderColor: "rgba(0, 0, 0, 1)",
+        //   pointHoverRadius: 1,
+        //   pointHoverBackgroundColor: "rgba(0, 0, 0, 1)",
+        //   pointHoverBorderColor: "rgba(0, 0, 0, 1)",
+        //   pointHitRadius: 5,
+        //   pointBorderWidth: 4,
+        //   data: data_2_D,
+        // },
+        //
+        // // Plot scenario 3
+        // {
+        //   label: "data_prof_num_hospitalised",
+        //   lineTension: 0.6,
+        //   backgroundColor: "rgba(0, 0, 0,0.1)",
+        //   borderColor: "rgba(0, 0, 0, 1)",
+        //   pointRadius: 1,
+        //   pointBackgroundColor: "rgba(0, 0, 0, 1)",
+        //   pointBorderColor: "rgba(0, 0, 0, 1)",
+        //   pointHoverRadius: 1,
+        //   pointHoverBackgroundColor: "rgba(0, 0, 0, 1)",
+        //   pointHoverBorderColor: "rgba(0, 0, 0, 1)",
+        //   pointHitRadius: 5,
+        //   pointBorderWidth: 4,
+        //   data: data_3_H,
+        // },
+        // {
+        //   label: "data_prof_num_critical",
+        //   lineTension: 0.6,
+        //   backgroundColor: "rgba(0, 0, 0,0.1)",
+        //   borderColor: "rgba(0, 0, 0, 1)",
+        //   pointRadius: 1,
+        //   pointBackgroundColor: "rgba(0, 0, 0, 1)",
+        //   pointBorderColor: "rgba(0, 0, 0, 1)",
+        //   pointHoverRadius: 1,
+        //   pointHoverBackgroundColor: "rgba(0, 0, 0, 1)",
+        //   pointHoverBorderColor: "rgba(0, 0, 0, 1)",
+        //   pointHitRadius: 5,
+        //   pointBorderWidth: 4,
+        //   data: data_3_C,
+        // },
+        // {
+        //   label: "data_prof_num_fatalities",
+        //   lineTension: 0.6,
+        //   backgroundColor: "rgba(0, 0, 0,0.1)",
+        //   borderColor: "rgba(0, 0, 0, 1)",
+        //   pointRadius: 1,
+        //   pointBackgroundColor: "rgba(0, 0, 0, 1)",
+        //   pointBorderColor: "rgba(0, 0, 0, 1)",
+        //   pointHoverRadius: 1,
+        //   pointHoverBackgroundColor: "rgba(0, 0, 0, 1)",
+        //   pointHoverBorderColor: "rgba(0, 0, 0, 1)",
+        //   pointHitRadius: 5,
+        //   pointBorderWidth: 4,
+        //   data: data_3_D,
+        // },
+        // // Plot scenario 4
+        // {
+        //   label: "data_prof_num_hospitalised",
+        //   lineTension: 0.6,
+        //   backgroundColor: "rgba(0, 0, 0,0.1)",
+        //   borderColor: "rgba(0, 0, 0, 1)",
+        //   pointRadius: 1,
+        //   pointBackgroundColor: "rgba(0, 0, 0, 1)",
+        //   pointBorderColor: "rgba(0, 0, 0, 1)",
+        //   pointHoverRadius: 1,
+        //   pointHoverBackgroundColor: "rgba(0, 0, 0, 1)",
+        //   pointHoverBorderColor: "rgba(0, 0, 0, 1)",
+        //   pointHitRadius: 5,
+        //   pointBorderWidth: 4,
+        //   data: data_4_H,
+        // },
+        // {
+        //   label: "data_prof_num_critical",
+        //   lineTension: 0.6,
+        //   backgroundColor: "rgba(0, 0, 0,0.1)",
+        //   borderColor: "rgba(0, 0, 0, 1)",
+        //   pointRadius: 1,
+        //   pointBackgroundColor: "rgba(0, 0, 0, 1)",
+        //   pointBorderColor: "rgba(0, 0, 0, 1)",
+        //   pointHoverRadius: 1,
+        //   pointHoverBackgroundColor: "rgba(0, 0, 0, 1)",
+        //   pointHoverBorderColor: "rgba(0, 0, 0, 1)",
+        //   pointHitRadius: 5,
+        //   pointBorderWidth: 4,
+        //   data: data_4_C,
+        // },
+        // {
+        //   label: "data_prof_num_fatalities",
+        //   lineTension: 0.6,
+        //   backgroundColor: "rgba(0, 0, 0,0.1)",
+        //   borderColor: "rgba(0, 0, 0, 1)",
+        //   pointRadius: 1,
+        //   pointBackgroundColor: "rgba(0, 0, 0, 1)",
+        //   pointBorderColor: "rgba(0, 0, 0, 1)",
+        //   pointHoverRadius: 1,
+        //   pointHoverBackgroundColor: "rgba(0, 0, 0, 1)",
+        //   pointHoverBorderColor: "rgba(0, 0, 0, 1)",
+        //   pointHitRadius: 5,
+        //   pointBorderWidth: 4,
+        //   data: data_4_D,
+        // },
+        // // Plot scenario 5
+        // {
+        //   label: "data_prof_num_hospitalised",
+        //   lineTension: 0.6,
+        //   backgroundColor: "rgba(0, 0, 0,0.1)",
+        //   borderColor: "rgba(0, 0, 0, 1)",
+        //   pointRadius: 1,
+        //   pointBackgroundColor: "rgba(0, 0, 0, 1)",
+        //   pointBorderColor: "rgba(0, 0, 0, 1)",
+        //   pointHoverRadius: 1,
+        //   pointHoverBackgroundColor: "rgba(0, 0, 0, 1)",
+        //   pointHoverBorderColor: "rgba(0, 0, 0, 1)",
+        //   pointHitRadius: 5,
+        //   pointBorderWidth: 4,
+        //   data: data_5_H,
+        // },
+        // {
+        //   label: "data_prof_num_critical",
+        //   lineTension: 0.6,
+        //   backgroundColor: "rgba(0, 0, 0,0.1)",
+        //   borderColor: "rgba(0, 0, 0, 1)",
+        //   pointRadius: 1,
+        //   pointBackgroundColor: "rgba(0, 0, 0, 1)",
+        //   pointBorderColor: "rgba(0, 0, 0, 1)",
+        //   pointHoverRadius: 1,
+        //   pointHoverBackgroundColor: "rgba(0, 0, 0, 1)",
+        //   pointHoverBorderColor: "rgba(0, 0, 0, 1)",
+        //   pointHitRadius: 5,
+        //   pointBorderWidth: 4,
+        //   data: data_5_C,
+        // },
+        // {
+        //   label: "data_prof_num_fatalities",
+        //   lineTension: 0.6,
+        //   backgroundColor: "rgba(0, 0, 0,0.1)",
+        //   borderColor: "rgba(0, 0, 0, 1)",
+        //   pointRadius: 1,
+        //   pointBackgroundColor: "rgba(0, 0, 0, 1)",
+        //   pointBorderColor: "rgba(0, 0, 0, 1)",
+        //   pointHoverRadius: 1,
+        //   pointHoverBackgroundColor: "rgba(0, 0, 0, 1)",
+        //   pointHoverBorderColor: "rgba(0, 0, 0, 1)",
+        //   pointHitRadius: 5,
+        //   pointBorderWidth: 4,
+        //   data: data_5_D,
+        // },
+        // // Plot scenario 6
+        // {
+        //   label: "data_prof_num_hospitalised",
+        //   lineTension: 0.6,
+        //   backgroundColor: "rgba(0, 0, 0,0.1)",
+        //   borderColor: "rgba(0, 0, 0, 1)",
+        //   pointRadius: 1,
+        //   pointBackgroundColor: "rgba(0, 0, 0, 1)",
+        //   pointBorderColor: "rgba(0, 0, 0, 1)",
+        //   pointHoverRadius: 1,
+        //   pointHoverBackgroundColor: "rgba(0, 0, 0, 1)",
+        //   pointHoverBorderColor: "rgba(0, 0, 0, 1)",
+        //   pointHitRadius: 5,
+        //   pointBorderWidth: 4,
+        //   data: data_6_H,
+        // },
+        // {
+        //   label: "data_prof_num_critical",
+        //   lineTension: 0.6,
+        //   backgroundColor: "rgba(0, 0, 0,0.1)",
+        //   borderColor: "rgba(0, 0, 0, 1)",
+        //   pointRadius: 1,
+        //   pointBackgroundColor: "rgba(0, 0, 0, 1)",
+        //   pointBorderColor: "rgba(0, 0, 0, 1)",
+        //   pointHoverRadius: 1,
+        //   pointHoverBackgroundColor: "rgba(0, 0, 0, 1)",
+        //   pointHoverBorderColor: "rgba(0, 0, 0, 1)",
+        //   pointHitRadius: 5,
+        //   pointBorderWidth: 4,
+        //   data: data_6_C,
+        // },
+        // {
+        //   label: "data_prof_num_fatalities",
+        //   lineTension: 0.6,
+        //   backgroundColor: "rgba(0, 0, 0,0.1)",
+        //   borderColor: "rgba(0, 0, 0, 1)",
+        //   pointRadius: 1,
+        //   pointBackgroundColor: "rgba(0, 0, 0, 1)",
+        //   pointBorderColor: "rgba(0, 0, 0, 1)",
+        //   pointHoverRadius: 1,
+        //   pointHoverBackgroundColor: "rgba(0, 0, 0, 1)",
+        //   pointHoverBorderColor: "rgba(0, 0, 0, 1)",
+        //   pointHitRadius: 5,
+        //   pointBorderWidth: 4,
+        //   data: data_6_D,
+        // },
+        // // Plot scenario 3
+        // {
+        //   label: "data_prof_num_hospitalised",
+        //   lineTension: 0.6,
+        //   backgroundColor: "rgba(0, 0, 0,0.1)",
+        //   borderColor: "rgba(0, 0, 0, 1)",
+        //   pointRadius: 1,
+        //   pointBackgroundColor: "rgba(0, 0, 0, 1)",
+        //   pointBorderColor: "rgba(0, 0, 0, 1)",
+        //   pointHoverRadius: 1,
+        //   pointHoverBackgroundColor: "rgba(0, 0, 0, 1)",
+        //   pointHoverBorderColor: "rgba(0, 0, 0, 1)",
+        //   pointHitRadius: 5,
+        //   pointBorderWidth: 4,
+        //   data: data_7_H,
+        // },
+        // {
+        //   label: "data_prof_num_critical",
+        //   lineTension: 0.6,
+        //   backgroundColor: "rgba(0, 0, 0,0.1)",
+        //   borderColor: "rgba(0, 0, 0, 1)",
+        //   pointRadius: 1,
+        //   pointBackgroundColor: "rgba(0, 0, 0, 1)",
+        //   pointBorderColor: "rgba(0, 0, 0, 1)",
+        //   pointHoverRadius: 1,
+        //   pointHoverBackgroundColor: "rgba(0, 0, 0, 1)",
+        //   pointHoverBorderColor: "rgba(0, 0, 0, 1)",
+        //   pointHitRadius: 5,
+        //   pointBorderWidth: 4,
+        //   data: data_7_C,
+        // },
+        // {
+        //   label: "data_prof_num_fatalities",
+        //   lineTension: 0.6,
+        //   backgroundColor: "rgba(0, 0, 0,0.1)",
+        //   borderColor: "rgba(0, 0, 0, 1)",
+        //   pointRadius: 1,
+        //   pointBackgroundColor: "rgba(0, 0, 0, 1)",
+        //   pointBorderColor: "rgba(0, 0, 0, 1)",
+        //   pointHoverRadius: 1,
+        //   pointHoverBackgroundColor: "rgba(0, 0, 0, 1)",
+        //   pointHoverBorderColor: "rgba(0, 0, 0, 1)",
+        //   pointHitRadius: 5,
+        //   pointBorderWidth: 4,
+        //   data: data_7_D,
+        // },
 
 
 
