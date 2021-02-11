@@ -16,6 +16,8 @@
 - [Second review (slides)](https://docs.google.com/presentation/d/1vitNpYH1wZCm37x9IQqmCacr1mpFP3Ws-LN2bmsNQIU/edit?fbclid=IwAR3Tllvh4Qn8Ztu2WHrLuC2n1oe0clxKboAQxggL7CARIG3NJ3muyu7OsY0#slide=id.ga8ac653453_3_13)
 - [Third review](https://www.overleaf.com/4274416223vckwytmnxxjj)
 - [Fourth review](https://www.overleaf.com/1153422599pwcwdtxkzntw)
+### Final review
+- [Slides](https://fr.overleaf.com/6876768185djckjctspgwp)
 
 ## Point a discuter
 1. Caractériser le bruit de la courbe num_positive (sensitivity test, percentage of infected tested)
