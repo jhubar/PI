@@ -2,7 +2,7 @@
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
 const $url_data_prof = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/Cov_invaders.csv"
-$url_data_scenario_0 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_0.csv"
+$url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_0.csv"
 $url_data_scenario_1 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_1.csv"
 $url_data_scenario_2 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_2.csv"
 $url_data_scenario_3 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_3.csv"
@@ -26,10 +26,29 @@ const $value_time_period_SEIR = $('.value_time_period_SEIR');
 const $value_time_wm = $('#range_time_period_wm');
 const $value_time_period_wm = $('.range_time_wearing_mask');
 
+const $value_time_sd = $('#range_time_period_sd');
+const $value_time_period_sd = $('.range_time_social_distancing');
+
+const $value_time_hq = $('#range_time_period_sd');
+const $value_time_period_hq = $('.range_time_home_quarantine');
+
+const $value_time_cs = $('#range_time_period_cs');
+const $value_time_period_cs = $('.range_time_closing_of_schools');
+
+const $value_time_ci = $('#range_time_period_cs');
+const $value_time_period_ci = $('.range_time_case_isolation');
+
+const $value_time_ld = $('#range_time_period_ld');
+const $value_time_period_ld = $('.range_time_lock_down');
 
 // $value_time_period_data.html($value_time_data.val());
 $value_time_period_SEIR.html($value_time_SEIR.val());
 $value_time_period_wm.html($value_time_wm.val());
+$value_time_period_sd.html($value_time_sd.val());
+$value_time_period_hq.html($value_time_hq.val());
+$value_time_period_cs.html($value_time_cs.val());
+$value_time_period_ci.html($value_time_ci.val());
+$value_time_period_ld.html($value_time_ld.val());
 
 const $id_switch_positive = document.getElementById('customSwitches_Positive');
 const $id_switch_hospitalized = document.getElementById('customSwitches_hospitalized');
@@ -88,8 +107,6 @@ loadData_prof();
 loadData_scenario();
 load_day_wm();
 
-
-
 function load_day_wm(){
   var data = ''
   // DAp
@@ -117,41 +134,42 @@ function load_day_wm(){
 
     }
 
-    if  ($value_time_wm.val() == 0) {
-       $url_data_scenario_0 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_0.csv"
-       loadData_scenario_0()
+    if (parseInt(data_day_wm[data_day_wm.length-1]) == 0) {
+       $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_0.csv"
+       loadData_scenario()
     }
     else if (parseInt(data_day_wm[data_day_wm.length-1]) == 10){
-       $url_data_scenario_0 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_1.csv"
-       loadData_scenario_0()
+       $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_1.csv"
+       loadData_scenario()
     }
     else if (parseInt(data_day_wm[data_day_wm.length-1]) == 30){
-       $url_data_scenario_0 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_2.csv"
-       loadData_scenario_0()
+       $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_2.csv"
+       loadData_scenario()
     }
     else if (parseInt(data_day_wm[data_day_wm.length-1]) == 40){
-       $url_data_scenario_0 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_3.csv"
-       loadData_scenario_0()
+       $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_3.csv"
+       loadData_scenario()
     }
     else if (parseInt(data_day_wm[data_day_wm.length-1]) == 50){
-       $url_data_scenario_0 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_4.csv"
-       loadData_scenario_0()
+       $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_4.csv"
+       loadData_scenario()
     }
 
 
     var ctx_active_cases = document.getElementById("myAreaSeirModel");
-    load_card_value_seir();
+
     draw()
+    load_card_value_seir();
 },
 );
 }
-function loadData_scenario_0(){
+function loadData_scenario(){
 
     var data = ''
     // DAp
     var tmp ;
 
-    $.get($url_data_scenario_0,function(data){
+    $.get($url_data_scenario,function(data){
       var result = [];
       var lines=data.split("\n");
       var headers=lines[0].split(",");
@@ -189,39 +207,10 @@ function loadData_scenario_0(){
 
       }
   var ctx_active_cases = document.getElementById("myAreaSeirModel");
-  load_card_value_seir();
+
   draw();
 },
 );}
-
-$value_time_wm.on('input change', () => {
-
-  $value_time_period_wm.html($value_time_wm.val());
-  load_day_wm();
-  loadData_scenario_0();
-  loadData_prof();
-
-});
-
-
-$value_time_SEIR.on('input change', () => {
-
-  $value_time_period_SEIR.html($value_time_SEIR.val());
-  load_day_wm();
-  loadData_scenario_0();
-  // loadData_scenario_1();
-  // loadData_scenario_2();
-  // loadData_scenario_3();
-  // loadData_scenario_4();
-  // loadData_scenario_5();
-  // loadData_scenario_6();
-  // loadData_scenario_7();
-  // loadData_scenario_8();
-  // loadData_scenario_9();
-  loadData_prof();
-
-});
-
 function loadData_prof(){
 
     var data = ''
@@ -289,12 +278,78 @@ function loadData_prof(){
 
 
 
+
+
 },
 );}
 
 
 
+$value_time_SEIR.on('input change', () => {
 
+  $value_time_period_SEIR.html($value_time_SEIR.val());
+  load_day_wm();
+  loadData_scenario();
+  loadData_prof();
+
+
+
+});
+
+$value_time_wm.on('input change', () => {
+
+  $value_time_period_wm.html($value_time_wm.val());
+  load_day_wm();
+  loadData_scenario();
+  loadData_prof();
+
+
+});
+$value_time_sd.on('input change', () => {
+
+  $value_time_period_sd.html($value_time_sd.val());
+  load_day_wm();
+  loadData_scenario();
+  loadData_prof();
+
+
+});
+$value_time_hq.on('input change', () => {
+
+  $value_time_period_hq.html($value_time_hq.val());
+  load_day_wm();
+  loadData_scenario();
+  loadData_prof();
+
+
+});
+$value_time_cs.on('input change', () => {
+
+  $value_time_period_cs.html($value_time_cs.val());
+  load_day_wm();
+  loadData_scenario();
+  loadData_prof();
+
+
+});
+$value_time_ci.on('input change', () => {
+
+  $value_time_period_ci.html($value_time_ci.val());
+  load_day_wm();
+  loadData_scenario();
+  loadData_prof();
+
+
+});
+$value_time_ld.on('input change', () => {
+
+  $value_time_period_ld.html($value_time_ld.val());
+  load_day_wm();
+  loadData_scenario();
+  loadData_prof();
+
+
+});
 
 
 function load_card_value_seir(){
@@ -304,35 +359,15 @@ function load_card_value_seir(){
   $("#num_Of_Recovered_seir").html((parseFloat(data_R[data_R.length-1]).toFixed(2)).toString())
   $("#num_Of_hospitalized_seir").html((parseFloat(data_H[data_H.length-1]).toFixed(2)).toString())
   $("#num_Of_criticals_seir").html((parseFloat(data_C[data_C.length-1]).toFixed(2)).toString())
-
-
-
   $("#num_Of_fatalities_seir").html((parseFloat(data_D[data_D.length-1]).toFixed(2)).toString())
   $("#num_Of_day_seir").html(((parseFloat(data_day[data_day.length-1])+1).toFixed(0)).toString())
-  $("#num_Of_day_wm").html((data_day_wm[data_day_wm.length-1]))
-  // if($id_switch_num_bed_hos.checked == true && $id_switch_num_bed_icu.checked == true){
-  //   $("#num_Of_newFat").html((parseFloat(data_seir_f_tot[data_seir_f_tot.length-1]).toFixed(0)).toString());
-  //   $("#num_Of_hospitalized_seir").html((parseFloat(data_seir_h_bis[data_seir_h_bis.length-1]).toFixed(2)).toString())
-  //   $("#num_Of_criticals_seir").html((parseFloat(data_seir_c_bis[data_seir_c_bis.length-1]).toFixed(2)).toString())
-  // }
-  // else if($id_switch_num_bed_hos.checked == false && $id_switch_num_bed_icu.checked == true){
-  //   $("#num_Of_newFat").html((parseFloat(data_seir_fc_bis[data_seir_fc_bis.length-1]).toFixed(0)).toString());
-  //   $("#num_Of_hospitalized_seir").html((parseFloat(data_seir_h[data_seir_h.length-1]).toFixed(2)).toString())
-  //   $("#num_Of_criticals_seir").html((parseFloat(data_seir_c_bis[data_seir_c_bis.length-1]).toFixed(2)).toString())
-  // }
-  // else if($id_switch_num_bed_hos.checked == true && $id_switch_num_bed_icu.checked == false){
-  //   $("#num_Of_newFat").html((parseFloat(data_seir_f_bis[data_seir_f_bis.length-1]).toFixed(0)).toString());
-  //   $("#num_Of_criticals_seir").html((parseFloat(data_seir_c[data_seir_c.length-1]).toFixed(2)).toString())
-  //   $("#num_Of_hospitalized_seir").html((parseFloat(data_seir_h_bis[data_seir_h_bis.length-1]).toFixed(2)).toString())
-
-  // }else{
-  //   $("#num_Of_newFat").html("Nan");
-  //   $("#num_Of_hospitalized_seir").html((parseFloat(data_H[data_H.length-1]).toFixed(2)).toString())
-  //   $("#num_Of_criticals_seir").html((parseFloat(data_C[data_C.length-1]).toFixed(2)).toString())
-  // }
-
-
-
+  $("#num_Of_day_wm").html(data_day_wm[data_day_wm.length-1])
+  $("#num_Of_day_sd").html(data_day_sd[data_day_sd.length-1])
+  $("#num_Of_day_hq").html(data_day_hq[data_day_hq.length-1])
+  $("#num_Of_day_cs").html(data_day_cs[data_day_cs.length-1])
+  $("#num_Of_day_ci").html(data_day_ci[data_day_ci.length-1])
+  $("#num_Of_day_ld").html(data_day_ld[data_day_ld.length-1])
+  
 
 }
 
