@@ -12,7 +12,12 @@ $url_data_scenario_6 = "https://raw.githubusercontent.com/jhubar/PI/master/Brute
 $url_data_scenario_7 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_7.csv"
 $url_data_scenario_8 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_8.csv"
 $url_data_scenario_9 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_9.csv"
-const $url_data_day_wm = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/days.csv"
+const $url_data_day_wm = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/days0.csv"
+const $url_data_day_sd = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/days1.csv"
+const $url_data_day_hq = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/days2.csv"
+const $url_data_day_cs = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/days3.csv"
+const $url_data_day_ci = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/days4.csv"
+const $url_data_day_ld = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/days5.csv"
 
 
 
@@ -24,22 +29,22 @@ const $value_time_period_SEIR = $('.value_time_period_SEIR');
 
 
 const $value_time_wm = $('#range_time_period_wm');
-const $value_time_period_wm = $('.range_time_wearing_mask');
+const $value_time_period_wm = $('.range_time_wm');
 
 const $value_time_sd = $('#range_time_period_sd');
-const $value_time_period_sd = $('.range_time_social_distancing');
+const $value_time_period_sd = $('.range_time_sd');
 
-const $value_time_hq = $('#range_time_period_sd');
-const $value_time_period_hq = $('.range_time_home_quarantine');
+const $value_time_hq = $('#range_time_period_hq');
+const $value_time_period_hq = $('.range_time_hq');
 
 const $value_time_cs = $('#range_time_period_cs');
-const $value_time_period_cs = $('.range_time_closing_of_schools');
+const $value_time_period_cs = $('.range_time_cs');
 
-const $value_time_ci = $('#range_time_period_cs');
-const $value_time_period_ci = $('.range_time_case_isolation');
+const $value_time_ci = $('#range_time_period_ci');
+const $value_time_period_ci = $('.range_time_ci');
 
 const $value_time_ld = $('#range_time_period_ld');
-const $value_time_period_ld = $('.range_time_lock_down');
+const $value_time_period_ld = $('.range_time_ld');
 
 // $value_time_period_data.html($value_time_data.val());
 $value_time_period_SEIR.html($value_time_SEIR.val());
@@ -106,6 +111,11 @@ $id_switch_Death.addEventListener('change',function(){
 loadData_prof();
 loadData_scenario();
 load_day_wm();
+load_day_sd();
+load_day_hq();
+load_day_cs();
+load_day_ci();
+load_day_ld();
 
 function load_day_wm(){
   var data = ''
@@ -163,6 +173,158 @@ function load_day_wm(){
 },
 );
 }
+function load_day_sd(){
+  var data = ''
+  // DAp
+  var tmp ;
+
+  $.get($url_data_day_sd,function(data){
+    var result = [];
+    var lines=data.split("\n");
+    var headers=lines[0].split(",");
+    for(var i=1;i<lines.length;i++){
+      var obj = {};
+      var currentline=lines[i].split(",");
+      for(var j=0;j<headers.length;j++){
+        obj[headers[j]] = currentline[j];
+      }
+      result.push(obj);
+    }
+
+
+    data_day_sd = []
+
+    for(var i=0;i<$value_time_sd.val();i++){
+
+      data_day_sd.push(result[i].Day);
+
+
+    }
+    
+
+},
+);
+}
+function load_day_hq(){
+  var data = ''
+  // DAp
+  var tmp ;
+
+  $.get($url_data_day_hq,function(data){
+    var result = [];
+    var lines=data.split("\n");
+    var headers=lines[0].split(",");
+    for(var i=1;i<lines.length;i++){
+      var obj = {};
+      var currentline=lines[i].split(",");
+      for(var j=0;j<headers.length;j++){
+        obj[headers[j]] = currentline[j];
+      }
+      result.push(obj);
+    }
+
+    data_day_hq = []
+
+    for(var i=0;i<$value_time_hq.val();i++){
+
+      data_day_hq.push(result[i].Day);
+
+
+    }
+
+},
+);
+}
+function load_day_cs(){
+  var data = ''
+  // DAp
+  var tmp ;
+
+  $.get($url_data_day_cs,function(data){
+    var result = [];
+    var lines=data.split("\n");
+    var headers=lines[0].split(",");
+    for(var i=1;i<lines.length;i++){
+      var obj = {};
+      var currentline=lines[i].split(",");
+      for(var j=0;j<headers.length;j++){
+        obj[headers[j]] = currentline[j];
+      }
+      result.push(obj);
+    }
+
+    data_day_cs = []
+
+    for(var i=0;i<$value_time_hq.val();i++){
+
+      data_day_cs.push(result[i].Day);
+
+
+    }
+
+},
+);
+}
+function load_day_ci(){
+  var data = ''
+  // DAp
+  var tmp ;
+
+  $.get($url_data_day_ci,function(data){
+    var result = [];
+    var lines=data.split("\n");
+    var headers=lines[0].split(",");
+    for(var i=1;i<lines.length;i++){
+      var obj = {};
+      var currentline=lines[i].split(",");
+      for(var j=0;j<headers.length;j++){
+        obj[headers[j]] = currentline[j];
+      }
+      result.push(obj);
+    }
+
+    data_day_ci = []
+
+    for(var i=0;i<$value_time_ci.val();i++){
+
+      data_day_ci.push(result[i].Day);
+
+
+    }
+
+},
+);
+}
+function load_day_ld(){
+  var data = ''
+  // DAp
+  var tmp ;
+
+  $.get($url_data_day_ld,function(data){
+    var result = [];
+    var lines=data.split("\n");
+    var headers=lines[0].split(",");
+    for(var i=1;i<lines.length;i++){
+      var obj = {};
+      var currentline=lines[i].split(",");
+      for(var j=0;j<headers.length;j++){
+        obj[headers[j]] = currentline[j];
+      }
+      result.push(obj);
+    }
+
+    data_day_ld = []
+
+    for(var i=0;i<$value_time_ld.val();i++){
+
+      data_day_ld.push(result[i].Day);
+
+
+    }
+
+},
+);}
+
 function loadData_scenario(){
 
     var data = ''
@@ -289,6 +451,11 @@ $value_time_SEIR.on('input change', () => {
 
   $value_time_period_SEIR.html($value_time_SEIR.val());
   load_day_wm();
+  load_day_sd();
+  load_day_hq();
+  load_day_cs();
+  load_day_ci();
+  load_day_ld();
   loadData_scenario();
   loadData_prof();
 
@@ -300,6 +467,11 @@ $value_time_wm.on('input change', () => {
 
   $value_time_period_wm.html($value_time_wm.val());
   load_day_wm();
+  load_day_sd();
+  load_day_hq();
+  load_day_cs();
+  load_day_ci();
+  load_day_ld();
   loadData_scenario();
   loadData_prof();
 
@@ -309,6 +481,11 @@ $value_time_sd.on('input change', () => {
 
   $value_time_period_sd.html($value_time_sd.val());
   load_day_wm();
+  load_day_sd();
+  load_day_hq();
+  load_day_cs();
+  load_day_ci();
+  load_day_ld();
   loadData_scenario();
   loadData_prof();
 
@@ -318,6 +495,11 @@ $value_time_hq.on('input change', () => {
 
   $value_time_period_hq.html($value_time_hq.val());
   load_day_wm();
+  load_day_sd();
+  load_day_hq();
+  load_day_cs();
+  load_day_ci();
+  load_day_ld();
   loadData_scenario();
   loadData_prof();
 
@@ -327,6 +509,11 @@ $value_time_cs.on('input change', () => {
 
   $value_time_period_cs.html($value_time_cs.val());
   load_day_wm();
+  load_day_sd();
+  load_day_hq();
+  load_day_cs();
+  load_day_ci();
+  load_day_ld();
   loadData_scenario();
   loadData_prof();
 
@@ -336,6 +523,11 @@ $value_time_ci.on('input change', () => {
 
   $value_time_period_ci.html($value_time_ci.val());
   load_day_wm();
+  load_day_sd();
+  load_day_hq();
+  load_day_cs();
+  load_day_ci();
+  load_day_ld();
   loadData_scenario();
   loadData_prof();
 
@@ -345,6 +537,11 @@ $value_time_ld.on('input change', () => {
 
   $value_time_period_ld.html($value_time_ld.val());
   load_day_wm();
+  load_day_sd();
+  load_day_hq();
+  load_day_cs();
+  load_day_ci();
+  load_day_ld();
   loadData_scenario();
   loadData_prof();
 
@@ -367,7 +564,7 @@ function load_card_value_seir(){
   $("#num_Of_day_cs").html(data_day_cs[data_day_cs.length-1])
   $("#num_Of_day_ci").html(data_day_ci[data_day_ci.length-1])
   $("#num_Of_day_ld").html(data_day_ld[data_day_ld.length-1])
-  
+
 
 }
 
