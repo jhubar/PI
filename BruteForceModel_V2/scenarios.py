@@ -120,10 +120,13 @@ def scenario():
     for wm in range(0,size):
         scenario_wm_sd = []
         for sd in range(0,size):
+
+
             scenario_wm_sd.append({
                 'duration': 300,
                 'wearing_mask': [73, 73+(wm*10)],
                 'social_dist': [73, 73+(sd*10), 6],
+
             })
         scenario_matrix.append(scenario_wm_sd)
 
