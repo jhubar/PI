@@ -2,17 +2,17 @@
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
 const $url_data_prof = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/Cov_invaders.csv"
-const $url_data_scenario_0 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_0.csv"
-const $url_data_scenario_1 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_1.csv"
-const $url_data_scenario_2 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_2.csv"
-const $url_data_scenario_3 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_3.csv"
-const $url_data_scenario_4 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_4.csv"
-const $url_data_scenario_5 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_5.csv"
-const $url_data_scenario_6 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_6.csv"
-const $url_data_scenario_7 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_7.csv"
-const $url_data_scenario_8 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_8.csv"
-const $url_data_scenario_9 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_9.csv"
-const $url_data_day_wm = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/day.csv"
+$url_data_scenario_0 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_0.csv"
+$url_data_scenario_1 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_1.csv"
+$url_data_scenario_2 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_2.csv"
+$url_data_scenario_3 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_3.csv"
+$url_data_scenario_4 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_4.csv"
+$url_data_scenario_5 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_5.csv"
+$url_data_scenario_6 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_6.csv"
+$url_data_scenario_7 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_7.csv"
+$url_data_scenario_8 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_8.csv"
+$url_data_scenario_9 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_9.csv"
+const $url_data_day_wm = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/days.csv"
 
 
 
@@ -86,18 +86,19 @@ $id_switch_Death.addEventListener('change',function(){
 
 load_day_wm();
 loadData_scenario_0();
-loadData_scenario_1();
-loadData_scenario_2();
-loadData_scenario_3();
-loadData_scenario_4();
-loadData_scenario_5();
-loadData_scenario_6();
-loadData_scenario_7();
-loadData_scenario_8();
-loadData_scenario_9();
+// loadData_scenario_1();
+// loadData_scenario_2();
+// loadData_scenario_3();
+// loadData_scenario_4();
+// loadData_scenario_5();
+// loadData_scenario_6();
+// loadData_scenario_7();
+// loadData_scenario_8();
+// loadData_scenario_9();
 loadData_prof()
 
-function load_day_wm(){  var data = ''
+function load_day_wm(){
+  var data = ''
   // DAp
   var tmp ;
 
@@ -113,12 +114,38 @@ function load_day_wm(){  var data = ''
       }
       result.push(obj);
     }
-    console.log(result)
+
+    data_day_wm = []
+    for(var i=0;i<$value_time_wm.val();i++){
+
+      data_day_wm.push(result[i].Day);
+
+
+    }
+    console.log(data_day_wm[data_day_wm.length-1])
+    if  (parseInt(data_day_wm[data_day_wm.length-1]) == 0) {
+       $url_data_scenario_0 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_0.csv"
+       loadData_scenario_0()
+    }
+    else if (parseInt(data_day_wm[data_day_wm.length-1]) == 10){
+       $url_data_scenario_0 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_1.csv"
+       loadData_scenario_0()
+    }
+    else if (parseInt(data_day_wm[data_day_wm.length-1]) == 30){
+       $url_data_scenario_0 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_2.csv"
+       loadData_scenario_0()
+    }
+    else if (parseInt(data_day_wm[data_day_wm.length-1]) == 40){
+       $url_data_scenario_0 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_3.csv"
+       loadData_scenario_0()
+    }
 
     var ctx_active_cases = document.getElementById("myAreaSeirModel");
-    // load_card_value_seir();
+    load_card_value_seir();
+    draw()
 },
-);}
+);
+}
 function loadData_scenario_0(){
 
     var data = ''
@@ -139,54 +166,7 @@ function loadData_scenario_0(){
       }
 
 
-
-      data_0_S = []
-      data_0_E = []
-      data_0_I = []
-      data_0_R = []
-      data_0_H = []
-      data_0_C = []
-      data_0_D = []
-
-
-
-      for(var i=0;i<$value_time_SEIR.val();i++){
-
-        data_0_S.push(result[i].S);
-        data_0_E.push(result[i].E);
-        data_0_I.push(result[i].I);
-        data_0_R.push(result[i].R);
-        data_0_H.push(result[i].H)
-        data_0_C.push(result[i].C)
-        data_0_D.push(result[i].D)
-
-
-      }
-  var ctx_active_cases = document.getElementById("myAreaSeirModel");
-  load_card_value_seir();
-},
-);}
-function loadData_scenario_1(){
-
-    var data = ''
-    // DAp
-    var tmp ;
-
-    $.get($url_data_scenario_1,function(data){
-      var result = [];
-      var lines=data.split("\n");
-      var headers=lines[0].split(",");
-      for(var i=1;i<lines.length;i++){
-        var obj = {};
-        var currentline=lines[i].split(",");
-        for(var j=0;j<headers.length;j++){
-          obj[headers[j]] = currentline[j];
-        }
-        result.push(obj);
-      }
-
-
-      data_day = [];
+      data_day = []
       data_S = []
       data_E = []
       data_I = []
@@ -198,7 +178,7 @@ function loadData_scenario_1(){
 
 
       for(var i=0;i<$value_time_SEIR.val();i++){
-        data_day.push((i).toString());
+        data_day.push(i);
         data_S.push(result[i].S);
         data_E.push(result[i].E);
         data_I.push(result[i].I);
@@ -209,452 +189,499 @@ function loadData_scenario_1(){
 
 
       }
-
-
-
-
-  var ctx_active_cases = document.getElementById("myAreaSeirModel");
-
-
-  // $("#id_beta_seir").html((parseFloat(result.model[0].beta).toFixed(6)).toString())
-  // $("#id_sigma_seir").html((parseFloat(result.model[0].sigma).toFixed(6)).toString())
-  // $("#id_gamma_seir").html((parseFloat(result.model[0].gamma).toFixed(6)).toString())
-  // $("#id_hp_seir").html((parseFloat(result.model[0].hp).toFixed(6)).toString())
-  // $("#id_hcr_seir").html((parseFloat(result.model[0].hcr).toFixed(6)).toString())
-
-
-
-  // draw();
-
-
-
-  load_card_value_seir();
-
-
-
-
-},
-);}
-function loadData_scenario_2(){
-
-    var data = ''
-    // DAp
-    var tmp ;
-
-    $.get($url_data_scenario_2,function(data){
-      var result = [];
-      var lines=data.split("\n");
-      var headers=lines[0].split(",");
-      for(var i=1;i<lines.length;i++){
-        var obj = {};
-        var currentline=lines[i].split(",");
-        for(var j=0;j<headers.length;j++){
-          obj[headers[j]] = currentline[j];
-        }
-        result.push(obj);
-      }
-
-
-
-      data_2_S = []
-      data_2_E = []
-      data_2_I = []
-      data_2_R = []
-      data_2_H = []
-      data_2_C = []
-      data_2_D = []
-
-
-
-      for(var i=0;i<$value_time_SEIR.val();i++){
-
-        data_2_S.push(result[i].S);
-        data_2_E.push(result[i].E);
-        data_2_I.push(result[i].I);
-        data_2_R.push(result[i].R);
-        data_2_H.push(result[i].H)
-        data_2_C.push(result[i].C)
-        data_2_D.push(result[i].D)
-
-
-      }
-
-
-
-
-  var ctx_active_cases = document.getElementById("myAreaSeirModel");
-
-
-  // $("#id_beta_seir").html((parseFloat(result.model[0].beta).toFixed(6)).toString())
-  // $("#id_sigma_seir").html((parseFloat(result.model[0].sigma).toFixed(6)).toString())
-  // $("#id_gamma_seir").html((parseFloat(result.model[0].gamma).toFixed(6)).toString())
-  // $("#id_hp_seir").html((parseFloat(result.model[0].hp).toFixed(6)).toString())
-  // $("#id_hcr_seir").html((parseFloat(result.model[0].hcr).toFixed(6)).toString())
-
-
-
-  // draw();
-
-
-
-  load_card_value_seir();
-
-
-
-
-},
-);}
-function loadData_scenario_3(){
-
-    var data = ''
-    // DAp
-    var tmp ;
-
-    $.get($url_data_scenario_3,function(data){
-      var result = [];
-      var lines=data.split("\n");
-      var headers=lines[0].split(",");
-      for(var i=1;i<lines.length;i++){
-        var obj = {};
-        var currentline=lines[i].split(",");
-        for(var j=0;j<headers.length;j++){
-          obj[headers[j]] = currentline[j];
-        }
-        result.push(obj);
-      }
-
-
-
-      data_3_S = []
-      data_3_E = []
-      data_3_I = []
-      data_3_R = []
-      data_3_H = []
-      data_3_C = []
-      data_3_D = []
-
-
-
-      for(var i=0;i<$value_time_SEIR.val();i++){
-
-        data_3_S.push(result[i].S);
-        data_3_E.push(result[i].E);
-        data_3_I.push(result[i].I);
-        data_3_R.push(result[i].R);
-        data_3_H.push(result[i].H)
-        data_3_C.push(result[i].C)
-        data_3_D.push(result[i].D)
-
-
-      }
-
-
-
-
-  var ctx_active_cases = document.getElementById("myAreaSeirModel");
-
-
-  // $("#id_beta_seir").html((parseFloat(result.model[0].beta).toFixed(6)).toString())
-  // $("#id_sigma_seir").html((parseFloat(result.model[0].sigma).toFixed(6)).toString())
-  // $("#id_gamma_seir").html((parseFloat(result.model[0].gamma).toFixed(6)).toString())
-  // $("#id_hp_seir").html((parseFloat(result.model[0].hp).toFixed(6)).toString())
-  // $("#id_hcr_seir").html((parseFloat(result.model[0].hcr).toFixed(6)).toString())
-
-
-
-  // draw();
-
-
-
-  load_card_value_seir();
-
-
-
-
-},
-);}
-function loadData_scenario_4(){
-
-    var data = ''
-    // DAp
-    var tmp ;
-
-    $.get($url_data_scenario_4,function(data){
-      var result = [];
-      var lines=data.split("\n");
-      var headers=lines[0].split(",");
-      for(var i=1;i<lines.length;i++){
-        var obj = {};
-        var currentline=lines[i].split(",");
-        for(var j=0;j<headers.length;j++){
-          obj[headers[j]] = currentline[j];
-        }
-        result.push(obj);
-      }
-
-
-
-      data_4_S = []
-      data_4_E = []
-      data_4_I = []
-      data_4_R = []
-      data_4_H = []
-      data_4_C = []
-      data_4_D = []
-
-
-
-      for(var i=0;i<$value_time_SEIR.val();i++){
-
-        data_4_S.push(result[i].S);
-        data_4_E.push(result[i].E);
-        data_4_I.push(result[i].I);
-        data_4_R.push(result[i].R);
-        data_4_H.push(result[i].H)
-        data_4_C.push(result[i].C)
-        data_4_D.push(result[i].D)
-
-
-      }
   var ctx_active_cases = document.getElementById("myAreaSeirModel");
   load_card_value_seir();
 },
 );}
-function loadData_scenario_5(){
-
-    var data = ''
-    // DAp
-    var tmp ;
-
-    $.get($url_data_scenario_5,function(data){
-      var result = [];
-      var lines=data.split("\n");
-      var headers=lines[0].split(",");
-      for(var i=1;i<lines.length;i++){
-        var obj = {};
-        var currentline=lines[i].split(",");
-        for(var j=0;j<headers.length;j++){
-          obj[headers[j]] = currentline[j];
-        }
-        result.push(obj);
-      }
-
-
-
-      data_5_S = []
-      data_5_E = []
-      data_5_I = []
-      data_5_R = []
-      data_5_H = []
-      data_5_C = []
-      data_5_D = []
-
-
-
-      for(var i=0;i<$value_time_SEIR.val();i++){
-
-        data_5_S.push(result[i].S);
-        data_5_E.push(result[i].E);
-        data_5_I.push(result[i].I);
-        data_5_R.push(result[i].R);
-        data_5_H.push(result[i].H)
-        data_5_C.push(result[i].C)
-        data_5_D.push(result[i].D)
-
-
-      }
-  var ctx_active_cases = document.getElementById("myAreaSeirModel");
-  load_card_value_seir();
-},
-);}
-function loadData_scenario_6(){
-
-    var data = ''
-    // DAp
-    var tmp ;
-
-    $.get($url_data_scenario_6,function(data){
-      var result = [];
-      var lines=data.split("\n");
-      var headers=lines[0].split(",");
-      for(var i=1;i<lines.length;i++){
-        var obj = {};
-        var currentline=lines[i].split(",");
-        for(var j=0;j<headers.length;j++){
-          obj[headers[j]] = currentline[j];
-        }
-        result.push(obj);
-      }
-
-
-
-      data_6_S = []
-      data_6_E = []
-      data_6_I = []
-      data_6_R = []
-      data_6_H = []
-      data_6_C = []
-      data_6_D = []
-
-
-
-      for(var i=0;i<$value_time_SEIR.val();i++){
-
-        data_6_S.push(result[i].S);
-        data_6_E.push(result[i].E);
-        data_6_I.push(result[i].I);
-        data_6_R.push(result[i].R);
-        data_6_H.push(result[i].H)
-        data_6_C.push(result[i].C)
-        data_6_D.push(result[i].D)
-
-
-      }
-  var ctx_active_cases = document.getElementById("myAreaSeirModel");
-  load_card_value_seir();
-},
-);}
-function loadData_scenario_7(){
-
-    var data = ''
-    // DAp
-    var tmp ;
-
-    $.get($url_data_scenario_7,function(data){
-      var result = [];
-      var lines=data.split("\n");
-      var headers=lines[0].split(",");
-      for(var i=1;i<lines.length;i++){
-        var obj = {};
-        var currentline=lines[i].split(",");
-        for(var j=0;j<headers.length;j++){
-          obj[headers[j]] = currentline[j];
-        }
-        result.push(obj);
-      }
-
-
-
-      data_7_S = []
-      data_7_E = []
-      data_7_I = []
-      data_7_R = []
-      data_7_H = []
-      data_7_C = []
-      data_7_D = []
-
-
-
-      for(var i=0;i<$value_time_SEIR.val();i++){
-
-        data_7_S.push(result[i].S);
-        data_7_E.push(result[i].E);
-        data_7_I.push(result[i].I);
-        data_7_R.push(result[i].R);
-        data_7_H.push(result[i].H)
-        data_7_C.push(result[i].C)
-        data_7_D.push(result[i].D)
-
-
-      }
-  var ctx_active_cases = document.getElementById("myAreaSeirModel");
-  load_card_value_seir();
-},
-);}
-function loadData_scenario_8(){
-
-    var data = ''
-    // DAp
-    var tmp ;
-
-    $.get($url_data_scenario_8,function(data){
-      var result = [];
-      var lines=data.split("\n");
-      var headers=lines[0].split(",");
-      for(var i=1;i<lines.length;i++){
-        var obj = {};
-        var currentline=lines[i].split(",");
-        for(var j=0;j<headers.length;j++){
-          obj[headers[j]] = currentline[j];
-        }
-        result.push(obj);
-      }
-
-
-
-      data_8_S = []
-      data_8_E = []
-      data_8_I = []
-      data_8_R = []
-      data_8_H = []
-      data_8_C = []
-      data_8_D = []
-
-
-
-      for(var i=0;i<$value_time_SEIR.val();i++){
-
-        data_8_S.push(result[i].S);
-        data_8_E.push(result[i].E);
-        data_8_I.push(result[i].I);
-        data_8_R.push(result[i].R);
-        data_8_H.push(result[i].H)
-        data_8_C.push(result[i].C)
-        data_8_D.push(result[i].D)
-
-
-      }
-  var ctx_active_cases = document.getElementById("myAreaSeirModel");
-  load_card_value_seir();
-},
-);}
-function loadData_scenario_9(){
-
-    var data = ''
-    // DAp
-    var tmp ;
-
-    $.get($url_data_scenario_9,function(data){
-      var result = [];
-      var lines=data.split("\n");
-      var headers=lines[0].split(",");
-      for(var i=1;i<lines.length;i++){
-        var obj = {};
-        var currentline=lines[i].split(",");
-        for(var j=0;j<headers.length;j++){
-          obj[headers[j]] = currentline[j];
-        }
-        result.push(obj);
-      }
-
-
-
-      data_9_S = []
-      data_9_E = []
-      data_9_I = []
-      data_9_R = []
-      data_9_H = []
-      data_9_C = []
-      data_9_D = []
-
-
-
-      for(var i=0;i<$value_time_SEIR.val();i++){
-
-        data_9_S.push(result[i].S);
-        data_9_E.push(result[i].E);
-        data_9_I.push(result[i].I);
-        data_9_R.push(result[i].R);
-        data_9_H.push(result[i].H)
-        data_9_C.push(result[i].C)
-        data_9_D.push(result[i].D)
-
-
-      }
-  var ctx_active_cases = document.getElementById("myAreaSeirModel");
-  load_card_value_seir();
-},
-);}
+// function loadData_scenario_1(){
+//
+//     var data = ''
+//     // DAp
+//     var tmp ;
+//
+//     $.get($url_data_scenario_1,function(data){
+//       var result = [];
+//       var lines=data.split("\n");
+//       var headers=lines[0].split(",");
+//       for(var i=1;i<lines.length;i++){
+//         var obj = {};
+//         var currentline=lines[i].split(",");
+//         for(var j=0;j<headers.length;j++){
+//           obj[headers[j]] = currentline[j];
+//         }
+//         result.push(obj);
+//       }
+//
+//
+//       data_day = [];
+//       data_S = []
+//       data_E = []
+//       data_I = []
+//       data_R = []
+//       data_H = []
+//       data_C = []
+//       data_D = []
+//
+//
+//
+//       for(var i=0;i<$value_time_SEIR.val();i++){
+//         data_day.push((i).toString());
+//         data_S.push(result[i].S);
+//         data_E.push(result[i].E);
+//         data_I.push(result[i].I);
+//         data_R.push(result[i].R);
+//         data_H.push(result[i].H)
+//         data_C.push(result[i].C)
+//         data_D.push(result[i].D)
+//
+//
+//       }
+//
+//
+//
+//
+//   var ctx_active_cases = document.getElementById("myAreaSeirModel");
+//
+//
+//   // $("#id_beta_seir").html((parseFloat(result.model[0].beta).toFixed(6)).toString())
+//   // $("#id_sigma_seir").html((parseFloat(result.model[0].sigma).toFixed(6)).toString())
+//   // $("#id_gamma_seir").html((parseFloat(result.model[0].gamma).toFixed(6)).toString())
+//   // $("#id_hp_seir").html((parseFloat(result.model[0].hp).toFixed(6)).toString())
+//   // $("#id_hcr_seir").html((parseFloat(result.model[0].hcr).toFixed(6)).toString())
+//
+//
+//
+//   // draw();
+//
+//
+//
+//   load_card_value_seir();
+//
+//
+//
+//
+// },
+// );}
+// function loadData_scenario_2(){
+//
+//     var data = ''
+//     // DAp
+//     var tmp ;
+//
+//     $.get($url_data_scenario_2,function(data){
+//       var result = [];
+//       var lines=data.split("\n");
+//       var headers=lines[0].split(",");
+//       for(var i=1;i<lines.length;i++){
+//         var obj = {};
+//         var currentline=lines[i].split(",");
+//         for(var j=0;j<headers.length;j++){
+//           obj[headers[j]] = currentline[j];
+//         }
+//         result.push(obj);
+//       }
+//
+//
+//
+//       data_2_S = []
+//       data_2_E = []
+//       data_2_I = []
+//       data_2_R = []
+//       data_2_H = []
+//       data_2_C = []
+//       data_2_D = []
+//
+//
+//
+//       for(var i=0;i<$value_time_SEIR.val();i++){
+//
+//         data_2_S.push(result[i].S);
+//         data_2_E.push(result[i].E);
+//         data_2_I.push(result[i].I);
+//         data_2_R.push(result[i].R);
+//         data_2_H.push(result[i].H)
+//         data_2_C.push(result[i].C)
+//         data_2_D.push(result[i].D)
+//
+//
+//       }
+//
+//
+//
+//
+//   var ctx_active_cases = document.getElementById("myAreaSeirModel");
+//
+//
+//   // $("#id_beta_seir").html((parseFloat(result.model[0].beta).toFixed(6)).toString())
+//   // $("#id_sigma_seir").html((parseFloat(result.model[0].sigma).toFixed(6)).toString())
+//   // $("#id_gamma_seir").html((parseFloat(result.model[0].gamma).toFixed(6)).toString())
+//   // $("#id_hp_seir").html((parseFloat(result.model[0].hp).toFixed(6)).toString())
+//   // $("#id_hcr_seir").html((parseFloat(result.model[0].hcr).toFixed(6)).toString())
+//
+//
+//
+//   // draw();
+//
+//
+//
+//   load_card_value_seir();
+//
+//
+//
+//
+// },
+// );}
+// function loadData_scenario_3(){
+//
+//     var data = ''
+//     // DAp
+//     var tmp ;
+//
+//     $.get($url_data_scenario_3,function(data){
+//       var result = [];
+//       var lines=data.split("\n");
+//       var headers=lines[0].split(",");
+//       for(var i=1;i<lines.length;i++){
+//         var obj = {};
+//         var currentline=lines[i].split(",");
+//         for(var j=0;j<headers.length;j++){
+//           obj[headers[j]] = currentline[j];
+//         }
+//         result.push(obj);
+//       }
+//
+//
+//
+//       data_3_S = []
+//       data_3_E = []
+//       data_3_I = []
+//       data_3_R = []
+//       data_3_H = []
+//       data_3_C = []
+//       data_3_D = []
+//
+//
+//
+//       for(var i=0;i<$value_time_SEIR.val();i++){
+//
+//         data_3_S.push(result[i].S);
+//         data_3_E.push(result[i].E);
+//         data_3_I.push(result[i].I);
+//         data_3_R.push(result[i].R);
+//         data_3_H.push(result[i].H)
+//         data_3_C.push(result[i].C)
+//         data_3_D.push(result[i].D)
+//
+//
+//       }
+//
+//
+//
+//
+//   var ctx_active_cases = document.getElementById("myAreaSeirModel");
+//
+//
+//   // $("#id_beta_seir").html((parseFloat(result.model[0].beta).toFixed(6)).toString())
+//   // $("#id_sigma_seir").html((parseFloat(result.model[0].sigma).toFixed(6)).toString())
+//   // $("#id_gamma_seir").html((parseFloat(result.model[0].gamma).toFixed(6)).toString())
+//   // $("#id_hp_seir").html((parseFloat(result.model[0].hp).toFixed(6)).toString())
+//   // $("#id_hcr_seir").html((parseFloat(result.model[0].hcr).toFixed(6)).toString())
+//
+//
+//
+//   // draw();
+//
+//
+//
+//   load_card_value_seir();
+//
+//
+//
+//
+// },
+// );}
+// function loadData_scenario_4(){
+//
+//     var data = ''
+//     // DAp
+//     var tmp ;
+//
+//     $.get($url_data_scenario_4,function(data){
+//       var result = [];
+//       var lines=data.split("\n");
+//       var headers=lines[0].split(",");
+//       for(var i=1;i<lines.length;i++){
+//         var obj = {};
+//         var currentline=lines[i].split(",");
+//         for(var j=0;j<headers.length;j++){
+//           obj[headers[j]] = currentline[j];
+//         }
+//         result.push(obj);
+//       }
+//
+//
+//
+//       data_4_S = []
+//       data_4_E = []
+//       data_4_I = []
+//       data_4_R = []
+//       data_4_H = []
+//       data_4_C = []
+//       data_4_D = []
+//
+//
+//
+//       for(var i=0;i<$value_time_SEIR.val();i++){
+//
+//         data_4_S.push(result[i].S);
+//         data_4_E.push(result[i].E);
+//         data_4_I.push(result[i].I);
+//         data_4_R.push(result[i].R);
+//         data_4_H.push(result[i].H)
+//         data_4_C.push(result[i].C)
+//         data_4_D.push(result[i].D)
+//
+//
+//       }
+//   var ctx_active_cases = document.getElementById("myAreaSeirModel");
+//   load_card_value_seir();
+// },
+// );}
+// function loadData_scenario_5(){
+//
+//     var data = ''
+//     // DAp
+//     var tmp ;
+//
+//     $.get($url_data_scenario_5,function(data){
+//       var result = [];
+//       var lines=data.split("\n");
+//       var headers=lines[0].split(",");
+//       for(var i=1;i<lines.length;i++){
+//         var obj = {};
+//         var currentline=lines[i].split(",");
+//         for(var j=0;j<headers.length;j++){
+//           obj[headers[j]] = currentline[j];
+//         }
+//         result.push(obj);
+//       }
+//
+//
+//
+//       data_5_S = []
+//       data_5_E = []
+//       data_5_I = []
+//       data_5_R = []
+//       data_5_H = []
+//       data_5_C = []
+//       data_5_D = []
+//
+//
+//
+//       for(var i=0;i<$value_time_SEIR.val();i++){
+//
+//         data_5_S.push(result[i].S);
+//         data_5_E.push(result[i].E);
+//         data_5_I.push(result[i].I);
+//         data_5_R.push(result[i].R);
+//         data_5_H.push(result[i].H)
+//         data_5_C.push(result[i].C)
+//         data_5_D.push(result[i].D)
+//
+//
+//       }
+//   var ctx_active_cases = document.getElementById("myAreaSeirModel");
+//   load_card_value_seir();
+// },
+// );}
+// function loadData_scenario_6(){
+//
+//     var data = ''
+//     // DAp
+//     var tmp ;
+//
+//     $.get($url_data_scenario_6,function(data){
+//       var result = [];
+//       var lines=data.split("\n");
+//       var headers=lines[0].split(",");
+//       for(var i=1;i<lines.length;i++){
+//         var obj = {};
+//         var currentline=lines[i].split(",");
+//         for(var j=0;j<headers.length;j++){
+//           obj[headers[j]] = currentline[j];
+//         }
+//         result.push(obj);
+//       }
+//
+//
+//
+//       data_6_S = []
+//       data_6_E = []
+//       data_6_I = []
+//       data_6_R = []
+//       data_6_H = []
+//       data_6_C = []
+//       data_6_D = []
+//
+//
+//
+//       for(var i=0;i<$value_time_SEIR.val();i++){
+//
+//         data_6_S.push(result[i].S);
+//         data_6_E.push(result[i].E);
+//         data_6_I.push(result[i].I);
+//         data_6_R.push(result[i].R);
+//         data_6_H.push(result[i].H)
+//         data_6_C.push(result[i].C)
+//         data_6_D.push(result[i].D)
+//
+//
+//       }
+//   var ctx_active_cases = document.getElementById("myAreaSeirModel");
+//   load_card_value_seir();
+// },
+// );}
+// function loadData_scenario_7(){
+//
+//     var data = ''
+//     // DAp
+//     var tmp ;
+//
+//     $.get($url_data_scenario_7,function(data){
+//       var result = [];
+//       var lines=data.split("\n");
+//       var headers=lines[0].split(",");
+//       for(var i=1;i<lines.length;i++){
+//         var obj = {};
+//         var currentline=lines[i].split(",");
+//         for(var j=0;j<headers.length;j++){
+//           obj[headers[j]] = currentline[j];
+//         }
+//         result.push(obj);
+//       }
+//
+//
+//
+//       data_7_S = []
+//       data_7_E = []
+//       data_7_I = []
+//       data_7_R = []
+//       data_7_H = []
+//       data_7_C = []
+//       data_7_D = []
+//
+//
+//
+//       for(var i=0;i<$value_time_SEIR.val();i++){
+//
+//         data_7_S.push(result[i].S);
+//         data_7_E.push(result[i].E);
+//         data_7_I.push(result[i].I);
+//         data_7_R.push(result[i].R);
+//         data_7_H.push(result[i].H)
+//         data_7_C.push(result[i].C)
+//         data_7_D.push(result[i].D)
+//
+//
+//       }
+//   var ctx_active_cases = document.getElementById("myAreaSeirModel");
+//   load_card_value_seir();
+// },
+// );}
+// function loadData_scenario_8(){
+//
+//     var data = ''
+//     // DAp
+//     var tmp ;
+//
+//     $.get($url_data_scenario_8,function(data){
+//       var result = [];
+//       var lines=data.split("\n");
+//       var headers=lines[0].split(",");
+//       for(var i=1;i<lines.length;i++){
+//         var obj = {};
+//         var currentline=lines[i].split(",");
+//         for(var j=0;j<headers.length;j++){
+//           obj[headers[j]] = currentline[j];
+//         }
+//         result.push(obj);
+//       }
+//
+//
+//
+//       data_8_S = []
+//       data_8_E = []
+//       data_8_I = []
+//       data_8_R = []
+//       data_8_H = []
+//       data_8_C = []
+//       data_8_D = []
+//
+//
+//
+//       for(var i=0;i<$value_time_SEIR.val();i++){
+//
+//         data_8_S.push(result[i].S);
+//         data_8_E.push(result[i].E);
+//         data_8_I.push(result[i].I);
+//         data_8_R.push(result[i].R);
+//         data_8_H.push(result[i].H)
+//         data_8_C.push(result[i].C)
+//         data_8_D.push(result[i].D)
+//
+//
+//       }
+//   var ctx_active_cases = document.getElementById("myAreaSeirModel");
+//   load_card_value_seir();
+// },
+// );}
+// function loadData_scenario_9(){
+//
+//     var data = ''
+//     // DAp
+//     var tmp ;
+//
+//     $.get($url_data_scenario_9,function(data){
+//       var result = [];
+//       var lines=data.split("\n");
+//       var headers=lines[0].split(",");
+//       for(var i=1;i<lines.length;i++){
+//         var obj = {};
+//         var currentline=lines[i].split(",");
+//         for(var j=0;j<headers.length;j++){
+//           obj[headers[j]] = currentline[j];
+//         }
+//         result.push(obj);
+//       }
+//
+//
+//
+//       data_9_S = []
+//       data_9_E = []
+//       data_9_I = []
+//       data_9_R = []
+//       data_9_H = []
+//       data_9_C = []
+//       data_9_D = []
+//
+//
+//
+//       for(var i=0;i<$value_time_SEIR.val();i++){
+//
+//         data_9_S.push(result[i].S);
+//         data_9_E.push(result[i].E);
+//         data_9_I.push(result[i].I);
+//         data_9_R.push(result[i].R);
+//         data_9_H.push(result[i].H)
+//         data_9_C.push(result[i].C)
+//         data_9_D.push(result[i].D)
+//
+//
+//       }
+//   var ctx_active_cases = document.getElementById("myAreaSeirModel");
+//   load_card_value_seir();
+// },
+// );}
 
 
 $value_time_wm.on('input change', () => {
@@ -668,13 +695,16 @@ $value_time_wm.on('input change', () => {
 $value_time_SEIR.on('input change', () => {
 
   $value_time_period_SEIR.html($value_time_SEIR.val());
-  loadData_scenario_1();
-  loadData_scenario_2();
-  loadData_scenario_3();
-  loadData_scenario_4();
-  loadData_scenario_5();
-  loadData_scenario_6();
-  loadData_scenario_7();
+  loadData_scenario_0();
+  // loadData_scenario_1();
+  // loadData_scenario_2();
+  // loadData_scenario_3();
+  // loadData_scenario_4();
+  // loadData_scenario_5();
+  // loadData_scenario_6();
+  // loadData_scenario_7();
+  // loadData_scenario_8();
+  // loadData_scenario_9();
   loadData_prof();
 
 });
@@ -737,15 +767,11 @@ function loadData_prof(){
 
 
 
-  var ctx_active_cases = document.getElementById("myAreaSeirModel");
+      var ctx_active_cases = document.getElementById("myAreaSeirModel");
 
 
 
-  draw();
-
-
-
-  load_card_value_seir();
+      draw();
 
 
 
@@ -770,7 +796,7 @@ function load_card_value_seir(){
 
   $("#num_Of_fatalities_seir").html((parseFloat(data_D[data_D.length-1]).toFixed(2)).toString())
   $("#num_Of_day_seir").html(((parseFloat(data_day[data_day.length-1])+1).toFixed(0)).toString())
-  $("#num_Of_day_wm").html("0")
+  $("#num_Of_day_wm").html((data_day_wm[data_day_wm.length-1]).toString())
   // if($id_switch_num_bed_hos.checked == true && $id_switch_num_bed_icu.checked == true){
   //   $("#num_Of_newFat").html((parseFloat(data_seir_f_tot[data_seir_f_tot.length-1]).toFixed(0)).toString());
   //   $("#num_Of_hospitalized_seir").html((parseFloat(data_seir_h_bis[data_seir_h_bis.length-1]).toFixed(2)).toString())
@@ -963,21 +989,8 @@ function target_death_draw(){
 //   load_card_value();
 // });
 
-function load_card_value(){
-  $("#num_day").html((parseFloat(data_day[data_day.length-1]).toFixed(0)).toString());
-  $("#num_positive").html((parseFloat(data_num_positive[data_num_positive.length-1]).toFixed(0)).toString());
-  $("#num_tested").html((parseFloat(data_num_tested[data_num_tested.length-1]).toFixed(0)).toString());
-  $("#num_hospitalised").html((parseFloat(data_num_hospitalised[data_num_hospitalised.length-1]).toFixed(0)).toString());
-  $("#num_cumulative_hospitalizations").html((parseFloat(data_num_cumulative_hospitalizations[data_num_cumulative_hospitalizations.length-1]).toFixed(0)).toString());
-  $("#num_critical").html((parseFloat(data_num_critical[data_num_critical.length-1]).toFixed(0)).toString());
-  $("#num_fatalities").html((parseFloat(data_num_fatalities[data_num_fatalities.length-1]).toFixed(0)).toString());
 
-
-
-
-}
 function load_card_kpi_value(){
-
 
   var percentChange_positive = data_num_positive[data_num_positive.length-1]-data_num_positive[data_num_positive.length-2]
   var percentChange_hos = data_num_hospitalised[data_num_hospitalised.length-1]-data_num_positive[data_num_hospitalised.length-2]

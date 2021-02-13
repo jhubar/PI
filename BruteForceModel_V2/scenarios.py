@@ -146,7 +146,8 @@ def scenario():
                                         R = mean_scenar[i][:,3],
                                         H = mean_scenar[i][:,4],
                                         C = mean_scenar[i][:,5],
-                                        D = mean_scenar[i][:,6]
+                                        D = mean_scenar[i][:,6],
+                                        index = i
                                         )
                                 )
             data_to_export.to_csv(r'Data_Scenario/scenario_'+str(i)+'.csv', header=True, index=False)
