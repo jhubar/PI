@@ -112,8 +112,9 @@ loadData_prof();
 loadData_scenario();
 load_day_wm();
 load_day_sd();
-// load_day_hq();
-// load_day_cs();
+load_day_cs();
+load_day_constraint();
+
 // load_day_ci();
 // load_day_ld();
 
@@ -142,116 +143,6 @@ function load_day_wm(){
       data_day_wm.push(result[i].Day);
 
 
-    }
-    if(parseInt($value_time_sd.val()) == 1) {
-      if (parseInt($value_time_wm.val()) == 1) {
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_0.csv"
-         loadData_scenario()
-      }
-      else if (parseInt($value_time_wm.val()) == 2){
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_5.csv"
-         loadData_scenario()
-      }
-      else if (parseInt($value_time_wm.val()) == 3){
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_10.csv"
-         loadData_scenario()
-      }
-      else if (parseInt($value_time_wm.val()) == 4){
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_15.csv"
-         loadData_scenario()
-      }
-      else if (parseInt($value_time_wm.val()) == 5){
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_20.csv"
-         loadData_scenario()
-      }
-    }
-    if(parseInt($value_time_sd.val()) == 2) {
-      if (parseInt($value_time_wm.val()) == 1) {
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_1.csv"
-         loadData_scenario()
-      }
-      else if (parseInt($value_time_wm.val()) == 2){
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_6.csv"
-         loadData_scenario()
-      }
-      else if (parseInt($value_time_wm.val()) == 3){
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_11.csv"
-         loadData_scenario()
-      }
-      else if (parseInt($value_time_wm.val()) == 4){
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_16.csv"
-         loadData_scenario()
-      }
-      else if (parseInt($value_time_wm.val()) == 5){
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_21.csv"
-         loadData_scenario()
-      }
-    }
-    if(parseInt($value_time_sd.val()) == 3) {
-      if (parseInt($value_time_wm.val()) == 1) {
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_2.csv"
-         loadData_scenario()
-      }
-      else if (parseInt($value_time_wm.val()) == 2){
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_7.csv"
-         loadData_scenario()
-      }
-      else if (parseInt($value_time_wm.val()) == 3){
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_12.csv"
-         loadData_scenario()
-      }
-      else if (parseInt($value_time_wm.val()) == 4){
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_17.csv"
-         loadData_scenario()
-      }
-      else if (parseInt($value_time_wm.val()) == 5){
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_22.csv"
-         loadData_scenario()
-      }
-    }
-    if(parseInt($value_time_sd.val()) == 4) {
-      if (parseInt($value_time_wm.val()) == 1) {
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_3.csv"
-         loadData_scenario()
-      }
-      else if (parseInt($value_time_wm.val()) == 2){
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_8.csv"
-         loadData_scenario()
-      }
-      else if (parseInt($value_time_wm.val()) == 3){
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_13.csv"
-         loadData_scenario()
-      }
-      else if (parseInt($value_time_wm.val()) == 4){
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_18.csv"
-         loadData_scenario()
-      }
-      else if (parseInt($value_time_wm.val()) == 5){
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_23.csv"
-         loadData_scenario()
-      }
-    }
-    if(parseInt($value_time_sd.val()) == 5) {
-      if (parseInt($value_time_wm.val()) == 1) {
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_4.csv"
-         loadData_scenario()
-      }
-      else if (parseInt($value_time_wm.val()) == 2){
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_9.csv"
-         loadData_scenario()
-      }
-      else if (parseInt($value_time_wm.val()) == 3){
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_14.csv"
-         loadData_scenario()
-      }
-      else if (parseInt($value_time_wm.val()) == 4){
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_19.csv"
-         loadData_scenario()
-      }
-      else if (parseInt($value_time_wm.val()) == 5){
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_24.csv"
-         loadData_scenario()
-      }
     }
 
     var ctx_active_cases = document.getElementById("myAreaSeirModel");
@@ -288,117 +179,6 @@ function load_day_sd(){
 
 
     }
-    if(parseInt($value_time_wm.val()) == 1) {
-      if (parseInt($value_time_sd.val()) == 1) {
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_0.csv"
-         loadData_scenario()
-      }
-      else if (parseInt($value_time_sd.val()) == 2){
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_10.csv"
-         loadData_scenario()
-      }
-      else if (parseInt($value_time_sd.val()) == 3){
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_2.csv"
-         loadData_scenario()
-      }
-      else if (parseInt($value_time_sd.val()) == 4){
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_3.csv"
-         loadData_scenario()
-      }
-      else if (parseInt($value_time_sd.val()) == 5){
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_4.csv"
-         loadData_scenario()
-      }
-    }
-    if(parseInt($value_time_wm.val()) == 2) {
-      if (parseInt($value_time_sd.val()) == 1) {
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_5.csv"
-         loadData_scenario()
-      }
-      else if (parseInt($value_time_sd.val()) == 2){
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_6.csv"
-         loadData_scenario()
-      }
-      else if (parseInt($value_time_sd.val()) == 3){
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_7.csv"
-         loadData_scenario()
-      }
-      else if (parseInt($value_time_sd.val()) == 4){
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_8.csv"
-         loadData_scenario()
-      }
-      else if (parseInt($value_time_sd.val()) == 5){
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_9.csv"
-         loadData_scenario()
-      }
-    }
-    if(parseInt($value_time_wm.val()) == 3) {
-      if (parseInt($value_time_sd.val()) == 1) {
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_10.csv"
-         loadData_scenario()
-      }
-      else if (parseInt($value_time_sd.val()) == 2){
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_11.csv"
-         loadData_scenario()
-      }
-      else if (parseInt($value_time_sd.val()) == 3){
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_12.csv"
-         loadData_scenario()
-      }
-      else if (parseInt($value_time_sd.val()) == 4){
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_13.csv"
-         loadData_scenario()
-      }
-      else if (parseInt($value_time_sd.val()) == 5){
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_14.csv"
-         loadData_scenario()
-      }
-    }
-    if(parseInt($value_time_wm.val()) == 4) {
-      if (parseInt($value_time_sd.val()) == 1) {
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_15.csv"
-         loadData_scenario()
-      }
-      else if (parseInt($value_time_sd.val()) == 2){
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_16.csv"
-         loadData_scenario()
-      }
-      else if (parseInt($value_time_sd.val()) == 3){
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_17.csv"
-         loadData_scenario()
-      }
-      else if (parseInt($value_time_sd.val()) == 4){
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_18.csv"
-         loadData_scenario()
-      }
-      else if (parseInt($value_time_sd.val()) == 5){
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_19.csv"
-         loadData_scenario()
-      }
-    }
-    if(parseInt($value_time_wm.val()) == 5) {
-      if (parseInt($value_time_sd.val()) == 1) {
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_20.csv"
-         loadData_scenario()
-      }
-      else if (parseInt($value_time_sd.val()) == 2){
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_21.csv"
-         loadData_scenario()
-      }
-      else if (parseInt($value_time_sd.val()) == 3){
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_22.csv"
-         loadData_scenario()
-      }
-      else if (parseInt($value_time_sd.val()) == 4){
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_23.csv"
-         loadData_scenario()
-      }
-      else if (parseInt($value_time_sd.val()) == 5){
-         $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_24.csv"
-         loadData_scenario()
-      }
-    }
-
 
     var ctx_active_cases = document.getElementById("myAreaSeirModel");
 
@@ -409,7 +189,41 @@ function load_day_sd(){
 },
 );
 }
-function load_day_hq(){
+function load_day_cs(){
+  var data = ''
+  // DAp
+  var tmp ;
+
+  $.get($url_data_day_cs,function(data){
+    var result = [];
+    var lines=data.split("\n");
+    var headers=lines[0].split(",");
+    for(var i=1;i<lines.length;i++){
+      var obj = {};
+      var currentline=lines[i].split(",");
+      for(var j=0;j<headers.length;j++){
+        obj[headers[j]] = currentline[j];
+      }
+      result.push(obj);
+    }
+
+    data_day_cs = []
+
+    for(var i=0;i<$value_time_hq.val();i++){
+
+      data_day_cs.push(result[i].Day);
+
+    }
+
+    var ctx_active_cases = document.getElementById("myAreaSeirModel");
+
+    draw()
+    load_card_value_seir();
+
+},
+);
+}
+function load_day_constraint(){
   var data = ''
   // DAp
   var tmp ;
@@ -1001,36 +815,7 @@ function load_day_hq(){
 },
 );
 }
-function load_day_cs(){
-  var data = ''
-  // DAp
-  var tmp ;
 
-  $.get($url_data_day_cs,function(data){
-    var result = [];
-    var lines=data.split("\n");
-    var headers=lines[0].split(",");
-    for(var i=1;i<lines.length;i++){
-      var obj = {};
-      var currentline=lines[i].split(",");
-      for(var j=0;j<headers.length;j++){
-        obj[headers[j]] = currentline[j];
-      }
-      result.push(obj);
-    }
-
-    data_day_cs = []
-
-    for(var i=0;i<$value_time_hq.val();i++){
-
-      data_day_cs.push(result[i].Day);
-
-
-    }
-
-},
-);
-}
 function load_day_ci(){
   var data = ''
   // DAp
@@ -1218,9 +1003,8 @@ $value_time_SEIR.on('input change', () => {
   $value_time_period_SEIR.html($value_time_SEIR.val());
   load_day_wm();
   load_day_sd();
-  // load_day_hq();
-  // load_day_cs();
-  // load_day_ci();
+  load_day_cs();
+  load_day_constraint();
   // load_day_ld();
   loadData_scenario();
   loadData_prof();
@@ -1228,71 +1012,66 @@ $value_time_SEIR.on('input change', () => {
 
 
 });
-
+// wm constraint
 $value_time_wm.on('input change', () => {
 
   $value_time_period_wm.html($value_time_wm.val());
   load_day_wm();
   load_day_sd();
-  // load_day_hq();
+  load_day_cs();
+  load_day_constraint();
   // load_day_cs();
   // load_day_ci();
   // load_day_ld();
   loadData_scenario();
   loadData_prof();
-
-
 });
+// sd constraint
 $value_time_sd.on('input change', () => {
 
   $value_time_period_sd.html($value_time_sd.val());
   load_day_wm();
   load_day_sd();
-  // load_day_hq();
-  // load_day_cs();
-  // load_day_ci();
+  load_day_cs();
+  load_day_constraint();
   // load_day_ld();
   loadData_scenario();
   loadData_prof();
 
-
 });
+// hq constraint
 $value_time_hq.on('input change', () => {
 
   $value_time_period_hq.html($value_time_hq.val());
   load_day_wm();
   load_day_sd();
-  // load_day_hq();
-  // load_day_cs();
-  // load_day_ci();
+  load_day_cs();
+  load_day_constraint();
   // load_day_ld();
   loadData_scenario();
   loadData_prof();
-
-
 });
+// CS constraint
 $value_time_cs.on('input change', () => {
 
   $value_time_period_cs.html($value_time_cs.val());
   load_day_wm();
   load_day_sd();
-  // load_day_hq();
-  // load_day_cs();
-  // load_day_ci();
+  load_day_cs();
+  load_day_constraint();
   // load_day_ld();
   loadData_scenario();
   loadData_prof();
 
-
 });
+// Ci constraint
 $value_time_ci.on('input change', () => {
 
   $value_time_period_ci.html($value_time_ci.val());
   load_day_wm();
   load_day_sd();
-  // load_day_hq();
-  // load_day_cs();
-  // load_day_ci();
+  load_day_cs();
+  load_day_constraint();
   // load_day_ld();
   loadData_scenario();
   loadData_prof();
@@ -1304,9 +1083,8 @@ $value_time_ld.on('input change', () => {
   $value_time_period_ld.html($value_time_ld.val());
   load_day_wm();
   load_day_sd();
-  // load_day_hq();
-  // load_day_cs();
-  // load_day_ci();
+  load_day_cs();
+  load_day_constraint();
   // load_day_ld();
   loadData_scenario();
   loadData_prof();
