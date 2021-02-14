@@ -130,9 +130,19 @@ def scenario():
                     'close_schools': [73, 73+(cs*10)]
 
                 })
-                scenario_wm_sd.append(scenario_wm_sd_cs)
-            scenario_matrix.append(scenario_wm_sd)
-
+            scenario_wm_sd.append(scenario_wm_sd_cs)
+        scenario_matrix.append(scenario_wm_sd)
+    # sys.exit()
+    print(len(scenario_wm_sd))
+    for i in range(0,size):
+        for j in range(0,size):
+            for k in range(0,size):
+                print(scenario_matrix[i][j][k])
+            print("-----------------------------------------------------------------------------")
+            print("-----------------------------------------------------------------------------")
+        print("#############################################################################")
+        print("#############################################################################")
+    
     # --------------------------- Create models --------------------------- #
     mean_scenar = []
 
