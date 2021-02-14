@@ -1566,8 +1566,6 @@ $value_time_SEIR.on('input change', () => {
   load_day_sd();
   load_day_cs();
   load_day_constraint();
-  // load_day_ld();
-  loadData_scenario();
   loadData_prof();
 
 
@@ -1581,10 +1579,6 @@ $value_time_wm.on('input change', () => {
   load_day_sd();
   load_day_cs();
   load_day_constraint();
-  // load_day_cs();
-  // load_day_ci();
-  // load_day_ld();
-  loadData_scenario();
   loadData_prof();
 });
 // sd constraint
@@ -1595,8 +1589,7 @@ $value_time_sd.on('input change', () => {
   load_day_sd();
   load_day_cs();
   load_day_constraint();
-  // load_day_ld();
-  loadData_scenario();
+
   loadData_prof();
 
 });
@@ -1608,8 +1601,7 @@ $value_time_hq.on('input change', () => {
   load_day_sd();
   load_day_cs();
   load_day_constraint();
-  // load_day_ld();
-  loadData_scenario();
+
   loadData_prof();
 });
 // CS constraint
@@ -1627,7 +1619,6 @@ $value_time_cs.on('input change', () => {
   }
   load_day_constraint();
   load_day_ld();
-  loadData_scenario();
   loadData_prof();
 
 });
@@ -1639,8 +1630,6 @@ $value_time_ci.on('input change', () => {
   load_day_sd();
   load_day_cs();
   load_day_constraint();
-  // load_day_ld();
-  loadData_scenario();
   loadData_prof();
 
 
@@ -1656,8 +1645,6 @@ $value_time_ld.on('input change', () => {
   }
   load_day_cs();
   load_day_constraint();
-  // load_day_ld();
-  loadData_scenario();
   loadData_prof();
 
 
