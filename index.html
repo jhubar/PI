@@ -495,10 +495,15 @@
                         <!-- home quarantine -->
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Home quarantine </div>
                         <div class="d-flex my-2">
-                          <div class="w-75">
-                            <input type="range" class="custom-range" id="range_time_period_hq" min="1" max="6" value="0">
+                          <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="customSwitches_home_quarantine" checked>
+                            <label class="custom-control-label text-warning" for="customSwitches_home_quarantine">
+                              <i class="fas fa-procedures fa-1x text-warning"></i> Apply during 40 days </label>
                           </div>
-                          <span class="font-weight-bold text-primary ml-2 range_time_period_hq"><a id="num_Of_day_hq"></a> days</span>
+                          <!-- <div class="w-75"> -->
+                            <!-- <input type="range" class="custom-range" id="range_time_period_hq" min="1" max="6" value="0"> -->
+                          <!-- </div> -->
+                          <!-- <span class="font-weight-bold text-primary ml-2 range_time_period_hq"><a id="num_Of_day_hq"></a> days</span> -->
                         </div>
                         <!-- closing of schools -->
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Closing of schools </div>
@@ -511,10 +516,15 @@
                         <!-- case isolation -->
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Case isolation </div>
                         <div class="d-flex my-2">
-                          <div class="w-75">
+                          <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="customSwitches_case_isolation" checked>
+                            <label class="custom-control-label text-warning" for="customSwitches_case_isolation">
+                              <i class="fas fa-procedures fa-1x text-warning"></i> Apply during 40 days </label>
+                          </div>
+                          <!-- <div class="w-75">
                             <input type="range" class="custom-range" id="range_time_period_ci" min="1" max="6" value="0">
                           </div>
-                          <span class="font-weight-bold text-primary ml-2 range_time_period_ci"><a id="num_Of_day_ci"></a> days</span>
+                          <span class="font-weight-bold text-primary ml-2 range_time_period_ci"><a id="num_Of_day_ci"></a> days</span> -->
                         </div>
                         <!-- lock down -->
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Lock down </div>

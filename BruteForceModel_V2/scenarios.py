@@ -120,14 +120,17 @@ def scenario():
     for wm in range(0,size):
         scenario_wm_sd = []
         for sd in range(0,size):
+            scenario_wm_sd_cs = []
+            for cs in range(0,size):
 
+                scenario_wm_sd_cs.append({
+                    'duration': 300,
+                    'wearing_mask': [73, 73+(wm*10)],
+                    'social_dist': [73, 73+(sd*10), 6],
+                    'close_schools': [73, 73+(cs*10)]
 
-            scenario_wm_sd.append({
-                'duration': 300,
-                'wearing_mask': [73, 73+(wm*10)],
-                'social_dist': [73, 73+(sd*10), 6],
-
-            })
+                })
+                scenario_wm_sd.append(scenario_wm_sd_cs)
             scenario_matrix.append(scenario_wm_sd)
 
     # --------------------------- Create models --------------------------- #
@@ -135,10 +138,11 @@ def scenario():
 
     for i in range(0,size):
         for j in range(0,size):
-            model.set_scenario(scenario_matrix[i][j])
-            mean_scenar.append(np.mean(model.stochastic_predic(duration=300, parameters=None,nb_simul=200, scenar=True),axis = 2))
+            for k in range(0,size):
+                model.set_scenario(scenario_matrix[i][j][k])
+                mean_scenar.append(np.mean(model.stochastic_predic(duration=300, parameters=None,nb_simul=200, scenar=True),axis = 2))
 
-    for i in range(0,size*size):
+    for i in range(0,size*size*size):
             data_to_export = pd.DataFrame(dict(Date = time,
                                         S = mean_scenar[i][:,0],
                                         E = mean_scenar[i][:,1],
