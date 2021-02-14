@@ -114,7 +114,7 @@ def scenario():
     }
     title_7 = 'Mask + social + quarantine'
     # --------------------------- ALL scenar --------------------------- #
-    size = 10
+    size = 5
 
     scenario_matrix = []
     for wm in range(0,size):
@@ -128,7 +128,7 @@ def scenario():
                 'social_dist': [73, 73+(sd*10), 6],
 
             })
-        scenario_matrix.append(scenario_wm_sd)
+            scenario_matrix.append(scenario_wm_sd)
 
     # --------------------------- Create models --------------------------- #
     mean_scenar = []
@@ -138,7 +138,7 @@ def scenario():
             model.set_scenario(scenario_matrix[i][j])
             mean_scenar.append(np.mean(model.stochastic_predic(duration=300, parameters=None,nb_simul=200, scenar=True),axis = 2))
 
-    for i in range(0,size):
+    for i in range(0,size*size):
             data_to_export = pd.DataFrame(dict(Date = time,
                                         S = mean_scenar[i][:,0],
                                         E = mean_scenar[i][:,1],

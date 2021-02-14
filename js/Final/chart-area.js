@@ -112,10 +112,10 @@ loadData_prof();
 loadData_scenario();
 load_day_wm();
 load_day_sd();
-load_day_hq();
-load_day_cs();
-load_day_ci();
-load_day_ld();
+// load_day_hq();
+// load_day_cs();
+// load_day_ci();
+// load_day_ld();
 
 function load_day_wm(){
   var data = ''
@@ -200,7 +200,33 @@ function load_day_sd(){
 
 
     }
-    
+    if ( ((parseInt(data_day_sd[data_day_sd.length-1])) == 0) && (parseInt(data_day_wm[data_day_wm.length-1])) == 100 )  {
+       $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_5.csv"
+       loadData_scenario()
+    }
+    else if (parseInt(data_day_sd[data_day_sd.length-1]) == 10){
+       $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_6.csv"
+       loadData_scenario()
+    }
+    else if (parseInt(data_day_sd[data_day_sd.length-1]) == 30){
+       $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_7.csv"
+       loadData_scenario()
+    }
+    else if (parseInt(data_day_sd[data_day_sd.length-1]) == 40){
+       $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_8.csv"
+       loadData_scenario()
+    }
+    else if (parseInt(data_day_sd[data_day_sd.length-1]) == 50){
+       $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_9.csv"
+       loadData_scenario()
+    }
+
+
+    var ctx_active_cases = document.getElementById("myAreaSeirModel");
+
+    draw()
+    load_card_value_seir();
+
 
 },
 );
@@ -452,10 +478,10 @@ $value_time_SEIR.on('input change', () => {
   $value_time_period_SEIR.html($value_time_SEIR.val());
   load_day_wm();
   load_day_sd();
-  load_day_hq();
-  load_day_cs();
-  load_day_ci();
-  load_day_ld();
+  // load_day_hq();
+  // load_day_cs();
+  // load_day_ci();
+  // load_day_ld();
   loadData_scenario();
   loadData_prof();
 
@@ -468,10 +494,10 @@ $value_time_wm.on('input change', () => {
   $value_time_period_wm.html($value_time_wm.val());
   load_day_wm();
   load_day_sd();
-  load_day_hq();
-  load_day_cs();
-  load_day_ci();
-  load_day_ld();
+  // load_day_hq();
+  // load_day_cs();
+  // load_day_ci();
+  // load_day_ld();
   loadData_scenario();
   loadData_prof();
 
@@ -482,10 +508,10 @@ $value_time_sd.on('input change', () => {
   $value_time_period_sd.html($value_time_sd.val());
   load_day_wm();
   load_day_sd();
-  load_day_hq();
-  load_day_cs();
-  load_day_ci();
-  load_day_ld();
+  // load_day_hq();
+  // load_day_cs();
+  // load_day_ci();
+  // load_day_ld();
   loadData_scenario();
   loadData_prof();
 
@@ -496,10 +522,10 @@ $value_time_hq.on('input change', () => {
   $value_time_period_hq.html($value_time_hq.val());
   load_day_wm();
   load_day_sd();
-  load_day_hq();
-  load_day_cs();
-  load_day_ci();
-  load_day_ld();
+  // load_day_hq();
+  // load_day_cs();
+  // load_day_ci();
+  // load_day_ld();
   loadData_scenario();
   loadData_prof();
 
@@ -510,10 +536,10 @@ $value_time_cs.on('input change', () => {
   $value_time_period_cs.html($value_time_cs.val());
   load_day_wm();
   load_day_sd();
-  load_day_hq();
-  load_day_cs();
-  load_day_ci();
-  load_day_ld();
+  // load_day_hq();
+  // load_day_cs();
+  // load_day_ci();
+  // load_day_ld();
   loadData_scenario();
   loadData_prof();
 
@@ -524,10 +550,10 @@ $value_time_ci.on('input change', () => {
   $value_time_period_ci.html($value_time_ci.val());
   load_day_wm();
   load_day_sd();
-  load_day_hq();
-  load_day_cs();
-  load_day_ci();
-  load_day_ld();
+  // load_day_hq();
+  // load_day_cs();
+  // load_day_ci();
+  // load_day_ld();
   loadData_scenario();
   loadData_prof();
 
@@ -538,10 +564,10 @@ $value_time_ld.on('input change', () => {
   $value_time_period_ld.html($value_time_ld.val());
   load_day_wm();
   load_day_sd();
-  load_day_hq();
-  load_day_cs();
-  load_day_ci();
-  load_day_ld();
+  // load_day_hq();
+  // load_day_cs();
+  // load_day_ci();
+  // load_day_ld();
   loadData_scenario();
   loadData_prof();
 
@@ -560,10 +586,10 @@ function load_card_value_seir(){
   $("#num_Of_day_seir").html(((parseFloat(data_day[data_day.length-1])+1).toFixed(0)).toString())
   $("#num_Of_day_wm").html(data_day_wm[data_day_wm.length-1])
   $("#num_Of_day_sd").html(data_day_sd[data_day_sd.length-1])
-  $("#num_Of_day_hq").html(data_day_hq[data_day_hq.length-1])
-  $("#num_Of_day_cs").html(data_day_cs[data_day_cs.length-1])
-  $("#num_Of_day_ci").html(data_day_ci[data_day_ci.length-1])
-  $("#num_Of_day_ld").html(data_day_ld[data_day_ld.length-1])
+  // $("#num_Of_day_hq").html(data_day_hq[data_day_hq.length-1])
+  // $("#num_Of_day_cs").html(data_day_cs[data_day_cs.length-1])
+  // $("#num_Of_day_ci").html(data_day_ci[data_day_ci.length-1])
+  // $("#num_Of_day_ld").html(data_day_ld[data_day_ld.length-1])
 
 
 }
