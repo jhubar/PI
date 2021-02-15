@@ -109,14 +109,11 @@ $id_switch_Death.addEventListener('change',function(){
 });
 
 loadData_prof();
-loadData_scenario();
 load_day_wm();
 load_day_sd();
 load_day_cs();
 load_day_constraint();
 
-// load_day_ci();
-// load_day_ld();
 
 function load_day_wm(){
   var data = ''
