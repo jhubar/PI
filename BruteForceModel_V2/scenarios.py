@@ -121,15 +121,17 @@ def scenario():
         scenario_wm_sd = []
         for sd in range(0,size):
             scenario_wm_sd_cs = []
-            # for cs in range(0,size):
-            for ld in range(0,size):
+            for cs in range(0,size):
+            # for ld in range(0,size):
 
                 scenario_wm_sd_cs.append({
                     'duration': 300,
                     'wearing_mask': [73, 73+(wm*10)],
                     'social_dist': [73, 73+(sd*10), 6],
-                    # 'close_schools': [73, 73+(cs*10)]
-                    "lock_down": [73, 73+(ld*10)]
+                    'close_schools': [73, 73+(cs*10)],
+                    # 'home_quarantine': [73, 119],
+                    'case_isolation': [73, 119]
+
 
 
                 })
@@ -168,7 +170,7 @@ def scenario():
                                         )
                                 )
             # data_to_export.to_csv(r'Data_Scenario/scenario_'+str(i)+'.csv', header=True, index=False)
-            data_to_export.to_csv(r'Data_Scenario/scenario_ld_'+str(i)+'.csv', header=True, index=False)
+            data_to_export.to_csv(r'Data_Scenario/scenario_ci_'+str(i)+'.csv', header=True, index=False)
 
 
 
