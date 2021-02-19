@@ -1,0 +1,3006 @@
+[
+  {
+    "Hospit": [
+      {
+        "initial": "1.0",
+        "Social distancing + wearing mask": "1.0",
+        "Social + Mask + School": "1.0",
+        "Mask + Social + quarantine": "1.0",
+        "Mask + Social + Case isolation": "1.0",
+        "Mask + Quarantine + School": "1.0",
+        "Lock down + measures": "1.0",
+        "Mask + social + quarantine": "1.0"
+      },
+      {
+        "initial": "1.46",
+        "Social distancing + wearing mask": "1.46",
+        "Social + Mask + School": "1.46",
+        "Mask + Social + quarantine": "1.46",
+        "Mask + Social + Case isolation": "1.46",
+        "Mask + Quarantine + School": "1.46",
+        "Lock down + measures": "1.46",
+        "Mask + social + quarantine": "1.46"
+      },
+      {
+        "initial": "1.73",
+        "Social distancing + wearing mask": "1.73",
+        "Social + Mask + School": "1.73",
+        "Mask + Social + quarantine": "1.73",
+        "Mask + Social + Case isolation": "1.73",
+        "Mask + Quarantine + School": "1.73",
+        "Lock down + measures": "1.73",
+        "Mask + social + quarantine": "1.73"
+      },
+      {
+        "initial": "2.09",
+        "Social distancing + wearing mask": "2.09",
+        "Social + Mask + School": "2.09",
+        "Mask + Social + quarantine": "2.09",
+        "Mask + Social + Case isolation": "2.09",
+        "Mask + Quarantine + School": "2.09",
+        "Lock down + measures": "2.09",
+        "Mask + social + quarantine": "2.09"
+      },
+      {
+        "initial": "2.56",
+        "Social distancing + wearing mask": "2.56",
+        "Social + Mask + School": "2.56",
+        "Mask + Social + quarantine": "2.56",
+        "Mask + Social + Case isolation": "2.56",
+        "Mask + Quarantine + School": "2.56",
+        "Lock down + measures": "2.56",
+        "Mask + social + quarantine": "2.56"
+      },
+      {
+        "initial": "2.99",
+        "Social distancing + wearing mask": "2.99",
+        "Social + Mask + School": "2.99",
+        "Mask + Social + quarantine": "2.99",
+        "Mask + Social + Case isolation": "2.99",
+        "Mask + Quarantine + School": "2.99",
+        "Lock down + measures": "2.99",
+        "Mask + social + quarantine": "2.99"
+      },
+      {
+        "initial": "3.45",
+        "Social distancing + wearing mask": "3.45",
+        "Social + Mask + School": "3.45",
+        "Mask + Social + quarantine": "3.45",
+        "Mask + Social + Case isolation": "3.45",
+        "Mask + Quarantine + School": "3.45",
+        "Lock down + measures": "3.45",
+        "Mask + social + quarantine": "3.45"
+      },
+      {
+        "initial": "3.67",
+        "Social distancing + wearing mask": "3.67",
+        "Social + Mask + School": "3.67",
+        "Mask + Social + quarantine": "3.67",
+        "Mask + Social + Case isolation": "3.67",
+        "Mask + Quarantine + School": "3.67",
+        "Lock down + measures": "3.67",
+        "Mask + social + quarantine": "3.67"
+      },
+      {
+        "initial": "4.28",
+        "Social distancing + wearing mask": "4.28",
+        "Social + Mask + School": "4.28",
+        "Mask + Social + quarantine": "4.28",
+        "Mask + Social + Case isolation": "4.28",
+        "Mask + Quarantine + School": "4.28",
+        "Lock down + measures": "4.28",
+        "Mask + social + quarantine": "4.28"
+      },
+      {
+        "initial": "4.68",
+        "Social distancing + wearing mask": "4.68",
+        "Social + Mask + School": "4.68",
+        "Mask + Social + quarantine": "4.68",
+        "Mask + Social + Case isolation": "4.68",
+        "Mask + Quarantine + School": "4.68",
+        "Lock down + measures": "4.68",
+        "Mask + social + quarantine": "4.68"
+      },
+      {
+        "initial": "5.185",
+        "Social distancing + wearing mask": "5.185",
+        "Social + Mask + School": "5.185",
+        "Mask + Social + quarantine": "5.185",
+        "Mask + Social + Case isolation": "5.185",
+        "Mask + Quarantine + School": "5.185",
+        "Lock down + measures": "5.185",
+        "Mask + social + quarantine": "5.185"
+      },
+      {
+        "initial": "5.665",
+        "Social distancing + wearing mask": "5.665",
+        "Social + Mask + School": "5.665",
+        "Mask + Social + quarantine": "5.665",
+        "Mask + Social + Case isolation": "5.665",
+        "Mask + Quarantine + School": "5.665",
+        "Lock down + measures": "5.665",
+        "Mask + social + quarantine": "5.665"
+      },
+      {
+        "initial": "6.35",
+        "Social distancing + wearing mask": "6.35",
+        "Social + Mask + School": "6.35",
+        "Mask + Social + quarantine": "6.35",
+        "Mask + Social + Case isolation": "6.35",
+        "Mask + Quarantine + School": "6.35",
+        "Lock down + measures": "6.35",
+        "Mask + social + quarantine": "6.35"
+      },
+      {
+        "initial": "6.97",
+        "Social distancing + wearing mask": "6.97",
+        "Social + Mask + School": "6.97",
+        "Mask + Social + quarantine": "6.97",
+        "Mask + Social + Case isolation": "6.97",
+        "Mask + Quarantine + School": "6.97",
+        "Lock down + measures": "6.97",
+        "Mask + social + quarantine": "6.97"
+      },
+      {
+        "initial": "7.795",
+        "Social distancing + wearing mask": "7.795",
+        "Social + Mask + School": "7.795",
+        "Mask + Social + quarantine": "7.795",
+        "Mask + Social + Case isolation": "7.795",
+        "Mask + Quarantine + School": "7.795",
+        "Lock down + measures": "7.795",
+        "Mask + social + quarantine": "7.795"
+      },
+      {
+        "initial": "8.5",
+        "Social distancing + wearing mask": "8.5",
+        "Social + Mask + School": "8.5",
+        "Mask + Social + quarantine": "8.5",
+        "Mask + Social + Case isolation": "8.5",
+        "Mask + Quarantine + School": "8.5",
+        "Lock down + measures": "8.5",
+        "Mask + social + quarantine": "8.5"
+      },
+      {
+        "initial": "9.475",
+        "Social distancing + wearing mask": "9.475",
+        "Social + Mask + School": "9.475",
+        "Mask + Social + quarantine": "9.475",
+        "Mask + Social + Case isolation": "9.475",
+        "Mask + Quarantine + School": "9.475",
+        "Lock down + measures": "9.475",
+        "Mask + social + quarantine": "9.475"
+      },
+      {
+        "initial": "10.415",
+        "Social distancing + wearing mask": "10.415",
+        "Social + Mask + School": "10.415",
+        "Mask + Social + quarantine": "10.415",
+        "Mask + Social + Case isolation": "10.415",
+        "Mask + Quarantine + School": "10.415",
+        "Lock down + measures": "10.415",
+        "Mask + social + quarantine": "10.415"
+      },
+      {
+        "initial": "11.51",
+        "Social distancing + wearing mask": "11.51",
+        "Social + Mask + School": "11.51",
+        "Mask + Social + quarantine": "11.51",
+        "Mask + Social + Case isolation": "11.51",
+        "Mask + Quarantine + School": "11.51",
+        "Lock down + measures": "11.51",
+        "Mask + social + quarantine": "11.51"
+      },
+      {
+        "initial": "12.355",
+        "Social distancing + wearing mask": "12.355",
+        "Social + Mask + School": "12.355",
+        "Mask + Social + quarantine": "12.355",
+        "Mask + Social + Case isolation": "12.355",
+        "Mask + Quarantine + School": "12.355",
+        "Lock down + measures": "12.355",
+        "Mask + social + quarantine": "12.355"
+      },
+      {
+        "initial": "13.62",
+        "Social distancing + wearing mask": "13.62",
+        "Social + Mask + School": "13.62",
+        "Mask + Social + quarantine": "13.62",
+        "Mask + Social + Case isolation": "13.62",
+        "Mask + Quarantine + School": "13.62",
+        "Lock down + measures": "13.62",
+        "Mask + social + quarantine": "13.62"
+      },
+      {
+        "initial": "14.69",
+        "Social distancing + wearing mask": "14.69",
+        "Social + Mask + School": "14.69",
+        "Mask + Social + quarantine": "14.69",
+        "Mask + Social + Case isolation": "14.69",
+        "Mask + Quarantine + School": "14.69",
+        "Lock down + measures": "14.69",
+        "Mask + social + quarantine": "14.69"
+      },
+      {
+        "initial": "15.835",
+        "Social distancing + wearing mask": "15.835",
+        "Social + Mask + School": "15.835",
+        "Mask + Social + quarantine": "15.835",
+        "Mask + Social + Case isolation": "15.835",
+        "Mask + Quarantine + School": "15.835",
+        "Lock down + measures": "15.835",
+        "Mask + social + quarantine": "15.835"
+      },
+      {
+        "initial": "16.975",
+        "Social distancing + wearing mask": "16.975",
+        "Social + Mask + School": "16.975",
+        "Mask + Social + quarantine": "16.975",
+        "Mask + Social + Case isolation": "16.975",
+        "Mask + Quarantine + School": "16.975",
+        "Lock down + measures": "16.975",
+        "Mask + social + quarantine": "16.975"
+      },
+      {
+        "initial": "18.45",
+        "Social distancing + wearing mask": "18.45",
+        "Social + Mask + School": "18.45",
+        "Mask + Social + quarantine": "18.45",
+        "Mask + Social + Case isolation": "18.45",
+        "Mask + Quarantine + School": "18.45",
+        "Lock down + measures": "18.45",
+        "Mask + social + quarantine": "18.45"
+      },
+      {
+        "initial": "19.725",
+        "Social distancing + wearing mask": "19.725",
+        "Social + Mask + School": "19.725",
+        "Mask + Social + quarantine": "19.725",
+        "Mask + Social + Case isolation": "19.725",
+        "Mask + Quarantine + School": "19.725",
+        "Lock down + measures": "19.725",
+        "Mask + social + quarantine": "19.725"
+      },
+      {
+        "initial": "21.62",
+        "Social distancing + wearing mask": "21.62",
+        "Social + Mask + School": "21.62",
+        "Mask + Social + quarantine": "21.62",
+        "Mask + Social + Case isolation": "21.62",
+        "Mask + Quarantine + School": "21.62",
+        "Lock down + measures": "21.62",
+        "Mask + social + quarantine": "21.62"
+      },
+      {
+        "initial": "23.355",
+        "Social distancing + wearing mask": "23.355",
+        "Social + Mask + School": "23.355",
+        "Mask + Social + quarantine": "23.355",
+        "Mask + Social + Case isolation": "23.355",
+        "Mask + Quarantine + School": "23.355",
+        "Lock down + measures": "23.355",
+        "Mask + social + quarantine": "23.355"
+      },
+      {
+        "initial": "25.39",
+        "Social distancing + wearing mask": "25.39",
+        "Social + Mask + School": "25.39",
+        "Mask + Social + quarantine": "25.39",
+        "Mask + Social + Case isolation": "25.39",
+        "Mask + Quarantine + School": "25.39",
+        "Lock down + measures": "25.39",
+        "Mask + social + quarantine": "25.39"
+      },
+      {
+        "initial": "27.39",
+        "Social distancing + wearing mask": "27.39",
+        "Social + Mask + School": "27.39",
+        "Mask + Social + quarantine": "27.39",
+        "Mask + Social + Case isolation": "27.39",
+        "Mask + Quarantine + School": "27.39",
+        "Lock down + measures": "27.39",
+        "Mask + social + quarantine": "27.39"
+      },
+      {
+        "initial": "29.085",
+        "Social distancing + wearing mask": "29.085",
+        "Social + Mask + School": "29.085",
+        "Mask + Social + quarantine": "29.085",
+        "Mask + Social + Case isolation": "29.085",
+        "Mask + Quarantine + School": "29.085",
+        "Lock down + measures": "29.085",
+        "Mask + social + quarantine": "29.085"
+      },
+      {
+        "initial": "31.635",
+        "Social distancing + wearing mask": "31.635",
+        "Social + Mask + School": "31.635",
+        "Mask + Social + quarantine": "31.635",
+        "Mask + Social + Case isolation": "31.635",
+        "Mask + Quarantine + School": "31.635",
+        "Lock down + measures": "31.635",
+        "Mask + social + quarantine": "31.635"
+      },
+      {
+        "initial": "33.82",
+        "Social distancing + wearing mask": "33.82",
+        "Social + Mask + School": "33.82",
+        "Mask + Social + quarantine": "33.82",
+        "Mask + Social + Case isolation": "33.82",
+        "Mask + Quarantine + School": "33.82",
+        "Lock down + measures": "33.82",
+        "Mask + social + quarantine": "33.82"
+      },
+      {
+        "initial": "36.325",
+        "Social distancing + wearing mask": "36.325",
+        "Social + Mask + School": "36.325",
+        "Mask + Social + quarantine": "36.325",
+        "Mask + Social + Case isolation": "36.325",
+        "Mask + Quarantine + School": "36.325",
+        "Lock down + measures": "36.325",
+        "Mask + social + quarantine": "36.325"
+      },
+      {
+        "initial": "38.855",
+        "Social distancing + wearing mask": "38.855",
+        "Social + Mask + School": "38.855",
+        "Mask + Social + quarantine": "38.855",
+        "Mask + Social + Case isolation": "38.855",
+        "Mask + Quarantine + School": "38.855",
+        "Lock down + measures": "38.855",
+        "Mask + social + quarantine": "38.855"
+      },
+      {
+        "initial": "41.87",
+        "Social distancing + wearing mask": "41.87",
+        "Social + Mask + School": "41.87",
+        "Mask + Social + quarantine": "41.87",
+        "Mask + Social + Case isolation": "41.87",
+        "Mask + Quarantine + School": "41.87",
+        "Lock down + measures": "41.87",
+        "Mask + social + quarantine": "41.87"
+      },
+      {
+        "initial": "45.315",
+        "Social distancing + wearing mask": "45.315",
+        "Social + Mask + School": "45.315",
+        "Mask + Social + quarantine": "45.315",
+        "Mask + Social + Case isolation": "45.315",
+        "Mask + Quarantine + School": "45.315",
+        "Lock down + measures": "45.315",
+        "Mask + social + quarantine": "45.315"
+      },
+      {
+        "initial": "48.97",
+        "Social distancing + wearing mask": "48.97",
+        "Social + Mask + School": "48.97",
+        "Mask + Social + quarantine": "48.97",
+        "Mask + Social + Case isolation": "48.97",
+        "Mask + Quarantine + School": "48.97",
+        "Lock down + measures": "48.97",
+        "Mask + social + quarantine": "48.97"
+      },
+      {
+        "initial": "53.075",
+        "Social distancing + wearing mask": "53.075",
+        "Social + Mask + School": "53.075",
+        "Mask + Social + quarantine": "53.075",
+        "Mask + Social + Case isolation": "53.075",
+        "Mask + Quarantine + School": "53.075",
+        "Lock down + measures": "53.075",
+        "Mask + social + quarantine": "53.075"
+      },
+      {
+        "initial": "57.725",
+        "Social distancing + wearing mask": "57.725",
+        "Social + Mask + School": "57.725",
+        "Mask + Social + quarantine": "57.725",
+        "Mask + Social + Case isolation": "57.725",
+        "Mask + Quarantine + School": "57.725",
+        "Lock down + measures": "57.725",
+        "Mask + social + quarantine": "57.725"
+      },
+      {
+        "initial": "62.88",
+        "Social distancing + wearing mask": "62.88",
+        "Social + Mask + School": "62.88",
+        "Mask + Social + quarantine": "62.88",
+        "Mask + Social + Case isolation": "62.88",
+        "Mask + Quarantine + School": "62.88",
+        "Lock down + measures": "62.88",
+        "Mask + social + quarantine": "62.88"
+      },
+      {
+        "initial": "67.5",
+        "Social distancing + wearing mask": "67.5",
+        "Social + Mask + School": "67.5",
+        "Mask + Social + quarantine": "67.5",
+        "Mask + Social + Case isolation": "67.5",
+        "Mask + Quarantine + School": "67.5",
+        "Lock down + measures": "67.5",
+        "Mask + social + quarantine": "67.5"
+      },
+      {
+        "initial": "73.18",
+        "Social distancing + wearing mask": "73.18",
+        "Social + Mask + School": "73.18",
+        "Mask + Social + quarantine": "73.18",
+        "Mask + Social + Case isolation": "73.18",
+        "Mask + Quarantine + School": "73.18",
+        "Lock down + measures": "73.18",
+        "Mask + social + quarantine": "73.18"
+      },
+      {
+        "initial": "79.565",
+        "Social distancing + wearing mask": "79.565",
+        "Social + Mask + School": "79.565",
+        "Mask + Social + quarantine": "79.565",
+        "Mask + Social + Case isolation": "79.565",
+        "Mask + Quarantine + School": "79.565",
+        "Lock down + measures": "79.565",
+        "Mask + social + quarantine": "79.565"
+      },
+      {
+        "initial": "85.75",
+        "Social distancing + wearing mask": "85.75",
+        "Social + Mask + School": "85.75",
+        "Mask + Social + quarantine": "85.75",
+        "Mask + Social + Case isolation": "85.75",
+        "Mask + Quarantine + School": "85.75",
+        "Lock down + measures": "85.75",
+        "Mask + social + quarantine": "85.75"
+      },
+      {
+        "initial": "92.965",
+        "Social distancing + wearing mask": "92.965",
+        "Social + Mask + School": "92.965",
+        "Mask + Social + quarantine": "92.965",
+        "Mask + Social + Case isolation": "92.965",
+        "Mask + Quarantine + School": "92.965",
+        "Lock down + measures": "92.965",
+        "Mask + social + quarantine": "92.965"
+      },
+      {
+        "initial": "100.44",
+        "Social distancing + wearing mask": "100.44",
+        "Social + Mask + School": "100.44",
+        "Mask + Social + quarantine": "100.44",
+        "Mask + Social + Case isolation": "100.44",
+        "Mask + Quarantine + School": "100.44",
+        "Lock down + measures": "100.44",
+        "Mask + social + quarantine": "100.44"
+      },
+      {
+        "initial": "108.91",
+        "Social distancing + wearing mask": "108.91",
+        "Social + Mask + School": "108.91",
+        "Mask + Social + quarantine": "108.91",
+        "Mask + Social + Case isolation": "108.91",
+        "Mask + Quarantine + School": "108.91",
+        "Lock down + measures": "108.91",
+        "Mask + social + quarantine": "108.91"
+      },
+      {
+        "initial": "117.59",
+        "Social distancing + wearing mask": "117.59",
+        "Social + Mask + School": "117.59",
+        "Mask + Social + quarantine": "117.59",
+        "Mask + Social + Case isolation": "117.59",
+        "Mask + Quarantine + School": "117.59",
+        "Lock down + measures": "117.59",
+        "Mask + social + quarantine": "117.59"
+      },
+      {
+        "initial": "127.39",
+        "Social distancing + wearing mask": "127.39",
+        "Social + Mask + School": "127.39",
+        "Mask + Social + quarantine": "127.39",
+        "Mask + Social + Case isolation": "127.39",
+        "Mask + Quarantine + School": "127.39",
+        "Lock down + measures": "127.39",
+        "Mask + social + quarantine": "127.39"
+      },
+      {
+        "initial": "137.285",
+        "Social distancing + wearing mask": "137.285",
+        "Social + Mask + School": "137.285",
+        "Mask + Social + quarantine": "137.285",
+        "Mask + Social + Case isolation": "137.285",
+        "Mask + Quarantine + School": "137.285",
+        "Lock down + measures": "137.285",
+        "Mask + social + quarantine": "137.285"
+      },
+      {
+        "initial": "148.895",
+        "Social distancing + wearing mask": "148.895",
+        "Social + Mask + School": "148.895",
+        "Mask + Social + quarantine": "148.895",
+        "Mask + Social + Case isolation": "148.895",
+        "Mask + Quarantine + School": "148.895",
+        "Lock down + measures": "148.895",
+        "Mask + social + quarantine": "148.895"
+      },
+      {
+        "initial": "161.42",
+        "Social distancing + wearing mask": "161.42",
+        "Social + Mask + School": "161.42",
+        "Mask + Social + quarantine": "161.42",
+        "Mask + Social + Case isolation": "161.42",
+        "Mask + Quarantine + School": "161.42",
+        "Lock down + measures": "161.42",
+        "Mask + social + quarantine": "161.42"
+      },
+      {
+        "initial": "175.12",
+        "Social distancing + wearing mask": "175.12",
+        "Social + Mask + School": "175.12",
+        "Mask + Social + quarantine": "175.12",
+        "Mask + Social + Case isolation": "175.12",
+        "Mask + Quarantine + School": "175.12",
+        "Lock down + measures": "175.12",
+        "Mask + social + quarantine": "175.12"
+      },
+      {
+        "initial": "189.465",
+        "Social distancing + wearing mask": "189.465",
+        "Social + Mask + School": "189.465",
+        "Mask + Social + quarantine": "189.465",
+        "Mask + Social + Case isolation": "189.465",
+        "Mask + Quarantine + School": "189.465",
+        "Lock down + measures": "189.465",
+        "Mask + social + quarantine": "189.465"
+      },
+      {
+        "initial": "205.53",
+        "Social distancing + wearing mask": "205.53",
+        "Social + Mask + School": "205.53",
+        "Mask + Social + quarantine": "205.53",
+        "Mask + Social + Case isolation": "205.53",
+        "Mask + Quarantine + School": "205.53",
+        "Lock down + measures": "205.53",
+        "Mask + social + quarantine": "205.53"
+      },
+      {
+        "initial": "222.09",
+        "Social distancing + wearing mask": "222.09",
+        "Social + Mask + School": "222.09",
+        "Mask + Social + quarantine": "222.09",
+        "Mask + Social + Case isolation": "222.09",
+        "Mask + Quarantine + School": "222.09",
+        "Lock down + measures": "222.09",
+        "Mask + social + quarantine": "222.09"
+      },
+      {
+        "initial": "239.25",
+        "Social distancing + wearing mask": "239.25",
+        "Social + Mask + School": "239.25",
+        "Mask + Social + quarantine": "239.25",
+        "Mask + Social + Case isolation": "239.25",
+        "Mask + Quarantine + School": "239.25",
+        "Lock down + measures": "239.25",
+        "Mask + social + quarantine": "239.25"
+      },
+      {
+        "initial": "257.73",
+        "Social distancing + wearing mask": "257.73",
+        "Social + Mask + School": "257.73",
+        "Mask + Social + quarantine": "257.73",
+        "Mask + Social + Case isolation": "257.73",
+        "Mask + Quarantine + School": "257.73",
+        "Lock down + measures": "257.73",
+        "Mask + social + quarantine": "257.73"
+      },
+      {
+        "initial": "277.135",
+        "Social distancing + wearing mask": "277.135",
+        "Social + Mask + School": "277.135",
+        "Mask + Social + quarantine": "277.135",
+        "Mask + Social + Case isolation": "277.135",
+        "Mask + Quarantine + School": "277.135",
+        "Lock down + measures": "277.135",
+        "Mask + social + quarantine": "277.135"
+      },
+      {
+        "initial": "300.145",
+        "Social distancing + wearing mask": "300.145",
+        "Social + Mask + School": "300.145",
+        "Mask + Social + quarantine": "300.145",
+        "Mask + Social + Case isolation": "300.145",
+        "Mask + Quarantine + School": "300.145",
+        "Lock down + measures": "300.145",
+        "Mask + social + quarantine": "300.145"
+      },
+      {
+        "initial": "324.235",
+        "Social distancing + wearing mask": "324.235",
+        "Social + Mask + School": "324.235",
+        "Mask + Social + quarantine": "324.235",
+        "Mask + Social + Case isolation": "324.235",
+        "Mask + Quarantine + School": "324.235",
+        "Lock down + measures": "324.235",
+        "Mask + social + quarantine": "324.235"
+      },
+      {
+        "initial": "349.845",
+        "Social distancing + wearing mask": "349.845",
+        "Social + Mask + School": "349.845",
+        "Mask + Social + quarantine": "349.845",
+        "Mask + Social + Case isolation": "349.845",
+        "Mask + Quarantine + School": "349.845",
+        "Lock down + measures": "349.845",
+        "Mask + social + quarantine": "349.845"
+      },
+      {
+        "initial": "376.455",
+        "Social distancing + wearing mask": "376.455",
+        "Social + Mask + School": "376.455",
+        "Mask + Social + quarantine": "376.455",
+        "Mask + Social + Case isolation": "376.455",
+        "Mask + Quarantine + School": "376.455",
+        "Lock down + measures": "376.455",
+        "Mask + social + quarantine": "376.455"
+      },
+      {
+        "initial": "405.62",
+        "Social distancing + wearing mask": "405.62",
+        "Social + Mask + School": "405.62",
+        "Mask + Social + quarantine": "405.62",
+        "Mask + Social + Case isolation": "405.62",
+        "Mask + Quarantine + School": "405.62",
+        "Lock down + measures": "405.62",
+        "Mask + social + quarantine": "405.62"
+      },
+      {
+        "initial": "435.91",
+        "Social distancing + wearing mask": "435.91",
+        "Social + Mask + School": "435.91",
+        "Mask + Social + quarantine": "435.91",
+        "Mask + Social + Case isolation": "435.91",
+        "Mask + Quarantine + School": "435.91",
+        "Lock down + measures": "435.91",
+        "Mask + social + quarantine": "435.91"
+      },
+      {
+        "initial": "470.635",
+        "Social distancing + wearing mask": "470.635",
+        "Social + Mask + School": "470.635",
+        "Mask + Social + quarantine": "470.635",
+        "Mask + Social + Case isolation": "470.635",
+        "Mask + Quarantine + School": "470.635",
+        "Lock down + measures": "470.635",
+        "Mask + social + quarantine": "470.635"
+      },
+      {
+        "initial": "506.7",
+        "Social distancing + wearing mask": "506.7",
+        "Social + Mask + School": "506.7",
+        "Mask + Social + quarantine": "506.7",
+        "Mask + Social + Case isolation": "506.7",
+        "Mask + Quarantine + School": "506.7",
+        "Lock down + measures": "506.7",
+        "Mask + social + quarantine": "506.7"
+      },
+      {
+        "initial": "544.695",
+        "Social distancing + wearing mask": "544.695",
+        "Social + Mask + School": "544.695",
+        "Mask + Social + quarantine": "544.695",
+        "Mask + Social + Case isolation": "544.695",
+        "Mask + Quarantine + School": "544.695",
+        "Lock down + measures": "544.695",
+        "Mask + social + quarantine": "544.695"
+      },
+      {
+        "initial": "584.26",
+        "Social distancing + wearing mask": "584.26",
+        "Social + Mask + School": "584.26",
+        "Mask + Social + quarantine": "584.26",
+        "Mask + Social + Case isolation": "584.26",
+        "Mask + Quarantine + School": "584.26",
+        "Lock down + measures": "584.26",
+        "Mask + social + quarantine": "584.26"
+      },
+      {
+        "initial": "629.135",
+        "Social distancing + wearing mask": "629.135",
+        "Social + Mask + School": "629.135",
+        "Mask + Social + quarantine": "629.135",
+        "Mask + Social + Case isolation": "629.135",
+        "Mask + Quarantine + School": "629.135",
+        "Lock down + measures": "629.135",
+        "Mask + social + quarantine": "629.135"
+      },
+      {
+        "initial": "675.955",
+        "Social distancing + wearing mask": "675.955",
+        "Social + Mask + School": "675.955",
+        "Mask + Social + quarantine": "675.955",
+        "Mask + Social + Case isolation": "675.955",
+        "Mask + Quarantine + School": "675.955",
+        "Lock down + measures": "675.955",
+        "Mask + social + quarantine": "675.955"
+      },
+      {
+        "initial": "724.77",
+        "Social distancing + wearing mask": "724.77",
+        "Social + Mask + School": "724.77",
+        "Mask + Social + quarantine": "724.77",
+        "Mask + Social + Case isolation": "724.77",
+        "Mask + Quarantine + School": "724.77",
+        "Lock down + measures": "724.77",
+        "Mask + social + quarantine": "724.77"
+      },
+      {
+        "initial": "775.79",
+        "Social distancing + wearing mask": "775.79",
+        "Social + Mask + School": "775.79",
+        "Mask + Social + quarantine": "775.79",
+        "Mask + Social + Case isolation": "775.79",
+        "Mask + Quarantine + School": "775.79",
+        "Lock down + measures": "775.79",
+        "Mask + social + quarantine": "775.79"
+      },
+      {
+        "initial": "832.27",
+        "Social distancing + wearing mask": "832.27",
+        "Social + Mask + School": "832.27",
+        "Mask + Social + quarantine": "832.27",
+        "Mask + Social + Case isolation": "832.27",
+        "Mask + Quarantine + School": "832.27",
+        "Lock down + measures": "832.27",
+        "Mask + social + quarantine": "832.27"
+      },
+      {
+        "initial": "892.7",
+        "Social distancing + wearing mask": "892.7",
+        "Social + Mask + School": "892.7",
+        "Mask + Social + quarantine": "892.7",
+        "Mask + Social + Case isolation": "892.7",
+        "Mask + Quarantine + School": "892.7",
+        "Lock down + measures": "892.7",
+        "Mask + social + quarantine": "892.7"
+      },
+      {
+        "initial": "954.595",
+        "Social distancing + wearing mask": "954.595",
+        "Social + Mask + School": "954.595",
+        "Mask + Social + quarantine": "954.595",
+        "Mask + Social + Case isolation": "954.595",
+        "Mask + Quarantine + School": "954.595",
+        "Lock down + measures": "954.595",
+        "Mask + social + quarantine": "954.595"
+      },
+      {
+        "initial": "1021.315",
+        "Social distancing + wearing mask": "1021.315",
+        "Social + Mask + School": "1021.315",
+        "Mask + Social + quarantine": "1021.315",
+        "Mask + Social + Case isolation": "1021.315",
+        "Mask + Quarantine + School": "1021.315",
+        "Lock down + measures": "1021.315",
+        "Mask + social + quarantine": "1021.315"
+      },
+      {
+        "initial": "1091.23",
+        "Social distancing + wearing mask": "1091.23",
+        "Social + Mask + School": "1091.23",
+        "Mask + Social + quarantine": "1091.23",
+        "Mask + Social + Case isolation": "1091.23",
+        "Mask + Quarantine + School": "1091.23",
+        "Lock down + measures": "1091.23",
+        "Mask + social + quarantine": "1091.23"
+      },
+      {
+        "initial": "1167.64",
+        "Social distancing + wearing mask": "1167.64",
+        "Social + Mask + School": "1167.64",
+        "Mask + Social + quarantine": "1167.64",
+        "Mask + Social + Case isolation": "1167.64",
+        "Mask + Quarantine + School": "1167.64",
+        "Lock down + measures": "1167.64",
+        "Mask + social + quarantine": "1167.64"
+      },
+      {
+        "initial": "1247.195",
+        "Social distancing + wearing mask": "1247.195",
+        "Social + Mask + School": "1247.195",
+        "Mask + Social + quarantine": "1247.195",
+        "Mask + Social + Case isolation": "1247.195",
+        "Mask + Quarantine + School": "1247.195",
+        "Lock down + measures": "1247.195",
+        "Mask + social + quarantine": "1247.195"
+      },
+      {
+        "initial": "1332.105",
+        "Social distancing + wearing mask": "1332.105",
+        "Social + Mask + School": "1332.105",
+        "Mask + Social + quarantine": "1332.105",
+        "Mask + Social + Case isolation": "1332.105",
+        "Mask + Quarantine + School": "1332.105",
+        "Lock down + measures": "1332.105",
+        "Mask + social + quarantine": "1332.105"
+      },
+      {
+        "initial": "1422.055",
+        "Social distancing + wearing mask": "1422.055",
+        "Social + Mask + School": "1422.055",
+        "Mask + Social + quarantine": "1422.055",
+        "Mask + Social + Case isolation": "1422.055",
+        "Mask + Quarantine + School": "1422.055",
+        "Lock down + measures": "1422.055",
+        "Mask + social + quarantine": "1422.055"
+      },
+      {
+        "initial": "1512.925",
+        "Social distancing + wearing mask": "1512.925",
+        "Social + Mask + School": "1512.925",
+        "Mask + Social + quarantine": "1512.925",
+        "Mask + Social + Case isolation": "1512.925",
+        "Mask + Quarantine + School": "1512.925",
+        "Lock down + measures": "1512.925",
+        "Mask + social + quarantine": "1512.925"
+      },
+      {
+        "initial": "1608.465",
+        "Social distancing + wearing mask": "1608.465",
+        "Social + Mask + School": "1608.465",
+        "Mask + Social + quarantine": "1608.465",
+        "Mask + Social + Case isolation": "1608.465",
+        "Mask + Quarantine + School": "1608.465",
+        "Lock down + measures": "1608.465",
+        "Mask + social + quarantine": "1608.465"
+      },
+      {
+        "initial": "1711.855",
+        "Social distancing + wearing mask": "1711.855",
+        "Social + Mask + School": "1711.855",
+        "Mask + Social + quarantine": "1711.855",
+        "Mask + Social + Case isolation": "1711.855",
+        "Mask + Quarantine + School": "1711.855",
+        "Lock down + measures": "1711.855",
+        "Mask + social + quarantine": "1711.855"
+      },
+      {
+        "initial": "1816.315",
+        "Social distancing + wearing mask": "1816.315",
+        "Social + Mask + School": "1816.315",
+        "Mask + Social + quarantine": "1816.315",
+        "Mask + Social + Case isolation": "1816.315",
+        "Mask + Quarantine + School": "1816.315",
+        "Lock down + measures": "1816.315",
+        "Mask + social + quarantine": "1816.315"
+      },
+      {
+        "initial": "1926.915",
+        "Social distancing + wearing mask": "1926.915",
+        "Social + Mask + School": "1926.915",
+        "Mask + Social + quarantine": "1926.915",
+        "Mask + Social + Case isolation": "1926.915",
+        "Mask + Quarantine + School": "1926.915",
+        "Lock down + measures": "1926.915",
+        "Mask + social + quarantine": "1926.915"
+      },
+      {
+        "initial": "2040.785",
+        "Social distancing + wearing mask": "2040.785",
+        "Social + Mask + School": "2040.785",
+        "Mask + Social + quarantine": "2040.785",
+        "Mask + Social + Case isolation": "2040.785",
+        "Mask + Quarantine + School": "2040.785",
+        "Lock down + measures": "2040.785",
+        "Mask + social + quarantine": "2040.785"
+      },
+      {
+        "initial": "2158.005",
+        "Social distancing + wearing mask": "2158.005",
+        "Social + Mask + School": "2158.005",
+        "Mask + Social + quarantine": "2158.005",
+        "Mask + Social + Case isolation": "2158.005",
+        "Mask + Quarantine + School": "2158.005",
+        "Lock down + measures": "2158.005",
+        "Mask + social + quarantine": "2158.005"
+      },
+      {
+        "initial": "2275.58",
+        "Social distancing + wearing mask": "2275.58",
+        "Social + Mask + School": "2275.58",
+        "Mask + Social + quarantine": "2275.58",
+        "Mask + Social + Case isolation": "2275.58",
+        "Mask + Quarantine + School": "2275.58",
+        "Lock down + measures": "2275.58",
+        "Mask + social + quarantine": "2275.58"
+      },
+      {
+        "initial": "2396.89",
+        "Social distancing + wearing mask": "2396.89",
+        "Social + Mask + School": "2396.89",
+        "Mask + Social + quarantine": "2396.89",
+        "Mask + Social + Case isolation": "2396.89",
+        "Mask + Quarantine + School": "2396.89",
+        "Lock down + measures": "2396.89",
+        "Mask + social + quarantine": "2396.89"
+      },
+      {
+        "initial": "2521.72",
+        "Social distancing + wearing mask": "2521.72",
+        "Social + Mask + School": "2521.72",
+        "Mask + Social + quarantine": "2521.72",
+        "Mask + Social + Case isolation": "2521.72",
+        "Mask + Quarantine + School": "2521.72",
+        "Lock down + measures": "2521.72",
+        "Mask + social + quarantine": "2521.72"
+      },
+      {
+        "initial": "2648.335",
+        "Social distancing + wearing mask": "2648.335",
+        "Social + Mask + School": "2648.335",
+        "Mask + Social + quarantine": "2648.335",
+        "Mask + Social + Case isolation": "2648.335",
+        "Mask + Quarantine + School": "2648.335",
+        "Lock down + measures": "2648.335",
+        "Mask + social + quarantine": "2648.335"
+      },
+      {
+        "initial": "2778.16",
+        "Social distancing + wearing mask": "2778.16",
+        "Social + Mask + School": "2778.16",
+        "Mask + Social + quarantine": "2778.16",
+        "Mask + Social + Case isolation": "2778.16",
+        "Mask + Quarantine + School": "2778.16",
+        "Lock down + measures": "2778.16",
+        "Mask + social + quarantine": "2778.16"
+      },
+      {
+        "initial": "2907.925",
+        "Social distancing + wearing mask": "2907.925",
+        "Social + Mask + School": "2907.925",
+        "Mask + Social + quarantine": "2907.925",
+        "Mask + Social + Case isolation": "2907.925",
+        "Mask + Quarantine + School": "2907.925",
+        "Lock down + measures": "2907.925",
+        "Mask + social + quarantine": "2907.925"
+      },
+      {
+        "initial": "3038.92",
+        "Social distancing + wearing mask": "3038.92",
+        "Social + Mask + School": "3038.92",
+        "Mask + Social + quarantine": "3038.92",
+        "Mask + Social + Case isolation": "3038.92",
+        "Mask + Quarantine + School": "3038.92",
+        "Lock down + measures": "3038.92",
+        "Mask + social + quarantine": "3038.92"
+      },
+      {
+        "initial": "3166.225",
+        "Social distancing + wearing mask": "3166.225",
+        "Social + Mask + School": "3166.225",
+        "Mask + Social + quarantine": "3166.225",
+        "Mask + Social + Case isolation": "3166.225",
+        "Mask + Quarantine + School": "3166.225",
+        "Lock down + measures": "3166.225",
+        "Mask + social + quarantine": "3166.225"
+      },
+      {
+        "initial": "3295.17",
+        "Social distancing + wearing mask": "3295.17",
+        "Social + Mask + School": "3295.17",
+        "Mask + Social + quarantine": "3295.17",
+        "Mask + Social + Case isolation": "3295.17",
+        "Mask + Quarantine + School": "3295.17",
+        "Lock down + measures": "3295.17",
+        "Mask + social + quarantine": "3295.17"
+      },
+      {
+        "initial": "3421.795",
+        "Social distancing + wearing mask": "3421.795",
+        "Social + Mask + School": "3421.795",
+        "Mask + Social + quarantine": "3421.795",
+        "Mask + Social + Case isolation": "3421.795",
+        "Mask + Quarantine + School": "3421.795",
+        "Lock down + measures": "3421.795",
+        "Mask + social + quarantine": "3421.795"
+      },
+      {
+        "initial": "3550.505",
+        "Social distancing + wearing mask": "3550.505",
+        "Social + Mask + School": "3550.505",
+        "Mask + Social + quarantine": "3550.505",
+        "Mask + Social + Case isolation": "3550.505",
+        "Mask + Quarantine + School": "3550.505",
+        "Lock down + measures": "3550.505",
+        "Mask + social + quarantine": "3550.505"
+      },
+      {
+        "initial": "3671.265",
+        "Social distancing + wearing mask": "3671.265",
+        "Social + Mask + School": "3671.265",
+        "Mask + Social + quarantine": "3671.265",
+        "Mask + Social + Case isolation": "3671.265",
+        "Mask + Quarantine + School": "3671.265",
+        "Lock down + measures": "3671.265",
+        "Mask + social + quarantine": "3671.265"
+      },
+      {
+        "initial": "3788.95",
+        "Social distancing + wearing mask": "3788.95",
+        "Social + Mask + School": "3788.95",
+        "Mask + Social + quarantine": "3788.95",
+        "Mask + Social + Case isolation": "3788.95",
+        "Mask + Quarantine + School": "3788.95",
+        "Lock down + measures": "3788.95",
+        "Mask + social + quarantine": "3788.95"
+      },
+      {
+        "initial": "3900.12",
+        "Social distancing + wearing mask": "3900.12",
+        "Social + Mask + School": "3900.12",
+        "Mask + Social + quarantine": "3900.12",
+        "Mask + Social + Case isolation": "3900.12",
+        "Mask + Quarantine + School": "3900.12",
+        "Lock down + measures": "3900.12",
+        "Mask + social + quarantine": "3900.12"
+      },
+      {
+        "initial": "4003.085",
+        "Social distancing + wearing mask": "4003.085",
+        "Social + Mask + School": "4003.085",
+        "Mask + Social + quarantine": "4003.085",
+        "Mask + Social + Case isolation": "4003.085",
+        "Mask + Quarantine + School": "4003.085",
+        "Lock down + measures": "4003.085",
+        "Mask + social + quarantine": "4003.085"
+      },
+      {
+        "initial": "4101.77",
+        "Social distancing + wearing mask": "4101.77",
+        "Social + Mask + School": "4101.77",
+        "Mask + Social + quarantine": "4101.77",
+        "Mask + Social + Case isolation": "4101.77",
+        "Mask + Quarantine + School": "4101.77",
+        "Lock down + measures": "4101.77",
+        "Mask + social + quarantine": "4101.77"
+      },
+      {
+        "initial": "4194.75",
+        "Social distancing + wearing mask": "4194.75",
+        "Social + Mask + School": "4194.75",
+        "Mask + Social + quarantine": "4194.75",
+        "Mask + Social + Case isolation": "4194.75",
+        "Mask + Quarantine + School": "4194.75",
+        "Lock down + measures": "4194.75",
+        "Mask + social + quarantine": "4194.75"
+      },
+      {
+        "initial": "4280.8",
+        "Social distancing + wearing mask": "4280.8",
+        "Social + Mask + School": "4280.8",
+        "Mask + Social + quarantine": "4280.8",
+        "Mask + Social + Case isolation": "4280.8",
+        "Mask + Quarantine + School": "4280.8",
+        "Lock down + measures": "4280.8",
+        "Mask + social + quarantine": "4280.8"
+      },
+      {
+        "initial": "4353.37",
+        "Social distancing + wearing mask": "4353.37",
+        "Social + Mask + School": "4353.37",
+        "Mask + Social + quarantine": "4353.37",
+        "Mask + Social + Case isolation": "4353.37",
+        "Mask + Quarantine + School": "4353.37",
+        "Lock down + measures": "4353.37",
+        "Mask + social + quarantine": "4353.37"
+      },
+      {
+        "initial": "4416.33",
+        "Social distancing + wearing mask": "4416.33",
+        "Social + Mask + School": "4416.33",
+        "Mask + Social + quarantine": "4416.33",
+        "Mask + Social + Case isolation": "4416.33",
+        "Mask + Quarantine + School": "4416.33",
+        "Lock down + measures": "4416.33",
+        "Mask + social + quarantine": "4416.33"
+      },
+      {
+        "initial": "4470.575",
+        "Social distancing + wearing mask": "4470.575",
+        "Social + Mask + School": "4470.575",
+        "Mask + Social + quarantine": "4470.575",
+        "Mask + Social + Case isolation": "4470.575",
+        "Mask + Quarantine + School": "4470.575",
+        "Lock down + measures": "4470.575",
+        "Mask + social + quarantine": "4470.575"
+      },
+      {
+        "initial": "4509.865",
+        "Social distancing + wearing mask": "4509.865",
+        "Social + Mask + School": "4509.865",
+        "Mask + Social + quarantine": "4509.865",
+        "Mask + Social + Case isolation": "4509.865",
+        "Mask + Quarantine + School": "4509.865",
+        "Lock down + measures": "4509.865",
+        "Mask + social + quarantine": "4509.865"
+      },
+      {
+        "initial": "4543.53",
+        "Social distancing + wearing mask": "4543.53",
+        "Social + Mask + School": "4543.53",
+        "Mask + Social + quarantine": "4543.53",
+        "Mask + Social + Case isolation": "4543.53",
+        "Mask + Quarantine + School": "4543.53",
+        "Lock down + measures": "4543.53",
+        "Mask + social + quarantine": "4543.53"
+      },
+      {
+        "initial": "4567.595",
+        "Social distancing + wearing mask": "4567.595",
+        "Social + Mask + School": "4567.595",
+        "Mask + Social + quarantine": "4567.595",
+        "Mask + Social + Case isolation": "4567.595",
+        "Mask + Quarantine + School": "4567.595",
+        "Lock down + measures": "4567.595",
+        "Mask + social + quarantine": "4567.595"
+      },
+      {
+        "initial": "4575.83",
+        "Social distancing + wearing mask": "4575.83",
+        "Social + Mask + School": "4575.83",
+        "Mask + Social + quarantine": "4575.83",
+        "Mask + Social + Case isolation": "4575.83",
+        "Mask + Quarantine + School": "4575.83",
+        "Lock down + measures": "4575.83",
+        "Mask + social + quarantine": "4575.83"
+      },
+      {
+        "initial": "4576.39",
+        "Social distancing + wearing mask": "4576.39",
+        "Social + Mask + School": "4576.39",
+        "Mask + Social + quarantine": "4576.39",
+        "Mask + Social + Case isolation": "4576.39",
+        "Mask + Quarantine + School": "4576.39",
+        "Lock down + measures": "4576.39",
+        "Mask + social + quarantine": "4576.39"
+      },
+      {
+        "initial": "4565.83",
+        "Social distancing + wearing mask": "4565.83",
+        "Social + Mask + School": "4565.83",
+        "Mask + Social + quarantine": "4565.83",
+        "Mask + Social + Case isolation": "4565.83",
+        "Mask + Quarantine + School": "4565.83",
+        "Lock down + measures": "4565.83",
+        "Mask + social + quarantine": "4565.83"
+      },
+      {
+        "initial": "4545.435",
+        "Social distancing + wearing mask": "4545.435",
+        "Social + Mask + School": "4545.435",
+        "Mask + Social + quarantine": "4545.435",
+        "Mask + Social + Case isolation": "4545.435",
+        "Mask + Quarantine + School": "4545.435",
+        "Lock down + measures": "4545.435",
+        "Mask + social + quarantine": "4545.435"
+      },
+      {
+        "initial": "4510.785",
+        "Social distancing + wearing mask": "4510.785",
+        "Social + Mask + School": "4510.785",
+        "Mask + Social + quarantine": "4510.785",
+        "Mask + Social + Case isolation": "4510.785",
+        "Mask + Quarantine + School": "4510.785",
+        "Lock down + measures": "4510.785",
+        "Mask + social + quarantine": "4510.785"
+      },
+      {
+        "initial": "4470.14",
+        "Social distancing + wearing mask": "4470.14",
+        "Social + Mask + School": "4470.14",
+        "Mask + Social + quarantine": "4470.14",
+        "Mask + Social + Case isolation": "4470.14",
+        "Mask + Quarantine + School": "4470.14",
+        "Lock down + measures": "4470.14",
+        "Mask + social + quarantine": "4470.14"
+      },
+      {
+        "initial": "4415.145",
+        "Social distancing + wearing mask": "4415.145",
+        "Social + Mask + School": "4415.145",
+        "Mask + Social + quarantine": "4415.145",
+        "Mask + Social + Case isolation": "4415.145",
+        "Mask + Quarantine + School": "4415.145",
+        "Lock down + measures": "4415.145",
+        "Mask + social + quarantine": "4415.145"
+      },
+      {
+        "initial": "4352.06",
+        "Social distancing + wearing mask": "4352.06",
+        "Social + Mask + School": "4352.06",
+        "Mask + Social + quarantine": "4352.06",
+        "Mask + Social + Case isolation": "4352.06",
+        "Mask + Quarantine + School": "4352.06",
+        "Lock down + measures": "4352.06",
+        "Mask + social + quarantine": "4352.06"
+      },
+      {
+        "initial": "4277.735",
+        "Social distancing + wearing mask": "4277.735",
+        "Social + Mask + School": "4277.735",
+        "Mask + Social + quarantine": "4277.735",
+        "Mask + Social + Case isolation": "4277.735",
+        "Mask + Quarantine + School": "4277.735",
+        "Lock down + measures": "4277.735",
+        "Mask + social + quarantine": "4277.735"
+      },
+      {
+        "initial": "4198.465",
+        "Social distancing + wearing mask": "4198.465",
+        "Social + Mask + School": "4198.465",
+        "Mask + Social + quarantine": "4198.465",
+        "Mask + Social + Case isolation": "4198.465",
+        "Mask + Quarantine + School": "4198.465",
+        "Lock down + measures": "4198.465",
+        "Mask + social + quarantine": "4198.465"
+      },
+      {
+        "initial": "4112.505",
+        "Social distancing + wearing mask": "4112.505",
+        "Social + Mask + School": "4112.505",
+        "Mask + Social + quarantine": "4112.505",
+        "Mask + Social + Case isolation": "4112.505",
+        "Mask + Quarantine + School": "4112.505",
+        "Lock down + measures": "4112.505",
+        "Mask + social + quarantine": "4112.505"
+      },
+      {
+        "initial": "4020.445",
+        "Social distancing + wearing mask": "4020.445",
+        "Social + Mask + School": "4020.445",
+        "Mask + Social + quarantine": "4020.445",
+        "Mask + Social + Case isolation": "4020.445",
+        "Mask + Quarantine + School": "4020.445",
+        "Lock down + measures": "4020.445",
+        "Mask + social + quarantine": "4020.445"
+      },
+      {
+        "initial": "3924.095",
+        "Social distancing + wearing mask": "3924.095",
+        "Social + Mask + School": "3924.095",
+        "Mask + Social + quarantine": "3924.095",
+        "Mask + Social + Case isolation": "3924.095",
+        "Mask + Quarantine + School": "3924.095",
+        "Lock down + measures": "3924.095",
+        "Mask + social + quarantine": "3924.095"
+      },
+      {
+        "initial": "3821.87",
+        "Social distancing + wearing mask": "3821.87",
+        "Social + Mask + School": "3821.87",
+        "Mask + Social + quarantine": "3821.87",
+        "Mask + Social + Case isolation": "3821.87",
+        "Mask + Quarantine + School": "3821.87",
+        "Lock down + measures": "3821.87",
+        "Mask + social + quarantine": "3821.87"
+      },
+      {
+        "initial": "3711.405",
+        "Social distancing + wearing mask": "3711.405",
+        "Social + Mask + School": "3711.405",
+        "Mask + Social + quarantine": "3711.405",
+        "Mask + Social + Case isolation": "3711.405",
+        "Mask + Quarantine + School": "3711.405",
+        "Lock down + measures": "3711.405",
+        "Mask + social + quarantine": "3711.405"
+      },
+      {
+        "initial": "3602.265",
+        "Social distancing + wearing mask": "3602.265",
+        "Social + Mask + School": "3602.265",
+        "Mask + Social + quarantine": "3602.265",
+        "Mask + Social + Case isolation": "3602.265",
+        "Mask + Quarantine + School": "3602.265",
+        "Lock down + measures": "3602.265",
+        "Mask + social + quarantine": "3602.265"
+      },
+      {
+        "initial": "3486.62",
+        "Social distancing + wearing mask": "3486.62",
+        "Social + Mask + School": "3486.62",
+        "Mask + Social + quarantine": "3486.62",
+        "Mask + Social + Case isolation": "3486.62",
+        "Mask + Quarantine + School": "3486.62",
+        "Lock down + measures": "3486.62",
+        "Mask + social + quarantine": "3486.62"
+      },
+      {
+        "initial": "3370.48",
+        "Social distancing + wearing mask": "3370.48",
+        "Social + Mask + School": "3370.48",
+        "Mask + Social + quarantine": "3370.48",
+        "Mask + Social + Case isolation": "3370.48",
+        "Mask + Quarantine + School": "3370.48",
+        "Lock down + measures": "3370.48",
+        "Mask + social + quarantine": "3370.48"
+      },
+      {
+        "initial": "3253.2",
+        "Social distancing + wearing mask": "3253.2",
+        "Social + Mask + School": "3253.2",
+        "Mask + Social + quarantine": "3253.2",
+        "Mask + Social + Case isolation": "3253.2",
+        "Mask + Quarantine + School": "3253.2",
+        "Lock down + measures": "3253.2",
+        "Mask + social + quarantine": "3253.2"
+      },
+      {
+        "initial": "3134.76",
+        "Social distancing + wearing mask": "3134.76",
+        "Social + Mask + School": "3134.76",
+        "Mask + Social + quarantine": "3134.76",
+        "Mask + Social + Case isolation": "3134.76",
+        "Mask + Quarantine + School": "3134.76",
+        "Lock down + measures": "3134.76",
+        "Mask + social + quarantine": "3134.76"
+      },
+      {
+        "initial": "3019.35",
+        "Social distancing + wearing mask": "3019.35",
+        "Social + Mask + School": "3019.35",
+        "Mask + Social + quarantine": "3019.35",
+        "Mask + Social + Case isolation": "3019.35",
+        "Mask + Quarantine + School": "3019.35",
+        "Lock down + measures": "3019.35",
+        "Mask + social + quarantine": "3019.35"
+      },
+      {
+        "initial": "2900.59",
+        "Social distancing + wearing mask": "2900.59",
+        "Social + Mask + School": "2900.59",
+        "Mask + Social + quarantine": "2900.59",
+        "Mask + Social + Case isolation": "2900.59",
+        "Mask + Quarantine + School": "2900.59",
+        "Lock down + measures": "2900.59",
+        "Mask + social + quarantine": "2900.59"
+      },
+      {
+        "initial": "2782.885",
+        "Social distancing + wearing mask": "2782.885",
+        "Social + Mask + School": "2782.885",
+        "Mask + Social + quarantine": "2782.885",
+        "Mask + Social + Case isolation": "2782.885",
+        "Mask + Quarantine + School": "2782.885",
+        "Lock down + measures": "2782.885",
+        "Mask + social + quarantine": "2782.885"
+      },
+      {
+        "initial": "2667.57",
+        "Social distancing + wearing mask": "2667.57",
+        "Social + Mask + School": "2667.57",
+        "Mask + Social + quarantine": "2667.57",
+        "Mask + Social + Case isolation": "2667.57",
+        "Mask + Quarantine + School": "2667.57",
+        "Lock down + measures": "2667.57",
+        "Mask + social + quarantine": "2667.57"
+      },
+      {
+        "initial": "2551.495",
+        "Social distancing + wearing mask": "2551.495",
+        "Social + Mask + School": "2551.495",
+        "Mask + Social + quarantine": "2551.495",
+        "Mask + Social + Case isolation": "2551.495",
+        "Mask + Quarantine + School": "2551.495",
+        "Lock down + measures": "2551.495",
+        "Mask + social + quarantine": "2551.495"
+      },
+      {
+        "initial": "2436.845",
+        "Social distancing + wearing mask": "2436.845",
+        "Social + Mask + School": "2436.845",
+        "Mask + Social + quarantine": "2436.845",
+        "Mask + Social + Case isolation": "2436.845",
+        "Mask + Quarantine + School": "2436.845",
+        "Lock down + measures": "2436.845",
+        "Mask + social + quarantine": "2436.845"
+      },
+      {
+        "initial": "2326.56",
+        "Social distancing + wearing mask": "2326.56",
+        "Social + Mask + School": "2326.56",
+        "Mask + Social + quarantine": "2326.56",
+        "Mask + Social + Case isolation": "2326.56",
+        "Mask + Quarantine + School": "2326.56",
+        "Lock down + measures": "2326.56",
+        "Mask + social + quarantine": "2326.56"
+      },
+      {
+        "initial": "2217.845",
+        "Social distancing + wearing mask": "2217.845",
+        "Social + Mask + School": "2217.845",
+        "Mask + Social + quarantine": "2217.845",
+        "Mask + Social + Case isolation": "2217.845",
+        "Mask + Quarantine + School": "2217.845",
+        "Lock down + measures": "2217.845",
+        "Mask + social + quarantine": "2217.845"
+      },
+      {
+        "initial": "2112.77",
+        "Social distancing + wearing mask": "2112.77",
+        "Social + Mask + School": "2112.77",
+        "Mask + Social + quarantine": "2112.77",
+        "Mask + Social + Case isolation": "2112.77",
+        "Mask + Quarantine + School": "2112.77",
+        "Lock down + measures": "2112.77",
+        "Mask + social + quarantine": "2112.77"
+      },
+      {
+        "initial": "2011.665",
+        "Social distancing + wearing mask": "2011.665",
+        "Social + Mask + School": "2011.665",
+        "Mask + Social + quarantine": "2011.665",
+        "Mask + Social + Case isolation": "2011.665",
+        "Mask + Quarantine + School": "2011.665",
+        "Lock down + measures": "2011.665",
+        "Mask + social + quarantine": "2011.665"
+      },
+      {
+        "initial": "1914.34",
+        "Social distancing + wearing mask": "1914.34",
+        "Social + Mask + School": "1914.34",
+        "Mask + Social + quarantine": "1914.34",
+        "Mask + Social + Case isolation": "1914.34",
+        "Mask + Quarantine + School": "1914.34",
+        "Lock down + measures": "1914.34",
+        "Mask + social + quarantine": "1914.34"
+      },
+      {
+        "initial": "1816.975",
+        "Social distancing + wearing mask": "1816.975",
+        "Social + Mask + School": "1816.975",
+        "Mask + Social + quarantine": "1816.975",
+        "Mask + Social + Case isolation": "1816.975",
+        "Mask + Quarantine + School": "1816.975",
+        "Lock down + measures": "1816.975",
+        "Mask + social + quarantine": "1816.975"
+      },
+      {
+        "initial": "1722.455",
+        "Social distancing + wearing mask": "1722.455",
+        "Social + Mask + School": "1722.455",
+        "Mask + Social + quarantine": "1722.455",
+        "Mask + Social + Case isolation": "1722.455",
+        "Mask + Quarantine + School": "1722.455",
+        "Lock down + measures": "1722.455",
+        "Mask + social + quarantine": "1722.455"
+      },
+      {
+        "initial": "1632.24",
+        "Social distancing + wearing mask": "1632.24",
+        "Social + Mask + School": "1632.24",
+        "Mask + Social + quarantine": "1632.24",
+        "Mask + Social + Case isolation": "1632.24",
+        "Mask + Quarantine + School": "1632.24",
+        "Lock down + measures": "1632.24",
+        "Mask + social + quarantine": "1632.24"
+      },
+      {
+        "initial": "1544.2",
+        "Social distancing + wearing mask": "1544.2",
+        "Social + Mask + School": "1544.2",
+        "Mask + Social + quarantine": "1544.2",
+        "Mask + Social + Case isolation": "1544.2",
+        "Mask + Quarantine + School": "1544.2",
+        "Lock down + measures": "1544.2",
+        "Mask + social + quarantine": "1544.2"
+      },
+      {
+        "initial": "1460.4",
+        "Social distancing + wearing mask": "1460.4",
+        "Social + Mask + School": "1460.4",
+        "Mask + Social + quarantine": "1460.4",
+        "Mask + Social + Case isolation": "1460.4",
+        "Mask + Quarantine + School": "1460.4",
+        "Lock down + measures": "1460.4",
+        "Mask + social + quarantine": "1460.4"
+      },
+      {
+        "initial": "1380.37",
+        "Social distancing + wearing mask": "1380.37",
+        "Social + Mask + School": "1380.37",
+        "Mask + Social + quarantine": "1380.37",
+        "Mask + Social + Case isolation": "1380.37",
+        "Mask + Quarantine + School": "1380.37",
+        "Lock down + measures": "1380.37",
+        "Mask + social + quarantine": "1380.37"
+      },
+      {
+        "initial": "1303.035",
+        "Social distancing + wearing mask": "1303.035",
+        "Social + Mask + School": "1303.035",
+        "Mask + Social + quarantine": "1303.035",
+        "Mask + Social + Case isolation": "1303.035",
+        "Mask + Quarantine + School": "1303.035",
+        "Lock down + measures": "1303.035",
+        "Mask + social + quarantine": "1303.035"
+      },
+      {
+        "initial": "1229.43",
+        "Social distancing + wearing mask": "1229.43",
+        "Social + Mask + School": "1229.43",
+        "Mask + Social + quarantine": "1229.43",
+        "Mask + Social + Case isolation": "1229.43",
+        "Mask + Quarantine + School": "1229.43",
+        "Lock down + measures": "1229.43",
+        "Mask + social + quarantine": "1229.43"
+      },
+      {
+        "initial": "1160.705",
+        "Social distancing + wearing mask": "1160.705",
+        "Social + Mask + School": "1160.705",
+        "Mask + Social + quarantine": "1160.705",
+        "Mask + Social + Case isolation": "1160.705",
+        "Mask + Quarantine + School": "1160.705",
+        "Lock down + measures": "1160.705",
+        "Mask + social + quarantine": "1160.705"
+      },
+      {
+        "initial": "1092.49",
+        "Social distancing + wearing mask": "1092.49",
+        "Social + Mask + School": "1092.49",
+        "Mask + Social + quarantine": "1092.49",
+        "Mask + Social + Case isolation": "1092.49",
+        "Mask + Quarantine + School": "1092.49",
+        "Lock down + measures": "1092.49",
+        "Mask + social + quarantine": "1092.49"
+      },
+      {
+        "initial": "1028.895",
+        "Social distancing + wearing mask": "1028.895",
+        "Social + Mask + School": "1028.895",
+        "Mask + Social + quarantine": "1028.895",
+        "Mask + Social + Case isolation": "1028.895",
+        "Mask + Quarantine + School": "1028.895",
+        "Lock down + measures": "1028.895",
+        "Mask + social + quarantine": "1028.895"
+      },
+      {
+        "initial": "969.055",
+        "Social distancing + wearing mask": "969.055",
+        "Social + Mask + School": "969.055",
+        "Mask + Social + quarantine": "969.055",
+        "Mask + Social + Case isolation": "969.055",
+        "Mask + Quarantine + School": "969.055",
+        "Lock down + measures": "969.055",
+        "Mask + social + quarantine": "969.055"
+      },
+      {
+        "initial": "911.175",
+        "Social distancing + wearing mask": "911.175",
+        "Social + Mask + School": "911.175",
+        "Mask + Social + quarantine": "911.175",
+        "Mask + Social + Case isolation": "911.175",
+        "Mask + Quarantine + School": "911.175",
+        "Lock down + measures": "911.175",
+        "Mask + social + quarantine": "911.175"
+      },
+      {
+        "initial": "856.23",
+        "Social distancing + wearing mask": "856.23",
+        "Social + Mask + School": "856.23",
+        "Mask + Social + quarantine": "856.23",
+        "Mask + Social + Case isolation": "856.23",
+        "Mask + Quarantine + School": "856.23",
+        "Lock down + measures": "856.23",
+        "Mask + social + quarantine": "856.23"
+      },
+      {
+        "initial": "805.925",
+        "Social distancing + wearing mask": "805.925",
+        "Social + Mask + School": "805.925",
+        "Mask + Social + quarantine": "805.925",
+        "Mask + Social + Case isolation": "805.925",
+        "Mask + Quarantine + School": "805.925",
+        "Lock down + measures": "805.925",
+        "Mask + social + quarantine": "805.925"
+      },
+      {
+        "initial": "757.905",
+        "Social distancing + wearing mask": "757.905",
+        "Social + Mask + School": "757.905",
+        "Mask + Social + quarantine": "757.905",
+        "Mask + Social + Case isolation": "757.905",
+        "Mask + Quarantine + School": "757.905",
+        "Lock down + measures": "757.905",
+        "Mask + social + quarantine": "757.905"
+      },
+      {
+        "initial": "711.51",
+        "Social distancing + wearing mask": "711.51",
+        "Social + Mask + School": "711.51",
+        "Mask + Social + quarantine": "711.51",
+        "Mask + Social + Case isolation": "711.51",
+        "Mask + Quarantine + School": "711.51",
+        "Lock down + measures": "711.51",
+        "Mask + social + quarantine": "711.51"
+      },
+      {
+        "initial": "667.305",
+        "Social distancing + wearing mask": "667.305",
+        "Social + Mask + School": "667.305",
+        "Mask + Social + quarantine": "667.305",
+        "Mask + Social + Case isolation": "667.305",
+        "Mask + Quarantine + School": "667.305",
+        "Lock down + measures": "667.305",
+        "Mask + social + quarantine": "667.305"
+      },
+      {
+        "initial": "626.57",
+        "Social distancing + wearing mask": "626.57",
+        "Social + Mask + School": "626.57",
+        "Mask + Social + quarantine": "626.57",
+        "Mask + Social + Case isolation": "626.57",
+        "Mask + Quarantine + School": "626.57",
+        "Lock down + measures": "626.57",
+        "Mask + social + quarantine": "626.57"
+      },
+      {
+        "initial": "587.405",
+        "Social distancing + wearing mask": "587.405",
+        "Social + Mask + School": "587.405",
+        "Mask + Social + quarantine": "587.405",
+        "Mask + Social + Case isolation": "587.405",
+        "Mask + Quarantine + School": "587.405",
+        "Lock down + measures": "587.405",
+        "Mask + social + quarantine": "587.405"
+      },
+      {
+        "initial": "549.54",
+        "Social distancing + wearing mask": "549.54",
+        "Social + Mask + School": "549.54",
+        "Mask + Social + quarantine": "549.54",
+        "Mask + Social + Case isolation": "549.54",
+        "Mask + Quarantine + School": "549.54",
+        "Lock down + measures": "549.54",
+        "Mask + social + quarantine": "549.54"
+      },
+      {
+        "initial": "514.425",
+        "Social distancing + wearing mask": "514.425",
+        "Social + Mask + School": "514.425",
+        "Mask + Social + quarantine": "514.425",
+        "Mask + Social + Case isolation": "514.425",
+        "Mask + Quarantine + School": "514.425",
+        "Lock down + measures": "514.425",
+        "Mask + social + quarantine": "514.425"
+      },
+      {
+        "initial": "483.03",
+        "Social distancing + wearing mask": "483.03",
+        "Social + Mask + School": "483.03",
+        "Mask + Social + quarantine": "483.03",
+        "Mask + Social + Case isolation": "483.03",
+        "Mask + Quarantine + School": "483.03",
+        "Lock down + measures": "483.03",
+        "Mask + social + quarantine": "483.03"
+      },
+      {
+        "initial": "451.175",
+        "Social distancing + wearing mask": "451.175",
+        "Social + Mask + School": "451.175",
+        "Mask + Social + quarantine": "451.175",
+        "Mask + Social + Case isolation": "451.175",
+        "Mask + Quarantine + School": "451.175",
+        "Lock down + measures": "451.175",
+        "Mask + social + quarantine": "451.175"
+      },
+      {
+        "initial": "421.485",
+        "Social distancing + wearing mask": "421.485",
+        "Social + Mask + School": "421.485",
+        "Mask + Social + quarantine": "421.485",
+        "Mask + Social + Case isolation": "421.485",
+        "Mask + Quarantine + School": "421.485",
+        "Lock down + measures": "421.485",
+        "Mask + social + quarantine": "421.485"
+      },
+      {
+        "initial": "394.375",
+        "Social distancing + wearing mask": "394.375",
+        "Social + Mask + School": "394.375",
+        "Mask + Social + quarantine": "394.375",
+        "Mask + Social + Case isolation": "394.375",
+        "Mask + Quarantine + School": "394.375",
+        "Lock down + measures": "394.375",
+        "Mask + social + quarantine": "394.375"
+      },
+      {
+        "initial": "369.17",
+        "Social distancing + wearing mask": "369.17",
+        "Social + Mask + School": "369.17",
+        "Mask + Social + quarantine": "369.17",
+        "Mask + Social + Case isolation": "369.17",
+        "Mask + Quarantine + School": "369.17",
+        "Lock down + measures": "369.17",
+        "Mask + social + quarantine": "369.17"
+      },
+      {
+        "initial": "343.93",
+        "Social distancing + wearing mask": "343.93",
+        "Social + Mask + School": "343.93",
+        "Mask + Social + quarantine": "343.93",
+        "Mask + Social + Case isolation": "343.93",
+        "Mask + Quarantine + School": "343.93",
+        "Lock down + measures": "343.93",
+        "Mask + social + quarantine": "343.93"
+      },
+      {
+        "initial": "321.23",
+        "Social distancing + wearing mask": "321.23",
+        "Social + Mask + School": "321.23",
+        "Mask + Social + quarantine": "321.23",
+        "Mask + Social + Case isolation": "321.23",
+        "Mask + Quarantine + School": "321.23",
+        "Lock down + measures": "321.23",
+        "Mask + social + quarantine": "321.23"
+      },
+      {
+        "initial": "300.615",
+        "Social distancing + wearing mask": "300.615",
+        "Social + Mask + School": "300.615",
+        "Mask + Social + quarantine": "300.615",
+        "Mask + Social + Case isolation": "300.615",
+        "Mask + Quarantine + School": "300.615",
+        "Lock down + measures": "300.615",
+        "Mask + social + quarantine": "300.615"
+      },
+      {
+        "initial": "279.945",
+        "Social distancing + wearing mask": "279.945",
+        "Social + Mask + School": "279.945",
+        "Mask + Social + quarantine": "279.945",
+        "Mask + Social + Case isolation": "279.945",
+        "Mask + Quarantine + School": "279.945",
+        "Lock down + measures": "279.945",
+        "Mask + social + quarantine": "279.945"
+      },
+      {
+        "initial": "261.46",
+        "Social distancing + wearing mask": "261.46",
+        "Social + Mask + School": "261.46",
+        "Mask + Social + quarantine": "261.46",
+        "Mask + Social + Case isolation": "261.46",
+        "Mask + Quarantine + School": "261.46",
+        "Lock down + measures": "261.46",
+        "Mask + social + quarantine": "261.46"
+      },
+      {
+        "initial": "243.8",
+        "Social distancing + wearing mask": "243.8",
+        "Social + Mask + School": "243.8",
+        "Mask + Social + quarantine": "243.8",
+        "Mask + Social + Case isolation": "243.8",
+        "Mask + Quarantine + School": "243.8",
+        "Lock down + measures": "243.8",
+        "Mask + social + quarantine": "243.8"
+      },
+      {
+        "initial": "227.61",
+        "Social distancing + wearing mask": "227.61",
+        "Social + Mask + School": "227.61",
+        "Mask + Social + quarantine": "227.61",
+        "Mask + Social + Case isolation": "227.61",
+        "Mask + Quarantine + School": "227.61",
+        "Lock down + measures": "227.61",
+        "Mask + social + quarantine": "227.61"
+      },
+      {
+        "initial": "212.45",
+        "Social distancing + wearing mask": "212.45",
+        "Social + Mask + School": "212.45",
+        "Mask + Social + quarantine": "212.45",
+        "Mask + Social + Case isolation": "212.45",
+        "Mask + Quarantine + School": "212.45",
+        "Lock down + measures": "212.45",
+        "Mask + social + quarantine": "212.45"
+      },
+      {
+        "initial": "198.155",
+        "Social distancing + wearing mask": "198.155",
+        "Social + Mask + School": "198.155",
+        "Mask + Social + quarantine": "198.155",
+        "Mask + Social + Case isolation": "198.155",
+        "Mask + Quarantine + School": "198.155",
+        "Lock down + measures": "198.155",
+        "Mask + social + quarantine": "198.155"
+      },
+      {
+        "initial": "184.465",
+        "Social distancing + wearing mask": "184.465",
+        "Social + Mask + School": "184.465",
+        "Mask + Social + quarantine": "184.465",
+        "Mask + Social + Case isolation": "184.465",
+        "Mask + Quarantine + School": "184.465",
+        "Lock down + measures": "184.465",
+        "Mask + social + quarantine": "184.465"
+      },
+      {
+        "initial": "171.395",
+        "Social distancing + wearing mask": "171.395",
+        "Social + Mask + School": "171.395",
+        "Mask + Social + quarantine": "171.395",
+        "Mask + Social + Case isolation": "171.395",
+        "Mask + Quarantine + School": "171.395",
+        "Lock down + measures": "171.395",
+        "Mask + social + quarantine": "171.395"
+      },
+      {
+        "initial": "159.275",
+        "Social distancing + wearing mask": "159.275",
+        "Social + Mask + School": "159.275",
+        "Mask + Social + quarantine": "159.275",
+        "Mask + Social + Case isolation": "159.275",
+        "Mask + Quarantine + School": "159.275",
+        "Lock down + measures": "159.275",
+        "Mask + social + quarantine": "159.275"
+      },
+      {
+        "initial": "148.37",
+        "Social distancing + wearing mask": "148.37",
+        "Social + Mask + School": "148.37",
+        "Mask + Social + quarantine": "148.37",
+        "Mask + Social + Case isolation": "148.37",
+        "Mask + Quarantine + School": "148.37",
+        "Lock down + measures": "148.37",
+        "Mask + social + quarantine": "148.37"
+      },
+      {
+        "initial": "137.85",
+        "Social distancing + wearing mask": "137.85",
+        "Social + Mask + School": "137.85",
+        "Mask + Social + quarantine": "137.85",
+        "Mask + Social + Case isolation": "137.85",
+        "Mask + Quarantine + School": "137.85",
+        "Lock down + measures": "137.85",
+        "Mask + social + quarantine": "137.85"
+      },
+      {
+        "initial": "128.15",
+        "Social distancing + wearing mask": "128.15",
+        "Social + Mask + School": "128.15",
+        "Mask + Social + quarantine": "128.15",
+        "Mask + Social + Case isolation": "128.15",
+        "Mask + Quarantine + School": "128.15",
+        "Lock down + measures": "128.15",
+        "Mask + social + quarantine": "128.15"
+      },
+      {
+        "initial": "119.39",
+        "Social distancing + wearing mask": "119.39",
+        "Social + Mask + School": "119.39",
+        "Mask + Social + quarantine": "119.39",
+        "Mask + Social + Case isolation": "119.39",
+        "Mask + Quarantine + School": "119.39",
+        "Lock down + measures": "119.39",
+        "Mask + social + quarantine": "119.39"
+      },
+      {
+        "initial": "110.635",
+        "Social distancing + wearing mask": "110.635",
+        "Social + Mask + School": "110.635",
+        "Mask + Social + quarantine": "110.635",
+        "Mask + Social + Case isolation": "110.635",
+        "Mask + Quarantine + School": "110.635",
+        "Lock down + measures": "110.635",
+        "Mask + social + quarantine": "110.635"
+      },
+      {
+        "initial": "102.605",
+        "Social distancing + wearing mask": "102.605",
+        "Social + Mask + School": "102.605",
+        "Mask + Social + quarantine": "102.605",
+        "Mask + Social + Case isolation": "102.605",
+        "Mask + Quarantine + School": "102.605",
+        "Lock down + measures": "102.605",
+        "Mask + social + quarantine": "102.605"
+      },
+      {
+        "initial": "95.535",
+        "Social distancing + wearing mask": "95.535",
+        "Social + Mask + School": "95.535",
+        "Mask + Social + quarantine": "95.535",
+        "Mask + Social + Case isolation": "95.535",
+        "Mask + Quarantine + School": "95.535",
+        "Lock down + measures": "95.535",
+        "Mask + social + quarantine": "95.535"
+      },
+      {
+        "initial": "89.11",
+        "Social distancing + wearing mask": "89.11",
+        "Social + Mask + School": "89.11",
+        "Mask + Social + quarantine": "89.11",
+        "Mask + Social + Case isolation": "89.11",
+        "Mask + Quarantine + School": "89.11",
+        "Lock down + measures": "89.11",
+        "Mask + social + quarantine": "89.11"
+      },
+      {
+        "initial": "82.835",
+        "Social distancing + wearing mask": "82.835",
+        "Social + Mask + School": "82.835",
+        "Mask + Social + quarantine": "82.835",
+        "Mask + Social + Case isolation": "82.835",
+        "Mask + Quarantine + School": "82.835",
+        "Lock down + measures": "82.835",
+        "Mask + social + quarantine": "82.835"
+      },
+      {
+        "initial": "77.19",
+        "Social distancing + wearing mask": "77.19",
+        "Social + Mask + School": "77.19",
+        "Mask + Social + quarantine": "77.19",
+        "Mask + Social + Case isolation": "77.19",
+        "Mask + Quarantine + School": "77.19",
+        "Lock down + measures": "77.19",
+        "Mask + social + quarantine": "77.19"
+      },
+      {
+        "initial": "72.06",
+        "Social distancing + wearing mask": "72.06",
+        "Social + Mask + School": "72.06",
+        "Mask + Social + quarantine": "72.06",
+        "Mask + Social + Case isolation": "72.06",
+        "Mask + Quarantine + School": "72.06",
+        "Lock down + measures": "72.06",
+        "Mask + social + quarantine": "72.06"
+      },
+      {
+        "initial": "66.855",
+        "Social distancing + wearing mask": "66.855",
+        "Social + Mask + School": "66.855",
+        "Mask + Social + quarantine": "66.855",
+        "Mask + Social + Case isolation": "66.855",
+        "Mask + Quarantine + School": "66.855",
+        "Lock down + measures": "66.855",
+        "Mask + social + quarantine": "66.855"
+      },
+      {
+        "initial": "62.13",
+        "Social distancing + wearing mask": "62.13",
+        "Social + Mask + School": "62.13",
+        "Mask + Social + quarantine": "62.13",
+        "Mask + Social + Case isolation": "62.13",
+        "Mask + Quarantine + School": "62.13",
+        "Lock down + measures": "62.13",
+        "Mask + social + quarantine": "62.13"
+      },
+      {
+        "initial": "57.765",
+        "Social distancing + wearing mask": "57.765",
+        "Social + Mask + School": "57.765",
+        "Mask + Social + quarantine": "57.765",
+        "Mask + Social + Case isolation": "57.765",
+        "Mask + Quarantine + School": "57.765",
+        "Lock down + measures": "57.765",
+        "Mask + social + quarantine": "57.765"
+      },
+      {
+        "initial": "53.875",
+        "Social distancing + wearing mask": "53.875",
+        "Social + Mask + School": "53.875",
+        "Mask + Social + quarantine": "53.875",
+        "Mask + Social + Case isolation": "53.875",
+        "Mask + Quarantine + School": "53.875",
+        "Lock down + measures": "53.875",
+        "Mask + social + quarantine": "53.875"
+      },
+      {
+        "initial": "50.105",
+        "Social distancing + wearing mask": "50.105",
+        "Social + Mask + School": "50.105",
+        "Mask + Social + quarantine": "50.105",
+        "Mask + Social + Case isolation": "50.105",
+        "Mask + Quarantine + School": "50.105",
+        "Lock down + measures": "50.105",
+        "Mask + social + quarantine": "50.105"
+      },
+      {
+        "initial": "46.32",
+        "Social distancing + wearing mask": "46.32",
+        "Social + Mask + School": "46.32",
+        "Mask + Social + quarantine": "46.32",
+        "Mask + Social + Case isolation": "46.32",
+        "Mask + Quarantine + School": "46.32",
+        "Lock down + measures": "46.32",
+        "Mask + social + quarantine": "46.32"
+      },
+      {
+        "initial": "42.7",
+        "Social distancing + wearing mask": "42.7",
+        "Social + Mask + School": "42.7",
+        "Mask + Social + quarantine": "42.7",
+        "Mask + Social + Case isolation": "42.7",
+        "Mask + Quarantine + School": "42.7",
+        "Lock down + measures": "42.7",
+        "Mask + social + quarantine": "42.7"
+      },
+      {
+        "initial": "39.705",
+        "Social distancing + wearing mask": "39.705",
+        "Social + Mask + School": "39.705",
+        "Mask + Social + quarantine": "39.705",
+        "Mask + Social + Case isolation": "39.705",
+        "Mask + Quarantine + School": "39.705",
+        "Lock down + measures": "39.705",
+        "Mask + social + quarantine": "39.705"
+      },
+      {
+        "initial": "37.07",
+        "Social distancing + wearing mask": "37.07",
+        "Social + Mask + School": "37.07",
+        "Mask + Social + quarantine": "37.07",
+        "Mask + Social + Case isolation": "37.07",
+        "Mask + Quarantine + School": "37.07",
+        "Lock down + measures": "37.07",
+        "Mask + social + quarantine": "37.07"
+      },
+      {
+        "initial": "34.34",
+        "Social distancing + wearing mask": "34.34",
+        "Social + Mask + School": "34.34",
+        "Mask + Social + quarantine": "34.34",
+        "Mask + Social + Case isolation": "34.34",
+        "Mask + Quarantine + School": "34.34",
+        "Lock down + measures": "34.34",
+        "Mask + social + quarantine": "34.34"
+      },
+      {
+        "initial": "31.775",
+        "Social distancing + wearing mask": "31.775",
+        "Social + Mask + School": "31.775",
+        "Mask + Social + quarantine": "31.775",
+        "Mask + Social + Case isolation": "31.775",
+        "Mask + Quarantine + School": "31.775",
+        "Lock down + measures": "31.775",
+        "Mask + social + quarantine": "31.775"
+      },
+      {
+        "initial": "29.545",
+        "Social distancing + wearing mask": "29.545",
+        "Social + Mask + School": "29.545",
+        "Mask + Social + quarantine": "29.545",
+        "Mask + Social + Case isolation": "29.545",
+        "Mask + Quarantine + School": "29.545",
+        "Lock down + measures": "29.545",
+        "Mask + social + quarantine": "29.545"
+      },
+      {
+        "initial": "27.465",
+        "Social distancing + wearing mask": "27.465",
+        "Social + Mask + School": "27.465",
+        "Mask + Social + quarantine": "27.465",
+        "Mask + Social + Case isolation": "27.465",
+        "Mask + Quarantine + School": "27.465",
+        "Lock down + measures": "27.465",
+        "Mask + social + quarantine": "27.465"
+      },
+      {
+        "initial": "25.315",
+        "Social distancing + wearing mask": "25.315",
+        "Social + Mask + School": "25.315",
+        "Mask + Social + quarantine": "25.315",
+        "Mask + Social + Case isolation": "25.315",
+        "Mask + Quarantine + School": "25.315",
+        "Lock down + measures": "25.315",
+        "Mask + social + quarantine": "25.315"
+      },
+      {
+        "initial": "23.5",
+        "Social distancing + wearing mask": "23.5",
+        "Social + Mask + School": "23.5",
+        "Mask + Social + quarantine": "23.5",
+        "Mask + Social + Case isolation": "23.5",
+        "Mask + Quarantine + School": "23.5",
+        "Lock down + measures": "23.5",
+        "Mask + social + quarantine": "23.5"
+      },
+      {
+        "initial": "21.785",
+        "Social distancing + wearing mask": "21.785",
+        "Social + Mask + School": "21.785",
+        "Mask + Social + quarantine": "21.785",
+        "Mask + Social + Case isolation": "21.785",
+        "Mask + Quarantine + School": "21.785",
+        "Lock down + measures": "21.785",
+        "Mask + social + quarantine": "21.785"
+      },
+      {
+        "initial": "20.33",
+        "Social distancing + wearing mask": "20.33",
+        "Social + Mask + School": "20.33",
+        "Mask + Social + quarantine": "20.33",
+        "Mask + Social + Case isolation": "20.33",
+        "Mask + Quarantine + School": "20.33",
+        "Lock down + measures": "20.33",
+        "Mask + social + quarantine": "20.33"
+      },
+      {
+        "initial": "19.15",
+        "Social distancing + wearing mask": "19.15",
+        "Social + Mask + School": "19.15",
+        "Mask + Social + quarantine": "19.15",
+        "Mask + Social + Case isolation": "19.15",
+        "Mask + Quarantine + School": "19.15",
+        "Lock down + measures": "19.15",
+        "Mask + social + quarantine": "19.15"
+      },
+      {
+        "initial": "17.63",
+        "Social distancing + wearing mask": "17.63",
+        "Social + Mask + School": "17.63",
+        "Mask + Social + quarantine": "17.63",
+        "Mask + Social + Case isolation": "17.63",
+        "Mask + Quarantine + School": "17.63",
+        "Lock down + measures": "17.63",
+        "Mask + social + quarantine": "17.63"
+      },
+      {
+        "initial": "16.36",
+        "Social distancing + wearing mask": "16.36",
+        "Social + Mask + School": "16.36",
+        "Mask + Social + quarantine": "16.36",
+        "Mask + Social + Case isolation": "16.36",
+        "Mask + Quarantine + School": "16.36",
+        "Lock down + measures": "16.36",
+        "Mask + social + quarantine": "16.36"
+      },
+      {
+        "initial": "15.135",
+        "Social distancing + wearing mask": "15.135",
+        "Social + Mask + School": "15.135",
+        "Mask + Social + quarantine": "15.135",
+        "Mask + Social + Case isolation": "15.135",
+        "Mask + Quarantine + School": "15.135",
+        "Lock down + measures": "15.135",
+        "Mask + social + quarantine": "15.135"
+      },
+      {
+        "initial": "14.01",
+        "Social distancing + wearing mask": "14.01",
+        "Social + Mask + School": "14.01",
+        "Mask + Social + quarantine": "14.01",
+        "Mask + Social + Case isolation": "14.01",
+        "Mask + Quarantine + School": "14.01",
+        "Lock down + measures": "14.01",
+        "Mask + social + quarantine": "14.01"
+      },
+      {
+        "initial": "13.01",
+        "Social distancing + wearing mask": "13.01",
+        "Social + Mask + School": "13.01",
+        "Mask + Social + quarantine": "13.01",
+        "Mask + Social + Case isolation": "13.01",
+        "Mask + Quarantine + School": "13.01",
+        "Lock down + measures": "13.01",
+        "Mask + social + quarantine": "13.01"
+      },
+      {
+        "initial": "12.185",
+        "Social distancing + wearing mask": "12.185",
+        "Social + Mask + School": "12.185",
+        "Mask + Social + quarantine": "12.185",
+        "Mask + Social + Case isolation": "12.185",
+        "Mask + Quarantine + School": "12.185",
+        "Lock down + measures": "12.185",
+        "Mask + social + quarantine": "12.185"
+      },
+      {
+        "initial": "11.3",
+        "Social distancing + wearing mask": "11.3",
+        "Social + Mask + School": "11.3",
+        "Mask + Social + quarantine": "11.3",
+        "Mask + Social + Case isolation": "11.3",
+        "Mask + Quarantine + School": "11.3",
+        "Lock down + measures": "11.3",
+        "Mask + social + quarantine": "11.3"
+      },
+      {
+        "initial": "10.465",
+        "Social distancing + wearing mask": "10.465",
+        "Social + Mask + School": "10.465",
+        "Mask + Social + quarantine": "10.465",
+        "Mask + Social + Case isolation": "10.465",
+        "Mask + Quarantine + School": "10.465",
+        "Lock down + measures": "10.465",
+        "Mask + social + quarantine": "10.465"
+      },
+      {
+        "initial": "9.77",
+        "Social distancing + wearing mask": "9.77",
+        "Social + Mask + School": "9.77",
+        "Mask + Social + quarantine": "9.77",
+        "Mask + Social + Case isolation": "9.77",
+        "Mask + Quarantine + School": "9.77",
+        "Lock down + measures": "9.77",
+        "Mask + social + quarantine": "9.77"
+      },
+      {
+        "initial": "9.1",
+        "Social distancing + wearing mask": "9.1",
+        "Social + Mask + School": "9.1",
+        "Mask + Social + quarantine": "9.1",
+        "Mask + Social + Case isolation": "9.1",
+        "Mask + Quarantine + School": "9.1",
+        "Lock down + measures": "9.1",
+        "Mask + social + quarantine": "9.1"
+      },
+      {
+        "initial": "8.33",
+        "Social distancing + wearing mask": "8.33",
+        "Social + Mask + School": "8.33",
+        "Mask + Social + quarantine": "8.33",
+        "Mask + Social + Case isolation": "8.33",
+        "Mask + Quarantine + School": "8.33",
+        "Lock down + measures": "8.33",
+        "Mask + social + quarantine": "8.33"
+      },
+      {
+        "initial": "7.645",
+        "Social distancing + wearing mask": "7.645",
+        "Social + Mask + School": "7.645",
+        "Mask + Social + quarantine": "7.645",
+        "Mask + Social + Case isolation": "7.645",
+        "Mask + Quarantine + School": "7.645",
+        "Lock down + measures": "7.645",
+        "Mask + social + quarantine": "7.645"
+      },
+      {
+        "initial": "7.055",
+        "Social distancing + wearing mask": "7.055",
+        "Social + Mask + School": "7.055",
+        "Mask + Social + quarantine": "7.055",
+        "Mask + Social + Case isolation": "7.055",
+        "Mask + Quarantine + School": "7.055",
+        "Lock down + measures": "7.055",
+        "Mask + social + quarantine": "7.055"
+      },
+      {
+        "initial": "6.535",
+        "Social distancing + wearing mask": "6.535",
+        "Social + Mask + School": "6.535",
+        "Mask + Social + quarantine": "6.535",
+        "Mask + Social + Case isolation": "6.535",
+        "Mask + Quarantine + School": "6.535",
+        "Lock down + measures": "6.535",
+        "Mask + social + quarantine": "6.535"
+      },
+      {
+        "initial": "6.1",
+        "Social distancing + wearing mask": "6.1",
+        "Social + Mask + School": "6.1",
+        "Mask + Social + quarantine": "6.1",
+        "Mask + Social + Case isolation": "6.1",
+        "Mask + Quarantine + School": "6.1",
+        "Lock down + measures": "6.1",
+        "Mask + social + quarantine": "6.1"
+      },
+      {
+        "initial": "5.595",
+        "Social distancing + wearing mask": "5.595",
+        "Social + Mask + School": "5.595",
+        "Mask + Social + quarantine": "5.595",
+        "Mask + Social + Case isolation": "5.595",
+        "Mask + Quarantine + School": "5.595",
+        "Lock down + measures": "5.595",
+        "Mask + social + quarantine": "5.595"
+      },
+      {
+        "initial": "5.185",
+        "Social distancing + wearing mask": "5.185",
+        "Social + Mask + School": "5.185",
+        "Mask + Social + quarantine": "5.185",
+        "Mask + Social + Case isolation": "5.185",
+        "Mask + Quarantine + School": "5.185",
+        "Lock down + measures": "5.185",
+        "Mask + social + quarantine": "5.185"
+      },
+      {
+        "initial": "4.8",
+        "Social distancing + wearing mask": "4.8",
+        "Social + Mask + School": "4.8",
+        "Mask + Social + quarantine": "4.8",
+        "Mask + Social + Case isolation": "4.8",
+        "Mask + Quarantine + School": "4.8",
+        "Lock down + measures": "4.8",
+        "Mask + social + quarantine": "4.8"
+      },
+      {
+        "initial": "4.44",
+        "Social distancing + wearing mask": "4.44",
+        "Social + Mask + School": "4.44",
+        "Mask + Social + quarantine": "4.44",
+        "Mask + Social + Case isolation": "4.44",
+        "Mask + Quarantine + School": "4.44",
+        "Lock down + measures": "4.44",
+        "Mask + social + quarantine": "4.44"
+      },
+      {
+        "initial": "4.17",
+        "Social distancing + wearing mask": "4.17",
+        "Social + Mask + School": "4.17",
+        "Mask + Social + quarantine": "4.17",
+        "Mask + Social + Case isolation": "4.17",
+        "Mask + Quarantine + School": "4.17",
+        "Lock down + measures": "4.17",
+        "Mask + social + quarantine": "4.17"
+      },
+      {
+        "initial": "3.885",
+        "Social distancing + wearing mask": "3.885",
+        "Social + Mask + School": "3.885",
+        "Mask + Social + quarantine": "3.885",
+        "Mask + Social + Case isolation": "3.885",
+        "Mask + Quarantine + School": "3.885",
+        "Lock down + measures": "3.885",
+        "Mask + social + quarantine": "3.885"
+      },
+      {
+        "initial": "3.545",
+        "Social distancing + wearing mask": "3.545",
+        "Social + Mask + School": "3.545",
+        "Mask + Social + quarantine": "3.545",
+        "Mask + Social + Case isolation": "3.545",
+        "Mask + Quarantine + School": "3.545",
+        "Lock down + measures": "3.545",
+        "Mask + social + quarantine": "3.545"
+      },
+      {
+        "initial": "3.325",
+        "Social distancing + wearing mask": "3.325",
+        "Social + Mask + School": "3.325",
+        "Mask + Social + quarantine": "3.325",
+        "Mask + Social + Case isolation": "3.325",
+        "Mask + Quarantine + School": "3.325",
+        "Lock down + measures": "3.325",
+        "Mask + social + quarantine": "3.325"
+      },
+      {
+        "initial": "3.14",
+        "Social distancing + wearing mask": "3.14",
+        "Social + Mask + School": "3.14",
+        "Mask + Social + quarantine": "3.14",
+        "Mask + Social + Case isolation": "3.14",
+        "Mask + Quarantine + School": "3.14",
+        "Lock down + measures": "3.14",
+        "Mask + social + quarantine": "3.14"
+      },
+      {
+        "initial": "2.955",
+        "Social distancing + wearing mask": "2.955",
+        "Social + Mask + School": "2.955",
+        "Mask + Social + quarantine": "2.955",
+        "Mask + Social + Case isolation": "2.955",
+        "Mask + Quarantine + School": "2.955",
+        "Lock down + measures": "2.955",
+        "Mask + social + quarantine": "2.955"
+      },
+      {
+        "initial": "2.725",
+        "Social distancing + wearing mask": "2.725",
+        "Social + Mask + School": "2.725",
+        "Mask + Social + quarantine": "2.725",
+        "Mask + Social + Case isolation": "2.725",
+        "Mask + Quarantine + School": "2.725",
+        "Lock down + measures": "2.725",
+        "Mask + social + quarantine": "2.725"
+      },
+      {
+        "initial": "2.485",
+        "Social distancing + wearing mask": "2.485",
+        "Social + Mask + School": "2.485",
+        "Mask + Social + quarantine": "2.485",
+        "Mask + Social + Case isolation": "2.485",
+        "Mask + Quarantine + School": "2.485",
+        "Lock down + measures": "2.485",
+        "Mask + social + quarantine": "2.485"
+      },
+      {
+        "initial": "2.315",
+        "Social distancing + wearing mask": "2.315",
+        "Social + Mask + School": "2.315",
+        "Mask + Social + quarantine": "2.315",
+        "Mask + Social + Case isolation": "2.315",
+        "Mask + Quarantine + School": "2.315",
+        "Lock down + measures": "2.315",
+        "Mask + social + quarantine": "2.315"
+      },
+      {
+        "initial": "2.175",
+        "Social distancing + wearing mask": "2.175",
+        "Social + Mask + School": "2.175",
+        "Mask + Social + quarantine": "2.175",
+        "Mask + Social + Case isolation": "2.175",
+        "Mask + Quarantine + School": "2.175",
+        "Lock down + measures": "2.175",
+        "Mask + social + quarantine": "2.175"
+      },
+      {
+        "initial": "1.945",
+        "Social distancing + wearing mask": "1.945",
+        "Social + Mask + School": "1.945",
+        "Mask + Social + quarantine": "1.945",
+        "Mask + Social + Case isolation": "1.945",
+        "Mask + Quarantine + School": "1.945",
+        "Lock down + measures": "1.945",
+        "Mask + social + quarantine": "1.945"
+      },
+      {
+        "initial": "1.78",
+        "Social distancing + wearing mask": "1.78",
+        "Social + Mask + School": "1.78",
+        "Mask + Social + quarantine": "1.78",
+        "Mask + Social + Case isolation": "1.78",
+        "Mask + Quarantine + School": "1.78",
+        "Lock down + measures": "1.78",
+        "Mask + social + quarantine": "1.78"
+      },
+      {
+        "initial": "1.66",
+        "Social distancing + wearing mask": "1.66",
+        "Social + Mask + School": "1.66",
+        "Mask + Social + quarantine": "1.66",
+        "Mask + Social + Case isolation": "1.66",
+        "Mask + Quarantine + School": "1.66",
+        "Lock down + measures": "1.66",
+        "Mask + social + quarantine": "1.66"
+      },
+      {
+        "initial": "1.545",
+        "Social distancing + wearing mask": "1.545",
+        "Social + Mask + School": "1.545",
+        "Mask + Social + quarantine": "1.545",
+        "Mask + Social + Case isolation": "1.545",
+        "Mask + Quarantine + School": "1.545",
+        "Lock down + measures": "1.545",
+        "Mask + social + quarantine": "1.545"
+      },
+      {
+        "initial": "1.43",
+        "Social distancing + wearing mask": "1.43",
+        "Social + Mask + School": "1.43",
+        "Mask + Social + quarantine": "1.43",
+        "Mask + Social + Case isolation": "1.43",
+        "Mask + Quarantine + School": "1.43",
+        "Lock down + measures": "1.43",
+        "Mask + social + quarantine": "1.43"
+      },
+      {
+        "initial": "1.31",
+        "Social distancing + wearing mask": "1.31",
+        "Social + Mask + School": "1.31",
+        "Mask + Social + quarantine": "1.31",
+        "Mask + Social + Case isolation": "1.31",
+        "Mask + Quarantine + School": "1.31",
+        "Lock down + measures": "1.31",
+        "Mask + social + quarantine": "1.31"
+      },
+      {
+        "initial": "1.215",
+        "Social distancing + wearing mask": "1.215",
+        "Social + Mask + School": "1.215",
+        "Mask + Social + quarantine": "1.215",
+        "Mask + Social + Case isolation": "1.215",
+        "Mask + Quarantine + School": "1.215",
+        "Lock down + measures": "1.215",
+        "Mask + social + quarantine": "1.215"
+      },
+      {
+        "initial": "1.095",
+        "Social distancing + wearing mask": "1.095",
+        "Social + Mask + School": "1.095",
+        "Mask + Social + quarantine": "1.095",
+        "Mask + Social + Case isolation": "1.095",
+        "Mask + Quarantine + School": "1.095",
+        "Lock down + measures": "1.095",
+        "Mask + social + quarantine": "1.095"
+      },
+      {
+        "initial": "1.01",
+        "Social distancing + wearing mask": "1.01",
+        "Social + Mask + School": "1.01",
+        "Mask + Social + quarantine": "1.01",
+        "Mask + Social + Case isolation": "1.01",
+        "Mask + Quarantine + School": "1.01",
+        "Lock down + measures": "1.01",
+        "Mask + social + quarantine": "1.01"
+      },
+      {
+        "initial": "0.955",
+        "Social distancing + wearing mask": "0.955",
+        "Social + Mask + School": "0.955",
+        "Mask + Social + quarantine": "0.955",
+        "Mask + Social + Case isolation": "0.955",
+        "Mask + Quarantine + School": "0.955",
+        "Lock down + measures": "0.955",
+        "Mask + social + quarantine": "0.955"
+      },
+      {
+        "initial": "0.905",
+        "Social distancing + wearing mask": "0.905",
+        "Social + Mask + School": "0.905",
+        "Mask + Social + quarantine": "0.905",
+        "Mask + Social + Case isolation": "0.905",
+        "Mask + Quarantine + School": "0.905",
+        "Lock down + measures": "0.905",
+        "Mask + social + quarantine": "0.905"
+      },
+      {
+        "initial": "0.865",
+        "Social distancing + wearing mask": "0.865",
+        "Social + Mask + School": "0.865",
+        "Mask + Social + quarantine": "0.865",
+        "Mask + Social + Case isolation": "0.865",
+        "Mask + Quarantine + School": "0.865",
+        "Lock down + measures": "0.865",
+        "Mask + social + quarantine": "0.865"
+      },
+      {
+        "initial": "0.8",
+        "Social distancing + wearing mask": "0.8",
+        "Social + Mask + School": "0.8",
+        "Mask + Social + quarantine": "0.8",
+        "Mask + Social + Case isolation": "0.8",
+        "Mask + Quarantine + School": "0.8",
+        "Lock down + measures": "0.8",
+        "Mask + social + quarantine": "0.8"
+      },
+      {
+        "initial": "0.735",
+        "Social distancing + wearing mask": "0.735",
+        "Social + Mask + School": "0.735",
+        "Mask + Social + quarantine": "0.735",
+        "Mask + Social + Case isolation": "0.735",
+        "Mask + Quarantine + School": "0.735",
+        "Lock down + measures": "0.735",
+        "Mask + social + quarantine": "0.735"
+      },
+      {
+        "initial": "0.7",
+        "Social distancing + wearing mask": "0.7",
+        "Social + Mask + School": "0.7",
+        "Mask + Social + quarantine": "0.7",
+        "Mask + Social + Case isolation": "0.7",
+        "Mask + Quarantine + School": "0.7",
+        "Lock down + measures": "0.7",
+        "Mask + social + quarantine": "0.7"
+      },
+      {
+        "initial": "0.665",
+        "Social distancing + wearing mask": "0.665",
+        "Social + Mask + School": "0.665",
+        "Mask + Social + quarantine": "0.665",
+        "Mask + Social + Case isolation": "0.665",
+        "Mask + Quarantine + School": "0.665",
+        "Lock down + measures": "0.665",
+        "Mask + social + quarantine": "0.665"
+      },
+      {
+        "initial": "0.575",
+        "Social distancing + wearing mask": "0.575",
+        "Social + Mask + School": "0.575",
+        "Mask + Social + quarantine": "0.575",
+        "Mask + Social + Case isolation": "0.575",
+        "Mask + Quarantine + School": "0.575",
+        "Lock down + measures": "0.575",
+        "Mask + social + quarantine": "0.575"
+      },
+      {
+        "initial": "0.54",
+        "Social distancing + wearing mask": "0.54",
+        "Social + Mask + School": "0.54",
+        "Mask + Social + quarantine": "0.54",
+        "Mask + Social + Case isolation": "0.54",
+        "Mask + Quarantine + School": "0.54",
+        "Lock down + measures": "0.54",
+        "Mask + social + quarantine": "0.54"
+      },
+      {
+        "initial": "0.51",
+        "Social distancing + wearing mask": "0.51",
+        "Social + Mask + School": "0.51",
+        "Mask + Social + quarantine": "0.51",
+        "Mask + Social + Case isolation": "0.51",
+        "Mask + Quarantine + School": "0.51",
+        "Lock down + measures": "0.51",
+        "Mask + social + quarantine": "0.51"
+      },
+      {
+        "initial": "0.495",
+        "Social distancing + wearing mask": "0.495",
+        "Social + Mask + School": "0.495",
+        "Mask + Social + quarantine": "0.495",
+        "Mask + Social + Case isolation": "0.495",
+        "Mask + Quarantine + School": "0.495",
+        "Lock down + measures": "0.495",
+        "Mask + social + quarantine": "0.495"
+      },
+      {
+        "initial": "0.425",
+        "Social distancing + wearing mask": "0.425",
+        "Social + Mask + School": "0.425",
+        "Mask + Social + quarantine": "0.425",
+        "Mask + Social + Case isolation": "0.425",
+        "Mask + Quarantine + School": "0.425",
+        "Lock down + measures": "0.425",
+        "Mask + social + quarantine": "0.425"
+      },
+      {
+        "initial": "0.375",
+        "Social distancing + wearing mask": "0.375",
+        "Social + Mask + School": "0.375",
+        "Mask + Social + quarantine": "0.375",
+        "Mask + Social + Case isolation": "0.375",
+        "Mask + Quarantine + School": "0.375",
+        "Lock down + measures": "0.375",
+        "Mask + social + quarantine": "0.375"
+      },
+      {
+        "initial": "0.36",
+        "Social distancing + wearing mask": "0.36",
+        "Social + Mask + School": "0.36",
+        "Mask + Social + quarantine": "0.36",
+        "Mask + Social + Case isolation": "0.36",
+        "Mask + Quarantine + School": "0.36",
+        "Lock down + measures": "0.36",
+        "Mask + social + quarantine": "0.36"
+      },
+      {
+        "initial": "0.34",
+        "Social distancing + wearing mask": "0.34",
+        "Social + Mask + School": "0.34",
+        "Mask + Social + quarantine": "0.34",
+        "Mask + Social + Case isolation": "0.34",
+        "Mask + Quarantine + School": "0.34",
+        "Lock down + measures": "0.34",
+        "Mask + social + quarantine": "0.34"
+      },
+      {
+        "initial": "0.305",
+        "Social distancing + wearing mask": "0.305",
+        "Social + Mask + School": "0.305",
+        "Mask + Social + quarantine": "0.305",
+        "Mask + Social + Case isolation": "0.305",
+        "Mask + Quarantine + School": "0.305",
+        "Lock down + measures": "0.305",
+        "Mask + social + quarantine": "0.305"
+      },
+      {
+        "initial": "0.3",
+        "Social distancing + wearing mask": "0.3",
+        "Social + Mask + School": "0.3",
+        "Mask + Social + quarantine": "0.3",
+        "Mask + Social + Case isolation": "0.3",
+        "Mask + Quarantine + School": "0.3",
+        "Lock down + measures": "0.3",
+        "Mask + social + quarantine": "0.3"
+      },
+      {
+        "initial": "0.27",
+        "Social distancing + wearing mask": "0.27",
+        "Social + Mask + School": "0.27",
+        "Mask + Social + quarantine": "0.27",
+        "Mask + Social + Case isolation": "0.27",
+        "Mask + Quarantine + School": "0.27",
+        "Lock down + measures": "0.27",
+        "Mask + social + quarantine": "0.27"
+      },
+      {
+        "initial": "0.24",
+        "Social distancing + wearing mask": "0.24",
+        "Social + Mask + School": "0.24",
+        "Mask + Social + quarantine": "0.24",
+        "Mask + Social + Case isolation": "0.24",
+        "Mask + Quarantine + School": "0.24",
+        "Lock down + measures": "0.24",
+        "Mask + social + quarantine": "0.24"
+      },
+      {
+        "initial": "0.215",
+        "Social distancing + wearing mask": "0.215",
+        "Social + Mask + School": "0.215",
+        "Mask + Social + quarantine": "0.215",
+        "Mask + Social + Case isolation": "0.215",
+        "Mask + Quarantine + School": "0.215",
+        "Lock down + measures": "0.215",
+        "Mask + social + quarantine": "0.215"
+      },
+      {
+        "initial": "0.205",
+        "Social distancing + wearing mask": "0.205",
+        "Social + Mask + School": "0.205",
+        "Mask + Social + quarantine": "0.205",
+        "Mask + Social + Case isolation": "0.205",
+        "Mask + Quarantine + School": "0.205",
+        "Lock down + measures": "0.205",
+        "Mask + social + quarantine": "0.205"
+      },
+      {
+        "initial": "0.19",
+        "Social distancing + wearing mask": "0.19",
+        "Social + Mask + School": "0.19",
+        "Mask + Social + quarantine": "0.19",
+        "Mask + Social + Case isolation": "0.19",
+        "Mask + Quarantine + School": "0.19",
+        "Lock down + measures": "0.19",
+        "Mask + social + quarantine": "0.19"
+      },
+      {
+        "initial": "0.17",
+        "Social distancing + wearing mask": "0.17",
+        "Social + Mask + School": "0.17",
+        "Mask + Social + quarantine": "0.17",
+        "Mask + Social + Case isolation": "0.17",
+        "Mask + Quarantine + School": "0.17",
+        "Lock down + measures": "0.17",
+        "Mask + social + quarantine": "0.17"
+      },
+      {
+        "initial": "0.155",
+        "Social distancing + wearing mask": "0.155",
+        "Social + Mask + School": "0.155",
+        "Mask + Social + quarantine": "0.155",
+        "Mask + Social + Case isolation": "0.155",
+        "Mask + Quarantine + School": "0.155",
+        "Lock down + measures": "0.155",
+        "Mask + social + quarantine": "0.155"
+      },
+      {
+        "initial": "0.14",
+        "Social distancing + wearing mask": "0.14",
+        "Social + Mask + School": "0.14",
+        "Mask + Social + quarantine": "0.14",
+        "Mask + Social + Case isolation": "0.14",
+        "Mask + Quarantine + School": "0.14",
+        "Lock down + measures": "0.14",
+        "Mask + social + quarantine": "0.14"
+      },
+      {
+        "initial": "0.135",
+        "Social distancing + wearing mask": "0.135",
+        "Social + Mask + School": "0.135",
+        "Mask + Social + quarantine": "0.135",
+        "Mask + Social + Case isolation": "0.135",
+        "Mask + Quarantine + School": "0.135",
+        "Lock down + measures": "0.135",
+        "Mask + social + quarantine": "0.135"
+      },
+      {
+        "initial": "0.13",
+        "Social distancing + wearing mask": "0.13",
+        "Social + Mask + School": "0.13",
+        "Mask + Social + quarantine": "0.13",
+        "Mask + Social + Case isolation": "0.13",
+        "Mask + Quarantine + School": "0.13",
+        "Lock down + measures": "0.13",
+        "Mask + social + quarantine": "0.13"
+      },
+      {
+        "initial": "0.13",
+        "Social distancing + wearing mask": "0.13",
+        "Social + Mask + School": "0.13",
+        "Mask + Social + quarantine": "0.13",
+        "Mask + Social + Case isolation": "0.13",
+        "Mask + Quarantine + School": "0.13",
+        "Lock down + measures": "0.13",
+        "Mask + social + quarantine": "0.13"
+      },
+      {
+        "initial": "0.11",
+        "Social distancing + wearing mask": "0.11",
+        "Social + Mask + School": "0.11",
+        "Mask + Social + quarantine": "0.11",
+        "Mask + Social + Case isolation": "0.11",
+        "Mask + Quarantine + School": "0.11",
+        "Lock down + measures": "0.11",
+        "Mask + social + quarantine": "0.11"
+      },
+      {
+        "initial": "0.1",
+        "Social distancing + wearing mask": "0.1",
+        "Social + Mask + School": "0.1",
+        "Mask + Social + quarantine": "0.1",
+        "Mask + Social + Case isolation": "0.1",
+        "Mask + Quarantine + School": "0.1",
+        "Lock down + measures": "0.1",
+        "Mask + social + quarantine": "0.1"
+      },
+      {
+        "initial": "0.09",
+        "Social distancing + wearing mask": "0.09",
+        "Social + Mask + School": "0.09",
+        "Mask + Social + quarantine": "0.09",
+        "Mask + Social + Case isolation": "0.09",
+        "Mask + Quarantine + School": "0.09",
+        "Lock down + measures": "0.09",
+        "Mask + social + quarantine": "0.09"
+      },
+      {
+        "initial": "0.08",
+        "Social distancing + wearing mask": "0.08",
+        "Social + Mask + School": "0.08",
+        "Mask + Social + quarantine": "0.08",
+        "Mask + Social + Case isolation": "0.08",
+        "Mask + Quarantine + School": "0.08",
+        "Lock down + measures": "0.08",
+        "Mask + social + quarantine": "0.08"
+      },
+      {
+        "initial": "0.07",
+        "Social distancing + wearing mask": "0.07",
+        "Social + Mask + School": "0.07",
+        "Mask + Social + quarantine": "0.07",
+        "Mask + Social + Case isolation": "0.07",
+        "Mask + Quarantine + School": "0.07",
+        "Lock down + measures": "0.07",
+        "Mask + social + quarantine": "0.07"
+      },
+      {
+        "initial": "0.07",
+        "Social distancing + wearing mask": "0.07",
+        "Social + Mask + School": "0.07",
+        "Mask + Social + quarantine": "0.07",
+        "Mask + Social + Case isolation": "0.07",
+        "Mask + Quarantine + School": "0.07",
+        "Lock down + measures": "0.07",
+        "Mask + social + quarantine": "0.07"
+      },
+      {
+        "initial": "0.065",
+        "Social distancing + wearing mask": "0.065",
+        "Social + Mask + School": "0.065",
+        "Mask + Social + quarantine": "0.065",
+        "Mask + Social + Case isolation": "0.065",
+        "Mask + Quarantine + School": "0.065",
+        "Lock down + measures": "0.065",
+        "Mask + social + quarantine": "0.065"
+      },
+      {
+        "initial": "0.06",
+        "Social distancing + wearing mask": "0.06",
+        "Social + Mask + School": "0.06",
+        "Mask + Social + quarantine": "0.06",
+        "Mask + Social + Case isolation": "0.06",
+        "Mask + Quarantine + School": "0.06",
+        "Lock down + measures": "0.06",
+        "Mask + social + quarantine": "0.06"
+      },
+      {
+        "initial": "0.055",
+        "Social distancing + wearing mask": "0.055",
+        "Social + Mask + School": "0.055",
+        "Mask + Social + quarantine": "0.055",
+        "Mask + Social + Case isolation": "0.055",
+        "Mask + Quarantine + School": "0.055",
+        "Lock down + measures": "0.055",
+        "Mask + social + quarantine": "0.055"
+      },
+      {
+        "initial": "0.045",
+        "Social distancing + wearing mask": "0.045",
+        "Social + Mask + School": "0.045",
+        "Mask + Social + quarantine": "0.045",
+        "Mask + Social + Case isolation": "0.045",
+        "Mask + Quarantine + School": "0.045",
+        "Lock down + measures": "0.045",
+        "Mask + social + quarantine": "0.045"
+      },
+      {
+        "initial": "0.045",
+        "Social distancing + wearing mask": "0.045",
+        "Social + Mask + School": "0.045",
+        "Mask + Social + quarantine": "0.045",
+        "Mask + Social + Case isolation": "0.045",
+        "Mask + Quarantine + School": "0.045",
+        "Lock down + measures": "0.045",
+        "Mask + social + quarantine": "0.045"
+      },
+      {
+        "initial": "0.04",
+        "Social distancing + wearing mask": "0.04",
+        "Social + Mask + School": "0.04",
+        "Mask + Social + quarantine": "0.04",
+        "Mask + Social + Case isolation": "0.04",
+        "Mask + Quarantine + School": "0.04",
+        "Lock down + measures": "0.04",
+        "Mask + social + quarantine": "0.04"
+      },
+      {
+        "initial": "0.03",
+        "Social distancing + wearing mask": "0.03",
+        "Social + Mask + School": "0.03",
+        "Mask + Social + quarantine": "0.03",
+        "Mask + Social + Case isolation": "0.03",
+        "Mask + Quarantine + School": "0.03",
+        "Lock down + measures": "0.03",
+        "Mask + social + quarantine": "0.03"
+      },
+      {
+        "initial": "0.03",
+        "Social distancing + wearing mask": "0.03",
+        "Social + Mask + School": "0.03",
+        "Mask + Social + quarantine": "0.03",
+        "Mask + Social + Case isolation": "0.03",
+        "Mask + Quarantine + School": "0.03",
+        "Lock down + measures": "0.03",
+        "Mask + social + quarantine": "0.03"
+      },
+      {
+        "initial": "0.025",
+        "Social distancing + wearing mask": "0.025",
+        "Social + Mask + School": "0.025",
+        "Mask + Social + quarantine": "0.025",
+        "Mask + Social + Case isolation": "0.025",
+        "Mask + Quarantine + School": "0.025",
+        "Lock down + measures": "0.025",
+        "Mask + social + quarantine": "0.025"
+      },
+      {
+        "initial": "0.02",
+        "Social distancing + wearing mask": "0.02",
+        "Social + Mask + School": "0.02",
+        "Mask + Social + quarantine": "0.02",
+        "Mask + Social + Case isolation": "0.02",
+        "Mask + Quarantine + School": "0.02",
+        "Lock down + measures": "0.02",
+        "Mask + social + quarantine": "0.02"
+      },
+      {
+        "initial": "0.025",
+        "Social distancing + wearing mask": "0.025",
+        "Social + Mask + School": "0.025",
+        "Mask + Social + quarantine": "0.025",
+        "Mask + Social + Case isolation": "0.025",
+        "Mask + Quarantine + School": "0.025",
+        "Lock down + measures": "0.025",
+        "Mask + social + quarantine": "0.025"
+      },
+      {
+        "initial": "0.02",
+        "Social distancing + wearing mask": "0.02",
+        "Social + Mask + School": "0.02",
+        "Mask + Social + quarantine": "0.02",
+        "Mask + Social + Case isolation": "0.02",
+        "Mask + Quarantine + School": "0.02",
+        "Lock down + measures": "0.02",
+        "Mask + social + quarantine": "0.02"
+      },
+      {
+        "initial": "0.015",
+        "Social distancing + wearing mask": "0.015",
+        "Social + Mask + School": "0.015",
+        "Mask + Social + quarantine": "0.015",
+        "Mask + Social + Case isolation": "0.015",
+        "Mask + Quarantine + School": "0.015",
+        "Lock down + measures": "0.015",
+        "Mask + social + quarantine": "0.015"
+      },
+      {
+        "initial": "0.02",
+        "Social distancing + wearing mask": "0.02",
+        "Social + Mask + School": "0.02",
+        "Mask + Social + quarantine": "0.02",
+        "Mask + Social + Case isolation": "0.02",
+        "Mask + Quarantine + School": "0.02",
+        "Lock down + measures": "0.02",
+        "Mask + social + quarantine": "0.02"
+      },
+      {
+        "initial": "0.02",
+        "Social distancing + wearing mask": "0.02",
+        "Social + Mask + School": "0.02",
+        "Mask + Social + quarantine": "0.02",
+        "Mask + Social + Case isolation": "0.02",
+        "Mask + Quarantine + School": "0.02",
+        "Lock down + measures": "0.02",
+        "Mask + social + quarantine": "0.02"
+      }
+    ]
+  }
+]
