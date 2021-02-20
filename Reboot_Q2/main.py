@@ -158,8 +158,8 @@ if __name__ == "__main__":
     print('Phase 3: ')
     scenario_1 = {
         'duration': 191,
-        'social_dist': [75, 128, 6],
-        'wearing_mask': [75, 128]
+        'social_dist': [73, 190, 6],
+        'wearing_mask': [73, 190]
     }
     # Put the scenario in the model:
     model.set_scenario(scenario_1)
