@@ -3094,14 +3094,14 @@ function positives_draw(){
     return [];
   }
 }
-function hospitalized_draw(){
-  if($id_switch_hospitalized.checked == true){
-      return data_H;
-  }
-  else{
-    return [];
-  }
-}
+// function hospitalized_draw(){
+//   if($id_switch_hospitalized.checked == true){
+//       return data_H;
+//   }
+//   else{
+//     return [];
+//   }
+// }
 function cum_hospitalized_draw(){
   if($id_switch_cum_hospitalized.checked == true){
     return data_num_cumulative_hospitalizations;
