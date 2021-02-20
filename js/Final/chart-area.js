@@ -2,16 +2,16 @@
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
 const $url_data_prof = "https://raw.githubusercontent.com/ADelau/proj0016-epidemic-data/main/Cov_invaders.csv"
-$url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_0.csv"
-$url_data_scenario_1 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_1.csv"
-$url_data_scenario_2 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_2.csv"
-$url_data_scenario_3 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_3.csv"
-$url_data_scenario_4 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_4.csv"
-$url_data_scenario_5 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_5.csv"
-$url_data_scenario_6 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_6.csv"
-$url_data_scenario_7 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_7.csv"
-$url_data_scenario_8 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_8.csv"
-$url_data_scenario_9 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_9.csv"
+// $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_0.csv"
+// $url_data_scenario_1 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_1.csv"
+// $url_data_scenario_2 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_2.csv"
+// $url_data_scenario_3 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_3.csv"
+// $url_data_scenario_4 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_4.csv"
+// $url_data_scenario_5 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_5.csv"
+// $url_data_scenario_6 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_6.csv"
+// $url_data_scenario_7 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_7.csv"
+// $url_data_scenario_8 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_8.csv"
+// $url_data_scenario_9 = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_9.csv"
 const $url_data_day_wm = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/days0.csv"
 const $url_data_day_sd = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/days1.csv"
 const $url_data_day_hq = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/days2.csv"
@@ -77,9 +77,11 @@ const $id_switch_ci = document.getElementById('customSwitches_ci');
 // const $id_switch_num_bed_hos = document.getElementById('customSwitches_num_bed_hos');
 // const $id_switch_num_bed_icu = document.getElementById('customSwitches_num_bed_icu');
 $id_switch_hq.addEventListener('change',function(){
+    load_day_constraint()
     draw();
 });
 $id_switch_ci.addEventListener('change',function(){
+    load_day_constraint()
     draw();
 });
 
@@ -141,7 +143,7 @@ function load_day_wm(){
     }
 
     data_day_wm = []
-    console.log($value_time_wm.val())
+
     for(var i=0;i<$value_time_wm.val();i++){
 
       data_day_wm.push(result[i].Day);
@@ -151,8 +153,10 @@ function load_day_wm(){
 
     var ctx_active_cases = document.getElementById("myAreaSeirModel");
 
-    draw()
+
     load_card_value_seir();
+    load_day_constraint()
+    draw()
 },
 );
 }
@@ -257,76 +261,81 @@ function load_day_constraint(){
     if(parseInt($value_time_wm.val()) == 1) {
       if (parseInt($value_time_sd.val()) == 1) {
         if (parseInt($value_time_cs.val()) == 1) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          console.log($id_switch_hq.checked)
+          console.log($id_switch_ci.checked)
+          if ($id_switch_hq.checked == false && $id_switch_ci.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_0.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
+            console.log("ci false hq true")
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_0.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
+            console.log("ci true hq false")
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_0.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
+            console.log("ci true hq true")
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_0.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 2) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_1.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_1.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_1.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_1.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 3) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_2.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_2.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_2.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_2.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 4) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_3.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_3.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_3.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_3.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 5) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_4.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_4.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_4.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_4.csv"
           }
          loadData_scenario()
@@ -334,76 +343,76 @@ function load_day_constraint(){
       }
       else if (parseInt($value_time_sd.val()) == 2) {
         if (parseInt($value_time_cs.val()) == 1) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_5.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_5.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_5.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_5.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 2) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_6.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_6.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_6.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_6.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 3) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_7.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_7.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_7.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_7.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 4) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_8.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_8.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_8.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_8.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 5) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_9.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_9.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_9.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_9.csv"
           }
          loadData_scenario()
@@ -411,76 +420,76 @@ function load_day_constraint(){
       }
       else if (parseInt($value_time_sd.val()) == 3) {
         if (parseInt($value_time_cs.val()) == 1) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_10.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_10.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_10.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_10.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 2) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_11.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_11.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_11.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_11.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 3) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_12.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_12.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_12.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_12.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 4) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_13.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_13.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_13.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_13.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 5) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_14.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_14.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_14.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_14.csv"
           }
          loadData_scenario()
@@ -488,76 +497,76 @@ function load_day_constraint(){
       }
       else if (parseInt($value_time_sd.val()) == 4) {
         if (parseInt($value_time_cs.val()) == 1) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_15.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_15.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_15.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_15.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 2) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_16.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_16.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_16.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_16.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 3) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_17.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_17.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_17.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_17.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 4) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_18.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_18.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_18.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_18.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 5) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_19.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_19.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_19.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_19.csv"
           }
          loadData_scenario()
@@ -565,76 +574,76 @@ function load_day_constraint(){
       }
       else if (parseInt($value_time_sd.val()) == 5) {
         if (parseInt($value_time_cs.val()) == 1) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_20.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_20.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_20.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_20.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 2) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_21.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_21.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_21.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_21.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 3) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_22.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_22.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_22.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_22.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 4) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_23.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_23.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_23.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_23.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 5) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_24.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_24.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_24.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_24.csv"
           }
          loadData_scenario()
@@ -644,76 +653,76 @@ function load_day_constraint(){
     else if(parseInt($value_time_wm.val()) == 2) {
       if (parseInt($value_time_sd.val()) == 1) {
         if (parseInt($value_time_cs.val()) == 1) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_25.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_25.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_25.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_25.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 2) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_26.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_26.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_26.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_26.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 3) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_27.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_27.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_27.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_27.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 4) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_28.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_28.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_28.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_28.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 5) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_29.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_29.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_29.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_29.csv"
           }
          loadData_scenario()
@@ -721,76 +730,76 @@ function load_day_constraint(){
       }
       else if (parseInt($value_time_sd.val()) == 2) {
         if (parseInt($value_time_cs.val()) == 1) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_30.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_30.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_30.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_30.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 2) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_31.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_31.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_31.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_31.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 3) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_32.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_32.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_32.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_32.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 4) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_33.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_33.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_33.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_33.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 5) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_34.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_34.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_34.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_34.csv"
           }
          loadData_scenario()
@@ -798,76 +807,76 @@ function load_day_constraint(){
       }
       else if (parseInt($value_time_sd.val()) == 3) {
         if (parseInt($value_time_cs.val()) == 1) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_35.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_35.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_35.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_35.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 2) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_36.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_36.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_36.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_36.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 3) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_37.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_37.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_37.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_37.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 4) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_39.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_38.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_38.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_38.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 5) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_39.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_39.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_39.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_39.csv"
           }
          loadData_scenario()
@@ -875,76 +884,76 @@ function load_day_constraint(){
       }
       else if (parseInt($value_time_sd.val()) == 4) {
         if (parseInt($value_time_cs.val()) == 1) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_40.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_40.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_40.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_40.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 2) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_41.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_41.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_41.csv"
           }
-          else{
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_41.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 3) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_42.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_42.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_42.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_42.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 4) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_43.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_43.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_43.csv"
           }
-          else{
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_43.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 5) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_44.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_44.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_44.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_44.csv"
           }
          loadData_scenario()
@@ -952,76 +961,76 @@ function load_day_constraint(){
       }
       else if (parseInt($value_time_sd.val()) == 5) {
         if (parseInt($value_time_cs.val()) == 1) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_45.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_45.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_45.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_45.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 2) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_46.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_46.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_46.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_46.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 3) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_47.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_47.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_47.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_47.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 4) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_48.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_48.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_48.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_48.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 5) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_49.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_49.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_49.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_49.csv"
           }
          loadData_scenario()
@@ -1031,76 +1040,76 @@ function load_day_constraint(){
     else if(parseInt($value_time_wm.val()) == 3) {
       if (parseInt($value_time_sd.val()) == 1) {
         if (parseInt($value_time_cs.val()) == 1) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_50.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_50.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_50.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_50.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 2) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_51.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_51.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_51.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_51.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 3) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_52.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_52.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_52.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_52.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 4) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_53.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_53.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_53.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_53.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 5) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_54.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_54.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_54.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_54.csv"
           }
          loadData_scenario()
@@ -1108,76 +1117,76 @@ function load_day_constraint(){
       }
       else if (parseInt($value_time_sd.val()) == 2) {
         if (parseInt($value_time_cs.val()) == 1) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_55.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_55.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_55.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_55.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 2) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_56.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_56.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_56.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_56.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 3) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_57.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_57.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_57.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_57.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 4) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_58.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_58.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_58.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_58.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 5) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_59.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_59.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_59.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_59.csv"
           }
          loadData_scenario()
@@ -1185,76 +1194,76 @@ function load_day_constraint(){
       }
       else if (parseInt($value_time_sd.val()) == 3) {
         if (parseInt($value_time_cs.val()) == 1) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_60.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_60.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_60.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_60.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 2) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_61.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_61.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_61.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_61.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 3) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_62.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_62.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_62.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_62.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 4) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_63.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_63.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_63.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_63.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 5) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_64.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_64.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_64.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_64.csv"
           }
          loadData_scenario()
@@ -1262,76 +1271,76 @@ function load_day_constraint(){
       }
       else if (parseInt($value_time_sd.val()) == 4) {
         if (parseInt($value_time_cs.val()) == 1) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_65.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_65.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_65.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_65.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 2) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_66.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_66.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_66.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_66.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 3) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_67.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_67.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_67.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_67.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 4) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_68.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_68.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_68.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_68.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 5) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_69.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_69.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_69.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_69.csv"
           }
          loadData_scenario()
@@ -1339,76 +1348,76 @@ function load_day_constraint(){
       }
       else if (parseInt($value_time_sd.val()) == 5) {
         if (parseInt($value_time_cs.val()) == 1) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_70.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_70.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_70.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_70.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 2) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_71.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_71.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_71.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_71.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 3) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_72.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_72.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_72.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_72.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 4) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_73.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_73.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_73.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_73.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 5) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_74.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_74.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_74.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_74.csv"
           }
          loadData_scenario()
@@ -1418,76 +1427,76 @@ function load_day_constraint(){
     else if(parseInt($value_time_wm.val()) == 4) {
       if (parseInt($value_time_sd.val()) == 1) {
         if (parseInt($value_time_cs.val()) == 1) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_75.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_75.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_75.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_75.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 2) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_76.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_76csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_76.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_76.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 3) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_77.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_77.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_77.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_77.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 4) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_78.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_78.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_78.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_78.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 5) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_79.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_79.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_79.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_79.csv"
           }
          loadData_scenario()
@@ -1495,76 +1504,76 @@ function load_day_constraint(){
       }
       else if (parseInt($value_time_sd.val()) == 2) {
         if (parseInt($value_time_cs.val()) == 1) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_80.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_80.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_80.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_80.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 2) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_81.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_81.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_81.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_81.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 3) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_82.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_82.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_82.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_82.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 4) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_83.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_83.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_83.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_83.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 5) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_84.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_84.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_84.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_84.csv"
           }
          loadData_scenario()
@@ -1572,76 +1581,76 @@ function load_day_constraint(){
       }
       else if (parseInt($value_time_sd.val()) == 3) {
         if (parseInt($value_time_cs.val()) == 1) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_85.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_85.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_85.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_85.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 2) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_86.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_86.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_86.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_86.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 3) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_87.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_87.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_87.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_87.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 4) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_88.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_88.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_88.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_88.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 5) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_89.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_89.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_89.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_89.csv"
           }
          loadData_scenario()
@@ -1649,76 +1658,76 @@ function load_day_constraint(){
       }
       else if (parseInt($value_time_sd.val()) == 4) {
         if (parseInt($value_time_cs.val()) == 1) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_90.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_90.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_90.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_90.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 2) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_91.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_91.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_91.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_91.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 3) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_92.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_92.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_92.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_92.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 4) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_93.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_93.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_93.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_93.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 5) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_94.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_94.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_94.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_94.csv"
           }
          loadData_scenario()
@@ -1726,76 +1735,76 @@ function load_day_constraint(){
       }
       else if (parseInt($value_time_sd.val()) == 5) {
         if (parseInt($value_time_cs.val()) == 1) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_95.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_95.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_95.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_95.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 2) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_96.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_96.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_96.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_96.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 3) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_97.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_97.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_97.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_97.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 4) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_98.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_98.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_98.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_98.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 5) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_99.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_99.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_99.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_99.csv"
           }
          loadData_scenario()
@@ -1805,76 +1814,76 @@ function load_day_constraint(){
     else if(parseInt($value_time_wm.val()) == 5) {
       if (parseInt($value_time_sd.val()) == 1) {
         if (parseInt($value_time_cs.val()) == 1) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_100.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_100.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_100.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_100.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 2) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_101.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_101.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_101.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_101.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 3) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_102.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_102.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_102.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_102.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 4) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_103.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_103.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_103.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_103.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 5) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_104.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_104.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_104.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_104.csv"
           }
          loadData_scenario()
@@ -1882,76 +1891,76 @@ function load_day_constraint(){
       }
       else if (parseInt($value_time_sd.val()) == 2) {
         if (parseInt($value_time_cs.val()) == 1) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_105.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_105.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_105.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_105.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 2) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_106.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_106.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_106.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_106.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 3) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_107.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_107.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_107.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_107.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 4) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_108.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_108.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_108.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_108.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 5) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_109.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_109.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_109.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_109.csv"
           }
          loadData_scenario()
@@ -1959,76 +1968,76 @@ function load_day_constraint(){
       }
       else if (parseInt($value_time_sd.val()) == 3) {
         if (parseInt($value_time_cs.val()) == 1) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_110.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_110.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_110.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_110.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 2) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_111.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_111.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_111.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_111.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 3) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_112.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_112.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_112.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_112.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 4) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_113.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_113.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_113.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_113.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 5) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_114.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_114.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_114.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_114.csv"
           }
          loadData_scenario()
@@ -2036,76 +2045,76 @@ function load_day_constraint(){
       }
       else if (parseInt($value_time_sd.val()) == 4) {
         if (parseInt($value_time_cs.val()) == 1) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_115.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_115.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_115.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_115.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 2) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_116.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_116.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_116.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_116.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 3) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_117.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_117.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_117.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_117.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 4) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_118.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_118.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_118.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_118.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 5) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_119.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_119.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_119.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_119.csv"
           }
          loadData_scenario()
@@ -2113,76 +2122,76 @@ function load_day_constraint(){
       }
       else if (parseInt($value_time_sd.val()) == 5) {
         if (parseInt($value_time_cs.val()) == 1) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_120.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_120.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_120.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_120.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 2) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_121.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_121.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_121.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_121.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 3) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_122.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_122.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_122.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_122.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 4) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_123.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_123.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_123.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_123.csv"
           }
          loadData_scenario()
         }
         else if (parseInt($value_time_cs.val()) == 5) {
-          if ($id_switch_ci.unchecked == true && id_switch_hq.unchecked == true){
+          if ($id_switch_ci.checked == false && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_124.csv"
           }
-          else if($id_switch_ci.unchecked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == false && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_124.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.unchecked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == false){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_ci_124.csv"
           }
-          else if($id_switch_ci.checked == true && id_switch_hq.checked == true){
+          else if($id_switch_ci.checked == true && $id_switch_hq.checked == true){
             $url_data_scenario = "https://raw.githubusercontent.com/jhubar/PI/master/BruteForceModel_V2/Data_Scenario/scenario_hm_ci_124.csv"
           }
          loadData_scenario()
@@ -2750,7 +2759,7 @@ function load_day_constraint(){
         }
       }
     }
-
+    draw()
 
 },
 );
