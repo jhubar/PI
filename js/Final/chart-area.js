@@ -2894,11 +2894,13 @@ function loadData_prof(){
       data_prof_num_cumulative_hospitalizations = []
       data_prof_num_critical = []
       data_prof_num_fatalities = []
+      data_ladder = []
 
 
 
 
       for(var i=0;i<$value_time_SEIR.val();i++){
+        data_ladder.push(1500)
 
         if (i > 191){
 
@@ -3515,6 +3517,21 @@ function draw() {
           pointBorderWidth: 4,
           data: target_death_draw(),
         },
+        {
+          label: "data_prof_num_fatalities",
+          lineTension: 0.1,
+          backgroundColor: "rgba(0, 0, 0,0.1)",
+          borderColor: "rgba(0, 0, 0, 1)",
+          pointRadius: 1,
+          pointBackgroundColor: "rgba(0, 0, 0, 1)",
+          pointBorderColor: "rgba(0, 0, 0, 1)",
+          pointHoverRadius: 1,
+          pointHoverBackgroundColor: "rgba(0, 0, 0, 1)",
+          pointHoverBorderColor: "rgba(0, 0, 0, 1)",
+          pointHitRadius: 1,
+          pointBorderWidth: 1,
+          data: data_ladder,
+        }
 
         // // Plot scenario 2
         // {
