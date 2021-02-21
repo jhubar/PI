@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 from scipy.integrate import odeint
 from scipy.optimize import minimize
 from scipy.stats import binom as binom
+from plot import *
 import tools
 
 class SEIR():
@@ -949,5 +950,50 @@ class SEIR():
 
         #for i in range(0, predict_length):
             #print(self.beta_time_line[i])
+
+    def stochastic_mean(self, duration):
+        sp = self.stochastic_predic(duration=duration)
+        sp_S = sp[:, 0, :]
+        sp_E = sp[:, 1, :]
+        sp_I = sp[:, 2, :]
+        sp_R = sp[:, 3, :]
+        sp_H = sp[:, 4, :]
+        sp_C = sp[:, 5, :]
+        sp_D = sp[:, 6, :]
+
+        mean = [np.mean(sp_S, axis=1), np.mean(sp_E, axis=1), np.mean(sp_I, axis=1),
+                np.mean(sp_R, axis=1), np.mean(sp_H, axis=1), np.mean(sp_C, axis=1),
+                np.mean(sp_D, axis=1)]
+
+        sto_hq = [np.mean(sp_S, axis=1) + (2 * np.std(sp_S, axis=1)),
+                  np.mean(sp_E, axis=1) + (2 * np.std(sp_E, axis=1)),
+                  np.mean(sp_I, axis=1) + (2 * np.std(sp_I, axis=1)),
+                  np.mean(sp_R, axis=1) + (2 * np.std(sp_R, axis=1)),
+                  np.mean(sp_H, axis=1) + (2 * np.std(sp_H, axis=1)),
+                  np.mean(sp_C, axis=1) + (2 * np.std(sp_C, axis=1)),
+                  np.mean(sp_D, axis=1) + (2 * np.std(sp_D, axis=1))]
+
+        sto_lq = [np.mean(sp_S, axis=1) - (2 * np.std(sp_S, axis=1)),
+                  np.mean(sp_E, axis=1) - (2 * np.std(sp_E, axis=1)),
+                  np.mean(sp_I, axis=1) - (2 * np.std(sp_I, axis=1)),
+                  np.mean(sp_R, axis=1) - (2 * np.std(sp_R, axis=1)),
+                  np.mean(sp_H, axis=1) - (2 * np.std(sp_H, axis=1)),
+                  np.mean(sp_C, axis=1) - (2 * np.std(sp_C, axis=1)),
+                  np.mean(sp_D, axis=1) - (2 * np.std(sp_D, axis=1))]
+
+        return mean, sto_hq, sto_lq, sp_S, sp_E, sp_I, sp_R, sp_H, sp_C, sp_D
+
+    def plot(self, filename, type, duration=0, plot_conf_inter=False,
+             global_view=False, plot_param=False):
+        """
+        @param filename(@type String): name of file to save plot in
+        @param type(@type String): type of curves to plot
+        @param duration(@type int): duration of predictions
+        @param plot_conf_inter(@type bool): plot confidence range
+        @param global_view(@type bool): plot all stochastic curves
+        @return:
+        """
+        plot_dataset(self, filename, type, duration, plot_conf_inter,
+                     global_view, plot_param)
 
 

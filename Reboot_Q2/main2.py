@@ -1,0 +1,28 @@
+import numpy as np
+import pandas as pd
+import json
+import matplotlib.pyplot as plt
+from SEIR import SEIR
+
+"""
+Adaptation du main de base pour ploter les graphes et interval de confiance sans mesures
+"""
+
+if __name__ == "__main__":
+    nb_sim = 100
+    # --------------------------- Create the model --------------------------- #
+    print('Phase 1: ')
+    # Create the model:
+    model = SEIR()
+
+    # Load the dataset
+    model.import_dataset()
+
+    # Fit the model
+    #model.fit(method='normal')
+
+    # Fit starting state:
+    #model.init_state_optimizer()
+
+    model.plot('fig/base_pred_A', type='--det-I --sto-I', duration=200)
+
