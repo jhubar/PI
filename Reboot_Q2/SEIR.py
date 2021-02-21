@@ -326,10 +326,10 @@ class SEIR():
         # Initial state to use:
         init = initial_state
         if init is None:
-            init = self.get_initial_state(sensib=prm[8], test_rate=prm[9],
-                                                     sigma=prm[1])
-            #init = np.asarray(self.get_initial_state(sensib=prm[8], test_rate=prm[9],
-            #                              sigma=prm[1]), dtype=int)
+            #init = self.get_initial_state(sensib=prm[8], test_rate=prm[9],
+            #                                         sigma=prm[1])
+            init = np.asarray(self.get_initial_state(sensib=prm[8], test_rate=prm[9],
+                                          sigma=prm[1]), dtype=int)
 
         # Make prediction:
         predict = odeint(func=self.differential,

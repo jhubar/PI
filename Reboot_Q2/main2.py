@@ -31,6 +31,6 @@ if __name__ == "__main__":
 
     model.plot('fig/base_pred_C', type='--det-S --sto-S --det-R --sto-R', duration=200, plot_conf_inter=True)
 
-    model.plot('fig/base_pred_B', type='--det-S --sto-S --det-R --sto-R', duration=200,
+    model.plot('fig/base_pred_D', type='--det-S --sto-S --det-R --sto-R', duration=200,
                plot_conf_inter=False, global_view=True)
 
