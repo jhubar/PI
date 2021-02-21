@@ -52,7 +52,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.main2">
+  <component name="RunManager" selected="Python.main3">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="RebootV2" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -97,8 +97,31 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="main3" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="RebootV2" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main3.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.main3" />
         <item itemvalue="Python.main2" />
         <item itemvalue="Python.main" />
       </list>
@@ -116,7 +139,7 @@
       <workItem from="1613815240459" duration="1792000" />
       <workItem from="1613842448947" duration="2189000" />
       <workItem from="1613915431953" duration="1214000" />
-      <workItem from="1613920665913" duration="3204000" />
+      <workItem from="1613920665913" duration="5126000" />
     </task>
     <servers />
   </component>
@@ -141,28 +164,28 @@
     </state>
     <state x="740" y="280" key="FileChooserDialogImpl/-1920.0.1280.700/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1613844046567" />
     <state x="2660" y="280" key="FileChooserDialogImpl/-1920.0.1280.700/1920.0.1920.1050/0.0.1920.1050@1920.0.1920.1050" timestamp="1613920640615" />
-    <state width="1877" height="168" key="GridCell.Tab.0.bottom" timestamp="1613923877970">
+    <state width="1877" height="168" key="GridCell.Tab.0.bottom" timestamp="1613923974862">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="168" key="GridCell.Tab.0.bottom/-1920.0.1280.700/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1613923877970" />
+    <state width="1877" height="168" key="GridCell.Tab.0.bottom/-1920.0.1280.700/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1613923974862" />
     <state width="1237" height="94" key="GridCell.Tab.0.bottom/0.0.1280.689/-1920.0.1280.689@-1920.0.1280.689" timestamp="1613827499737" />
     <state width="1237" height="47" key="GridCell.Tab.0.bottom/0.0.1280.689/-1920.0.1280.689@0.0.1280.689" timestamp="1613825129115" />
-    <state width="1877" height="168" key="GridCell.Tab.0.center" timestamp="1613923877969">
+    <state width="1877" height="168" key="GridCell.Tab.0.center" timestamp="1613923974861">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="168" key="GridCell.Tab.0.center/-1920.0.1280.700/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1613923877969" />
+    <state width="1877" height="168" key="GridCell.Tab.0.center/-1920.0.1280.700/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1613923974861" />
     <state width="1237" height="94" key="GridCell.Tab.0.center/0.0.1280.689/-1920.0.1280.689@-1920.0.1280.689" timestamp="1613827499737" />
     <state width="1237" height="47" key="GridCell.Tab.0.center/0.0.1280.689/-1920.0.1280.689@0.0.1280.689" timestamp="1613825129115" />
-    <state width="1877" height="168" key="GridCell.Tab.0.left" timestamp="1613923877969">
+    <state width="1877" height="168" key="GridCell.Tab.0.left" timestamp="1613923974861">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="168" key="GridCell.Tab.0.left/-1920.0.1280.700/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1613923877969" />
+    <state width="1877" height="168" key="GridCell.Tab.0.left/-1920.0.1280.700/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1613923974861" />
     <state width="1237" height="94" key="GridCell.Tab.0.left/0.0.1280.689/-1920.0.1280.689@-1920.0.1280.689" timestamp="1613827499737" />
     <state width="1237" height="47" key="GridCell.Tab.0.left/0.0.1280.689/-1920.0.1280.689@0.0.1280.689" timestamp="1613825129115" />
-    <state width="1877" height="168" key="GridCell.Tab.0.right" timestamp="1613923877970">
+    <state width="1877" height="168" key="GridCell.Tab.0.right" timestamp="1613923974862">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="168" key="GridCell.Tab.0.right/-1920.0.1280.700/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1613923877970" />
+    <state width="1877" height="168" key="GridCell.Tab.0.right/-1920.0.1280.700/1920.0.1920.1050/0.0.1920.1050@0.0.1920.1050" timestamp="1613923974862" />
     <state width="1237" height="94" key="GridCell.Tab.0.right/0.0.1280.689/-1920.0.1280.689@-1920.0.1280.689" timestamp="1613827499737" />
     <state width="1237" height="47" key="GridCell.Tab.0.right/0.0.1280.689/-1920.0.1280.689@0.0.1280.689" timestamp="1613825129115" />
     <state x="284" y="0" key="SettingsEditor" timestamp="1613815408010">
@@ -172,7 +195,7 @@
     <state x="284" y="0" key="SettingsEditor/0.0.1280.689@0.0.1280.689" timestamp="1613815408010" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Reboot_Q2$main2.coverage" NAME="main2 Coverage Results" MODIFIED="1613923877946" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Reboot_Q2$main2.coverage" NAME="main2 Coverage Results" MODIFIED="1613923974846" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Reboot_Q2$main.coverage" NAME="main Coverage Results" MODIFIED="1613922971509" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/RebootV2$main.coverage" NAME="main Coverage Results" MODIFIED="1613761134442" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
