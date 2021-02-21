@@ -2902,12 +2902,12 @@ function loadData_prof(){
 
         if (i > 191){
 
-          data_prof_num_positive.push(0);
-          data_prof_num_tested.push(0);
-          data_prof_num_hospitalised.push(0);
-          data_prof_num_cumulative_hospitalizations.push(0);
-          data_prof_num_critical.push(0);
-          data_prof_num_fatalities.push(0);
+          // data_prof_num_positive.push(0);
+          // data_prof_num_tested.push(0);
+          // data_prof_num_hospitalised.push(0);
+          // data_prof_num_cumulative_hospitalizations.push(0);
+          // data_prof_num_critical.push(0);
+          // data_prof_num_fatalities.push(0);
         }
         else{
 
@@ -3175,7 +3175,7 @@ function hospitalized_seir_draw(){
   }
 }
 function target_hospitalized_draw(){
-  if($id_switch_target_data.checked == true){
+  if($id_switch_target_data.checked == true && $id_switch_Hospitalized.checked == true){
     return data_prof_num_hospitalised;
   }
   else{
@@ -3191,7 +3191,7 @@ function criticals_seir_draw(){
   }
 }
 function target_criticals_draw(){
-  if($id_switch_target_data.checked == true){
+  if($id_switch_target_data.checked == true && $id_switch_Criticals.checked == true){
     return data_prof_num_critical;
   }
   else{
@@ -3207,7 +3207,7 @@ function fatalities_seir_draw(){
   }
 }
 function target_death_draw(){
-  if($id_switch_target_data.checked == true){
+  if($id_switch_target_data.checked == true && $id_switch_Death.checked == true){
     return data_prof_num_fatalities;
   }
   else{
