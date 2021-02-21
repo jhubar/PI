@@ -24,5 +24,13 @@ if __name__ == "__main__":
     # Fit starting state:
     #model.init_state_optimizer()
 
-    model.plot('fig/base_pred_A', type='--det-I --sto-I', duration=200)
+    model.plot('fig/base_pred_A', type='--det-I --sto-I --det-C --sto-C --det-H --sto-H --det-D --sto-D', duration=200, plot_conf_inter=True)
+
+    model.plot('fig/base_pred_B', type='--det-I --sto-I --det-C --sto-C --det-H --sto-H --det-D --sto-D', duration=200,
+               plot_conf_inter=False, global_view=True)
+
+    model.plot('fig/base_pred_C', type='--det-S --sto-S --det-R --sto-R', duration=200, plot_conf_inter=True)
+
+    model.plot('fig/base_pred_B', type='--det-S --sto-S --det-R --sto-R', duration=200,
+               plot_conf_inter=False, global_view=True)
 
