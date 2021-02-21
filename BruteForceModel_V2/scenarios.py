@@ -17,39 +17,39 @@ def scenario():
     model.import_dataset()
 
     # Load best models file:
-    result = pd.read_csv('FINAL_MODEL.csv', header=0, sep=';', index_col=0)
+    # result = pd.read_csv('FINAL_MODEL.csv', header=0, sep=';', index_col=0)
     # Numpy version
-    npr = result.to_numpy()
+    # npr = result.to_numpy()
     # Chose index 0:
     i = 0
     # Print the selected row
     # row = result.loc[i, :]
     # print(row)
     # Load parameters
-    model.beta = npr[i][0]
-    model.sigma = npr[i][1]
-    model.gamma = npr[i][2]
-    model.hp = npr[i][3]
-    model.hcr = npr[i][4]
-    model.pc = npr[i][5]
-    model.pd = npr[i][6]
-    model.pcr = npr[i][7]
-    model.s = npr[i][8]
-    model.t = npr[i][9]
-    model.I_0 = npr[i][23]
-
-    # Load parameters
-    model.beta = npr[i][0]
-    model.sigma = npr[i][1]
-    model.gamma = npr[i][2]
-    model.hp = npr[i][3]
-    model.hcr = npr[i][4]
-    model.pc = npr[i][5]
-    model.pd = npr[i][6]
-    model.pcr = npr[i][7]
-    model.s = npr[i][8]
-    model.t = npr[i][9]
-    model.I_0 = npr[i][23]
+    # model.beta = npr[i][0]
+    # model.sigma = npr[i][1]
+    # model.gamma = npr[i][2]
+    # model.hp = npr[i][3]
+    # model.hcr = npr[i][4]
+    # model.pc = npr[i][5]
+    # model.pd = npr[i][6]
+    # model.pcr = npr[i][7]
+    # model.s = npr[i][8]
+    # model.t = npr[i][9]
+    # model.I_0 = npr[i][23]
+    #
+    # # Load parameters
+    # model.beta = npr[i][0]
+    # model.sigma = npr[i][1]
+    # model.gamma = npr[i][2]
+    # model.hp = npr[i][3]
+    # model.hcr = npr[i][4]
+    # model.pc = npr[i][5]
+    # model.pd = npr[i][6]
+    # model.pcr = npr[i][7]
+    # model.s = npr[i][8]
+    # model.t = npr[i][9]
+    # model.I_0 = npr[i][23]
     # Get time vector:
     time = np.arange(300)
 
@@ -61,58 +61,58 @@ def scenario():
 
     # Choose scenario
 
-
-    scenario_1 = {
-        'duration': 300,
-        'social_dist': [73, 119, 6],
-        'wearing_mask': [73, 119]
-    }
-    title_1 = 'Social distancing + wearing mask'
-
-    scenario_2 = {
-        'duration': 300,
-        'social_dist': [73, 119, 6],
-        'wearing_mask': [73, 119],
-        'close_schools': [73, 119]
-    }
-    title_2 = 'Social + Mask + School'
-    scenario_3 = {
-        'duration': 300,
-        'social_dist': [73, 119, 6],
-        'home_quarantine': [73, 119],
-        'wearing_mask': [73, 119]
-    }
-    title_3 = 'Mask + Social + quarantine'
-    scenario_4 = {
-        'duration': 300,
-        'social_dist': [73, 119, 6],
-        'case_isolation': [73, 119],
-        'wearing_mask': [73, 119]
-    }
-    title_4 = 'Mask + Social + Case isolation'
-    scenario_5 = {
-        'duration': 300,
-        'social_dist': [73, 119, 6],
-        'home_quarantine': [73, 119],
-        'wearing_mask': [73, 119],
-        'close_schools': [73, 119]
-    }
-    title_5 = 'Mask + Quarantine + School'
-    scenario_6 = {
-        'duration': 300,
-        'home_quarantine': [73, 119],
-        'wearing_mask': [73, 119],
-        'social_dist': [73, 119, 6],
-        "lock_down": [73, 119]
-    }
-    title_6 = 'Lock down + measures'
-    scenario_7 = {
-        'duration': 300,
-        'social_dist': [73, 119, 6],
-        'wearing_mask': [73, 119],
-        'home_quarantine': [73, 119]
-    }
-    title_7 = 'Mask + social + quarantine'
+    #
+    # scenario_1 = {
+    #     'duration': 300,
+    #     'social_dist': [73, 119, 6],
+    #     'wearing_mask': [73, 119]
+    # }
+    # title_1 = 'Social distancing + wearing mask'
+    #
+    # scenario_2 = {
+    #     'duration': 300,
+    #     'social_dist': [73, 119, 6],
+    #     'wearing_mask': [73, 119],
+    #     'close_schools': [73, 119]
+    # }
+    # title_2 = 'Social + Mask + School'
+    # scenario_3 = {
+    #     'duration': 300,
+    #     'social_dist': [73, 119, 6],
+    #     'home_quarantine': [73, 119],
+    #     'wearing_mask': [73, 119]
+    # }
+    # title_3 = 'Mask + Social + quarantine'
+    # scenario_4 = {
+    #     'duration': 300,
+    #     'social_dist': [73, 119, 6],
+    #     'case_isolation': [73, 119],
+    #     'wearing_mask': [73, 119]
+    # }
+    # title_4 = 'Mask + Social + Case isolation'
+    # scenario_5 = {
+    #     'duration': 300,
+    #     'social_dist': [73, 119, 6],
+    #     'home_quarantine': [73, 119],
+    #     'wearing_mask': [73, 119],
+    #     'close_schools': [73, 119]
+    # }
+    # title_5 = 'Mask + Quarantine + School'
+    # scenario_6 = {
+    #     'duration': 300,
+    #     'home_quarantine': [73, 119],
+    #     'wearing_mask': [73, 119],
+    #     'social_dist': [73, 119, 6],
+    #     "lock_down": [73, 119]
+    # }
+    # title_6 = 'Lock down + measures'
+    # scenario_7 = {
+    #     'duration': 300,
+    #     'social_dist': [73, 119, 6],
+    #     'wearing_mask': [73, 119],
+    #     'home_quarantine': [73, 119]
+    # }
+    # title_7 = 'Mask + social + quarantine'
     # --------------------------- ALL scenar --------------------------- #
     size = 5
 
@@ -126,11 +126,11 @@ def scenario():
 
                 scenario_wm_sd_cs.append({
                     'duration': 300,
-                    'wearing_mask': [73, 73+(wm*10)],
-                    'social_dist': [73, 73+(sd*10), 6],
-                    'close_schools': [73, 73+(cs*10)],
-                    # 'home_quarantine': [73, 119],
-                    'case_isolation': [73, 119]
+                    'wearing_mask': [73, 73+(wm*30)],
+                    'social_dist': [73, 73+(sd*30), 6],
+                    'close_schools': [73, 73+(cs*30)],
+                    # 'home_quarantine': [73, 193],
+                    'case_isolation': [73, 193]
 
 
 

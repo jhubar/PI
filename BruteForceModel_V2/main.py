@@ -7,6 +7,6 @@ import tools
 from  scenarios import *
 
 if __name__ == "__main__":
-    time = np.arange(300)
-    print(len(time))
+    
+
     scenario()
