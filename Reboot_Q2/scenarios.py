@@ -57,7 +57,7 @@ def scenario_ld():
         for j in range(0,size):
             for k in range(0,size):
                 model.set_scenario(scenario_matrix[i][j][k])
-                mean_scenar.append(np.mean(model.stochastic_predic(duration=300, parameters=None,nb_simul=200, scenar=True),axis = 2))
+                mean_scenar.append(np.mean(model.stochastic_predic(duration=300, parameters=None,nb_simul=100, scenar=True),axis = 2))
 
     for i in range(0,size*size*size):
             data_to_export = pd.DataFrame(dict(Date = time,
@@ -123,7 +123,7 @@ def scenario_ci():
         for j in range(0,size):
             for k in range(0,size):
                 model.set_scenario(scenario_matrix[i][j][k])
-                mean_scenar.append(np.mean(model.stochastic_predic(duration=300, parameters=None,nb_simul=200, scenar=True),axis = 2))
+                mean_scenar.append(np.mean(model.stochastic_predic(duration=300, parameters=None,nb_simul=100, scenar=True),axis = 2))
 
     for i in range(0,size*size*size):
             data_to_export = pd.DataFrame(dict(Date = time,
@@ -189,7 +189,7 @@ def scenario_hm():
         for j in range(0,size):
             for k in range(0,size):
                 model.set_scenario(scenario_matrix[i][j][k])
-                mean_scenar.append(np.mean(model.stochastic_predic(duration=300, parameters=None,nb_simul=200, scenar=True),axis = 2))
+                mean_scenar.append(np.mean(model.stochastic_predic(duration=300, parameters=None,nb_simul=100, scenar=True),axis = 2))
 
     for i in range(0,size*size*size):
             data_to_export = pd.DataFrame(dict(Date = time,
@@ -255,7 +255,7 @@ def scenario_hm_ci():
         for j in range(0,size):
             for k in range(0,size):
                 model.set_scenario(scenario_matrix[i][j][k])
-                mean_scenar.append(np.mean(model.stochastic_predic(duration=300, parameters=None,nb_simul=200, scenar=True),axis = 2))
+                mean_scenar.append(np.mean(model.stochastic_predic(duration=300, parameters=None,nb_simul=100, scenar=True),axis = 2))
 
     for i in range(0,size*size*size):
             data_to_export = pd.DataFrame(dict(Date = time,
@@ -337,9 +337,3 @@ def scenario():
                                 )
             # data_to_export.to_csv(r'Data_Scenario/scenario_'+str(i)+'.csv', header=True, index=False)
             data_to_export.to_csv(r'data/scenario_'+str(i)+'.csv', header=True, index=False)
-
-
-
-if __name__ == "__main__":
-
-    scenario()

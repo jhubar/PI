@@ -10,8 +10,8 @@ Adaptation du main de base pour ploter les graphes et interval de confiance sans
 
 if __name__ == "__main__":
 
-    scenario()
-    nb_sim = 100
+    scenario_hm_ci()
+
     # --------------------------- Create the model --------------------------- #
     print('Phase 1: ')
     # Create the model:
