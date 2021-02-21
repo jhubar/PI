@@ -99,43 +99,44 @@ def plot_dataset(self, filename, type, duration_=0,
     # --------------------------------------------#
     #              Plot deterministic
     # --------------------------------------------#
+    linewidth = 4
 
     if "--det-S" in type:
         ax_plot_dataset.plot(time,
                              det[:, 0],
-                             label='deterministic - S')
+                             label='deterministic - S', linewidth=linewidth)
     if "--det-E" in type:
         ax_plot_dataset.plot(time,
                              det[:, 1],
-                             label='deterministic - E')
+                             label='deterministic - E', linewidth=linewidth)
     if "--det-I" in type:
         ax_plot_dataset.plot(time,
                              det[:, 2],
-                             label='deterministic - I')
+                             label='deterministic - I', linewidth=linewidth)
     if "--det-R" in type:
         ax_plot_dataset.plot(time,
                              det[:, 3],
-                             label='deterministic - R')
+                             label='deterministic - R', linewidth=linewidth)
     if "--det-H" in type:
         ax_plot_dataset.plot(time,
                              det[:, 4],
-                             label='deterministic - H')
+                             label='deterministic - H', linewidth=linewidth)
     if "--det-C" in type:
         ax_plot_dataset.plot(time,
                              det[:, 5],
-                             label='deterministic - C')
+                             label='deterministic - C', linewidth=linewidth)
     if "--det-D" in type:
         ax_plot_dataset.plot(time,
                              det[:, 6],
-                             label='deterministic - D')
+                             label='deterministic - D', linewidth=linewidth)
     if "--det-+CC" in type:
         ax_plot_dataset.plot(time,
                              det[:, 7],
-                             label='deterministic - Cumul. Contam.')
+                             label='deterministic - Cumul. Contam.', linewidth=linewidth)
     if "--det-+CH" in type:
         ax_plot_dataset.plot(time,
                              det[:, 8],
-                             label='deterministic - Cumul. Hospit')
+                             label='deterministic - Cumul. Hospit', linewidth=linewidth)
 
     # --------------------------------------------#
     #               Plot all curves
