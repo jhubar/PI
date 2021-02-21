@@ -3,7 +3,7 @@ import numpy as np
 
 
 def plot_dataset(self, filename, type, duration_=0,
-                 plot_conf_inter=False, global_view=False,plot_param=False):
+                 plot_conf_inter=False, global_view=False, plot_param=False):
     """
 	Parameters
 	----------
@@ -92,10 +92,10 @@ def plot_dataset(self, filename, type, duration_=0,
 
     time = np.arange(1, duration + 1, 1)
     det = self.predict(duration)
-    sto_m, sto_hq, sto_lq, _,\
-        res_S, res_E, res_I, res_R, res_H, res_C, res_F, res_Conta = \
-            self.stochastic_mean(time, 1000)
+    sto_m, sto_hq, sto_lq,\
+        res_S, res_E, res_I, res_R, res_H, res_C, res_F = self.stochastic_mean(duration_)
 
+    #print(sto_m)
     # --------------------------------------------#
     #              Plot deterministic
     # --------------------------------------------#
@@ -141,7 +141,7 @@ def plot_dataset(self, filename, type, duration_=0,
     #               Plot all curves
     # --------------------------------------------#
     line_width = 0.3
-    qt_of_plot = 10
+    qt_of_plot = 5
     if global_view:
         if "--sto-S" in type:
             for i in range(res_S.shape[1]):
@@ -198,14 +198,6 @@ def plot_dataset(self, filename, type, duration_=0,
                                          res_F[:, i],
                                          linewidth=line_width,
                                          color='peru')
-
-        if "--sto-+CC" in type:
-            for i in range(res_Conta.shape[1]):
-                if i%qt_of_plot == 0:
-                    ax_plot_dataset.plot(time,
-                                         res_Conta[:, i],
-                                         linewidth=line_width,
-                                         color='cornflowerblue')
     # --------------------------------------------#
     #            Plot stochastic hq & lq
     # --------------------------------------------#
@@ -213,114 +205,114 @@ def plot_dataset(self, filename, type, duration_=0,
     if plot_conf_inter:
         if "--sto-S" in type:
             ax_plot_dataset.plot(time,
-                                 sto_hq[:, 0],
+                                 sto_hq[0],
                                  color='grey',
                                  linewidth=0.3)
             ax_plot_dataset.plot(time,
-                                 sto_lq[:, 0],
+                                 sto_lq[0],
                                  color='grey',
                                  linewidth=0.3)
             ax_plot_dataset.fill_between(time,
-                                         sto_hq[:, 0],
-                                         sto_lq[:, 0],
+                                         sto_hq[0],
+                                         sto_lq[0],
                                          color='lavender',
                                          alpha=0.7)
         if "--sto-E" in type:
             ax_plot_dataset.plot(time,
-                                 sto_hq[:, 1],
+                                 sto_hq[1],
                                  color='grey',
                                  linewidth=0.3)
             ax_plot_dataset.plot(time,
-                                 sto_lq[:, 1],
+                                 sto_lq[1],
                                  color='grey',
                                  linewidth=0.3)
             ax_plot_dataset.fill_between(time,
-                                         sto_hq[:, 1],
-                                         sto_lq[:, 1],
+                                         sto_hq[1],
+                                         sto_lq[1],
                                          color='thistle',
                                          alpha=0.7)
         if "--sto-I" in type:
             ax_plot_dataset.plot(time,
-                                 sto_hq[:, 2],
+                                 sto_hq[2],
                                  color='grey',
                                  linewidth=0.3)
             ax_plot_dataset.plot(time,
-                                 sto_lq[:, 2],
+                                 sto_lq[2],
                                  color='grey',
                                  linewidth=0.3)
             ax_plot_dataset.fill_between(time,
-                                         sto_hq[:, 2],
-                                         sto_lq[:, 2],
+                                         sto_hq[2],
+                                         sto_lq[2],
                                          color='mistyrose',
                                          alpha=0.7)
         if "--sto-R" in type:
             ax_plot_dataset.plot(time,
-                                 sto_hq[:, 3],
+                                 sto_hq[3],
                                  color='grey',
                                  linewidth=0.3)
             ax_plot_dataset.plot(time,
-                                 sto_lq[:, 3],
+                                 sto_lq[3],
                                  color='grey',
                                  linewidth=0.3)
             ax_plot_dataset.fill_between(time,
-                                         sto_hq[:, 3],
-                                         sto_lq[:, 3],
+                                         sto_hq[3],
+                                         sto_lq[3],
                                          color='lavenderblush',
                                          alpha=0.7)
         if "--sto-H" in type:
             ax_plot_dataset.plot(time,
-                                 sto_hq[:, 4],
+                                 sto_hq[4],
                                  color='grey',
                                  linewidth=0.3)
             ax_plot_dataset.plot(time,
-                                 sto_lq[:, 4],
+                                 sto_lq[4],
                                  color='grey',
                                  linewidth=0.3)
             ax_plot_dataset.fill_between(time,
-                                         sto_hq[:, 4],
-                                         sto_lq[:, 4],
+                                         sto_hq[4],
+                                         sto_lq[4],
                                          color='palegreen',
                                          alpha=0.7)
         if "--sto-C" in type:
             ax_plot_dataset.plot(time,
-                                 sto_hq[:, 5],
+                                 sto_hq[5],
                                  color='grey',
                                  linewidth=0.3)
             ax_plot_dataset.plot(time,
-                                 sto_lq[:, 5],
+                                 sto_lq[5],
                                  color='grey',
                                  linewidth=0.3)
             ax_plot_dataset.fill_between(time,
-                                         sto_hq[:, 5],
-                                         sto_lq[:, 5],
+                                         sto_hq[5],
+                                         sto_lq[5],
                                          color='peachpuff',
                                          alpha=0.7)
         if "--sto-D" in type:
             ax_plot_dataset.plot(time,
-                                 sto_hq[:, 6],
+                                 sto_hq[6],
                                  color='grey',
                                  linewidth=0.3)
             ax_plot_dataset.plot(time,
-                                 sto_lq[:, 6],
+                                 sto_lq[6],
                                  color='grey',
                                  linewidth=0.3)
             ax_plot_dataset.fill_between(time,
-                                         sto_hq[:, 6],
-                                         sto_lq[:, 6],
+                                         sto_hq[6],
+                                         sto_lq[6],
                                          color='lightcyan',
                                          alpha=0.7)
         if "--sto-+CC" in type:
             ax_plot_dataset.plot(time,
-                                 sto_hq[:, 7],
+                                 sto_hq[7],
                                  color='grey',
                                  linewidth=0.3)
             ax_plot_dataset.plot(time,
-                                 sto_lq[:, 7],
+                                 sto_lq[7],
                                  color='grey',
                                  linewidth=0.3)
             ax_plot_dataset.fill_between(time,
-                                         sto_hq[:, 7],
-                                         sto_lq[:, 7],
+                                         sto_hq[7],
+                                         sto_lq[7],
                                          color='bisque',
                                          alpha=0.7)
 
@@ -334,42 +326,42 @@ def plot_dataset(self, filename, type, duration_=0,
 
     if "--sto-S" in type:
         ax_plot_dataset.plot(time,
-                             sto_m[:, 0],
+                             sto_m[0],
                              label='stochastic - S',
                              linewidth=line_width_sto_m)
     if "--sto-E" in type:
         ax_plot_dataset.plot(time,
-                             sto_m[:, 1],
+                             sto_m[1],
                              label='stochastic - E',
                              linewidth=line_width_sto_m)
     if "--sto-I" in type:
         ax_plot_dataset.plot(time,
-                             sto_m[:, 2],
+                             sto_m[2],
                              label='stochastic - I',
                              linewidth=line_width_sto_m)
     if "--sto-R" in type:
         ax_plot_dataset.plot(time,
-                             sto_m[:, 3],
+                             sto_m[3],
                              label='stochastic - R',
                              linewidth=line_width_sto_m)
     if "--sto-H" in type:
         ax_plot_dataset.plot(time,
-                             sto_m[:, 4],
+                             sto_m[4],
                              label='stochastic - H',
                              linewidth=line_width_sto_m)
     if "--sto-C" in type:
         ax_plot_dataset.plot(time,
-                             sto_m[:, 5],
+                             sto_m[5],
                              label='stochastic - C',
                              linewidth=line_width_sto_m)
     if "--sto-D" in type:
         ax_plot_dataset.plot(time,
-                             sto_m[:, 6],
+                             sto_m[6],
                              label='stochastic - D',
                              linewidth=line_width_sto_m)
     if "--sto-+CC" in type:
         ax_plot_dataset.plot(time,
-                             sto_m[:, 7],
+                             sto_m[7],
                              label='stochastic - Cumul. Contam.',
                              linewidth=line_width_sto_m)
 
@@ -407,7 +399,7 @@ def plot_dataset(self, filename, type, duration_=0,
         tick.label.set_fontsize(30)
     for tick in ax_plot_dataset.yaxis.get_major_ticks():
         tick.label.set_fontsize(30)
-    fig_plot_dataset.savefig('img/' + filename + ".pdf")
-    fig_plot_dataset.savefig('img/' + filename + ".png")
+    fig_plot_dataset.savefig(filename + ".pdf")
+    fig_plot_dataset.savefig(filename + ".png")
 
     plt.close()
