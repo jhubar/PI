@@ -65,7 +65,7 @@ if __name__ == "__main__":
     time = np.arange(delau_np.shape[0])
 
 
-    plt.fill_between(time, sto_hq[:, 7], sto_lq[:, 7], color='lavender', alpha=0.7)
+    plt.fill_between(time, sto_hq[:, 7]*model.t*model.s, sto_lq[:, 7]*model.t*model.s, color='lavender', alpha=0.7)
     plt.plot(time, pred_sto_mean[:, 7]*model.t*model.s, color='black', label='Stochastic cumulative conta. Mean')
     plt.scatter(time, delau_np[:, 7], color='blue', label='Testing Cumulative data')
     plt.legend()

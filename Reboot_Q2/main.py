@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from SEIR import SEIR
 
 if __name__ == "__main__":
-    nb_sim = 100
+    nb_sim = 150
     # --------------------------- Create the model --------------------------- #
     print('Phase 1: ')
     # Create the model:
@@ -176,10 +176,10 @@ if __name__ == "__main__":
     for i in range(0, nb_sim):
         plt.plot(time, pred_sto[:, 7, i]*model.t*model.s, color='limegreen', linewidth=0.1)
     plt.plot(time, pred_sto_mean[:, 7]*model.t*model.s, color='green', label='Stochastic conta')
-    plt.plot(time, pred_det[:, 7]*model.t*model.s, color='red', label='Deterministic conta')
+    #plt.plot(time, pred_det[:, 7]*model.t*model.s, color='red', label='Deterministic conta')
     plt.scatter(time, delau_np[:, 7], color='blue', label='Testing data')
     plt.legend()
-    plt.title('Cumulative testing data vs pred')
+    plt.title('Cumulative testing: data vs predictions')
     #plt.show()
     plt.savefig('fig/scenar_1_cum_test_190.png')
     plt.close()
@@ -188,10 +188,10 @@ if __name__ == "__main__":
     for i in range(0, nb_sim):
         plt.plot(time, pred_sto[:, 4, i], color='limegreen', linewidth=0.1)
     plt.plot(time, pred_sto_mean[:, 4], color='green', label='Hospit pred stocha')
-    plt.plot(time, pred_det[:, 4], color='red', label='Hospit pred deter')
+    #plt.plot(time, pred_det[:, 4], color='red', label='Hospit pred deter')
     plt.scatter(time, delau_np[:, 3], color='blue', label='Hospit data')
     plt.legend()
-    plt.title('Hospit: pred stocha/deter vs data')
+    plt.title('Hospitalizations: data vs predictions')
     #plt.show()
     plt.savefig('fig/scenar_1_hospit_190.png')
     plt.close()
@@ -200,10 +200,10 @@ if __name__ == "__main__":
     for i in range(0, nb_sim):
         plt.plot(time, pred_sto[:, 5, i], color='limegreen', linewidth=0.1)
     plt.plot(time, pred_sto_mean[:, 5], color='green', label='Critical pred stocha')
-    plt.plot(time, pred_det[:, 5], color='red', label='Critical pred deter')
+    #plt.plot(time, pred_det[:, 5], color='red', label='Critical pred deter')
     plt.scatter(time, delau_np[:, 5], color='blue', label='Critical data')
     plt.legend()
-    plt.title('Critical: pred stocha/deter vs data')
+    plt.title('Critical: data vs predictions')
     #plt.show()
     plt.savefig('fig/scenar_1_critical_190.png')
     plt.close()
@@ -212,10 +212,10 @@ if __name__ == "__main__":
     for i in range(0, nb_sim):
         plt.plot(time, pred_sto[:, 6, i], color='limegreen', linewidth=0.1)
     plt.plot(time, pred_sto_mean[:, 6], color='green', label='Fatalities pred stocha')
-    plt.plot(time, pred_det[:, 6], color='red', label='Fatalities pred deter')
+    #plt.plot(time, pred_det[:, 6], color='red', label='Fatalities pred deter')
     plt.scatter(time, delau_np[:, 6], color='blue', label='Fatalities data')
     plt.legend()
-    plt.title('Fatalities: pred stocha/deter vs data')
+    plt.title('Fatalities: data vs predictions')
     # plt.show()
     plt.savefig('fig/scenar_1_fatal_190.png')
     plt.close()
