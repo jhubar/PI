@@ -7,6 +7,7 @@
 
 - [Cov-invaders link](https://jhubar.github.io/PI/)
 - [github data](https://github.com/ADelau/proj0016-epidemic-data/)
+- (https://towardsdatascience.com/free-stock-data-for-python-using-yahoo-finance-api-9dafd96cad2e)
 
 ## Rapport
 
