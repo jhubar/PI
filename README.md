@@ -32,11 +32,11 @@
 
 -March 22: Starting session \
 -March 29: \
--April 5:
--April 12:
--April 19: Intermediate review  /!\
--April 26:
--May 10:
+-April 5: \
+-April 12: \
+-April 19: Intermediate review  /!\\
+-April 26: \
+-May 10: \
 -May 10: Final submission /!\
 
 
