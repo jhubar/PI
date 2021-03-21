@@ -28,6 +28,18 @@
 ## Questions
 1. We use implicit method so the system is stable.
 
+## Roadmap
+
+-March 22: Starting session 
+-March 29:
+-April 5:
+-April 12:
+-April 19: Intermediate review  /!\
+-April 26:
+-May 10:
+-May 10: Final submission /!\
+
+
 # Authors
 1. [Hubar Julien](https://jhubar.github.io)
 1. [Andreas Duquenne](https://githut.com/AnDuquenne)
