@@ -30,14 +30,14 @@
 
 ## Roadmap
 
--March 22: Starting session \
+-March 22: Starting session (finding the way to present result + api mastering)\
 -March 29: \
 -April 5: \
 -April 12: \
 -April 19: Intermediate review  \
 -April 26: \
 -May 10: \
--May 10: Final submission \
+-May 10: Final submission 
 
 
 # Authors
