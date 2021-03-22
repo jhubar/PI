@@ -5,6 +5,8 @@ import seaborn
 from pandas_datareader import data
 import pandas as pd
 
+import plotly.express as px
+
 
 
 
@@ -13,12 +15,34 @@ import pandas as pd
 from datetime import datetime
 import yfinance as yf
 import mplfinance as mpf
+import numpy as np
+
+from datetime import datetime, date, timedelta
+
+import yfinance as yf
+import mplfinance as mpf
+import numpy as np
 
 
-start_date = datetime(2019, 1, 1)
+def daterange(start_date,end_date):
+    for n in range(int((end_date-start_date).days)):
+        yield(start_date+timedelta(n))
+
+
+start_date = datetime(2018, 1, 1)
 end_date = datetime(2021, 3, 15)
-data = yf.download('AMZN', start=start_date, end=end_date)
-mpf.plot(data,type='candle',mav=(3,6,9),volume=True,show_nontrading=True)
+companies = ['WMT','GD','BA','RB.L','AIR','RTX']
+data = yf.download(companies, start=start_date, end=end_date)
+#print(data)
+#\print(data['Adj Close']['Air'])
+
+df = data['Adj Close']
+df["Date"] = daterange(start_date,end_date)
+print(df)
+#fig = px.line(df, x="Date", y=df.columns)
+#fig.show()
+
+#plot(data)
 
 
 
@@ -95,6 +119,3 @@ mpf.plot(data,type='candle',mav=(3,6,9),volume=True,show_nontrading=True)
 # import requests
 # import json
 # from datetime import datetime
-
-
-
