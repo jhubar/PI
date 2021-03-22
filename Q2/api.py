@@ -4,48 +4,48 @@ import matplotlib.pyplot as plt
 import seaborn
 from pandas_datareader import data
 import pandas as pd
-
+import numpy as np
 import plotly.express as px
 
 
-
-
-
-
-from datetime import datetime
-import yfinance as yf
-import mplfinance as mpf
-import numpy as np
-
 from datetime import datetime, date, timedelta
-
 import yfinance as yf
 import mplfinance as mpf
-import numpy as np
 
 
-def daterange(start_date,end_date):
-    for n in range(int((end_date-start_date).days)):
-        yield(start_date+timedelta(n))
+def daterange(start_date, end_date):
+    dt = []
+    for n in range(int((end_date - start_date).days)):
+         dt.append(start_date + timedelta(n))
+
+    return dt
 
 
-start_date = datetime(2018, 1, 1)
+start_date = datetime(2019, 1, 1)
 end_date = datetime(2021, 3, 15)
-companies = ['WMT','GD','BA','RB.L','AIR','RTX']
-data = yf.download(companies, start=start_date, end=end_date)
-#print(data)
-#\print(data['Adj Close']['Air'])
 
-df = data['Adj Close']
-df["Date"] = daterange(start_date,end_date)
-print(df)
-#fig = px.line(df, x="Date", y=df.columns)
-#fig.show()
+data = pd.DataFrame()
+companies = ("WMT", "GB", "BA", "LMT", "AIR", "RTX")
 
-#plot(data)
+set_date = True
+for company_ in companies:
+
+    data['Date'] = (yf.download(company_, start=start_date,
+                                                end=end_date, show_nontrading=True)).index.values
+    set_date = False
+
+    data["{}".format(company_)] = ((yf.download(company_, start=start_date,
+                                                end=end_date, show_nontrading=True)["Open"] + \
+                                  yf.download(company_, start=start_date,
+                                              end=end_date, show_nontrading=True)["Close"]) / 2).to_numpy()
 
 
+print(data)
 
+fig = px.line(data, x='Date', y=data.columns, title='Time Series of our Companies')
+fig.update_xaxes(rangeslider_visible=True)
+fig.show()
+# print(data["Date"])
 
 
 
@@ -119,3 +119,6 @@ print(df)
 # import requests
 # import json
 # from datetime import datetime
+
+
+

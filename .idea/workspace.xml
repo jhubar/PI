@@ -2,26 +2,36 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="749abb67-b151-41a0-950f-d9578cf5d1c3" name="Default Changelist" comment="Change SEIR correction + update scenarios to plot 7 determined scenarios">
-      <change afterPath="$PROJECT_DIR$/BruteForceModel_V2/.ipynb_checkpoints/interactive_scenarios-checkpoint.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BruteForceModel_V2/.ipynb_checkpoints/main-checkpoint.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BruteForceModel_V2/img_andreas/Criticals_basics.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BruteForceModel_V2/img_andreas/Criticals_comb.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BruteForceModel_V2/img_andreas/Criticals_test.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BruteForceModel_V2/img_andreas/Hospitalization_basics.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BruteForceModel_V2/img_andreas/Hospitalization_comb.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BruteForceModel_V2/img_andreas/Hospitalization_test.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BruteForceModel_V2/interactive_scenarios.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Q2/csvdefdp.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BruteForceModel_V2/SEIR.py" beforeDir="false" afterPath="$PROJECT_DIR$/BruteForceModel_V2/SEIR.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BruteForceModel_V2/scenarios.py" beforeDir="false" afterPath="$PROJECT_DIR$/BruteForceModel_V2/scenarios.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Q2/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/Q2/api.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
+    <envs>
+      <env key="FLASK_APP" value="app" />
+    </envs>
+    <option name="myCustomStartScript" value="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))" />
+    <option name="myEnvs">
+      <map>
+        <entry key="FLASK_APP" value="app" />
+      </map>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="JupyterTrust" id="0733deb6-31ab-485f-9063-cf6d48d41805" />
   <component name="ProjectId" id="1lKZp1RKDKuk2nGb1hxU24LBlNx" />
@@ -76,6 +86,8 @@
       <workItem from="1607731924089" duration="4130000" />
       <workItem from="1607873443574" duration="9171000" />
       <workItem from="1607893771005" duration="1320000" />
+      <workItem from="1616420765693" duration="2410000" />
+      <workItem from="1616429136287" duration="1471000" />
     </task>
     <task id="LOCAL-00001" summary="Change SEIR correction + update scenarios to plot 7 determined scenarios">
       <created>1607735940381</created>
